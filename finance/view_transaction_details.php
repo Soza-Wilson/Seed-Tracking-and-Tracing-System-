@@ -79,12 +79,22 @@ if (empty($test)) {
                 if (payment_type==="Cheque"){
                     $('#cheque_number').prop("readonly", false);
                    $('#cheque_file').prop('readonly', false);
+                   $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
                 }
-                else{
-                    
+                else if (payment_type==="Bank_transfer"){
+                    $('#bank_name').prop('readonly', false);
+                   $('#account_name').prop('readonly', false);
+                    $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', false);
+
+                }
+                else if (payment_type==="Cash"){
+
+                    $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
                     $('#cheque_number').prop("readonly", true);
                    $('#cheque_file').prop('readonly', true);
-
                 }
 
 
@@ -827,8 +837,10 @@ if (empty($test)) {
                                                         <div class="col-sm-12">
                                                             <select id="select_payment_type" name="select_payment_type" class="form-control" required="">
                                                                 <option value="type_not_selected">Select Payment Type</option>
-                                                                <option value="Cheque">Cheque</option>
+                                                                
                                                                 <option value="Cash">Cash</option>
+                                                                <option value="Cheque">Cheque</option>
+                                                                <option value="Bank_transfer">Bank transfer</option>
                                                                 
 
 
@@ -859,10 +871,44 @@ if (empty($test)) {
 
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Bank name" require="">
+
+
+
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control" id="account_name" name="account_name" placeholder="Account name" require="">
+
+
+
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <input type="text" class="form-control" id="description" name="description" placeholder="Description (Optional)" require="">
+
+
+
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
 
                                                     <div class="form-group row">
 
-                                                        <div class="col-sm-12"><label>Upload scanned cheque file</label></div>
+                                                        <div class="col-sm-12"><label>Upload scanned cheque file / Other supporting documents</label></div>
                                                         <div class="col-sm-12">
                                                         <input type="file" class="form-control" id="cheque_file" name="image" placeholder=" " require="">
                                                             
@@ -1120,7 +1166,7 @@ if (isset($_POST['place_order'])) {
 }
  
 
-
+   
 
 if (isset($_FILES['image'])) {
     $errors = array();
@@ -1145,36 +1191,40 @@ if (isset($_FILES['image'])) {
     }
 
     if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/cheque/" . $newfilename);
+        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
         echo "Success";
     } else {
         print_r($errors);
     }
 }
-
+ 
 
 if (isset($_POST['save_payment'])) {
 
-$object = new main;
-$object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],
-'dsgg',$_SESSION['user'],$_POST['trans_id'],$_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date']);
+ //// $_POST[trans_date] is used to get the transaction payment
+ $uploaded_file = $newfilename;   
 
-// if($_POST['select_payment_type']=="Cheque"){
+if($_POST['select_payment_type']=="Cheque"){
 
     
-//     $temp = $_POST['trans_date'];
+    $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
+    
 
-  
+}
+else if($_POST['select_payment_type']=="Cash"){
+
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
    
+}else if($_POST['select_payment_type']=="Bank_transfer"){
 
 
-// }
-// else if($_POST['select_payment_type']=="Cash"){
-//     $temp = $_POST['trans_date'];
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
 
-// $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],$_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date']);
-   
-// }
+}
 
 
    

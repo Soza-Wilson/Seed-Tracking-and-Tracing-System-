@@ -145,7 +145,8 @@ mysqli_query($con, $sql);
 ///payment table 
 
 $sql= "CREATE TABLE payment(payment_ID varchar(100) PRIMARY KEY,
-type varchar(100),amount int,description varchar(100),documents varchar(100),
+type varchar(100),amount int,description varchar(100),documents varchar(100),cheque_number varchar(100),bank_name varchar(100),
+account_name varchar(100),
 user_ID varchar(100),transaction_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID), 
 FOREIGN KEY(transaction_ID)REFERENCES transaction(transaction_ID))";

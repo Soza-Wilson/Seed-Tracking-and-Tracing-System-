@@ -1388,7 +1388,7 @@ class main
 
   /// add payment 
 
-  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id,$debtor_id,$trans_amount,$trans_status)
+  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id,$debtor_id,$trans_amount,$trans_status,$cheque_number,$bank_name,$account_name,$description)
   {
             
     
@@ -1400,16 +1400,15 @@ class main
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
-    echo ("<script> alert('$type,$transaction_id');
-    </script>");
+   
 
     if ($trans_status == "payment_pending") {
       /// adding new payment
-      
-      $sql = "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
-    `description`, `documents`, `user_ID`,`transaction_ID`) VALUES 
-    ('$payment_ID','$type','$amount','-','-','$user_id','$transaction_id')";
 
+      $sql= "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, `description`, `documents`, `cheque_number`, `bank_name`, `account_name`, `user_ID`, `transaction_ID`) VALUES 
+      ('$payment_ID','$type','$amount','$description','$dir','$cheque_number','$bank_name','$account_name','$user_id','$transaction_id')";
+      
+      
       $statement = $con->prepare($sql);
       $statement->execute();
         /// checking payment amount and type 
