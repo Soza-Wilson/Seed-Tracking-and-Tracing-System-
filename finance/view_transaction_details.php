@@ -580,7 +580,7 @@ if (empty($test)) {
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -932,7 +932,83 @@ if (empty($test)) {
 
                                                 </div>
                                                 <div class="card-block">
+                                                <div class="table-responsive" id="table_test">
+                                                                    <table class="table" id="transaction_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Payment_ID</th>
+                                                                                <th>Amount</th>
+                                                                                <th>Date</th>
+                                                                                <th>Time</th>
+                                                                                <th>Type<th>
+                                                                                <th>Added by</th>
+                                                                                
 
+                                                                              
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <?php
+                                                                        
+
+                                                                               
+                                                                            
+                                                                                $order_id = $_GET['order_id'];
+
+                                                                                $sql = "SELECT * FROM `payment` WHERE `transaction_ID`='$trans_id'";
+
+                                                                       
+
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $payment_ID = $row["payment_ID"];
+                                                                                        $amount   = $row["amount"];
+                                                                                        $type = $row["type"];
+                                                                                        $date= $row["date"];
+                                                                                        $time = $row["time"];
+                                                                                        
+                                                                                     
+
+
+
+                                                                                        echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$payment_ID</td>
+                                                       <td>$amount</td>
+                                                       <td>$date</td>
+                                                       <td>$time</td>
+                                                       <td>$type</td>
+                                                    
+                                                    
+                                                         
+                                                       
+                                                        
+                                                   </tr>	
+                                               ";
+                                                                                    }
+                                                                                }
+                                                                            
+
+
+                                                                            ?>
+                                                                            <tr>
+                                                                                <th scope="row">-</th>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                </div>
     </div>
                                             </div>
 
@@ -1213,14 +1289,21 @@ if($_POST['select_payment_type']=="Cheque"){
     
 
 }
-else if($_POST['select_payment_type']=="Cash"){
+ if($_POST['select_payment_type']=="Cash"){
 
+  
+
+    
+      $object = new main;
     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+  
    
-}else if($_POST['select_payment_type']=="Bank_transfer"){
+} if($_POST['select_payment_type']=="Bank_transfer"){
 
 
+      $object = new main;
     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
 

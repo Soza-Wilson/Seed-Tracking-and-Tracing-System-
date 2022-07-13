@@ -59,35 +59,63 @@ if (empty($test)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', true);
+
+            $('#select_payment_type').change(function() {
+
+                 
 
 
-            $('#select_class').change(function() {
+                let payment_type = $('#select_payment_type').val();
 
-                var crop_data = $('#select_crop').val();
-                var variety_data = $('#select_variety').val();
-                var class_data = $('#select_class').val();
-
-                if (crop_data == 0) {
-
-                    alert('Select crop and variety');
-
-
-                } else if (variety_data == 0) {
-
-                    alert('Select crop and variety');
-
-                } else {
-
-                    $.post('get_prices.php', {
-                        crop_data: crop_data,
-                        variety_data: variety_data,
-                        class_data: class_data
-                    }, function(data) {
-
-                        $('#price_per_kg').val(data);
-
-                    });
+                if (payment_type==="Cheque"){
+                    $('#cheque_number').prop("readonly", false);
+                   $('#cheque_file').prop('readonly', false);
+                   $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
                 }
+                else if (payment_type==="Bank_transfer"){
+                    $('#bank_name').prop('readonly', false);
+                   $('#account_name').prop('readonly', false);
+                    $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', false);
+
+                }
+                else if (payment_type==="Cash"){
+
+                    $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
+                    $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', true);
+                }
+
+
+                // var crop_data = $('#select_crop').val();
+                // var variety_data = $('#select_variety').val();
+                // var class_data = $('#select_class').val();
+
+                // if (crop_data == 0) {
+
+                //     alert('Select crop and variety');
+
+
+                // } else if (variety_data == 0) {
+
+                //     alert('Select crop and variety');
+
+                // } else {
+
+                //     $.post('get_prices.php', {
+                //         crop_data: crop_data,
+                //         variety_data: variety_data,
+                //         class_data: class_data
+                //     }, function(data) {
+
+                //         $('#price_per_kg').val(data);
+
+                //     });
+                // }
 
 
 
@@ -173,7 +201,7 @@ if (empty($test)) {
                     alert('please select order type');
                 } else if (type_value == "agro_dealer") {
 
-                    $.post('../marketing/get_data.php', {
+                    $.post('get_data.php', {
                         type_value: type_value,
                         search_value: search_value,
 
@@ -189,7 +217,7 @@ if (empty($test)) {
 
                     });
 
-                    $.post('../marketing/get_transactions.php', {
+                    $.post('get_transactions.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -202,7 +230,7 @@ if (empty($test)) {
 
                 } else if (type_value == "b_to_b") {
 
-                    $.post('../marketing/get_data.php', {
+                    $.post('get_data.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -218,7 +246,7 @@ if (empty($test)) {
 
                     });
 
-                    $.post('../marketing/get_transactions.php', {
+                    $.post('get_transactions.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -232,7 +260,7 @@ if (empty($test)) {
                 } else if (type_value == "customer") {
 
 
-                    $.post('../marketing/get_data.php', {
+                    $.post('get_data.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -260,7 +288,7 @@ if (empty($test)) {
 
                     });
 
-                    $.post('../marketing/get_transactions.php', {
+                    $.post('get_transactions.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -277,7 +305,7 @@ if (empty($test)) {
                 } else if (type_value == "grower") {
 
 
-                    $.post('../marketing/get_data.php', {
+                    $.post('get_data.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -293,7 +321,7 @@ if (empty($test)) {
 
                     })
 
-                    $.post('../marketing/get_transactions.php', {
+                    $.post('get_transactions.php', {
                         type_value: type_value,
                         search_value: search_value,
                         search_result: search_result,
@@ -305,8 +333,6 @@ if (empty($test)) {
                 }
 
             });
-
-          
 
         });
     </script>
@@ -498,13 +524,14 @@ if (empty($test)) {
                     </div>
                 </div>
             </nav>
-
+           
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
+                           
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -535,23 +562,17 @@ if (empty($test)) {
                                     </a>
 
                             </ul>
-                            
-
-                            
-
-                            
-
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="active">
+                                <li class="">
                                     <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="active">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -656,7 +677,7 @@ if (empty($test)) {
 
                             </ul>
                             </li>
-                            
+                            </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -684,7 +705,7 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-                        <form action="place_order.php" method="POST">
+                        
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -693,60 +714,21 @@ if (empty($test)) {
 
                                         <!-- Page body start -->
                                         <div class="page-body">
+                                            
+ 
+                                       
+
+                                           
 
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Select Payment Type</h5>
+                                                    <h5>Filter </h5>
 
 
                                                 </div>
                                                 <div class="card-block">
 
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6">
-                                                            <select id="debtor_type" name="debtor_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Debtor Type</option>
-                                                                <option value="agro_dealer">agro dealer</option>
-                                                                <option value="grower">grower</option>
-                                                                <option value="b_to_b">B to B</option>
-                                                                <option value="customer">Customer</option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Search " require="">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <select id="search_result" name="search_result" class="form-control" required="">
-                                                                <option value="not_selected">-</option>
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="description" name="description" placeholder=" " require="">
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                </div>
-
+    </div>
                                             </div>
 
 
@@ -754,19 +736,23 @@ if (empty($test)) {
                                                 <div class="col-md-12">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5>Outstanding payments</h5>
+                                                            <h5>Transaction list</h5>
                                                             <div class="card-block table-border-style">
                                                                 <div class="table-responsive" id="table_test">
                                                                     <table class="table" id="transaction_table">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th>Trans_ID</th>
-                                                                                <th>status</th>
-                                                                                <th>Time</th>
+                                                                                <th>ID</th>
+                                                                                <th>Type</th>
+                                                                                <th>Amount</th>
                                                                                 <th>Date</th>
-                                                                                <th>amount</th>
+                                                                               
+                                                                                <th>Time</th>
+                                                                                <th>Status</th>
+                                                                                <th>Actions</th>
+                                                                                
 
-                                                                                <th>Action</th>
+                                                                              
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -776,39 +762,42 @@ if (empty($test)) {
 
                                                                                
                                                                             
- 
+                                                                             
 
-                                                                                $sql = "SELECT * FROM `transaction` WHERE type ='customer_order' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
+                                                                                $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+
+                                                                       
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
                                                                                     while ($row = $result->fetch_assoc()) {
-                                                                                        $trans_ID      = $row["transaction_ID"];
-                                                                                        $debtor_id = $row["C_D_ID"];
-                                                                                        $status   = $row["trans_status"];
-                                                                                        $time = $row["trans_time"];
-                                                                                        $date = $row["trans_date"];
-                                                                                        $amount = $row['amount'];
-                                                                                        $action_id = $row['action_ID'];
-                                                                                        $type= $row["type"];
-                                                                                        $debtor_id = $row["C_D_ID"];
-                                                                                        $status = $row["trans_status"];
+                                                                                        $transaction_ID = $row["transaction_ID"];
+                                                                                        $type  = $row["type"];
+                                                                                        $amount = $row["amount"];
+                                                                                        $trans_date = $row["trans_date"];
+                                                                                        $trans_time = $row['trans_time'];
+                                                                                        $trans_status = $row['trans_status'];
+                                                                                        
                                                                                      
 
 
 
                                                                                         echo "
                                                    <tr class='odd gradeX'>
-                                                       <td>$trans_ID</td>
-                                                       <td>$status</td>
-                                                       <td>$time</td>
-                                                       <td>$date</td>
+                                                       <td>$transaction_ID</td>
+                                                       <td>$type</td>
                                                        <td>$amount</td>
-                                                    
+                                                       <td>$trans_date</td>
+                                                       <td>$trans_time</td>
+                                                       <td>$trans_status</td>
+                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+                                                       
+                                                     
+                                                                                                           
                                                          
                                                        
-                                                       
-                                                       <td><a href='view_transaction_details.php? order_id=$action_id&trans_id=$trans_ID&debitor_id=$debtor_id&trans_date=$date&trans_time=$time&trans_amount=$amount&trans_type=$type&debtor_id=$debtor_id&status=$status' class='btn btn-success'>View</a></td>
+                                                        
                                                    </tr>	
                                                ";
                                                                                     }
@@ -970,255 +959,80 @@ if (isset($_POST['place_order'])) {
         </script>");
     }
 }
+ 
 
-if (isset($_POST['add_item'])) {
+   
 
-    //checking if user has added customer details before adding items to order
+if (isset($_FILES['image'])) {
+    $errors = array();
+    $file_name = $_FILES['image']['name'];
+    $file_size = $_FILES['image']['size'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
 
-    $debtor_type = "";
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
 
-    if (!empty($_SESSION['order'])) {
 
-        $debtor_type = $_SESSION['type'];
+    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+    $extensions = array("pdf");
+
+    if (in_array($file_ext, $extensions) === false) {
+        $errors[] = "extension not allowed, please choose pdf.";
+    }
+
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
+        echo "Success";
     } else {
-        $debtor_type = $_POST['debtor_type'];
+        print_r($errors);
     }
+}
+ 
+
+if (isset($_POST['save_payment'])) {
+
+ //// $_POST[trans_date] is used to get the transaction payment
+ $uploaded_file = $newfilename;   
+
+if($_POST['select_payment_type']=="Cheque"){
+
+    
+    $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
+    
+
+}
+ if($_POST['select_payment_type']=="Cash"){
+
+  
+
+    
+      $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+  
+   
+} if($_POST['select_payment_type']=="Bank_transfer"){
 
 
-    switch ($debtor_type) {
+      $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
 
-        case "agro_dealer":
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
+}
 
 
-                //checking if order is in progress by checking is the order session is empty 
+   
 
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
-                }
-            }
-            break;
-        case "b_to_b":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-
-
-
-            break;
-
-        case "grower":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-        case "customer":
-
-
-
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-
-                //register customer (figure out how to get customer ID)
-
-                $object = new main();
-                $object->register_customer($_POST['customer_name'], $_POST['description']);
-                $array_data[]  = "";
-                $array_data[0] = "-";
-                $array_data[1] = $_POST['description'];
-                $array_data[2] = $_POST['customer_name'];
-
-                $object->temp_data(
-                    $array_data,
-                    $_POST['order_book_number'],
-                    $_POST['crop'],
-                    $_POST['variety'],
-                    $_POST['class'],
-                    $_POST['quantity'],
-                    $_POST['price_per_kg'],
-                    $_POST['discount_price'],
-                    $_POST['total_price']
-                );
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-
-        default:
-
-            echo ("<script> alert('Please add customer details');
-        </script>");;
-    }
+   
+   
 }
 
 

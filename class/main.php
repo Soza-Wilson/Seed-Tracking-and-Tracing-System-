@@ -1397,6 +1397,8 @@ class main
     global $con;
     $payed_amount = "";
     $transaction_amount = "";
+    $date = date("d-m-Y");
+    $time = date("H:m:i");
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
@@ -1405,8 +1407,8 @@ class main
     if ($trans_status == "payment_pending") {
       /// adding new payment
 
-      $sql= "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, `description`, `documents`, `cheque_number`, `bank_name`, `account_name`, `user_ID`, `transaction_ID`) VALUES 
-      ('$payment_ID','$type','$amount','$description','$dir','$cheque_number','$bank_name','$account_name','$user_id','$transaction_id')";
+      $sql= "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, `description`, `documents`, `cheque_number`, `bank_name`, `account_name`,`date`, `time`, `user_ID`, `transaction_ID`) VALUES 
+      ('$payment_ID','$type','$amount','$description','$dir','$cheque_number','$bank_name','$account_name','$date','$time','$user_id','$transaction_id')";
       
       
       $statement = $con->prepare($sql);
@@ -1431,7 +1433,8 @@ class main
       $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-      
+    
+      header('Location:add_payment.php');
      
     } else if ($trans_status == "partly_payed") {
     }
