@@ -983,8 +983,8 @@ if (empty($test)) {
                                                        <td>$time</td>
                                                        <td>$type</td>
                                                        <td>$added_by</td>
-                                                       <td><a href='view_transaction_details.php?  class='btn btn-success'>View</a></td>
-                                                    
+                                                       <td><a href='view_transaction_details.php?'  class='btn btn-success'>View</a></td>
+                                                       
                                                          
                                                        
                                                         
