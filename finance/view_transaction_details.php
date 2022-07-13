@@ -940,8 +940,10 @@ if (empty($test)) {
                                                                                 <th>Amount</th>
                                                                                 <th>Date</th>
                                                                                 <th>Time</th>
-                                                                                <th>Type<th>
+                                                                                <th>Type</th>
                                                                                 <th>Added by</th>
+                                                                                <th>Action</th>
+                                                                                
                                                                                 
 
                                                                               
@@ -956,7 +958,8 @@ if (empty($test)) {
                                                                             
                                                                                 $order_id = $_GET['order_id'];
 
-                                                                                $sql = "SELECT * FROM `payment` WHERE `transaction_ID`='$trans_id'";
+                                                                                $sql = "SELECT `payment_ID`, payment.type, `amount`, `description`,payment.date, payment.time,`transaction_ID`, user.fullname
+                                                                                 FROM `payment` INNER JOIN user ON user.user_ID = payment.user_ID  WHERE `transaction_ID`='$trans_id'";
 
                                                                        
 
@@ -968,8 +971,7 @@ if (empty($test)) {
                                                                                         $type = $row["type"];
                                                                                         $date= $row["date"];
                                                                                         $time = $row["time"];
-                                                                                        
-                                                                                     
+                                                                                        $added_by =$row["fullname"];
 
 
 
@@ -980,7 +982,8 @@ if (empty($test)) {
                                                        <td>$date</td>
                                                        <td>$time</td>
                                                        <td>$type</td>
-                                                    
+                                                       <td>$added_by</td>
+                                                       <td><a href='view_transaction_details.php?  class='btn btn-success'>View</a></td>
                                                     
                                                          
                                                        
@@ -1078,7 +1081,7 @@ if (empty($test)) {
                                                     
                                                          
                                                        
-                                                        
+                                                       
                                                    </tr>	
                                                ";
                                                                                     }
