@@ -572,7 +572,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -581,7 +581,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -590,7 +590,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="active">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -698,7 +698,7 @@ if (empty($test)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Processed Debtor Payment</a>
+                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -742,13 +742,13 @@ if (empty($test)) {
                                                                     <table class="table" id="transaction_table">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th>ID</th>
+                                                                                <th>ID </th>
+                                                                                <th>Name</th>
                                                                                 <th>Type</th>
-                                                                                <th>Amount</th>
-                                                                                <th>Date</th>
-                                                                               
-                                                                                <th>Time</th>
-                                                                                <th>Status</th>
+                                                                                <th>Phone</th>
+                                                                                <th>Registered by</th>
+                                                                                <th>Registered date</th>
+                                                                                <th>Account funds (MK)</th>
                                                                                 <th>Actions</th>
                                                                                 
 
@@ -764,20 +764,20 @@ if (empty($test)) {
                                                                             
                                                                              
 
-                                                                                $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+                                                                                $sql = "SELECT * FROM debtor";
 
                                                                        
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
                                                                                     while ($row = $result->fetch_assoc()) {
-                                                                                        $transaction_ID = $row["transaction_ID"];
-                                                                                        $type  = $row["type"];
-                                                                                        $amount = $row["amount"];
-                                                                                        $trans_date = $row["trans_date"];
-                                                                                        $trans_time = $row['trans_time'];
-                                                                                        $trans_status = $row['trans_status'];
+                                                                                        $debtor_ID = $row["debtor_ID"];
+                                                                                        $name = $row["name"];
+                                                                                        $type  = $row["debtor_type"];
+                                                                                        $phone = $row["phone"];
+                                                                                        $by = $row["user_ID"];
+                                                                                        $date = $row['registered_date'];
+                                                                                        $funds = $row['account_funds'];
                                                                                         
                                                                                      
 
@@ -785,12 +785,13 @@ if (empty($test)) {
 
                                                                                         echo "
                                                    <tr class='odd gradeX'>
-                                                       <td>$transaction_ID</td>
+                                                       <td>$debtor_ID</td>
+                                                       <td>$name</td>
                                                        <td>$type</td>
-                                                       <td>$amount</td>
-                                                       <td>$trans_date</td>
-                                                       <td>$trans_time</td>
-                                                       <td>$trans_status</td>
+                                                       <td>$phone</td>
+                                                       <td>$by</td>
+                                                       <td>$date</td>
+                                                       <td>$funds</td>
                                                        <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
                                                        
                                                      

@@ -1437,7 +1437,92 @@ class main
       header('Location:add_payment.php');
      
     } else if ($trans_status == "partly_payed") {
+
+
+          $sql = "SELECT sum(amount) as total_amount FROM `payment`WHERE transaction_Id ='$transaction_id'";
+
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+
+            $total_payment_amount = $row["total_amount"];
+          }
+
+         $balance = $total_payment_amount-$amount; 
+
+
+         if($balance = $amount){
+
+          $update_status = "fully_payed";
+
+          $sql= "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, `description`, `documents`, `cheque_number`, `bank_name`, `account_name`,`date`, `time`, `user_ID`, `transaction_ID`) VALUES 
+          ('$payment_ID','$type','$amount','$description','$dir','$cheque_number','$bank_name','$account_name','$date','$time','$user_id','$transaction_id')";
+        
+        
+           $statement = $con->prepare($sql);
+           $statement->execute();
+
+
+
+               // update transaction status 
+
+      $sql="UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      //update debtor funds 
+       
+      $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      header('Location:add_payment.php');
+
+
+         }
+
+      else if($amount< $balance){
+
+        $update_status = "partly_payed";
+
+        $sql= "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, `description`, `documents`, `cheque_number`, `bank_name`, `account_name`,`date`, `time`, `user_ID`, `transaction_ID`) VALUES 
+        ('$payment_ID','$type','$amount','$description','$dir','$cheque_number','$bank_name','$account_name','$date','$time','$user_id','$transaction_id')";
+      
+      
+         $statement = $con->prepare($sql);
+         $statement->execute();
+
+
+             // update transaction status 
+
+      $sql="UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      //update debtor funds 
+       
+      $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+      header('Location:add_payment.php');
+      }
+
+      else if ($amount > $balance){
+
+        echo ("<script> alert('Error Amount greater than required balance ');
+        </script>");
+
+      }
+
+        
+
+     
+
     }
+
+  }
 
 
     //     $sql = "SELECT * FROM payment WHERE `transaction_ID`=$transaction_id";
@@ -1510,7 +1595,13 @@ class main
 
   }
 
+
+  // process payback function
+
   function add_creditor_payment()
   {
+
+
+
   }
 }

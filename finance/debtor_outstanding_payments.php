@@ -572,7 +572,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -581,7 +581,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="active">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -698,7 +698,7 @@ if (empty($test)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Processed Debtor Payment</a>
+                                            <li class="breadcrumb-item"><a href="#!"> Outstanding Debtor Payment</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -765,7 +765,7 @@ if (empty($test)) {
                                                                              
 
                                                                                 $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' ";
 
                                                                        
 
