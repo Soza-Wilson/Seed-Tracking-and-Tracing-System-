@@ -170,10 +170,12 @@ if (empty($test)) {
 
                 if (type_value == "type_not_selected") {
 
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
+                    alert('Please select credtior type');
+                } else if (type_value == "external") {
 
-                    $.post('../marketing/get_data.php', {
+
+                    alert('ex');
+                    $.post('buy_back_get_data.php', {
                         type_value: type_value,
                         search_value: search_value,
 
@@ -200,110 +202,38 @@ if (empty($test)) {
 
 
 
-                } else if (type_value == "b_to_b") {
+                } else if (type_value == "internal") {
 
-                    $.post('../marketing/get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
+                    alert('int');
 
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
+                    // $.post('../marketing/get_data.php', {
+                    //     type_value: type_value,
+                    //     search_value: search_value,
+                    //     search_result: search_result,
 
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
+                    // }, function(data) {
+                    //     $('#search_result').html(data);
+                    //     // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
 
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
+                    //     var data = $('#search_result').val();
+                    //     var test = data.split(',');
 
-                    });
+                    //     $('#description').attr('value', test[1] + ' ( Businesss description )');
 
-                    $.post('../marketing/get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
+                    // });
 
-
-
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('../marketing/get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    });
-
-                    $.post('../marketing/get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    })
+                    // $.post('../marketing/get_transactions.php', {
+                    //     type_value: type_value,
+                    //     search_value: search_value,
+                    //     search_result: search_result,
+                    // }, data => {
+                    //     $('#transaction_table').html(data);
+                    // });
 
 
 
 
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('../marketing/get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-                    $.post('../marketing/get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-                }
-
+                } 
             });
 
           
@@ -707,8 +637,8 @@ if (empty($test)) {
                                                         <div class="col-sm-6">
                                                             <select id="debtor_type" name="debtor_type" class="form-control" required="">
                                                                 <option value="type_not_selected">Select Creditor Type</option>
-                                                                <option value="agro_dealer">External</option>
-                                                                <option value="grower">Internal</option>
+                                                                <option value="external">External</option>
+                                                                <option value="internal">Internal</option>
                                                                 
                                                             </select>
                                                         </div>
