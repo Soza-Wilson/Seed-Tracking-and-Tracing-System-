@@ -544,7 +544,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="active">
+                                <li class="">
                                     <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
@@ -583,7 +583,7 @@ if (empty($test)) {
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="">
+                                <li class="active">
                                     <a href="add_payback_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
@@ -706,14 +706,10 @@ if (empty($test)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-6">
                                                             <select id="debtor_type" name="debtor_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Debtor Type</option>
-                                                                <option value="agro_dealer">agro dealer</option>
-                                                                <option value="grower">grower</option>
-                                                                <option value="b_to_b">B to B</option>
-                                                                <option value="customer">Customer</option>
-
-
-
+                                                                <option value="type_not_selected">Select Creditor Type</option>
+                                                                <option value="agro_dealer">External</option>
+                                                                <option value="grower">Internal</option>
+                                                                
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -752,7 +748,8 @@ if (empty($test)) {
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card">
+
+                                                <div class="card">
                                                         <div class="card-header">
                                                             <h5>Outstanding payments</h5>
                                                             <div class="card-block table-border-style">
@@ -778,7 +775,7 @@ if (empty($test)) {
                                                                             
  
 
-                                                                                $sql = "SELECT * FROM `transaction` WHERE type ='customer_order' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
+                                                                                $sql = "SELECT * FROM `transaction` WHERE type ='creditor_buy_back' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
@@ -804,6 +801,104 @@ if (empty($test)) {
                                                        <td>$time</td>
                                                        <td>$date</td>
                                                        <td>$amount</td>
+                                                    
+                                                         
+                                                       
+                                                       
+                                                       <td><a href='view_transaction_details.php? order_id=$action_id&trans_id=$trans_ID&debitor_id=$debtor_id&trans_date=$date&trans_time=$time&trans_amount=$amount&trans_type=$type&debtor_id=$debtor_id&status=$status' class='btn btn-success'>View</a></td>
+                                                   </tr>	
+                                               ";
+                                                                                    }
+                                                                                }
+                                                                            
+
+
+                                                                            ?>
+                                                                            <tr>
+                                                                                <th scope="row">-</th>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="card">
+
+
+
+                                                        
+
+                                                    </div>
+
+
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h5>Creditor Accounts</h5>
+                                                            <span>Accounts with outstanding balances </span>
+                                                            <div class="card-block table-border-style">
+                                                                <div class="table-responsive" id="table_test">
+                                                                    <table class="table" id="transaction_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Creditor ID</th>
+                                                                                <th>Name</th>
+                                                                                <th>Source</th>
+                                                                                <th>Phone</th>
+                                                                                <th>Email</th>
+                                                                                <th>Registered_date</th>
+                                                                                <th>Funds</th>
+
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <?php
+                                                                        
+
+                                                                               
+                                                                            
+ 
+
+                                                                                $sql = "SELECT * FROM `creditor`";
+
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $creditor_ID      = $row["creditor_ID"];
+                                                                                        $name  = $row["name"];
+                                                                                        $source = $row["source"];
+                                                                                        $phone= $row["phone"];
+                                                                                        $email= $row["email"];
+                                                                                        $registered_date = $row['registered_date'];
+                                                                                        $account_funds = $row['account_funds'];
+                                                                                        
+                                                                                     
+
+
+
+                                                                                        echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$creditor_ID</td>
+                                                       <td>$name</td>
+                                                       <td>$source</td>
+                                                       <td>$phone</td>
+                                                       <td>$email</td>
+                                                       <td>$registered_date</td>
+                                                       <td>$account_funds</td>
                                                     
                                                          
                                                        
