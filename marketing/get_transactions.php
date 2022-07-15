@@ -223,4 +223,113 @@ if (isset($_POST['search_value'])) {
           ";
     }
   }
+
+  // gettiing transactions for creditors 
+
+  if ($_POST['type_value'] == "External") {
+
+    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND trans_status = 'payment_pending' AND type='creditor_buy_back'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $trans_ID      = $row["transaction_ID"];
+        $status   = $row["trans_status"];
+        $time = $row["trans_time"];
+        $date = $row["trans_date"];
+        $amount = $row['amount'];
+        $action_id = $row['action_ID'];
+        $creditor_id = $row['C_D_ID'];
+        $type = $row['type'];
+
+
+        echo "
+                                                                                       
+                                                   <tr class='odd gradeX'>
+                                                       <td>$trans_ID</td>
+                                                       <td>$status</td>
+                                                       <td>$time</td>
+                                                       <td>$date</td>
+                                                       <td>$amount</td>
+                                                     
+                                                         
+                                                       
+                                                       
+                                                       <td><a href='view_creditor_transaction_details.php? order_id=$action_id&trans_id=$trans_ID&creditor_id=$creditor_id&trans_date=$date&trans_time=$time&trans_amount=$amount&trans_type=$type&status=$status' class='btn btn-success'>View</a></td>
+                                                   </tr>	
+                                               ";
+      }
+    } else {
+
+      echo "
+                                                                                       
+              <tr class='odd gradeX'>
+                  <td><h3>Unavailable !!</h3></td>
+                  <td-</td>
+                  <td-</td>
+                  <td-</td>
+                  <td-</td>
+               
+                    
+                  
+                  
+                  <td-</td>
+              </tr>	
+          ";
+    }
+  }
+
+
+  if ($_POST['type_value'] == "MUSECO") {
+
+    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND trans_status = 'payment_pending' AND type='creditor_buy_back'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $trans_ID      = $row["transaction_ID"];
+        $status   = $row["trans_status"];
+        $time = $row["trans_time"];
+        $date = $row["trans_date"];
+        $amount = $row['amount'];
+        $action_id = $row['action_ID'];
+        $creditor_id = $row['C_D_ID'];
+        $type = $row['type'];
+
+
+        echo "
+                                                                                       
+                                                   <tr class='odd gradeX'>
+                                                       <td>$trans_ID</td>
+                                                       <td>$status</td>
+                                                       <td>$time</td>
+                                                       <td>$date</td>
+                                                       <td>$amount</td>
+                                                     
+                                                         
+                                                       
+                                                       
+                                                       <td><a href='view_creditor_transaction_details.php? order_id=$action_id&trans_id=$trans_ID&creditor_id=$creditor_id&trans_date=$date&trans_time=$time&trans_amount=$amount&trans_type=$type&status=$status' class='btn btn-success'>View</a></td>
+                                                   </tr>	
+                                               ";
+      }
+    } else {
+
+      echo "
+                                                                                       
+              <tr class='odd gradeX'>
+                  <td><h3>Unavailable !!</h3></td>
+                  <td-</td>
+                  <td-</td>
+                  <td-</td>
+                  <td-</td>
+               
+                    
+                  
+                  
+                  <td-</td>
+              </tr>	
+          ";
+    }
+  }
 }
