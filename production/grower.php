@@ -14,11 +14,11 @@ if (empty($test)) {
 }
 
 
-if($position !="lab_technician" || $position !="production_admin" || $position !="admin" || $position !="field_officer"){
+// if($position !="lab_technician" || $position !="production_admin" || $position !="admin" || $position !="field_officer"){
      
-    header('Location:javascript://history.go(-1)');
+//     header('Location:javascript://history.go(-1)');
 
-}
+// }
 
 ?>
 
