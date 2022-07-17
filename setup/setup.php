@@ -192,7 +192,17 @@ Hectors varchar(100),
   mysqli_query($con, $sql);
 
 
+/// Bank account table 
 
+$sql = "CREATE TABLE bank_account(bank_ID varchar(100) PRIMARY KEY, 
+bank_name varchar(100),
+account_number varchar(100),
+account_funds int,
+register_date varchar(100),
+user_ID varchar(100),
+FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
+
+mysqli_query($con, $sql);
 
 
   ///// stock in (table reording all stock in transactions )    
