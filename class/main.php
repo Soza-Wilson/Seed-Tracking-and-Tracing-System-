@@ -86,6 +86,11 @@ class main
       $user_id = "PAY" . $shuffled_time;
     }
 
+    else if ($department == "bank") {
+
+      $user_id = "BANK" . $shuffled_time;
+    }
+
 
 
 
@@ -1591,7 +1596,7 @@ class main
       echo ("<script> alert('Bank name or Account number already registered');
      </script>");
     } else {
-      $bank_ID = $this->generate_user("debtor");
+      $bank_ID = $this->generate_user("bank");
       $account_funds = 0;
       $user_ID = $_SESSION['user'];
       $register_date = date("d-m-Y");

@@ -472,7 +472,7 @@ if (empty($test)) {
                                                                 <h5 class="modal-title">Register new Bank Account</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
+                                                                <form action="bank_account.php" method="POST" enctype="multipart/form-data">
 
                                                                     <div class="form-group row">
 
@@ -539,9 +539,10 @@ if (empty($test)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Fullname</th>
-                                                                <th>Email </th>
-                                                                <th>phone</th>
+                                                                  <th>ID</th>
+                                                                <th>Bank name</th>
+                                                                <th>Account number </th>
+                                                                <th>Acccount funds</th>
                                                                 <th>Registered date</th>
                                                                 <th>registered by</th>
 
@@ -554,18 +555,19 @@ if (empty($test)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`, `creditor_files`, creditor.registered_date FROM `creditor`
-                              INNER JOIN user ON creditor.user_ID = user.user_ID WHERE source = 'MUSECO'";
+                                                            $sql = "SELECT `bank_ID`, `bank_name`, `account_number`, `account_funds`, `register_date`, `fullname` FROM `bank_account`
+                              INNER JOIN user ON bank_account.user_ID = user.user_ID";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $name = $row['name'];
-                                                                    $phone = $row['phone'];
-                                                                    $email = $row['email'];
-                                                                    $registered_date = $row['registered_date'];
+                                                                    $bank_id = $row['bank_ID'];
+                                                                    $name = $row['bank_name'];
+                                                                    $account_number = $row['account_number'];
+                                                                    $account_funds = $row['account_funds'];
+                                                                    $registered_date = $row['register_date'];
                                                                     $registered_by = $row['fullname'];
-                                                                    $dir = $row['creditor_files'];
+                                                                   
 
 
 
@@ -574,9 +576,10 @@ if (empty($test)) {
 
                                                                     echo "
 											<tr class='odd gradeX'>
+                                                <td>$bank_id</td>
                                                  <td>$name</td>
-											    <td>$email</td>
-												<td>$phone</td>
+											    <td>$account_number</td>
+												<td> $account_funds</td>
 												<td>$registered_date</td>
 												<td>$registered_by</td>
                                                
@@ -587,7 +590,9 @@ if (empty($test)) {
 												<td><a href='view_registered_users.php' class='ti-eye'></a>/
                                                 <a href='view_registered_users.php' class='ti-trash'></a>/
                                                 <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='creditor_documents/$dir' class='ti-bookmark-alt'></a>
+                                                <a href='creditor_documents
+                                                
+                                                ' class='ti-bookmark-alt'></a>
                                                 </td>
 											</tr>	
 										";

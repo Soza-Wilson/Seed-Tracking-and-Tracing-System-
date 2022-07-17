@@ -659,6 +659,14 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
+                            <li class="">
+                                    <a href="bank_account.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
                                 <li class="">
                                     <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
