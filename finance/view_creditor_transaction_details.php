@@ -1285,7 +1285,9 @@ if (isset($_POST['save_payment'])) {
 
     $uploaded_file = $newfilename;   
     $object = new main;
-    $object-> add_creditor_payment($_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+
+  
+    $object->add_creditor_payment($_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
     $_POST['creditor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],$_POST['select_bank_name'],$_POST['description']);
    
     

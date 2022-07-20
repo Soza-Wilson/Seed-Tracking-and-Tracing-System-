@@ -1577,7 +1577,7 @@ class main
 
   // update debtors funds 
 
-}
+
 //// bank account fuctions
 
 function register_bank_account($bank_name, $account_number)
@@ -1656,7 +1656,7 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
 
     //update creditor funds 
 
-    $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$creditor_id'";
+    $sql = "UPDATE creditor set `account_funds` = `account_funds`+$amount WHERE `debtor_ID`='$creditor_id'";
     $statement = $con->prepare($sql);
     $statement->execute();
 
@@ -1665,7 +1665,7 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
 
     // update bank account funds 
 
-    $sql = "UPDATE `bank_account` SET `account_funds`= `account_funds`-'$amount' WHERE `bank_ID` = '$bank_name'";
+    $sql = "UPDATE `bank_account` SET `account_funds`=  account_funds -$amount WHERE `bank_ID` = '$bank_name'";
 
     $statement = $con->prepare($sql);
     $statement->execute();
@@ -1710,7 +1710,7 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
 
       //update creditor funds 
 
-      $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
+      $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 
@@ -1719,7 +1719,7 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
       /// Update company bank account
 
 
-      $sql = "UPDATE `bank_account` SET `account_funds`= account_funds - $amount WHERE `bank_account` = '$bank_name'";
+      $sql = "UPDATE `bank_account` SET `account_funds`= `account_funds`-'$amount' WHERE `bank_ID` = '$bank_name'";
 
       $statement = $con->prepare($sql);
       $statement->execute();
@@ -1748,7 +1748,7 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
 
       //update creditor funds 
 
-      $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
+      $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 
@@ -1771,4 +1771,6 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
     </script>");
   }
   }
+}
+
 }
