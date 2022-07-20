@@ -697,6 +697,6 @@ if (isset($_POST['register_bank'])) {
 
 
     $object = new main();
-    $object->regiser_bank_account($_POST['bank_name'], $_POST['account_number']);
+    $object->register_bank_account($_POST['bank_name'], $_POST['account_number']);
 }
 ?>

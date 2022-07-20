@@ -332,3 +332,11 @@ if (isset($_POST['search_value'])) {
 
     }}
 }
+
+if (isset($_POST['bank_data'])) {
+
+  echo"
+  <option value='type_not_selected'>Select Bank Account</option>
+  <option value='type_not_selected'>yyytiyi</option>";
+
+}

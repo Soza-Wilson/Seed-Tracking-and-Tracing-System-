@@ -3,6 +3,8 @@
 <html lang="en">
 <?php
 
+use LDAP\Result;
+
 Ob_start();
 include('../class/main.php');
 session_start();
@@ -66,6 +68,13 @@ if (empty($test)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var bank_data = 1;
+            $.post('marketing/get_transactions.php', {
+                        bank_data: bank_data
+                    }, function(data) {
+                        $('#select_bank_name').html(data)
+
+                    });
 
             $('#cheque_number').prop("readonly", true);
                    $('#cheque_file').prop('readonly', true);
@@ -77,58 +86,7 @@ if (empty($test)) {
 
                 let payment_type = $('#select_payment_type').val();
 
-                if (payment_type==="Cheque"){
-                    $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
-                    $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
-
-                }
-                else if (payment_type==="Cash"){
-
-                    $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
-                }
-
-
-                // var crop_data = $('#select_crop').val();
-                // var variety_data = $('#select_variety').val();
-                // var class_data = $('#select_class').val();
-
-                // if (crop_data == 0) {
-
-                //     alert('Select crop and variety');
-
-
-                // } else if (variety_data == 0) {
-
-                //     alert('Select crop and variety');
-
-                // } else {
-
-                //     $.post('get_prices.php', {
-                //         crop_data: crop_data,
-                //         variety_data: variety_data,
-                //         class_data: class_data
-                //     }, function(data) {
-
-                //         $('#price_per_kg').val(data);
-
-                //     });
-                // }
-
-
-
-
-            });
+                
 
 
             $('#debtor_type').change(function() {
@@ -733,7 +691,7 @@ if (empty($test)) {
                                             
  
                                         <div class="card">
-                                            <form action="view_transaction_details.php" method="POST" enctype="multipart/form-data">
+                                            <form action="view_creditor_transaction_details.php" method="POST" enctype="multipart/form-data">
                                                 <div class="card-header">
                                                     <h5>Transaction details</h5>
 
@@ -811,8 +769,8 @@ if (empty($test)) {
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary ">Debtor ID</label>
-                                                            <select class="form-control" name="debtor_id">
-                                                                <option value="<?php echo $debtor_id; ?>"><?php echo $creditor_id; ?></option>
+                                                            <select class="form-control" name="creditor_id">
+                                                                <option value="<?php echo $creditor_id; ?>"><?php echo $creditor_id; ?></option>
                                                             </select>
 
 
@@ -844,18 +802,59 @@ if (empty($test)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <select id="select_payment_type" name="select_payment_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Bank Account</option>
-                                                                
-                                                                <option value="Cash">CDH</option>
-                                                                
+                                                         
+                                    
+                                                        
+                                  <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
+                                  <option value="type_not_selected">Select bank name</option>
+
+                                <?php
+                                $sql = "SELECT * FROM bank_account";
+                                $result = $con->query($sql);
+                                if ($result->num_rows > 0) {
+
+                                  
+                                  while ($row = $result->fetch_assoc()) {
+                                       $name = $row["bank_name"];
+                                       $bankid = $row["bank_ID"];
+                                    echo"<option value='$bank_id'>$name</option>";
+                                  }
+                                }
+
+                                if ($value=1){
+
+                                  
+                                }
+                              
+
+                                ?>
+
+                               
+                               
+                                 
+                                  
+                                 
+                                  
+                                
+                                
+                                                        
+                                                 
+                                                        
+                                                       
+                                                           
                                                                 
 
 
                                                             </select>
+                                                            
                                                         </div>
                                                         
                                                     </div>
+
+                                                    <?php
+                                                    
+                                                    
+                                                    ?>
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
@@ -1282,42 +1281,19 @@ if (isset($_FILES['image'])) {
 if (isset($_POST['save_payment'])) {
 
  //// $_POST[trans_date] is used to get the transaction payment
- $uploaded_file = $newfilename;   
 
-if($_POST['select_payment_type']=="Cheque"){
 
-    
+    $uploaded_file = $newfilename;   
     $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
+    $object-> add_creditor_payment($_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+    $_POST['creditor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],$_POST['select_bank_name'],$_POST['description']);
+   
     
 
-}
- if($_POST['select_payment_type']=="Cash"){
+
 
   
 
-    
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-  
-   
-} if($_POST['select_payment_type']=="Bank_transfer"){
-
-
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-}
-
-
-   
-
-   
-   
 }
 
 
