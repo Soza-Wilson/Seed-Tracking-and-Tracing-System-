@@ -236,13 +236,23 @@ mysqli_query($con, $sql);
 
 
  
+//// grading table 
 
-  /// farm table 
+$sql="CREATE TABLE grading( grade_ID varchar(100) PRIMARY KEY,
+                           date varchar(100),
+                           time varchar(100),
+                           grade_out_quantity varchar(100),
+                           trash_quantity varchar(100),
+                           stock_in_ID varchar(100),
+                           user_ID varchar(100),
+                           FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+                           FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID))";
+
+mysqli_query($con, $sql);
 
 
 
-
-
+// mysqli_query($con, $sql);
 
 
 
@@ -414,7 +424,7 @@ values ('001','01','ADMIN','0000','-','0000','ADMIN','0000','admin@example.com',
   $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maize'),
 ('CP002','gnuts_shelled'),
 ('CP003','gnuts_unshelled'),
-('CP004','sorgum'),
+('CP004','sorghum'),
 ('CP005','rice'),
 ('CP006','cowpea'),
 ('CP007','pigeonpea'),

@@ -1372,7 +1372,7 @@ if (isset($_POST['add_to_stock'])) {
         $farm_ID = $_POST['search_farm_result'];
         $certificate ="";
         $quantity = $_POST['farm_quantity'];
-        $status = "uncertified";
+        $status = "ungraded";
 
     } else if ($source == "External") {
 
