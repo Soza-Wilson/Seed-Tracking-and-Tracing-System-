@@ -226,7 +226,7 @@ if (isset($_POST['search_value'])) {
 
   if ($_POST['type_value'] == "External") {
 
-    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND trans_status = 'payment_pending' AND type='creditor_buy_back'";
+    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND type='creditor_buy_back' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -280,7 +280,7 @@ if (isset($_POST['search_value'])) {
 
   if ($_POST['type_value'] == "MUSECO") {
 
-    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND trans_status = 'payment_pending' AND type='creditor_buy_back'";
+    $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND type='creditor_buy_back' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {

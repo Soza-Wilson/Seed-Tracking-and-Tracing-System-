@@ -1683,96 +1683,98 @@ function add_creditor_payment($amount, $dir, $user_id, $transaction_id, $credito
         $total_payment_amount = $row["total_amount"];
       }
     }
-    $ava_balance = $total_payment_amount - $trans_amount;
+    $ava_balance = $trans_amount - $total_payment_amount ;
 
 
-    if ($balance = $amount) {
+    if ($ava_balance == $amount) {
 
       echo ("<script> alert('$ava_balance');
       </script>");
 
-      // $update_status = "fully_payed";
+      $update_status = "fully_payed";
 
-      // $sql = "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
-      //       `description`, `documents`, `cheque_number`, `bank_name`, 
-      //       `account_name`, `date`, `time`, `user_ID`, `transaction_ID`) VALUES
-      //        ('$payment_ID','cheque','$amount','$description','$dir',
-      //        '$cheque_number','-','-','$date','$time','$user_id','$transaction_id')";
-
-
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      $sql = "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
+            `description`, `documents`, `cheque_number`, `bank_name`, 
+            `account_name`, `date`, `time`, `user_ID`, `transaction_ID`) VALUES
+             ('$payment_ID','cheque','$amount','$description','$dir',
+             '$cheque_number','-','-','$date','$time','$user_id','$transaction_id')";
 
 
-
-      // // update transaction status 
-
-      // $sql = "UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
-
-      // //update creditor funds 
-
-      // $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      $statement = $con->prepare($sql);
+      $statement->execute();
 
 
 
-      // /// Update company bank account
+      // update transaction status 
+
+      $sql = "UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      //update creditor funds 
+
+      $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
 
 
-      // $sql = "UPDATE `bank_account` SET `account_funds`= `account_funds`-'$amount' WHERE `bank_ID` = '$bank_name'";
 
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      /// Update company bank account
 
-      // header('Location:add_payback_payment.php');
-    } else if ($amount < $balance) {
 
-      echo ("<script> alert('Partly payed');
-      </script>");
+      $sql = "UPDATE `bank_account` SET `account_funds`= `account_funds`-'$amount' WHERE `bank_ID` = '$bank_name'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      header('Location:add_payback_payment.php');
+
+
+
+    } else if ($amount < $ava_balance) {
+
       
-      // $update_status = "partly_payed";
+      
+      $update_status = "partly_payed";
 
-      // $sql = "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
-      //       `description`, `documents`, `cheque_number`, `bank_name`, 
-      //       `account_name`, `date`, `time`, `user_ID`, `transaction_ID`) VALUES
-      //        ('$payment_ID','cheque','$amount','$description','$dir',
-      //        '$cheque_number','-','-','$date','$time','$user_id','$transaction_id')";
-
-
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      $sql = "INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
+            `description`, `documents`, `cheque_number`, `bank_name`, 
+            `account_name`, `date`, `time`, `user_ID`, `transaction_ID`) VALUES
+             ('$payment_ID','cheque','$amount','$description','$dir',
+             '$cheque_number','-','-','$date','$time','$user_id','$transaction_id')";
 
 
-
-      // // update transaction status 
-
-      // $sql = "UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
-
-      // //update creditor funds 
-
-      // $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      $statement = $con->prepare($sql);
+      $statement->execute();
 
 
 
-      // /// Update company bank account
+      // update transaction status 
+
+      $sql = "UPDATE transaction SET `trans_status`='$update_status' WHERE `transaction_ID`='$transaction_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      //update creditor funds 
+
+      $sql = "UPDATE creditor set `account_funds` =`account_funds`+'$amount' WHERE `creditor_ID`='$creditor_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
 
 
-      // $sql = "UPDATE `bank_account` SET `account_funds`= account_funds - $amount WHERE `bank_account` = '$bank_name'";
 
-      // $statement = $con->prepare($sql);
-      // $statement->execute();
+      // Update company bank account
 
-      // header('Location:add_payback_payment.php');
+
+      $sql = "UPDATE `bank_account` SET `account_funds`= `account_funds` - '$amount' WHERE `bank_ID` = '$bank_name'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      header('Location:add_payback_payment.php');
     }
 
-  else if ($amount > $balance) {
+  else if ($amount > $ava_balance) {
 
     echo ("<script> alert('Error Amount greater than required balance ');
     </script>");

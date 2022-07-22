@@ -10,26 +10,24 @@ $test = $_SESSION['fullname'];
 
 if (empty($test)) {
 
-    header('Location:../login.php');
+    header('Location:../index.php');
 }
 
 
-// if($position !="lab_technician" || $position !="production_admin" || $position !="admin" || $position !="field_officer"){
-     
-//     header('Location:javascript://history.go(-1)');
 
-// }
 
 ?>
 
+
+
 <head>
-    <title>MUSECO</title>
+    <title>Mega Able bootstrap admin template by codedthemes </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -49,17 +47,300 @@ if (empty($test)) {
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', true);
+
+            $('#select_payment_type').change(function() {
+
+                 
+
+
+                let payment_type = $('#select_payment_type').val();
+
+                if (payment_type==="Cheque"){
+                    $('#cheque_number').prop("readonly", false);
+                   $('#cheque_file').prop('readonly', false);
+                   $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
+                }
+                else if (payment_type==="Bank_transfer"){
+                    $('#bank_name').prop('readonly', false);
+                   $('#account_name').prop('readonly', false);
+                    $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', false);
+
+                }
+                else if (payment_type==="Cash"){
+
+                    $('#bank_name').prop('readonly', true);
+                   $('#account_name').prop('readonly', true);
+                    $('#cheque_number').prop("readonly", true);
+                   $('#cheque_file').prop('readonly', true);
+                }
+
+
+                // var crop_data = $('#select_crop').val();
+                // var variety_data = $('#select_variety').val();
+                // var class_data = $('#select_class').val();
+
+                // if (crop_data == 0) {
+
+                //     alert('Select crop and variety');
+
+
+                // } else if (variety_data == 0) {
+
+                //     alert('Select crop and variety');
+
+                // } else {
+
+                //     $.post('get_prices.php', {
+                //         crop_data: crop_data,
+                //         variety_data: variety_data,
+                //         class_data: class_data
+                //     }, function(data) {
+
+                //         $('#price_per_kg').val(data);
+
+                //     });
+                // }
+
+
+
+
+            });
+
+
+            $('#debtor_type').change(function() {
+
+                var type_value = $('#debtor_type').val();
+
+                if (type_value == 'agro_dealer') {
+
+                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
+                    $('#description').attr('placeholder', 'agro dealer phone');
+
+
+                } else if (type_value == 'b_to_b') {
+
+                    $('#customer_name').attr('placeholder', 'Search Business by name');
+                    $('#description').attr('placeholder', 'Business description');
+
+
+
+                } else if (type_value == 'customer') {
+
+                    $('#customer_name').attr('placeholder', 'Enter customer name');
+                    $('#description').attr('placeholder', 'Enter customer phone number ');
+
+
+                } else if (type_value == 'grower') {
+
+                    $('#customer_name').attr('placeholder', 'Search grower by name');
+                    $('#description').attr('placeholder', 'grower farm crop and variety ');
+
+
+                }
+
+
+
+                $("#search_main_certificate").on("input", function() {
+
+
+                    var main_certificate_value = $('#search_main_certificate').val();
+                    var main_quantity_value = $('#main_quantity').val();
+                    var crop_value = $('#select_crop').val();
+                    var variety_value = $('#select_variety').val();
+                    var class_result = $('#select_class').val();
+
+
+                    $.post('farm_get_certificate.php', {
+                        main_certificate_value: main_certificate_value,
+                        main_quantity_value: main_quantity_value,
+                        crop_value: crop_value,
+                        variety_value: variety_value,
+                        class_value: class_value
+                    }, function(data) {
+                        $('#main_certificate').html(data);
+
+
+                    })
+
+                });
+
+
+
+
+
+
+
+
+            });
+
+            $('#customer_name').on("input", function() {
+
+
+                let type_value = $('#debtor_type').val();
+                let search_value = $('#customer_name').val();
+                let search_result = $('#search_result').val();
+
+                if (type_value == "type_not_selected") {
+
+                    alert('please select order type');
+                } else if (type_value == "agro_dealer") {
+
+                    $.post('get_data.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+
+                    }, function(data) {
+                        $('#search_result').html(data);
+                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
+
+                        var data = $('#search_result').val();
+                        var test = data.split(',');
+
+                        $('#description').attr('value', test[1]);
+
+
+                    });
+
+                    $.post('get_transactions.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+                    }, data => {
+                        $('#transaction_table').html(data);
+                    });
+
+
+
+
+                } else if (type_value == "b_to_b") {
+
+                    $.post('get_data.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+
+                    }, function(data) {
+                        $('#search_result').html(data);
+                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
+
+                        var data = $('#search_result').val();
+                        var test = data.split(',');
+
+                        $('#description').attr('value', test[1] + ' ( Businesss description )');
+
+                    });
+
+                    $.post('get_transactions.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+                    }, data => {
+                        $('#transaction_table').html(data);
+                    });
+
+
+
+
+                } else if (type_value == "customer") {
+
+
+                    $.post('get_data.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+
+                    }, function(data) {
+                        $('#search_result').html(data);
+                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
+
+                        var data = $('#search_result').val();
+                        var test = data.split(',');
+                        var temp_data = "-";
+
+
+                        if (test == null) {
+
+                            temp_data = "enter -"
+                        } else {
+
+                            temp_data = test[1];
+                        }
+
+
+                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
+
+
+                    });
+
+                    $.post('get_transactions.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+                    }, data => {
+                        $('#transaction_table').html(data);
+                    })
+
+
+
+
+
+
+
+                } else if (type_value == "grower") {
+
+
+                    $.post('get_data.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+
+                    }, function(data) {
+                        $('#search_result').html(data);
+                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
+
+                        var data = $('#search_result').val();
+                        var test = data.split(',');
+
+                        $('#description').attr('value', test[1] + ' ( grower phone number )');
+
+                    })
+
+                    $.post('get_transactions.php', {
+                        type_value: type_value,
+                        search_value: search_value,
+                        search_result: search_result,
+                    }, data => {
+                        $('#transaction_table').html(data);
+                    });
+
+
+                }
+
+            });
+
+        });
+    </script>
+
+
 </head>
 
 <body>
-    <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -134,7 +415,9 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-
+                        <a href="index.html">
+                            <span>Finance</span>
+                        </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
@@ -173,9 +456,9 @@ if (empty($test)) {
                                     </li>
                                     <li class="waves-effect waves-light">
                                         <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image">
+                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
                                             <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
+                                                <h5 class="notification-user"></h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                                 <span class="notification-time">30 minutes ago</span>
                                             </div>
@@ -231,7 +514,7 @@ if (empty($test)) {
                                         </a>
                                     </li>
                                     <li class="waves-effect waves-light">
-                                        <a href="auth-normal-sign-in.html">
+                                        <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -241,13 +524,14 @@ if (empty($test)) {
                     </div>
                 </div>
             </nav>
-
+           
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
+                           
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -278,12 +562,6 @@ if (empty($test)) {
                                     </a>
 
                             </ul>
-                            
-
-                            
-
-                            
-
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
@@ -294,7 +572,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -333,8 +611,8 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="creditor_processed_payments" class="waves-effect waves-dark">
+                                <li class="active">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -343,7 +621,7 @@ if (empty($test)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="creditor_outstanding_payments" class="waves-effect waves-dark">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -373,7 +651,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="active">
+                            <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -407,7 +685,7 @@ if (empty($test)) {
 
                             </ul>
                             </li>
-                            
+                            </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -417,286 +695,358 @@ if (empty($test)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Bank Accounts</h5>
-                                            <p class="m-b-0"></p>
+                                            <h5 class="m-b-10">Add payment </h5>
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
+                                            <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="grower.php">Bank accounts</a>
+                                            <li class="breadcrumb-item"><a href="#!">Processed Debtor Payment</a>
                                             </li>
-
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-                            <!-- Main-body start -->
-                            <div class="main-body">
-                                <div class="page-wrapper">
-                                    <!-- Page-body start -->
-                                    <div class="page-body">
-                                        <!-- Basic table card start -->
-                                        <!-- Basic table card end -->
-                                        <!-- Inverse table card start -->
+                        
+                            <!-- Page-header end -->
+                            <div class="pcoded-inner-content">
+                                <!-- Main-body start -->
+                                <div class="main-body">
+                                    <div class="page-wrapper">
 
-                                        <!-- Inverse table card end -->
-                                        <!-- Hover table card start -->
+                                        <!-- Page body start -->
+                                        <div class="page-body">
+                                            
+ 
+                                       
 
-                                        <!-- Hover table card end -->
-                                        <!-- Contextual classes table starts -->
+                                           
 
-
-                                        <!-- Contextual classes table ends -->
-                                        <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
-
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">New Bank Account</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new Bank Account</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="bank_account.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_name" type="text" class="form-control" name="bank_name" placeholder="Bank name" require="">
-                                                                        </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Filter </h5>
 
 
-                                                                    </div>
+                                                </div>
+                                                <div class="card-block">
+
+    </div>
+                                            </div>
 
 
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h5>Transaction list</h5>
+                                                            <div class="card-block table-border-style">
+                                                                <div class="table-responsive" id="table_test">
+                                                                    <table class="table" id="transaction_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>ID</th>
+                                                                                <th>Type</th>
+                                                                                <th>Amount</th>
+                                                                                <th>Date</th>
+                                                                               
+                                                                                <th>Time</th>
+                                                                                <th>Status</th>
+                                                                                <th>Actions</th>
+                                                                                
 
-                                                                    <div class="form-group row">
+                                                                              
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
 
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="text" class="form-control" name="account_number" placeholder="Account-number" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-
+                                                                            <?php
                                                                         
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" name="register_bank" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
-                                                                        </div>
 
-                                                                    </div>
+                                                                               
+                                                                            
+                                                                             
+
+                                                                                $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+
+                                                                       
+
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $transaction_ID = $row["transaction_ID"];
+                                                                                        $type  = $row["type"];
+                                                                                        $amount = $row["amount"];
+                                                                                        $trans_date = $row["trans_date"];
+                                                                                        $trans_time = $row['trans_time'];
+                                                                                        $trans_status = $row['trans_status'];
+                                                                                        
+                                                                                     
 
 
 
+                                                                                        echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$transaction_ID</td>
+                                                       <td>$type</td>
+                                                       <td>$amount</td>
+                                                       <td>$trans_date</td>
+                                                       <td>$trans_time</td>
+                                                       <td>$trans_status</td>
+                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+                                                       
+                                                     
+                                                                                                           
+                                                         
+                                                       
+                                                        
+                                                   </tr>	
+                                               ";
+                                                                                    }
+                                                                                }
+                                                                            
 
 
-                                                                </form>
+                                                                            ?>
+                                                                            <tr>
+                                                                                <th scope="row">-</th>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
+
                                                         </div>
 
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Registred Bank Accounts </h5>
-
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                  <th>ID</th>
-                                                                <th>Bank name</th>
-                                                                <th>Account number </th>
-                                                                <th>Acccount funds</th>
-                                                                <th>Registered date</th>
-                                                                <th>registered by</th>
-
-                                                                <th>Action</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
 
 
-                                                            $sql = "SELECT `bank_ID`, `bank_name`, `account_number`, `account_funds`, `register_date`, `fullname` FROM `bank_account`
-                              INNER JOIN user ON bank_account.user_ID = user.user_ID";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $bank_id = $row['bank_ID'];
-                                                                    $name = $row['bank_name'];
-                                                                    $account_number = $row['account_number'];
-                                                                    $account_funds = $row['account_funds'];
-                                                                    $registered_date = $row['register_date'];
-                                                                    $registered_by = $row['fullname'];
-                                                                   
+                        </form>
 
 
 
-
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                <td>$bank_id</td>
-                                                 <td>$name</td>
-											    <td>$account_number</td>
-												<td> $account_funds</td>
-												<td>$registered_date</td>
-												<td>$registered_by</td>
-                                               
-                                                
-                                               
-	
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='creditor_documents
-                                                
-                                                ' class='ti-bookmark-alt'></a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Background Utilities table end -->
-                                    </div>
-                                    <!-- Page-body end -->
-                                </div>
-                            </div>
-                            <!-- Main-body end -->
-
-                            <div id="styleSelector">
-
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <!-- Basic Form Inputs card end -->
+            <!-- Input Grid card start -->
+
         </div>
+        <!-- Page body end -->
     </div>
+    </div>
+    <!-- Main-body end -->
+    <div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
 
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]>
-    <div class="ie-warning">
-        <h1>Warning!!</h1>
-        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-        <div class="iew-container">
-            <ul class="iew-download">
-                <li>
-                    <a href="http://www.google.com/chrome/">
-                        <img src="assets/images/browser/chrome.png" alt="Chrome">
-                        <div>Chrome</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.mozilla.org/en-US/firefox/new/">
-                        <img src="assets/images/browser/firefox.png" alt="Firefox">
-                        <div>Firefox</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.opera.com">
-                        <img src="assets/images/browser/opera.png" alt="Opera">
-                        <div>Opera</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.apple.com/safari/">
-                        <img src="assets/images/browser/safari.png" alt="Safari">
-                        <div>Safari</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                        <img src="assets/images/browser/ie.png" alt="">
-                        <div>IE (9 & above)</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <p>Sorry for the inconvenience!</p>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
+        to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
     </div>
-    <![endif]-->
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
     <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
     <!-- waves js -->
     <script src="assets/pages/waves/js/waves.min.js"></script>
+
     <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
     <!-- Custom js -->
     <script src="assets/js/pcoded.min.js"></script>
     <script src="assets/js/vertical-layout.min.js "></script>
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
-
-
-
-</html>
-
 <?php
 
 
-if (isset($_POST['register_bank'])) {
+if (isset($_POST['place_order'])) {
+
+    if ($_SESSION['type'] = "customer") {
 
 
-    $object = new main();
-    $object->register_bank_account($_POST['bank_name'], $_POST['account_number']);
+
+        // since reguler customer are registered when the user adds the first
+        // item, the code here is trying to include the customer's id to the temp session list  
+
+        $name = $_SESSION['customer_name'];
+
+        echo ("<script> alert('$name !');
+        </script>");
+
+
+        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+
+
+            while ($row = $result->fetch_assoc()) {
+                unset($_SESSION['customer_ID']);
+                $_SESSION['customer_ID'] =  $row["debtor_ID"];
+            }
+        }
+        $object = new main();
+        $object->place_order();
+    } else {
+        $object = new main();
+        $object->place_order();
+
+        echo ("<script> alert('not working !');
+        </script>");
+    }
 }
+ 
+
+   
+
+if (isset($_FILES['image'])) {
+    $errors = array();
+    $file_name = $_FILES['image']['name'];
+    $file_size = $_FILES['image']['size'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
+
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
+
+
+    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+    $extensions = array("pdf");
+
+    if (in_array($file_ext, $extensions) === false) {
+        $errors[] = "extension not allowed, please choose pdf.";
+    }
+
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
+        echo "Success";
+    } else {
+        print_r($errors);
+    }
+}
+ 
+
+if (isset($_POST['save_payment'])) {
+
+ //// $_POST[trans_date] is used to get the transaction payment
+ $uploaded_file = $newfilename;   
+
+if($_POST['select_payment_type']=="Cheque"){
+
+    
+    $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
+    
+
+}
+ if($_POST['select_payment_type']=="Cash"){
+
+  
+
+    
+      $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+  
+   
+} if($_POST['select_payment_type']=="Bank_transfer"){
+
+
+      $object = new main;
+    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
+    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+}
+
+
+   
+
+   
+   
+}
+
+
+
+
+
 ?>
+
+</html>

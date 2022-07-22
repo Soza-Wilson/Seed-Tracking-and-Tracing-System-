@@ -584,7 +584,7 @@ $.post('../marketing/get_transactions.php', {
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -593,7 +593,7 @@ $.post('../marketing/get_transactions.php', {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -602,7 +602,7 @@ $.post('../marketing/get_transactions.php', {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditors.php" class="waves-effect waves-dark">
+                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
