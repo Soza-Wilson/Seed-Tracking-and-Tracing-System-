@@ -8,9 +8,18 @@ session_start();
 
 $test = $_SESSION['fullname'];
 
+$stock_in_ID = $_GET['stock_in_id'];
+$crop = $_GET['crop'];
+$variety = $_GET['variety'];
+$class = $_GET['class'];
+$quantity = $_GET['quantity'];
+
+
 if (empty($test)) {
 
     header('Location:../login.php');
+
+
 }
 
 
@@ -305,7 +314,7 @@ if (empty($test)) {
                                             </a>
                                         </li>
                                         <li class="active">
-                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
+                                    <a href="grading.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
                                         <span class="pcoded-mcaret"></span>
@@ -462,7 +471,7 @@ if (empty($test)) {
                                             <li class="breadcrumb-item"><a href="#">dashboard</a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="admin_pending_orders.php">Grade seed </a>
-                                            
+
                                             </li>
                                             </li>
 
@@ -493,9 +502,9 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="stock_out_check_items.php" method="POST">
+                                            <form action="grade_seed.php" method="POST">
                                                 <div class="card-header">
-                                                    <h5>Item details</h5>
+                                                    <h5>Stock in details </h5>
 
                                                     <div class="card-header-right">
                                                         <ul class="list-unstyled card-option">
@@ -510,6 +519,16 @@ if (empty($test)) {
 
 
                                                         <span class="pcoded-mcaret"></span>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">stock in ID</label>
+                                                            <select class="form-control" name="stock_in_id">
+                                                                <option value="<?php echo $stock_in_ID; ?>"><?php echo $stock_in_ID; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
 
 
                                                         <div class="col-sm-2">
@@ -555,25 +574,9 @@ if (empty($test)) {
 
 
                                                         </div>
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">price per kd</label>
-                                                            <select class="form-control" name="price_per_kg">
-                                                                <option value="<?php echo $price_per_kg; ?>"><?php echo $price_per_kg; ?></option>
-                                                            </select>
+                                                        
 
-
-
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Discount price</label>
-                                                            <select class="form-control" name="discount_price">
-                                                                <option value="<?php echo $discount_price; ?>"><?php echo $discount_price; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
+                                                        
 
 
 
@@ -582,7 +585,7 @@ if (empty($test)) {
 
 
 
-                                            </form>
+                                           
 
 
                                         </div>
@@ -597,136 +600,138 @@ if (empty($test)) {
                                 </div>
                             </div>
 
-                          
-
-                                <!-- Background Utilities table end -->
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Items available in stock</h5>
-
-                                    <div class="card-header-right">
-                                        <ul class="list-unstyled card-option">
-                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                            <li><i class="fa fa-window-maximize full-card"></i></li>
-                                            <li><i class="fa fa-minus minimize-card"></i></li>
-                                            <li><i class="fa fa-refresh reload-card"></i></li>
-                                            <li><i class="fa fa-trash close-card"></i></li>
-                                        </ul>
-                                    </div>
 
 
-                                </div>
-                                <div class="card-block table-border-style">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Stock in ID</th>
-                                                    <th>Crop</th>
-                                                    <th>Variety</th>
-                                                    <th>Class</th>
-                                                    <th>Quantity</th>
-                                                    <th>Source</th>
-                                                    <th>Source_name</th>
-                                                    <th>SRN</th>
-                                                    <th>Added by</th>
-                                                    <th>added date</th>
-                                                    <th>Action</th>
-
-
-
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <?php
-
-                                                $crop_ID = $_GET['crop_ID'];
-                                                $variety_ID = $_GET['variety_ID'];
-                                                $class = $_GET['seed_class'];
-                                                $item_quantity = $_GET['quantity'];
-                                                $order_ID = $_GET['order_ID'];
-
-
-                                                $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
-                                               `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                                                `quantity`, `date` ,`supporting_dir` FROM `stock_in` 
-                                               INNER JOIN user ON stock_in.user_ID = user.user_ID 
-                                               INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                                               INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                                               INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.crop_ID = '$crop_ID' AND stock_in.variety_ID = '$variety_ID' AND stock_in.class = '$class' AND stock_in.available_quantity > 0 ";
-
-                                                $result = $con->query($sql);
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-
-
-                                                        $stock_in_id = $row['stock_in_ID'];
-                                                        $crop      = $row['crop'];
-                                                        $source = $row['source'];
-                                                        $source_name = $row['name'];
-                                                        $variety     = $row['variety'];
-                                                        $class     = $row['class'];
-                                                        $quantity     = $row['quantity'];
-                                                        $date_added = $row['date'];
-                                                        $user = $row['fullname'];
-                                                        $srn = $row['SLN'];
-                                                        $dir = $row['supporting_dir'];
-                                                       
-
-
-                                                        echo "
-											<tr class='odd gradeX'>
-                                            <td>$stock_in_id</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$quantity</td>
-                                                <td>$source</td>
-                                                <td>$source_name</td>
-                                                <td>$srn</td>
-                                                <td>$user</td>
-                                                <td>$date_added</td>
-                                          
-
-                                            <td><a href='process_stock_out.php? item_ID=$item_ID & item_quntity=$item_quantity & stock_in_ID=$stock_in_id & stock_in_quantity=$quantity & order_ID=$order_ID & price_per_kg=$price_per_kg & discount_price=$discount_price'  class='btn btn-primary'>Add to order item</a> </td>
-
-												
-											</tr>	
-                                    
-												
-										";
-                                                    }
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="card-block">
-
-                                        <input type='button' value="back" onclick="history.back()" class='btn btn-primary'>
-
-
-                                    </div>
-                                </div>
-
-                                <!-- Background Utilities table end -->
-                            </div>
-                            <!-- Page-body end -->
+                            <!-- Background Utilities table end -->
                         </div>
-                    </div>
-                    <!-- Main-body end -->
 
-                    <div id="styleSelector">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Grade seed </h5>
 
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                        <li><i class="fa fa-trash close-card"></i></li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                            <div class="card-block">
+
+
+
+
+
+
+
+
+
+
+
+                                            
+                                           
+
+                                         
+
+
+
+
+
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Grade outs quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="grade_outs" class="form-control" name="grade_outs" placeholder="-" require="">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Trash quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="trash" class="form-control" name="trash" placeholder="-" require="">
+                                                </div>
+                                            </div>
+
+
+                                            
+                                      
+
+
+                                            <div class="form-group row">
+                                                
+
+
+
+
+
+
+                                                </br></br></br>
+
+
+                                                <div>
+
+                                                </div>
+
+                                                <br>
+                                                .
+                                                <div class="form-group">
+
+
+                                                    <input type="submit" name="save_grade_out" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                    <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+                                                </div>
+
+
+
+
+
+                                                </form>
+
+
+
+                                            </div>
+
+                                        </div>
+                                        <!-- Input Grid card end -->
+                                        <!-- Input Validation card start -->
+
+                                        <!-- Input Validation card end -->
+                                        <!-- Input Alignment card start -->
+
+                                        <!-- Input Alignment card end -->
+                                    </div>
+                            
+                                
+                           
+
+
+
+                            <!-- Background Utilities table end -->
+                        </div>
+                        <!-- Page-body end -->
                     </div>
+                </div>
+                <!-- Main-body end -->
+
+                <div id="styleSelector">
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
     </div>
@@ -796,17 +801,11 @@ if (empty($test)) {
 </body>
 <?php
 
-if (isset($_POST['approve_order'])) {
+if (isset($_POST['save_grade_out'])) {
 
+   $object = new main();
+   $object -> grade_seed($_POST['stock_in_id'],$_POST['grade_outs'],$_POST['trash']);
 
-    $ID = $_POST['order_id'];
-
-    $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    echo ("<script> alert('Order approved!');
-    </script>");
 }
 
 if (isset($_POST['deny_order'])) {

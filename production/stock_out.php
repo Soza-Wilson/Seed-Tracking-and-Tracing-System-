@@ -309,6 +309,15 @@ if (empty($test)) {
                                             </a>
                                         </li>
 
+                                        <li class="">
+                                    <a href="grading.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+
                                         <li class="active">
                                             <a href="stock_out.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>

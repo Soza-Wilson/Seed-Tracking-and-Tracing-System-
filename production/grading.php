@@ -571,7 +571,7 @@ if (empty($test)) {
                                                
 												
 												
-												<td><a href='grade_seed.php' class='btn btn-success'> grade</a>
+												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$user' class='btn btn-success'> grade</a>
                                                 
                                                 </td>
 											</tr>	
@@ -622,6 +622,7 @@ if (empty($test)) {
                                                                 <th>Added by</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
+                                                                <th>Action</th>
                                                                 
 
                                                             </tr>
@@ -630,31 +631,19 @@ if (empty($test)) {
 
                                                             <?php
 
-
-                                                            $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
-                              `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                               `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
-                              INNER JOIN user ON stock_in.user_ID = user.user_ID 
-                              INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                              INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID";
-
+                                                           $sql="SELECT `grade_ID`,user.fullname,`date`,`time`,`grade_out_quantity`,`trash_quantity`,`stock_in_ID` FROM `grading` INNER JOIN user ON grading.user_ID = user.user_ID";
+                                                            
+                                                          
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $stock_in_id = $row['stock_in_ID'];
-                                                                    $crop      = $row['crop'];
-                                                                    $source = $row['source'];
-                                                                    $source_name = $row['name'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $quantity     = $row['quantity'];
-                                                                    $used_quantity = $row['used_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $date_added = $row['date'];
+                                                                    $grade_id = $row['grade_ID'];
+                                                                    $stock_in_id = $row['grade_ID'];
                                                                     $user = $row['fullname'];
-                                                                    $srn = $row['SLN'];
-                                                                    $dir = $row['supporting_dir'];
+                                                                    $date = $row['date'];
+                                                                    $time = $row['time'];
+                                                                    $grade_out_quantity = $row['grade_out_quantity'];
+                                                                    $trash_quantity = $row['trash_quantity'];
 
 
 
@@ -662,18 +651,14 @@ if (empty($test)) {
 
                                                                     echo "
 											<tr class='odd gradeX'>
-                                                 <td>$stock_in_id</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$quantity</td>
-                                                <td> $used_quantity</td>
-                                                <td> $available_quantity</td>
-                                                <td>$source</td>
-                                                <td>$source_name</td>
-                                                <td>$srn</td>
-                                                <td>$user</td>
-                                                <td>$date_added</td>
+                                                 <td>$grade_id</td>
+											    <td>$stock_in_id</td>
+												<td>$grade_out_quantity</td>
+												<td>$trash_quantity</td>
+												<td>$user</td>
+                                                <td>$date</td>
+                                                <td>$time</td>
+                                                
                                                 
                                                
 												
@@ -681,7 +666,7 @@ if (empty($test)) {
 												<td><a href='view_registered_users.php' class='ti-eye'></a>/
                                                 <a href='view_registered_users.php' class='ti-trash'></a>/
                                                 <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='stock_in_documents/$dir' class='ti-bookmark-alt'></a>
+                                                
                                                 </td>
 											</tr>	
 										";
