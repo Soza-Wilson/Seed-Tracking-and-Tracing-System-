@@ -1,89 +1,105 @@
 <?php
+include('../class/main.php');
+require('../pdf/fpdf.php');
 
-
-require('../fpdf/fpdf.php');
-$date = date("d-m-Y");
-$time = date("H:i:s"); 
-
-class pdf_handler{
-
-      
+class PDF extends FPDF
+{
+// Page header
+function Header()
+{
+    // Logo
+    $this->Image('../pdf/logo.png',0,5,0);
+    // Arial bold 15
+    $this->SetFont('Arial','',10);
+    // Move to the right
+     $this->Cell(80);
+    // Title
+    // $this->Cell(20,10,'   P.O Box 2281, Lilongwe,Malawi',0,0,'');
+    // //
+    // $this->Cell(20,24,'Along Likuni Road',0,0,'c');
+    // $this->Cell(20,31,'Tel: +265 (0) 994870500/400/500',0,0,'c');
+    // $this->Cell(20,39,'info@musecomalawi.com',0,0,'c');
+    // $this->Cell(20,46,'www.musecomalawi.com',0,0,'c');
     
 
-function create_qr(){
-
-
-
+    // Line break
+    $this->Ln(20);
+   
 }
 
-
-function create_dispatch($order_id){
-
-    $sql = "SELECT * FROM `stock_out` WHERE `order_ID`= '$order_id'";
-
-    $result = $con->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-
-
-
-
-
-             $name   = $row["name"];
-            
-
-            $pdf = new FPDF();
-            $pdf->AddPage();
-            $pdf->SetFont('Arial','',13);
-            $pdf->Cell(150,10,'MultiSeeds Company LTD!',0,0);
-            $pdf->Cell(52,10,'INVOICE',0,1);
-            $pdf->Cell(150,11,'Along Bwemba road',0,0);
-            $pdf->Cell(15,10,'Date:',0,0);
-            $pdf->Cell(26,10,$name,0,1);
-            $pdf->Cell(150,11,'Along Bwemba road',0,0);
-            $pdf->Cell(15,10,$name,0,0);
-            $pdf->Cell(26,10,$value,0,1);
-            $pdf->Output();
-            
-        }
-
-    }
-
-
+// Page footer
+function Footer()
+{
+    // Position at 1.5 cm from bottom
+    $this->SetY(-15);
+    // Arial italic 8
+    $this->SetFont('Arial','I',8);
+    // Page number
+    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+}
 }
 
-function create_pdf($type,$customer_data,$details_dat){
-
-
-    /// the function needs to be getting the document type, customer info in an array, and details info in an array
-
-
-$pdf = new FPDF();
+// Instanciation of inherited class
+$pdf = new PDF();
+$pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Arial','',13);
-$pdf->Cell(150,10,'MultiSeeds Company LTD!',0,0);
-$pdf->Cell(52,10,'INVOICE',0,1);
-$pdf->Cell(150,11,'Along Bwemba road',0,0);
-$pdf->Cell(15,10,'Date:',0,0);
-$pdf->Cell(26,10,$value,0,1);
-$pdf->Cell(150,11,'Along Bwemba road',0,0);
-$pdf->Cell(15,10,'time:',0,0);
-$pdf->Cell(26,10,$value,0,1);
+$pdf->SetFont('Arial','B','',18);
+// for($i=1;$i<=20;$i++)
+//     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+$pdf->Cell(65,40,'',0,0,'c');
+$pdf->Cell(60,40,'           RECEIPT ',0);
+$pdf->Ln();
+$pdf->SetFont('Arial','','',12);
+
+/// customer details
+$pdf->Cell(20,5,'Name :',1,0,'C');
+$pdf->Ln();
+$pdf->Cell(18,5,'Date :',1,0,'C');
+$pdf->Ln();
+$pdf->Cell(29,5,'Payment ID :',1,0,'C');
+$pdf->Ln();
+$pdf->Cell(32,5,'Payment type :',1,0,'C');
+$pdf->Ln();
+
+// get trasac
+
+$sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`total_price` FROM
+`item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID";
+
+
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $item_ID = $row["item_ID"];
+        $crop   = $row["crop"];
+        $variety = $row["variety"];
+        $class = $row["class"];
+        $quantity = $row['quantity'];
+        $price = $row['price_per_kg'];
+        $discount = $row['discount_price'];
+        $total_price = $row['total_price'];
+
+//transaction table
+
+$pdf->SetFont('Arial','B','',10);
+$pdf->Cell(30,5,$quantity,1,0,'C');
+$pdf->Cell(120,5,$crop,1,0,'C');
+$pdf->Cell(30,5, $price,1,0,'C');
+
+
+}
+}
+$pdf->SetFont('Arial','B','',12);
+$pdf->Cell(60,20,'',0,0,'C');
+$pdf->Cell(60,20,'Transaction Details',0,0,'C');
+$pdf->Ln();
+$pdf->SetFont('Arial','B','',10);
+$pdf->Cell(30,5,'Quantity',1,0,'C');
+$pdf->Cell(120,5,'Description',1,0,'C');
+$pdf->Cell(30,5,'Amount',1,0,'C');
 $pdf->Output();
 
 
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
 ?>
+

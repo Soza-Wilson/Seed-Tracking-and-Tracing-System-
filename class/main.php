@@ -7,6 +7,8 @@ $password  = "";
 $database        = "seed_tracking_db";
 $con = new mysqli($localhost, $username, $password, $database);
 
+
+
 class main
 {
 
@@ -698,6 +700,10 @@ class main
 
 
 
+
+
+  
+
   // production stock in functions 
 
 
@@ -752,7 +758,7 @@ class main
       }
     }
     $calculated_amount = $temp_amount * $quantity;
-    $account_funds = "";
+    $account_funds ="";
     $transaction_ID = $transaction_ID = $this->generate_user("transaction");
     $trans_type = "stock_in";
 
@@ -764,7 +770,7 @@ class main
      '$date','$time','payment_pending','$user_ID')";
 
     $statement = $con->prepare($sql);
-    $statement->execute();
+    $statement->execute(); 
 
     ///   update creditor funds account 
     $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`= $creditor";
@@ -1807,7 +1813,10 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        header('Location:add_payback_payment.php');
+        //header('Location:add_payback_payment.php');
+        $pdf = new create_pdf;
+        $pdf -> create_sales_receipt();
+
       } else if ($amount > $ava_balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
@@ -1815,4 +1824,10 @@ class main
       }
     }
   }
+
+
+  // function create pdf files using fpdf
+
+
+
 }
