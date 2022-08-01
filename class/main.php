@@ -1478,7 +1478,14 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      header('Location:add_payment.php');
+      //header('Location:add_payment.php');
+
+
+     //generate payment receipt pdf
+
+    //  $object = new pdf_handler();
+    //  $object -> create_receipt();
+
     } else if ($trans_status == "partly_payed") {
 
 
@@ -1519,6 +1526,9 @@ class main
         $statement->execute();
 
         header('Location:add_payment.php');
+
+    //     $object = new pdf_handler();
+    //  $object -> create_receipt();
       } else if ($amount < $balance) {
 
         $update_status = "partly_payed";
@@ -1545,6 +1555,8 @@ class main
 
 
         header('Location:add_payment.php');
+    //     $object = new pdf_handler();
+    //  $object -> create_receipt();
       } else if ($amount > $balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
@@ -1814,8 +1826,7 @@ class main
         $statement->execute();
 
         //header('Location:add_payback_payment.php');
-        $pdf = new create_pdf;
-        $pdf -> create_sales_receipt();
+       
 
       } else if ($amount > $ava_balance) {
 

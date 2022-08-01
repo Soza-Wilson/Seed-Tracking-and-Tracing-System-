@@ -39,7 +39,13 @@ function Footer()
 }
 }
 
-// Instanciation of inherited class
+class pdf_handler extends main {
+
+    function create_receipt(){
+
+
+
+        // Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -52,13 +58,25 @@ $pdf->Ln();
 $pdf->SetFont('Arial','','',12);
 
 /// customer details
-$pdf->Cell(20,5,'Name :',1,0,'C');
+$pdf->Cell(20,5,'Name :',0,0,'C');
 $pdf->Ln();
-$pdf->Cell(18,5,'Date :',1,0,'C');
+$pdf->Cell(18,5,'Date :',0,0,'C');
 $pdf->Ln();
-$pdf->Cell(29,5,'Payment ID :',1,0,'C');
+$pdf->Cell(29,5,'Payment ID :',0,0,'C');
 $pdf->Ln();
-$pdf->Cell(32,5,'Payment type :',1,0,'C');
+$pdf->Cell(32,5,'Payment type :',0,0,'C');
+$pdf->Ln();
+
+$pdf->SetFont('Arial','B','',12);
+$pdf->Cell(60,20,'',0,0,'C');
+$pdf->Cell(60,20,'Transaction Details',0,0,'C');
+$pdf->Ln();
+
+
+$pdf->SetFont('Arial','B','',10);
+$pdf->Cell(30,5,'Quantity',1,0,'C');
+$pdf->Cell(120,5,'Description',1,0,'C');
+$pdf->Cell(30,5,'Amount',1,0,'C');
 $pdf->Ln();
 
 // get trasac
@@ -82,23 +100,27 @@ if ($result->num_rows > 0) {
 
 //transaction table
 
-$pdf->SetFont('Arial','B','',10);
+$pdf->SetFont('Arial','','',10);
 $pdf->Cell(30,5,$quantity,1,0,'C');
-$pdf->Cell(120,5,$crop,1,0,'C');
+$pdf->Cell(120,5,"$crop / $variety / $class",1,0,'C');
 $pdf->Cell(30,5, $price,1,0,'C');
-
-
-}
-}
-$pdf->SetFont('Arial','B','',12);
-$pdf->Cell(60,20,'',0,0,'C');
-$pdf->Cell(60,20,'Transaction Details',0,0,'C');
 $pdf->Ln();
-$pdf->SetFont('Arial','B','',10);
-$pdf->Cell(30,5,'Quantity',1,0,'C');
-$pdf->Cell(120,5,'Description',1,0,'C');
-$pdf->Cell(30,5,'Amount',1,0,'C');
+
+}
+}
+
 $pdf->Output();
+
+
+
+        
+    }
+
+
+}
+
+
+
 
 
 ?>
