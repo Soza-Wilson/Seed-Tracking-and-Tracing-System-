@@ -7,7 +7,7 @@ $password  = "";
 $database        = "seed_tracking_db";
 $con = new mysqli($localhost, $username, $password, $database);
 
-
+require('pdf_handler.php');
 
 class main
 {
@@ -1483,8 +1483,8 @@ class main
 
      //generate payment receipt pdf
 
-    //  $object = new pdf_handler();
-    //  $object -> create_receipt();
+     $object = new pdf_handler();
+     $object -> create_receipt();
 
     } else if ($trans_status == "partly_payed") {
 
@@ -1527,8 +1527,8 @@ class main
 
         header('Location:add_payment.php');
 
-    //     $object = new pdf_handler();
-    //  $object -> create_receipt();
+        $object = new pdf_handler();
+     $object -> create_receipt();
       } else if ($amount < $balance) {
 
         $update_status = "partly_payed";
@@ -1555,8 +1555,8 @@ class main
 
 
         header('Location:add_payment.php');
-    //     $object = new pdf_handler();
-    //  $object -> create_receipt();
+        $object = new pdf_handler();
+     $object -> create_receipt();
       } else if ($amount > $balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');

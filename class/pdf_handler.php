@@ -1,7 +1,12 @@
 <?php
-include('../class/main.php');
+
 require('../pdf/fpdf.php');
 
+$localhost = "localhost";
+$username  = "root";
+$password  = "";
+$database        = "seed_tracking_db";
+$con = new mysqli($localhost, $username, $password, $database);
 class PDF extends FPDF
 {
 // Page header
@@ -39,7 +44,7 @@ function Footer()
 }
 }
 
-class pdf_handler extends main {
+class pdf_handler{
 
     function create_receipt(){
 
@@ -83,7 +88,7 @@ $pdf->Ln();
 
 $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`total_price` FROM
 `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID";
-
+ global $con;
 
 
 $result = $con->query($sql);
