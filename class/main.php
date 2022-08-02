@@ -1491,7 +1491,7 @@ class main
       $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-      header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$amount");
+      header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
      // header('Location:add_payment.php');
 
 
@@ -1538,7 +1538,7 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$amount");
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
 
        
       } else if ($amount < $balance) {
@@ -1566,7 +1566,7 @@ class main
         $statement->execute();
 
 
-        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$amount");
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
        
       } else if ($amount > $balance) {
 
