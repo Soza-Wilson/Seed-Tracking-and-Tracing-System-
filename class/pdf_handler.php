@@ -59,6 +59,7 @@ class pdf_handler{
      $payment_id="";
      $payment_type="";
      $order_id =$_GET['order_id']; 
+     $total =$_GET['total']; 
      //$payment_id =$$_GET['payment_id'];
 
 //getting customer details
@@ -163,6 +164,14 @@ $result = $con->query($sql);
  
  }
  }
+
+ //Items total
+ $pdf->SetFont('Times','B','',10);
+ $pdf->Cell(150,5,'TOTAL',0,0,'R');
+ $pdf->Cell(30,5,"$total",1,0,'C');
+ $pdf->Ln();
+
+
  
  $pdf->Output();
  
