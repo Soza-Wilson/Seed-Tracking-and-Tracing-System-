@@ -7,7 +7,7 @@ $password  = "";
 $database        = "seed_tracking_db";
 $con = new mysqli($localhost, $username, $password, $database);
 
-require('pdf_handler.php');
+
 
 class main
 {
@@ -321,10 +321,10 @@ class main
   function update_user($user_id, $fullname, $department, $dob, $registered_date, $position, $phone, $email, $password)
   {
 
-    $sql = "UPDATE `user` SET `user_type_ID`='$department',`fullname`='$fullname',
-        `DOB`='$dob',`registered_date`='$registered_date',`postion`='$position',`phone`='$phone',`email`='$email',`password`='$password' WHERE `user_ID`=''$user_id'";
+    // $sql = "UPDATE `user` SET `user_type_ID`='$department',`fullname`='$fullname',
+    //     `DOB`='$dob',`registered_date`='$registered_date',`postion`='$position',`phone`='$phone',`email`='$email',`password`='$password' WHERE `user_ID`=''$user_id'";
 
-    $statement->execute();
+    // $sql->execute();
   }
 
   function delete_user()
@@ -1436,18 +1436,32 @@ class main
 
   /// add payment 
 
+ 
+
   function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description)
-  {;
+  {
 
     global $con;
     $payed_amount = "";
     $transaction_amount = "";
+    
+    $order_id ="";
     $date = date("d-m-Y");
     $time = date("H:m:i");
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
+    $sql="SELECT * FROM `transaction` WHERE `transaction_ID`='$transaction_id'";
 
+    $result = $con->query($sql);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+
+          $order_id = $row["action_ID"];
+          
+        }
+
+      }
 
     if ($trans_status == "payment_pending") {
       /// adding new payment
@@ -1477,14 +1491,13 @@ class main
       $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-
-      //header('Location:add_payment.php');
+      header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id");
+     // header('Location:add_payment.php');
 
 
      //generate payment receipt pdf
 
-     $object = new pdf_handler();
-     $object -> create_receipt();
+    
 
     } else if ($trans_status == "partly_payed") {
 
@@ -1525,10 +1538,9 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        header('Location:add_payment.php');
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id");
 
-        $object = new pdf_handler();
-     $object -> create_receipt();
+       
       } else if ($amount < $balance) {
 
         $update_status = "partly_payed";
@@ -1554,9 +1566,8 @@ class main
         $statement->execute();
 
 
-        header('Location:add_payment.php');
-        $object = new pdf_handler();
-     $object -> create_receipt();
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id");
+       
       } else if ($amount > $balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
