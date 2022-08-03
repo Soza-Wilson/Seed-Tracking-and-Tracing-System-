@@ -702,6 +702,8 @@ if (empty($test)) {
                                         <!-- Page body start -->
                                         <div class="page-body">
 
+                                        
+
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5>Select Payment Type</h5>

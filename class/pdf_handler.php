@@ -1,3 +1,5 @@
+
+
 <?php
 
 use function PHPSTORM_META\type;
@@ -58,8 +60,10 @@ class pdf_handler{
      $payment_time="";
      $payment_id="";
      $payment_type="";
-     $order_id =$_GET['order_id']; 
-     $total =$_GET['total']; 
+     $order_id ="";
+     $total = "";
+     $order_id = $_GET['order_id']; 
+     $total = $_GET['total']; 
      //$payment_id =$$_GET['payment_id'];
 
 //getting customer details
@@ -101,13 +105,13 @@ $result = $con->query($sql);
  $pdf = new PDF();
  $pdf->AliasNbPages();
  $pdf->AddPage();
- $pdf->SetFont('Arial','B','',18);
+ $pdf->SetFont('Times','B','',24);
  // for($i=1;$i<=20;$i++)
  //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
- $pdf->Cell(65,40,'',0,0,'c');
- $pdf->Cell(60,40,'           RECEIPT ',0);
+ $pdf->Cell(80,40,'',0,0,'c');
+ $pdf->Cell(60,40,'SALES RECEIPT ',0);
  $pdf->Ln();
- $pdf->SetFont('Times','','',12);
+ $pdf->SetFont('Times','B','',12);
  
  /// customer details
  $pdf->Cell(20,5,"Name________: $debtor_name",0,0,'');
@@ -120,8 +124,12 @@ $result = $con->query($sql);
  $pdf->Ln();
  $pdf->Cell(20,5,"Payment ID____: $payment_id",0,0,'');
  $pdf->Ln();
- $pdf->Cell(20,5,"Payment type__: $payment_type",0,0,'');
+ 
+ $pdf->Cell(60,5,'',0,0,'');
  $pdf->Ln();
+ $pdf->Cell(190,0,'',1,0,'');
+ $pdf->Ln();
+ 
  
  $pdf->SetFont('Times','B','',12);
  $pdf->Cell(60,20,'',0,0,'C');
@@ -131,7 +139,10 @@ $result = $con->query($sql);
  
  $pdf->SetFont('Times','B','',10);
  $pdf->Cell(30,5,'Quantity',1,0,'C');
- $pdf->Cell(120,5,'Description',1,0,'C');
+ $pdf->Cell(70,5,'Description',1,0,'C');
+ $pdf->Cell(30,5,'Unit price',1,0,'C');
+ $pdf->Cell(30,5,'Discount price',1,0,'C');
+
  $pdf->Cell(30,5,'Amount',1,0,'C');
  $pdf->Ln();
  
@@ -158,7 +169,9 @@ $result = $con->query($sql);
  
  $pdf->SetFont('Times','','',10);
  $pdf->Cell(30,5,$quantity,1,0,'C');
- $pdf->Cell(120,5,"$crop / $variety / $class",1,0,'C');
+ $pdf->Cell(70,5,"$crop / $variety / $class",1,0,'C');
+ $pdf->Cell(30,5, $price,1,0,'C');
+ $pdf->Cell(30,5, $discount,1,0,'C');
  $pdf->Cell(30,5, $total_price,1,0,'C');
  $pdf->Ln();
  
@@ -167,8 +180,78 @@ $result = $con->query($sql);
 
  //Items total
  $pdf->SetFont('Times','B','',10);
- $pdf->Cell(150,5,'TOTAL',0,0,'R');
+ $pdf->Cell(160,5,'GRAND TOTAL',0,0,'R');
  $pdf->Cell(30,5,"$total",1,0,'C');
+ $pdf->Ln();
+
+
+ $pdf->Cell(60,5,'',0,0,'');
+ $pdf->Ln();
+ $pdf->Cell(190,0,'',1,0,'');
+ $pdf->Ln();
+
+// payment details 
+
+
+$pdf->SetFont('Times','B','',12);
+ $pdf->Cell(60,20,'',0,0,'C');
+ $pdf->Cell(60,20,'Payment Details',0,0,'C');
+ $pdf->Ln();
+ 
+
+ $pdf->SetFont('Times','B','',10);
+ $pdf->Cell(50,5,'Payment Method',1,0,'C');
+ $pdf->Cell(90,5,'Description',1,0,'C');
+ $pdf->Cell(50,5,'Payment Amount',1,0,'C');
+ $pdf->Ln();
+
+
+
+
+   $sql="SELECT `payment_ID`, `type`, `description`,`amount`,user.fullname
+ FROM `payment` INNER JOIN user ON payment.user_ID = user.user_ID  WHERE `payment_ID`='$payment_id'";
+   global $con;
+ 
+ 
+ 
+   $result = $con->query($sql);
+   if ($result->num_rows > 0) {
+       while ($row = $result->fetch_assoc()) {
+          
+
+        $payment_type = $row["type"];
+        $description  = $row["description"];
+        $amount = $row["amount"];
+        $user_name = $row["fullname"];
+        
+        //retrieve payment details
+
+        $pdf->SetFont('Times','','',10);
+ $pdf->Cell(50,5,$payment_type,1,0,'C');
+ $pdf->Cell(90,5,$description,1,0,'C');
+ $pdf->Cell(50,5,$amount,1,0,'C');
+ $pdf->Ln();
+
+        
+       }}
+
+       $pdf->Cell(60,5,'',0,0,'');
+ $pdf->Ln();
+ $pdf->Cell(190,0,'',1,0,'');
+ $pdf->Ln();
+
+       $pdf->Ln();
+       $pdf->Cell(60,40,'',0,0,'C');
+       $pdf->Ln();
+       
+
+$pdf->SetFont('Times','B','',10);
+ $pdf->Cell(60,5,"Issued by: $user_name",0,0,'');
+ $pdf->Ln();
+ 
+ $pdf->Cell(100,10,'Signature : .........................',0,0,'');
+ $pdf->Ln();
+ $pdf->Cell(60,5,'With thanks',0,0,'');
  $pdf->Ln();
 
 
@@ -176,18 +259,41 @@ $result = $con->query($sql);
  $pdf->Output();
  
 
-
-
     }
+
+ function create_delivery_note(){
+
+
+
+ } 
+ 
+ function create_dispatch_note(){
+
+
+
+ }
+
+ function create_invoice(){
+
+
+
+     
+ }
 
 
 }
 
-if ($pdf_type="receipt"){
-    $object = new pdf_handler();
-    $object->create_receipt();
-    
-    }
+
+
+
+    if ($pdf_type="receipt"){
+            $object = new pdf_handler();
+            $object->create_receipt();
+            
+            }
+
+
+
 
 
         

@@ -14,7 +14,7 @@ $trans_date = $_GET['trans_date'];
 $trans_time = $_GET['trans_time'];
 $trans_type = $_GET['trans_type'];
 $trans_amount = $_GET['trans_amount'];
-$trans_status= $_GET['status'];
+$trans_status = $_GET['status'];
 if (empty($test)) {
 
     header('Location:../index.php');
@@ -67,34 +67,32 @@ if (empty($test)) {
         $(document).ready(function() {
 
             $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            $('#cheque_file').prop('readonly', true);
 
             $('#select_payment_type').change(function() {
 
-                 
+
 
 
                 let payment_type = $('#select_payment_type').val();
 
-                if (payment_type==="Cheque"){
+                if (payment_type === "Cheque") {
                     $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
+                    $('#cheque_file').prop('readonly', false);
+                    $('#bank_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
+                } else if (payment_type === "Bank_transfer") {
                     $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
+                    $('#account_name').prop('readonly', false);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
+                    $('#cheque_file').prop('readonly', false);
 
-                }
-                else if (payment_type==="Cash"){
+                } else if (payment_type === "Cash") {
 
                     $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+                    $('#cheque_file').prop('readonly', true);
                 }
 
 
@@ -531,14 +529,14 @@ if (empty($test)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
+
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -606,9 +604,9 @@ if (empty($test)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -644,7 +642,7 @@ if (empty($test)) {
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -658,7 +656,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -682,7 +680,7 @@ if (empty($test)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -720,19 +718,22 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-                        
-                            <!-- Page-header end -->
-                            <div class="pcoded-inner-content">
-                                <!-- Main-body start -->
-                                <div class="main-body">
-                                    <div class="page-wrapper">
 
-                                        <!-- Page body start -->
-                                        <div class="page-body">
-                                            
- 
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+
+
+                                       
+
                                         <div class="card">
-                                            <form action="view_transaction_details.php" method="POST" enctype="multipart/form-data">
+
+                                        <form action="view_transaction_details.php" method="POST" enctype="multipart/form-data">
                                                 <div class="card-header">
                                                     <h5>Transaction details</h5>
 
@@ -747,7 +748,7 @@ if (empty($test)) {
                                                     </div>
 
 
-                                                    
+
                                                     <div class="form-group row">
 
 
@@ -830,172 +831,231 @@ if (empty($test)) {
 
 
                                                 </div>
-                                        </div>
+                                            <div class="card-header">
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add Payment Details</h5>
+                                               
 
+                                                <!-- Modal -->
+                                                <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
 
-                                                </div>
-                                                <div class="card-block">
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <select id="select_payment_type" name="select_payment_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Payment Type</option>
-                                                                
-                                                                <option value="Cash">Cash</option>
-                                                                <option value="Cheque">Cheque</option>
-                                                                <option value="Bank_transfer">Bank transfer</option>
-                                                                
-
-
-                                                            </select>
-                                                        </div>
-                                                        
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount (MK)" require="">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">Save Payment</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
 
 
 
-                                                            </select>
-                                                        </div>
 
-                                                    </div>
+                                                                    <div class="form-group row">
 
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="cheque_number" name="cheque_number" placeholder="Cheque number " require="">
+                                                                        <div class="col-sm-3">
+                                                                            <button class="btn btn-primary" name="save_payment"> Save & Print Receipt</button>
+                                                                        </div>
 
 
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Bank name" require="">
+                                                                    </div>
 
 
+                                                                    <div class="form-group row">
 
-                                                            </select>
+                                                                        <div class="col-sm-3">
+                                                                            <button class="btn btn-success"> Save Only</button>
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                   
+
+
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="account_name" name="account_name" placeholder="Account name" require="">
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="description" name="description" placeholder="Description (Optional)" require="">
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-
-                                                    <div class="form-group row">
-
-                                                        <div class="col-sm-12"><label>Upload scanned cheque file / Other supporting documents</label></div>
-                                                        <div class="col-sm-12">
-                                                        <input type="file" class="form-control" id="cheque_file" name="image" placeholder=" " require="">
-                                                            
-                                                        </div>
-
-                                                    </div>
-
-                                                   
-
-                                                    <input type="submit" name="save_payment" value="Save Payment" class="btn btn-success">
-                                                    <input type="submit" name="back" value="back" class="btn btn-primary">
-
                                                 </div>
 
                                             </div>
 
-                                            <div class="card">
-                                                <div class="card-header">
+                                            
+                                        </div>
+
+                                        <div class="card">
+                                            
+                                            <div class="card-header">
+                                                <h5>Add Payment Details</h5>
+
+
+                                            </div>
+                                            <div class="card-block">
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <select id="select_payment_type" name="select_payment_type" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Payment Type</option>
+
+                                                            <option value="Cash">Cash</option>
+                                                            <option value="Cheque">Cheque</option>
+                                                            <option value="Bank_transfer">Bank transfer</option>
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount (MK)" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="cheque_number" name="cheque_number" placeholder="Cheque number " require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Bank name" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="account_name" name="account_name" placeholder="Account name" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="description" name="description" placeholder="Description (Optional)" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12"><label>Upload scanned cheque file / Other supporting documents</label></div>
+                                                    <div class="col-sm-12">
+                                                        <input type="file" class="form-control" id="cheque_file" name="image" placeholder=" " require="">
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <input type="button"  data-toggle="modal" data-target="#myModal" value="save payment"class="btn btn-success">
+                                                <input type="submit" name="back" value="back" class="btn btn-primary">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
 
                                                 <?php
                                                 $sql = "SELECT sum(amount) as total_amount FROM `payment`WHERE transaction_Id ='$trans_id'";
                                                 $result = $con->query($sql);
                                                 if ($result->num_rows > 0) {
-                                                  while ($row = $result->fetch_assoc()) {
-                                        
-                                                    $total_payment_amount = $row["total_amount"];
-                                                  }
-                                                        $balance =   $trans_amount - $total_payment_amount;
+                                                    while ($row = $result->fetch_assoc()) {
+
+                                                        $total_payment_amount = $row["total_amount"];
+                                                    }
+                                                    $balance =   $trans_amount - $total_payment_amount;
                                                 }
                                                 ?>
-                                                    <h5>Previous Payments  <span>Balance: MK <?php echo $balance; ?> </span></h5>
+                                                <h5>Previous Payments <span>Balance: MK <?php echo $balance; ?> </span></h5>
 
 
-                                                </div>
-                                                <div class="card-block">
+                                            </div>
+                                            <div class="card-block">
                                                 <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Payment_ID</th>
-                                                                                <th>Amount</th>
-                                                                                <th>Date</th>
-                                                                                <th>Time</th>
-                                                                                <th>Type</th>
-                                                                                <th>Added by</th>
-                                                                                <th>Action</th>
-                                                                                
-                                                                                
+                                                    <table class="table" id="transaction_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Payment_ID</th>
+                                                                <th>Amount</th>
+                                                                <th>Date</th>
+                                                                <th>Time</th>
+                                                                <th>Type</th>
+                                                                <th>Added by</th>
+                                                                <th>Action</th>
 
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
 
-                                                                            <?php
-                                                                        
 
-                                                                               
-                                                                            
-                                                                                $order_id = $_GET['order_id'];
 
-                                                                                $sql = "SELECT `payment_ID`, payment.type, `amount`, `description`,payment.date, payment.time,`transaction_ID`, user.fullname
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <?php
+
+
+
+
+                                                            $order_id = $_GET['order_id'];
+
+                                                            $sql = "SELECT `payment_ID`, payment.type, `amount`, `description`,payment.date, payment.time,`transaction_ID`, user.fullname
                                                                                  FROM `payment` INNER JOIN user ON user.user_ID = payment.user_ID  WHERE `transaction_ID`='$trans_id'";
 
-                                                                       
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $payment_ID = $row["payment_ID"];
-                                                                                        $amount   = $row["amount"];
-                                                                                        $type = $row["type"];
-                                                                                        $date= $row["date"];
-                                                                                        $time = $row["time"];
-                                                                                        $added_by =$row["fullname"];
 
 
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    $payment_ID = $row["payment_ID"];
+                                                                    $amount   = $row["amount"];
+                                                                    $type = $row["type"];
+                                                                    $date = $row["date"];
+                                                                    $time = $row["time"];
+                                                                    $added_by = $row["fullname"];
 
-                                                                                        echo "
+
+
+                                                                    echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$payment_ID</td>
                                                        <td>$amount</td>
@@ -1010,85 +1070,85 @@ if (empty($test)) {
                                                         
                                                    </tr>	
                                                ";
-                                                                                    }
-                                                                                }
-                                                                            
+                                                                }
+                                                            }
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+
+                                                            ?>
+                                                            <tr>
+                                                                <th scope="row">-</th>
+                                                                <td>-</td>
+                                                                <td>-</td>
+                                                                <td>-</td>
+                                                                <td>-</td>
+                                                                <td>-</td>
 
 
-                                                                            </tr>
+                                                            </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                        </tbody>
+                                                    </table>
 
 
-                                                                </div>
-    </div>
+                                                </div>
                                             </div>
+                                        </div>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Transaction item list</h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Item_ID</th>
-                                                                                <th>Crop</th>
-                                                                                <th>Variety</th>
-                                                                                <th>Class</th>
-                                                                               
-                                                                                <th>Quantity</th>
-                                                                                <th>Price per kg</th>
-                                                                                <th>Discount</th>
-                                                                                <th>amount</th>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Transaction item list</h5>
+                                                        <div class="card-block table-border-style">
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table" id="transaction_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Item_ID</th>
+                                                                            <th>Crop</th>
+                                                                            <th>Variety</th>
+                                                                            <th>Class</th>
 
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
+                                                                            <th>Quantity</th>
+                                                                            <th>Price per kg</th>
+                                                                            <th>Discount</th>
+                                                                            <th>amount</th>
 
-                                                                            <?php
-                                                                        
 
-                                                                               
-                                                                            
-                                                                                $order_id = $_GET['order_id'];
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
 
-                                                                                $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`total_price` FROM
+                                                                        <?php
+
+
+
+
+                                                                        $order_id = $_GET['order_id'];
+
+                                                                        $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`total_price` FROM
                                                                                 `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE order_ID = '$order_id'";
 
-                                                                       
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $item_ID = $row["item_ID"];
-                                                                                        $crop   = $row["crop"];
-                                                                                        $variety = $row["variety"];
-                                                                                        $class = $row["class"];
-                                                                                        $quantity = $row['quantity'];
-                                                                                        $price = $row['price_per_kg'];
-                                                                                        $discount = $row['discount_price'];
-                                                                                        $total_price = $row['total_price'];
-                                                                                     
 
 
+                                                                        $result = $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+                                                                                $item_ID = $row["item_ID"];
+                                                                                $crop   = $row["crop"];
+                                                                                $variety = $row["variety"];
+                                                                                $class = $row["class"];
+                                                                                $quantity = $row['quantity'];
+                                                                                $price = $row['price_per_kg'];
+                                                                                $discount = $row['discount_price'];
+                                                                                $total_price = $row['total_price'];
 
-                                                                                        echo "
+
+
+
+                                                                                echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$item_ID</td>
                                                        <td>$crop</td>
@@ -1104,59 +1164,59 @@ if (empty($test)) {
                                                        
                                                    </tr>	
                                                ";
-                                                                                    }
-                                                                                }
-                                                                            
+                                                                            }
+                                                                        }
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+
+                                                                        ?>
+                                                                        <tr>
+                                                                            <th scope="row">-</th>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
 
 
-                                                                            </tr>
+                                                                        </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                    </tbody>
+                                                                </table>
 
 
-                                                                </div>
                                                             </div>
-
                                                         </div>
 
                                                     </div>
 
-
-                        </form>
-
+                                                </div>
 
 
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+                                </div>
+                                <!-- Page body end -->
+                            </div>
+                        </div>
+                        <!-- Main-body end -->
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-
         </div>
-        <!-- Page body end -->
-    </div>
-    </div>
-    <!-- Main-body end -->
-    <div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -1263,9 +1323,9 @@ if (isset($_POST['place_order'])) {
         </script>");
     }
 }
- 
 
-   
+
+
 
 if (isset($_FILES['image'])) {
     $errors = array();
@@ -1296,47 +1356,72 @@ if (isset($_FILES['image'])) {
         print_r($errors);
     }
 }
- 
+
 
 if (isset($_POST['save_payment'])) {
 
- //// $_POST[trans_date] is used to get the transaction payment
- $uploaded_file = $newfilename;   
+    //// $_POST[trans_date] is used to get the transaction payment
+    $uploaded_file = $newfilename;
 
-if($_POST['select_payment_type']=="Cheque"){
-
-    
-    $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
-    
-
-}
- if($_POST['select_payment_type']=="Cash"){
-
-  
-
-    
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-  
-   
-} if($_POST['select_payment_type']=="Bank_transfer"){
+    if ($_POST['select_payment_type'] == "Cheque") {
 
 
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            $uploaded_file,
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            $_POST['cheque_number'],
+            '-',
+            '-',
+            $_POST['description']
+        );
+    }
+    if ($_POST['select_payment_type'] == "Cash") {
 
-}
 
 
-   
 
-   
-   
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description']
+        );
+    }
+    if ($_POST['select_payment_type'] == "Bank_transfer") {
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description']
+        );
+    }
 }
 
 
