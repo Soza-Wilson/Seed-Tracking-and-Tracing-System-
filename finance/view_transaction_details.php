@@ -831,12 +831,20 @@ if (empty($test)) {
 
 
                                                 </div>
+                                           
+
+                                            
+                                        </div>
+
+                                        <div class="card">
+                                            
                                             <div class="card-header">
+                                                <h5>Add Payment Details</h5>
 
-                                               
 
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
+                                            </div>
+
+                                            <div id="myModal" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-lg">
 
                                                         <!-- Modal content-->
@@ -846,7 +854,7 @@ if (empty($test)) {
                                                                 <h5 class="modal-title">Save Payment</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
+                                                               
 
 
 
@@ -876,7 +884,7 @@ if (empty($test)) {
 
 
 
-                                                                </form>
+                                                               
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -885,19 +893,6 @@ if (empty($test)) {
 
                                                     </div>
                                                 </div>
-
-                                            </div>
-
-                                            
-                                        </div>
-
-                                        <div class="card">
-                                            
-                                            <div class="card-header">
-                                                <h5>Add Payment Details</h5>
-
-
-                                            </div>
                                             <div class="card-block">
 
 
@@ -1360,8 +1355,11 @@ if (isset($_FILES['image'])) {
 
 if (isset($_POST['save_payment'])) {
 
-    //// $_POST[trans_date] is used to get the transaction payment
+   
+
+    // $_POST[trans_date] is used to get the transaction payment
     $uploaded_file = $newfilename;
+    
 
     if ($_POST['select_payment_type'] == "Cheque") {
 
