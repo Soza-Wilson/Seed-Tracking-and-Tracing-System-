@@ -1438,7 +1438,7 @@ class main
 
  
 
-  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description)
+  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description,$save_type)
   {
 
     global $con;
@@ -1491,7 +1491,14 @@ class main
       $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-      header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
+
+      if($save_type=="save"){
+        header('Location:add_payment.php');
+      }else{
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+
+      } 
+      //header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
      // header('Location:add_payment.php');
 
 
@@ -1538,7 +1545,12 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
+        if($save_type=="save"){
+          header('Location:add_payment.php');
+        }else{
+          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+  
+        } 
 
        
       } else if ($amount < $balance) {
@@ -1566,8 +1578,12 @@ class main
         $statement->execute();
 
 
-        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount");
-       
+        if($save_type=="save"){
+          header('Location:add_payment.php');
+        }else{
+          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+  
+        } 
       } else if ($amount > $balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');

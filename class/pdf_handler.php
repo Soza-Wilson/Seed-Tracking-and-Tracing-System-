@@ -64,7 +64,7 @@ class pdf_handler{
      $total = "";
      $order_id = $_GET['order_id']; 
      $total = $_GET['total']; 
-     //$payment_id =$$_GET['payment_id'];
+     $payment_id =$_GET['payment_id'];
 
 //getting customer details
 
@@ -87,7 +87,7 @@ $result = $con->query($sql);
 // getting payment details 
 
 $sql="SELECT `payment_ID`,user.fullname, `type`, `amount`, `description`, `documents`, `cheque_number`,
- `bank_name`, `account_name`, payment.date, payment.time, `transaction_ID` FROM `payment` INNER JOIN user ON payment.user_ID = user.user_ID";
+ `bank_name`, `account_name`, payment.date, payment.time, `transaction_ID` FROM `payment` INNER JOIN user ON payment.user_ID = user.user_ID WHERE `payment_ID`='$payment_id'";
 
 $result = $con->query($sql);
  if ($result->num_rows > 0) {
@@ -95,7 +95,7 @@ $result = $con->query($sql);
          $user_name = $row["fullname"];
          $payment_date = $row["date"];
          $payment_time = $row["time"];
-         $payment_id = $row["payment_ID"];
+        
          $payment_type = $row["type"];
 
      }

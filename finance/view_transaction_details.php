@@ -862,7 +862,7 @@ if (empty($test)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-3">
-                                                                            <button class="btn btn-primary" name="save_payment"> Save & Print Receipt</button>
+                                                                            <button class="btn btn-primary" name="print_save_payment"> Save & Print Receipt</button>
                                                                         </div>
 
 
@@ -872,7 +872,7 @@ if (empty($test)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-3">
-                                                                            <button class="btn btn-success"> Save Only</button>
+                                                                            <button class="btn btn-success" name = "save_payment"> Save Only</button>
                                                                         </div>
 
 
@@ -1353,12 +1353,13 @@ if (isset($_FILES['image'])) {
 }
 
 
-if (isset($_POST['save_payment'])) {
+if (isset($_POST['print_save_payment'])) {
 
    
 
     // $_POST[trans_date] is used to get the transaction payment
     $uploaded_file = $newfilename;
+    $save_type="save_n_print";
     
 
     if ($_POST['select_payment_type'] == "Cheque") {
@@ -1377,7 +1378,8 @@ if (isset($_POST['save_payment'])) {
             $_POST['cheque_number'],
             '-',
             '-',
-            $_POST['description']
+            $_POST['description'],
+            $save_type
         );
     }
     if ($_POST['select_payment_type'] == "Cash") {
@@ -1399,6 +1401,8 @@ if (isset($_POST['save_payment'])) {
             '-',
             '-',
             $_POST['description']
+            ,
+            $save_type
         );
     }
     if ($_POST['select_payment_type'] == "Bank_transfer") {
@@ -1418,8 +1422,84 @@ if (isset($_POST['save_payment'])) {
             '-',
             '-',
             $_POST['description']
+            ,
+            $save_type
+            
         );
     }
+}
+
+if(isset($_POST['save_payment'])){
+      // $_POST[trans_date] is used to get the transaction payment
+      $uploaded_file = $newfilename;
+      $save_type="save";
+      
+  
+      if ($_POST['select_payment_type'] == "Cheque") {
+  
+  
+          $object = new main;
+          $object->add_debtor_payment(
+              $_POST['select_payment_type'],
+              $_POST['amount'],
+              $uploaded_file,
+              $_SESSION['user'],
+              $_POST['trans_id'],
+              $_POST['debtor_id'],
+              $_POST['trans_amount'],
+              $_POST['trans_date'],
+              $_POST['cheque_number'],
+              '-',
+              '-',
+              $_POST['description'],
+              $save_type
+          );
+      }
+      if ($_POST['select_payment_type'] == "Cash") {
+  
+  
+  
+  
+          $object = new main;
+          $object->add_debtor_payment(
+              $_POST['select_payment_type'],
+              $_POST['amount'],
+              '-',
+              $_SESSION['user'],
+              $_POST['trans_id'],
+              $_POST['debtor_id'],
+              $_POST['trans_amount'],
+              $_POST['trans_date'],
+              '-',
+              '-',
+              '-',
+              $_POST['description']
+              ,
+              $save_type
+          );
+      }
+      if ($_POST['select_payment_type'] == "Bank_transfer") {
+  
+  
+          $object = new main;
+          $object->add_debtor_payment(
+              $_POST['select_payment_type'],
+              $_POST['amount'],
+              '-',
+              $_SESSION['user'],
+              $_POST['trans_id'],
+              $_POST['debtor_id'],
+              $_POST['trans_amount'],
+              $_POST['trans_date'],
+              '-',
+              '-',
+              '-',
+              $_POST['description']
+              ,
+              $save_type
+              
+          );
+      }
 }
 
 
