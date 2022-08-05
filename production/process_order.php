@@ -611,7 +611,47 @@ if ($result->num_rows > 0) {
                                                 </div>
                                         </div>
 
+
+
+
                                         <div class="card">
+                                            <div id="myModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h5 class="modal-title">Process Order</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-3">
+                                                                    <button class="btn btn-primary" name="print_process_order_btn"> Save & Print Dispatch note</button>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-3">
+                                                                    <button class="btn btn-success" name="process_order_btn"> Save Only</button>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             <div class="card-header">
                                                 <h5>Items</h5>
 
@@ -703,7 +743,9 @@ if ($result->num_rows > 0) {
                                                 <div class="card-block">
                                                     <a href='stock_out.php' class='btn btn-primary'>Back </a>
 
-                                                    <button value="process order" name="process_order_btn" class='btn btn-success'>Process Order</button>
+                                                    <!-- <button value="process order" name="process_order_btn" class='btn btn-success'>Process Order</button> -->
+
+                                                    <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Process Order</button>
 
 
 
@@ -795,9 +837,10 @@ if ($result->num_rows > 0) {
 </body>
 <?php
 
-if (isset($_POST['process_order_btn'])) {
+if (isset($_POST['print_process_order_btn'])) {
 
     $type = "";
+    $printSave ="print";
 
     $order_ID = $_POST['order_ID'];
     $C_D_ID = $_POST['order_for'];
@@ -819,7 +862,35 @@ if (isset($_POST['process_order_btn'])) {
 
 
     $object = new main();
-    $object->production_process_order($order_ID, $C_D_ID, $type);
+    $object->production_process_order($order_ID, $C_D_ID, $type,$printSave);
+}
+
+if (isset($_POST['process_order_btn'])) {
+
+    $type = "";
+    $printSave ="save";
+
+    $order_ID = $_POST['order_ID'];
+    $C_D_ID = $_POST['order_for'];
+    $temp = $_POST['order_type'];
+    if ($temp = "customer") {
+
+        $type = "customer_order";
+    } elseif ($temp = "b_to_b") {
+
+        $type = "b_to_b_order";
+    } elseif ($temp = "agro_dealer") {
+
+        $type = "agro_dealer_order";
+    } elseif ($temp = "grower") {
+
+        $type = "grower_order";
+    }
+
+
+
+    $object = new main();
+    $object->production_process_order($order_ID, $C_D_ID, $type,$printSave);
 }
 
 

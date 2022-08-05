@@ -89,8 +89,7 @@ class main
     } else if ($department == "bank") {
 
       $user_id = "BANK" . $shuffled_time;
-    }
-    else if ($department == "grade_seed") {
+    } else if ($department == "grade_seed") {
 
       $user_id = "GRADE" . $shuffled_time;
     }
@@ -702,7 +701,7 @@ class main
 
 
 
-  
+
 
   // production stock in functions 
 
@@ -758,7 +757,7 @@ class main
       }
     }
     $calculated_amount = $temp_amount * $quantity;
-    $account_funds ="";
+    $account_funds = "";
     $transaction_ID = $transaction_ID = $this->generate_user("transaction");
     $trans_type = "stock_in";
 
@@ -770,7 +769,7 @@ class main
      '$date','$time','payment_pending','$user_ID')";
 
     $statement = $con->prepare($sql);
-    $statement->execute(); 
+    $statement->execute();
 
     ///   update creditor funds account 
     $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`= $creditor";
@@ -914,7 +913,7 @@ class main
 
   ///production process order 
 
-  function production_process_order($order_ID, $C_D_ID, $type)
+  function production_process_order($order_ID, $C_D_ID, $type,$printSave)
   {
 
     global $con;
@@ -957,7 +956,7 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    //step 4 deduct funds from customer accoun, call create pdf class for dispatch notes and delivery notes etc
+    //step 4 deduct funds from customer account, call create pdf class for dispatch notes and delivery notes etc
 
     if ($type = "customer_order" || $type = "b_to_b_order") {
 
@@ -968,7 +967,21 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
-      header('location:stock_out.php');
+
+      if($printSave=="print"){
+
+        header("Location:../class/pdf_handler.php?");
+  
+  
+      }
+  
+      else if($printSave=="save"){
+  
+        header('location:stock_out.php');
+  
+  
+      }
+      //
     } elseif ($type = "agro_dealer_order" || $type = "grower_order") {
 
       $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$amount WHERE `creditor_ID`= '$C_D_ID'";
@@ -976,6 +989,8 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
     }
+
+   
   }
 
 
@@ -1147,20 +1162,18 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-// update stock in status and available quantity  
+    // update stock in status and available quantity  
 
-   $t_g_quantity = $grade_out_quantity + $trash_quantity;
+    $t_g_quantity = $grade_out_quantity + $trash_quantity;
 
 
-  $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'"; 
+    $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
 
-  $statement = $con->prepare($sql);
+    $statement = $con->prepare($sql);
     $statement->execute();
 
     echo ("<script> alert('saved!');
     </script>");
-
- 
   }
 
 
@@ -1436,32 +1449,43 @@ class main
 
   /// add payment 
 
- 
 
-  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description,$save_type)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description, $save_type)
   {
 
     global $con;
     $payed_amount = "";
     $transaction_amount = "";
-    
-    $order_id ="";
+
+    $order_id = "";
     $date = date("d-m-Y");
     $time = date("H:m:i");
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
-    $sql="SELECT * FROM `transaction` WHERE `transaction_ID`='$transaction_id'";
+    $sql = "SELECT * FROM `transaction` WHERE `transaction_ID`='$transaction_id'";
 
     $result = $con->query($sql);
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
 
-          $order_id = $row["action_ID"];
-          
-        }
-
+        $order_id = $row["action_ID"];
       }
+    }
 
     if ($trans_status == "payment_pending") {
       /// adding new payment
@@ -1492,19 +1516,32 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      if($save_type=="save"){
+      if ($save_type == "save") {
         header('Location:add_payment.php');
-      }else{
+      } else {
         header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
-
-      } 
+      }
       //header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
-     // header('Location:add_payment.php');
+      // header('Location:add_payment.php');
 
 
-     //generate payment receipt pdf
+      //generate payment receipt pdf
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     } else if ($trans_status == "partly_payed") {
 
@@ -1545,14 +1582,27 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        if($save_type=="save"){
+        if ($save_type == "save") {
           header('Location:add_payment.php');
-        }else{
+        } else {
           header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
-  
-        } 
+        }
 
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       } else if ($amount < $balance) {
 
         $update_status = "partly_payed";
@@ -1578,12 +1628,11 @@ class main
         $statement->execute();
 
 
-        if($save_type=="save"){
+        if ($save_type == "save") {
           header('Location:add_payment.php');
-        }else{
+        } else {
           header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
-  
-        } 
+        }
       } else if ($amount > $balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
@@ -1853,7 +1902,7 @@ class main
         $statement->execute();
 
         //header('Location:add_payback_payment.php');
-       
+
 
       } else if ($amount > $ava_balance) {
 
