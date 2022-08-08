@@ -9,6 +9,7 @@ include('../class/production.php');
 session_start(); 
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if(empty($test)){
 
@@ -16,6 +17,20 @@ if(empty($test)){
 
 
 }
+
+$restricted = array("production_admin", "system_administrator", "lab_technician", "field_officer");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+$restricted = array("production_admin", "system_administrator", "lab_technician");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+
 
 $data_list = new production();
 

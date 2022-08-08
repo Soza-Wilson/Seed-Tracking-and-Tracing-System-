@@ -13,6 +13,12 @@ if (empty($test)) {
 
     header('Location:../index.php');
 }
+$restricted = array("production_admin", "system_administrator","warehouse_officer");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 // else if($position !="warehouse_officer" || $position !="production_admin" || $position !="ADMIN"){
      

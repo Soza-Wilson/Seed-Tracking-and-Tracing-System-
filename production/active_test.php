@@ -9,6 +9,7 @@ include('../class/production.php');
 session_start(); 
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if(empty($test)){
 
@@ -16,11 +17,13 @@ if(empty($test)){
 
 
 }
-if($position !="lab_technician" || $position !="production_admin" || $position !="admin" ){
-     
-    header('Location:javascript://history.go(-1)');
+$restricted = array("production_admin", "system_administrator", "lab_technician");
 
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
 }
+
 
 $data_list = new production();
 

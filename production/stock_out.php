@@ -7,11 +7,20 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
+
+$restricted = array("production_admin", "system_administrator","warehouse_officer");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+
 // if($position !="warehouse_officer" || $position !="production_admin" || $position !="admin"){
      
 //     header('Location:javascript://history.go(-1)');
