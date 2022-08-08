@@ -1314,6 +1314,7 @@ form add land history
                                                 <div class="col-sm-12">
                                                     <select id="pre_select_crop" name="pre_crop" class="form-control" required="">
                                                         <option value="0">Select crop</option>
+                                                        <option value="fallow">Fallow</option>
                                                         <option value="maize">Maize</option>
                                                         <option value="G/nuts">Ground nuts</option>
 
@@ -1352,6 +1353,7 @@ form add land history
                                                 <div class="col-sm-12">
                                                     <select id="other_select_crop" name="other_select_crop" class="form-control" required="">
                                                         <option value="0">Select crop</option>
+                                                        <option value="fallow">Fallow</option>
                                                         <option value="maize">Maize</option>
                                                         <option value="G/nuts">Ground nuts -shelled-</option>
 
@@ -1434,7 +1436,7 @@ form adding farm location details
                                                 </div>
                                                 <div class="col-sm-3">
 
-                                                    <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA" require="">
+                                                    <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA / Trading center " require="">
 
 
 
@@ -1453,7 +1455,7 @@ form adding farm location details
 
                                                 <div class="col-sm-6">
 
-                                                    <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name" require="">
+                                                    <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name / Estate" require="">
 
 
 

@@ -343,6 +343,7 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 							                  variety_ID varchar(100),
 							                    class varchar(100),
                                   quantity INT,
+                                  stock_out_quantity INT,
                                   price_per_kg varchar(100),
                                   discount_price varchar(100),
                                   status varchar(100),
@@ -417,7 +418,7 @@ values ('001','ADMIN'),
   mysqli_query($con, $sql);
 
   $sql = "insert into user
-values ('001','01','ADMIN','0000','-','0000','ADMIN','0000','admin@example.com','0000');";
+values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admin@example.com','0000');";
 
   mysqli_query($con, $sql);
 

@@ -176,7 +176,7 @@ class main
         header('Location:production/new_test.php');
       } else if ($_SESSION['depertment'] == 2 &&  $_SESSION['position'] == "field_officer") {
 
-        header('Location:production/grower_in.php');
+        header('Location:production/grower.php');
       } else if ($_SESSION['depertment'] == 2) {
 
         header('Location:production/production_dashboard.php');
