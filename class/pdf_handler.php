@@ -369,7 +369,8 @@ class pdf_handler
         $fullname ="";
         $issued_fullname ="";
         $transaction_ID =  $_GET['transaction_ID'];
-        $order_ID = $_GET['order_ID'];        
+        $order_ID = $_GET['order_ID'];
+        $total_quantity = $_GET['total_quantity'];    
 
         $pdf = new PDF();
         $pdf->AliasNbPages();
@@ -439,7 +440,7 @@ class pdf_handler
              }
              $pdf->SetFont('Times', 'B', '', 10);
              $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "", 1, 0, 'C');
+             $pdf->Cell(30, 5, "$total_quantity", 1, 0, 'C');
              $pdf->Ln();     
     
              $pdf->Cell(60, 20, '', 0, 0, 'C');
