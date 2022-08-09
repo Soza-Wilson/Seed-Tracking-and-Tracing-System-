@@ -7,20 +7,20 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-$position = $_SESSION['position'];
+$position =$_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../login.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician","warehouse_officer");
 
-if (in_array($position, $restricted)) {
+$notRestricted = array("production_admin", "system_administrator","merl_officer","warehouse_officer");
+
+if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
-
 
 ?>
 

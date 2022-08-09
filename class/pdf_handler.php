@@ -391,8 +391,35 @@ class pdf_handler
         $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
         $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
         $pdf->Ln();
+
+        $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`stock_out_quantity`,`total_price` FROM
+        `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID";
+               global $con;
+               $i=1;
+              
+               $result = $con->query($sql);
+               if ($result->num_rows > 0) {
+                   while ($row = $result->fetch_assoc()) {
+                       
+                    
+                       $crop   = $row["crop"];
+                       $variety = $row["variety"];
+                       $class = $row["class"];
+                       $stock_out_quantity = $row['stock_out_quantity'];
+                       
+       
+                       //transaction table
+       
+                       
+
+                       $pdf->SetFont('Times', '', '', 10);
+               $pdf->Cell(30, 5, $i++, 1, 0, 'C');
+                $pdf->Cell(130, 5, "$crop / $variety / $class", 1, 0, 'C');
+                 $pdf->Cell(30, 5, $stock_out_quantity, 1, 0, 'C');
+                $pdf->Ln();
+                   }
         
-        $i = 1;
+       
        while ($i <= 20) {
 
         $pdf->SetFont('Times', '', '', 10);
@@ -513,6 +540,8 @@ class pdf_handler
 //         $object->create_delivery_note();
 
 //         }
+
+}
 
 if ($pdf_type = "dispatch_note") {
     $object = new pdf_handler();

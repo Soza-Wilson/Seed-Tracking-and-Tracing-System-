@@ -825,10 +825,12 @@ class main
     $time = date("H:i:s");
     global $con;
 
-    if ($stock_in_quantity >= $item_quantity) {
+    $intItemQuantity=(int) $item_quantity;
+    $intStockInQuantity= (int) $stock_in_quantity;
 
+    if ( $intStockInQuantity >= $intItemQuantity) {
 
-
+  
 
       $sql = "INSERT INTO `stock_out`(`stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `Quntity`, `amount`, `date`, `time`, `user_ID`) VALUES
        ('$stock_out_ID','$item_ID','$stock_in_ID','$order_ID','$item_quantity',$amount,'$date','$time','$user_ID')";
@@ -846,7 +848,17 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
-    } else if ($item_quantity >= $stock_in_quantity) {
+
+      /// update item stock .... contradiction with the stock out table .. but will leave it as it is... maybe will refactor later
+
+      $sql = "UPDATE `item` SET `stock_out_quantity`='$item_quantity' WHERE`item_ID`='$item_ID'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    } else if ($intItemQuantity >=  $intStockInQuantity) {
+
+     
+
 
 
       $sql = "INSERT INTO `stock_out`(`stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `Quntity`, `amount`, `date`, `time`, `user_ID`) VALUES
@@ -864,6 +876,17 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
+
+
+      /// update item stock .... contradiction with the stock out table .. but will leave it as it is... maybe will refactor later
+
+      $sql = "UPDATE `item` SET `stock_out_quantity`='$item_quantity' WHERE`item_ID`='$item_ID'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+     
+
+
     }
   }
 
@@ -902,6 +925,15 @@ class main
 
     $statement = $con->prepare($sql);
     $statement->execute();
+
+    $sql = "UPDATE `item` SET `stock_out_quantity`= stock_out_quantity - '$item_quantity' WHERE`item_ID`='$item_ID'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+    
+
+
   }
 
 
