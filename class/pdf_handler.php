@@ -6,6 +6,7 @@ use function PHPSTORM_META\type;
 
 require('../pdf/fpdf.php');
 require('main.php');
+session_start();
 $pdf_type = "dispatch_note";
 
 
@@ -283,7 +284,7 @@ class pdf_handler
         $pdf->Ln();
         $pdf->Cell(20, 5, "Time________:", 0, 0, '');
         $pdf->Ln();
-        $pdf->Cell(20, 5, "Transaction ID___:", 0, 0, '');
+        $pdf->Cell(20, 5, "Transaction ID_____:", 0, 0, '');
 
         $pdf->Cell(60, 20, '', 0, 0, 'C');
         $pdf->Ln();
@@ -363,7 +364,12 @@ class pdf_handler
 
 //
     function create_dispatch_note()
-    {
+    {   
+        $user_ID = $_SESSION['user'];
+        $fullname ="";
+        $issued_fullname ="";
+        $transaction_ID =  $_GET['transaction_ID'];
+        $order_ID = $_GET['order_ID'];        
 
         $pdf = new PDF();
         $pdf->AliasNbPages();
@@ -375,12 +381,14 @@ class pdf_handler
         $pdf->Cell(60, 35, 'DISPATCH NOTE', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
+        $date = date("d-m-Y");
+        $time = date("H:i:s");
 
-        $pdf->Cell(20, 5, "Date________:", 0, 0, '');
+        $pdf->Cell(20, 5, "Date___________:$date", 0, 0, '');
         $pdf->Ln();
-        $pdf->Cell(20, 5, "Time________:", 0, 0, '');
+        $pdf->Cell(20, 5, "Time___________:$time", 0, 0, '');
         $pdf->Ln();
-        $pdf->Cell(20, 5, "Transaction ID___:", 0, 0, '');
+        $pdf->Cell(20, 5, "Transaction ID__:$transaction_ID", 0, 0, '');
 
         $pdf->Cell(60, 20, '', 0, 0, 'C');
         $pdf->Ln();
@@ -393,7 +401,7 @@ class pdf_handler
         $pdf->Ln();
 
         $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`stock_out_quantity`,`total_price` FROM
-        `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID";
+        `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID`='$order_ID'";
                global $con;
                $i=1;
               
@@ -436,10 +444,35 @@ class pdf_handler
     
              $pdf->Cell(60, 20, '', 0, 0, 'C');
              $pdf->Ln();
-        
+
+             $sql="SELECT fullname FROM `user` WHERE `user_ID`='$user_ID'";
+            
+             $result = $con->query($sql);
+               if ($result->num_rows > 0) {
+                   while ($row = $result->fetch_assoc()) {
+                       
+                    
+                       $fullname= $row["fullname"];
+                      
+                   }
+                
+                }
+
+                $sql="SELECT fullname FROM `order_table` INNER JOIN `user` ON user.user_ID = order_table.user_ID WHERE `order_ID`= '$order_ID' ";
+            
+             $result = $con->query($sql);
+               if ($result->num_rows > 0) {
+                   while ($row = $result->fetch_assoc()) {
+                       
+                    
+                    $issued_fullname= $row["fullname"];
+                      
+                   }
+                
+                }
              $pdf->SetFont('Times', 'B', '', 10);
-        $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
-        $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
+        $pdf->Cell(100, 5, "Issued by : $fullname", 0, 0, '');
+        $pdf->Cell(100, 5, "Received by: $issued_fullname", 0, 0, '');
         $pdf->Ln();
 
         $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');

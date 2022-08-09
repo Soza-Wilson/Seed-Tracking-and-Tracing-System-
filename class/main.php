@@ -954,7 +954,7 @@ class main
     $time = date("H:i:s");
     $transaction_ID = $this->generate_user("transaction");
     $amount = "";
-
+    $total_quantity ="";
     //step 0: pass data to dispatch note pdf function
 
 
@@ -967,13 +967,14 @@ class main
 
     //step 2: calculate the total amount for the order
 
-    $sql = "SELECT sum(amount) as total_amount FROM `stock_out`WHERE order_ID ='$order_ID'";
+    $sql = "SELECT sum(amount) as total_amount,sum(Quntity) as total_quantity  FROM `stock_out`WHERE order_ID ='$order_ID'";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
 
         $amount = $row["total_amount"];
+        $total_quantity = $row["total_quantity"];
       }
     }
 
@@ -1002,7 +1003,7 @@ class main
 
       if($printSave=="print"){
 
-        header("Location:../class/pdf_handler.php?");
+        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity");
   
   
       }
