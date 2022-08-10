@@ -7,7 +7,8 @@ use function PHPSTORM_META\type;
 require('../pdf/fpdf.php');
 require('main.php');
 session_start();
-$pdf_type = "dispatch_note";
+$type = $_GET['type'];
+$pdf_type = $type;
 
 
 
@@ -330,6 +331,71 @@ class pdf_handler
         $pdf->Output();
     }
 
+    function create_invoice(){
+
+        $pdf = new PDF();
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times', 'B', '', 24);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        $pdf->Cell(80, 60, '', 0, 0, 'c');
+        $pdf->Cell(60, 35, 'DELIVERY NOTE', 0);
+        $pdf->Ln();
+        $pdf->SetFont('Times', 'B', '', 12);
+
+        $pdf->Cell(20, 5, "Date________:", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(20, 5, "Time________:", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(20, 5, "Transaction ID_____:", 0, 0, '');
+
+        $pdf->Cell(60, 20, '', 0, 0, 'C');
+        $pdf->Ln();
+
+
+        $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(30, 5, 'NO', 1, 0, 'C');
+        $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
+        $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
+        $pdf->Ln();
+        
+        $i = 1;
+       while ($i <= 20) {
+
+        $pdf->SetFont('Times', '', '', 10);
+        $pdf->Cell(30, 5, $i, 1, 0, 'C');
+        $pdf->Cell(130, 5, '', 1, 0, 'C');
+        $pdf->Cell(30, 5, '', 1, 0, 'C');
+        $pdf->Ln();
+         $i++ ;
+             }
+             $pdf->SetFont('Times', 'B', '', 10);
+             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+             $pdf->Cell(30, 5, "", 1, 0, 'C');
+             $pdf->Ln();     
+    
+             $pdf->Cell(60, 20, '', 0, 0, 'C');
+             $pdf->Ln();
+        
+             $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
+        $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(190, 0, '', 1, 0, '');
+        $pdf->Ln();
+
+
+        $pdf->Output();
+
+
+    }
+
 
 
 
@@ -487,100 +553,63 @@ class pdf_handler
         $pdf->Output();
     }
 
-
-
-
-    function create_invoice()
-    {
-
-        $pdf = new PDF();
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        $pdf->SetFont('Times', 'B', '', 24);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        $pdf->Cell(80, 60, '', 0, 0, 'c');
-        $pdf->Cell(60, 35, 'DISPATCH NOTE', 0);
-        $pdf->Ln();
-        $pdf->SetFont('Times', 'B', '', 12);
-
-        $pdf->Cell(20, 5, "Date________:", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(20, 5, "Time________:", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(20, 5, "Transaction ID___:", 0, 0, '');
-
-        $pdf->Cell(60, 20, '', 0, 0, 'C');
-        $pdf->Ln();
-
-
-        $pdf->SetFont('Times', 'B', '', 10);
-        $pdf->Cell(30, 5, 'NO', 1, 0, 'C');
-        $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
-        $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
-        $pdf->Ln();
-        
-        $i = 1;
-       while ($i <= 20) {
-
-        $pdf->SetFont('Times', '', '', 10);
-        $pdf->Cell(30, 5, $i, 1, 0, 'C');
-        $pdf->Cell(130, 5, '', 1, 0, 'C');
-        $pdf->Cell(30, 5, '', 1, 0, 'C');
-        $pdf->Ln();
-         $i++ ;
-             }
-             $pdf->SetFont('Times', 'B', '', 10);
-             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "", 1, 0, 'C');
-             $pdf->Ln();     
     
-             $pdf->Cell(60, 20, '', 0, 0, 'C');
-             $pdf->Ln();
-        
-             $pdf->SetFont('Times', 'B', '', 10);
-        $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
-        $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
-        $pdf->Ln();
-
-        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
-        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
-        $pdf->Ln();
-
-        $pdf->Cell(190, 0, '', 1, 0, '');
-        $pdf->Ln();
-
-
-        $pdf->Output();
-
-    }
 }
 
 
+}
 
+
+$object = new pdf_handler();
+switch ($pdf_type){
+    case "receipt":
+        $object->create_receipt();
+        break;
+
+     case "dispatch_note":
+     $object->create_dispatch_note();
+     break;
+
+     case "delivery_note":
+        $object->create_delivery_note();
+     break;
+    
+     case "invoice":
+        $object->create_invoice();
+     break;
+     
+
+
+
+        
+}
 
 // if ($pdf_type="receipt"){
 //         $object = new pdf_handler();
 //         $object->create_receipt();
 
 //         }
+
+//  else if ($pdf_type = "dispatch_note") {
+//     $object = new pdf_handler();
+//     $object->create_dispatch_note();
+// }      
+
+
 //  if($pdf_type="invoice"){
 //         $object = new pdf_handler();
 //         $object->create_invoice();
 
-//         }
+        
 // if($pdf_type="delivery_note"){
 //         $object = new pdf_handler();
 //         $object->create_delivery_note();
 
 //         }
 
-}
+// /
 
-if ($pdf_type = "dispatch_note") {
-    $object = new pdf_handler();
-    $object->create_dispatch_note();
-}
+
 
 
 

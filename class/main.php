@@ -947,8 +947,10 @@ class main
 
   function production_process_order($order_ID, $C_D_ID, $type,$printSave)
   {
-
+ 
+     
     global $con;
+    $pdfType = "dispatch_note";
     $user_ID = $_SESSION['user'];
     $date = date("d-m-Y");
     $time = date("H:i:s");
@@ -1003,7 +1005,7 @@ class main
 
       if($printSave=="print"){
 
-        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity");
+        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
   
   
       }
@@ -1503,6 +1505,7 @@ class main
     global $con;
     $payed_amount = "";
     $transaction_amount = "";
+    $pdfType = "receipt";
 
     $order_id = "";
     $date = date("d-m-Y");
@@ -1552,7 +1555,7 @@ class main
       if ($save_type == "save") {
         header('Location:add_payment.php');
       } else {
-        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+        header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID & type=$pdfType");
       }
       //header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
       // header('Location:add_payment.php');
@@ -1618,7 +1621,7 @@ class main
         if ($save_type == "save") {
           header('Location:add_payment.php');
         } else {
-          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID & type=$pdfType");
         }
 
 
@@ -1664,7 +1667,7 @@ class main
         if ($save_type == "save") {
           header('Location:add_payment.php');
         } else {
-          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID");
+          header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID & type=$pdfType");
         }
       } else if ($amount > $balance) {
 
@@ -1946,7 +1949,14 @@ class main
   }
 
 
-  // function create pdf files using fpdf
+  // function create pdf files using f
+  
+
+
+
+
+
+
 
 
 
