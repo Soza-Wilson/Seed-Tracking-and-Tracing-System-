@@ -269,128 +269,139 @@ if(empty($test)){
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="place_order.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Place Order</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="active">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="view_processed_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="view_denied_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="view_all_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                               
-                    
                             </ul>
+                            
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                
-                                <li class="">
-                                    <a href="agro_dealer.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-                    
-                            </ul>
-                    
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                
-                                <li class="">
-                                    <a href="b_to_b.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Business </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-                    
-                            </ul>
-                    
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
+                            
+
+                            
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
-                                    <a href="b_to_b.php" class="waves-effect waves-dark">
+                                <li class="">
+                                    <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Processed Payments</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    
+
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Outstanding Payments</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    
+
                                 </li>
-                    
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="debtor_accounts.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
+                                <li class="active">
+                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                
+
+
+
+
+
+
+
+                            </ul>
+                            </li>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                            <li class="">
+                                    <a href="bank_account.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="add_payment.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="finance_ledger.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
                                
 
-                                        
-                                        
-                                       
-                            
-                                    </ul>
-                                </li>
+
+
+
+
+
+
+                            </ul>
+                            </li>
+                    
+                    
                             </ul>
                         </div>
                     </nav>
