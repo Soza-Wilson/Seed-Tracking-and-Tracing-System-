@@ -1059,6 +1059,8 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
+        header('Location:finance_ledger.php');
+
       } else if ($ledger_type == "credit") {
 
        
@@ -1069,6 +1071,8 @@ class main
 
         $statement = $con->prepare($sql);
         $statement->execute();
+
+        header('Location:finance_ledger.php');
       }
 
 
