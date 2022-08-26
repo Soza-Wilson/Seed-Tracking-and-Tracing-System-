@@ -205,6 +205,21 @@ FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 mysqli_query($con, $sql);
 
 
+//ledger table 
+
+$sql = "CREATE TABLE ledger(ledger_ID varchar(100) PRIMARY KEY,
+ledger_type varchar(100),description varchar(100),
+amount int,bank_ID varchar(100),
+transaction_ID varchar(100),user_ID varchar(100),
+reference_bank_amount int,
+entry_date date,
+entry_time varchar(100),
+FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
+
+mysqli_query($con, $sql);
+
+
   ///// stock in (table reording all stock in transactions )    
 
   $sql = "CREATE TABLE stock_in(stock_in_ID varchar(100) PRIMARY KEY,

@@ -35,8 +35,7 @@ else{
     $amount = (int)$price_per_kg*(int)$item_quantity; 
     $object -> stock_out($item_ID,$stock_in_ID,$item_quantity,$stock_in_quantity,$order_ID,$amount);
 
-    echo ("<script> alert('not available!');
-    </script>");
+   
 }
 
 

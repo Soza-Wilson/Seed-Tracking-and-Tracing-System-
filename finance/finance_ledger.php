@@ -59,282 +59,18 @@ if (empty($test)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+        var data_value ="bank";
 
-            $('#select_payment_type').change(function() {
+            $.post('get_creditors.php', {
+           data_value: data_value
+}, function(data) {
+    $('#bank_name').html(data);
 
-                 
+});
 
 
-                let payment_type = $('#select_payment_type').val();
-
-                if (payment_type==="Cheque"){
-                    $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
-                    $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
-
-                }
-                else if (payment_type==="Cash"){
-
-                    $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
-                }
-
-
-                // var crop_data = $('#select_crop').val();
-                // var variety_data = $('#select_variety').val();
-                // var class_data = $('#select_class').val();
-
-                // if (crop_data == 0) {
-
-                //     alert('Select crop and variety');
-
-
-                // } else if (variety_data == 0) {
-
-                //     alert('Select crop and variety');
-
-                // } else {
-
-                //     $.post('get_prices.php', {
-                //         crop_data: crop_data,
-                //         variety_data: variety_data,
-                //         class_data: class_data
-                //     }, function(data) {
-
-                //         $('#price_per_kg').val(data);
-
-                //     });
-                // }
-
-
-
-
-            });
-
-
-            $('#debtor_type').change(function() {
-
-                var type_value = $('#debtor_type').val();
-
-                if (type_value == 'agro_dealer') {
-
-                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
-                    $('#description').attr('placeholder', 'agro dealer phone');
-
-
-                } else if (type_value == 'b_to_b') {
-
-                    $('#customer_name').attr('placeholder', 'Search Business by name');
-                    $('#description').attr('placeholder', 'Business description');
-
-
-
-                } else if (type_value == 'customer') {
-
-                    $('#customer_name').attr('placeholder', 'Enter customer name');
-                    $('#description').attr('placeholder', 'Enter customer phone number ');
-
-
-                } else if (type_value == 'grower') {
-
-                    $('#customer_name').attr('placeholder', 'Search grower by name');
-                    $('#description').attr('placeholder', 'grower farm crop and variety ');
-
-
-                }
-
-
-
-                $("#search_main_certificate").on("input", function() {
-
-
-                    var main_certificate_value = $('#search_main_certificate').val();
-                    var main_quantity_value = $('#main_quantity').val();
-                    var crop_value = $('#select_crop').val();
-                    var variety_value = $('#select_variety').val();
-                    var class_result = $('#select_class').val();
-
-
-                    $.post('farm_get_certificate.php', {
-                        main_certificate_value: main_certificate_value,
-                        main_quantity_value: main_quantity_value,
-                        crop_value: crop_value,
-                        variety_value: variety_value,
-                        class_value: class_value
-                    }, function(data) {
-                        $('#main_certificate').html(data);
-
-
-                    })
-
-                });
-
-
-
-
-
-
-
-
-            });
-
-            $('#customer_name').on("input", function() {
-
-
-                let type_value = $('#debtor_type').val();
-                let search_value = $('#customer_name').val();
-                let search_result = $('#search_result').val();
-
-                if (type_value == "type_not_selected") {
-
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1]);
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "b_to_b") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    })
-
-
-
-
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-                }
-
-            });
-
-        });
+});
+           
     </script>
 
 
@@ -499,7 +235,7 @@ if (empty($test)) {
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+                                   
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -511,14 +247,13 @@ if (empty($test)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -549,6 +284,12 @@ if (empty($test)) {
                                     </a>
 
                             </ul>
+                            
+
+                            
+
+                            
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
@@ -559,7 +300,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="pcoded-hasmenu">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -568,7 +309,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="">
+                                <li class="pcoded-hasmenu">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -577,7 +318,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="active">
+                                <li class="pcoded-hasmenu">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -592,14 +333,14 @@ if (empty($test)) {
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
+                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -608,7 +349,7 @@ if (empty($test)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -617,7 +358,7 @@ if (empty($test)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditors.php" class="waves-effect waves-dark">
+                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
@@ -638,6 +379,14 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
+                            <li class="">
+                                    <a href="bank_account.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
                                 <li class="">
                                     <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
@@ -645,7 +394,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="active">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
@@ -664,7 +413,7 @@ if (empty($test)) {
 
                             </ul>
                             </li>
-                            </ul>
+                            
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -674,7 +423,7 @@ if (empty($test)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add payment </h5>
+                                            <h5 class="m-b-10">Ledger </h5>
 
                                         </div>
                                     </div>
@@ -685,14 +434,14 @@ if (empty($test)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
+                                            <li class="breadcrumb-item"><a href="#!">Ledger</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                        <form action="finance_ledger.php" method="POST">
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -701,45 +450,187 @@ if (empty($test)) {
 
                                         <!-- Page body start -->
                                         <div class="page-body">
-                                            
- 
-                                       
-
-                                           
 
                                             <div class="card">
+
+
+                                                <!-- Modal -->
+                                                <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">New entry</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="finance_ledger.php" method="POST" enctype="multipart/form-data">
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                        <select id="bank_name" name="bank_name" class="form-control" required="">
+                                                                <option value="type_not_selected">Select Bank Account</option>
+                                                                  
+                                                            </select>
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                        <select id="ledger_type" name="ledger_type" class="form-control" required="">
+                                                                <option value="type_not_selected">Select Entry type</option>
+                                                                <option value="credit">Credit</option>
+                                                                <option value="debit">Debit</option>
+                                                                 
+                                                            </select>
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="amount" type="text" class="form-control" name="amount" placeholder="Amount" require="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <labe>Description :</label>
+                                                                                <textarea  class="form-control" name="description">
+    </textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" name="save_ledger" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            
                                                 <div class="card-header">
-                                                    <h5>Filter </h5>
+                                                    <h5>Filter</h5>
 
 
                                                 </div>
                                                 <div class="card-block">
 
-    </div>
+                                                <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                            <label>Ledger type</label>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                           <label>From :</label>
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                           <label>To :</label>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                            <select id="debtor_type" name="debtor_type" class="form-control" required="">
+                                                                <option value="type_not_selected">Select ledger Type</option>
+                                                                  <option value="credit">credit</option>
+                                                                <option value="debit">debit</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="date" class="form-control" id="customer_name" name="customer_name" placeholder="From" require="">
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <input type="date" class="form-control" id="customer_name" name="customer_name" placeholder="TO " require="">
+                                                        </div>
+
+                                                        
+                                                        <div class="col-sm-3">
+                                                        <button class="btn btn-primary">Get Data</button>
+                                                        <button class="btn btn-danger"> Reset</button>
+                                                        </div>
+                                                    </div>
+
+                                                    
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
+
+
+
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
                                             </div>
 
 
                                             <div class="row">
                                                 <div class="col-md-12">
+
+                                               
+                                                    <div class="card">
+
+
+
+                                                        
+
+                                                    </div>
+
+
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5>Transaction list</h5>
+                                                            <h5>Creditor Accounts</h5>
+                                                            <span>Accounts with outstanding balances </span>
                                                             <div class="card-block table-border-style">
                                                                 <div class="table-responsive" id="table_test">
                                                                     <table class="table" id="transaction_table">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th>ID </th>
-                                                                                <th>Name</th>
-                                                                                <th>Type</th>
-                                                                                <th>Phone</th>
-                                                                                <th>Registered by</th>
-                                                                                <th>Registered date</th>
-                                                                                <th>Account funds (MK)</th>
-                                                                                <th>Actions</th>
-                                                                                
+                                                                                <th>Entry ID</th>
+                                                                                <th>Transaction type</th>
+                                                                                <th>Amount</th>
+                                                                                <th>Description</th>
+                                                                                <th>Bank account name</th>
+                                                                                <th>Reference Amount</th>
+                                                                                <th>Current Amount</th>
+                                                                                <th>Entry_date</th>
+                                                                                <th>Entry_time</th>
+                                                                                <th>Entry_by</th>
+                                                                               
 
-                                                                              
+                                                                                <th>Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -749,22 +640,27 @@ if (empty($test)) {
 
                                                                                
                                                                             
-                                                                             
+ 
 
-                                                                                $sql = "SELECT * FROM creditor";
-
-                                                                       
+                                                                                $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
+                                                                                 `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
+                                                                                  `reference_bank_amount`, `entry_date`, `entry_time` FROM 
+                                                                                `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
+                                                                                INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
                                                                                     while ($row = $result->fetch_assoc()) {
-                                                                                        $debtor_ID = $row["debtor_ID"];
-                                                                                        $name = $row["name"];
-                                                                                        $type  = $row["debtor_type"];
-                                                                                        $phone = $row["phone"];
-                                                                                        $by = $row["user_ID"];
-                                                                                        $date = $row['registered_date'];
-                                                                                        $funds = $row['account_funds'];
+                                                                                        $ledger_ID      = $row["ledger_ID"];
+                                                                                        $ledger_type  = $row["ledger_type"];
+                                                                                        $description = $row["description"];
+                                                                                        $amount= $row["amount"];
+                                                                                        $bank_name= $row["bank_name"];
+                                                                                        $bank_funds= $row["account_funds"];
+                                                                                        $user = $row["fullname"];
+                                                                                        $registered_date = $row['entry_date'];
+                                                                                        $registered_time = $row['entry_time'];
+                                                                                      
                                                                                         
                                                                                      
 
@@ -772,21 +668,25 @@ if (empty($test)) {
 
                                                                                         echo "
                                                    <tr class='odd gradeX'>
-                                                       <td>$debtor_ID</td>
-                                                       <td>$name</td>
-                                                       <td>$type</td>
-                                                       <td>$phone</td>
-                                                       <td>$by</td>
-                                                       <td>$date</td>
-                                                       <td>$funds</td>
-                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
-                                                       
-                                                     
-                                                                                                           
+                                                       <td>$ledger_ID</td>
+                                                       <td>$ledger_type</td>
+                                                       <td>$amount</td>
+                                                       <td>$description</td>
+                                                       <td>$bank_name</td>
+                                                       <td>$bank_funds</td>
+                                                       <td>$bank_funds</td>
+                                                       <td>$registered_date</td>
+                                                       <td>$registered_time</td>
+                                                       <td>$user</td>
+                                                      
+                                                    
                                                          
                                                        
-                                                        
+                                                       
+                                                      <td><a href='view_transaction_details.php? class='btn btn-success'>View</a></td>
                                                    </tr>	
+
+                                                  
                                                ";
                                                                                     }
                                                                                 }
@@ -796,6 +696,11 @@ if (empty($test)) {
                                                                             ?>
                                                                             <tr>
                                                                                 <th scope="row">-</th>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
                                                                                 <td>-</td>
                                                                                 <td>-</td>
                                                                                 <td>-</td>
@@ -912,115 +817,11 @@ if (empty($test)) {
 <?php
 
 
-if (isset($_POST['place_order'])) {
-
-    if ($_SESSION['type'] = "customer") {
 
 
-
-        // since reguler customer are registered when the user adds the first
-        // item, the code here is trying to include the customer's id to the temp session list  
-
-        $name = $_SESSION['customer_name'];
-
-        echo ("<script> alert('$name !');
-        </script>");
-
-
-        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-        $result = $con->query($sql);
-        if ($result->num_rows > 0) {
-
-
-            while ($row = $result->fetch_assoc()) {
-                unset($_SESSION['customer_ID']);
-                $_SESSION['customer_ID'] =  $row["debtor_ID"];
-            }
-        }
-        $object = new main();
-        $object->place_order();
-    } else {
-        $object = new main();
-        $object->place_order();
-
-        echo ("<script> alert('not working !');
-        </script>");
-    }
-}
- 
-
-   
-
-if (isset($_FILES['image'])) {
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
-
-
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
-
-    $extensions = array("pdf");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose pdf.";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
-
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
-        echo "Success";
-    } else {
-        print_r($errors);
-    }
-}
- 
-
-if (isset($_POST['save_payment'])) {
-
- //// $_POST[trans_date] is used to get the transaction payment
- $uploaded_file = $newfilename;   
-
-if($_POST['select_payment_type']=="Cheque"){
-
-    
-    $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
-    
-
-}
- if($_POST['select_payment_type']=="Cash"){
-
-  
-
-    
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-  
-   
-} if($_POST['select_payment_type']=="Bank_transfer"){
-
-
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-}
-
-
-   
-
-   
-   
+if (isset($_POST['save_ledger'])) {
+$object = new main;
+$object->ledger_new_entry($_POST['ledger_type'],$_POST['description'],$_POST['amount'],$_POST['bank_name'],"-","-");
 }
 
 

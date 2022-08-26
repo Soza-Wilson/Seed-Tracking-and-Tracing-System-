@@ -93,6 +93,9 @@ class main
 
       $user_id = "GRADE" . $shuffled_time;
     }
+    else if ($department == "ledger"){
+      $user_id = "LG" . $shuffled_time;
+    }
 
 
 
@@ -335,7 +338,18 @@ class main
 
   //admin set prices for all products function
 
+  function update_user_profile($user_ID, $fullname, $phone, $email, $password)
+  {
 
+    $sql = "UPDATE `user` SET `fullname`='$fullname',`phone`='$phone',
+ `email`='$email',`password`='$password' WHERE `user_ID`='$user_ID'";
+    global $con;
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    header('Location:user_profile.php');
+  }
 
 
 
@@ -825,12 +839,12 @@ class main
     $time = date("H:i:s");
     global $con;
 
-    $intItemQuantity=(int) $item_quantity;
-    $intStockInQuantity= (int) $stock_in_quantity;
+    $intItemQuantity = (int) $item_quantity;
+    $intStockInQuantity = (int) $stock_in_quantity;
 
-    if ( $intStockInQuantity >= $intItemQuantity) {
+    if ($intStockInQuantity >= $intItemQuantity) {
 
-  
+
 
       $sql = "INSERT INTO `stock_out`(`stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `Quntity`, `amount`, `date`, `time`, `user_ID`) VALUES
        ('$stock_out_ID','$item_ID','$stock_in_ID','$order_ID','$item_quantity',$amount,'$date','$time','$user_ID')";
@@ -857,7 +871,7 @@ class main
       $statement->execute();
     } else if ($intItemQuantity >=  $intStockInQuantity) {
 
-     
+
 
 
 
@@ -884,9 +898,6 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
-     
-
-
     }
   }
 
@@ -928,12 +939,8 @@ class main
 
     $sql = "UPDATE `item` SET `stock_out_quantity`= stock_out_quantity - '$item_quantity' WHERE`item_ID`='$item_ID'";
 
-      $statement = $con->prepare($sql);
-      $statement->execute();
-
-    
-
-
+    $statement = $con->prepare($sql);
+    $statement->execute();
   }
 
 
@@ -945,10 +952,10 @@ class main
 
   ///production process order 
 
-  function production_process_order($order_ID, $C_D_ID, $type,$printSave)
+  function production_process_order($order_ID, $C_D_ID, $type, $printSave)
   {
- 
-     
+
+
     global $con;
     $pdfType = "dispatch_note";
     $user_ID = $_SESSION['user'];
@@ -956,7 +963,7 @@ class main
     $time = date("H:i:s");
     $transaction_ID = $this->generate_user("transaction");
     $amount = "";
-    $total_quantity ="";
+    $total_quantity = "";
     //step 0: pass data to dispatch note pdf function
 
 
@@ -1003,18 +1010,12 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      if($printSave=="print"){
+      if ($printSave == "print") {
 
         header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
-  
-  
-      }
-  
-      else if($printSave=="save"){
-  
+      } else if ($printSave == "save") {
+
         header('location:stock_out.php');
-  
-  
       }
       //
     } elseif ($type = "agro_dealer_order" || $type = "grower_order") {
@@ -1024,14 +1025,32 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
     }
-
-   
   }
 
 
 
 
+/// ledger function
+function ledger_new_entry($ledger_type,$description,$amount,$bank_ID,$transaction_ID,$reference_amount){
+  global $con;
+  $ledger_ID = $this->generate_user('ledger');
+  $user_ID = $_SESSION['user'];
+  $date = date("Y-M-D");
+  $time = date("H:i:s");
 
+  
+  $sql="INSERT INTO `ledger`(`ledger_ID`, `ledger_type`, `description`,
+  `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
+   `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
+  ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
+  '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
+
+
+$statement = $con->prepare($sql);
+$statement->execute();
+
+
+}
 
 
 
@@ -1623,22 +1642,6 @@ class main
         } else {
           header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID & type=$pdfType");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
       } else if ($amount < $balance) {
 
         $update_status = "partly_payed";
@@ -1950,7 +1953,7 @@ class main
 
 
   // function create pdf files using f
-  
+
 
 
 

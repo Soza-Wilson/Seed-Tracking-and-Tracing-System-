@@ -217,7 +217,7 @@ if($position !="marketing_admin" || $position !="admin" || $position !="marketin
                               <ul class="show-notification profile-notification">
                                   
                                   <li class="waves-effect waves-light">
-                                      <a href="user-profile.html">
+                                      <a href="../other/user_profile.php">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>

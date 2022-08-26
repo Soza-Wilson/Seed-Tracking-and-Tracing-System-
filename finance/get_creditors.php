@@ -13,6 +13,33 @@ include('../class/marketing.php');
 include('../class/main.php');
 
 
+if(isset($_POST['data_value'])){ 
+
+
+
+  $sql = "SELECT * FROM `bank_account`";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $bank_ID      = $row["bank_ID"];
+      $bank_name    = $row["bank_name"];
+
+      echo "
+                                                                                     
+      <option value='type_not_selected'>Select Bank Account</option>
+      <option value='$bank_ID'>$bank_name</option>
+  ";
+
+    }
+
+  }
+
+
+
+}
+
+
 if (isset($_POST['search_value'])) {
 
   $value = $_POST['search_value'];
@@ -223,4 +250,6 @@ if (isset($_POST['search_value'])) {
           ";
     }
   }
+ 
+  
 }

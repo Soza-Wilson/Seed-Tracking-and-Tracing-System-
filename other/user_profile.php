@@ -10,34 +10,34 @@ session_start();
 $test = $_SESSION['fullname'];
 
 
-$user_ID=  $_SESSION['user'];
-$fullname="";
-$DOB="";
-$registered_date="";
-$position="";
-$phone="";
-$email="";
-$passoword="";
+$user_ID =  $_SESSION['user'];
+$fullname = "";
+$DOB = "";
+$registered_date = "";
+$position = "";
+$phone = "";
+$email = "";
+$passoword = "";
 
 $sql = "SELECT `user_ID`, `user_type_ID`,
  `fullname`, `DOB`, `sex`, `registered_date`,
   `postion`, `phone`, `email`, `password` FROM 
   `user` WHERE `user_ID`='$user_ID'";
- global $con;
+global $con;
 
- $result = $con->query($sql);
- if ($result->num_rows > 0) {
-     while ($row = $result->fetch_assoc()) {
-         $user_ID= $row["user_ID"];
-         $fullname  = $row["fullname"];
-         $dob  = $row["DOB"];
-         $registered_date = $row["registered_date"];
-         $position  = $row["postion"];
-         $phone  = $row["phone"];
-         $email  = $row["email"];
-         $password  = $row["password"];
-     }
- }
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $user_ID = $row["user_ID"];
+        $fullname  = $row["fullname"];
+        $dob  = $row["DOB"];
+        $registered_date = $row["registered_date"];
+        $position  = $row["postion"];
+        $phone  = $row["phone"];
+        $email  = $row["email"];
+        $password  = $row["password"];
+    }
+}
 
 
 
@@ -83,6 +83,12 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+            document.getElementById('user_id').readOnly = true;
+            document.getElementById('dob').readOnly = true;
+            document.getElementById('reg_date').readOnly = true;
+            document.getElementById('position').readOnly = true;
+            
 
 
 
@@ -355,7 +361,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <form action="lab_add_certificate.php" method="POST">
+                                        <form action="user_profile.php" method="POST">
 
 
                                             <div class="card">
@@ -375,7 +381,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary">User ID:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $user_ID;?>">
+                                                            <input type="text" class="form-control" name="user_id" id="user_id" required="" value="<?php echo $user_ID; ?>">
                                                         </div>
                                                     </div>
 
@@ -386,7 +392,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary">Fullname:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $fullname;?>">
+                                                            <input type="text" class="form-control" name="fullname" required="" value="<?php echo $fullname; ?>">
                                                         </div>
                                                     </div>
 
@@ -395,7 +401,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary ">Date of Birth:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $dob;?>">
+                                                            <input type="text" class="form-control" name="dob" id="dob" required="" value="<?php echo $dob; ?>">
                                                         </div>
                                                     </div>
 
@@ -404,7 +410,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary">Registered date:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $registered_date;?>">
+                                                            <input type="text" class="form-control" name="reg_date" id="reg_date" required="" value="<?php echo $registered_date; ?>">
                                                         </div>
                                                     </div>
 
@@ -413,7 +419,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary">Position:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $position;?>">
+                                                            <input type="text" class="form-control" name="position" id="position" required="" value="<?php echo $position; ?>">
                                                         </div>
                                                     </div>
 
@@ -426,7 +432,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                         </div>
 
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $email;?>">
+                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $email; ?>">
                                                         </div>
                                                     </div>
 
@@ -442,19 +448,19 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                             <label class="badge badge-primary ">Password:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $password;?>">
+                                                            <input type="text" class="form-control" name="password" required="" value="<?php echo $password; ?>">
                                                         </div>
 
 
                                                     </div>
 
-                                                    
 
 
-                                                   
-                                                   
 
-                                                    
+
+
+
+
 
                                                     <div class="form-group row">
 
@@ -467,7 +473,7 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
 
 
 
-                                                    </br>
+                                                        </br>
 
 
                                                         <div>
@@ -479,13 +485,8 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
                                                         <div class="form-group">
 
 
-                                                            <input type="submit" name="add_certificate" value="update" class="btn waves-effect waves-light btn-primary btn-block" />
-                                                            <a href="active_test.php" class="btn waves-effect waves-light btn-success btn-block">
-                                                                Back
-
-                                                            </a>
-
-
+                                                            <input type="submit" name="update_profile" value="update" class="btn waves-effect waves-light btn-primary btn-block" />
+                                                            <button type="button" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
                                                         </div>
 
 
@@ -577,14 +578,16 @@ $sql = "SELECT `user_ID`, `user_type_ID`,
 
     <?php
 
-    if (isset($_POST['add_certificate'])) {
+    if (isset($_POST['update_profile'])) {
 
-        $stock_ID = $_POST['stock_in'];
-        $quantity = $_POST['farm_quantity'];
-        $lab_id = $_POST['farm_grade'];
-        $lot_number = $_POST['main_certificate'];
-
-        $get_data->lab_certify_stock($quantity, $stock_ID, $lab_id, $lot_number);
+        $object = new main;
+        $object->update_user_profile(
+            $_SESSION['user'],
+            $_POST['fullname'],
+            $_POST['phone'],
+            $_POST['email'],
+            $_POST['password']
+        );
     }
 
 

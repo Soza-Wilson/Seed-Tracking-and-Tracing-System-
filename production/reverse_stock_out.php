@@ -8,7 +8,7 @@ $test = $_SESSION['fullname'];
 
 if (empty($test)) {
 
-    header('Location:../login.php');
+    header('Location:../index.php');
 }
 
 $item_ID = $_GET['item_ID'];
