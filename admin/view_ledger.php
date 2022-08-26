@@ -274,15 +274,81 @@ if (empty($test)) {
                             <div class="p-15 p-b-0">
 
                             </div>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="pcoded-hasmenu">
+
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="admin_dashboard.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+
+
+
+
+
+                                        </li>
+
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="add_user.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="view_registered_users.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                            </ul>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                </li>
 
+                                <li class="">
+                                    <a href="add_product.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="set_prices.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="set_prices.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
                             </ul>
                             
 
@@ -290,110 +356,53 @@ if (empty($test)) {
 
                             
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
 
                                 <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
+                                    <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
 
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="debtor_accounts.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                </ul>
-
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                                <li class="">
-                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="">
-                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                            </ul>
 
                                 
-
-
-
-
-
-
-
-                            </ul>
-                            </li>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
-                                    <a href="bank_account.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
                                 <li class="active">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
@@ -455,82 +464,7 @@ if (empty($test)) {
 
 
                                                 <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">New entry</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="finance_ledger.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                        <select id="bank_name" name="bank_name" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Bank Account</option>
-                                                                  
-                                                            </select>
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                        <select id="ledger_type" name="ledger_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Entry type</option>
-                                                                <option value="credit">Credit</option>
-                                                                <option value="debit">Debit</option>
-                                                                 
-                                                            </select>
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="amount" type="text" class="form-control" name="amount" placeholder="Amount" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <labe>Description :</label>
-                                                                                <textarea  class="form-control" name="description">
-    </textarea>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" name="save_ledger" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
+                                                
 
                                             
                                                 <div class="card-header">
@@ -579,16 +513,7 @@ if (empty($test)) {
 
                                                     
 
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
+                                                   
 
 
                                                 </div>

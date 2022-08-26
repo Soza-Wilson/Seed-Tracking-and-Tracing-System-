@@ -92,8 +92,7 @@ class main
     } else if ($department == "grade_seed") {
 
       $user_id = "GRADE" . $shuffled_time;
-    }
-    else if ($department == "ledger"){
+    } else if ($department == "ledger") {
       $user_id = "LG" . $shuffled_time;
     }
 
@@ -1030,27 +1029,63 @@ class main
 
 
 
-/// ledger function
-function ledger_new_entry($ledger_type,$description,$amount,$bank_ID,$transaction_ID,$reference_amount){
-  global $con;
-  $ledger_ID = $this->generate_user('ledger');
-  $user_ID = $_SESSION['user'];
-  $date = date("Y-M-D");
-  $time = date("H:i:s");
-
-  
-  $sql="INSERT INTO `ledger`(`ledger_ID`, `ledger_type`, `description`,
-  `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
-   `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
-  ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
-  '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
+  /// ledger function
+  function ledger_new_entry($ledger_type, $description, $amount, $bank_ID, $transaction_ID, $reference_amount, $custome)
+  {
+    global $con;
+    $ledger_ID = $this->generate_user('ledger');
+    $user_ID = $_SESSION['user'];
+    $date = date("Y-m-d");
+    $time = date("H:i:s");
+    $amount_to_bank = intval($amount);
 
 
-$statement = $con->prepare($sql);
-$statement->execute();
+    if ($custome == "user") {
+
+      $sql = "INSERT INTO `ledger`(`ledger_ID`, `ledger_type`, `description`,
+    `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
+     `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
+    ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
+    '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
 
 
-}
+      $statement = $con->prepare($sql);
+      $statement->execute();
+      if ($ledger_type == "debit") {
+
+        $sql ="UPDATE `bank_account` SET 
+        `account_funds`= account_funds+$amount_to_bank WHERE `bank_ID`='$bank_ID'";
+
+        $statement = $con->prepare($sql);
+        $statement->execute();
+
+      } else if ($ledger_type == "credit") {
+
+       
+
+
+        $sql ="UPDATE `bank_account` SET 
+        `account_funds`= account_funds-$amount_to_bank WHERE `bank_ID`='$bank_ID'";
+
+        $statement = $con->prepare($sql);
+        $statement->execute();
+      }
+
+
+    } else if ($custome == "system") {
+
+
+      $sql = "INSERT INTO `ledger`(`ledger_ID`, `ledger_type`, `description`,
+    `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
+     `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
+    ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
+    '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
+
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    }
+  }
 
 
 
