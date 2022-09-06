@@ -1557,7 +1557,7 @@ class main
 
 
 
-  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description, $save_type)
+  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description, $save_type,$company_bank_account)
   {
 
     global $con;
@@ -1939,6 +1939,8 @@ class main
         $statement->execute();
 
         header('Location:add_payback_payment.php');
+
+        $this->ledger_new_entry("credit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
       } else if ($amount < $ava_balance) {
 
 
@@ -1979,7 +1981,11 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        //header('Location:add_payback_payment.php');
+        header('Location:add_payback_payment.php');
+
+        //update ledger
+
+       $this->ledger_new_entry("credit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
 
 
       } else if ($amount > $ava_balance) {

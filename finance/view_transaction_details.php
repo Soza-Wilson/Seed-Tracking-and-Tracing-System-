@@ -751,6 +751,8 @@ if (empty($test)) {
 
                                                         </div>
 
+                                                        
+
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary "> Type</label>
@@ -891,6 +893,40 @@ if (empty($test)) {
                                                             <option value="Cash">Cash</option>
                                                             <option value="Cheque">Cheque</option>
                                                             <option value="Bank_transfer">Bank transfer</option>
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <select id="bank_account_name" name="bank_account_name" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Company Bank Account</option>
+
+                                                           
+                                <?php
+                                $sql = "SELECT * FROM bank_account";
+                                $result = $con->query($sql);
+                                if ($result->num_rows > 0) {
+
+                                  
+                                  while ($row = $result->fetch_assoc()) {
+                                       $name = $row["bank_name"];
+                                       $bank_id = $row["bank_ID"];
+                                    echo"<option value='$bank_id'>$name</option>";
+                                  }
+                                }
+
+                                if ($value=1){
+
+                                  
+                                }
+                              
+
+                                ?>
 
 
 
@@ -1366,7 +1402,8 @@ if (isset($_POST['print_save_payment'])) {
             '-',
             '-',
             $_POST['description'],
-            $save_type
+            $save_type,
+            $_POST['bank_account_name']
         );
     }
     if ($_POST['select_payment_type'] == "Cash") {
@@ -1389,7 +1426,9 @@ if (isset($_POST['print_save_payment'])) {
             '-',
             $_POST['description']
             ,
-            $save_type
+            $save_type,
+            $_POST['bank_account_name']
+            
         );
     }
     if ($_POST['select_payment_type'] == "Bank_transfer") {
@@ -1410,7 +1449,8 @@ if (isset($_POST['print_save_payment'])) {
             '-',
             $_POST['description']
             ,
-            $save_type
+            $save_type, 
+            $_POST['bank_account_name']
             
         );
     }
@@ -1439,7 +1479,8 @@ if(isset($_POST['save_payment'])){
               '-',
               '-',
               $_POST['description'],
-              $save_type
+              $save_type,
+              $_POST['bank_account_name']
           );
       }
       if ($_POST['select_payment_type'] == "Cash") {
@@ -1462,7 +1503,8 @@ if(isset($_POST['save_payment'])){
               '-',
               $_POST['description']
               ,
-              $save_type
+              $save_type,
+              $_POST['bank_account_name']
           );
       }
       if ($_POST['select_payment_type'] == "Bank_transfer") {
@@ -1483,7 +1525,8 @@ if(isset($_POST['save_payment'])){
               '-',
               $_POST['description']
               ,
-              $save_type
+              $save_type,
+              $_POST['bank_account_name']
               
           );
       }
