@@ -13,7 +13,7 @@ class main
 {
 
 
-  // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the user department)
+  // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the department)
 
   function generate_user($department)
   {
@@ -39,75 +39,17 @@ class main
     } else if ($department == "4") {
 
       $user_id = "MNE" . $shuffled_time;
-    } else if ($department == "order") {
 
-
-      $user_id = "ORDER" . $shuffled_time;
-    } else if ($department == "order") {
-
-
-      $user_id = "ORDER" . $shuffled_time;
-    } else if ($department == "order_item") {
-
-
-      $user_id = "ITEM" . $shuffled_time;
-    } else if ($department == "stock") {
-
-
-      $user_id = "STOCK" . $shuffled_time;
-    } else if ($department == "creditor") {
-
-
-      $user_id = "CRE" . $shuffled_time;
-    } else if ($department == "farm") {
-
-      $user_id = "FARM" . $shuffled_time;
-    } else if ($department == "inspection") {
-
-      $user_id = "ISPN" . $shuffled_time;
-    } else if ($department == "test") {
-
-      $user_id = "LAB" . $shuffled_time;
-    } else if ($department == "debtor") {
-
-      $user_id = "DEB" . $shuffled_time;
-    } else if ($department == "stock_out") {
-
-      $user_id = "STKOUT" . $shuffled_time;
-    } else if ($department == "transaction") {
-
-      $user_id = "TRANS" . $shuffled_time;
-    } else if ($department == "crop") {
-
-      $user_id = "CP" . $shuffled_time;
-    } else if ($department == "variety") {
-
-      $user_id = "VT" . $shuffled_time;
-    } else if ($department == "payment") {
-
-      $user_id = "PAY" . $shuffled_time;
-    } else if ($department == "bank") {
-
-      $user_id = "BANK" . $shuffled_time;
-    } else if ($department == "grade_seed") {
-
-      $user_id = "GRADE" . $shuffled_time;
-    } else if ($department == "ledger") {
-      $user_id = "LG" . $shuffled_time;
     }
 
+    else{
 
+      $new_value=substr(strtoupper($department),0,3) ;
+      $user_id= $new_value.$shuffled_time;
+  
 
-
-
-
-
-
-
-
-
-
-
+    }
+ 
 
 
 
@@ -115,33 +57,7 @@ class main
   }
 
 
-
-
-
-  // user functions 
-
-  // user login function ()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//user log-in function
 
 
   function user_log_in($email, $password)
@@ -1565,6 +1481,9 @@ class main
     $transaction_amount = "";
     $pdfType = "receipt";
 
+    $newAmount = (int) $amount;
+    $newTransAmount = (int) $trans_amount;
+
     $order_id = "";
     $date = date("d-m-Y");
     $time = date("H:m:i");
@@ -1592,9 +1511,9 @@ class main
       $statement->execute();
       /// checking payment amount and type 
 
-      if ($amount < $trans_amount) {
+      if ($newAmount < $newTransAmount) {
         $update_status = "partly_payed";
-      } else if ($amount >= $trans_amount) {
+      } else if ($newAmount >= $newTransAmount) {
         $update_status = "fully_payed";
       }
 
@@ -1609,6 +1528,15 @@ class main
       $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
+
+      //update bank_account
+      $sql = "UPDATE `bank_account` SET `account_funds`=`account_funds`+$amount WHERE `bank_ID`='$company_bank_account'";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      // update ledger 
+      $this->ledger_new_entry("credit", $description, $amount,$company_bank_account,$transaction_id,$amount,"system");
 
       if ($save_type == "save") {
         header('Location:add_payment.php');
@@ -1838,6 +1766,9 @@ class main
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
+    $newAmount= (int) $amount;
+    $newTransAmount = (int)$trans_amount;
+
     if ($trans_status == "payment_pending") {
       /// adding new payment
 
@@ -1853,9 +1784,9 @@ class main
       $statement->execute();
       /// checking payment amount and type 
 
-      if ($amount < $trans_amount) {
+      if ($newAmount < $newTransAmount) {
         $update_status = "partly_payed";
-      } else if ($amount >= $trans_amount) {
+      } else if ($newAmount >= $newTransAmount) {
         $update_status = "fully_payed";
       }
 
@@ -1985,7 +1916,7 @@ class main
 
         //update ledger
 
-       $this->ledger_new_entry("credit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
+       $this->ledger_new_entry("debit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
 
 
       } else if ($amount > $ava_balance) {

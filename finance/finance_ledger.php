@@ -59,6 +59,32 @@ if (empty($test)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+        $('#get_data').click(()=>{
+
+
+            
+
+            var fromDateValue = $('#fromDateValue').val();
+            let toDateValue= $('#toDateValue').val();
+            let typeValue=$('#TypeValue').val();
+
+          
+
+            // $.post('get_creditors.php', {
+            //             fromDateValue: fromDateValue,
+            //             toDateValue: toDateValue,
+            //             typeValue: typeValue
+            //         }, (data)=>{
+
+            //             $('#ledger_table').val(data);
+
+            //         });
+
+           
+        });    
+
+
+
         var data_value ="bank";
 
             $.post('get_creditors.php', {
@@ -395,7 +421,7 @@ if (empty($test)) {
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="finance_ledger.php class="waves-effect waves-dark">
+                                    <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
                                         <span class="pcoded-mcaret"></span>
@@ -556,24 +582,24 @@ if (empty($test)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
-                                                            <select id="debtor_type" name="debtor_type" class="form-control" required="">
+                                                            <select id="typeValue" name="typeValue" class="form-control" required="">
                                                                 <option value="type_not_selected">Select ledger Type</option>
                                                                   <option value="credit">credit</option>
                                                                 <option value="debit">debit</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <input type="date" class="form-control" id="customer_name" name="customer_name" placeholder="From" require="">
+                                                            <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                         </div>
 
                                                         <div class="col-sm-3">
-                                                            <input type="date" class="form-control" id="customer_name" name="customer_name" placeholder="TO " require="">
+                                                            <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         </div>
 
                                                         
                                                         <div class="col-sm-3">
-                                                        <button class="btn btn-primary">Get Data</button>
-                                                        <button class="btn btn-danger"> Reset</button>
+                                                        <button name="get_data" id="get_data" class="btn btn-primary">Get Data</button>
+                                                        <button name ="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                         </div>
                                                     </div>
 
@@ -615,7 +641,7 @@ if (empty($test)) {
                                                             <span>all transactions are listed below </span>
                                                             <div class="card-block table-border-style">
                                                                 <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
+                                                                    <table class="table" id="ledger_table">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Entry ID</th>
