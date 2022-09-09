@@ -1632,7 +1632,10 @@ class main
         $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
         $statement = $con->prepare($sql);
         $statement->execute();
-
+    
+        //update ledger
+          
+        $this->ledger_new_entry("credit", $description, $amount,$company_bank_account,$transaction_id,$amount,"system");
 
         if ($save_type == "save") {
           header('Location:add_payment.php');
@@ -1648,76 +1651,7 @@ class main
   }
 
 
-  //     $sql = "SELECT * FROM payment WHERE `transaction_ID`=$transaction_id";
-  //     $result = $con->query($sql);
-
-
-  //     if ($result->num_rows > 0) {
-  //     // get all transaction previous payments and calculate how much has been payed so far
-
-  //       $sql = "SELECT sum(amount) as total_amount FROM `payment`WHERE transaction_Id ='$transaction_id'";
-
-  //     $result = $con->query($sql);
-  //     if ($result->num_rows > 0) {
-  //       while ($row = $result->fetch_assoc()) {
-  //         $payed_amount = $row["total_amount"];
-  //       }
-
-  //       }
-
-  //       $sql = "SELECT "
-
-  //     }
-
-
-
-
-  //     else if ($result->num_rows <= 0){
-
-
-  //     }
-
-
-
-
-  //     $sql = "SELECT sum(amount) as total_amount FROM `payment`WHERE transaction_Id ='$transaction_id'";
-
-  //     $result = $con->query($sql);
-  //     if ($result->num_rows > 0) {
-  //       while ($row = $result->fetch_assoc()) {
-
-  //         $amount = $row["total_amount"];
-  //       }
-
-
-
-  //     global $con;
-  //     $payment_ID = $this->generate_user("payment");
-
-  //   $sql ="INSERT INTO `payment`(`payment_ID`, `type`, `amount`, 
-  //   `description`, `documents`, `user_ID`, `transaction_ID`) VALUES 
-  //   ('$payment_ID','$type','$amount','-','$dir','$user_id','$transaction_id')";
-
-  // $statement = $con->prepare($sql);
-  // $statement->execute();
-
-
-
-
-
-  // get trans total amount to determine payment status (part payment or complete)
-
-
-
-  //update transaction status to partly_payed 
-
-
-
-
-  // update debtors funds 
-
-
-  //// bank account fuctions
+  
 
   function register_bank_account($bank_name, $account_number)
   {
