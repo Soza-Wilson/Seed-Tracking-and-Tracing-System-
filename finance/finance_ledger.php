@@ -64,21 +64,19 @@ if (empty($test)) {
 
             
 
-            var fromDateValue = $('#fromDateValue').val();
+            let fromDateValue = $('#fromDateValue').val();
             let toDateValue= $('#toDateValue').val();
-            let typeValue=$('#TypeValue').val();
+            let typeValue=$('#typeValue').val();
 
           
+            $.post('get_creditors.php', {
+                        fromDateValue: fromDateValue,
+                        toDateValue: toDateValue,
+                        typeValue: typeValue
+                    }, data=>{
+                        $('#ledger_table').html(data);
 
-            // $.post('get_creditors.php', {
-            //             fromDateValue: fromDateValue,
-            //             toDateValue: toDateValue,
-            //             typeValue: typeValue
-            //         }, (data)=>{
-
-            //             $('#ledger_table').val(data);
-
-            //         });
+                    });
 
            
         });    
@@ -584,6 +582,7 @@ if (empty($test)) {
                                                         <div class="col-sm-3">
                                                             <select id="typeValue" name="typeValue" class="form-control" required="">
                                                                 <option value="type_not_selected">Select ledger Type</option>
+                                                                <option value="all">all</option>
                                                                   <option value="credit">credit</option>
                                                                 <option value="debit">debit</option>
                                                             </select>
@@ -598,7 +597,9 @@ if (empty($test)) {
 
                                                         
                                                         <div class="col-sm-3">
-                                                        <button name="get_data" id="get_data" class="btn btn-primary">Get Data</button>
+
+                                                        <input type="button" name="get_data" id="get_data" value="Get data"class="btn btn-primary"/>
+                                                      
                                                         <button name ="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                         </div>
                                                     </div>
