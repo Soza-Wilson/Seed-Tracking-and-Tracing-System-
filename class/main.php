@@ -39,17 +39,12 @@ class main
     } else if ($department == "4") {
 
       $user_id = "MNE" . $shuffled_time;
+    } else {
 
+      $new_value = substr(strtoupper($department), 0, 3);
+      $user_id = $new_value . $shuffled_time;
     }
 
-    else{
-
-      $new_value=substr(strtoupper($department),0,3) ;
-      $user_id= $new_value.$shuffled_time;
-  
-
-    }
- 
 
 
 
@@ -57,7 +52,7 @@ class main
   }
 
 
-//user log-in function
+  //user log-in function
 
 
   function user_log_in($email, $password)
@@ -945,6 +940,12 @@ class main
 
 
 
+
+
+
+
+
+
   /// ledger function
   function ledger_new_entry($ledger_type, $description, $amount, $bank_ID, $transaction_ID, $reference_amount, $custome)
   {
@@ -954,6 +955,7 @@ class main
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $amount_to_bank = intval($amount);
+    $bank_reference_amount = $this->get_reference_amount($amount,$bank_ID,$ledger_type);
 
 
     if ($custome == "user") {
@@ -962,27 +964,26 @@ class main
     `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
      `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
     ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
-    '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
+    '$transaction_ID','$user_ID','$bank_reference_amount','$date','$time')";
 
 
       $statement = $con->prepare($sql);
       $statement->execute();
       if ($ledger_type == "debit") {
 
-        $sql ="UPDATE `bank_account` SET 
+        $sql = "UPDATE `bank_account` SET 
         `account_funds`= account_funds+$amount_to_bank WHERE `bank_ID`='$bank_ID'";
 
         $statement = $con->prepare($sql);
         $statement->execute();
 
         header('Location:finance_ledger.php');
-
       } else if ($ledger_type == "credit") {
 
-       
 
 
-        $sql ="UPDATE `bank_account` SET 
+
+        $sql = "UPDATE `bank_account` SET 
         `account_funds`= account_funds-$amount_to_bank WHERE `bank_ID`='$bank_ID'";
 
         $statement = $con->prepare($sql);
@@ -990,8 +991,6 @@ class main
 
         header('Location:finance_ledger.php');
       }
-
-
     } else if ($custome == "system") {
 
 
@@ -999,7 +998,7 @@ class main
     `amount`, `bank_ID`, `transaction_ID`, `user_ID`,
      `reference_bank_amount`, `entry_date`, `entry_time`) VALUES 
     ('$ledger_ID','$ledger_type','$description','$amount','$bank_ID',
-    '$transaction_ID','$user_ID','$reference_amount','$date','$time')";
+    '$transaction_ID','$user_ID','$bank_reference_amount','$date','$time')";
 
 
       $statement = $con->prepare($sql);
@@ -1011,6 +1010,39 @@ class main
 
 
 
+
+
+
+  // get bank reference amount
+  function get_reference_amount($ledger_trans_amount, $bank_account_id, $type)
+  {
+    global $con;
+    $reference_amount = "";
+    $account_funds = "";
+    $sql = "SELECT  `account_funds` FROM `bank_account` WHERE `bank_ID` ='$bank_account_id'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $account_funds = $row["account_funds"];
+      }
+    }
+
+    if ($type = "debit") {
+      $reference_amount = (int)$ledger_trans_amount + (int)$account_funds;
+    } else if ($type = "credit") {
+      $reference_amount = (int)$ledger_trans_amount - (int)$account_funds;
+    }
+    return $reference_amount;
+  }
+
+
+
+
+
+
+
+  //add creditor function 
   function add_creditor($source, $name, $phone, $email, $description, $files)
   {
 
@@ -1050,24 +1082,6 @@ class main
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // production certicate functions 
 
 
@@ -1091,6 +1105,8 @@ class main
     echo ("<script> alert('certificate added!');
                                 </script>");
   }
+
+
 
 
 
@@ -1154,6 +1170,13 @@ class main
   }
 
 
+
+
+
+
+
+
+
   // add graded percentage
 
   function grade_seed($stock_in_id, $grade_out_quantity, $trash_quantity)
@@ -1184,6 +1207,9 @@ class main
     echo ("<script> alert('saved!');
     </script>");
   }
+
+
+
 
 
 
@@ -1238,6 +1264,12 @@ class main
     }
   }
   // function register inspection log 
+
+
+
+
+
+
 
   function register_inspection()
   {
@@ -1473,7 +1505,7 @@ class main
 
 
 
-  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description, $save_type,$company_bank_account)
+  function add_debtor_payment($type, $amount, $dir, $user_id, $transaction_id, $debtor_id, $trans_amount, $trans_status, $cheque_number, $bank_name, $account_name, $description, $save_type, $company_bank_account)
   {
 
     global $con;
@@ -1536,7 +1568,7 @@ class main
       $statement->execute();
 
       // update ledger 
-      $this->ledger_new_entry("credit", $description, $amount,$company_bank_account,$transaction_id,$amount,"system");
+      $this->ledger_new_entry("credit", $description, $amount, $company_bank_account, $transaction_id, $amount, "system");
 
       if ($save_type == "save") {
         header('Location:add_payment.php');
@@ -1632,10 +1664,10 @@ class main
         $sql = "UPDATE debtor set `account_funds` =`account_funds`+'$amount' WHERE `debtor_ID`='$debtor_id'";
         $statement = $con->prepare($sql);
         $statement->execute();
-    
+
         //update ledger
-          
-        $this->ledger_new_entry("credit", $description, $amount,$company_bank_account,$transaction_id,$amount,"system");
+
+        $this->ledger_new_entry("credit", $description, $amount, $company_bank_account, $transaction_id, $amount, "system");
 
         if ($save_type == "save") {
           header('Location:add_payment.php');
@@ -1651,8 +1683,14 @@ class main
   }
 
 
-  
 
+
+
+
+
+
+
+//register new bank account
   function register_bank_account($bank_name, $account_number)
   {
 
@@ -1700,7 +1738,7 @@ class main
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
 
-    $newAmount= (int) $amount;
+    $newAmount = (int) $amount;
     $newTransAmount = (int)$trans_amount;
 
     if ($trans_status == "payment_pending") {
@@ -1805,7 +1843,7 @@ class main
 
         header('Location:add_payback_payment.php');
 
-        $this->ledger_new_entry("credit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
+        $this->ledger_new_entry("credit", $description, $amount, $bank_name, $transaction_id, $amount, "system");
       } else if ($amount < $ava_balance) {
 
 
@@ -1850,9 +1888,7 @@ class main
 
         //update ledger
 
-       $this->ledger_new_entry("debit", $description, $amount, $bank_name,$transaction_id,$amount,"system");
-
-
+        $this->ledger_new_entry("debit", $description, $amount, $bank_name, $transaction_id, $amount, "system");
       } else if ($amount > $ava_balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');

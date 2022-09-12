@@ -286,7 +286,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue'";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -314,8 +314,8 @@ if (isset($_POST['fromDateValue'])) {
                                                    <td>$amount</td>
                                                    <td>$description</td>
                                                    <td>$bank_name</td>
-                                                   <td>$account_funds</td>
                                                    <td>$reference_bank_amount</td>
+                                                   <td>$account_funds</td>
                                                    <td>$entry_date</td>
                                                    <td>$entry_time</td>
                                                    <td>$user</td>
@@ -374,7 +374,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID  WHERE ledger.ledger_type = 'credit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue'";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID  WHERE ledger.ledger_type = 'credit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -402,8 +402,8 @@ if (isset($_POST['fromDateValue'])) {
                                                    <td>$amount</td>
                                                    <td>$description</td>
                                                    <td>$bank_name</td>
-                                                   <td>$account_funds</td>
                                                    <td>$reference_bank_amount</td>
+                                                   <td>$account_funds</td>
                                                    <td>$entry_date</td>
                                                    <td>$entry_time</td>
                                                    <td>$user</td>
@@ -462,7 +462,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.ledger_type = 'debit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue'";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.ledger_type = 'debit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -490,8 +490,8 @@ if (isset($_POST['fromDateValue'])) {
                                                    <td>$amount</td>
                                                    <td>$description</td>
                                                    <td>$bank_name</td>
-                                                   <td>$account_funds</td>
                                                    <td>$reference_bank_amount</td>
+                                                   <td>$account_funds</td>
                                                    <td>$entry_date</td>
                                                    <td>$entry_time</td>
                                                    <td>$user</td>

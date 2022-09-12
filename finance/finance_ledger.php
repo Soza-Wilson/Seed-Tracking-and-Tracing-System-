@@ -54,47 +54,60 @@ if (empty($test)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-
+    <script type="text/javascript" src="../assets/table-pagination.js"></script>
     <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script src="../assets/js/bootstrap-table-pagination.js"></script>
+    <script src="../assets/js/pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
-        $('#get_data').click(()=>{
+            $('#ledger_table').pageMe({
+                pagerSelector: '#developer_page',
+                showPrevNext: true,
+                hidePageNumbers: false,
+                perPage: 3
+            });
 
 
-            
 
-            let fromDateValue = $('#fromDateValue').val();
-            let toDateValue= $('#toDateValue').val();
-            let typeValue=$('#typeValue').val();
 
-          
+
+            $('#get_data').click(() => {
+
+
+
+
+
+                let fromDateValue = $('#fromDateValue').val();
+                let toDateValue = $('#toDateValue').val();
+                let typeValue = $('#typeValue').val();
+
+
+                $.post('get_creditors.php', {
+                    fromDateValue: fromDateValue,
+                    toDateValue: toDateValue,
+                    typeValue: typeValue
+                }, data => {
+                    $('#ledger_table').html(data);
+
+                });
+
+
+            });
+
+
+
+            var data_value = "bank";
+
             $.post('get_creditors.php', {
-                        fromDateValue: fromDateValue,
-                        toDateValue: toDateValue,
-                        typeValue: typeValue
-                    }, data=>{
-                        $('#ledger_table').html(data);
+                data_value: data_value
+            }, function(data) {
+                $('#bank_name').html(data);
 
-                    });
-
-           
-        });    
+            });
 
 
-
-        var data_value ="bank";
-
-            $.post('get_creditors.php', {
-           data_value: data_value
-}, function(data) {
-    $('#bank_name').html(data);
-
-});
-
-
-});
-           
+        });
     </script>
 
 
@@ -253,13 +266,13 @@ if (empty($test)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -308,11 +321,11 @@ if (empty($test)) {
                                     </a>
 
                             </ul>
-                            
 
-                            
 
-                            
+
+
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -351,9 +364,9 @@ if (empty($test)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -389,7 +402,7 @@ if (empty($test)) {
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -403,7 +416,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -427,7 +440,7 @@ if (empty($test)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -437,7 +450,7 @@ if (empty($test)) {
 
                             </ul>
                             </li>
-                            
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -494,10 +507,10 @@ if (empty($test)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                        <select id="bank_name" name="bank_name" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Bank Account</option>
-                                                                  
-                                                            </select>
+                                                                            <select id="bank_name" name="bank_name" class="form-control" required="">
+                                                                                <option value="type_not_selected">Select Bank Account</option>
+
+                                                                            </select>
                                                                         </div>
 
 
@@ -508,12 +521,12 @@ if (empty($test)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                        <select id="ledger_type" name="ledger_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Entry type</option>
-                                                                <option value="credit">Credit</option>
-                                                                <option value="debit">Debit</option>
-                                                                 
-                                                            </select>
+                                                                            <select id="ledger_type" name="ledger_type" class="form-control" required="">
+                                                                                <option value="type_not_selected">Select Entry type</option>
+                                                                                <option value="credit">Credit</option>
+                                                                                <option value="debit">Debit</option>
+
+                                                                            </select>
                                                                         </div>
 
 
@@ -535,7 +548,7 @@ if (empty($test)) {
 
                                                                         <div class="col-sm-12">
                                                                             <labe>Description :</label>
-                                                                                <textarea  class="form-control" name="description">
+                                                                                <textarea class="form-control" name="description">
     </textarea>
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -556,7 +569,7 @@ if (empty($test)) {
                                                     </div>
                                                 </div>
 
-                                            
+
                                                 <div class="card-header">
                                                     <h5>Filter</h5>
 
@@ -564,16 +577,16 @@ if (empty($test)) {
                                                 </div>
                                                 <div class="card-block">
 
-                                                <div class="form-group row">
+                                                    <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <label>Ledger type</label>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                           <label>From :</label>
+                                                            <label>From :</label>
                                                         </div>
 
                                                         <div class="col-sm-3">
-                                                           <label>To :</label>
+                                                            <label>To :</label>
                                                         </div>
                                                     </div>
 
@@ -583,7 +596,7 @@ if (empty($test)) {
                                                             <select id="typeValue" name="typeValue" class="form-control" required="">
                                                                 <option value="type_not_selected">Select ledger Type</option>
                                                                 <option value="all">all</option>
-                                                                  <option value="credit">credit</option>
+                                                                <option value="credit">credit</option>
                                                                 <option value="debit">debit</option>
                                                             </select>
                                                         </div>
@@ -595,20 +608,20 @@ if (empty($test)) {
                                                             <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         </div>
 
-                                                        
+
                                                         <div class="col-sm-3">
 
-                                                        <input type="button" name="get_data" id="get_data" value="Get data"class="btn btn-primary"/>
-                                                      
-                                                        <button name ="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
+                                                            <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+
+                                                            <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                         </div>
                                                     </div>
 
-                                                    
+
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
+                                                            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
 
 
 
@@ -626,12 +639,12 @@ if (empty($test)) {
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                               
+
                                                     <div class="card">
 
 
 
-                                                        
+
 
                                                     </div>
 
@@ -642,7 +655,7 @@ if (empty($test)) {
                                                             <span>all transactions are listed below </span>
                                                             <div class="card-block table-border-style">
                                                                 <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="ledger_table">
+                                                                    <table class="table" id="ledger_table" name="ledger_table">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Entry ID</th>
@@ -655,52 +668,53 @@ if (empty($test)) {
                                                                                 <th>Entry_date</th>
                                                                                 <th>Entry_time</th>
                                                                                 <th>Entry_by</th>
-                                                                               
+
 
                                                                                 <th>Action</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody>
+                                                                        <tbody id="developers">
 
                                                                             <?php
-                                                                        
 
-                                                                               
-                                                                            
- 
 
-                                                                                $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
+
+
+
+
+                                                                            $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
                                                                                  `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
                                                                                   `reference_bank_amount`, `entry_date`, `entry_time` FROM 
-                                                                                `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-                                                                                INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
+                                                                                `ledger`  INNER JOIN user ON user.user_ID = ledger.user_ID 
+                                                                                INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID ORDER BY `ledger_ID` DESC";
 
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $ledger_ID      = $row["ledger_ID"];
-                                                                                        $ledger_type  = $row["ledger_type"];
-                                                                                        $description = $row["description"];
-                                                                                        $amount= $row["amount"];
-                                                                                        $bank_name= $row["bank_name"];
-                                                                                        $bank_funds= $row["account_funds"];
-                                                                                        $user = $row["fullname"];
-                                                                                        $registered_date = $row['entry_date'];
-                                                                                        $registered_time = $row['entry_time'];
-                                                                                      
-                                                                                        
-                                                                                     
+                                                                            $result = $con->query($sql);
+                                                                            if ($result->num_rows > 0) {
+                                                                                while ($row = $result->fetch_assoc()) {
+                                                                                    $ledger_ID      = $row["ledger_ID"];
+                                                                                    $ledger_type  = $row["ledger_type"];
+                                                                                    $description = $row["description"];
+                                                                                    $amount = $row["amount"];
+                                                                                    $bank_name = $row["bank_name"];
+                                                                                    $bank_funds = $row["account_funds"];
+                                                                                    $reference_amount = $row["reference_bank_amount"];
+                                                                                    $user = $row["fullname"];
+                                                                                    $registered_date = $row['entry_date'];
+                                                                                    $registered_time = $row['entry_time'];
 
 
 
-                                                                                        echo "
+
+
+
+                                                                                    echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$ledger_ID</td>
                                                        <td>$ledger_type</td>
                                                        <td>$amount</td>
                                                        <td>$description</td>
                                                        <td>$bank_name</td>
-                                                       <td>$bank_funds</td>
+                                                       <td>$reference_amount</td>
                                                        <td>$bank_funds</td>
                                                        <td>$registered_date</td>
                                                        <td>$registered_time</td>
@@ -715,9 +729,9 @@ if (empty($test)) {
 
                                                   
                                                ";
-                                                                                    }
                                                                                 }
-                                                                            
+                                                                            }
+
 
 
                                                                             ?>
@@ -741,6 +755,10 @@ if (empty($test)) {
                                                                     </table>
 
 
+                                                                </div>
+                                                                <div class="col-md-12 text-center">
+                                                                    <ul class="pagination pagination-lg pager" id="developer_page"></ul>
+                                                                  
                                                                 </div>
                                                             </div>
 
@@ -847,8 +865,8 @@ if (empty($test)) {
 
 
 if (isset($_POST['save_ledger'])) {
-$object = new main;
-$object->ledger_new_entry($_POST['ledger_type'],$_POST['description'],$_POST['amount'],$_POST['bank_name'],"-","-","user");
+    $object = new main;
+    $object->ledger_new_entry($_POST['ledger_type'], $_POST['description'], $_POST['amount'], $_POST['bank_name'], "-", "-", "user");
 }
 
 
