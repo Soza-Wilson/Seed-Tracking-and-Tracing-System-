@@ -262,6 +262,25 @@ if (isset($_POST['fromDateValue'])) {
 
 
   if ($typeValue == "all") {
+
+
+    echo"
+    <tr>
+    <th>Entry ID</th>
+    <th>Transaction type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Bank account name</th>
+    <th>Reference Amount</th>
+    <th>Current Amount</th>
+    <th>Entry_date</th>
+    <th>Entry_time</th>
+    <th>Entry_by</th>
+   
+
+    <th>Action</th>
+</tr>
+    ";
     
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
@@ -277,7 +296,7 @@ if (isset($_POST['fromDateValue'])) {
         $description = $row["description"];
         $amount = $row["amount"];
         $transaction_ID = $row["transaction_ID"];
-        $fullname = $row["fullname"];
+        $user = $row["fullname"];
         $bank_name = $row["bank_name"];
         $account_funds = $row["account_funds"];
         $reference_bank_amount = $row["reference_bank_amount"];
@@ -285,19 +304,26 @@ if (isset($_POST['fromDateValue'])) {
         $entry_time = $row["entry_time"];
 
         echo "
+
+       
+                                                                          
                                                                                        
                                                    <tr class='odd gradeX'>
-                                                       <td>$ledger_ID</td>
-                                                       <td>$ledger_type</td>
-                                                       <td>$description</td>
-                                                       <td>$amount</td>
-                                                       <td>$transaction_ID</td>
-                                                       <td>$fullname</td>
-                                                       <td>$bank_name</td>
-                                                       <td>$account_funds</td>
-                                                       <td>$reference_bank_amount</td>
-                                                       <td>$entry_date</td>
-                                                       <td>$entry_time</td>
+                                                   <td>$ledger_ID</td>
+                                                   <td>$ledger_type</td>
+                                                   <td>$amount</td>
+                                                   <td>$description</td>
+                                                   <td>$bank_name</td>
+                                                   <td>$account_funds</td>
+                                                   <td>$reference_bank_amount</td>
+                                                   <td>$entry_date</td>
+                                                   <td>$entry_time</td>
+                                                   <td>$user</td>
+
+
+                                                    <td><a href='view_transaction_details.php?' class='btn btn-success'>View</a></td>
+                                                   
+                                                  
                                                        
                                                    </tr>	
                                                ";
@@ -326,6 +352,23 @@ if (isset($_POST['fromDateValue'])) {
 
   else if($typeValue == "credit"){
 
+    echo"
+    <tr>
+    <th>Entry ID</th>
+    <th>Transaction type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Bank account name</th>
+    <th>Reference Amount</th>
+    <th>Current Amount</th>
+    <th>Entry_date</th>
+    <th>Entry_time</th>
+    <th>Entry_by</th>
+   
+
+    <th>Action</th>
+</tr>";
+
       
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
@@ -341,7 +384,7 @@ if (isset($_POST['fromDateValue'])) {
         $description = $row["description"];
         $amount = $row["amount"];
         $transaction_ID = $row["transaction_ID"];
-        $fullname = $row["fullname"];
+        $user = $row["fullname"];
         $bank_name = $row["bank_name"];
         $account_funds = $row["account_funds"];
         $reference_bank_amount = $row["reference_bank_amount"];
@@ -349,19 +392,25 @@ if (isset($_POST['fromDateValue'])) {
         $entry_time = $row["entry_time"];
 
         echo "
+
+       
+                                                                          
                                                                                        
                                                    <tr class='odd gradeX'>
-                                                       <td>$ledger_ID</td>
-                                                       <td>$ledger_type</td>
-                                                       <td>$description</td>
-                                                       <td>$amount</td>
-                                                       <td>$transaction_ID</td>
-                                                       <td>$fullname</td>
-                                                       <td>$bank_name</td>
-                                                       <td>$account_funds</td>
-                                                       <td>$reference_bank_amount</td>
-                                                       <td>$entry_date</td>
-                                                       <td>$entry_time</td>
+                                                   <td>$ledger_ID</td>
+                                                   <td>$ledger_type</td>
+                                                   <td>$amount</td>
+                                                   <td>$description</td>
+                                                   <td>$bank_name</td>
+                                                   <td>$account_funds</td>
+                                                   <td>$reference_bank_amount</td>
+                                                   <td>$entry_date</td>
+                                                   <td>$entry_time</td>
+                                                   <td>$user</td>
+
+
+                                                    <td><a href='view_transaction_details.php?' class='btn btn-success'>View</a></td>
+                                                   
                                                        
                                                    </tr>	
                                                ";
@@ -391,6 +440,23 @@ if (isset($_POST['fromDateValue'])) {
 
   else if($typeValue == "debit"){
 
+
+    echo"
+    <tr>
+    <th>Entry ID</th>
+    <th>Transaction type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Bank account name</th>
+    <th>Reference Amount</th>
+    <th>Current Amount</th>
+    <th>Entry_date</th>
+    <th>Entry_time</th>
+    <th>Entry_by</th>
+   
+
+    <th>Action</th>
+</tr>";
       
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
@@ -406,7 +472,7 @@ if (isset($_POST['fromDateValue'])) {
         $description = $row["description"];
         $amount = $row["amount"];
         $transaction_ID = $row["transaction_ID"];
-        $fullname = $row["fullname"];
+        $user = $row["fullname"];
         $bank_name = $row["bank_name"];
         $account_funds = $row["account_funds"];
         $reference_bank_amount = $row["reference_bank_amount"];
@@ -414,20 +480,25 @@ if (isset($_POST['fromDateValue'])) {
         $entry_time = $row["entry_time"];
 
         echo "
+
+       
+                                                                          
                                                                                        
                                                    <tr class='odd gradeX'>
-                                                       <td>$ledger_ID</td>
-                                                       <td>$ledger_type</td>
-                                                       <td>$description</td>
-                                                       <td>$amount</td>
-                                                       <td>$transaction_ID</td>
-                                                       <td>$fullname</td>
-                                                       <td>$bank_name</td>
-                                                       <td>$account_funds</td>
-                                                       <td>$reference_bank_amount</td>
-                                                       <td>$entry_date</td>
-                                                       <td>$entry_time</td>
-                                                       
+                                                   <td>$ledger_ID</td>
+                                                   <td>$ledger_type</td>
+                                                   <td>$amount</td>
+                                                   <td>$description</td>
+                                                   <td>$bank_name</td>
+                                                   <td>$account_funds</td>
+                                                   <td>$reference_bank_amount</td>
+                                                   <td>$entry_date</td>
+                                                   <td>$entry_time</td>
+                                                   <td>$user</td>
+
+
+                                                    <td><a href='view_transaction_details.php?' class='btn btn-success'>View</a></td>
+                                                   
                                                    </tr>	
                                                ";
       }
