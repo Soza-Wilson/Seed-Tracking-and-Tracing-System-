@@ -61,7 +61,7 @@ if (empty($test)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#ledger_table').pageMe({
+            $('#developers').pageMe({
                 pagerSelector: '#developer_page',
                 showPrevNext: true,
                 hidePageNumbers: false,

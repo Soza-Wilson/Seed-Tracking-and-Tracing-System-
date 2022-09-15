@@ -2,25 +2,25 @@
 <html lang="en">
 <?php
 
+
 Ob_start();
 include('../class/main.php');
-session_start(); 
+session_start();
 
 $test = $_SESSION['fullname'];
+$position= $_SESSION['position'];
 
-if(empty($test)){
+if (empty($test)) {
 
     header('Location:../index.php');
-
-
 }
 
-if($position !="marketing_admin" || $position !="admin" || $position !="marketing_officer"){
-     
-    header('Location:javascript://history.go(-1)');
+$restricted = array("marketing_admin", "system_administrator","marketing_officer");
 
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
 }
-
 
 ?>
  

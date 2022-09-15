@@ -354,7 +354,7 @@ class main
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $_POST['debtor_type'];
-      $_SESSION['order_book_number'] = $order_note_number;
+      
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
     ('$order_ID')";
@@ -368,21 +368,21 @@ class main
   function check_order_book_number($order, $order_book_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
 
+    $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+
+    // global $con;
+    // $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
+    // $result =  $con->query($sql);
+    // $count = $result->num_rows;
+    // if ($count >= 1) {
+    //   echo ("<script> alert('Error: Order book number already exists ');
+    //                                         </script>");
+    // } else {
 
 
-    global $con;
-    $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
-    $result =  $con->query($sql);
-    $count = $result->num_rows;
-    if ($count >= 1) {
-      echo ("<script> alert('Error: Order book number already exists ');
-                                            </script>");
-    } else {
 
-
-
-      $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
-    }
+    //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+    // }
   }
 
 
@@ -1044,7 +1044,7 @@ class main
 
   //add creditor function 
   function add_creditor($source, $name, $phone, $email, $description, $files)
-  {
+  { 
 
     $creditor_ID = $this->generate_user("creditor");
     $user_ID = $_SESSION['user'];

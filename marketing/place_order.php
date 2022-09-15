@@ -2,25 +2,25 @@
 <html lang="en">
 <?php
 
+
 Ob_start();
 include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position= $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
 
+$restricted = array("marketing_admin", "system_administrator","marketing_officer");
 
-// if($position !="marketing_admin" || $position !="admin" || $position !="marketing_officer"){
-     
-//     header('Location:javascript://history.go(-1)');
-
-// }
-
-
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 
 ?>
@@ -942,12 +942,7 @@ if (empty($test)) {
                 <div class="card-block">
 
 
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" name="order_book_number" placeholder="Order note number" require="">
-                        </div>
-
-                    </div>
+                    
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <select id="select_crop" name="crop" class="form-control" required="">
@@ -1202,45 +1197,48 @@ if (isset($_POST['add_item'])) {
     switch ($debtor_type) {
 
         case "agro_dealer":
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
 
-                echo ("<script> alert('please select agro dealer');
+            echo ("<script> alert('agro dealer ');
             </script>");
-            } else {
+            // //checking if user has selected customer from the selected debtor type 
+            // if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
+
+            //     echo ("<script> alert('please select agro dealer');
+            // </script>");
+            // } else {
 
 
-                //checking if order is in progress by checking is the order session is empty 
+            //     //checking if order is in progress by checking is the order session is empty 
 
-                if (empty($_SESSION['order'])) {
+            //     if (empty($_SESSION['order'])) {
 
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
+            //         $test =  $_POST['search_result'];
+            //         $data_result = explode(",", $test);
 
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
+            //         $object = new main();
+            //         $object->temp_data(
+            //             $data_result,
+            //             $_POST['order_book_number'],
+            //             $_POST['crop'],
+            //             $_POST['variety'],
+            //             $_POST['class'],
+            //             $_POST['quantity'],
+            //             $_POST['price_per_kg'],
+            //             $_POST['discount_price'],
+            //             $_POST['total_price']
+            //         );
+            //     } else {
 
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
+            //         $order = $_SESSION['order'];
+            //         $order_book = $_POST['order_book_number'];
+            //         $crop =  $_POST['crop'];
+            //         $variety = $_POST['variety'];
+            //         $class = $_POST['class'];
 
-                    $object = new main();
-                    $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
-                }
-            }
+            //         $object = new main();
+            //         $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
+            //     }
+            // }
             break;
         case "b_to_b":
 
