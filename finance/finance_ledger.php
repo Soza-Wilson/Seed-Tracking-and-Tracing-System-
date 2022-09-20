@@ -61,15 +61,6 @@ if (empty($test)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#developers').pageMe({
-                pagerSelector: '#developer_page',
-                showPrevNext: true,
-                hidePageNumbers: false,
-                perPage: 3
-            });
-
-
-
 
 
             $('#get_data').click(() => {
@@ -81,12 +72,14 @@ if (empty($test)) {
                 let fromDateValue = $('#fromDateValue').val();
                 let toDateValue = $('#toDateValue').val();
                 let typeValue = $('#typeValue').val();
+                let bankAccount = $('#select_bank_name').val();
 
 
                 $.post('get_creditors.php', {
                     fromDateValue: fromDateValue,
                     toDateValue: toDateValue,
-                    typeValue: typeValue
+                    typeValue: typeValue,
+                    bankAccount: bankAccount
                 }, data => {
                     $('#ledger_table').html(data);
 
@@ -103,6 +96,8 @@ if (empty($test)) {
                 data_value: data_value
             }, function(data) {
                 $('#bank_name').html(data);
+                $('#select_bank_name').html(data);
+
 
             });
 
@@ -581,11 +576,14 @@ if (empty($test)) {
                                                         <div class="col-sm-3">
                                                             <label>Ledger type</label>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2">
+                                                            <label>Bank name</label>
+                                                        </div>
+                                                        <div class="col-sm-2">
                                                             <label>From :</label>
                                                         </div>
 
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2">
                                                             <label>To :</label>
                                                         </div>
                                                     </div>
@@ -600,11 +598,19 @@ if (empty($test)) {
                                                                 <option value="debit">debit</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-3">
+
+                                                        <div class="col-sm-2">
+                                                                            <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
+                                                                                <option value="type_not_selected">Select Bank Account</option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                        <div class="col-sm-2">
                                                             <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                         </div>
 
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2">
                                                             <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         </div>
 

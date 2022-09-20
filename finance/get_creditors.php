@@ -258,6 +258,7 @@ if (isset($_POST['fromDateValue'])) {
   $fromDateValue = $_POST['fromDateValue'];
   $toDateValue = $_POST['toDateValue'];
   $typeValue = $_POST['typeValue'];
+  $bankAccount = $_POST['bankAccount'];
 
 
 
@@ -286,7 +287,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE bank_account.bank_ID = '$bankAccount' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -374,7 +375,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID  WHERE ledger.ledger_type = 'credit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID  WHERE bank_account.bank_ID = '$bankAccount' AND ledger.ledger_type = 'credit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -462,7 +463,7 @@ if (isset($_POST['fromDateValue'])) {
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
    `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE ledger.ledger_type = 'debit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
+   INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE bank_account.bank_ID = '$bankAccount' AND ledger.ledger_type = 'debit' AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {

@@ -56,59 +56,52 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script src="../assets/table-pagination.js"></script>
 
-  
+
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#ledger_table').createTablePagination({
-    rowPerPage: 4,
-    paginationColor:'#6f7ad7',
-    fontColor:'#555555',
-    paginationStyle:'borderless',// or 'bordered'
-    transitionDuration: 500,
-    jumpPage:true,
-
-
-  });
-
-            $('#get_data').click(()=>{
-
-
             
 
-let fromDateValue = $('#fromDateValue').val();
-let toDateValue= $('#toDateValue').val();
-let typeValue=$('#typeValue').val();
+            $('#get_data').click(() => {
 
 
-$.post('../finance/get_creditors.php', {
-            fromDateValue: fromDateValue,
-            toDateValue: toDateValue,
-            typeValue: typeValue
-        }, data=>{
-            $('#ledger_table').html(data);
+
+
+                let fromDateValue = $('#fromDateValue').val();
+                let toDateValue = $('#toDateValue').val();
+                let typeValue = $('#typeValue').val();
+                let bankAccount = $('#select_bank_name').val();
+
+
+                $.post('../finance/get_creditors.php', {
+                    fromDateValue: fromDateValue,
+                    toDateValue: toDateValue,
+                    typeValue: typeValue,
+                    bankAccount: bankAccount
+                }, data => {
+                    $('#ledger_table').html(data);
+
+                });
+
+
+            });
+
+
+
+
+            var data_value = "bank";
+
+            $.post('../finance/get_creditors.php', {
+                data_value: data_value
+            }, function(data) {
+                $('#select_bank_name').html(data);
+                
+
+            });
+
 
         });
-
-
-});    
-
-
-
-
-        var data_value ="bank";
-
-            $.post('get_creditors.php', {
-           data_value: data_value
-}, function(data) {
-    $('#bank_name').html(data);
-
-});
-
-
-});
-           
     </script>
 
 
@@ -267,13 +260,13 @@ $.post('../finance/get_creditors.php', {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -388,11 +381,11 @@ $.post('../finance/get_creditors.php', {
 
                             </ul>
                             </ul>
-                            
 
-                            
 
-                            
+
+
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -436,7 +429,7 @@ $.post('../finance/get_creditors.php', {
 
                             </ul>
 
-                                
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -450,7 +443,7 @@ $.post('../finance/get_creditors.php', {
 
                                 </li>
 
-                               
+
 
 
 
@@ -460,7 +453,7 @@ $.post('../finance/get_creditors.php', {
 
                             </ul>
                             </li>
-                            
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -502,9 +495,9 @@ $.post('../finance/get_creditors.php', {
 
 
                                                 <!-- Modal -->
-                                                
 
-                                            
+
+
                                                 <div class="card-header">
                                                     <h5>Filter</h5>
 
@@ -512,17 +505,23 @@ $.post('../finance/get_creditors.php', {
                                                 </div>
                                                 <div class="card-block">
 
-                                                <div class="form-group row">
+                                                    <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <label>Ledger type</label>
                                                         </div>
-                                                        <div class="col-sm-3">
-                                                           <label>From :</label>
+                                                        <div class="col-sm-2">
+                                                            <label>Bank name</label>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>From :</label>
                                                         </div>
 
-                                                        <div class="col-sm-3">
-                                                           <label>To :</label>
+                                                        <div class="col-sm-2">
+                                                            <label>To :</label>
                                                         </div>
+                                                    </div>
+
+                                                        
                                                     </div>
 
 
@@ -531,30 +530,37 @@ $.post('../finance/get_creditors.php', {
                                                             <select id="typeValue" name="typeValue" class="form-control" required="">
                                                                 <option value="type_not_selected">Select ledger Type</option>
                                                                 <option value="all">all</option>
-                                                                  <option value="credit">credit</option>
+                                                                <option value="credit">credit</option>
                                                                 <option value="debit">debit</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2">
+                                                                            <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
+                                                                                <option value="type_not_selected">Select Bank Account</option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                        <div class="col-sm-2">
                                                             <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                         </div>
 
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2">
                                                             <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         </div>
 
-                                                        
+
                                                         <div class="col-sm-3">
 
-                                                        <input type="button" name="get_data" id="get_data" value="Get data"class="btn btn-primary"/>
-                                                      
-                                                        <button name ="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
+                                                            <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+
+                                                            <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                         </div>
                                                     </div>
 
-                                                    
 
-                                                   
+
+
 
 
                                                 </div>
@@ -565,12 +571,12 @@ $.post('../finance/get_creditors.php', {
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                               
+
                                                     <div class="card">
 
 
 
-                                                        
+
 
                                                     </div>
 
@@ -594,7 +600,7 @@ $.post('../finance/get_creditors.php', {
                                                                                 <th>Entry_date</th>
                                                                                 <th>Entry_time</th>
                                                                                 <th>Entry_by</th>
-                                                                               
+
 
                                                                                 <th>Action</th>
                                                                             </tr>
@@ -602,37 +608,37 @@ $.post('../finance/get_creditors.php', {
                                                                         <tbody>
 
                                                                             <?php
-                                                                        
 
-                                                                               
-                                                                            
- 
 
-                                                                                $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
+
+
+
+
+                                                                            $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
                                                                                  `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
                                                                                   `reference_bank_amount`, `entry_date`, `entry_time` FROM 
                                                                                 `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
                                                                                 INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
 
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $ledger_ID      = $row["ledger_ID"];
-                                                                                        $ledger_type  = $row["ledger_type"];
-                                                                                        $description = $row["description"];
-                                                                                        $amount= $row["amount"];
-                                                                                        $bank_name= $row["bank_name"];
-                                                                                        $bank_funds= $row["account_funds"];
-                                                                                        $user = $row["fullname"];
-                                                                                        $registered_date = $row['entry_date'];
-                                                                                        $registered_time = $row['entry_time'];
-                                                                                      
-                                                                                        
-                                                                                     
+                                                                            $result = $con->query($sql);
+                                                                            if ($result->num_rows > 0) {
+                                                                                while ($row = $result->fetch_assoc()) {
+                                                                                    $ledger_ID      = $row["ledger_ID"];
+                                                                                    $ledger_type  = $row["ledger_type"];
+                                                                                    $description = $row["description"];
+                                                                                    $amount = $row["amount"];
+                                                                                    $bank_name = $row["bank_name"];
+                                                                                    $bank_funds = $row["account_funds"];
+                                                                                    $user = $row["fullname"];
+                                                                                    $registered_date = $row['entry_date'];
+                                                                                    $registered_time = $row['entry_time'];
 
 
 
-                                                                                        echo "
+
+
+
+                                                                                    echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$ledger_ID</td>
                                                        <td>$ledger_type</td>
@@ -654,9 +660,9 @@ $.post('../finance/get_creditors.php', {
 
                                                   
                                                ";
-                                                                                    }
                                                                                 }
-                                                                            
+                                                                            }
+
 
 
                                                                             ?>
@@ -786,8 +792,8 @@ $.post('../finance/get_creditors.php', {
 
 
 if (isset($_POST['save_ledger'])) {
-$object = new main;
-$object->ledger_new_entry($_POST['ledger_type'],$_POST['description'],$_POST['amount'],$_POST['bank_name'],"-","-","user");
+    $object = new main;
+    $object->ledger_new_entry($_POST['ledger_type'], $_POST['description'], $_POST['amount'], $_POST['bank_name'], "-", "-", "user");
 }
 
 
