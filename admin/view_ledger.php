@@ -78,7 +78,7 @@ if (empty($test)) {
                     fromDateValue: fromDateValue,
                     toDateValue: toDateValue,
                     typeValue: typeValue,
-                    bankAccount: bankAccount
+                    bankAccount: bankAccount   
                 }, data => {
                     $('#ledger_table').html(data);
 

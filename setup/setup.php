@@ -106,7 +106,7 @@ if ($database === true) {
 
 
   mysqli_query($con, $sql);
-// debtors (these will include agro dealer and customers )
+  // debtors (these will include agro dealer and customers )
 
   $sql = "CREATE TABLE debtor(debtor_ID varchar(100) PRIMARY KEY,
   
@@ -122,11 +122,11 @@ account_funds int,
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
-///transaction table 
+  ///transaction table 
 
-$sql = "CREATE TABLE transaction (transaction_ID varchar(100) PRIMARY KEY, 
+  $sql = "CREATE TABLE transaction (transaction_ID varchar(100) PRIMARY KEY, 
 type varchar(100),
 action_name varchar(100),
 action_ID varchar(100),
@@ -139,19 +139,19 @@ trans_status varchar(100),
 user_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
 
-///payment table 
+  ///payment table 
 
-$sql= "CREATE TABLE payment(payment_ID varchar(100) PRIMARY KEY,
+  $sql = "CREATE TABLE payment(payment_ID varchar(100) PRIMARY KEY,
 type varchar(100),amount int,description varchar(100),documents varchar(100),cheque_number varchar(100),bank_name varchar(100),
 account_name varchar(100),date varchar(100),time varchar(100),
 user_ID varchar(100),transaction_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID), 
 FOREIGN KEY(transaction_ID)REFERENCES transaction(transaction_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
   //farm table 
 
@@ -192,9 +192,9 @@ Hectors varchar(100),
   mysqli_query($con, $sql);
 
 
-/// Bank account table 
+  /// Bank account table 
 
-$sql = "CREATE TABLE bank_account(bank_ID varchar(100) PRIMARY KEY, 
+  $sql = "CREATE TABLE bank_account(bank_ID varchar(100) PRIMARY KEY, 
 bank_name varchar(100),
 account_number varchar(100),
 account_funds int,
@@ -202,12 +202,12 @@ register_date varchar(100),
 user_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
 
-//ledger table 
+  //ledger table 
 
-$sql = "CREATE TABLE ledger(ledger_ID varchar(100) PRIMARY KEY,
+  $sql = "CREATE TABLE ledger(ledger_ID varchar(100) PRIMARY KEY,
 ledger_type varchar(100),description varchar(100),
 amount int,bank_ID varchar(100),
 transaction_ID varchar(100),user_ID varchar(100),
@@ -217,7 +217,7 @@ entry_time varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID),
 FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
 
   ///// stock in (table reording all stock in transactions )    
@@ -250,24 +250,45 @@ mysqli_query($con, $sql);
   mysqli_query($con, $sql);
 
 
- 
-//// grading table 
 
-$sql="CREATE TABLE grading( grade_ID varchar(100) PRIMARY KEY,
-                           date varchar(100),
-                           time varchar(100),
-                           grade_out_quantity varchar(100),
-                           trash_quantity varchar(100),
+  //// grading and seed processing tables 
+
+  $sql = "CREATE TABLE grading( grade_ID varchar(100) PRIMARY KEY,
+                           assigned_date date,
+                           assigned_time varchar(100),
+                           assigned_quantity INT,
+                           used_quantity INT,
+                           available_quantity INT,
                            stock_in_ID varchar(100),
-                           user_ID varchar(100),
-                           FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+                           assigned_by varchar(100),
+                           received_by varchar(100),
+                           file_directory varchar(100),
+                           FOREIGN KEY(assigned_by) REFERENCES user(user_ID),
                            FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
 
+  $sql = "CREATE TABLE process_seed(process_ID varchar(100) PRIMARY KEY,
+                                  assigned_quantity INT, 
+                                  trash_quantity INT, 
+                                  grade_outs_quantity INT,
+                                  processed_quantity INT, 
+                                  process_type varchar(100),
+                                  processed_date date,
+                                  processed_time varchar(100),
+                                  stock_in_ID varchar(100),
+                                  user_ID varchar(100),
+                                  FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+                                  FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID)
 
-// mysqli_query($con, $sql);
+                  
+                                  )";
+
+
+  mysqli_query($con, $sql);
+
+  // mysqli_query($con, $sql);
 
 
 
@@ -386,9 +407,9 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                  FOREIGN KEY(item_ID) REFERENCES item(item_ID)
                                  )";
 
-// , 
-// FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID), 
-// FOREIGN KEY(item) REFERENCES item(item_ID)
+  // , 
+  // FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID), 
+  // FOREIGN KEY(item) REFERENCES item(item_ID)
 
   mysqli_query($con, $sql);
 
@@ -511,7 +532,4 @@ VALUES ('PRC001','CP001','VT001','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC0027','CP009','VT0027','0.00','0.00','0.00','0.00','0.00','0.00')";
 
   mysqli_query($con, $sql);
-
-
-
 }

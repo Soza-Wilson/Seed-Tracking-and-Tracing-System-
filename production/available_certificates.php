@@ -313,6 +313,33 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                            <li class="">
+                                    <a href="process_seed.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="view_processed_seed.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="labels.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                 </li>
+                                </ul> 
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
