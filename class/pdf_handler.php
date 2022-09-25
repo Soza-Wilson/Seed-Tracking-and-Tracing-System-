@@ -7,8 +7,9 @@ use function PHPSTORM_META\type;
 require('../pdf/fpdf.php');
 require('main.php');
 session_start();
-$type = $_GET['type'];
-$pdf_type = $type;
+// $type = $_GET['type'];
+// $pdf_type = $type;
+$pdf_type = "handover";
 
 
 
@@ -353,7 +354,7 @@ class pdf_handler
         $pdf->Cell(60, 20, '', 0, 0, 'C');
         $pdf->Ln();
 
-
+         
         $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(30, 5, 'NO', 1, 0, 'C');
         $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
@@ -392,6 +393,142 @@ class pdf_handler
 
 
         $pdf->Output();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function create_handoff(){
+        
+     $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`,
+      `assigned_quantity`,crop.crop,variety.variety,stock_in.class FROM `grading`
+     INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
+      INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
+      INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID;";
+
+        global $con;
+$result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $grade_ID= $row["grade_ID"];
+                $assigned_date = $row["assigned_date"];
+                $assigned_time = $row["assigned_time"];
+
+                
+            }
+        }
+
+        $pdf = new PDF();
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times', 'B', '', 24);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        $pdf->Cell(80, 60, '', 0, 0, 'c');
+        $pdf->Cell(60, 35, 'SEED HANDOVER', 0);
+        $pdf->Ln();
+        $pdf->SetFont('Times', 'B', '', 12);
+
+        $pdf->Cell(20, 5, "Date________: $assigned_date", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(20, 5, "Time________: $assigned_time", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(20, 5, "Grade ID_____: $grade_ID", 0, 0, '');
+
+        $pdf->Cell(60, 20, '', 0, 0, 'C');
+        $pdf->Ln();
+
+
+        $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(30, 5, 'NO', 1, 0, 'C');
+        $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
+        $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
+        $pdf->Ln();
+        $i = 1;
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+
+
+                
+                $crop  = $row["crop"];
+                $variety = $row["variety"];
+                $class = $row["class"];
+                $quantity= $row["assigned_quantity"];
+
+                //retrieve payment details
+
+               
+
+                $pdf->SetFont('Times', '', '', 10);
+                $pdf->Cell(30, 5, $i++, 1, 0, 'C');
+                 $pdf->Cell(130, 5, "$crop / $variety / $class", 1, 0, 'C');
+                  $pdf->Cell(30, 5,$quantity, 1, 0, 'C');
+                 $pdf->Ln();
+            }
+        }
+       
+
+         
+        
+        
+       while ($i <= 20) {
+
+        $pdf->SetFont('Times', '', '', 10);
+        $pdf->Cell(30, 5, $i, 1, 0, 'C');
+        $pdf->Cell(130, 5, '', 1, 0, 'C');
+        $pdf->Cell(30, 5, '', 1, 0, 'C');
+        $pdf->Ln();
+         $i++ ;
+             }
+             $pdf->SetFont('Times', 'B', '', 10);
+             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+             $pdf->Cell(30, 5, "$quantity", 1, 0, 'C');
+             $pdf->Ln();     
+    
+             $pdf->Cell(60, 20, '', 0, 0, 'C');
+             $pdf->Ln();
+        
+             $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
+        $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
+       
+        $pdf->Ln();
+
+        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+       
+        $pdf->Ln();
+        
+
+        $pdf->Cell(190, 0, '', 1, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(100, 10, "                                                           Supervisor by: ................................................. ", 0, 0, '');
+
+        $pdf->Ln();
+        $pdf->Cell(100, 10, '                                                            Signature : ....................................................', 0, 0, '');
+
+        $pdf->Ln();
+        $pdf->Cell(190, 0, '', 1, 0, '');
+        $pdf->Ln();
+
+
+        $pdf->Output();
+
+
 
 
     }
@@ -577,6 +714,10 @@ switch ($pdf_type){
      case "invoice":
         $object->create_invoice();
      break;
+
+     case "handover":
+        $object->create_handoff();
+        break;
      
 
 

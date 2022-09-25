@@ -588,6 +588,18 @@ if (empty($test)) {
 
 
                                                         </div>
+
+
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Stock In Date</label>
+                                                            <select class="form-control" name="quantity">
+                                                                <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
                                                         
 
                                                         
@@ -621,7 +633,7 @@ if (empty($test)) {
 
                         <div class="card">
                             <div class="card-header">
-                                <h5>Grade seed </h5>
+                                <h5>Assign seed for processing</h5>
 
                                 <div class="card-header-right">
                                     <ul class="list-unstyled card-option">
@@ -662,21 +674,14 @@ if (empty($test)) {
 
                                             <div class="form-group row">
                                                 <div class="col-sm-2">
-                                                    <label>Grade outs quantity:</label>
+                                                    <label>Assign quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="grade_outs" class="form-control" name="grade_outs" placeholder="-" require="">
+                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Trash quantity:</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="trash" class="form-control" name="trash" placeholder="-" require="">
-                                                </div>
-                                            </div>
+                                            
 
 
                                             
@@ -703,7 +708,7 @@ if (empty($test)) {
                                                 <div class="form-group">
 
 
-                                                    <input type="submit" name="save_grade_out" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                    <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
                                                     <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
@@ -815,26 +820,12 @@ if (empty($test)) {
 </body>
 <?php
 
-if (isset($_POST['save_grade_out'])) {
+if (isset($_POST['assign_seed'])) {
 
    $object = new main();
-   $object -> grade_seed($_POST['stock_in_id'],$_POST['grade_outs'],$_POST['trash']);
+   $object -> assign_prcessing_quantity($_POST['stock_in_id'],$_POST['assign_quantity']);
 
 }
-
-if (isset($_POST['deny_order'])) {
-
-
-    $ID = $_POST['order_id'];
-
-    $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$ID'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    echo ("<script> alert('Order denied!');
-    </script>");
-}
-
 
 
 

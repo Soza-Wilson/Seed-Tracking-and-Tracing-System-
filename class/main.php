@@ -354,7 +354,7 @@ class main
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $_POST['debtor_type'];
-      
+
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
     ('$order_ID')";
@@ -955,7 +955,7 @@ class main
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $amount_to_bank = intval($amount);
-    $bank_reference_amount = $this->get_reference_amount($amount,$bank_ID,$ledger_type);
+    $bank_reference_amount = $this->get_reference_amount($amount, $bank_ID, $ledger_type);
 
 
     if ($custome == "user") {
@@ -1044,7 +1044,7 @@ class main
 
   //add creditor function 
   function add_creditor($source, $name, $phone, $email, $description, $files)
-  { 
+  {
 
     $creditor_ID = $this->generate_user("creditor");
     $user_ID = $_SESSION['user'];
@@ -1177,9 +1177,9 @@ class main
 
 
 
-  // add graded percentage
+  // assign ungraded seed for processing
 
-  function grade_seed($stock_in_id, $grade_out_quantity, $trash_quantity)
+  function assign_prcessing_quantity($stock_in_id, $assigned_quantity)
   {
 
     $grade_ID = $this->generate_user("grade_seed");
@@ -1188,24 +1188,35 @@ class main
     $time = date("H:i:s");
     global $con;
 
-    $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
-    ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
+    $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, 
+                `available_quantity`, `stock_in_ID`, `assigned_by`, `received_by`, `file_directory`) VALUES 
+                ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-')";
+
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    // update stock in status and available quantity  
+    // create PDF file for assigned seed
 
-    $t_g_quantity = $grade_out_quantity + $trash_quantity;
+    
+
+    // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
+    // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
 
 
-    $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
 
-    $statement = $con->prepare($sql);
-    $statement->execute();
+    // // update stock in status and available quantity  
 
-    echo ("<script> alert('saved!');
-    </script>");
+    // $t_g_quantity = $grade_out_quantity + $trash_quantity;
+
+
+    // $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
+
+    // $statement = $con->prepare($sql);
+    // $statement->execute();
+
+    // echo ("<script> alert('saved!');
+    // </script>");
   }
 
 
@@ -1690,7 +1701,7 @@ class main
 
 
 
-//register new bank account
+  //register new bank account
   function register_bank_account($bank_name, $account_number)
   {
 
