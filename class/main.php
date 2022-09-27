@@ -647,10 +647,10 @@ class main
 
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
      `creditor_ID`, `source`, `crop_ID`, `status`, `variety_ID`, `class`, `SLN`,
-      `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,
+      `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,`processed_quantity`,
        `description`, `supporting_dir`, `date`, `time`) VALUES ('$stock_ID','$user_ID',
        '$certificate','$farm','$creditor','$source','$crop','$status','$variety','$class',
-       '$srn','$bincard','$bags','$quantity',0,'$quantity','$description',
+       '$srn','$bincard','$bags','$quantity',0,0,0,'$description',
        '$supporting_dir','$date','$time')";
 
     $statement = $con->prepare($sql);
@@ -1197,6 +1197,10 @@ class main
     
     $statement = $con->prepare($sql);
     $statement->execute();
+    
+    // update stock in available quantity by subtracting assigned quantity with available 
+
+       
 
     // create PDF file for assigned seed
 

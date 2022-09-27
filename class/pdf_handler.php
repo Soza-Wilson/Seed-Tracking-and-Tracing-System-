@@ -410,11 +410,14 @@ class pdf_handler
 
 
 
-    function create_handoff(){
+    function create_handover(){
+
+     $grade_ID =$_GET['grade_id'];   
         
-     $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`,
+     $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,
       `assigned_quantity`,crop.crop,variety.variety,stock_in.class FROM `grading`
      INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
+     INNER JOIN user ON grading.assigned_by = user.user_ID
       INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
       INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `grade_ID`= '$grade_ID';";
 
@@ -425,6 +428,7 @@ $result = $con->query($sql);
                 $grade_ID= $row["grade_ID"];
                 $assigned_date = $row["assigned_date"];
                 $assigned_time = $row["assigned_time"];
+                $fullname = $row["fullname"];
 
                 
             }
@@ -502,7 +506,7 @@ $result = $con->query($sql);
              $pdf->Ln();
         
              $pdf->SetFont('Times', 'B', '', 10);
-        $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
+        $pdf->Cell(100, 5, "Issued by: $fullname ", 0, 0, '');
         $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
        
         $pdf->Ln();
@@ -716,7 +720,7 @@ switch ($pdf_type){
      break;
 
      case "handover":
-        $object->create_handoff();
+        $object->create_handover();
         break;
      
 
