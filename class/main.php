@@ -1186,19 +1186,23 @@ class main
     $user_ID = $_SESSION['user'];
     $date = date("Y-M-D");
     $time = date("H:i:s");
+    $pdfType ="handover";
+   
     global $con;
 
 
     $sql="INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
     `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
-    ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-','-','-')";
+    ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
     
     $statement = $con->prepare($sql);
     $statement->execute();
 
     // create PDF file for assigned seed
 
-
+    header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
+   
+    
 
     // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
     // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
@@ -1219,10 +1223,13 @@ class main
     // </script>");
   }
 
-  function handover_conformation($received_by, $file_directory, $grade_id)
+  function handover_conformation($receive_id,$received_name, $file_directory, $grade_id)
   {
     global $con;
-    $sql = "UPDATE `grading` SET `received_by`='$received_by',`file_directory`='$file_directory' WHERE `grade_ID`=$grade_id";
+
+    $sql="UPDATE `grading` SET `received_ID`='$receive_id',
+    `received_name`='$received_name',`status`='unprocessed',
+    `file_directory`='$file_directory' WHERE `grade_ID`='$grade_id'";
     $statement = $con->prepare($sql);
     $statement->execute();
   }

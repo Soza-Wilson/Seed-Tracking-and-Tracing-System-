@@ -7,9 +7,9 @@ use function PHPSTORM_META\type;
 require('../pdf/fpdf.php');
 require('main.php');
 session_start();
-// $type = $_GET['type'];
-// $pdf_type = $type;
-$pdf_type = "handover";
+$type = $_GET['type'];
+$pdf_type = $type;
+
 
 
 
@@ -416,7 +416,7 @@ class pdf_handler
       `assigned_quantity`,crop.crop,variety.variety,stock_in.class FROM `grading`
      INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
       INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
-      INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID;";
+      INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `grade_ID`= '$grade_ID';";
 
         global $con;
 $result = $con->query($sql);
