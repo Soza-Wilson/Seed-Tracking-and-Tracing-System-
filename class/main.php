@@ -1184,21 +1184,21 @@ class main
 
     $grade_ID = $this->generate_user("grade_seed");
     $user_ID = $_SESSION['user'];
-    $date = date("d-m-Y");
+    $date = date("Y-M-D");
     $time = date("H:i:s");
     global $con;
 
-    $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, 
-                `available_quantity`, `stock_in_ID`, `assigned_by`, `received_by`, `file_directory`) VALUES 
-                ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-')";
 
-
+    $sql="INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
+    `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
+    ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-','-','-')";
+    
     $statement = $con->prepare($sql);
     $statement->execute();
 
     // create PDF file for assigned seed
 
-    
+
 
     // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
     // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
@@ -1218,6 +1218,15 @@ class main
     // echo ("<script> alert('saved!');
     // </script>");
   }
+
+  function handover_conformation($received_by, $file_directory, $grade_id)
+  {
+    global $con;
+    $sql = "UPDATE `grading` SET `received_by`='$received_by',`file_directory`='$file_directory' WHERE `grade_ID`=$grade_id";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
 
 
 

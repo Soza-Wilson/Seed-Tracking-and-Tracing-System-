@@ -18,8 +18,6 @@ $quantity = $_GET['quantity'];
 if (empty($test)) {
 
     header('Location:../login.php');
-
-
 }
 
 
@@ -214,13 +212,13 @@ if (empty($test)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -301,12 +299,12 @@ if (empty($test)) {
                                             </a>
                                         </li>
                                         <li class="">
-                                    <a href="grading.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="grading.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
                                         <li class="">
                                             <a href="stock_out.php" class="waves-effect waves-dark">
@@ -337,31 +335,31 @@ if (empty($test)) {
                                     </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="active">
-                                    <a href="process_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="view_processed_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="active">
+                                            <a href="process_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="view_processed_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="labels.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                 </li>
-                                </ul> 
+                                        <li>
+                                            <a href="labels.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -516,7 +514,7 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="grade_seed.php" method="POST">
+                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">
                                                 <div class="card-header">
                                                     <h5>Stock in details </h5>
 
@@ -600,9 +598,9 @@ if (empty($test)) {
 
 
                                                         </div>
-                                                        
 
-                                                        
+
+
 
 
 
@@ -611,44 +609,44 @@ if (empty($test)) {
 
 
 
-                                           
 
 
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
                                         </div>
 
 
 
+                                        <!-- Background Utilities table end -->
                                     </div>
 
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Confirm received seed</h5>
+
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
+                                            </div>
 
 
+                                        </div>
 
-                                </div>
-                            </div>
-
-
-
-                            <!-- Background Utilities table end -->
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Confirm received seed</h5>
-                                
-                                <div class="card-header-right">
-                                    <ul class="list-unstyled card-option">
-                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                        <li><i class="fa fa-trash close-card"></i></li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-
-                            <div class="card-block">
+                                        <div class="card-block">
 
 
 
@@ -660,10 +658,10 @@ if (empty($test)) {
 
 
 
-                                            
-                                           
 
-                                         
+
+
+
 
 
 
@@ -675,23 +673,23 @@ if (empty($test)) {
                                             <div class="form-group row">
                                                 <div class="col-sm-2">
                                                     <label>Upload Corfimation Document</label>
-                                                  
+
 
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="file" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="file" id="conformation_file" class="form-control" name="conformation_file" placeholder="-" require="">
                                                 </div>
                                             </div>
 
-                                            
 
 
-                                            
-                                      
+
+
+
 
 
                                             <div class="form-group row">
-                                                
+
 
 
 
@@ -710,7 +708,7 @@ if (empty($test)) {
                                                 <div class="form-group">
 
 
-                                                    <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
+                                                    <input type="submit" name="confirm" value="Confirm" class="btn waves-effect waves-light btn-success btn-block" />
                                                     <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
@@ -734,26 +732,26 @@ if (empty($test)) {
 
                                         <!-- Input Alignment card end -->
                                     </div>
-                            
-                                
-                           
 
 
 
-                            <!-- Background Utilities table end -->
+
+
+
+                                    <!-- Background Utilities table end -->
+                                </div>
+                                <!-- Page-body end -->
+                            </div>
                         </div>
-                        <!-- Page-body end -->
+                        <!-- Main-body end -->
+
+                        <div id="styleSelector">
+
+                        </div>
                     </div>
-                </div>
-                <!-- Main-body end -->
-
-                <div id="styleSelector">
-
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -847,17 +845,27 @@ if (isset($_FILES['conformation_file'])) {
     }
 
     if (empty($errors) == true) {
-        move_uploaded_file($_FILES["conformation_file"]["tmp_name"], "certificate/" . $newfilename);
+        move_uploaded_file($_FILES["conformation_file"]["tmp_name"], "../files/production/handover_conformation_documents/" . $newfilename);
         echo "Success";
     } else {
-        print_r($errors);
+        $error = implode($errors);
+        echo ("<script> alert('$error');
+            window.location.href = 'process_seed.php';
+        </script>");
     }
 }
 
-if (isset($_POST['assign_seed'])) {
+if (isset($_POST['confirm'])) {
 
-   $object = new main();
-   $object -> assign_prcessing_quantity($_POST['stock_in_id'],$_POST['assign_quantity']);
+
+
+
+    echo ("<script> alert('working');
+    </script>");
+
+
+    // $object = new main();
+    // $object -> assign_prcessing_quantity($_POST['stock_in_id'],$_POST['assign_quantity']);
 
 }
 

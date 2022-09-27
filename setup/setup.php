@@ -261,7 +261,9 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                            available_quantity INT,
                            stock_in_ID varchar(100),
                            assigned_by varchar(100),
-                           received_by varchar(100),
+                           received_ID varchar(100),
+                           received_name varchar(100),
+                           status varchar(100),
                            file_directory varchar(100),
                            FOREIGN KEY(assigned_by) REFERENCES user(user_ID),
                            FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID))";
