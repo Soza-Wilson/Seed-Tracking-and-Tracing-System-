@@ -551,8 +551,8 @@ if (in_array($position, $restricted)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,
-                                                            `assigned_quantity`,crop.crop,variety.variety,stock_in.class FROM `grading`
+                                                            $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,user.user_ID,
+                                                            `assigned_quantity`,crop.crop,variety.variety,stock_in.class,stock_in.stock_in_ID FROM `grading`
                                                            INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
                                                             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN user ON user.user_ID = grading.assigned_by
                                                             INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID;";
@@ -560,7 +560,9 @@ if (in_array($position, $restricted)) {
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
+                                                                    $user_ID= $row['user_ID'];
                                                                     $grade_ID = $row['grade_ID'];
+                                                                    $stock_in_id = $row['stock_in_ID'];
                                                                     $crop      = $row['crop'];
                                                                     $variety     = $row['variety'];
                                                                     $class     = $row['class'];
@@ -568,6 +570,7 @@ if (in_array($position, $restricted)) {
                                                                     $assigned_date = $row['assigned_date'];
                                                                     $assigned_time = $row['assigned_time'];
                                                                     $assigned_by = $row['fullname'];
+                                                                 
                                                                    
                                                                     
 
@@ -589,7 +592,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='confirm_for_processing.php? stock_in_id=$grade_ID & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$assigned_by' class='btn btn-primary'> view</a>
+												<td><a href='confirm_for_processing.php? grade_id=$grade_ID & stock_in=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$assigned_by & user_ID=$user_ID' class='btn btn-primary'> view</a>
                                                 
                                                 </td>
 											</tr>	

@@ -647,10 +647,10 @@ class main
 
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
      `creditor_ID`, `source`, `crop_ID`, `status`, `variety_ID`, `class`, `SLN`,
-      `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,`processed_quantity`,
+      `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,`processed_quantity`,`grade_outs_quantity`, `trash_quantity`,
        `description`, `supporting_dir`, `date`, `time`) VALUES ('$stock_ID','$user_ID',
        '$certificate','$farm','$creditor','$source','$crop','$status','$variety','$class',
-       '$srn','$bincard','$bags','$quantity',0,0,0,'$description',
+       '$srn','$bincard','$bags','$quantity',0,0,0,0,0,'$description',
        '$supporting_dir','$date','$time')";
 
     $statement = $con->prepare($sql);
@@ -1186,27 +1186,27 @@ class main
     $user_ID = $_SESSION['user'];
     $date = date("Y-M-D");
     $time = date("H:i:s");
-    $pdfType ="handover";
-   
+    $pdfType = "handover";
+
     global $con;
 
 
-    $sql="INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
+    $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
     `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
     ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
-    
+
     $statement = $con->prepare($sql);
     $statement->execute();
-    
+
     // update stock in available quantity by subtracting assigned quantity with available 
 
-       
+
 
     // create PDF file for assigned seed
 
     header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
-   
-    
+
+
 
     // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
     // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
@@ -1227,13 +1227,24 @@ class main
     // </script>");
   }
 
-  function handover_conformation($receive_id,$received_name, $file_directory, $grade_id)
+  function handover_conformation($receive_id, $received_name, $file_directory, $grade_id, $passed_quantity, $stock_in_ID)
   {
     global $con;
 
-    $sql="UPDATE `grading` SET `received_ID`='$receive_id',
+    $sql = "UPDATE `grading` SET `received_ID`='$receive_id',
     `received_name`='$received_name',`status`='unprocessed',
     `file_directory`='$file_directory' WHERE `grade_ID`='$grade_id'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    echo ("<script> alert('$grade_id');
+                                </script>");
+
+
+    // updating stock in proceessed quantity field when hand over is complete 
+
+
+    $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
     $statement = $con->prepare($sql);
     $statement->execute();
   }

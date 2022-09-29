@@ -239,6 +239,8 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                                      used_quantity INT,
                                      available_quantity INT,
                                      processed_quantity INT,
+                                     grade_outs_quantity INT,
+                                     trash_quantity INT,
                                      description varchar(100),
                                      supporting_dir varchar(100),
                                      date varchar(100),

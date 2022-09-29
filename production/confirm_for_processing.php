@@ -7,12 +7,14 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-
-$stock_in_ID = $_GET['stock_in_id'];
+$stock_in = $_GET['stock_in'];
+$grade_ID = $_GET['grade_id'];
 $crop = $_GET['crop'];
 $variety = $_GET['variety'];
 $class = $_GET['class'];
 $quantity = $_GET['quantity'];
+$received_ID = $_GET['user_ID'];
+$received_name = $_GET['user_name'];
 
 
 if (empty($test)) {
@@ -514,9 +516,10 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">
+                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">  
+                                            <!-- // " -->
                                                 <div class="card-header">
-                                                    <h5>Stock in details </h5>
+                                                    <h5>Seed details </h5>
 
                                                     <div class="card-header-right">
                                                         <ul class="list-unstyled card-option">
@@ -534,8 +537,8 @@ if (empty($test)) {
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary ">stock in ID</label>
-                                                            <select class="form-control" name="stock_in_id">
-                                                                <option value="<?php echo $stock_in_ID; ?>"><?php echo $stock_in_ID; ?></option>
+                                                            <select class="form-control" name="grade_id">
+                                                                <option value="<?php echo $grade_ID; ?>"><?php echo $grade_ID; ?></option>
                                                             </select>
 
 
@@ -591,7 +594,7 @@ if (empty($test)) {
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary ">Stock In Date</label>
-                                                            <select class="form-control" name="quantity">
+                                                            <select class="form-control" name="">
                                                                 <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
                                                             </select>
 
@@ -678,6 +681,12 @@ if (empty($test)) {
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <input type="file" id="conformation_file" class="form-control" name="conformation_file" placeholder="-" require="">
+                                                    <input type="hidden" name="grade" value="<?php echo $grade_ID; ?>">
+                                                    <input type="hidden" name="receive_id" value="<?php echo $received_ID; ?>">
+                                                    <input type="hidden" name="receive_name" value="<?php echo $received_name; ?>">
+                                                    <input type="hidden" name="passed_quantity" value="<?php echo $quantity; ?>">
+                                                    <input type="hidden" name="stock_in_ID" value="<?php echo $stock_in; ?>">
+                                                    
                                                 </div>
                                             </div>
 
@@ -856,16 +865,20 @@ if (isset($_FILES['conformation_file'])) {
 }
 
 if (isset($_POST['confirm'])) {
+ 
+        $object = new main();
+        $grade_id = $_POST['grade'];
+        $id = $_POST['receive_id'];
+        $name = $_POST['receive_name'];
+        $passed_quantity= $_POST['passed_quantity'];
+        $stock_in = $_POST['stock_in_ID'];
+        $object -> handover_conformation($id,$name,$newfilename,$grade_id,$passed_quantity,$stock_in);
 
+      
+  
 
+  
 
-
-    echo ("<script> alert('working');
-    </script>");
-
-
-    // $object = new main();
-    // $object -> assign_prcessing_quantity($_POST['stock_in_id'],$_POST['assign_quantity']);
 
 }
 
