@@ -552,10 +552,10 @@ if (in_array($position, $restricted)) {
 
 
                                                             $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,user.user_ID,
-                                                            `assigned_quantity`,crop.crop,variety.variety,stock_in.class,stock_in.stock_in_ID FROM `grading`
+                                                            `assigned_quantity`,crop.crop,variety.variety,stock_in.class,stock_in.stock_in_ID FROM `grading` 
                                                            INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
                                                             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN user ON user.user_ID = grading.assigned_by
-                                                            INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID;";
+                                                            INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE grading.status ='unconfirmed';";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -615,11 +615,97 @@ if (in_array($position, $restricted)) {
 
                                             </div>
                                         </div>
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Unprocessed seed </h5>
+                                                <span> Graded new stock</span>
+
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Assigned Quantity</th>
+                                                                <th>Availables Quantity</th>
+                                                                <th>Grower name</th>
+                                                                <th>Assigned by</th>
+                                                                <th>Received date</th>
+                                                                <th>Received time</th>
+                                                                <th>Action</th>
+                                                                
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <?php
+
+                                                           $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`,
+                                                           grading.available_quantity, user.fullname,creditor.name FROM `grading`
+                                                           INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID INNER JOIN 
+                                                           creditor ON stock_in.creditor_ID = creditor.creditor_ID 
+                                                           INNER JOIN user ON user.user_ID = grading.assigned_by";
+                                                            
+                                                          
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    $grade_id = $row['grade_ID'];
+                                                                    $assigned_date = $row['assigned_date'];
+                                                                    $assigned_time = $row['assigned_time'];
+                                                                    $assigned_quantity= $row['assigned_quantity'];
+                                                                    $available_quantity = $row['available_quantity'];
+                                                                    $assigned_by = $row['fullname'];
+                                                                    $grower_name = $row['name'];
+                                                                   
+
+
+
+
+
+                                                                    echo "
+											<tr class='odd gradeX'>
+                                                 <td>$grade_id</td>
+											    <td>$assigned_quantity kg</td>
+												<td>$available_quantity</td>
+												<td>$grower_name</td>
+												<td>$assigned_by</td>
+                                                <td>$assigned_date</td>
+                                                <td>$assigned_time</td>
+                                                
+                                                
+                                               
+												
+												
+												<td><a href='view_registered_users.php' class='btn btn-primary'>Process</a>
+                                                
+                                                </td>
+											</tr>	
+										";
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Graded stock</h5>
-                                                <span>view graded stock</span>
+                                                <h5>Active</h5>
+                                                <span>Grading in prograce</span>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
