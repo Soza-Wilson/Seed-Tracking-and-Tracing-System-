@@ -1184,7 +1184,7 @@ class main
 
     $grade_ID = $this->generate_user("grade_seed");
     $user_ID = $_SESSION['user'];
-    $date = date("Y-M-D");
+    $date = date("Y-m-d");
     $time = date("H:i:s");
     $pdfType = "handover";
 
@@ -1193,7 +1193,7 @@ class main
 
     $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
     `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
-    ('$grade_ID','$date','$time','$assigned_quantity','0','0','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
+    ('$grade_ID','$date','$time','$assigned_quantity','0','$assigned_quantity','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
 
     $statement = $con->prepare($sql);
     $statement->execute();
@@ -1247,7 +1247,7 @@ class main
     $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
     $statement = $con->prepare($sql);
     $statement->execute();
-  }
+   }
 
 
 

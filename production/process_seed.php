@@ -655,7 +655,7 @@ if (in_array($position, $restricted)) {
                                                            grading.available_quantity, user.fullname,creditor.name FROM `grading`
                                                            INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID INNER JOIN 
                                                            creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                                                           INNER JOIN user ON user.user_ID = grading.assigned_by";
+                                                           INNER JOIN user ON user.user_ID = grading.assigned_by WHERE grading.status ='unprocessed'";
                                                             
                                                           
                                                             $result = $con->query($sql);
@@ -678,7 +678,7 @@ if (in_array($position, $restricted)) {
 											<tr class='odd gradeX'>
                                                  <td>$grade_id</td>
 											    <td>$assigned_quantity kg</td>
-												<td>$available_quantity</td>
+												<td>$available_quantity kg</td>
 												<td>$grower_name</td>
 												<td>$assigned_by</td>
                                                 <td>$assigned_date</td>
