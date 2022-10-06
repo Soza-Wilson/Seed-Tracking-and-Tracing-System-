@@ -571,7 +571,8 @@ if (in_array($position, $restricted)) {
                                                                     $assigned_time = $row['assigned_time'];
                                                                     $assigned_by = $row['fullname'];
                                                                  
-                                                                   
+                                                                   $object = new main();
+                                                                   $new_date = $object->change_date_format($assigned_date);
                                                                     
 
 
@@ -585,7 +586,7 @@ if (in_array($position, $restricted)) {
 												<td>$variety</td>
 												<td>$class</td>
 												<td>$quantity</td>
-                                                <td>$assigned_date</td>
+                                                <td>$new_date</td>
                                                 <td>$assigned_time</td>
                                                 <td>$assigned_by</td>
                                                 

@@ -1310,7 +1310,14 @@ class main
 
 
 
+///change date format from yyyy-mm-dd to dd-mm-yyyy
 
+  function change_date_format($date)
+  {
+    $date = date_create($date);
+    $date = date_format($date, "d-m-Y");
+    return $date;
+  }
 
 
   function register_inspection()
