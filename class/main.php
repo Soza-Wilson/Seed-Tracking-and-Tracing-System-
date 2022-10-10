@@ -1253,6 +1253,15 @@ class main
 
 
 
+   // clean and process seed
+
+    function process_seed($grade_ID,$type)
+
+   "SELECT `process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID` FROM `process_seed` WHERE 1"
+
+
+
+
 
 
 
@@ -1319,7 +1328,7 @@ class main
     return $date;
   }
 
-
+  
   function register_inspection()
   {
 

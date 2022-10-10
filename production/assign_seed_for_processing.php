@@ -512,115 +512,107 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
+                                        
                                         <div class="card">
-                                            <div class="card-header">
+                                            <form action="grade_seed.php" method="POST">
+                                                <div class="card-header">
+                                                    <h5>Seed details </h5>
 
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Seed Handover</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Assigned Seed</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>GradeID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Assigned Quantity</th>
-                                                              
-                                                                <th>Assigned Date</th>
-                                                                <th>Assigned TIme/th>
-                                                                <th>Assigned by</th>
-                                                                <th>Action</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
+                                                    <div class="card-header-right">
+                                                        <ul class="list-unstyled card-option">
+                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="form-group row">
 
 
-                                                            $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,user.user_ID,
-                                                            `assigned_quantity`,crop.crop,variety.variety,stock_in.class,stock_in.stock_in_ID FROM `grading` 
-                                                           INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
-                                                            INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN user ON user.user_ID = grading.assigned_by
-                                                            INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE grading.status ='unconfirmed';";
+                                                        <span class="pcoded-mcaret"></span>
 
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $user_ID= $row['user_ID'];
-                                                                    $grade_ID = $row['grade_ID'];
-                                                                    $stock_in_id = $row['stock_in_ID'];
-                                                                    $crop      = $row['crop'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $quantity     = $row['assigned_quantity'];
-                                                                    $assigned_date = $row['assigned_date'];
-                                                                    $assigned_time = $row['assigned_time'];
-                                                                    $assigned_by = $row['fullname'];
-                                                                 
-                                                                   $object = new main();
-                                                                   $new_date = $object->change_date_format($assigned_date);
-                                                                    
+                                                        <div class="col-sm-3">
+                                                            <label class="badge badge-primary ">ID</label>
+                                                            <select class="form-control" name="stock_in_id">
+                                                                <option value="<?php echo $_GET['grade_id']; ?>"><?php echo $_GET['grade_id']; ?></option>
+                                                            </select>
 
 
 
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$grade_ID</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$quantity</td>
-                                                <td>$new_date</td>
-                                                <td>$assigned_time</td>
-                                                <td>$assigned_by</td>
-                                                
-                                               
-												
-												
-												<td><a href='confirm_for_processing.php? grade_id=$grade_ID & stock_in=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$assigned_by & user_ID=$user_ID' class='btn btn-primary'> view</a>
-                                                
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
                                                         </div>
 
-                                                    </div>
-                                                </div>
 
-                                            </div>
+                                                        <div class="col-sm-3">
+
+                                                            <label class="badge badge-primary ">Crop</label>
+                                                            <select class="form-control" name="crop">
+                                                                <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+
+
+                                                        <div class="col-sm-3">
+
+                                                            <label class="badge badge-primary ">Variety</label>
+                                                            <select class="form-control" name="variety">
+                                                                <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety']; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+                                                        
+
+
+
+                                                        <div class="col-sm-3">
+                                                            <label class="badge badge-primary ">Available Quantity</label>
+                                                            <select class="form-control" name="quantity">
+                                                                <option value="<?php echo $_GET['available_quantity']; ?>"><?php echo $_GET['available_quantity']; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+                                                        
+
+                                                        
+
+
+
+
+                                                        <div class="card-block">
+
+
+
+                                           
+
+
                                         </div>
+
+
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+
+                            
+
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Unprocessed seed </h5>
-                                                <span> Graded new stock</span>
-
+                                                <h5>Process seed </h5>
+                                           
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -630,167 +622,87 @@ if (in_array($position, $restricted)) {
                                                         <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>Assigned Quantity</th>
-                                                                <th>Availables Quantity</th>
-                                                                <th>Grower name</th>
-                                                                <th>Assigned by</th>
-                                                                <th>Received date</th>
-                                                                <th>Received time</th>
-                                                                <th>Action</th>
-                                                                
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+    </br>
 
-                                                            <?php
-
-                                                           $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`,
-                                                            grading.available_quantity,crop.crop,variety.variety, user.fullname,creditor.name
-                                                             FROM `grading` INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
-                                                              INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON 
-                                                              variety.variety_ID = stock_in.variety_ID INNER JOIN creditor ON 
-                                                              stock_in.creditor_ID = creditor.creditor_ID INNER JOIN user
-                                                               ON user.user_ID = grading.assigned_by WHERE grading.status ='unprocessed'";
-                                                            
-                                                          
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $grade_id = $row['grade_ID'];
-                                                                    $assigned_date = $row['assigned_date'];
-                                                                    $assigned_time = $row['assigned_time'];
-                                                                    $assigned_quantity= $row['assigned_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $assigned_by = $row['fullname'];
-                                                                    $grower_name = $row['name'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety = $row['variety'];
-                                                                    $grading_type = "cleaning";
-                                                                    $object = new main();
-                                                                    $new_date = $object->change_date_format($assigned_date);
-
-
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$grade_id</td>
-											    <td>$assigned_quantity kg</td>
-												<td>$available_quantity kg</td>
-												<td>$grower_name</td>
-												<td>$assigned_by</td>
-                                                <td>$new_date</td>
-                                                <td>$assigned_time</td>
-                                                
-                                                
-                                               
-												
-												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type'  class='btn btn-primary'>Process</a>
-                                                
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
+    <span>--</span>
+                                                <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Process type:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" value="<?php echo $_GET['grading_type']; ?>" require="">
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Assign quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Grade Outs quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                </div>
+                                            </div>
+
+
+
+                                                <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Trash quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                </div>
+                                            </div>
+
+
+                                                <div class="form-group row">
+                                                
+
+
+
+
+
+
+                                                </br></br></br>
+
+
+                                                <div>
+
+                                                </div>
+
+                                                <br>
+                                                .
+                                                <div class="form-group">
+
+
+                                                    <input type="submit" name="assign_seed" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                    <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+                                                </div>
+
+
+
+
+
+                                                </form>
+
+
+
+                                            </div>
+                                            </div>
+                                            
                                         </div>
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Active</h5>
-                                                <span>Grading in progress</span>
-
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Grade ID</th>
-                                                                <th>Stock in ID</th>
-                                                                <th>Grade out Quantity</th>
-                                                                <th>Trash quantity</th>
-                                                                <th>Added by</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
-                                                                
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-                                                           $sql="SELECT `grade_ID`,user.fullname,`date`,`time`,`grade_out_quantity`,`trash_quantity`,`stock_in_ID` FROM `grading` INNER JOIN user ON grading.user_ID = user.user_ID";
-                                                            
-                                                          
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $grade_id = $row['grade_ID'];
-                                                                    $stock_in_id = $row['grade_ID'];
-                                                                    $user = $row['fullname'];
-                                                                    $date = $row['date'];
-                                                                    $time = $row['time'];
-                                                                    $grade_out_quantity = $row['grade_out_quantity'];
-                                                                    $trash_quantity = $row['trash_quantity'];
-
-
-
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$grade_id</td>
-											    <td>$stock_in_id</td>
-												<td>$grade_out_quantity</td>
-												<td>$trash_quantity</td>
-												<td>$user</td>
-                                                <td>$date</td>
-                                                <td>$time</td>
-                                                
-                                                
-                                               
-												
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                         <!-- Background Utilities table end -->
                                     </div>

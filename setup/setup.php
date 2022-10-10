@@ -276,26 +276,32 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
 
   $sql = "CREATE TABLE process_seed(process_ID varchar(100) PRIMARY KEY,
                                   assigned_quantity INT, 
-                                  trash_quantity INT, 
-                                  grade_outs_quantity INT,
-                                  processed_quantity INT, 
-                                  process_type varchar(100),
                                   processed_date date,
                                   processed_time varchar(100),
-                                  stock_in_ID varchar(100),
+                                  grade_ID varchar(100),
                                   user_ID varchar(100),
                                   FOREIGN KEY(user_ID) REFERENCES user(user_ID),
-                                  FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID)
+                                  FOREIGN KEY(grade_ID) REFERENCES grading(grade_ID)
 
                   
                                   )";
 
 
   mysqli_query($con, $sql);
+  
+  // process type table 
 
-  // mysqli_query($con, $sql);
+  $sql = "CREATE TABLE process_type(process_type_ID varchar(100) PRIMARY KEY,
+                                    process_ID varchar(100),
+                                    grade_outs_quantity INT,
+                                    processed_quantity INT, 
+                                    trash_quantity INT, 
+                                    process_type varchar(100),
+                                    FOREIGN KEY(process_ID) REFERENCES process_seed(process_ID))";
+   mysqli_query($con, $sql);
 
 
+         /// instection 
 
   $sql = "CREATE TABLE inspection( inspection_ID varchar(100) PRIMARY KEY,
    date varchar(100),
