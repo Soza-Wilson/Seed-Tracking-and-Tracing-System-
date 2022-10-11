@@ -514,7 +514,7 @@ if (in_array($position, $restricted)) {
 
                                         
                                         <div class="card">
-                                            <form action="grade_seed.php" method="POST">
+                                            <form action="assign_seed_for_processing.php" method="POST">
                                                 <div class="card-header">
                                                     <h5>Seed details </h5>
 
@@ -527,6 +527,7 @@ if (in_array($position, $restricted)) {
                                                             <li><i class="fa fa-trash close-card"></i></li>
                                                         </ul>
                                                     </div>
+                                                    <form method="POST" action="assign_seed_for_processing.php">
                                                     <div class="form-group row">
 
 
@@ -534,7 +535,7 @@ if (in_array($position, $restricted)) {
 
                                                         <div class="col-sm-3">
                                                             <label class="badge badge-primary ">ID</label>
-                                                            <select class="form-control" name="stock_in_id">
+                                                            <select class="form-control" name="grade_id">
                                                                 <option value="<?php echo $_GET['grade_id']; ?>"><?php echo $_GET['grade_id']; ?></option>
                                                             </select>
 
@@ -573,7 +574,7 @@ if (in_array($position, $restricted)) {
 
                                                         <div class="col-sm-3">
                                                             <label class="badge badge-primary ">Available Quantity</label>
-                                                            <select class="form-control" name="quantity">
+                                                            <select class="form-control" name="assigned_quantity">
                                                                 <option value="<?php echo $_GET['available_quantity']; ?>"><?php echo $_GET['available_quantity']; ?></option>
                                                             </select>
 
@@ -631,7 +632,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Process type:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" value="<?php echo $_GET['grading_type']; ?>" require="">
+                                                    <input type="text" id="type" class="form-control" name="type" value="<?php echo $_GET['grading_type']; ?>" require="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -639,7 +640,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Assign quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="text" id="assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
                                                 </div>
                                             </div>
 
@@ -648,7 +649,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Grade Outs quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" placeholder="-" require="">
                                                 </div>
                                             </div>
 
@@ -659,7 +660,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Trash quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" placeholder="-" require="">
                                                 </div>
                                             </div>
 
@@ -684,8 +685,8 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group">
 
 
-                                                    <input type="submit" name="assign_seed" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
-                                                    <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+                                                    <input type="submit" name="process_seed" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                    <input type="submit" name="cancle" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
 
@@ -786,3 +787,13 @@ if (in_array($position, $restricted)) {
 </body>
 
 </html>
+
+<?php
+if(isset($_POST['process_seed'])){
+
+   $object = new main();
+   $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+
+}
+
+?>

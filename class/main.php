@@ -1247,17 +1247,69 @@ class main
     $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
     $statement = $con->prepare($sql);
     $statement->execute();
-   }
+  }
 
 
 
 
 
-   // clean and process seed
+  // clean and process seed
 
-    function process_seed($grade_ID,$type)
+  function process_seed($grade_ID,$type,$assigned_quantity, $grade_outs_quantity, $trash_quantity,$process_ID)
+  {
+      
+    $process_type_ID = $this->generate_user("pr_type");
+    global $con;
 
-   "SELECT `process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID` FROM `process_seed` WHERE 1"
+    
+
+
+    if ($type == "cleaning") {
+
+      $process_ID = $this->generate_user("process");
+     
+      $user = $_SESSION['user'];
+      $process_date = date("Y-d-m");
+      $process_time = date("H:i:s");
+      
+      
+
+      $sql = "INSERT INTO `process_seed`(`process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID`) VALUES 
+        ('$process_ID','$assigned_quantity','$process_date','$process_time','$grade_ID','$user')";
+
+       $statement = $con->prepare($sql);
+       $statement->execute(); 
+  
+     
+      $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
+
+      $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
+      VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+    } else {
+
+      $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
+
+      $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
+      VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    }
+  }
+
+
+  function get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity)
+  {
+    $t =(int)$trash_quantity+(int)$grade_outs_quantity;
+    $processed_quantity = $assigned_quantity-$t; 
+    return $processed_quantity;
+  }
+
 
 
 
@@ -1319,7 +1371,7 @@ class main
 
 
 
-///change date format from yyyy-mm-dd to dd-mm-yyyy
+  ///change date format from yyyy-mm-dd to dd-mm-yyyy
 
   function change_date_format($date)
   {
@@ -1328,7 +1380,7 @@ class main
     return $date;
   }
 
-  
+
   function register_inspection()
   {
 

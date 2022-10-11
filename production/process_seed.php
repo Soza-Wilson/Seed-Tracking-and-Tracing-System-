@@ -728,11 +728,11 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Grade ID</th>
-                                                                <th>Stock in ID</th>
-                                                                <th>Grade out Quantity</th>
-                                                                <th>Trash quantity</th>
-                                                                <th>Added by</th>
+                                                                <th> ID</th>
+                                                                <th>Crop</th>
+                                                                <th>Variety</th>
+                                                                <th>Class</th>
+                                                                <th>Assigned Quantity</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>Action</th>
@@ -744,19 +744,24 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                           $sql="SELECT `grade_ID`,user.fullname,`date`,`time`,`grade_out_quantity`,`trash_quantity`,`stock_in_ID` FROM `grading` INNER JOIN user ON grading.user_ID = user.user_ID";
+                                                           $sql="SELECT `process_ID`,`crop`,`variety`,`class`, process_seed.assigned_quantity,
+                                                                         `processed_date`, `processed_time` FROM `process_seed` INNER JOIN
+                                                                          grading ON process_seed.grade_ID = grading.grade_ID INNER JOIN 
+                                                                             stock_in ON stock_in.stock_in_ID = grading.stock_in_ID INNER JOIN 
+                                                                             crop ON stock_in.crop_ID = crop.crop_ID INNER JOIN
+                                                                              variety ON stock_in.variety_ID = variety.variety_ID;";
                                                             
                                                           
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $grade_id = $row['grade_ID'];
-                                                                    $stock_in_id = $row['grade_ID'];
-                                                                    $user = $row['fullname'];
-                                                                    $date = $row['date'];
-                                                                    $time = $row['time'];
-                                                                    $grade_out_quantity = $row['grade_out_quantity'];
-                                                                    $trash_quantity = $row['trash_quantity'];
+                                                                    $process_id = $row['process_ID'];
+                                                                    $crop = $row['crop'];
+                                                                    $variety = $row['variety'];
+                                                                    $class = $row['class'];
+                                                                    $assigned_quantity = $row['assigned_quantity'];
+                                                                    $process_date = $row['processed_date'];
+                                                                    $process_time = $row['processed_time'];
 
 
 
@@ -764,21 +769,19 @@ if (in_array($position, $restricted)) {
 
                                                                     echo "
 											<tr class='odd gradeX'>
-                                                 <td>$grade_id</td>
-											    <td>$stock_in_id</td>
-												<td>$grade_out_quantity</td>
-												<td>$trash_quantity</td>
-												<td>$user</td>
-                                                <td>$date</td>
-                                                <td>$time</td>
+                                                 <td>$process_id</td>
+											    <td>$crop</td>
+												<td>$variety</td>
+												<td>$class</td>
+												<td>$assigned_quantity</td>
+                                                <td>$process_date</td>
+                                                <td>$process_time</td>
                                                 
                                                 
                                                
 												
 												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type'  class='btn btn-success'>Process</a>
                                                 
                                                 </td>
 											</tr>	
