@@ -640,7 +640,17 @@ if (in_array($position, $restricted)) {
                                                     <label>Assign quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="text" id="assign_quantity" class="form-control" name="assign_quantity" value="<?php
+                                                     if(empty($_GET['processed_quantity'])){
+                                                     echo"-";
+
+                                                     }
+                                                     else{
+
+                                                        echo $_GET['processed_quantity'];
+                                                     }
+                                                    
+                                                    ?>" require="">
                                                 </div>
                                             </div>
 
@@ -650,6 +660,7 @@ if (in_array($position, $restricted)) {
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" placeholder="-" require="">
+                                                    <input type="hidden" name="process_id" value="<?php echo $_GET['process_id'];?>">
                                                 </div>
                                             </div>
 
@@ -790,9 +801,20 @@ if (in_array($position, $restricted)) {
 
 <?php
 if(isset($_POST['process_seed'])){
+    $object = new main();
 
-   $object = new main();
-   $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+    if(empty($_GET['process_id'])){
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+
+    }
+    else{
+
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['process_id']);
+
+    }
+
+  
+  
 
 }
 

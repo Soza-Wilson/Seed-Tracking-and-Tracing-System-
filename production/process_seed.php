@@ -673,7 +673,7 @@ if (in_array($position, $restricted)) {
                                                                     $grower_name = $row['name'];
                                                                     $crop = $row['crop'];
                                                                     $variety = $row['variety'];
-                                                                    $grading_type = "cleaning";
+                                                                    $grading_type = "Cleaning";
                                                                     $object = new main();
                                                                     $new_date = $object->change_date_format($assigned_date);
 
@@ -694,7 +694,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type'  class='btn btn-primary'>Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & assigned_quantity=$assigned_quantity'  class='btn btn-primary'>Process</a>
                                                 
                                                 </td>
 											</tr>	
@@ -732,7 +732,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Crop</th>
                                                                 <th>Variety</th>
                                                                 <th>Class</th>
-                                                                <th>Assigned Quantity</th>
+                                                                <th>Cleaned Quantity</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>Action</th>
@@ -744,12 +744,13 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                           $sql="SELECT `process_ID`,`crop`,`variety`,`class`, process_seed.assigned_quantity,
-                                                                         `processed_date`, `processed_time` FROM `process_seed` INNER JOIN
-                                                                          grading ON process_seed.grade_ID = grading.grade_ID INNER JOIN 
-                                                                             stock_in ON stock_in.stock_in_ID = grading.stock_in_ID INNER JOIN 
-                                                                             crop ON stock_in.crop_ID = crop.crop_ID INNER JOIN
-                                                                              variety ON stock_in.variety_ID = variety.variety_ID;";
+                                                           $sql="SELECT `process_type_ID`,process_type.process_ID,`crop`,`variety`,`class`,process_seed.processed_date,process_seed.processed_time,process_type.process_ID,
+                                                            process_type.grade_outs_quantity, process_type.processed_quantity, process_type.trash_quantity 
+                                                            FROM `process_type` INNER JOIN process_seed ON process_type.process_ID = process_seed.process_ID
+                                                             INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID
+                                                            INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
+                                                             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN
+                                                              variety ON stock_in.variety_ID = variety.variety_ID";
                                                             
                                                           
                                                             $result = $con->query($sql);
@@ -759,7 +760,9 @@ if (in_array($position, $restricted)) {
                                                                     $crop = $row['crop'];
                                                                     $variety = $row['variety'];
                                                                     $class = $row['class'];
-                                                                    $assigned_quantity = $row['assigned_quantity'];
+                                                                    $assigned_quantity = $row['processed_quantity'];
+                                                                    $process_ID = $row['process_ID'];
+                                                                    $grading_type = "Processing";
                                                                     $process_date = $row['processed_date'];
                                                                     $process_time = $row['processed_time'];
 
@@ -781,7 +784,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type'  class='btn btn-success'>Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & processed_quantity=$assigned_quantity & process_id=$process_ID'  class='btn btn-success'>Process</a>
                                                 
                                                 </td>
 											</tr>	
