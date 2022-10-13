@@ -1292,6 +1292,9 @@ class main
 
     } else {
 
+      
+ 
+
       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
 
       $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 

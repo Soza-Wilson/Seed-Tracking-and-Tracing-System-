@@ -14,7 +14,7 @@ if (empty($test)) {
     header('Location:../login.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician","warehouse_officer");
+$restricted = array("production_admin", "system_administrator", "lab_technician", "warehouse_officer");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -212,13 +212,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -336,7 +336,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="active">
+                                <li class="active">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -357,8 +357,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -398,8 +398,8 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -414,7 +414,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -528,58 +528,58 @@ if (in_array($position, $restricted)) {
                                                                 <h5 class="modal-title">Assigned Seed</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>GradeID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Assigned Quantity</th>
-                                                              
-                                                                <th>Assigned Date</th>
-                                                                <th>Assigned TIme/th>
-                                                                <th>Assigned by</th>
-                                                                <th>Action</th>
+                                                                <div class="card-block table-border-style">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>GradeID</th>
+                                                                                    <th>Crop</th>
+                                                                                    <th>Variety</th>
+                                                                                    <th>Class</th>
+                                                                                    <th>Assigned Quantity</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                                                    <th>Assigned Date</th>
+                                                                                    <th>Assigned TIme/th>
+                                                                                    <th>Assigned by</th>
+                                                                                    <th>Action</th>
 
-                                                            <?php
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <?php
 
 
-                                                            $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,user.user_ID,
+                                                                                $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,user.user_ID,
                                                             `assigned_quantity`,crop.crop,variety.variety,stock_in.class,stock_in.stock_in_ID FROM `grading` 
                                                            INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
                                                             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN user ON user.user_ID = grading.assigned_by
                                                             INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE grading.status ='unconfirmed';";
 
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $user_ID= $row['user_ID'];
-                                                                    $grade_ID = $row['grade_ID'];
-                                                                    $stock_in_id = $row['stock_in_ID'];
-                                                                    $crop      = $row['crop'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $quantity     = $row['assigned_quantity'];
-                                                                    $assigned_date = $row['assigned_date'];
-                                                                    $assigned_time = $row['assigned_time'];
-                                                                    $assigned_by = $row['fullname'];
-                                                                 
-                                                                   $object = new main();
-                                                                   $new_date = $object->change_date_format($assigned_date);
-                                                                    
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $user_ID = $row['user_ID'];
+                                                                                        $grade_ID = $row['grade_ID'];
+                                                                                        $stock_in_id = $row['stock_in_ID'];
+                                                                                        $crop      = $row['crop'];
+                                                                                        $variety     = $row['variety'];
+                                                                                        $class     = $row['class'];
+                                                                                        $quantity     = $row['assigned_quantity'];
+                                                                                        $assigned_date = $row['assigned_date'];
+                                                                                        $assigned_time = $row['assigned_time'];
+                                                                                        $assigned_by = $row['fullname'];
+
+                                                                                        $object = new main();
+                                                                                        $new_date = $object->change_date_format($assigned_date);
 
 
 
 
 
-                                                                    echo "
+
+                                                                                        echo "
 											<tr class='odd gradeX'>
                                                  <td>$grade_ID</td>
 											    <td>$crop</td>
@@ -598,13 +598,13 @@ if (in_array($position, $restricted)) {
                                                 </td>
 											</tr>	
 										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -644,7 +644,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Received date</th>
                                                                 <th>Received time</th>
                                                                 <th>Action</th>
-                                                                
+
 
                                                             </tr>
                                                         </thead>
@@ -652,22 +652,22 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                           $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`,
+                                                            $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`,
                                                             grading.available_quantity,crop.crop,variety.variety, user.fullname,creditor.name
                                                              FROM `grading` INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
                                                               INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON 
                                                               variety.variety_ID = stock_in.variety_ID INNER JOIN creditor ON 
                                                               stock_in.creditor_ID = creditor.creditor_ID INNER JOIN user
                                                                ON user.user_ID = grading.assigned_by WHERE grading.status ='unprocessed'";
-                                                            
-                                                          
+
+
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
                                                                     $grade_id = $row['grade_ID'];
                                                                     $assigned_date = $row['assigned_date'];
                                                                     $assigned_time = $row['assigned_time'];
-                                                                    $assigned_quantity= $row['assigned_quantity'];
+                                                                    $assigned_quantity = $row['assigned_quantity'];
                                                                     $available_quantity = $row['available_quantity'];
                                                                     $assigned_by = $row['fullname'];
                                                                     $grower_name = $row['name'];
@@ -736,7 +736,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>Action</th>
-                                                                
+
 
                                                             </tr>
                                                         </thead>
@@ -744,15 +744,19 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                           $sql="SELECT `process_type_ID`,process_type.process_ID,`crop`,`variety`,`class`,process_seed.processed_date,process_seed.processed_time,process_type.process_ID,
-                                                            process_type.grade_outs_quantity, process_type.processed_quantity, process_type.trash_quantity 
-                                                            FROM `process_type` INNER JOIN process_seed ON process_type.process_ID = process_seed.process_ID
-                                                             INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID
-                                                            INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
-                                                             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN
-                                                              variety ON stock_in.variety_ID = variety.variety_ID";
-                                                            
-                                                          
+                                                            $sql = "SELECT `process_type_ID`,process_type.process_ID,`crop`,
+                                                           `variety`,`class`,process_seed.processed_date,process_seed.processed_time,
+                                                           process_type.process_ID, process_type.grade_outs_quantity, 
+                                                           process_type.processed_quantity, process_type.trash_quantity
+                                                            FROM `process_type` INNER JOIN process_seed ON 
+                                                            process_type.process_ID = process_seed.process_ID
+                                                             INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID 
+                                                             INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
+                                                              INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN 
+                                                            variety ON stock_in.variety_ID = variety.variety_ID WHERE
+                                                           process_type.process_type = 'Cleaning'";
+
+
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {

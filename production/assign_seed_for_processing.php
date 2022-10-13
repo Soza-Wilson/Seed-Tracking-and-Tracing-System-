@@ -574,7 +574,7 @@ if (in_array($position, $restricted)) {
 
                                                         <div class="col-sm-3">
                                                             <label class="badge badge-primary ">Available Quantity</label>
-                                                            <select class="form-control" name="assigned_quantity">
+                                                            <select class="form-control" name="available_quantity">
                                                                 <option value="<?php echo $_GET['available_quantity']; ?>"><?php echo $_GET['available_quantity']; ?></option>
                                                             </select>
 
@@ -803,13 +803,15 @@ if (in_array($position, $restricted)) {
 if(isset($_POST['process_seed'])){
     $object = new main();
 
-    if(empty($_GET['process_id'])){
-        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+    if(empty($_POST['process_id'])){
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+
+       
+   
 
     }
-    else{
-
-        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assigned_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['process_id']);
+    else{ 
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['process_id']);
 
     }
 
