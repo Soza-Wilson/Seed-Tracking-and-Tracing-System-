@@ -769,8 +769,9 @@ if (in_array($position, $restricted)) {
                                                                     $grading_type = "Processing";
                                                                     $process_date = $row['processed_date'];
                                                                     $process_time = $row['processed_time'];
+                                                                    $passed_process_type_id = $row['process_type_ID'];
 
-
+                                                                    $new_date = $object->change_date_format($process_date);
 
 
 
@@ -781,14 +782,14 @@ if (in_array($position, $restricted)) {
 												<td>$variety</td>
 												<td>$class</td>
 												<td>$assigned_quantity</td>
-                                                <td>$process_date</td>
+                                                <td>$new_date</td>
                                                 <td>$process_time</td>
                                                 
                                                 
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & processed_quantity=$assigned_quantity & process_id=$process_ID'  class='btn btn-success'>Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & processed_quantity=$assigned_quantity & process_id=$process_ID & passed_process_type_id=$passed_process_type_id'  class='btn btn-success'>Process</a>
                                                 
                                                 </td>
 											</tr>	

@@ -1237,8 +1237,7 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    echo ("<script> alert('$grade_id');
-                                </script>");
+
 
 
     // updating stock in proceessed quantity field when hand over is complete 
@@ -1255,50 +1254,58 @@ class main
 
   // clean and process seed
 
-  function process_seed($grade_ID,$type,$assigned_quantity, $grade_outs_quantity, $trash_quantity,$process_ID)
+  function process_seed($grade_ID, $type, $assigned_quantity, $grade_outs_quantity, $trash_quantity,$available_quantity,$process_ID, $passed_process_type_id)
   {
-      
+
+
     $process_type_ID = $this->generate_user("pr_type");
     global $con;
 
-    
 
 
-    if ($type == "cleaning") {
+
+    if ($type == "Cleaning ") {
+
+
 
       $process_ID = $this->generate_user("process");
-     
+
       $user = $_SESSION['user'];
-      $process_date = date("Y-d-m");
+      $process_date = date("Y-m-d");
       $process_time = date("H:i:s");
-      
-      
+
+      // update available quantity in gr
+      $this->update_available_quantity_grading($grade_ID,$available_quantity,$assigned_quantity);
 
       $sql = "INSERT INTO `process_seed`(`process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID`) VALUES 
-        ('$process_ID','$assigned_quantity','$process_date','$process_time','$grade_ID','$user')";
-
-       $statement = $con->prepare($sql);
-       $statement->execute(); 
-  
-     
-      $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
-
-      $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
-      VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+          ('$process_ID','$assigned_quantity','$process_date','$process_time','$grade_ID','$user')";
 
       $statement = $con->prepare($sql);
       $statement->execute();
 
 
-    } else {
-
-      
- 
-
       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
 
       $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
-      VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+        VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    } else {
+
+      $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
+
+
+      // update cleaning status (i was lazy at the end)
+
+
+      $sql = "UPDATE `process_type` SET
+        `process_type`='Cleaning_done' WHERE `process_type_ID`='$passed_process_type_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
+        VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
 
       $statement = $con->prepare($sql);
       $statement->execute();
@@ -1308,11 +1315,22 @@ class main
 
   function get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity)
   {
-    $t =(int)$trash_quantity+(int)$grade_outs_quantity;
-    $processed_quantity = $assigned_quantity-$t; 
+    $t = (int)$trash_quantity + (int)$grade_outs_quantity;
+    $processed_quantity = (int)$assigned_quantity - $t;
     return $processed_quantity;
   }
 
+
+
+
+  function update_available_quantity_grading($grade_id, $available_quantity, $assigned_quantity)
+  {
+    $new_available_quantity = (int)$assigned_quantity - (int)$available_quantity;
+    $sql = "UPDATE `grading` SET `available_quantity`=' $new_available_quantity' WHERE `grade_ID`='$grade_id'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
 
 
 

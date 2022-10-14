@@ -632,7 +632,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Process type:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="type" class="form-control" name="type" value="<?php echo $_GET['grading_type']; ?>" require="">
+                                                    <input type="text" id="type" class="form-control" name="type" value="<?php echo $_GET['grading_type'];?>" require="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -661,6 +661,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="col-sm-12">
                                                     <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" placeholder="-" require="">
                                                     <input type="hidden" name="process_id" value="<?php echo $_GET['process_id'];?>">
+                                                    <input type="hidden" name="passed_process_type_id" value="<?php echo $_GET['passed_process_type_id'];?>">
                                                 </div>
                                             </div>
 
@@ -804,14 +805,14 @@ if(isset($_POST['process_seed'])){
     $object = new main();
 
     if(empty($_POST['process_id'])){
-        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],"-");
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['available_quantity'],"-","-");
 
        
    
 
     }
     else{ 
-        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['process_id']);
+        $object->process_seed($_POST['grade_id'],$_POST['type'],$_POST['assign_quantity'],$_POST['grade_outs_quantity'],$_POST['trash_quantity'],$_POST['available_quantity'],$_POST['process_id'],$_POST['passed_process_type_id']);
 
     }
 
