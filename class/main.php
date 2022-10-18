@@ -1291,6 +1291,12 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
+      $this->update_available_quantity_grading($grade_ID,$available_quantity,$assigned_quantity);
+
+       echo ("<script> alert('saved!');
+       window.location='process_seed.php';
+       </script>");
+     
     } else {
 
       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
@@ -1309,6 +1315,10 @@ class main
 
       $statement = $con->prepare($sql);
       $statement->execute();
+
+      echo ("<script> alert('saved!');
+      window.location='process_seed.php';
+      </script>");
     }
   }
 
@@ -1324,8 +1334,10 @@ class main
 
 
   function update_available_quantity_grading($grade_id, $available_quantity, $assigned_quantity)
-  {
-    $new_available_quantity = (int)$assigned_quantity - (int)$available_quantity;
+  {  
+
+    global $con;
+    $new_available_quantity = (int)$available_quantity - (int)$assigned_quantity;
     $sql = "UPDATE `grading` SET `available_quantity`=' $new_available_quantity' WHERE `grade_ID`='$grade_id'";
 
     $statement = $con->prepare($sql);
