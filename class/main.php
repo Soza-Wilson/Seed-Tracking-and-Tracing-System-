@@ -1306,7 +1306,7 @@ class main
 
 
       $sql = "UPDATE `process_type` SET
-        `process_type`='Cleaning_done' WHERE `process_type_ID`='$passed_process_type_id'";
+        `process_type`='Cleaning_' WHERE `process_type_ID`='$passed_process_type_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 

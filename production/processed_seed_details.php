@@ -8,6 +8,7 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$process_id = $_GET['process_id'];
 
 if (empty($test)) {
 
@@ -20,6 +21,7 @@ if (in_array($position, $restricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
+
 
 
 ?>
@@ -336,7 +338,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li>
+                                <li >
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -510,13 +512,11 @@ if (in_array($position, $restricted)) {
 
 
                                         <!-- Contextual classes table ends -->
-                                        <!-- Background Utilities table start -->
-
-
+                                        
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Processed seed </h5>
-                                                <span> View all processed seed</span>
+                                                <h5>Processing Type</h5>
+                                               
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -533,15 +533,13 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th> ID</th>
-                                                                <th>Grower Name</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
+                                                             
+                                                                <th>Process Type</th>
                                                                 <th>Processed Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
+                                                                <th>Grade Outs Quantity</th>
+                                                                <th>Trash Quantity</th>
+                                                               
+                                                                
 
 
                                                             </tr>
@@ -550,57 +548,41 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                            $sql = "SELECT `process_type_ID`,process_type.process_ID,`crop`,creditor.name,
-                                                            `variety`,`class`,process_seed.processed_date,process_seed.processed_time,
-                                                            process_type.process_ID, process_type.grade_outs_quantity, 
-                                                            process_type.processed_quantity, process_type.trash_quantity
-                                                             FROM `process_type` INNER JOIN process_seed ON 
-                                                             process_type.process_ID = process_seed.process_ID
-                                                              INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID 
-                                                              INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
-                                                               INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN 
-                                                             variety ON stock_in.variety_ID = variety.variety_ID INNER JOIN 
-                                                             creditor on stock_in.creditor_ID = creditor.creditor_ID WHERE
-                                                            process_type.process_type = 'Processing'";
+                                                            $sql = "SELECT `process_type_ID`, `process_ID`, `grade_outs_quantity`, 
+                                                            `processed_quantity`, `trash_quantity`, `process_type` FROM `process_type` WHERE 
+                                                            `process_ID`='$process_id' ORDER BY `process_type_ID` DESC";
 
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $process_id = $row['process_ID'];
-                                                                    $assigned_date = $row['processed_date'];
-                                                                    $assigned_time = $row['processed_time'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety = $row['variety'];
-                                                                    $class =$row['class'];
-                                                                    $processed_quantity = $row['processed_quantity'];
-                                                                    $grower_name = $row['name'];
-                                                                    $variety = $row['variety'];
-                                                                    $grading_type = "Cleaning";
+                                                                    $process_type = $row['process_type'];
+                                                                    $trash_quantity = $row['trash_quantity'];
+                                                                    $grade_outs_quantity = $row['grade_outs_quantity'];
+                                                                    $assigned_quantity = $row['processed_quantity'];
+                                                                   
+                                                                    
                                                                     $object = new main();
-                                                                    $new_date = $object->change_date_format($assigned_date);
+                                                                    
 
 
 
 
                                                                     echo "
 											<tr class='odd gradeX'>
-                                                 <td>$process_id</td>
-                                                 <td>$grower_name</td>
-                                                 <td>$crop</td>
-                                                 <td>$variety</td>
-                                                 <td>$class</td>
-											    <td>$processed_quantity kg</td>
-												<td>$new_date</td>
-                                                <td>$assigned_time</td>
+                                                 <td>$process_type</td>
+											    <td>$assigned_quantity kg</td>
+												<td>$grade_outs_quantity kg</td>
+												<td>$trash_quantity</td>
+												
                                                 
                                                 
                                                
 												
 												
 												
-                                                <td><a href='processed_seed_details.php? process_id=$process_id'  class='btn btn-success'>View</a>
-                                                </td>
+                                                
+                                               
 											</tr>	
 										";
                                                                 }
@@ -612,7 +594,140 @@ if (in_array($position, $restricted)) {
                                             </div>
                                         </div>
 
+                                        <div class="card">
 
+                                        <?php
+
+                                         $sql="SELECT `process_ID`, process_seed.assigned_quantity,creditor.name, `processed_date`, `processed_time` FROM `process_seed` 
+                                         INNER JOIN grading ON process_seed.grade_ID = process_seed.grade_ID 
+                                         INNER JOIN stock_in ON grading.stock_in_ID = stock_in.stock_in_ID
+                                        INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID WHERE `process_ID`='$process_id'";
+                                        
+
+                                        $result = $con->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $process_id = $row['process_ID'];
+                                                $name = $row['name'];
+                                                $assigned_quantity = $row['assigned_quantity'];
+                                                $processed_date = $row['processed_date'];
+                                                $processed_time = $row['processed_time'];
+                                                
+                                                $new_date = $object->change_date_format($processed_date);
+
+                                            }
+                                        }
+                                        
+                                        ?>
+                                            <div class="card-header">
+                                                <h5>Processed Seed Details </h5>
+                                           
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+
+    </br>
+
+    <span>--</span>
+                                                <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>ID:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="type" class="form-control" name="type" value="<?php echo $process_id; ?>" require="">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Grower name:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" value="<?php echo $name; ?>" require="">
+                                                    
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        
+
+
+
+                                                <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Assigned Quantity:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $assigned_quantity; ?> kg" require="">
+                                                </div>
+                                            </div>
+
+                                            
+                                             
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Process Date:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $new_date; ?>" require="">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Process Time:</label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $processed_time; ?>" require="">
+                                                </div>
+                                            </div>
+
+                                                <div class="form-group row">
+                                                
+
+
+
+
+
+
+                                                </br></br></br>
+
+
+                                                <div>
+
+                                                </div>
+
+                                                <br>
+                                                .
+                                                <div class="form-group">
+
+
+                                                  
+                                                    <input type="submit" name="cancle" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+                                                </div>
+
+
+
+
+
+                                                </form>
+
+
+
+                                            </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                        
 
                                         <!-- Background Utilities table end -->
                                     </div>
