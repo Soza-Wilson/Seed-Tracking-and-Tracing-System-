@@ -1181,42 +1181,95 @@ class main
 
   function assign_prcessing_quantity($stock_in_id, $assigned_quantity)
   {
+      
 
-    $grade_ID = $this->generate_user("grade_seed");
+    global $con;
+     $grade_ID = $this->generate_user("grade_seed");
     $user_ID = $_SESSION['user'];
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $pdfType = "handover";
+    $total_quantity= "";
+    $stock_in_quantity = "";
+    
 
-    global $con;
+    //Checking if all graded seed quantity are less than or equal to stock_in quantity
+
+    $sql="SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
+    INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$stock_in_id'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $total_quantity= $row['total_graded'];
+            $stock_in_quantity = $row['quantity'];
+            
+ 
+        }
+        // echo ("<script> alert('$total_quantity.$stock_in_quantity');
+        // window.location='process_seed.php';
+        // </script>");
+
+        $stock = (int)$stock_in_quantity;
+        $tota = (int)$total_quantity;
+
+        if ($stock > $total){
+          echo ("<script> alert('Seed can not be assigned for processing, quantinty exceeding available stock');
+          window.location='grading.php';
+           </script>");
+  
+  
+        }
+  
+        else{
+          $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
+          `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
+          ('$grade_ID','$date','$time','$assigned_quantity','0','$assigned_quantity','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
+      
+          $statement = $con->prepare($sql);
+          $statement->execute();
+      
+          // update stock in available quantity by subtracting assigned quantity with available 
+      
+      
+      
+          // create PDF file for assigned seed
+      
+          header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
+      
+      
+      
+          $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
+          ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
+      
+      
+      
+          // update stock in status and available quantity  
+      
+          $t_g_quantity = $grade_out_quantity + $trash_quantity;
+      
+  
+          
+        }
+      
+      }
 
 
-    $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
-    `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
-    ('$grade_ID','$date','$time','$assigned_quantity','0','$assigned_quantity','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
+      
+       
+      
+      
+    
 
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    // update stock in available quantity by subtracting assigned quantity with available 
-
+     
 
 
-    // create PDF file for assigned seed
+   
 
-    header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
-
-
-
-    // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
-    // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
+  
 
 
-
-    // // update stock in status and available quantity  
-
-    // $t_g_quantity = $grade_out_quantity + $trash_quantity;
-
+    
 
     // $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
 
@@ -1260,6 +1313,13 @@ class main
 
     $process_type_ID = $this->generate_user("pr_type");
     global $con;
+
+    //Check if all processed transaction are greater are not more than the stock in quantity 
+
+    $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
+
+
+
 
 
 
