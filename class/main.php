@@ -1326,7 +1326,7 @@ class main
         // echo("<script>$available_quantity</script>");
 
 
-
+    
 
     if ($type == "Cleaning ") {
 
@@ -1376,6 +1376,12 @@ class main
 
       $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
         VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      $sql ="UPDATE `stock_in` INNER JOIN grading ON grading.stock_in_ID = stock_in.stock_in_ID INNER JOIN process_seed ON
+       process_seed.grade_ID = grading.grade_ID SET stock_in.status = 'uncertified' WHERE process_seed.process_ID='$process_ID'";
 
       $statement = $con->prepare($sql);
       $statement->execute();
