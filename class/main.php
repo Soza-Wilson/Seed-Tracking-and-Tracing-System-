@@ -1211,10 +1211,16 @@ class main
         // </script>");
 
         $stock = (int)$stock_in_quantity;
-        $tota = (int)$total_quantity;
+        $total = (int)$total_quantity+(int)$assigned_quantity;
 
-        if ($stock > $total){
-          echo ("<script> alert('Seed can not be assigned for processing, quantinty exceeding available stock');
+
+       
+
+        if ($total>$stock){
+         
+            //echo ("<scriTY\t> alert('$stock.$total'); </script>");
+
+          echo ("<script> alert('Seed can not be assigned for processing, quantity exceeding available stock');
           window.location='grading.php';
            </script>");
   
@@ -1239,14 +1245,14 @@ class main
       
       
       
-          $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
-          ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
+          // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
+          // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
       
       
       
           // update stock in status and available quantity  
       
-          $t_g_quantity = $grade_out_quantity + $trash_quantity;
+          // $t_g_quantity = $grade_out_quantity + $trash_quantity;
       
   
           
@@ -1258,9 +1264,7 @@ class main
       
        
       
-      
     
-
      
 
 
@@ -1316,10 +1320,10 @@ class main
 
     //Check if all processed transaction are greater are not more than the stock in quantity 
 
-    $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
+   // $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
 
 
-
+        // echo("<script>$available_quantity</script>");
 
 
 
