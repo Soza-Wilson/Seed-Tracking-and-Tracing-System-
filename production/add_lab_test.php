@@ -841,6 +841,24 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Oil Content (%):</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Moisture Content (%):</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
                                                             <label class="badge badge-primary">Purity (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
