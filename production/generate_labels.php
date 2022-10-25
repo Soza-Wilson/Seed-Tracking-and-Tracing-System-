@@ -762,7 +762,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_ID" name="farm_ID" class="form-control">
 
-                                                                <option value="<?php echo $data[7]; ?>"><?php $_GET['farm_id'];; ?></option>
+                                                                <option value="<?php echo $data[7]; ?>"><?php  echo$_GET['farm']; ?></option>
 
 
 

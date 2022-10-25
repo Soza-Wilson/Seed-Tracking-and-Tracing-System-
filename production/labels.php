@@ -675,7 +675,7 @@ if (in_array($position, $restricted)) {
 												
 												
 												
-                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & farm_id=$time'  class='btn btn-success'>View</a>
+                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & farm=$farm_id'  class='btn btn-success'>View</a>
                                                 </td>
 											</tr>	
 										";
