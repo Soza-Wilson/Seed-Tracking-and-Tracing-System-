@@ -472,7 +472,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Process Seed</h5>
+                                            <h5 class="m-b-10">Generate Labels</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -483,7 +483,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#">dashboard</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Grade new stock</a>
+                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Generate Labels</a>
                                             </li>
 
                                         </ul>
@@ -512,11 +512,82 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
+                                        <div class="card">
 
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <label>Crop</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Variety</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label>To :</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Crop</option>
+                                                            <option value="all">all</option>
+                                                            <option value="credit">credit</option>
+                                                            <option value="debit">debit</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Variety </option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                    </div>
+
+
+                                                    <div class="col-sm-3">
+
+                                                        <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+
+                                                        <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Processed seed </h5>
-                                                <span> View all processed seed</span>
+                                                <h5>Available stock </h5>
+                                                <span> Select to generate labels</span>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -533,12 +604,12 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th> ID</th>
+                                                                <th>ID</th>
                                                                 <th>Grower Name</th>
                                                                 <th>Crop</th>
                                                                 <th>Variety</th>
                                                                 <th>Class</th>
-                                                                <th>Processed Quantity</th>
+
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>Action</th>
@@ -550,56 +621,61 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                            $sql = "SELECT `process_type_ID`,process_type.process_ID,`crop`,creditor.name,
-                                                            `variety`,`class`,process_seed.processed_date,process_seed.processed_time,
-                                                            process_type.process_ID, process_type.grade_outs_quantity, 
-                                                            process_type.processed_quantity, process_type.trash_quantity
-                                                             FROM `process_type` INNER JOIN process_seed ON 
-                                                             process_type.process_ID = process_seed.process_ID
-                                                              INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID 
-                                                              INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
-                                                               INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN 
-                                                             variety ON stock_in.variety_ID = variety.variety_ID INNER JOIN 
-                                                             creditor on stock_in.creditor_ID = creditor.creditor_ID WHERE
-                                                            process_type.process_type = 'Processing'";
+                                                            $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`,creditor.name,stock_in.time,
+                                                                `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,farm_ID,
+                                                                `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
+                                                                INNER JOIN user ON stock_in.user_ID = user.user_ID 
+                
+                                                                INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
+                                                                INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
+                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status='certified' ORDER BY `stock_in_ID` DESC";
 
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $process_id = $row['process_ID'];
-                                                                    $assigned_date = $row['processed_date'];
-                                                                    $assigned_time = $row['processed_time'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety = $row['variety'];
-                                                                    $class =$row['class'];
-                                                                    $processed_quantity = $row['processed_quantity'];
+                                                                    $stock_in_id = $row['stock_in_ID'];
+                                                                    $crop      = $row['crop'];
+                                                                    $source = $row['source'];
+                                                                    $source_name = $row['name'];
                                                                     $grower_name = $row['name'];
-                                                                    $variety = $row['variety'];
-                                                                    $grading_type = "Cleaning";
+                                                                    $variety     = $row['variety'];
+                                                                    $class     = $row['class'];
+                                                                    $quantity     = $row['quantity'];
+                                                                    $used_quantity = $row['used_quantity'];
+                                                                    $available_quantity = $row['available_quantity'];
+                                                                    $date_added = $row['date'];
+                                                                    $user = $row['fullname'];
+                                                                    $srn = $row['SLN'];
+                                                                    $dir = $row['supporting_dir'];
+                                                                    $time = $row['time'];
+                                                                    $farm_id =$row['farm_ID'];
+
                                                                     $object = new main();
-                                                                    $new_date = $object->change_date_format($assigned_date);
+                                                                    $new_date = $object->change_date_format($date_added);
+
 
 
 
 
                                                                     echo "
 											<tr class='odd gradeX'>
-                                                 <td>$process_id</td>
+                                                 <td>$stock_in_id</td>
                                                  <td>$grower_name</td>
                                                  <td>$crop</td>
                                                  <td>$variety</td>
                                                  <td>$class</td>
-											    <td>$processed_quantity kg</td>
+											   
 												<td>$new_date</td>
-                                                <td>$assigned_time</td>
+                                                <td>$time</td>
+                                              
                                                 
                                                 
                                                
 												
 												
 												
-                                                <td><a href='processed_seed_details.php? process_id=$process_id'  class='btn btn-success'>View</a>
+                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & farm_id=$time'  class='btn btn-success'>View</a>
                                                 </td>
 											</tr>	
 										";

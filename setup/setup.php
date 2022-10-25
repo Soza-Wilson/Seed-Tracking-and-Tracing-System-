@@ -433,6 +433,8 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 							                   variety_ID varchar(100),
                                  farm_ID varchar(100),
                                  germination_percentage varchar(100),
+                                 moisture_content varchar(100),
+                                 oil_content varchar(100),
                                  shelling_percentage varchar(100),
                                  purity_percentage varchar(100),
                                  defects_percentage varchar(100),

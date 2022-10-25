@@ -4,22 +4,13 @@
 
 Ob_start();
 include('../class/main.php');
+include('../class/production.php');
 session_start();
 
-$test = $_SESSION['fullname'];
-$position = $_SESSION['position'];
-
-if (empty($test)) {
-
-    header('Location:../login.php');
-}
-
-$restricted = array("production_admin", "system_administrator", "lab_technician", "warehouse_officer");
-
-if (in_array($position, $restricted)) {
-} else {
-    header('Location:../restricted_access/restricted_access.php');
-}
+$get_data = new production();
+//$ID = $_GET["ID"] ;
+//$data = $get_data -> get_test_details($ID);
+ 
 
 
 ?>
@@ -58,6 +49,78 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+          
+
+
+
+               
+
+
+
+               
+
+
+
+
+      
+
+
+            ////js code for sending  crop data and retrive certificate 
+
+            //retriving main certificate data 
+
+            $("#search_main_certificate").on("input", function() {
+
+                
+
+
+                var lab_certificate_value = $('#search_main_certificate').val();
+                var quantity_value = $('#farm_quantity').val();
+                var variety_value = $('#farm_variety').val();
+                var class_value = $('#farm_class').val();
+               
+                
+                $.post('farm_get_certificate.php', {
+                 lab_certificate_value: lab_certificate_value,
+                 quantity_value: quantity_value,
+                 variety_value: variety_value,
+                 class_value: class_value
+                }, function(data) {
+                    $('#main_certificate').html(data);
+
+                })
+
+            });
+
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+           
+
+     
+    </script>
+   
 </head>
 
 <body>
@@ -212,13 +275,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-
+                                    
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-
+                                    
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -287,8 +350,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
+                                <li>
+                                    <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
                                         <span class="pcoded-mcaret"></span>
@@ -296,15 +359,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li class="">
-                                    <a href="stock_out.php" class="waves-effect waves-dark">
+                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
                                         <span class="pcoded-mcaret"></span>
@@ -312,7 +367,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
+                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
@@ -336,14 +391,14 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li>
+                            <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="view_processed_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
@@ -351,19 +406,19 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li>
+                                <li class="active">
                                     <a href="labels.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>
-                            </ul>
+                                 </li>
+                                </ul> 
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
+                                    <a href="chart.html" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
                                         <span class="pcoded-mcaret"></span>
@@ -432,13 +487,12 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
-
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
 
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                <li class="">
+                                <li >
                                     <a href="new_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
@@ -446,22 +500,22 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="active_test.php" class="waves-effect waves-dark">
+                                <li class="">
+                                    <a href="new_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="test_history.php" class="waves-effect waves-dark">
+                                <li>
+                                    <a href="register_farm.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            </li>
+
                             </ul>
                         </div>
                     </nav>
@@ -472,7 +526,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Process Seed</h5>
+                                            <h5 class="m-b-10">Download Labels</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -483,7 +537,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#">dashboard</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Grade new stock</a>
+                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Download Labels</a>
                                             </li>
 
                                         </ul>
@@ -511,129 +565,274 @@ if (in_array($position, $restricted)) {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
+                                        <form action="lab_add_certificate.php" method="POST">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Download Labels </h5>
 
+
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+
+
+                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                   
+
+
+
+                                                    
+
+
+
+
+
+                                                </div>
+                                                
+
+
+                                                
+
+
+
+                                                <!--                                                                                                            /*
+add hybrid female crop certificate 
+*/   -->
+
+
+
+                                              
+
+                                                <div class="col-sm-12">
+
+                                                    <a href="add_certificate.php" class="btn btn-success">
+                                                       Download PDF file
+
+                                                    </a>
+
+                                                    <a href="add_certificate.php" class="btn btn-danger">
+                                                        Back
+
+                                                    </a>
+
+                                                </div>
+                                                
+
+
+                                            </div>
+
+                                            <!-- Background Utilities table end -->
+                                        </div>
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Processed seed </h5>
-                                                <span> View all processed seed</span>
+                                                <h5>Seed details </h5>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
+
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th> ID</th>
-                                                                <th>Grower Name</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Processed Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
 
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                          
 
-                                                            <?php
+                                                <div class="card-block">
 
-                                                            $sql = "SELECT `process_type_ID`,process_type.process_ID,`crop`,creditor.name,
-                                                            `variety`,`class`,process_seed.processed_date,process_seed.processed_time,
-                                                            process_type.process_ID, process_type.grade_outs_quantity, 
-                                                            process_type.processed_quantity, process_type.trash_quantity
-                                                             FROM `process_type` INNER JOIN process_seed ON 
-                                                             process_type.process_ID = process_seed.process_ID
-                                                              INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID 
-                                                              INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
-                                                               INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN 
-                                                             variety ON stock_in.variety_ID = variety.variety_ID INNER JOIN 
-                                                             creditor on stock_in.creditor_ID = creditor.creditor_ID WHERE
-                                                            process_type.process_type = 'Processing'";
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">stock in ID :</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="stock_in" name="stock_in" class="form-control">
 
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $process_id = $row['process_ID'];
-                                                                    $assigned_date = $row['processed_date'];
-                                                                    $assigned_time = $row['processed_time'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety = $row['variety'];
-                                                                    $class =$row['class'];
-                                                                    $processed_quantity = $row['processed_quantity'];
-                                                                    $grower_name = $row['name'];
-                                                                    $variety = $row['variety'];
-                                                                    $grading_type = "Cleaning";
-                                                                    $object = new main();
-                                                                    $new_date = $object->change_date_format($assigned_date);
+                                                                <option value="<?php echo $_GET['stock_in_id']; ?>"><?php echo $_GET['stock_in_id']; ?></option>
 
 
 
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$process_id</td>
-                                                 <td>$grower_name</td>
-                                                 <td>$crop</td>
-                                                 <td>$variety</td>
-                                                 <td>$class</td>
-											    <td>$processed_quantity kg</td>
-												<td>$new_date</td>
-                                                <td>$assigned_time</td>
-                                                
-                                                
-                                               
-												
-												
-												
-                                                <td><a href='processed_seed_details.php? process_id=$process_id'  class='btn btn-success'>View</a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Crop :</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_crop" name="farm_crop" class="form-control">
+
+                                                                <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Variety:</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_variety" name="farm_variety" class="form-control">
+
+                                                                <option value="<?php echo $_GET['variety'];?>"><?php echo $_GET['variety'];; ?></option>
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Class :</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_class" name="farm_class" class="form-control">
+
+                                                            <option value="<?php echo $_GET['class'];?>"><?php echo $_GET['class'];?></option>
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary"> Stock in Quantity :</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_quantity" name="farm_quantity" class="form-control">
+
+                                                                <option value="<?php echo $_GET['stock_quantity']; ?>"><?php echo $_GET['stock_quantity']; ?></option>
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Grower :</label>
+
+                                                            <br />
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            <select id="germ" name="germ" class="form-control">
+
+                                                                <option value="<?php echo $_GET['grower']; ?>"><?php echo $_GET['grower']; ?></option>
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Production Year</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_ID" name="farm_ID" class="form-control">
+
+                                                                <option value="<?php echo $_GET['product_date']; ?>"><?php echo $_GET['product_date']; ?></option>
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary">Lot Number:</label>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <select id="farm_ID" name="farm_ID" class="form-control">
+
+                                                                <option value="<?php echo $data[7]; ?>"><?php $_GET['farm_id'];; ?></option>
+
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    
+                                                  
+
+                                                    
+
+
+                                                    <div class="form-group row">
+
+                                                        <div class="col-sm-12">
+
+                                                        </div class="form-group row" require="">
+
+
+
+
+
+
+                                                        </br></br></br>
+
+
+                                                        <div>
+
+                                                        </div>
+
+                                                        <br>
+                                                        .
+                                                        <div class="form-group">
+
+
+                                                       
+                                                    </a>
+
+
+                                                        </div>
+
+
+
+
+
+                                            </form>
+
+
+
                                         </div>
-
-
-
-                                        <!-- Background Utilities table end -->
+                                        <!-- Page-body end -->
                                     </div>
-                                    <!-- Page-body end -->
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
+                                <!-- Main-body end -->
 
-                            <div id="styleSelector">
+                                <div id="styleSelector">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+        <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -674,25 +873,41 @@ if (in_array($position, $restricted)) {
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+        <!-- Warning Section Ends -->
+        <!-- Required Jquery -->
+        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+        <!-- Custom js -->
+        <script src="assets/js/pcoded.min.js"></script>
+        <script src="assets/js/vertical-layout.min.js "></script>
+        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
+
+        <?php
+
+if(isset($_POST['add_certificate'])){
+
+    $stock_ID = $_POST['stock_in'];
+    $quantity = $_POST['farm_quantity'];
+    $lab_id = $_POST['farm_grade'];
+    $lot_number = $_POST['main_certificate'];
+
+    $get_data->lab_certify_stock($quantity,$stock_ID,$lab_id,$lot_number);
+    
+}
+        
+        
+        ?>
 </body>
 
 </html>

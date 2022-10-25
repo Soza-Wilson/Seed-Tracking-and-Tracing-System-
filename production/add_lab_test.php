@@ -844,7 +844,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-primary">Oil Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
+                                                            <input type="text" id="oil_content" class="form-control" name="oil_content" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -853,7 +853,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-primary">Moisture Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
+                                                            <input type="text" id="moisture_content" class="form-control" name="moisture_content" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -1050,6 +1050,9 @@ if (in_array($position, $restricted)) {
         $purity_perc = $_POST['purity'];
         $defects_perc = $_POST['defects'];
         $grade = "";
+        $moisture_content= $_POST['moisture_content'];
+        $oil_content = $_POST['oil_content'];
+
         $crop_id = $_POST['farm_crop'];
         $variety_id = $_POST['farm_variety'];
         $farm = $_POST['farm_ID'];
@@ -1063,7 +1066,7 @@ if (in_array($position, $restricted)) {
             $grade = "failed";
         }
         $object = new main();
-        $object->register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc, $grade, $crop_id, $variety_id, $farm);
+        $object->register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc, $moisture_content, $oil_content, $grade, $crop_id, $variety_id, $farm);
     }
 
 

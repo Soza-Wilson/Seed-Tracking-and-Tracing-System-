@@ -1515,7 +1515,7 @@ class main
 
   // function register lab test
 
-  function register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc, $grade, $crop, $variety, $farm)
+  function register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc,$moisture_content,$oil_content, $grade, $crop, $variety, $farm)
   {
 
 
@@ -1550,14 +1550,16 @@ class main
       $user_ID = $_SESSION['user'];
       global $con;
 
-
-
+    
+     
+     
 
 
       $sql = "INSERT INTO `lab_test`(`test_ID`, `date`, `time`, `crop_ID`, `variety_ID`, 
-      `farm_ID`, `germination_percentage`, `shelling_percentage`, `purity_percentage`, 
-      `defects_percentage`, `grade`, `stock_in_ID`, `user_ID`, `test_status`) VALUES ('$test_ID','$test_date',
-      '$test_time','$crop','$variety','$farm','$germ_perc','$shell_perc','$purity_perc','$defects_perc',
+      `farm_ID`, `germination_percentage`, `moisture_content`, `oil_content`,
+       `shelling_percentage`, `purity_percentage`, `defects_percentage`, `grade`,
+       `stock_in_ID`, `user_ID`, `test_status`) VALUES ('$test_ID','$test_date',
+      '$test_time','$crop','$variety','$farm','$germ_perc','$moisture_content','$oil_content','$shell_perc','$purity_perc','$defects_perc',
       '$grade','$stock_ID','$user_ID','$status')";
 
 
