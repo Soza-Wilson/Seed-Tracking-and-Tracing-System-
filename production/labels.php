@@ -517,7 +517,11 @@ if (in_array($position, $restricted)) {
                                             <div class="card-block">
 
                                                 <div class="form-group row">
-                                                    <div class="col-sm-3">
+
+                                                    <div class="col-sm-2">
+                                                        <label>Grower</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
                                                         <label>Crop</label>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -534,7 +538,20 @@ if (in_array($position, $restricted)) {
 
 
                                                 <div class="form-group row">
-                                                    <div class="col-sm-3">
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <input list="grower_list" name="grower_list" class="form-control" placeholder="Select Grower " require="">
+                                                        <datalist id="grower_list">
+
+                                                            <option value="all">all</option>
+                                                            <option value="credit">credit</option>
+                                                            <option value="debit">debit</option>
+                                                        </datalist>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Select Crop</option>
                                                             <option value="all">all</option>
@@ -542,6 +559,7 @@ if (in_array($position, $restricted)) {
                                                             <option value="debit">debit</option>
                                                         </select>
                                                     </div>
+
 
                                                     <div class="col-sm-2">
                                                         <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
@@ -559,7 +577,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
 
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-2">
 
                                                         <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
 
@@ -569,16 +587,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
 
-
-
-                                                        </select>
-                                                    </div>
-
-                                                </div>
 
 
                                             </div>
@@ -628,7 +637,7 @@ if (in_array($position, $restricted)) {
                 
                                                                 INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
                                                                 INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status='certified' ORDER BY `stock_in_ID` DESC";
+                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status='certified' AND stock_in.source ='MUSECO' ORDER BY `stock_in_ID` DESC";
 
 
                                                             $result = $con->query($sql);
@@ -649,7 +658,7 @@ if (in_array($position, $restricted)) {
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];
                                                                     $time = $row['time'];
-                                                                    $farm_id =$row['farm_ID'];
+                                                                    $farm_id = $row['farm_ID'];
 
                                                                     $object = new main();
                                                                     $new_date = $object->change_date_format($date_added);

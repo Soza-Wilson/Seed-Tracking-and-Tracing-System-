@@ -10,9 +10,22 @@ session_start();
 $get_data = new production();
 //$ID = $_GET["ID"] ;
 //$data = $get_data -> get_test_details($ID);
+$farm_id = $_GET['farm'];
+$lot_number ="";
  
 
+$sql="SELECT `main_lot_number`, `main_quantity`, `male_lot_number`,
+ `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm` WHERE `farm_id` = '$farm_id'";
+ 
+ $result = $con->query($sql);
+ if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {
+         $lot_number = $row['main_lot_number'];
+         
 
+     }
+
+    }
 ?>
 
 <head>
@@ -762,7 +775,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_ID" name="farm_ID" class="form-control">
 
-                                                                <option value="<?php echo $data[7]; ?>"><?php  echo$_GET['farm']; ?></option>
+                                                                <option value="<?php echo $data[7]; ?>"><?php  echo $lot_number; ?></option>
 
 
 
