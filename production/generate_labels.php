@@ -10,22 +10,10 @@ session_start();
 $get_data = new production();
 //$ID = $_GET["ID"] ;
 //$data = $get_data -> get_test_details($ID);
-$farm_id = $_GET['farm'];
-$lot_number ="";
+
+
  
 
-$sql="SELECT `main_lot_number`, `main_quantity`, `male_lot_number`,
- `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm` WHERE `farm_id` = '$farm_id'";
- 
- $result = $con->query($sql);
- if ($result->num_rows > 0) {
-     while ($row = $result->fetch_assoc()) {
-         $lot_number = $row['main_lot_number'];
-         
-
-     }
-
-    }
 ?>
 
 <head>
@@ -578,7 +566,7 @@ $sql="SELECT `main_lot_number`, `main_quantity`, `male_lot_number`,
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <form action="lab_add_certificate.php" method="POST">
+                                        <form action="generate_labels.php" method="POST">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Download Labels </h5>
@@ -620,13 +608,14 @@ add hybrid female crop certificate
 
 
                                               
-
+                                                  
                                                 <div class="col-sm-12">
 
-                                                    <a href="add_certificate.php" class="btn btn-success">
-                                                       Download PDF file
+                                              
 
-                                                    </a>
+                                               
+
+                                                   <input type="submit" name="save_pdf" value="Download PDF File" class="btn btn-success">
 
                                                     <a href="add_certificate.php" class="btn btn-danger">
                                                         Back
@@ -773,9 +762,9 @@ add hybrid female crop certificate
                                                             <label class="badge badge-primary">Lot Number:</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <select id="farm_ID" name="farm_ID" class="form-control">
+                                                            <select id="lot_number" name="lot_number" class="form-control">
 
-                                                                <option value="<?php echo $data[7]; ?>"><?php  echo $lot_number; ?></option>
+                                                                <option value="<?php echo $_GET['lotnumber']; ?>"><?php echo $_GET['lotnumber'] ?></option>
 
 
 
@@ -908,14 +897,13 @@ add hybrid female crop certificate
 
         <?php
 
-if(isset($_POST['add_certificate'])){
+if(isset($_POST['save_pdf'])){
 
-    $stock_ID = $_POST['stock_in'];
-    $quantity = $_POST['farm_quantity'];
-    $lab_id = $_POST['farm_grade'];
-    $lot_number = $_POST['main_certificate'];
+    $lot_number = $_POST["lot_number"];
 
-    $get_data->lab_certify_stock($quantity,$stock_ID,$lab_id,$lot_number);
+    echo ("<script> alert('PDF File Downloaded');
+    window.location='../class/pdf_handler.php? type=labels & lot_number=$lot_number ';
+      </script>");
     
 }
         

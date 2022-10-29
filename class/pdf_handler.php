@@ -7,7 +7,7 @@ use function PHPSTORM_META\type;
 require('../pdf/fpdf.php');
 require('main.php');
 session_start();
-//$type = $_GET['type'];
+$type = $_GET['type'];
 $pdf_type = "labels";
 
 
@@ -50,9 +50,8 @@ class PDF extends FPDF
     }
 }
 
-class labels_pdf extends FPDF{
-
-    
+class labels_pdf extends FPDF
+{
 }
 
 
@@ -302,26 +301,26 @@ class pdf_handler
         $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
         $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
         $pdf->Ln();
-        
-        $i = 1;
-       while ($i <= 20) {
 
-        $pdf->SetFont('Times', '', '', 10);
-        $pdf->Cell(30, 5, $i, 1, 0, 'C');
-        $pdf->Cell(130, 5, '', 1, 0, 'C');
-        $pdf->Cell(30, 5, '', 1, 0, 'C');
+        $i = 1;
+        while ($i <= 20) {
+
+            $pdf->SetFont('Times', '', '', 10);
+            $pdf->Cell(30, 5, $i, 1, 0, 'C');
+            $pdf->Cell(130, 5, '', 1, 0, 'C');
+            $pdf->Cell(30, 5, '', 1, 0, 'C');
+            $pdf->Ln();
+            $i++;
+        }
+        $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+        $pdf->Cell(30, 5, "", 1, 0, 'C');
         $pdf->Ln();
-         $i++ ;
-             }
-             $pdf->SetFont('Times', 'B', '', 10);
-             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "", 1, 0, 'C');
-             $pdf->Ln();     
-    
-             $pdf->Cell(60, 20, '', 0, 0, 'C');
-             $pdf->Ln();
-        
-             $pdf->SetFont('Times', 'B', '', 10);
+
+        $pdf->Cell(60, 20, '', 0, 0, 'C');
+        $pdf->Ln();
+
+        $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
         $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
         $pdf->Ln();
@@ -337,7 +336,8 @@ class pdf_handler
         $pdf->Output();
     }
 
-    function create_invoice(){
+    function create_invoice()
+    {
 
         $pdf = new PDF();
         $pdf->AliasNbPages();
@@ -359,32 +359,32 @@ class pdf_handler
         $pdf->Cell(60, 20, '', 0, 0, 'C');
         $pdf->Ln();
 
-         
+
         $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(30, 5, 'NO', 1, 0, 'C');
         $pdf->Cell(130, 5, 'Description', 1, 0, 'C');
         $pdf->Cell(30, 5, 'Quantity', 1, 0, 'C');
         $pdf->Ln();
-        
-        $i = 1;
-       while ($i <= 20) {
 
-        $pdf->SetFont('Times', '', '', 10);
-        $pdf->Cell(30, 5, $i, 1, 0, 'C');
-        $pdf->Cell(130, 5, '', 1, 0, 'C');
-        $pdf->Cell(30, 5, '', 1, 0, 'C');
+        $i = 1;
+        while ($i <= 20) {
+
+            $pdf->SetFont('Times', '', '', 10);
+            $pdf->Cell(30, 5, $i, 1, 0, 'C');
+            $pdf->Cell(130, 5, '', 1, 0, 'C');
+            $pdf->Cell(30, 5, '', 1, 0, 'C');
+            $pdf->Ln();
+            $i++;
+        }
+        $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+        $pdf->Cell(30, 5, "", 1, 0, 'C');
         $pdf->Ln();
-         $i++ ;
-             }
-             $pdf->SetFont('Times', 'B', '', 10);
-             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "", 1, 0, 'C');
-             $pdf->Ln();     
-    
-             $pdf->Cell(60, 20, '', 0, 0, 'C');
-             $pdf->Ln();
-        
-             $pdf->SetFont('Times', 'B', '', 10);
+
+        $pdf->Cell(60, 20, '', 0, 0, 'C');
+        $pdf->Ln();
+
+        $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(100, 5, "Issued by: ", 0, 0, '');
         $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
         $pdf->Ln();
@@ -398,8 +398,6 @@ class pdf_handler
 
 
         $pdf->Output();
-
-
     }
 
 
@@ -415,11 +413,12 @@ class pdf_handler
 
 
 
-    function create_handover(){
+    function create_handover()
+    {
 
-     $grade_ID =$_GET['grade_id'];   
-        
-     $sql="SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,
+        $grade_ID = $_GET['grade_id'];
+
+        $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`,user.fullname,
       `assigned_quantity`,crop.crop,variety.variety,stock_in.class FROM `grading`
      INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID
      INNER JOIN user ON grading.assigned_by = user.user_ID
@@ -427,15 +426,13 @@ class pdf_handler
       INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `grade_ID`= '$grade_ID';";
 
         global $con;
-$result = $con->query($sql);
+        $result = $con->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $grade_ID= $row["grade_ID"];
+                $grade_ID = $row["grade_ID"];
                 $assigned_date = $row["assigned_date"];
                 $assigned_time = $row["assigned_time"];
                 $fullname = $row["fullname"];
-
-                
             }
         }
 
@@ -471,56 +468,56 @@ $result = $con->query($sql);
             while ($row = $result->fetch_assoc()) {
 
 
-                
+
                 $crop  = $row["crop"];
                 $variety = $row["variety"];
                 $class = $row["class"];
-                $quantity= $row["assigned_quantity"];
+                $quantity = $row["assigned_quantity"];
 
                 //retrieve payment details
 
-               
+
 
                 $pdf->SetFont('Times', '', '', 10);
                 $pdf->Cell(30, 5, $i++, 1, 0, 'C');
-                 $pdf->Cell(130, 5, "$crop / $variety / $class", 1, 0, 'C');
-                  $pdf->Cell(30, 5,$quantity, 1, 0, 'C');
-                 $pdf->Ln();
+                $pdf->Cell(130, 5, "$crop / $variety / $class", 1, 0, 'C');
+                $pdf->Cell(30, 5, $quantity, 1, 0, 'C');
+                $pdf->Ln();
             }
         }
-       
 
-         
-        
-        
-       while ($i <= 20) {
 
-        $pdf->SetFont('Times', '', '', 10);
-        $pdf->Cell(30, 5, $i, 1, 0, 'C');
-        $pdf->Cell(130, 5, '', 1, 0, 'C');
-        $pdf->Cell(30, 5, '', 1, 0, 'C');
+
+
+
+        while ($i <= 20) {
+
+            $pdf->SetFont('Times', '', '', 10);
+            $pdf->Cell(30, 5, $i, 1, 0, 'C');
+            $pdf->Cell(130, 5, '', 1, 0, 'C');
+            $pdf->Cell(30, 5, '', 1, 0, 'C');
+            $pdf->Ln();
+            $i++;
+        }
+        $pdf->SetFont('Times', 'B', '', 10);
+        $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+        $pdf->Cell(30, 5, "$quantity", 1, 0, 'C');
         $pdf->Ln();
-         $i++ ;
-             }
-             $pdf->SetFont('Times', 'B', '', 10);
-             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "$quantity", 1, 0, 'C');
-             $pdf->Ln();     
-    
-             $pdf->Cell(60, 20, '', 0, 0, 'C');
-             $pdf->Ln();
-        
-             $pdf->SetFont('Times', 'B', '', 10);
+
+        $pdf->Cell(60, 20, '', 0, 0, 'C');
+        $pdf->Ln();
+
+        $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(100, 5, "Issued by: $fullname ", 0, 0, '');
         $pdf->Cell(100, 5, "Received by: ................................................. ", 0, 0, '');
-       
+
         $pdf->Ln();
 
         $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
         $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
-       
+
         $pdf->Ln();
-        
+
 
         $pdf->Cell(190, 0, '', 1, 0, '');
         $pdf->Ln();
@@ -536,10 +533,6 @@ $result = $con->query($sql);
 
 
         $pdf->Output();
-
-
-
-
     }
 
 
@@ -574,15 +567,15 @@ $result = $con->query($sql);
 
 
 
-//
+    //
     function create_dispatch_note()
-    {   
+    {
         $user_ID = $_SESSION['user'];
-        $fullname ="";
-        $issued_fullname ="";
+        $fullname = "";
+        $issued_fullname = "";
         $transaction_ID =  $_GET['transaction_ID'];
         $order_ID = $_GET['order_ID'];
-        $total_quantity = $_GET['total_quantity'];    
+        $total_quantity = $_GET['total_quantity'];
 
         $pdf = new PDF();
         $pdf->AliasNbPages();
@@ -615,415 +608,351 @@ $result = $con->query($sql);
 
         $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`stock_out_quantity`,`total_price` FROM
         `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID`='$order_ID'";
-               global $con;
-               $i=1;
-              
-               $result = $con->query($sql);
-               if ($result->num_rows > 0) {
-                   while ($row = $result->fetch_assoc()) {
-                       
-                    
-                       $crop   = $row["crop"];
-                       $variety = $row["variety"];
-                       $class = $row["class"];
-                       $stock_out_quantity = $row['stock_out_quantity'];
-                       
-       
-                       //transaction table
-       
-                       
+        global $con;
+        $i = 1;
 
-                       $pdf->SetFont('Times', '', '', 10);
-               $pdf->Cell(30, 5, $i++, 1, 0, 'C');
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+
+
+                $crop   = $row["crop"];
+                $variety = $row["variety"];
+                $class = $row["class"];
+                $stock_out_quantity = $row['stock_out_quantity'];
+
+
+                //transaction table
+
+
+
+                $pdf->SetFont('Times', '', '', 10);
+                $pdf->Cell(30, 5, $i++, 1, 0, 'C');
                 $pdf->Cell(130, 5, "$crop / $variety / $class", 1, 0, 'C');
-                 $pdf->Cell(30, 5, $stock_out_quantity, 1, 0, 'C');
+                $pdf->Cell(30, 5, $stock_out_quantity, 1, 0, 'C');
                 $pdf->Ln();
-                   }
+            }
+
+
+            while ($i <= 20) {
+
+                $pdf->SetFont('Times', '', '', 10);
+                $pdf->Cell(30, 5, $i, 1, 0, 'C');
+                $pdf->Cell(130, 5, '', 1, 0, 'C');
+                $pdf->Cell(30, 5, '', 1, 0, 'C');
+                $pdf->Ln();
+                $i++;
+            }
+            $pdf->SetFont('Times', 'B', '', 10);
+            $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
+            $pdf->Cell(30, 5, "$total_quantity", 1, 0, 'C');
+            $pdf->Ln();
+
+            $pdf->Cell(60, 20, '', 0, 0, 'C');
+            $pdf->Ln();
+
+            $sql = "SELECT fullname FROM `user` WHERE `user_ID`='$user_ID'";
+
+            $result = $con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+
+
+                    $fullname = $row["fullname"];
+                }
+            }
+
+            $sql = "SELECT fullname FROM `order_table` INNER JOIN `user` ON user.user_ID = order_table.user_ID WHERE `order_ID`= '$order_ID' ";
+
+            $result = $con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+
+
+                    $issued_fullname = $row["fullname"];
+                }
+            }
+            $pdf->SetFont('Times', 'B', '', 10);
+            $pdf->Cell(100, 5, "Issued by : $fullname", 0, 0, '');
+            $pdf->Cell(100, 5, "Received by: $issued_fullname", 0, 0, '');
+            $pdf->Ln();
+
+            $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+            $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+            $pdf->Ln();
+
+            $pdf->Cell(190, 0, '', 1, 0, '');
+            $pdf->Ln();
+
+
+            $pdf->Output();
+        }
+    }
+
+    function create_labels()
+    {
+
+
+        $number = $_GET['lot_number'];
         
-       
-       while ($i <= 20) {
+        $sql = "SELECT `lot_number`, `crop`,`variety`, `class`,
+    `date_tested`, `expiry_date` FROM `certificate` 
+    INNER JOIN crop ON crop.crop_ID = certificate.crop_ID
+     INNER JOIN variety ON variety.variety_ID = certificate.variety_ID WHERE `lot_number`='$number'";
+        global $con;
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
 
-        $pdf->SetFont('Times', '', '', 10);
-        $pdf->Cell(30, 5, $i, 1, 0, 'C');
-        $pdf->Cell(130, 5, '', 1, 0, 'C');
-        $pdf->Cell(30, 5, '', 1, 0, 'C');
+
+
+                $lot_number = $row["lot_number"];
+                $crop = $row["crop"];
+                $variety = $row["variety"];
+                $class = $row["class"];
+                $tested_date = $row["date_tested"];
+                $expire_date = $row["expiry_date"];
+            }
+        }
+
+        $object = new main();
+        $test_date = $object->change_date_format($tested_date);
+        $exp_date = $object->change_date_format($expire_date);
+
+        $pdf = new labels_pdf();
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        /// Manyi you can do bettter
+
+        $pdf->SetFont('Times', 'B', '', 14);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        // $pdf->Cell(80, 40, '', 0, 0, 'c');
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
+
+
+
+
+
         $pdf->Ln();
-         $i++ ;
-             }
-             $pdf->SetFont('Times', 'B', '', 10);
-             $pdf->Cell(160, 5, 'TOTAL QUANTITY', 0, 0, 'R');
-             $pdf->Cell(30, 5, "$total_quantity", 1, 0, 'C');
-             $pdf->Ln();     
-    
-             $pdf->Cell(60, 20, '', 0, 0, 'C');
-             $pdf->Ln();
+        $pdf->SetFont('Times', '', '', 8);
 
-             $sql="SELECT fullname FROM `user` WHERE `user_ID`='$user_ID'";
-            
-             $result = $con->query($sql);
-               if ($result->num_rows > 0) {
-                   while ($row = $result->fetch_assoc()) {
-                       
-                    
-                       $fullname= $row["fullname"];
-                      
-                   }
-                
-                }
-
-                $sql="SELECT fullname FROM `order_table` INNER JOIN `user` ON user.user_ID = order_table.user_ID WHERE `order_ID`= '$order_ID' ";
-            
-             $result = $con->query($sql);
-               if ($result->num_rows > 0) {
-                   while ($row = $result->fetch_assoc()) {
-                       
-                    
-                    $issued_fullname= $row["fullname"];
-                      
-                   }
-                
-                }
-             $pdf->SetFont('Times', 'B', '', 10);
-        $pdf->Cell(100, 5, "Issued by : $fullname", 0, 0, '');
-        $pdf->Cell(100, 5, "Received by: $issued_fullname", 0, 0, '');
+        /// customer details
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(30, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(20, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(20, 5, "Class: $class", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(20, 5, "lot Number:", 0, 0, '');
         $pdf->Ln();
 
-        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
-        $pdf->Cell(100, 10, 'Signature : ....................................................', 0, 0, '');
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(20, 5, "$lot_number", 0, 0, '');
         $pdf->Ln();
 
-        $pdf->Cell(190, 0, '', 1, 0, '');
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Tested Date: $test_date", 0, 0, '');
         $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Expire Date: $exp_date", 0, 0, '');
+
+
+
+        
+        $pdf->SetFont('Times', 'B', '', 14);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        // $pdf->Cell(80, 40, '', 0, 0, 'c');
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
+
+
+
+
+
+        $pdf->Ln();
+        $pdf->SetFont('Times', '', '', 8);
+
+        /// customer details
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(30, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(20, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(20, 5, "Class: $class", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(20, 5, "lot Number:", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(20, 5, "$lot_number", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Expire Date: $exp_date", 0, 0, '');
+
+
+
+        
+        $pdf->SetFont('Times', 'B', '', 14);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        // $pdf->Cell(80, 40, '', 0, 0, 'c');
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
+
+
+
+
+
+        $pdf->Ln();
+        $pdf->SetFont('Times', '', '', 8);
+
+        /// customer details
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(30, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(20, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(20, 5, "Class: $class", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(20, 5, "lot Number:", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(20, 5, "$lot_number", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Expire Date: $exp_date", 0, 0, '');
+
+
+
+        
+        $pdf->SetFont('Times', 'B', '', 14);
+        // for($i=1;$i<=20;$i++)
+        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
+        // $pdf->Cell(80, 40, '', 0, 0, 'c');
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
+        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
+
+
+
+
+
+        $pdf->Ln();
+        $pdf->SetFont('Times', '', '', 8);
+
+        /// customer details
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(70, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Cell(30, 5, "Crop: $crop", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(70, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Cell(20, 5, "Variety: $variety", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(70, 5, "Class: $class", 0, 0, '');
+        $pdf->Cell(20, 5, "Class: $class", 0, 0, '');
+        $pdf->Ln();
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(70, 5, "lot Number:", 0, 0, '');
+        $pdf->Cell(20, 5, "lot Number:", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(70, 5, "$lot_number", 0, 0, '');
+        $pdf->Cell(20, 5, "$lot_number", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Tested Date: $test_date", 0, 0, '');
+        $pdf->Ln();
+
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(70, 5, "Expire Date: $exp_date", 0, 0, '');
+        $pdf->Cell(20, 5, "Expire Date: $exp_date", 0, 0, '');
+
 
 
         $pdf->Output();
     }
-
-    
-}
-
-function create_labels(){
-
-    $i=6;
-   
-
-
-
-    $pdf = new labels_pdf();
-    $pdf->AliasNbPages();
-    $pdf->AddPage();
-/// Manyi you can do bettter
-      
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-         
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-
-
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-
-
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-
-        $pdf->SetFont('Times', 'B', '', 14);
-        // for($i=1;$i<=20;$i++)
-        //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
-        // $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(70, 10, 'Multi Seeds Company LTD ', 0);
-        $pdf->Cell(10, 10, 'Multi Seeds Company LTD ', 0);
-       
-
-       
-        
-    
-        $pdf->Ln();
-        $pdf->SetFont('Times', '', '', 10);
-    
-        /// customer details
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Crop: ", 0, 0, '');
-        $pdf->Cell(30, 5, "Crop: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Variety: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Variety: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(70, 5, "Class: ", 0, 0, '');
-        $pdf->Cell(20, 5, "Class: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(70, 5, "lot Number: ", 0, 0, '');
-        $pdf->Cell(20, 5, "lot Number: ", 0, 0, '');
-        $pdf->Ln();
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(70, 5, "Production Year:", 0, 0, '');
-        $pdf->Cell(20, 5, "Production Year:", 0, 0, '');
-        $pdf->Ln();
-
-
-     
-        $pdf->Output();
-    
-    
-    
-   
-   
-   
-
-}
-
 }
 
 
 $object = new pdf_handler();
-switch ($pdf_type){
+switch ($pdf_type) {
     case "receipt":
         $object->create_receipt();
         break;
 
-     case "dispatch_note":
-     $object->create_dispatch_note();
-     break;
+    case "dispatch_note":
+        $object->create_dispatch_note();
+        break;
 
-     case "delivery_note":
+    case "delivery_note":
         $object->create_delivery_note();
-     break;
-    
-     case "invoice":
-        $object->create_invoice();
-     break;
+        break;
 
-     case "handover":
+    case "invoice":
+        $object->create_invoice();
+        break;
+
+    case "handover":
         $object->create_handover();
         break;
 
     case "labels":
-         $object->create_labels();
+        $object->create_labels();
         break;
-     
-
-
-
-        
 }
 
 // if ($pdf_type="receipt"){
@@ -1042,7 +971,7 @@ switch ($pdf_type){
 //         $object = new pdf_handler();
 //         $object->create_invoice();
 
-        
+
 // if($pdf_type="delivery_note"){
 //         $object = new pdf_handler();
 //         $object->create_delivery_note();

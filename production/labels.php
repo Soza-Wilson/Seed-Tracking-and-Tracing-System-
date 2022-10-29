@@ -630,7 +630,7 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                            $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`,creditor.name,stock_in.time,
+                                                            $sql = "SELECT `stock_in_ID`,stock_in.certificate_ID, `fullname`,stock_in.source, `name`, `crop`,creditor.name,stock_in.time,
                                                                 `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,farm_ID,
                                                                 `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
                                                                 INNER JOIN user ON stock_in.user_ID = user.user_ID 
@@ -658,7 +658,7 @@ if (in_array($position, $restricted)) {
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];
                                                                     $time = $row['time'];
-                                                                    $farm_id = $row['farm_ID'];
+                                                                    $lotnumber = $row['certificate_ID'];
 
                                                                     $object = new main();
                                                                     $new_date = $object->change_date_format($date_added);
@@ -684,7 +684,7 @@ if (in_array($position, $restricted)) {
 												
 												
 												
-                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & farm=$farm_id'  class='btn btn-success'>View</a>
+                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & lotnumber=$lotnumber'  class='btn btn-success'>View</a>
                                                 </td>
 											</tr>	
 										";
