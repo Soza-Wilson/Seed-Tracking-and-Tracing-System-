@@ -900,10 +900,10 @@ add hybrid female crop certificate
 if(isset($_POST['save_pdf'])){
 
     $lot_number = $_POST["lot_number"];
+   
+    header("Location:../class/pdf_handler.php? type='labels' & lot_number=$lot_number");
 
-    echo ("<script> alert('PDF File Downloaded');
-    window.location='../class/pdf_handler.php? type=labels & lot_number=$lot_number ';
-      </script>");
+   
     
 }
         
