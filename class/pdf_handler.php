@@ -8,7 +8,7 @@ require('../pdf/fpdf.php');
 require('main.php');
 session_start();
 //$type = $_GET['type'];
-$pdf_type = "labels";
+$pdf_type = $_GET['type'];
 
 
 
@@ -1006,7 +1006,7 @@ switch ($pdf_type) {
         $object->create_handover();
         break;
 
-    case "labels":
+    case "LB":
         $object->create_labels();
         break;
 }

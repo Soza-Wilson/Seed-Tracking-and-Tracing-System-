@@ -61,8 +61,7 @@ if (empty($test)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            
-
+            alert('working');
             $('#get_data').click(() => {
 
 
