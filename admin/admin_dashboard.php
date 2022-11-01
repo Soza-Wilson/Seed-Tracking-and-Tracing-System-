@@ -67,8 +67,15 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(() => {
-            alert('working');
 
+            var data_value = "admin_stock_out_chart";
+
+            $.post('../other/chart_data.php', {
+                admin_stock_out_valu : data_value
+            }, function(data) {
+                $('#select_bank_name').html(data);
+
+                
             const labels = [
                 'January',
                 'February',
@@ -88,9 +95,43 @@ if (in_array($position, $restricted)) {
                 labels: labels,
                 datasets: [{
                     label: 'My First dataset',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: '',
-                    data: [5, 10, 5, 2, 20, 30, 45,5, 10, 5, 2, 20, 3, 45],
+                    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)',
+      'rgba(45, 189, 79, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)',
+   
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+      'rgb(45, 189, 79,)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+
+    ],
+    borderWidth: 1,
+                    
+                    data: [5, 10, 5, 2, 20, 30, 30,5, 10, 5, 2, 20, 3, 45],
                 }]
             };
 
@@ -110,6 +151,11 @@ if (in_array($position, $restricted)) {
                 document.getElementById('stock_out_chart'),
                 config
             );
+
+
+            });
+           
+
             // $('#get_data').click(() => {
 
 
