@@ -238,71 +238,54 @@ if (in_array($position, $restricted)) {
         }
 
 
-        function seed_stock(){
+        function seed_stock() {
 
             
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ];
 
-            const data = {
-                labels: labels,
+            let labels=[];
+           
+
+            
+
+            $.post('../other/chart_data.php', {
+             
+            }, function(data) {
+
+           
+
+               
+                   console.log(data);
+                     var crop = [];
+                    var quantity = [];
+
+                    for (var i in data) {
+                        crop.push(data[i].crop);
+                        quantity.push(data[i].quantity);
+                    }
+                 
+                    const dataset = {
+                labels: crop,
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-                        'rgba(45, 189, 79, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-
+                       
                     ],
                     borderColor: [
                         'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
-                        'rgb(45, 189, 79,)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
+                        
 
                     ],
                     borderWidth: 1,
 
-                    data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                    data: quantity,
                 }]
             };
+                  
 
             const config = {
   type: 'bar',
-  data: data,
+  data: dataset,
   options: {
     scales: {
       y: {
@@ -315,8 +298,82 @@ if (in_array($position, $restricted)) {
                 document.getElementById('seed_stock'),
                 config
             );
+            });
+             
+                 
+          
+                 
+            //  labels = [
+            //     'January',
+            //     'February',
+            //     'March',
+            //     'April',
+            //     'May',
+            //     'June',
+            //     'July',
+            //     'August',
+            //     'September',
+            //     'October',
+            //     'November',
+            //     'December',
+            // ];
 
+          
 
+            // const data = {
+            //     labels: labels,
+            //     datasets: [{
+            //         label: 'Stock out Quantity For 2022',
+            //         backgroundColor: [
+            //             'rgba(255, 99, 132, 0.2)',
+            //             'rgba(255, 159, 64, 0.2)',
+            //             'rgba(255, 205, 86, 0.2)',
+            //             'rgba(75, 192, 192, 0.2)',
+            //             'rgba(54, 162, 235, 0.2)',
+            //             'rgba(153, 102, 255, 0.2)',
+            //             'rgba(201, 203, 207, 0.2)',
+            //             'rgba(45, 189, 79, 0.2)',
+            //             'rgba(255, 159, 64, 0.2)',
+            //             'rgba(255, 205, 86, 0.2)',
+            //             'rgba(75, 192, 192, 0.2)',
+            //             'rgba(54, 162, 235, 0.2)',
+            //             'rgba(153, 102, 255, 0.2)',
+            //             'rgba(201, 203, 207, 0.2)',
+
+            //         ],
+            //         borderColor: [
+            //             'rgb(255, 99, 132)',
+            //             'rgb(255, 159, 64)',
+            //             'rgb(255, 205, 86)',
+            //             'rgb(75, 192, 192)',
+            //             'rgb(54, 162, 235)',
+            //             'rgb(153, 102, 255)',
+            //             'rgb(201, 203, 207)',
+            //             'rgb(45, 189, 79,)',
+            //             'rgb(255, 159, 64)',
+            //             'rgb(255, 205, 86)',
+            //             'rgb(75, 192, 192)',
+            //             'rgb(54, 162, 235)',
+            //             'rgb(153, 102, 255)',
+            //             'rgb(201, 203, 207)',
+
+            //         ],
+            //         borderWidth: 1,
+
+            //         data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+            //     }]
+            // };
+
+            // const config = {
+            //     type: 'line',
+            //     data: data,
+            // };
+            // const myChart = new Chart(
+            //     document.getElementById('seed_stock'),
+            //     config
+            // );
+
+    
 
         }
     </script>
@@ -556,83 +613,83 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                     </ul>
-                           
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="add_product.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="add_product.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="set_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            </ul>
+                                        <li class="">
+                                            <a href="set_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li>
-                                    <a href="admin_pending_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_approved_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_denied_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_processed_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li>
+                                            <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
 
-                                <li class="">
-                                    <a href="admin_all_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            </ul>
+                                    </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -643,7 +700,7 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Dashboard</h5>
-                                           
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -683,10 +740,10 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                
+
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                
+
                                                             </div>
                                                         </div>
 
@@ -702,18 +759,18 @@ if (in_array($position, $restricted)) {
                                                                 <h6 class="text-muted m-b-0">Seed in Stock</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                            <i class="ti-writes"></i>
-                                                               
+                                                                <i class="ti-writes"></i>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                              
+
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                               
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -735,10 +792,10 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                             
+
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -760,10 +817,10 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                
+
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -783,12 +840,12 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="col-xl-4 col-md-12">
 
-                                            <div class="card">
-                                                <div>
-                                                    <canvas id="inventory_chart"></canvas>
-                                                </div>
+                                                <div class="card">
+                                                    <div>
+                                                        <canvas id="inventory_chart"></canvas>
+                                                    </div>
 
-    </div>
+                                                </div>
 
                                             </div>
                                             <!--  sale analytics end -->
@@ -796,14 +853,14 @@ if (in_array($position, $restricted)) {
                                             <!--  project and team member start -->
                                             <div class="col-xl-8 col-md-12">
 
-                                            <div class="card">
+                                                <div class="card">
 
-                                            <div>
-                                                    <canvas id="seed_stock"></canvas>
+                                                    <div>
+                                                        <canvas id="seed_stock"></canvas>
+                                                    </div>
+
                                                 </div>
 
-                                            </div>
-                                               
                                             </div>
                                             <div class="col-xl-4 col-md-12">
                                                 <div class="card ">
