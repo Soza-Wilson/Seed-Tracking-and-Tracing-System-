@@ -68,93 +68,23 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(() => {
 
-            var data_value = "admin_stock_out_chart";
-
-            $.post('../other/chart_data.php', {
-                admin_stock_out_valu : data_value
-            }, function(data) {
-                $('#select_bank_name').html(data);
-
-                
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ];
-
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)',
-      'rgba(45, 189, 79, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)',
-   
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)',
-      'rgb(45, 189, 79,)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)',
-
-    ],
-    borderWidth: 1,
-                    
-                    data: [5, 10, 5, 2, 20, 30, 30,5, 10, 5, 2, 20, 3, 45],
-                }]
-            };
-
-            const config = {
-                type: 'bar',
-                data: data,
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                },
-            };
-
-            const myChart = new Chart(
-                document.getElementById('stock_out_chart'),
-                config
-            );
+            // var data_value = "admin_stock_out_chart";
+            Stock_bar_chart();
+            stock_pie_chart();
+            seed_stock();
+            // $.post('', {
+            //     admin_stock_out_value : data_value;
+            // }, function(data) {
+            //     $('#stock_out_chart').html(data);
 
 
-            });
-           
+
+
+
+            // });
+
+
+
 
             // $('#get_data').click(() => {
 
@@ -195,6 +125,200 @@ if (in_array($position, $restricted)) {
 
 
         });
+
+
+        function Stock_bar_chart() {
+
+
+            const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Stock out Quantity For 2022',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(45, 189, 79, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(45, 189, 79,)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+
+                    ],
+                    borderWidth: 1,
+
+                    data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+            };
+            const myChart = new Chart(
+                document.getElementById('stock_out_chart'),
+                config
+            );
+
+        }
+
+
+        function stock_pie_chart() {
+
+
+
+            const data = {
+                labels: [
+                    'Certified',
+                    'Uprocessed',
+                    'Uncertified'
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+            };
+
+            const myChart = new Chart(
+                document.getElementById('inventory_chart'),
+                config
+            );
+
+
+
+        }
+
+
+        function seed_stock(){
+
+            
+            const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Stock out Quantity For 2022',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(45, 189, 79, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(45, 189, 79,)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+
+                    ],
+                    borderWidth: 1,
+
+                    data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                }]
+            };
+
+            const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+            const myChart = new Chart(
+                document.getElementById('seed_stock'),
+                config
+            );
+
+
+
+        }
     </script>
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -432,69 +556,82 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                     </ul>
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Pricing</div>
+                           
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="view_all_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="add_product.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">set crop prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="set_prices.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
 
                             </ul>
-                            </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
+                                <li>
+                                    <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="pcoded-hasmenu ">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
                                 </li>
+                                <li>
+                                    <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+
+                                <li class="">
+                                    <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </div>
                     </nav>
@@ -506,7 +643,7 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Dashboard</h5>
-                                            <p class="m-b-0">Welcome to Mega Able</p>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -535,7 +672,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">$30200</h4>
+                                                                <h4 class="text-c-purple">$0</h4>
                                                                 <h6 class="text-muted m-b-0">All Earnings</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -546,10 +683,10 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                
                                                             </div>
                                                         </div>
 
@@ -561,21 +698,22 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">290+</h4>
-                                                                <h6 class="text-muted m-b-0">Page Views</h6>
+                                                                <h4 class="text-c-green">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Seed in Stock</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-file-text-o f-28"></i>
+                                                            <i class="ti-writes"></i>
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                              
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
@@ -586,21 +724,21 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">145</h4>
-                                                                <h6 class="text-muted m-b-0">Task Completed</h6>
+                                                                <h4 class="text-c-red">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Stock In</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-calendar-check-o f-28"></i>
+                                                                <i class="ti-arrow-down"></i>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                             
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -611,21 +749,21 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">500</h4>
-                                                                <h6 class="text-muted m-b-0">Downloads</h6>
+                                                                <h4 class="text-c-blue">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Stock Out </h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-hand-o-down f-28"></i>
+                                                                <i class="ti-arrow-up "></i>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
+                                                                
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -644,161 +782,33 @@ if (in_array($position, $restricted)) {
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-md-12">
-                                            <div>
-                                                        <canvas id="inventory_chart"></canvas>
-                                                    </div>
-                                               
+
+                                            <div class="card">
+                                                <div>
+                                                    <canvas id="inventory_chart"></canvas>
+                                                </div>
+
+    </div>
+
                                             </div>
                                             <!--  sale analytics end -->
 
                                             <!--  project and team member start -->
                                             <div class="col-xl-8 col-md-12">
-                                                <div class="card table-card">
-                                                    <div class="card-header">
-                                                        <h5>Projects</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            Assigned
-                                                                        </th>
-                                                                        <th>Name</th>
-                                                                        <th>Due Date</th>
-                                                                        <th class="text-right">Priority</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-inline-block align-middle">
-                                                                                <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                                <div class="d-inline-block">
-                                                                                    <h6>John Deo</h6>
-                                                                                    <p class="text-muted m-b-0">Graphics Designer</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>Able Pro</td>
-                                                                        <td>Jun, 26</td>
-                                                                        <td class="text-right"><label class="label label-danger">Low</label></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-inline-block align-middle">
-                                                                                <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                                <div class="d-inline-block">
-                                                                                    <h6>Jenifer Vintage</h6>
-                                                                                    <p class="text-muted m-b-0">Web Designer</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>Mashable</td>
-                                                                        <td>March, 31</td>
-                                                                        <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-inline-block align-middle">
-                                                                                <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                                <div class="d-inline-block">
-                                                                                    <h6>William Jem</h6>
-                                                                                    <p class="text-muted m-b-0">Developer</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>Flatable</td>
-                                                                        <td>Aug, 02</td>
-                                                                        <td class="text-right"><label class="label label-success">medium</label></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="chk-option">
-                                                                                <div class="checkbox-fade fade-in-primary">
-                                                                                    <label class="check-task">
-                                                                                        <input type="checkbox" value="">
-                                                                                        <span class="cr">
-                                                                                            <i class="cr-icon fa fa-check txt-default"></i>
-                                                                                        </span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="d-inline-block align-middle">
-                                                                                <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                                <div class="d-inline-block">
-                                                                                    <h6>David Jones</h6>
-                                                                                    <p class="text-muted m-b-0">Developer</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>Guruable</td>
-                                                                        <td>Sep, 22</td>
-                                                                        <td class="text-right"><label class="label label-primary">high</label></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="text-right m-r-20">
-                                                                <a href="#!" class=" b-b-primary text-primary">View all Projects</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+                                            <div class="card">
+
+                                            <div>
+                                                    <canvas id="seed_stock"></canvas>
                                                 </div>
+
+                                            </div>
+                                               
                                             </div>
                                             <div class="col-xl-4 col-md-12">
                                                 <div class="card ">
                                                     <div class="card-header">
-                                                        <h5>Team Members</h5>
+                                                        <h5>Bank Accounts </h5>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
