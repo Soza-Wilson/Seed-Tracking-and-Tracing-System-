@@ -901,7 +901,7 @@ if(isset($_POST['save_pdf'])){
 
     $lot_number = $_POST["lot_number"];
    
-    header("Location:../class/pdf_handler.php? type='LB' & lot_number=$lot_number");
+    header("Location:../class/pdf_handler.php? lot_number=$lot_number");
 
    
     
