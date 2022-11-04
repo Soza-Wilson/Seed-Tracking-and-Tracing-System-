@@ -342,7 +342,7 @@ class main
   //Marketing sales functions 
 
 
-  function temp_data($data_result, $order_note_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
+  function temp_data($data_result, $order_note_number,$order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
 
     // sessions for holding temp data when order is in progress
@@ -353,7 +353,7 @@ class main
       $_SESSION['order'] =  $order_ID;
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
-      $_SESSION['type'] = $_POST['debtor_type'];
+      $_SESSION['type'] = $order_type;
 
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
@@ -361,53 +361,29 @@ class main
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      $this->check_order_book_number($order_ID, $order_note_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+      $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
     }
   }
 
-  function check_order_book_number($order, $order_book_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
-  {
+  // function check_order_book_number($order, $order_book_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
+  // {
 
-    $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+  //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
 
-    // global $con;
-    // $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
-    // $result =  $con->query($sql);
-    // $count = $result->num_rows;
-    // if ($count >= 1) {
-    //   echo ("<script> alert('Error: Order book number already exists ');
-    //                                         </script>");
-    // } else {
-
-
-
-    //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
-    // }
-  }
+  //   // global $con;
+  //   // $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
+  //   // $result =  $con->query($sql);
+  //   // $count = $result->num_rows;
+  //   // if ($count >= 1) {
+  //   //   echo ("<script> alert('Error: Order book number already exists ');
+  //   //                                         </script>");
+  //   // } else {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //   //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+  //   // }
+  // }
 
 
 
@@ -444,7 +420,7 @@ class main
       $order_type = $_SESSION['type'];
       $customer_id = $_SESSION['customer_ID'];
       $customer_name = $_SESSION['customer_name'];
-      $order_book_number = $_SESSION['order_book_number'];
+      
 
 
 
@@ -560,7 +536,7 @@ class main
   function add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
     global $con;
-    $item_ID = $this->generate_user("order_item");
+    $item_ID = $this->generate_user("item");
 
     echo ("<script> alert('$total_price');
     </script>");

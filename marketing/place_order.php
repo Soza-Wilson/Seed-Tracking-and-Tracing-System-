@@ -1153,7 +1153,7 @@ if (isset($_POST['place_order'])) {
         // since reguler customer are registered when the user adds the first
         // item, the code here is trying to include the customer's id to the temp session list  
 
-        $name = $_SESSION['customer_name'];
+        $name = $_SESSION['type'];
 
         echo ("<script> alert('$name !');
         </script>");
@@ -1261,6 +1261,7 @@ if (isset($_POST['add_item'])) {
                     $object->temp_data(
                         $data_result,
                         $_POST['order_book_number'],
+                        $_POST['debtor_type'],
                         $_POST['crop'],
                         $_POST['variety'],
                         $_POST['class'],
@@ -1318,6 +1319,7 @@ if (isset($_POST['add_item'])) {
                     $object->temp_data(
                         $data_result,
                         $_POST['order_book_number'],
+                        $_POST['debtor_type'],
                         $_POST['crop'],
                         $_POST['variety'],
                         $_POST['class'],
@@ -1370,6 +1372,7 @@ if (isset($_POST['add_item'])) {
                 $object->temp_data(
                     $array_data,
                     $_POST['order_book_number'],
+                    $_POST['debtor_type'],
                     $_POST['crop'],
                     $_POST['variety'],
                     $_POST['class'],
@@ -1392,6 +1395,7 @@ if (isset($_POST['add_item'])) {
                     $object->temp_data(
                         $data_result,
                         $_POST['order_book_number'],
+                        $_POST['debtor_type'],
                         $_POST['crop'],
                         $_POST['variety'],
                         $_POST['class'],
