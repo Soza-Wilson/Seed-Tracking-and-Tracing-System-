@@ -8,14 +8,14 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-$position= $_SESSION['position'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
 
-$restricted = array("marketing_admin", "system_administrator","marketing_officer");
+$restricted = array("marketing_admin", "system_administrator", "marketing_officer");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -80,7 +80,7 @@ if (in_array($position, $restricted)) {
                 //$("#result").text($(this).val());
             });
 
-            $("#discount_price").on("input",()=>{
+            $("#discount_price").on("input", () => {
                 var result = $("#quantity").val();
                 var result2 = $("#discount_price").val();
                 var total = result * result2;
@@ -114,25 +114,25 @@ if (in_array($position, $restricted)) {
                     alert("please select Crop ");
                 } else {
 
-                  
-
-
-                        let crop_value = $('#select_crop').val();
-
-                        $.post('../production/get_products.php', {
-                            crop_value: crop_value
-
-                        }, data => {
-                            $('#select_variety').html(data);
 
 
 
-                        });
+                    let crop_value = $('#select_crop').val();
+
+                    $.post('../production/get_products.php', {
+                        crop_value: crop_value
+
+                    }, data => {
+                        $('#select_variety').html(data);
+
+
+
+                    });
 
 
 
 
-                  
+
 
 
 
@@ -504,13 +504,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -759,62 +759,62 @@ if (in_array($position, $restricted)) {
                                         <!-- Page body start -->
                                         <div class="page-body">
 
-                                         
+
 
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5>Select Order type</h5>
 
 
-                                                </diforderv>
-                                                <div class="card-block">
+                                                    </diforderv>
+                                                    <div class="card-block">
 
 
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6">
-                                                            <select id="debtor_type" name="debtor_type" class="form-control" required="">
-                                                                <option value="type_not_selected">Select Order Type</option>
-                                                                <option value="agro_dealer">To agro dealer</option>
-                                                                <option value="grower">To grower</option>
-                                                                <option value="b_to_b">B to B</option>
-                                                                <option value="customer">Customer</option>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-6">
+                                                                <select id="debtor_type" name="debtor_type" class="form-control" required="">
+                                                                    <option value="type_not_selected">Select Order Type</option>
+                                                                    <option value="agro_dealer">To agro dealer</option>
+                                                                    <option value="grower">To grower</option>
+                                                                    <option value="b_to_b">B to B (LPO)</option>
+                                                                    <option value="customer">Customer</option>
 
 
 
-                                                            </select>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Search " require="">
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Search " require="">
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <select id="search_result" name="search_result" class="form-control" required="">
+                                                                    <option value="not_selected">-</option>
+
+
+
+                                                                </select>
+                                                            </div>
+
                                                         </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" class="form-control" id="description" name="description" placeholder=" " require="">
+
+
+
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+
                                                     </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <select id="search_result" name="search_result" class="form-control" required="">
-                                                                <option value="not_selected">-</option>
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="description" name="description" placeholder=" " require="">
-
-
-
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
 
                                                 </div>
-
-                                            </div>
                                             </div>
 
                                             <div class="row">
@@ -942,7 +942,7 @@ if (in_array($position, $restricted)) {
                 <div class="card-block">
 
 
-                    
+
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <select id="select_crop" name="crop" class="form-control" required="">
@@ -1146,17 +1146,17 @@ if (in_array($position, $restricted)) {
 
 if (isset($_POST['place_order'])) {
 
+    echo ("<script> alert('Key working !');
+   </script>");
+
     if ($_SESSION['type'] = "customer") {
 
-
-
-        // since reguler customer are registered when the user adds the first
+          // since regular customer are registered when the user adds the first
         // item, the code here is trying to include the customer's id to the temp session list  
 
-        $name = $_SESSION['type'];
+        $name = $_SESSION['customer_name'];
 
-        echo ("<script> alert('$name !');
-        </script>");
+
 
 
         $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
@@ -1167,17 +1167,64 @@ if (isset($_POST['place_order'])) {
             while ($row = $result->fetch_assoc()) {
                 unset($_SESSION['customer_ID']);
                 $_SESSION['customer_ID'] =  $row["debtor_ID"];
+
             }
         }
         $object = new main();
         $object->place_order();
-    } else {
+    
+        
+    
+    } else if ($_SESSION['type'] = "agro_dealer") {
         $object = new main();
         $object->place_order();
+    } else if ($_SESSION['type'] = "B_to_B") {
 
-        echo ("<script> alert('not working !');
-        </script>");
+        echo ("<script> alert('b to b');
+         </script>");
+    }else if($_SESSION['type'] = "grower"){
+
+        echo ("<script> alert('Grower');
+         </script>");
+
     }
+
+
+
+
+
+    // if ($_SESSION['type'] = "customer") {
+
+
+
+    //     // since regular customer are registered when the user adds the first
+    //     // item, the code here is trying to include the customer's id to the temp session list  
+
+    //     $name = $_SESSION['customer_name'];
+
+
+
+
+    //     $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
+    //     $result = $con->query($sql);
+    //     if ($result->num_rows > 0) {
+
+
+    //         while ($row = $result->fetch_assoc()) {
+    //             unset($_SESSION['customer_ID']);
+    //             $_SESSION['customer_ID'] =  $row["debtor_ID"];
+
+    //         }
+    //     }
+    //     $object = new main();
+    //     $object->place_order();
+    // } else {
+    //     $object = new main();
+    //     $object->place_order();
+
+    //     echo ("<script> alert('not working !');
+    //     </script>");
+    // }
 }
 
 if (isset($_POST['add_item'])) {
@@ -1197,55 +1244,58 @@ if (isset($_POST['add_item'])) {
     switch ($debtor_type) {
 
         case "agro_dealer":
+             
 
-            echo ("<script> alert('agro dealer ');
+            //checking if user has selected customer from the selected debtor type 
+            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
+
+
+                
+
+                echo ("<script> alert('please select agro dealer');
             </script>");
-            // //checking if user has selected customer from the selected debtor type 
-            // if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-            //     echo ("<script> alert('please select agro dealer');
-            // </script>");
-            // } else {
+            } else {
 
 
-            //     //checking if order is in progress by checking is the order session is empty 
+                //checking if order is in progress by checking is the order session is empty 
 
-            //     if (empty($_SESSION['order'])) {
+                if (empty($_SESSION['order'])) {
 
-            //         $test =  $_POST['search_result'];
-            //         $data_result = explode(",", $test);
+                    $test =  $_POST['search_result'];
+                    $data_result = explode(",", $test);
 
-            //         $object = new main();
-            //         $object->temp_data(
-            //             $data_result,
-            //             $_POST['order_book_number'],
-            //             $_POST['crop'],
-            //             $_POST['variety'],
-            //             $_POST['class'],
-            //             $_POST['quantity'],
-            //             $_POST['price_per_kg'],
-            //             $_POST['discount_price'],
-            //             $_POST['total_price']
-            //         );
-            //     } else {
+                    $object = new main();
+                    $object->temp_data(
+                        $data_result,
+                        $_POST['order_book_number'],
+                        $_POST['debtor_type'],
+                        $_POST['crop'],
+                        $_POST['variety'],
+                        $_POST['class'],
+                        $_POST['quantity'],
+                        $_POST['price_per_kg'],
+                        $_POST['discount_price'],
+                        $_POST['total_price']
+                    );
+                } else {
 
-            //         $order = $_SESSION['order'];
-            //         $order_book = $_POST['order_book_number'];
-            //         $crop =  $_POST['crop'];
-            //         $variety = $_POST['variety'];
-            //         $class = $_POST['class'];
+                    $order = $_SESSION['order'];
+                    $order_book = $_POST['order_book_number'];
+                    $crop =  $_POST['crop'];
+                    $variety = $_POST['variety'];
+                    $class = $_POST['class'];
 
-            //         $object = new main();
-            //         $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
-            //     }
-            // }
+                    $object = new main();
+                    $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
+                }
+            }
             break;
         case "b_to_b":
 
             //checking if user has selected customer from the selected debtor type 
             if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
 
-                echo ("<script> alert('please select agro dealer');
+                echo ("<script> alert('Please select Business first');
             </script>");
             } else {
 
@@ -1425,7 +1475,7 @@ if (isset($_POST['add_item'])) {
                         $_POST['total_price']
                     );
                 }
-            } 
+            }
 
             break;
 

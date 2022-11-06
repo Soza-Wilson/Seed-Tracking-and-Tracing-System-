@@ -355,6 +355,7 @@ class main
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $order_type;
 
+    
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
     ('$order_ID')";
@@ -365,25 +366,25 @@ class main
     }
   }
 
-  // function check_order_book_number($order, $order_book_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
-  // {
+  function check_order_book_number($order, $order_book_number, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
+  {
 
-  //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+    $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
 
-  //   // global $con;
-  //   // $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
-  //   // $result =  $con->query($sql);
-  //   // $count = $result->num_rows;
-  //   // if ($count >= 1) {
-  //   //   echo ("<script> alert('Error: Order book number already exists ');
-  //   //                                         </script>");
-  //   // } else {
+    // global $con;
+    // $sql = "SELECT * FROM `order_table` WHERE `order_book_number`='$order_book_number'";
+    // $result =  $con->query($sql);
+    // $count = $result->num_rows;
+    // if ($count >= 1) {
+    //   echo ("<script> alert('Error: Order book number already exists ');
+    //                                         </script>");
+    // } else {
 
 
 
-  //   //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
-  //   // }
-  // }
+    //   $this->add_order_item($order, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+    // }
+  }
 
 
 
@@ -398,10 +399,14 @@ class main
   function place_order()
   {
 
+   
     $temp =  $_SESSION['order'];
+ 
 
+    echo ("<script> alert('$temp!');
+     </script>");
 
-
+   // checking is order has items added 
 
     if (empty($temp)) {
 
@@ -409,6 +414,7 @@ class main
       echo ("<script> alert('No items add to order !');
     </script>");
     } else {
+      
       global $con;
       $status = "pending";
       $date = date("d-m-Y");
@@ -421,10 +427,10 @@ class main
       $customer_id = $_SESSION['customer_ID'];
       $customer_name = $_SESSION['customer_name'];
       
-
-
-
-
+     
+      
+      echo ("<script> alert('$order_type test!');
+    </script>");
 
 
 
@@ -438,14 +444,15 @@ class main
         }
       }
 
-
+      echo ("<script> alert('$sum!');
+      </script>");
 
       if (!empty($sum)) {
         /// finalizing order by updating the total of all added atems in the order 
+        
 
         $sql = " UPDATE `order_table` SET `order_type`=' $order_type',
-      `customer_id`='$customer_id',`customer_name`='$customer_name',
-      `order_book_number`='$order_book_number',`user_ID`='$user_ID',
+      `customer_id`='$customer_id',`customer_name`='$customer_name',`user_ID`='$user_ID',
       `status`='$status',`date`='$date',`time`='$time',
       `count`='$count',`total_amount`='$sum' WHERE order_ID ='$order_ID'";
 
@@ -460,13 +467,21 @@ class main
         unset($_SESSION['customer_name']);
         unset($_SESSION['order_book_number']);
 
+  
 
 
-        header('Location:place_order.php');
 
+        echo ("<script> alert('Order placed !!');
+        window.location='place_order.php';
+         </script>");
 
-        echo ("<script> alert('order successful!');
-    </script>");
+      
+      }
+
+      else{
+
+        echo ("<script> alert('Can not process order. price not added to products !');
+        </script>");
       }
     }
   }
@@ -547,9 +562,14 @@ class main
 
     $statement = $con->prepare($sql);
     $statement->execute();
+     
 
 
-    header('Location:place_order.php');
+      echo ("<script> alert('Item added to order');
+      window.location='place_order.php';
+      </script>");
+
+  
   }
 
   /// update order
