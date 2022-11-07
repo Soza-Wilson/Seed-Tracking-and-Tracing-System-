@@ -15,11 +15,11 @@ if(empty($test)){
 
 }
 
-if($position !="marketing_admin" || $position !="admin" || $position !="marketing_officer"){
+// if($position !="marketing_admin" || $position !="admin" || $position !="marketing_officer"){
      
-    header('Location:javascript://history.go(-1)');
+//     header('Location:javascript://history.go(-1)');
 
-}
+// }
 
 
 ?>

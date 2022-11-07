@@ -472,7 +472,7 @@ if (in_array($position, $restricted)) {
                                                         <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
-                                                                <th>Book number</th>                      
+                                                                       
                                                                 <th>Customer name</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
@@ -495,7 +495,7 @@ if (in_array($position, $restricted)) {
 
                                         
 										$order_ID 	 = $row["order_ID"];
-										$order_book_number	 = $row["order_book_number"];
+									
 										$customer_name  = $row["customer_name"];
 										$date    = $row['date'];
 										$time = $row['time'];
@@ -506,7 +506,7 @@ if (in_array($position, $restricted)) {
 										echo"
 											<tr class='odd gradeX'>
 											    <td>$order_ID</td>
-												<td>$order_book_number</td>
+											
 												<td>$customer_name</td>
 												<td>$date</td>
                                                 <td>$time</t>

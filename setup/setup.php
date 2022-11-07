@@ -171,7 +171,10 @@ Hectors varchar(100),
                creditor_ID varchar(100),
                registered_date varchar(100),
                previous_year_crop varchar(100),
+              
                other_year_crop varchar(100),
+               order_status varchar(100),
+               
 
                main_lot_number varchar(100),
               main_quantity varchar(100),

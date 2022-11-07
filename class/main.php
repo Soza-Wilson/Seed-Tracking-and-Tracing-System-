@@ -1146,7 +1146,7 @@ class main
 
       $sql = "INSERT INTO `farm`(`farm_ID`, `Hectors`, `crop_species`, `crop_variety`, `class`, `region`, `district`,`area_name`,
                `address`, `physical_address`, `EPA`, `user_ID`, `creditor_ID`, `registered_date`, 
-               `previous_year_crop`, `other_year_crop`, `main_lot_number`, `main_quantity`, 
+               `previous_year_crop`, `other_year_crop`,`order_status`, `main_lot_number`, `main_quantity`, 
                `male_lot_number`, `male_quantity`, `female_lot_number`, `female_quantity`) VALUES 
                ('$farm_ID','$hectors','$crop','$variety','$class','$region','$district','$area_name',
                '$address','$physical_address','$epa','$user_ID','$grower_ID','$registered_date','$previous_year',
