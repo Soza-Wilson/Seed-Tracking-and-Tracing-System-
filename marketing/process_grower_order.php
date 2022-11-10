@@ -22,7 +22,41 @@ if (in_array($position, $restricted)) {
     header('Location:../restricted_access/restricted_access.php');
 }
 
+$sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID, `class`, 
+`region`, `district`, `area_name`, `address`, `physical_address`, 
+`EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+`other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+ `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+  INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+  variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+  ON farm.creditor_ID = creditor.creditor_ID ";
 
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $crop_ID = $row['crop_ID'];
+        $variety_ID = $row['variety_ID'];
+        $main_quantity = $row['main_quantity'];
+        $male_quantity = $row['male_quantity'];
+        $female_quantity = $row['main_quantity'];
+       
+
+    }
+}
+
+if ($variety_ID="VT003" || $variety_ID="VT004" || $variety_ID="VT004"){
+
+    $main_quantity = "-";
+    $male_quantity = 
+
+
+}
+
+else{
+
+
+}
+  
 ?>
 
 
@@ -64,288 +98,7 @@ if (in_array($position, $restricted)) {
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-
-
-
-
-            $("#quantity").on("input", function() {
-                var result = $("#quantity").val();
-                var result2 = $("#price_per_kg").val();
-                var total = result * result2;
-
-
-                $('#total_price').val(total);
-                // Print entered value in a div box
-                //$("#result").text($(this).val());
-            });
-
-            $("#discount_price").on("input", () => {
-                var result = $("#quantity").val();
-                var result2 = $("#discount_price").val();
-                var total = result * result2;
-
-
-                $('#total_price').val(total);
-            })
-
-            const loaded = "1";
-
-            $.post('../production/get_products.php', {
-                loaded: loaded
-
-            }, data => {
-                $('#select_crop').html(data);
-
-
-
-
-            });
-
-
-
-            $('#select_crop').change(function() {
-
-
-
-                var data = $('#select_crop').find(':selected');
-
-                if (data.val() == "0") {
-                    alert("please select Crop ");
-                } else {
-
-
-
-
-                    let crop_value = $('#select_crop').val();
-
-                    $.post('../production/get_products.php', {
-                        crop_value: crop_value
-
-                    }, data => {
-                        $('#select_variety').html(data);
-
-
-
-                    });
-
-
-
-
-
-
-
-
-                }
-            });
-
-            $('#select_class').change(function() {
-
-                var crop_data = $('#select_crop').val();
-                var variety_data = $('#select_variety').val();
-                var class_data = $('#select_class').val();
-
-                if (crop_data == 0) {
-
-                    alert('Select crop and variety');
-
-
-                } else if (variety_data == 0) {
-
-                    alert('Select crop and variety');
-
-                } else {
-
-                    $.post('get_prices.php', {
-                        crop_data: crop_data,
-                        variety_data: variety_data,
-                        class_data: class_data
-                    }, function(data) {
-
-                        $('#price_per_kg').val(data);
-
-                    });
-                }
-
-
-
-
-            });
-
-
-            $('#debtor_type').change(function() {
-
-                var type_value = $('#debtor_type').val();
-
-                if (type_value == 'agro_dealer') {
-
-                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
-                    $('#description').attr('placeholder', 'agro dealer phone');
-
-
-                } else if (type_value == 'b_to_b') {
-
-                    $('#customer_name').attr('placeholder', 'Search Business by name');
-                    $('#description').attr('placeholder', 'Business description');
-
-
-
-                } else if (type_value == 'customer') {
-
-                    $('#customer_name').attr('placeholder', 'Enter customer name');
-                    $('#description').attr('placeholder', 'Enter customer phone number ');
-
-
-                } else if (type_value == 'grower') {
-
-                    $('#customer_name').attr('placeholder', 'Search grower by name');
-                    $('#description').attr('placeholder', 'grower farm crop and variety ');
-
-
-                }
-
-
-
-                $("#search_main_certificate").on("input", function() {
-
-
-                    var main_certificate_value = $('#search_main_certificate').val();
-                    var main_quantity_value = $('#main_quantity').val();
-                    var crop_value = $('#select_crop').val();
-                    var variety_value = $('#select_variety').val();
-                    var class_result = $('#select_class').val();
-
-
-                    $.post('farm_get_certificate.php', {
-                        main_certificate_value: main_certificate_value,
-                        main_quantity_value: main_quantity_value,
-                        crop_value: crop_value,
-                        variety_value: variety_value,
-                        class_value: class_value
-                    }, function(data) {
-                        $('#main_certificate').html(data);
-
-
-                    })
-
-                });
-
-
-
-
-
-
-
-
-            });
-
-            $('#customer_name').on("input", function() {
-
-
-                let type_value = $('#debtor_type').val();
-                let search_value = $('#customer_name').val();
-
-                if (type_value == "type_not_selected") {
-
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1]);
-
-
-                    });
-
-
-
-
-                } else if (type_value == "b_to_b") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
-
-                    })
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    })
-
-
-
-
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-
-                }
-
-            });
-
-        });
+       
     </script>
 
 
@@ -561,14 +314,14 @@ if (in_array($position, $restricted)) {
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="">
                                     <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Place Order</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="active">
                                     <a href="grower_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
@@ -738,7 +491,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Grower Order </h5>
+                                            <h5 class="m-b-10">Place Order </h5>
 
                                         </div>
                                     </div>
@@ -768,165 +521,11 @@ if (in_array($position, $restricted)) {
 
 
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Select Order type</h5>
-
-
-                                                    </diforderv>
-                                                    <div class="card-block">
-
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6">
-                                                                <select id="debtor_type" name="debtor_type" class="form-control" required="">
-                                                                    <option value="type_not_selected">Select Order Type</option>
-                                                                    <option value="agro_dealer">To agro dealer</option>
-                                                                    <option value="grower">To grower</option>
-                                                                    <option value="b_to_b">B to B (LPO)</option>
-                                                                    <option value="customer">Customer</option>
-
-
-
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Search " require="">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <select id="search_result" name="search_result" class="form-control" required="">
-                                                                    <option value="not_selected">-</option>
-
-
-
-                                                                </select>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <input type="text" class="form-control" id="description" name="description" placeholder=" " require="">
-
-
-
-                                                                </select>
-                                                            </div>
-
-                                                        </div>
-
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Order items </h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID</th>
-                                                                                <th>Crop</th>
-                                                                                <th>Variety</th>
-                                                                                <th>class</th>
-                                                                                <th>Quantity</th>
-                                                                                <th>price per kg</th>
-                                                                                <th>Discount</th>
-                                                                                <th>Total price</th>
-                                                                                <th>Action</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <?php
-                                                                            $order_id = "";
-
-
-                                                                            if (!empty($_SESSION['order'])) {
-
-                                                                                $order_id = $_SESSION['order'];
-                                                                            } else {
-
-                                                                                $order_id = "";
-                                                                            }
-
-                                                                            if (empty($test)) {
-
-                                                                                echo ("<script> alert('no order in progress ');
-                                    </script>");
-                                                                            } else {
-
-                                                                                $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
-                                        `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE order_ID = '$order_id'";
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $item_ID      = $row["item_ID"];
-                                                                                        $crop     = $row["crop"];
-                                                                                        $variety = $row["variety"];
-                                                                                        $class = $row["class"];
-                                                                                        $quantity = $row['quantity'];
-                                                                                        $price_per_kg = $row['price_per_kg'];
-                                                                                        $discount = $row['discount_price'];
-                                                                                        $total_price = $row['total_price'];
-
-
-
-                                                                                        echo "
-                                                   <tr class='odd gradeX'>
-                                                       <td>$item_ID</td>
-                                                       <td>$crop</td>
-                                                       <td>$variety</td>
-                                                       <td>$class</td>
-                                                       <td>$quantity</td>
-                                                       <td>$price_per_kg </td>
-                                                       <td>$discount</td>
-                                                       <td>$total_price</td>
-                                                         
-                                                       
-                                                       
-                                                       <td><a href='view_registered_users.php?' class='ti-eye'></a>/<a href='view_registered_users.php' class='ti-trash'></a>/<a href='view_registered_users.php' class='ti-pencil-alt'></a></td>
-                                                   </tr>	
-                                               ";
-                                                                                    }
-                                                                                }
-                                                                            }
-
-
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
-
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
+                                                    
 
 
                         </form>
@@ -942,7 +541,7 @@ if (in_array($position, $restricted)) {
             <!-- Input Grid card start -->
             <div class="card">
                 <div class="card-header">
-                    <h5>Add Item</h5>
+                    <h5>Grower order details</h5>
 
 
                 </div>
@@ -950,56 +549,64 @@ if (in_array($position, $restricted)) {
 
 
 
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <select id="select_crop" name="crop" class="form-control" required="">
-                                <option value="0">Select crop</option>
-                                <option value="CP001">Maize</option>
-                                <option value="CP002">Ground nuts -shelled-</option>
-                                <option value="CP003">Ground nuts -unshelled-</option>
-                                <option value="CP009">Soyabean </option>
-                                <option value="CP005">Rice</option>
-                                <option value="CP004">Sorgum</option>
-                                <option value="CP006">Cowpea</option>
-                                <option value="CP007">Pigeonpea</option>
-                                <option value="CP008">Beans</option>
 
 
-
-
-                            </select>
+                <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label>Crop :</label>
                         </div>
-
-                    </div>
-                    <div class="form-group row">
                         <div class="col-sm-12">
-                            <select id="select_variety" name="variety" class="form-control" required="">
-                                <option value="variety_not_selected">Select Variety</option>
-
-
-
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <select id="select_class" name="class" class="form-control" required="">
-                                <option value="0">Select class</option>
-                                <option value="basic">Basic</option>
-                                <option value="pre_basic">Pre-Basic</option>
-                                <option value="certified">Certified</option>
-
-                            </select>
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
                         </div>
                     </div>
+
+
+
                     <div class="form-group row">
-
-                        <div class="col-sm-12">
-                            <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Quantity" require="">
+                        <div class="col-sm-2">
+                            <label>Variety :</label>
                         </div>
+                        <div class="col-sm-12">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
+                        </div>
+                    </div>
 
 
+                <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label>Class :</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['class'];?>">
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label>Certificate Quantity :</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $variety_ID;?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label>Male Certificate Quantity :</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label>Female Certificate Quantity:</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-2">
@@ -1043,7 +650,7 @@ if (in_array($position, $restricted)) {
                         <div class="form-group">
 
 
-                            <input type="submit" name="add_item" value="add item" class="btn waves-effect waves-light btn-primary btn-block" />
+                           
                             <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                         </div>

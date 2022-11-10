@@ -1150,7 +1150,7 @@ class main
                `male_lot_number`, `male_quantity`, `female_lot_number`, `female_quantity`) VALUES 
                ('$farm_ID','$hectors','$crop','$variety','$class','$region','$district','$area_name',
                '$address','$physical_address','$epa','$user_ID','$grower_ID','$registered_date','$previous_year',
-               '$other_year','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
+               '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
 
       $statement = $con->prepare($sql);
       $statement->execute();

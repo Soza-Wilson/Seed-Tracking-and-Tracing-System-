@@ -285,7 +285,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="active">
                                     <a href="grower_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
@@ -293,7 +293,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="active">
+                                <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
@@ -413,7 +413,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Place Order</h5>
+                                            <h5 class="m-b-10">Grower Order</h5>
                                           
                                         </div>
                                     </div>
@@ -424,7 +424,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Place Order</a>
+                                            <li class="breadcrumb-item"><a href="#!">Grower Order</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -461,8 +461,8 @@ if (in_array($position, $restricted)) {
                                                             <!-- Input Grid card start -->
                                                             <div class="card">
                                             <div class="card-header">
-                                                
-                                               
+                                                <h5>Registered farms</h5>
+
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -477,56 +477,92 @@ if (in_array($position, $restricted)) {
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
                                                         <thead>
-                                                        <tr>
-                                                                <th>Order ID</th>
-                                                                       
-                                                                <th>Customer name</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>count</th>
-                                                                <th>Total Price</th>
+                                                            <tr>
+                                                                <th>Farm ID</th>
+                                                                <th>Grower</th>
+                                                                <th>Crop</th>
+                                                                <th>Variety</th>
+                                                                <th>Class</th>
+                                                                <th>Quantity</th>
                                                                 <th>Action</th>
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                        <?php
-								$sql = "SELECT * FROM `order_table` WHERE status = 'pending'";
-								$result = $con->query($sql);
-								if($result->num_rows>0)
-								{
-									while($row=$result->fetch_assoc())
-									{
+                                                            <?php
 
 
-                                        
-										$order_ID 	 = $row["order_ID"];
-									
-										$customer_name  = $row["customer_name"];
-										$date    = $row['date'];
-										$time = $row['time'];
-                                        $count = $row['count'];
-                                        $total = $row['total_amount'];
-										
-										
-										echo"
+                                                            $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety,variety.variety_ID, `class`, 
+                              `region`, `district`, `area_name`, `address`, `physical_address`, 
+                              `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+                              `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+                               `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+                                INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+                                variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+                                ON farm.creditor_ID = creditor.creditor_ID WHERE `order_status`='unconfirmed'";
+
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    $farm_id = $row['farm_ID'];
+                                                                    $grower_name = $row['name'];
+                                                                    $crop = $row['crop'];
+                                                                    $variety     = $row['variety'];
+                                                                    $variety_ID     = $row['variety_ID'];
+                                                                    $class     = $row['class'];
+                                                                    $hectors     = $row['Hectors'];
+                                                                    $registered_date = $row['registered_date'];
+                                                                    $region = $row['region'];
+                                                                    $district = $row['district'];
+                                                                    $epa = $row['EPA'];
+                                                                    $area_name = $row['area_name'];
+                                                                    $address = $row['address'];
+                                                                    $main_quantity = $row['main_quantity'];
+                                                                    $male_quantity = $row['male_quantity'];
+                                                                    $female_quantity = $row['female_quantity'];
+
+                                                                    $physical_address = $row['physical_address'];
+                                                                    $previous = $row['previous_year_crop'];
+                                                                    $other_previous = $row['other_year_crop'];
+                                                                    $quantity = "";
+
+                                                                    if($variety_ID=="VT003" || $variety_ID=="VT004" || $variety_ID=="VT004"){
+
+                                                                        $quantity = "$male_quantity . / . $female_quantity";
+
+                                                                    }
+                                                                   else{
+
+                                                                        $quantity = $main_quantity;
+                                                                   }
+
+
+
+
+                                                                    echo "
 											<tr class='odd gradeX'>
-											    <td>$order_ID</td>
-											
-												<td>$customer_name</td>
-												<td>$date</td>
-                                                <td>$time</t>
-                                                <td>$count</t>
-                                                <td>$total</td>
-                                    
-												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
+                                                 <td>$farm_id</td>
+                                                 <td>$grower_name</td>
+											    <td>$crop</td>
+												<td>$variety</td>
+												<td>$class</td>
+                                                <td>$quantity</td>
+
+												
                                                 
+                                               
+												
+												
+												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class ' class='btn btn-success'>View</a>
+                                              </a>
+                                               
+                                                </td>
 											</tr>	
 										";
-									}
-								} 	
-							    ?> 
+                                                                }
+                                                            }
+                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
