@@ -38,23 +38,63 @@ if ($result->num_rows > 0) {
         $variety_ID = $row['variety_ID'];
         $main_quantity = $row['main_quantity'];
         $male_quantity = $row['male_quantity'];
-        $female_quantity = $row['main_quantity'];
+        $female_quantity = $row['female_quantity'];
        
 
     }
 }
 
-if ($variety_ID="VT003" || $variety_ID="VT004" || $variety_ID="VT004"){
+if ($variety_ID=="VT003" || $variety_ID=="VT004" || $variety_ID=="VT004"){
 
-    $main_quantity = "-";
-    $male_quantity = 
+    $main_quantity_ = "-";
+    $male_quantity_ = $male_quantity;
+    $female_quantity_ = $female_quantity;
 
 
 }
 
 else{
+    $main_quantity_ = $main_quantity;
+    $male_quantity_ = "-";
+    $female_quantity_ ="-";
+
+}
 
 
+///Getting price
+
+
+$sql= "SELECT `prices_ID`, `crop_ID`, `variety_ID`, 
+`sell_basic`, `sell_pre_basic`, `sell_certified`, `buy_basic`, `buy_pre_basic`, 
+`buy_certified` FROM `price` WHERE `crop_ID`='$crop_ID' AND `variety_ID`='$variety_ID'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $buy_basic = $row['$buy_basic'];
+        $buy_prebasic = $row['$buy_prebasic'];
+        $buy_certified = $row['$buy_certified'];
+       
+
+    }
+}
+  
+
+
+$price = "";
+if($_GET['class']=="pre_basic"){
+
+    $price = $buy_basic;
+}
+
+else if($_GET['class']=="pre_basic"){
+
+    $price = $buy_basic;
+}
+
+else if($_GET['class']=="pre_basic"){
+
+    $price = $buy_basic;
 }
   
 ?>
@@ -587,7 +627,7 @@ else{
                             <label>Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $variety_ID;?>">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
                         </div>
                     </div>
 
@@ -596,7 +636,7 @@ else{
                             <label>Male Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
                         </div>
                     </div>
 
@@ -605,7 +645,7 @@ else{
                             <label>Female Certificate Quantity:</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -613,7 +653,7 @@ else{
                             <label>Price Per Kg :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $price;?>">
                         </div>
                     </div>
 
