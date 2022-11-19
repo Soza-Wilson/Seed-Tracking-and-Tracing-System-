@@ -1142,15 +1142,18 @@ class main
     global $con;
 
     if (!empty('$main_quantity')) {
+      
+      $sql ="INSERT INTO `farm`(`farm_ID`, `Hectors`, `crop_species`, 
+      `crop_variety`, `class`, `region`, `district`, `area_name`,
+       `address`, `physical_address`, `EPA`, `user_ID`, `creditor_ID`, 
+       `registered_date`, `previous_year_crop`, `other_year_crop`, `order_status`,
+        `main_lot_number`, `main_quantity`, `male_lot_number`, `male_quantity`,
+         `female_lot_number`, `female_quantity`) VALUES ('$farm_ID','$hectors',
+         '$crop','$variety','$class','$region','$district','$area_name',
+         '$address','$physical_address','$epa','$user_ID','$grower_ID','$registered_date','$previous_year',
+         '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
 
 
-      $sql = "INSERT INTO `farm`(`farm_ID`, `Hectors`, `crop_species`, `crop_variety`, `class`, `region`, `district`,`area_name`,
-               `address`, `physical_address`, `EPA`, `user_ID`, `creditor_ID`, `registered_date`, 
-               `previous_year_crop`, `other_year_crop`,`order_status`, `main_lot_number`, `main_quantity`, 
-               `male_lot_number`, `male_quantity`, `female_lot_number`, `female_quantity`) VALUES 
-               ('$farm_ID','$hectors','$crop','$variety','$class','$region','$district','$area_name',
-               '$address','$physical_address','$epa','$user_ID','$grower_ID','$registered_date','$previous_year',
-               '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
 
       $statement = $con->prepare($sql);
       $statement->execute();
@@ -1168,7 +1171,43 @@ class main
 
 
 
+function grower_order_price($crop,$variety,$class){
 
+  global $con;
+
+   $sql="SELECT `prices_ID`, `crop_ID`, 
+   `variety_ID`, `sell_basic`,
+    `sell_pre_basic`, 
+    `sell_certified`,
+     `buy_basic`,
+     `buy_pre_basic`, `buy_certified` FROM `price` WHERE `crop_ID` ='$crop' AND `variety_ID`='$variety'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $basic= $row['sell_basic'];
+        $pre_basic = $row['sell_pre_basic'];
+        
+
+    }
+
+  if($class=="certified"){
+    
+
+   return $basic;
+
+  }
+  else if($class=="basic"){
+
+    return $pre_basic;
+  }
+ 
+  
+
+
+}
+
+}
 
 
 

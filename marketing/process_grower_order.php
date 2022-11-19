@@ -39,6 +39,7 @@ if ($result->num_rows > 0) {
         $main_quantity = $row['main_quantity'];
         $male_quantity = $row['male_quantity'];
         $female_quantity = $row['female_quantity'];
+        $class = $row['class'];
        
 
     }
@@ -64,24 +65,7 @@ else{
 ///Getting price
 
 
-$sql= "SELECT `prices_ID`, `crop_ID`, `variety_ID`, 
-`sell_basic`, `sell_pre_basic`, `sell_certified`, `buy_basic`, `buy_pre_basic`, 
-`buy_certified` FROM `price` WHERE `crop_ID`='$crop_ID' AND `variety_ID`='$variety_ID'";
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $buy_basic = $row['$buy_basic'];
-        $buy_prebasic = $row['$buy_prebasic'];
-        $buy_certified = $row['$buy_certified'];
-       
-
-    }
-}
-  
-
-
-$price = "";
 if($_GET['class']=="pre_basic"){
 
     $price = $buy_basic;

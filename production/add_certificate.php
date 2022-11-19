@@ -862,7 +862,7 @@ if (isset($_FILES['image'])) {
     }
 
     if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "certificate/" . $newfilename);
+        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/production/seed_certificate/" . $newfilename);
         echo "Success";
     } else {
         print_r($errors);

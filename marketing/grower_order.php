@@ -562,6 +562,28 @@ if (in_array($position, $restricted)) {
 										";
                                                                 }
                                                             }
+
+                                                            else{
+
+                                                                echo "
+                                                                <tr class='odd gradeX'>
+                                                                     <td>Unavailable !!</td>
+                                                                    
+                                                                    
+                                                                    
+                                                                   
+                                                                    
+                                                                    
+                                                                    <td>
+                                                                  </a>
+                                                                   
+                                                                    </td>
+                                                                </tr>	
+                                                            ";
+                                                                
+                                                                
+                                                                
+                                                            }
                                                             ?>
                                                         </tbody>
                                                     </table>
