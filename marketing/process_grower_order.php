@@ -71,6 +71,7 @@ if($class=="certified"){
    $object = new main();
    $price = $object->grower_order_price($crop_ID,$variety_ID,$class);    
    $certificate_class="basic";
+   
 
 }
 
@@ -79,6 +80,7 @@ else if($class=="basic"){
     $object = new main();
     $price = $object->grower_order_price($crop_ID,$variety_ID,$class);   
     $certificate_class="prebasic";
+   
 }
 
 
@@ -124,6 +126,16 @@ else if($class=="basic"){
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
+
+$(document).ready(function() {
+ const quntity = $("#certificate_quantity").val();
+ const price = $("#price_per_kg").val();
+
+ let total = quntity*price;
+
+ $("#total_price").val(total);
+    
+});
        
     </script>
 
@@ -582,7 +594,7 @@ else if($class=="basic"){
                             <label>Crop :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
+                            <input type="text" id="crop" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
                         </div>
                     </div>
 
@@ -593,7 +605,7 @@ else if($class=="basic"){
                             <label>Variety :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
+                            <input type="text" id="variety" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
                         </div>
                     </div>
 
@@ -603,7 +615,7 @@ else if($class=="basic"){
                             <label>Class :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['class'];?>">
+                            <input type="text" id="certificate_class" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $certificate_class;?>">
                         </div>
                     </div>
                    
@@ -613,7 +625,7 @@ else if($class=="basic"){
                             <label>Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
+                            <input type="text" id="certificate_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
                         </div>
                     </div>
 
@@ -622,7 +634,7 @@ else if($class=="basic"){
                             <label>Male Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
+                            <input type="text" id="male_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
                         </div>
                     </div>
 
@@ -631,7 +643,7 @@ else if($class=="basic"){
                             <label>Female Certificate Quantity:</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
+                            <input type="text" id="female_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
                         </div>
                     </div>
                     <div class="form-group row">

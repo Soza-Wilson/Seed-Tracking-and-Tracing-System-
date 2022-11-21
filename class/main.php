@@ -341,6 +341,32 @@ class main
 
   //Marketing sales functions 
 
+  // grower order is a little different from the normal order 
+   function grower_order($creditor_id,$creditor_name,$order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price){
+
+    global $con;
+      $order_ID = $this->generate_user("order");
+      $user = $_SESSION["user"];
+      $date = date("d-m-Y");
+      $time = date("H:i:s");
+         
+      $sql ="INSERT INTO `order_table`(`order_ID`, `order_type`,
+       `customer_id`, `customer_name`, `order_book_number`, 
+       `user_ID`, `status`, `date`, `time`, `count`, `total_amount`) 
+      VALUES ('$order_ID','grower_order','$creditor_id','$creditor_name',
+      '-','$user','pendind','$date','$time','1','$total_price')";
+
+        $statement = $con->prepare($sql);
+        $statement->execute();    
+  
+        $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+
+
+
+
+
+
+   }
 
   function temp_data($data_result, $order_note_number,$order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
@@ -349,6 +375,7 @@ class main
 
     if (empty($_SESSION['order'])) {
       global $con;
+      
       $order_ID = $this->generate_user("order");
       $_SESSION['order'] =  $order_ID;
       $_SESSION['customer_ID'] = $data_result[0];
