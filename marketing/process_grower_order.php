@@ -66,20 +66,22 @@ else{
 
 
 
-if($_GET['class']=="pre_basic"){
+if($class=="certified"){
 
-    $price = $buy_basic;
+   $object = new main();
+   $price = $object->grower_order_price($crop_ID,$variety_ID,$class);    
+   $certificate_class="basic";
+
 }
 
-else if($_GET['class']=="pre_basic"){
+else if($class=="basic"){
 
-    $price = $buy_basic;
+    $object = new main();
+    $price = $object->grower_order_price($crop_ID,$variety_ID,$class);   
+    $certificate_class="prebasic";
 }
 
-else if($_GET['class']=="pre_basic"){
 
-    $price = $buy_basic;
-}
   
 ?>
 
