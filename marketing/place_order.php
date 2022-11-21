@@ -738,7 +738,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Grower Order </h5>
+                                            <h5 class="m-b-10">Place Order </h5>
 
                                         </div>
                                     </div>

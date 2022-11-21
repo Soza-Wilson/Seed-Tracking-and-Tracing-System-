@@ -354,7 +354,7 @@ class main
        `customer_id`, `customer_name`, `order_book_number`, 
        `user_ID`, `status`, `date`, `time`, `count`, `total_amount`) 
       VALUES ('$order_ID','grower_order','$creditor_id','$creditor_name',
-      '-','$user','pendind','$date','$time','1','$total_price')";
+      '-','$user','pending','$date','$time','1','$total_price')";
 
         $statement = $con->prepare($sql);
         $statement->execute();    
