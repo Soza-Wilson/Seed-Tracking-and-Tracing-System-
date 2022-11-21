@@ -547,7 +547,7 @@ $(document).ready(function() {
                                 </div>
                             </div>
                         </div>
-                        <form action="place_order.php" method="POST">
+                        <form action="process_grower_order.php" method="POST">
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -566,7 +566,7 @@ $(document).ready(function() {
                                                     
 
 
-                        </form>
+                       
 
 
 
@@ -594,7 +594,7 @@ $(document).ready(function() {
                             <label>Crop :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="crop" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
+                            <input type="text" id="crop" class="form-control" name="crop" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
                         </div>
                     </div>
 
@@ -605,7 +605,7 @@ $(document).ready(function() {
                             <label>Variety :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="variety" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
+                            <input type="text" id="variety" class="form-control" name="variety" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
                         </div>
                     </div>
 
@@ -615,7 +615,9 @@ $(document).ready(function() {
                             <label>Class :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="certificate_class" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $certificate_class;?>">
+                            <input type="text" id="certificate_class" class="form-control" name="certificate_class" placeholder="certificate_class" require=""  value="<?php echo $certificate_class;?>">
+                            <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id'];?>">
+                            <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name'];?>">
                         </div>
                     </div>
                    
@@ -625,7 +627,7 @@ $(document).ready(function() {
                             <label>Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="certificate_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
+                            <input type="text" id="certificate_quantity" class="form-control" name="certificate_quantity" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
                         </div>
                     </div>
 
@@ -634,7 +636,7 @@ $(document).ready(function() {
                             <label>Male Certificate Quantity :</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="male_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
+                            <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
                         </div>
                     </div>
 
@@ -643,7 +645,7 @@ $(document).ready(function() {
                             <label>Female Certificate Quantity:</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="text" id="female_quantity" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
+                            <input type="text" id="female_quantity" class="form-control" name="female_quantity" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -801,46 +803,14 @@ if (isset($_POST['place_order'])) {
     echo ("<script> alert('Key working !');
    </script>");
 
-    if ($_SESSION['type'] = "customer") {
 
-          // since regular customer are registered when the user adds the first
-        // item, the code here is trying to include the customer's id to the temp session list  
+   $object = new main();
+   $object ->grower_order($_POST['creditor_id'],$_POST['creditor_name'],
+   $_POST['crop'],$_POST['variety'],$_POST['certificate_class'], $_POST['quantity'],
+    $_POST['price_per_kg'],$_POST['discount_price'], $_POST['total_price']);
+  
 
-        $name = $_SESSION['customer_name'];
-
-
-
-
-        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-        $result = $con->query($sql);
-        if ($result->num_rows > 0) {
-
-
-            while ($row = $result->fetch_assoc()) {
-                unset($_SESSION['customer_ID']);
-                $_SESSION['customer_ID'] =  $row["debtor_ID"];
-
-            }
-        }
-        $object = new main();
-        $object->place_order();
-    
-        
-    
-    } else if ($_SESSION['type'] = "agro_dealer") {
-        $object = new main();
-        $object->place_order();
-    } else if ($_SESSION['type'] = "B_to_B") {
-
-        echo ("<script> alert('b to b');
-         </script>");
-    }else if($_SESSION['type'] = "grower"){
-
-        echo ("<script> alert('Grower');
-         </script>");
-
-    }
-
+   
 
 
 

@@ -493,7 +493,7 @@ if (in_array($position, $restricted)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety,variety.variety_ID, `class`, 
+                                                            $sql = "SELECT creditor.creditor_ID,`farm_ID`, `Hectors`,crop.crop,variety.variety,variety.variety_ID, `class`, 
                               `region`, `district`, `area_name`, `address`, `physical_address`, 
                               `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
                               `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
@@ -505,6 +505,8 @@ if (in_array($position, $restricted)) {
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
+                                                                    $creditor_id = $row['creditor_ID'];
+                                                                  
                                                                     $farm_id = $row['farm_ID'];
                                                                     $grower_name = $row['name'];
                                                                     $crop = $row['crop'];
@@ -554,7 +556,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class ' class='btn btn-success'>View</a>
+												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name' class='btn btn-success'>View</a>
                                               </a>
                                                
                                                 </td>

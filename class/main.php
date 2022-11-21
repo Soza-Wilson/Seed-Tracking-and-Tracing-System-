@@ -342,7 +342,7 @@ class main
   //Marketing sales functions 
 
   // grower order is a little different from the normal order 
-   function grower_order($creditor_id,$creditor_name,$order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price){
+   function grower_order($creditor_id,$creditor_name,$crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price){
 
     global $con;
       $order_ID = $this->generate_user("order");
