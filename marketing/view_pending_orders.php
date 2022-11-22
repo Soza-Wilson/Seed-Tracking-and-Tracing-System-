@@ -285,13 +285,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="grower_order.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                               
 
                                 <li class="active">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -367,41 +361,7 @@ if (in_array($position, $restricted)) {
                     
                             </ul>
                     
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                            <li class="">
-                                    <a href="b_to_b.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-                    
-                               
-
-                                        
-                                        
-                                       
-                            
-                                    </ul>
+                         
                                 </li>
                             </ul>
                         </div>

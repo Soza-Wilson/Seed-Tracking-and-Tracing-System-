@@ -285,6 +285,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                               
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -301,7 +302,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="view_denied_orders" class="waves-effect waves-dark">
+                                    <a href="view_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
@@ -317,97 +318,50 @@ if (in_array($position, $restricted)) {
                                
                     
                             </ul>
-                    
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Chart &amp; Maps</div>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li>
-                                    <a href="chart.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="map-google.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
+                                
+                                <li class="">
+                                    <a href="agro_dealer.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
+                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="auth-normal-sign-in.html" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="auth-sign-up.html" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Register</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="sample-page.html" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Sample Page</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    
                                 </li>
                     
                             </ul>
                     
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
+                                
+                                <li class="">
+                                    <a href="b_to_b.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Business </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="pcoded-hasmenu ">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    
+                                </li>
+                    
+                            </ul>
+                    
                             
-                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -468,7 +422,7 @@ if (in_array($position, $restricted)) {
                                                             <div class="card">
                                             <div class="card-header">
                                                 
-                                                <span>All requested orders </span>
+                                               
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -485,17 +439,12 @@ if (in_array($position, $restricted)) {
                                                         <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
-                                                                <th>Order #</th>
-                                                                <th>user name</th>
+                                                                       
                                                                 <th>Customer name</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
-                                                                <th>Quantity</th>
-                                                                <th>Price per KG</th>
-                                                                <th>Total</th>
-                                                                <th>Status</th>
+                                                                <th>count</th>
+                                                                <th>Total Price</th>
                                                                 <th>Action</th>
 
                                                             </tr>
@@ -503,43 +452,36 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                         <?php
-								$sql = "SELECT * FROM `order_table`";
+								$sql = "SELECT * FROM `order_table` WHERE status = 'denied'";
 								$result = $con->query($sql);
 								if($result->num_rows>0)
 								{
 									while($row=$result->fetch_assoc())
 									{
+
+
+                                        
 										$order_ID 	 = $row["order_ID"];
-										$order_book_number	 = $row["order_book_number"];
-										$user_ID = $row["user_ID"];
+									
 										$customer_name  = $row["customer_name"];
-										$crop = $row['crop'];
-										$variety  = $row['variety'];
 										$date    = $row['date'];
 										$time = $row['time'];
-										$order_quantity = $row['order_quantity'];
-                                        $price_per_kg = $row['price_per_kg'];
-                                        $status = $row['price_per_kg'];
-                                        $total = $row['total_price'];
+                                        $count = $row['count'];
+                                        $total = $row['total_amount'];
 										
 										
 										echo"
 											<tr class='odd gradeX'>
 											    <td>$order_ID</td>
-												<td>$order_book_number</td>
-												<td>$user_ID</td>
+											
 												<td>$customer_name</td>
-												<td>$crop</td>
-												<td>$variety</td>
 												<td>$date</td>
-                                                <td>$time</td>
-                                                <td>$order_quantity</td>
-                                                <td>$price_per_kg</td>
-                                                <td>$status</td>
+                                                <td>$time</t>
+                                                <td>$count</t>
                                                 <td>$total</td>
+                                    
+												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
                                                 
-                                                
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/<a href='view_registered_users.php' class='ti-trash'></a>/<a href='view_registered_users.php' class='ti-pencil-alt'></a></td>
 											</tr>	
 										";
 									}

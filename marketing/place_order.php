@@ -568,13 +568,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="grower_order.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+         
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -650,83 +644,14 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                           
 
 
 
 
 
 
-
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="pcoded-hasmenu ">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
+                          
                                 </li>
                             </ul>
                         </div>
@@ -782,7 +707,7 @@ if (in_array($position, $restricted)) {
                                                                 <select id="debtor_type" name="debtor_type" class="form-control" required="">
                                                                     <option value="type_not_selected">Select Order Type</option>
                                                                     <option value="agro_dealer">To agro dealer</option>
-                                                                    <option value="grower">To grower</option>
+                                                                    
                                                                     <option value="b_to_b">B to B (LPO)</option>
                                                                     <option value="customer">Customer</option>
 
@@ -817,6 +742,9 @@ if (in_array($position, $restricted)) {
                                                             </div>
 
                                                         </div>
+
+    </br>
+                                       <a href="grower_order.php" class="btn btn-success">Grower Order</a>
 
 
                                                     </div>

@@ -342,7 +342,7 @@ class main
   //Marketing sales functions 
 
   // grower order is a little different from the normal order 
-   function grower_order($creditor_id,$creditor_name,$crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price){
+   function grower_order($creditor_id,$creditor_name,$crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price,$farm_id){
 
     global $con;
       $order_ID = $this->generate_user("order");
@@ -357,7 +357,11 @@ class main
       '-','$user','pending','$date','$time','1','$total_price')";
 
         $statement = $con->prepare($sql);
-        $statement->execute();    
+        $statement->execute(); 
+        
+        $sql= "UPDATE `farm` SET `order_status`='confirmed' WHERE `farm_ID`='$farm_id'";
+        $statement = $con->prepare($sql);
+        $statement->execute();
   
         $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
 
@@ -580,8 +584,9 @@ class main
     global $con;
     $item_ID = $this->generate_user("item");
 
-    echo ("<script> alert('$total_price');
-    </script>");
+    echo ("<script> alert('$item_ID+$crop+$variety+$class$order_quantity+$price_per_kg+$discount_price+$total_price'); </script>");
+
+   
     $sql = "INSERT INTO `item`(`item_ID`, `order_ID`, `crop_ID`,
      `variety_ID`, `class`, `quantity`, `price_per_kg`, `discount_price`, 
      `total_price`) VALUES ('$item_ID','$order_ID','$crop','$variety','$class',
@@ -592,9 +597,9 @@ class main
      
 
 
-      echo ("<script> alert('Item added to order');
-      window.location='place_order.php';
-      </script>");
+      // echo ("<script> alert('Item added to order');
+      // window.location='place_order.php';
+      // </script>");
 
   
   }
@@ -665,7 +670,17 @@ class main
     $user_ID = $_SESSION['user'];
     $date = date("d-m-Y");
     $time = date("H:i:s");
-    global $con;
+    global $con;  
+
+    if($source == "External"){
+
+      $available_quantity = $quantity;
+    }
+    else if($source == "MUSECO"){
+ 
+      $available_quantity =0;
+
+    }
 
 
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
@@ -673,7 +688,7 @@ class main
       `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,`processed_quantity`,`grade_outs_quantity`, `trash_quantity`,
        `description`, `supporting_dir`, `date`, `time`) VALUES ('$stock_ID','$user_ID',
        '$certificate','$farm','$creditor','$source','$crop','$status','$variety','$class',
-       '$srn','$bincard','$bags','$quantity',0,0,0,0,0,'$description',
+       '$srn','$bincard','$bags','$quantity',0,$available_quantity,0,0,0,'$description',
        '$supporting_dir','$date','$time')";
 
     $statement = $con->prepare($sql);

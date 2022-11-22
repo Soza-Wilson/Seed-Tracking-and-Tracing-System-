@@ -34,6 +34,7 @@ $sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID, `class`,
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        $farm_id = $row['farm_ID'];
         $crop_ID = $row['crop_ID'];
         $variety_ID = $row['variety_ID'];
         $main_quantity = $row['main_quantity'];
@@ -134,6 +135,14 @@ $(document).ready(function() {
  let total = quntity*price;
 
  $("#total_price").val(total);
+ $("#total_price").prop("readonly","true");
+ $("#certificate_quantity").prop("readonly","true");
+ $("#price_per_kg").prop("readonly","true");
+$("#crop").prop("readonly","true");
+$("#variety").prop("readonly","true");
+$("#certificate_class").prop("readonly","true");
+$("#male_quantity").prop("readonly","true");
+$("#female_quantity").prop("readonly","true");
     
 });
        
@@ -352,20 +361,14 @@ $(document).ready(function() {
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Place Order</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
-                                    <a href="grower_order.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -441,83 +444,9 @@ $(document).ready(function() {
 
                             </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                            
 
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-
-
-
-
-
-
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="pcoded-hasmenu ">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
+                            
                                 </li>
                             </ul>
                         </div>
@@ -595,6 +524,8 @@ $(document).ready(function() {
                         </div>
                         <div class="col-sm-12">
                             <input type="text" id="crop" class="form-control" name="crop" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
+                            <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id'];?>">
+                            <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id'];?>">
                         </div>
                     </div>
 
@@ -663,7 +594,16 @@ $(document).ready(function() {
                             <label>Enter Discount price:</label>
                         </div>
                         <div class="col-sm-12">
+                        <div class="col-sm-12">
                             <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
+                        </div>
+
+</br>
+
+                        <div class="col-sm-2">
+                        <input type="submit" name="place_order" value="Request for discount" class="btn waves-effect waves-light btn-success  btn-block" />
+                        </div>
+
                         </div>
                     </div>
 
@@ -800,314 +740,23 @@ $(document).ready(function() {
 
 if (isset($_POST['place_order'])) {
 
-    echo ("<script> alert('Key working !');
-   </script>");
+    
+
 
 
    $object = new main();
    $object ->grower_order($_POST['creditor_id'],$_POST['creditor_name'],
-   $_POST['crop'],$_POST['variety'],$_POST['certificate_class'], $_POST['quantity'],
-    $_POST['price_per_kg'],$_POST['discount_price'], $_POST['total_price']);
+   $_POST['crop_id'],$_POST['variety_id'],$_POST['certificate_class'], $_POST['certificate_quantity'],
+    $_POST['price_per_kg'],$_POST['discount_price'], $_POST['total_price'],$farm_id);
   
 
+
+
+
    
-
-
-
-
-    // if ($_SESSION['type'] = "customer") {
-
-
-
-    //     // since regular customer are registered when the user adds the first
-    //     // item, the code here is trying to include the customer's id to the temp session list  
-
-    //     $name = $_SESSION['customer_name'];
-
-
-
-
-    //     $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-    //     $result = $con->query($sql);
-    //     if ($result->num_rows > 0) {
-
-
-    //         while ($row = $result->fetch_assoc()) {
-    //             unset($_SESSION['customer_ID']);
-    //             $_SESSION['customer_ID'] =  $row["debtor_ID"];
-
-    //         }
-    //     }
-    //     $object = new main();
-    //     $object->place_order();
-    // } else {
-    //     $object = new main();
-    //     $object->place_order();
-
-    //     echo ("<script> alert('not working !');
-    //     </script>");
-    // }
 }
 
-if (isset($_POST['add_item'])) {
 
-    //checking if user has added customer details before adding items to order
-
-    $debtor_type = "";
-
-    if (!empty($_SESSION['order'])) {
-
-        $debtor_type = $_SESSION['type'];
-    } else {
-        $debtor_type = $_POST['debtor_type'];
-    }
-
-
-    switch ($debtor_type) {
-
-        case "agro_dealer":
-             
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-
-                
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['debtor_type'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
-                }
-            }
-            break;
-        case "b_to_b":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('Please select Business first');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['debtor_type'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-
-
-
-            break;
-
-        case "grower":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['debtor_type'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-        case "customer":
-
-
-
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-
-                //register customer (figure out how to get customer ID)
-
-                $object = new main();
-                $object->register_customer($_POST['customer_name'], $_POST['description']);
-                $array_data[]  = "";
-                $array_data[0] = "-";
-                $array_data[1] = $_POST['description'];
-                $array_data[2] = $_POST['customer_name'];
-
-                $object->temp_data(
-                    $array_data,
-                    $_POST['order_book_number'],
-                    $_POST['debtor_type'],
-                    $_POST['crop'],
-                    $_POST['variety'],
-                    $_POST['class'],
-                    $_POST['quantity'],
-                    $_POST['price_per_kg'],
-                    $_POST['discount_price'],
-                    $_POST['total_price']
-                );
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['debtor_type'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-
-        default:
-
-            echo ("<script> alert('Please add customer details');
-        </script>");;
-    }
-}
 
 
 

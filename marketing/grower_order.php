@@ -278,20 +278,14 @@ if (in_array($position, $restricted)) {
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Place Order</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
-                                    <a href="grower_order.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-image"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grower Order</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -367,41 +361,7 @@ if (in_array($position, $restricted)) {
                     
                             </ul>
                     
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                            <li class="">
-                                    <a href="b_to_b.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
-                    
-                               
-
-                                        
-                                        
-                                       
-                            
-                                    </ul>
+                          
                                 </li>
                             </ul>
                         </div>
@@ -493,7 +453,7 @@ if (in_array($position, $restricted)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT creditor.creditor_ID,`farm_ID`, `Hectors`,crop.crop,variety.variety,variety.variety_ID, `class`, 
+                                                            $sql = "SELECT creditor.creditor_ID,`farm_ID`, `Hectors`,crop.crop,crop.crop_ID,variety.variety,variety.variety_ID, `class`, 
                               `region`, `district`, `area_name`, `address`, `physical_address`, 
                               `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
                               `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
@@ -510,6 +470,7 @@ if (in_array($position, $restricted)) {
                                                                     $farm_id = $row['farm_ID'];
                                                                     $grower_name = $row['name'];
                                                                     $crop = $row['crop'];
+                                                                    $crop_ID = $row['crop_ID'];
                                                                     $variety     = $row['variety'];
                                                                     $variety_ID     = $row['variety_ID'];
                                                                     $class     = $row['class'];
@@ -556,7 +517,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name' class='btn btn-success'>View</a>
+												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID' class='btn btn-success'>View</a>
                                               </a>
                                                
                                                 </td>

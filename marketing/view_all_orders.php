@@ -15,7 +15,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("marketing_admin", "system_administrator","marketing_officer");
+$restricted = array("marketing_admin", "system_administrator", "marketing_officer");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -23,7 +23,7 @@ if (in_array($position, $restricted)) {
 }
 
 ?>
- 
+
 
 <head>
     <title>Mega Able bootstrap admin template by codedthemes </title>
@@ -285,6 +285,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                               
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -317,8 +318,7 @@ if (in_array($position, $restricted)) {
                                
                     
                             </ul>
-                            
-                    
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
@@ -359,6 +359,10 @@ if (in_array($position, $restricted)) {
                                     
                                 </li>
                     
+                            </ul>
+                    
+                            
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -408,7 +412,7 @@ if (in_array($position, $restricted)) {
                                         
                                          </form>
                                                                        
-                                         
+                                                                   
                                                                      
                                                                     </div>
                                                                 </div>
@@ -418,36 +422,14 @@ if (in_array($position, $restricted)) {
                                                             <div class="card">
                                             <div class="card-header">
                                                 
-                                                
+                                               
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-minus minimize-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
-                    
-                                                        <?php
-                                                        
-                                                        $sql = "SELECT * FROM `order_table`";
-								           $result = $con->query($sql);
-
-                                           $all_data ="";
-								             if($result->num_rows>0)
-								            {
-									             while($row=$result->fetch_assoc())
-									                        {
-                                                            $all_data.=$row["order_ID"].','.$row["customer_name"].','.$row["crop"] ."\n";
-
-                                                            $response ="data:text/CSV;charset=utf-8,ORDER_ID,NAME,CROP\n";
-                                                            $response .= $all_data;
-                                                            }
-
-                                                            echo "working";
-                                                        
-                                                        }  
-                                                        ?>
-                                                        
-                                            </li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -456,8 +438,8 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                         <tr>
-                                                        <th>Order ID</th>
-                                                                <th>Book number</th>                      
+                                                                <th>Order ID</th>
+                                                                       
                                                                 <th>Customer name</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
@@ -476,8 +458,11 @@ if (in_array($position, $restricted)) {
 								{
 									while($row=$result->fetch_assoc())
 									{
+
+
+                                        
 										$order_ID 	 = $row["order_ID"];
-										$order_book_number	 = $row["order_book_number"];
+									
 										$customer_name  = $row["customer_name"];
 										$date    = $row['date'];
 										$time = $row['time'];
@@ -486,18 +471,18 @@ if (in_array($position, $restricted)) {
 										
 										
 										echo"
-                                        <tr class='odd gradeX'>
-                                        <td>$order_ID</td>
-                                        <td>$order_book_number</td>
-                                        <td>$customer_name</td>
-                                        <td>$date</td>
-                                        <td>$time</t>
-                                        <td>$count</t>
-                                        <td>$total</td>
-                            
-                                        <td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
-                                        
-                                    </tr>		
+											<tr class='odd gradeX'>
+											    <td>$order_ID</td>
+											
+												<td>$customer_name</td>
+												<td>$date</td>
+                                                <td>$time</t>
+                                                <td>$count</t>
+                                                <td>$total</td>
+                                    
+												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
+                                                
+											</tr>	
 										";
 									}
 								} 	
