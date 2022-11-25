@@ -386,6 +386,8 @@ class main
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $order_type;
 
+      
+
     
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
@@ -460,8 +462,7 @@ class main
       
      
       
-      echo ("<script> alert('$order_type test!');
-    </script>");
+      
 
 
 
@@ -475,8 +476,7 @@ class main
         }
       }
 
-      echo ("<script> alert('$sum!');
-      </script>");
+      
 
       if (!empty($sum)) {
         /// finalizing order by updating the total of all added atems in the order 
@@ -947,7 +947,7 @@ class main
 
     //step 4 deduct funds from customer account, call create pdf class for dispatch notes and delivery notes etc
 
-    if ($type == "customer_order" || $type == "b_to_b_order") {
+    if ($type == "customer_order" || $type == "b_to_b_order" || $type == "agro_dealer_order") {
 
       $temp_amount = (int)$amount;
 
@@ -964,7 +964,7 @@ class main
         header('location:stock_out.php');
       }
       
-    } elseif ($type == "agro_dealer_order" || $type == "grower_order") {
+    } elseif ($type == "grower_order") {
 
   
       $temp_amount = (int)$amount;

@@ -28,7 +28,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>Place Order</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -196,14 +196,8 @@ if (in_array($position, $restricted)) {
                     $('#description').attr('placeholder', 'Enter customer phone number ');
 
 
-                } else if (type_value == 'grower') {
-
-                    $('#customer_name').attr('placeholder', 'Search grower by name');
-                    $('#description').attr('placeholder', 'grower farm crop and variety ');
-
-
                 }
-
+                el
 
 
                 $("#search_main_certificate").on("input", function() {
@@ -568,7 +562,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-         
+
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -644,15 +638,15 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
-                           
 
 
 
 
 
 
-                          
-                                </li>
+
+
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -707,7 +701,7 @@ if (in_array($position, $restricted)) {
                                                                 <select id="debtor_type" name="debtor_type" class="form-control" required="">
                                                                     <option value="type_not_selected">Select Order Type</option>
                                                                     <option value="agro_dealer">To agro dealer</option>
-                                                                    
+
                                                                     <option value="b_to_b">B to B (LPO)</option>
                                                                     <option value="customer">Customer</option>
 
@@ -743,8 +737,8 @@ if (in_array($position, $restricted)) {
 
                                                         </div>
 
-    </br>
-                                       <a href="grower_order.php" class="btn btn-success">Grower Order</a>
+                                                        </br>
+                                                        <a href="grower_order.php" class="btn btn-success">Grower Order</a>
 
 
                                                     </div>
@@ -1081,85 +1075,57 @@ if (in_array($position, $restricted)) {
 
 if (isset($_POST['place_order'])) {
 
-    echo ("<script> alert('Key working !');
-   </script>");
 
-    if ($_SESSION['type'] = "customer") {
+    $type = $_SESSION['type'];
+    switch ($type) {
 
-          // since regular customer are registered when the user adds the first
-        // item, the code here is trying to include the customer's id to the temp session list  
+        case "customer":
 
-        $name = $_SESSION['customer_name'];
+            // since regular customer are registered when the user adds the first
+            // item, the code here is trying to include the customer's id to the temp session list  
 
-
-
-
-        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-        $result = $con->query($sql);
-        if ($result->num_rows > 0) {
+            $name = $_SESSION['customer_name'];
 
 
-            while ($row = $result->fetch_assoc()) {
-                unset($_SESSION['customer_ID']);
-                $_SESSION['customer_ID'] =  $row["debtor_ID"];
 
+
+            $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
+            $result = $con->query($sql);
+            if ($result->num_rows > 0) {
+
+
+                while ($row = $result->fetch_assoc()) {
+                    unset($_SESSION['customer_ID']);
+                    $_SESSION['customer_ID'] =  $row["debtor_ID"];
+                }
             }
-        }
-        $object = new main();
-        $object->place_order();
-    
-        
-    
-    } else if ($_SESSION['type'] = "agro_dealer") {
-        $object = new main();
-        $object->place_order();
-    } else if ($_SESSION['type'] = "B_to_B") {
+            $object = new main();
+            $object->place_order();
 
-        echo ("<script> alert('b to b');
-         </script>");
-    }else if($_SESSION['type'] = "grower"){
 
-        echo ("<script> alert('Grower');
-         </script>");
 
+
+            break;
+
+        case "agro_dealer":
+
+            $object = new main();
+            $object->place_order();
+
+
+            break;
+
+        case "B_to_B":
+            $object = new main();
+            $object->place_order();
+
+            break;
     }
 
 
 
 
-
-    // if ($_SESSION['type'] = "customer") {
-
-
-
-    //     // since regular customer are registered when the user adds the first
-    //     // item, the code here is trying to include the customer's id to the temp session list  
-
-    //     $name = $_SESSION['customer_name'];
-
-
-
-
-    //     $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-    //     $result = $con->query($sql);
-    //     if ($result->num_rows > 0) {
-
-
-    //         while ($row = $result->fetch_assoc()) {
-    //             unset($_SESSION['customer_ID']);
-    //             $_SESSION['customer_ID'] =  $row["debtor_ID"];
-
-    //         }
-    //     }
-    //     $object = new main();
-    //     $object->place_order();
-    // } else {
-    //     $object = new main();
-    //     $object->place_order();
-
-    //     echo ("<script> alert('not working !');
-    //     </script>");
-    // }
+   
 }
 
 if (isset($_POST['add_item'])) {
@@ -1179,13 +1145,14 @@ if (isset($_POST['add_item'])) {
     switch ($debtor_type) {
 
         case "agro_dealer":
-             
+
+
+
 
             //checking if user has selected customer from the selected debtor type 
+
             if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
 
-
-                
 
                 echo ("<script> alert('please select agro dealer');
             </script>");
@@ -1281,60 +1248,8 @@ if (isset($_POST['add_item'])) {
 
 
 
-            break;
-
-        case "grower":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
 
 
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['debtor_type'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
 
             break;
 
