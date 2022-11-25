@@ -26,7 +26,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -60,6 +60,46 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script src="../assets/js/table2csv.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(()=>{
+
+         $("#download_csv").click(()=>{
+            $("#order_table").table2csv();
+            $("#order_table").table2csv('output', {
+                appendTo:'#out'
+                });
+
+            $("#order_table").table2csv({  
+             filename:'table.csv'
+         });   
+
+         $("#order_table").table2csv({
+
+        separator:',',
+        newline:'\n',
+        quoteFields:true,
+        excludeColumns:'',
+        excludeRows:'',
+        trimContent:true // Trims the content of individual <th>, <td> tags of whitespaces.
+
+    });
+
+    $("#order_table").table2csv('return');
+ 
+
+        })
+
+        
+
+
+
+
+
+
+</script>
 </head>
 
 <body>
@@ -258,13 +298,7 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                <form class="form-material">
-                                    <div class="form-group form-primary">
-                                        <input type="text" name="footer-email" class="form-control" required="">
-                                        <span class="form-bar"></span>
-                                        <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                    </div>
-                                </form>
+                               
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -424,18 +458,12 @@ if (in_array($position, $restricted)) {
                                                 
                                                
                                                 <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+                                                    <button id="download_csv" class="btn btn-success">Download CSV</button>
                                                 </div>
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="all_orders">
                                                         <thead>
                                                         <tr>
                                                                 <th>Order ID</th>

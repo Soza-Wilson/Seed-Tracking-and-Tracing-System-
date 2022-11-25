@@ -28,7 +28,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>Place Order</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -182,11 +182,54 @@ if (in_array($position, $restricted)) {
                     $('#customer_name').attr('placeholder', 'Search agro dealer by name');
                     $('#description').attr('placeholder', 'agro dealer phone');
 
+                    $('#select_class').empty();
+                    var myOptions = [{
+                            text: 'Select Class',
+                            value: "0"
+                        },
+                        {
+                            text: 'certified',
+                            value: "certified"
+                        }
+                    
+
+                    ];
+
+                    $.each(myOptions, function(i, el) {
+                        $('#select_class').append(new Option(el.text, el.value));
+                    });
+
+
 
                 } else if (type_value == 'b_to_b') {
 
                     $('#customer_name').attr('placeholder', 'Search Business by name');
                     $('#description').attr('placeholder', 'Business description');
+
+                    $('#select_class').empty();
+                    var myOptions = [{
+                            text: 'Select Class',
+                            value: "0"
+                        },
+                        {
+                            text: 'basic',
+                            value: "basic"
+                        },
+                        {
+                            text: 'Pre-basic',
+                            value: "pre_basic"
+                        },
+                        {
+                            text: 'certified',
+                            value: "certified"
+                        }
+                    
+
+                    ];
+
+                    $.each(myOptions, function(i, el) {
+                        $('#select_class').append(new Option(el.text, el.value));
+                    });
 
 
 
@@ -194,6 +237,32 @@ if (in_array($position, $restricted)) {
 
                     $('#customer_name').attr('placeholder', 'Enter customer name');
                     $('#description').attr('placeholder', 'Enter customer phone number ');
+
+
+                    $('#select_class').empty();
+                    var myOptions = [{
+                            text: 'Select Class',
+                            value: "0"
+                        },
+                        {
+                            text: 'basic',
+                            value: "basic"
+                        },
+                        {
+                            text: 'Pre-basic',
+                            value: "pre_basic"
+                        },
+                        {
+                            text: 'certified',
+                            value: "certified"
+                        }
+                    
+
+                    ];
+
+                    $.each(myOptions, function(i, el) {
+                        $('#select_class').append(new Option(el.text, el.value));
+                    });
 
 
                 }

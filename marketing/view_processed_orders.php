@@ -26,7 +26,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -248,24 +248,7 @@ if (in_array($position, $restricted)) {
                                 </div>
                         
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="p-15 p-b-0">
-                                <form class="form-material">
-                                    <div class="form-group form-primary">
-                                        <input type="text" name="footer-email" class="form-control" required="">
-                                        <span class="form-bar"></span>
-                                        <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                    </div>
-                                </form>
-                            </div>
+                                   
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
