@@ -584,7 +584,6 @@ class main
     global $con;
     $item_ID = $this->generate_user("item");
 
-    echo ("<script> alert('$item_ID+$crop+$variety+$class$order_quantity+$price_per_kg+$discount_price+$total_price'); </script>");
 
    
     $sql = "INSERT INTO `item`(`item_ID`, `order_ID`, `crop_ID`,
@@ -597,9 +596,9 @@ class main
      
 
 
-      // echo ("<script> alert('Item added to order');
-      // window.location='place_order.php';
-      // </script>");
+      echo ("<script> alert('Item added to order');
+      window.location='place_order.php';
+      </script>");
 
   
   }
@@ -948,10 +947,9 @@ class main
 
     //step 4 deduct funds from customer account, call create pdf class for dispatch notes and delivery notes etc
 
-    if ($type = "customer_order" || $type = "b_to_b_order") {
+    if ($type == "customer_order" || $type == "b_to_b_order") {
 
       $temp_amount = (int)$amount;
-
 
       $sql = "UPDATE `debtor` SET `account_funds`= account_funds-$temp_amount WHERE `debtor_ID`= '$C_D_ID'";
 
@@ -965,13 +963,23 @@ class main
 
         header('location:stock_out.php');
       }
-      //
-    } elseif ($type = "agro_dealer_order" || $type = "grower_order") {
+      
+    } elseif ($type == "agro_dealer_order" || $type == "grower_order") {
 
-      $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$amount WHERE `creditor_ID`= '$C_D_ID'";
+  
+      $temp_amount = (int)$amount;
+      $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$temp_amount WHERE `creditor_ID`= '$C_D_ID'";
 
       $statement = $con->prepare($sql);
       $statement->execute();
+
+      if ($printSave == "print") {
+
+        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
+      } else if ($printSave == "save") {
+
+        header('location:stock_out.php');
+      }
     }
   }
 

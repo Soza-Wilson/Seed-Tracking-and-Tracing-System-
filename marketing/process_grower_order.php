@@ -9,6 +9,7 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$farm_id = $_GET['farm_id'];
 
 if (empty($test)) {
 
@@ -22,14 +23,15 @@ if (in_array($position, $restricted)) {
     header('Location:../restricted_access/restricted_access.php');
 }
 
-$sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID, `class`, 
-`region`, `district`, `area_name`, `address`, `physical_address`, 
-`EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
-`other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
- `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
-  INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
-  variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
-  ON farm.creditor_ID = creditor.creditor_ID ";
+$sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID,
+ `class`, `region`, `district`, `area_name`, `address`, `physical_address`,
+ `EPA`,creditor.name, farm.registered_date, `previous_year_crop`,
+  `other_year_crop`, `main_lot_number`, `main_quantity`, 
+  `male_lot_number`, `male_quantity`, `female_lot_number`, 
+  `female_quantity` FROM `farm` INNER JOIN crop
+ ON farm.crop_species = crop.crop_ID INNER JOIN variety 
+ ON farm.crop_variety = variety.variety_ID INNER JOIN 
+ creditor ON farm.creditor_ID = creditor.creditor_ID WHERE farm.farm_ID='$farm_id'";
 
 $result = $con->query($sql);
 if ($result->num_rows > 0) {

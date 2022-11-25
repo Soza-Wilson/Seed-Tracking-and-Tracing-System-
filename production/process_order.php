@@ -857,24 +857,13 @@ if (isset($_POST['print_process_order_btn'])) {
     $type = "";
     $printSave ="print";
 
+   
+
     $order_ID = $_POST['order_ID'];
     $C_D_ID = $_POST['order_for'];
-    $temp = $_POST['order_type'];
-    if ($temp = "customer") {
-
-        $type = "customer_order";
-    } elseif ($temp = "b_to_b") {
-
-        $type = "b_to_b_order";
-    } elseif ($temp = "agro_dealer") {
-
-        $type = "agro_dealer_order";
-    } elseif ($temp = "grower") {
-
-        $type = "grower_order";
-    }
-
-
+    $type = $_POST['order_type'];
+   
+    
 
     $object = new main();
     $object->production_process_order($order_ID, $C_D_ID, $type,$printSave);
@@ -887,22 +876,10 @@ if (isset($_POST['process_order_btn'])) {
 
     $order_ID = $_POST['order_ID'];
     $C_D_ID = $_POST['order_for'];
-    $temp = $_POST['order_type'];
-    if ($temp = "customer") {
-
-        $type = "customer_order";
-    } elseif ($temp = "b_to_b") {
-
-        $type = "b_to_b_order";
-    } elseif ($temp = "agro_dealer") {
-
-        $type = "agro_dealer_order";
-    } elseif ($temp = "grower") {
-
-        $type = "grower_order";
-    }
-
-
+    $type = $_POST['order_type'];
+  
+    echo ("<script> alert('$type');
+    </script>");
 
     $object = new main();
     $object->production_process_order($order_ID, $C_D_ID, $type,$printSave);
