@@ -628,6 +628,7 @@ if (empty($test)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
+                                                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Download CSV</button>
 
 
 
