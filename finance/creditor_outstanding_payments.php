@@ -697,7 +697,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!"> Outstanding Debtor Payment</a>
+                                            <li class="breadcrumb-item"><a href="#!"> Outstanding Creditor Payment</a>
                                             </li>
                                         </ul>
                                     </div>
