@@ -510,6 +510,8 @@ if (in_array($position, $restricted)) {
 										";
 									}
 								} 	
+
+                            
 							    ?> 
                                                         </tbody>
                                                     </table>

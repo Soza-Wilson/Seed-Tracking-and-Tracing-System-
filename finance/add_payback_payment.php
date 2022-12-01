@@ -7,21 +7,26 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
 
+$restricted = array("system_administrator","finance_admin","cashier");
 
-
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 ?>
 
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -508,7 +513,7 @@ $.post('../marketing/get_transactions.php', {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -1017,291 +1022,6 @@ $.post('../marketing/get_transactions.php', {
 <?php
 
 
-if (isset($_POST['place_order'])) {
-
-    if ($_SESSION['type'] = "customer") {
-
-
-
-        // since reguler customer are registered when the user adds the first
-        // item, the code here is trying to include the customer's id to the temp session list  
-
-        $name = $_SESSION['customer_name'];
-
-        echo ("<script> alert('$name !');
-        </script>");
-
-
-        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-        $result = $con->query($sql);
-        if ($result->num_rows > 0) {
-
-
-            while ($row = $result->fetch_assoc()) {
-                unset($_SESSION['customer_ID']);
-                $_SESSION['customer_ID'] =  $row["debtor_ID"];
-            }
-        }
-        $object = new main();
-        $object->place_order();
-    } else {
-        $object = new main();
-        $object->place_order();
-
-        echo ("<script> alert('not working !');
-        </script>");
-    }
-}
-
-if (isset($_POST['add_item'])) {
-
-    //checking if user has added customer details before adding items to order
-
-    $debtor_type = "";
-
-    if (!empty($_SESSION['order'])) {
-
-        $debtor_type = $_SESSION['type'];
-    } else {
-        $debtor_type = $_POST['debtor_type'];
-    }
-
-
-    switch ($debtor_type) {
-
-        case "agro_dealer":
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number($order, $order_book, $crop, $variety, $class, $_POST['quantity'], $_POST['price_per_kg'], $_POST['discount_price'], $_POST['total_price']);
-                }
-            }
-            break;
-        case "b_to_b":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-
-
-
-            break;
-
-        case "grower":
-
-            //checking if user has selected customer from the selected debtor type 
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-                echo ("<script> alert('please select agro dealer');
-            </script>");
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-        case "customer":
-
-
-
-            if ($_POST['search_result'] == "not_selected" && empty($_SESSION['type'])) {
-
-
-                //register customer (figure out how to get customer ID)
-
-                $object = new main();
-                $object->register_customer($_POST['customer_name'], $_POST['description']);
-                $array_data[]  = "";
-                $array_data[0] = "-";
-                $array_data[1] = $_POST['description'];
-                $array_data[2] = $_POST['customer_name'];
-
-                $object->temp_data(
-                    $array_data,
-                    $_POST['order_book_number'],
-                    $_POST['crop'],
-                    $_POST['variety'],
-                    $_POST['class'],
-                    $_POST['quantity'],
-                    $_POST['price_per_kg'],
-                    $_POST['discount_price'],
-                    $_POST['total_price']
-                );
-            } else {
-
-
-                //checking if order is in progress by checking is the order session is empty 
-
-                if (empty($_SESSION['order'])) {
-
-                    $test =  $_POST['search_result'];
-                    $data_result = explode(",", $test);
-
-                    $object = new main();
-                    $object->temp_data(
-                        $data_result,
-                        $_POST['order_book_number'],
-                        $_POST['crop'],
-                        $_POST['variety'],
-                        $_POST['class'],
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                } else {
-
-                    $order = $_SESSION['order'];
-                    $order_book = $_POST['order_book_number'];
-                    $crop =  $_POST['crop'];
-                    $variety = $_POST['variety'];
-                    $class = $_POST['class'];
-
-                    $object = new main();
-                    $object->check_order_book_number(
-                        $order,
-                        $order_book,
-                        $crop,
-                        $variety,
-                        $class,
-                        $_POST['quantity'],
-                        $_POST['price_per_kg'],
-                        $_POST['discount_price'],
-                        $_POST['total_price']
-                    );
-                }
-            }
-
-            break;
-
-
-        default:
-
-            echo ("<script> alert('Please add customer details');
-        </script>");;
-    }
-}
 
 
 

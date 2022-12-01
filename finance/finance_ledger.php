@@ -7,21 +7,26 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
 
+$restricted = array("system_administrator","finance_admin");
 
-
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 ?>
 
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -60,6 +65,28 @@ if (empty($test)) {
     <script src="../assets/js/pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+
+
+            $('#create_csv_file').click(()=>{
+             
+                let fromDateValue = $('#fromDateValue').val();
+                let toDateValue = $('#toDateValue').val();
+                let typeValue = $('#typeValue').val();
+                let bankAccount = $('#select_bank_name').val();
+
+
+                $.post('finance_csv_handler.php', {
+                    fromDateValue: fromDateValue,
+                    toDateValue: toDateValue,
+                    typeValue: typeValue,
+                    bankAccount: bankAccount
+                },data => {
+                    $('#ledger_table').html(data);
+
+                });
+
+            });
 
 
 
@@ -309,7 +336,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -628,7 +655,7 @@ if (empty($test)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
-                                                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Download CSV</button>
+                                                            <button type="button" class="btn btn-primary " id='create_csv_file' name='create_csv_file'>Download CSV</button>
 
 
 

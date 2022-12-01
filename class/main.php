@@ -101,7 +101,7 @@ class main
         header('Location:production/m&e_dashboard.php');
       } else if ($_SESSION['depertment'] == 5) {
 
-        header('Location:production/finance_dashboard.php');
+        header('Location:finance/finance_dashboard.php');
       } else {
         echo ("<script> alert('Error on user identifying users type');
         </script>");

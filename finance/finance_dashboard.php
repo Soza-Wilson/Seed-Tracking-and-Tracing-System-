@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 
 Ob_start();
@@ -14,7 +15,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","finance_admin");
+$restricted = array("system_administrator","finance_admin","cashier");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -22,6 +23,7 @@ if (in_array($position, $restricted)) {
 }
 
 ?>
+
 
 <head>
     <title>STTS</title>
@@ -48,19 +50,286 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-    <!-- themify-icons line icon -->
+    <!-- themify icon -->
     <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <!-- am chart export.css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
 <body>
-    <!-- Pre-loader start -->
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            // var data_value = "admin_stock_out_chart";
+            Stock_bar_chart();
+            stock_pie_chart();
+            seed_stock();
+            // $.post('', {
+            //     admin_stock_out_value : data_value;
+            // }, function(data) {
+            //     $('#stock_out_chart').html(data);
+
+
+
+
+
+            // });
+
+
+
+
+            // $('#get_data').click(() => {
+
+
+
+
+            //     let fromDateValue = $('#fromDateValue').val();
+            //     let toDateValue = $('#toDateValue').val();
+            //     let typeValue = $('#typeValue').val();
+            //     let bankAccount = $('#select_bank_name').val();
+
+
+            //     $.post('../finance/get_creditors.php', {
+            //         fromDateValue: fromDateValue,
+            //         toDateValue: toDateValue,
+            //         typeValue: typeValue,
+            //         bankAccount: bankAccount   
+            //     }, data => {
+            //         $('#ledger_table').html(data);
+
+            //     });
+
+
+            // });
+
+
+
+
+            var data_value = "bank";
+
+            $.post('../finance/get_creditors.php', {
+                data_value: data_value
+            }, function(data) {
+                $('#select_bank_name').html(data);
+
+
+            });
+
+
+        });
+
+
+        function Stock_bar_chart() {
+
+
+            const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Stock out Quantity For 2022',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(45, 189, 79, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(45, 189, 79,)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+
+                    ],
+                    borderWidth: 1,
+
+                    data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+            };
+            const myChart = new Chart(
+                document.getElementById('stock_out_chart'),
+                config
+            );
+
+        }
+
+
+        function stock_pie_chart() {
+
+
+
+            const data = {
+                labels: [
+                    'Certified',
+                    'Uprocessed',
+                    'Uncertified'
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+            };
+
+            const myChart = new Chart(
+                document.getElementById('inventory_chart'),
+                config
+            );
+
+
+
+        }
+
+
+        function seed_stock() {
+
+            
+
+          <?php 
+            
+$sql="SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
+ INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
+$result = mysqli_query($con,$sql);
+
+  $result = $con->query($sql);
+  foreach($result as $row){
+    $day[] = $row['crop'];
+    $amount[] = $row['quantity'];
+   
+
+
+
+
+  }
+            
+            
+            ?>
+                 
+            
+
+          
+
+            const data = {
+                labels: <?php echo json_encode($day)?>,
+                datasets: [{
+                    label: 'Stock out Quantity For 2022',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(45, 189, 79, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+                        'rgb(45, 189, 79,)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)',
+
+                    ],
+                    borderWidth: 1,
+
+                    data: <?php echo json_encode($amount)?>,
+                }]
+            };
+
+            const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+            const myChart = new Chart(
+                document.getElementById('seed_stock'),
+                config
+            );
+
+    
+
+        }
+    </script>
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -118,7 +387,7 @@ if (in_array($position, $restricted)) {
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-            <nav class="navbar header-navbar pcoded-header">
+        <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
@@ -135,7 +404,9 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-
+                        <a href="index.html">
+                            <span>Finance</span>
+                        </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
@@ -174,9 +445,9 @@ if (in_array($position, $restricted)) {
                                     </li>
                                     <li class="waves-effect waves-light">
                                         <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image">
+                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
                                             <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
+                                                <h5 class="notification-user"></h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
                                                 <span class="notification-time">30 minutes ago</span>
                                             </div>
@@ -232,7 +503,7 @@ if (in_array($position, $restricted)) {
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -258,7 +529,7 @@ if (in_array($position, $restricted)) {
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
@@ -322,7 +593,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="creditor_processed_payments" class="waves-effect waves-dark">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -331,7 +602,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="creditor_outstanding_payments" class="waves-effect waves-dark">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -340,7 +611,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
+                                    <a href="creditors.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
@@ -361,7 +632,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="active">
+                            <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -405,20 +676,17 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Bank Accounts</h5>
-                                            <p class="m-b-0"></p>
+                                            <h5 class="m-b-10">Dashboard</h5>
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
+                                            <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="grower.php">Bank accounts</a>
-                                            </li>
-
                                         </ul>
                                     </div>
                                 </div>
@@ -431,177 +699,208 @@ if (in_array($position, $restricted)) {
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                        <!-- Basic table card start -->
-                                        <!-- Basic table card end -->
-                                        <!-- Inverse table card start -->
-
-                                        <!-- Inverse table card end -->
-                                        <!-- Hover table card start -->
-
-                                        <!-- Hover table card end -->
-                                        <!-- Contextual classes table starts -->
-
-
-                                        <!-- Contextual classes table ends -->
-                                        <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
-
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">New Bank Account</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new Bank Account</h5>
+                                        <div class="row">
+                                            <!-- task, page, download counter  start -->
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-purple">$0</h4>
+                                                                <h6 class="text-muted m-b-0">All Earnings</h6>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <form action="bank_account.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_name" type="text" class="form-control" name="bank_name" placeholder="Bank name" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="text" class="form-control" name="account_number" placeholder="Account-number" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-
-                                                                        
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" name="register_bank" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-
-
-                                                                </form>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-bar-chart f-28"></i>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-purple">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+
+                                                            </div>
+                                                            <div class="col-3 text-right">
+
                                                             </div>
                                                         </div>
 
                                                     </div>
                                                 </div>
-
                                             </div>
-                                        </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-green">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Seed in Stock</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="ti-writes"></i>
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Registred Bank Accounts </h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-green">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                  <th>ID</th>
-                                                                <th>Bank name</th>
-                                                                <th>Account number </th>
-                                                                <th>Acccount funds</th>
-                                                                <th>Registered date</th>
-                                                                <th>registered by</th>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-red">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Stock In</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="ti-arrow-down"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-red">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
 
-                                                                <th>Action</th>
+                                                            </div>
+                                                            <div class="col-3 text-right">
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-
-                                                            $sql = "SELECT `bank_ID`, `bank_name`, `account_number`, `account_funds`, `register_date`, `fullname` FROM `bank_account`
-                              INNER JOIN user ON bank_account.user_ID = user.user_ID";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $bank_id = $row['bank_ID'];
-                                                                    $name = $row['bank_name'];
-                                                                    $account_number = $row['account_number'];
-                                                                    $account_funds = $row['account_funds'];
-                                                                    $registered_date = $row['register_date'];
-                                                                    $registered_by = $row['fullname'];
-                                                                   
-
-
-
-
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                <td>$bank_id</td>
-                                                 <td>$name</td>
-											    <td>$account_number</td>
-												<td> $account_funds</td>
-												<td>$registered_date</td>
-												<td>$registered_by</td>
-                                               
-                                                
-                                               
-	
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='creditor_documents
-                                                
-                                                ' class='ti-bookmark-alt'></a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-blue">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Stock Out </h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="ti-arrow-up "></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-blue">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
 
-                                        <!-- Background Utilities table end -->
+                                                            </div>
+                                                            <div class="col-3 text-right">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- task, page, download counter  end -->
+
+                                            <!--  sale analytics start -->
+                                            <div class="col-xl-8 col-md-12">
+                                                <div class="card">
+
+                                                    <div>
+                                                        <canvas id="stock_out_chart"></canvas>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-md-12">
+
+                                                <div class="card">
+                                                    <div>
+                                                        <canvas id="inventory_chart"></canvas>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <!--  sale analytics end -->
+
+                                            <!--  project and team member start -->
+                                            <div class="col-xl-8 col-md-12">
+
+                                                <div class="card">
+
+                                                    <div>
+                                                        <canvas id="seed_stock"></canvas>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xl-4 col-md-12">
+                                                <div class="card ">
+                                                    <div class="card-header">
+                                                        <h5>Bank Accounts </h5>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="align-middle m-b-30">
+                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>David Jones</h6>
+                                                                <p class="text-muted m-b-0">Developer</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-middle m-b-30">
+                                                            <img src="assets/images/avatar-1.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>David Jones</h6>
+                                                                <p class="text-muted m-b-0">Developer</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-middle m-b-30">
+                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>David Jones</h6>
+                                                                <p class="text-muted m-b-0">Developer</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-middle m-b-30">
+                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>David Jones</h6>
+                                                                <p class="text-muted m-b-0">Developer</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-middle m-b-10">
+                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                            <div class="d-inline-block">
+                                                                <h6>David Jones</h6>
+                                                                <p class="text-muted m-b-0">Developer</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <a href="#!" class="b-b-primary text-primary">View all Projects</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  project and team member end -->
+                                        </div>
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
-
-                            <div id="styleSelector">
-
+                                <div id="styleSelector"> </div>
                             </div>
                         </div>
                     </div>
@@ -609,7 +908,6 @@ if (in_array($position, $restricted)) {
             </div>
         </div>
     </div>
-
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]>
@@ -654,37 +952,37 @@ if (in_array($position, $restricted)) {
     </div>
     <![endif]-->
     <!-- Warning Section Ends -->
+
     <!-- Required Jquery -->
     <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
     <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <script type="text/javascript" src="assets/pages/widget/excanvas.js "></script>
     <!-- waves js -->
     <script src="assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
     <!-- modernizr js -->
     <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
+    <!-- slimscroll js -->
+    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- Chart js -->
+    <script type="text/javascript" src="assets/js/chart.js/Chart.js"></script>
+    <!-- amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="assets/pages/widget/amchart/gauge.js"></script>
+    <script src="assets/pages/widget/amchart/serial.js"></script>
+    <script src="assets/pages/widget/amchart/light.js"></script>
+    <script src="assets/pages/widget/amchart/pie.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <!-- menu js -->
     <script src="assets/js/pcoded.min.js"></script>
     <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
+    <script type="text/javascript" src="assets/js/script.js "></script>
 </body>
 
-
-
 </html>
-
-<?php
-
-
-if (isset($_POST['register_bank'])) {
-
-
-    $object = new main();
-    $object->register_bank_account($_POST['bank_name'], $_POST['account_number']);
-}
-?>

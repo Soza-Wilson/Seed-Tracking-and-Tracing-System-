@@ -4,16 +4,23 @@
 
 Ob_start();
 include('../class/main.php');
-session_start(); 
+session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
-if(empty($test)){
+if (empty($test)) {
 
     header('Location:../index.php');
-
-
 }
+
+$restricted = array("system_administrator","finance_admin","cashier");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+
 
 
 
@@ -21,7 +28,7 @@ if(empty($test)){
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -264,7 +271,7 @@ if(empty($test)){
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>

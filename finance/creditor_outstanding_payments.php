@@ -7,21 +7,26 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../index.php');
 }
 
+$restricted = array("system_administrator","finance_admin","cashier");
 
-
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 ?>
 
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -542,7 +547,7 @@ if (empty($test)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -915,124 +920,6 @@ if (empty($test)) {
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
-<?php
 
-
-if (isset($_POST['place_order'])) {
-
-    if ($_SESSION['type'] = "customer") {
-
-
-
-        // since reguler customer are registered when the user adds the first
-        // item, the code here is trying to include the customer's id to the temp session list  
-
-        $name = $_SESSION['customer_name'];
-
-        echo ("<script> alert('$name !');
-        </script>");
-
-
-        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
-        $result = $con->query($sql);
-        if ($result->num_rows > 0) {
-
-
-            while ($row = $result->fetch_assoc()) {
-                unset($_SESSION['customer_ID']);
-                $_SESSION['customer_ID'] =  $row["debtor_ID"];
-            }
-        }
-        $object = new main();
-        $object->place_order();
-    } else {
-        $object = new main();
-        $object->place_order();
-
-        echo ("<script> alert('not working !');
-        </script>");
-    }
-}
- 
-
-   
-
-if (isset($_FILES['image'])) {
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
-
-
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
-
-    $extensions = array("pdf");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose pdf.";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
-
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
-        echo "Success";
-    } else {
-        print_r($errors);
-    }
-}
- 
-
-if (isset($_POST['save_payment'])) {
-
- //// $_POST[trans_date] is used to get the transaction payment
- $uploaded_file = $newfilename;   
-
-if($_POST['select_payment_type']=="Cheque"){
-
-    
-    $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
-    
-
-}
- if($_POST['select_payment_type']=="Cash"){
-
-  
-
-    
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-  
-   
-} if($_POST['select_payment_type']=="Bank_transfer"){
-
-
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-}
-
-
-   
-
-   
-   
-}
-
-
-
-
-
-?>
 
 </html>
