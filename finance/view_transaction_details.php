@@ -81,6 +81,12 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $('#search_creditor_name').click(()=>{
+
+                alert('working');
+
+            });
+
             $('#cheque_number').prop("readonly", true);
             $('#cheque_file').prop('readonly', true);
 

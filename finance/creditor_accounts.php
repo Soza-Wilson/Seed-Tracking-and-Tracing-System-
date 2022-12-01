@@ -14,7 +14,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","finance_admin","cashier");
+$restricted = array("system_administrator", "finance_admin", "cashier");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -64,35 +64,45 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $('#search_creditor_name').click(() => {
+                
+                       var creditor_name_search = $('#creditor_search').val();
+                $.post('get_creditors.php', {
+                    creditor_name_search: creditor_name_search,
+
+                },function(data) {
+                        $('#transaction_table').html(data);
+                });
+
+            });
+
             $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            $('#cheque_file').prop('readonly', true);
 
             $('#select_payment_type').change(function() {
 
-                 
+
 
 
                 let payment_type = $('#select_payment_type').val();
 
-                if (payment_type==="Cheque"){
+                if (payment_type === "Cheque") {
                     $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
+                    $('#cheque_file').prop('readonly', false);
+                    $('#bank_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
+                } else if (payment_type === "Bank_transfer") {
                     $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
+                    $('#account_name').prop('readonly', false);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
+                    $('#cheque_file').prop('readonly', false);
 
-                }
-                else if (payment_type==="Cash"){
+                } else if (payment_type === "Cash") {
 
                     $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+                    $('#cheque_file').prop('readonly', true);
                 }
 
 
@@ -433,15 +443,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -449,48 +451,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -498,13 +459,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -516,14 +477,14 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
+
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -591,9 +552,9 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -629,7 +590,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -643,7 +604,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                
+
                                 <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
@@ -652,13 +613,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li >
-                                    <a href="#" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+
                                 <li class="pcoded-hasmenu">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
@@ -668,7 +623,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -699,92 +654,131 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
+                                            <li class="breadcrumb-item"><a href="#!"> Creditor Accounts</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                            <!-- Page-header end -->
-                            <div class="pcoded-inner-content">
-                                <!-- Main-body start -->
-                                <div class="main-body">
-                                    <div class="page-wrapper">
 
-                                        <!-- Page body start -->
-                                        <div class="page-body">
-                                            
- 
-                                       
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
 
-                                           
+                                    <!-- Page body start -->
+                                    <div class="page-body">
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Filter </h5>
 
+
+
+
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Filter</h5>
+
+
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="creditor_search" name="creditor_search" placeholder="Enter Creditor Name " require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <button class="ti-search btn btn-success" id="search_creditor_name" name="search_creditor_name"></button>
+
+
+                                                    </div>
 
                                                 </div>
-                                                <div class="card-block">
 
-    </div>
+
+
+
+
+
+
+
                                             </div>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Transaction list</h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID </th>
-                                                                                <th>Name</th>
-                                                                               
-                                                                                <th>Phone</th>
-                                                                                <th>Registered by</th>
-                                                                                <th>Registered date</th>
-                                                                                <th>Account funds (MK)</th>
-                                                                                <th>Actions</th>
-                                                                                
 
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <?php
-                                                                        
-
-                                                                               
-                                                                            
-                                                                             
-
-                                                                                $sql = "SELECT * FROM creditor";
-
-                                                                       
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $creditor_ID = $row["creditor_ID"];
-                                                                                        $name = $row["name"];
-                                                                                        
-                                                                                        $phone = $row["phone"];
-                                                                                        $by = $row["user_ID"];
-                                                                                        $date = $row['registered_date'];
-                                                                                        $funds = $row['account_funds'];
-                                                                                        
-                                                                                     
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
 
 
 
-                                                                                        echo "
+
+
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Transaction list</h5>
+                                                    <div class="card-block table-border-style">
+                                                        <div class="table-responsive" id="table_test">
+                                                            <table class="table" id="transaction_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID </th>
+                                                                        <th>Name</th>
+
+                                                                        <th>Phone</th>
+                                                                        <th>Registered by</th>
+                                                                        <th>Registered date</th>
+                                                                        <th>Account funds (MK)</th>
+                                                                        <th>Actions</th>
+
+
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php
+
+
+
+
+
+
+                                                                    $sql = "SELECT * FROM creditor";
+
+
+
+                                                                    $result = $con->query($sql);
+                                                                    if ($result->num_rows > 0) {
+                                                                        while ($row = $result->fetch_assoc()) {
+                                                                            $creditor_ID = $row["creditor_ID"];
+                                                                            $name = $row["name"];
+
+                                                                            $phone = $row["phone"];
+                                                                            $by = $row["user_ID"];
+                                                                            $date = $row['registered_date'];
+                                                                            $funds = $row['account_funds'];
+
+
+
+
+
+                                                                            echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$creditor_ID</td>
                                                        <td>$name</td>
@@ -802,58 +796,58 @@ if (in_array($position, $restricted)) {
                                                         
                                                    </tr>	
                                                ";
-                                                                                    }
-                                                                                }
-                                                                            
+                                                                        }
+                                                                    }
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+
+                                                                    ?>
+                                                                    <tr>
+                                                                        <th scope="row">-</th>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
 
 
-                                                                            </tr>
+                                                                    </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                </tbody>
+                                                            </table>
 
-
-                                                                </div>
-                                                            </div>
 
                                                         </div>
-
                                                     </div>
 
+                                                </div>
 
-                        </form>
+                                            </div>
 
 
+                                            </form>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Basic Form Inputs card end -->
+                                <!-- Input Grid card start -->
+
+                            </div>
+                            <!-- Page body end -->
+                        </div>
+                    </div>
+                    <!-- Main-body end -->
+                    <div>
 
                     </div>
                 </div>
             </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-
         </div>
-        <!-- Page body end -->
-    </div>
-    </div>
-    <!-- Main-body end -->
-    <div>
-
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
     </div>

@@ -223,15 +223,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                           
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -239,48 +231,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                           
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -321,13 +272,7 @@ if (in_array($position, $restricted)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -446,13 +391,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                               
                                 <li class="active">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
@@ -644,9 +583,11 @@ if (in_array($position, $restricted)) {
 
                                                         <div class="col-sm-3">
 
-                                                            <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+                                                           
 
-                                                            <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
+                                                            <button name="get_data" id="get_data" value="" class="ti-search btn btn-primary"></button>
+
+                                                            <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
                                                         </div>
                                                     </div>
 
@@ -654,8 +595,8 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
-                                                            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">new Entry</button>
-                                                            <button type="button" class="btn btn-primary " id='create_csv_file' name='create_csv_file'>Download CSV</button>
+                                                            <button type="button" class="ti-plus btn btn-success " data-toggle="modal" data-target="#myModal">  new</button>
+                                                            <button type="button" class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
 
 
 

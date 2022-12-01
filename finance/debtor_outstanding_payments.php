@@ -604,7 +604,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -613,7 +613,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>

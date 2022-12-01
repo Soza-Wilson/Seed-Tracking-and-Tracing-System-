@@ -575,3 +575,55 @@ if (isset($_POST['fromDateValue'])) {
     
   }
 }
+
+
+if (isset($_POST['creditor_name_search'])){
+
+
+    $creditor_name = $_POST['creditor_name_search'];
+
+  
+  $sql = "SELECT * FROM creditor WHERE `name`  like '%$creditor_name%' ";
+
+
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $creditor_ID = $row["creditor_ID"];
+          $name = $row["name"];
+
+          $phone = $row["phone"];
+          $by = $row["user_ID"];
+          $date = $row['registered_date'];
+          $funds = $row['account_funds'];
+
+
+
+
+
+          echo "
+<tr class='odd gradeX'>
+<td>$creditor_ID</td>
+<td>$name</td>
+
+<td>$phone</td>
+<td>$by</td>
+<td>$date</td>
+<td>$funds</td>
+<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+
+
+                                         
+
+
+
+</tr>	
+";
+      }
+
+
+
+
+}
+}
