@@ -7,6 +7,19 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$order_ID = $_GET['order_id'];
+$trans_id = $_GET['trans_id'];
+$debtor_id = $_GET['debtor_id'];
+$trans_date = $_GET['trans_date'];
+$trans_time = $_GET['trans_time'];
+$trans_type = $_GET['trans_type'];
+$trans_amount = $_GET['trans_amount'];
+$trans_status = $_GET['status'];
+
+
+
+
+$test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 
 if (empty($test)) {
@@ -14,7 +27,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","finance_admin","cashier");
+$restricted = array("system_administrator", "finance_admin", "cashier");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -22,6 +35,10 @@ if (in_array($position, $restricted)) {
 }
 
 ?>
+
+
+
+
 
 
 
@@ -64,48 +81,39 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+            $('#search_creditor_name').click(() => {
 
-            $('#search_debtor_name').click(() => {
-                
-                var debtor_name_search = $('#debtor_search').val();
-         $.post('get_creditors.php', {
-             debtor_name_search: debtor_name_search,
+                alert('working');
 
-         },function(data) {
-                 $('#transaction_table').html(data);
-         });
-
-     });
+            });
 
             $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            $('#cheque_file').prop('readonly', true);
 
             $('#select_payment_type').change(function() {
 
-                 
+
 
 
                 let payment_type = $('#select_payment_type').val();
 
-                if (payment_type==="Cheque"){
+                if (payment_type === "Cheque") {
                     $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
+                    $('#cheque_file').prop('readonly', false);
+                    $('#bank_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
+                } else if (payment_type === "Bank_transfer") {
                     $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
+                    $('#account_name').prop('readonly', false);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
+                    $('#cheque_file').prop('readonly', false);
 
-                }
-                else if (payment_type==="Cash"){
+                } else if (payment_type === "Cash") {
 
                     $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+                    $('#cheque_file').prop('readonly', true);
                 }
 
 
@@ -511,13 +519,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -529,14 +537,14 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
+
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -560,7 +568,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -570,14 +578,14 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="">
+                                <li class="active">
                                     <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="pcoded-hasmenu">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -586,8 +594,8 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="">
-                                    <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -595,7 +603,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="active">
+                                <li class="pcoded-hasmenu">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -604,20 +612,20 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
-                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
+                                    <a href="add_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -626,7 +634,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="creditor_ouststanding_payments.php" class="waves-effect waves-dark">
+                                    <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -635,14 +643,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
+                                    <a href="creditors.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -656,8 +664,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-
-                            <li class="">
+                                <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -681,7 +688,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -712,182 +719,457 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
+                                            <li class="breadcrumb-item"><a href="#!">Payment</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                            <!-- Page-header end -->
-                            <div class="pcoded-inner-content">
-                                <!-- Main-body start -->
-                                <div class="main-body">
-                                    <div class="page-wrapper">
 
-                                        <!-- Page body start -->
-                                        <div class="page-body">
-                                            
- 
-                                       
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
 
-                                           
+                                    <!-- Page body start -->
+                                    <div class="page-body">
 
-                                            <div class="card">
+
+
+
+                                        <div class="card">
+
+                                            <form action="view_transaction_details.php" method="POST" enctype="multipart/form-data">
                                                 <div class="card-header">
-                                                    <h5>Filter </h5>
+                                                    <h5>Creditor Account Details</h5>
 
-
-                                                </div>
-                                                <div class="card-block">
-
-<div class="form-group row">
-    <div class="col-sm-4">
-        <input type="text" class="form-control" id="debtor_search" name="debtor_search" placeholder="Enter Debtor Name " require="">
-    </div>
-
-    <div class="col-sm-2">
-        <button class="ti-search btn btn-success" id="search_debtor_name" name="search_debtor_name"></button>
-
-
-    </div>
-
-</div>
+                                                    <div class="card-header-right">
+                                                        <ul class="list-unstyled card-option">
+                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                        </ul>
+                                                    </div>
 
 
 
+                                                    <div class="form-group row">
 
 
+                                                        <span class="pcoded-mcaret"></span>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">ID</label>
+                                                            <select class="form-control" name="trans_id">
+                                                                <option value="<?php echo $trans_id; ?>"><?php echo $trans_id; ?></option>
+                                                            </select>
 
 
-
-</div>
-                                            </div>
-
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Transaction list</h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID </th>
-                                                                                <th>Name</th>
-                                                                                <th>Type</th>
-                                                                                <th>Phone</th>
-                                                                                <th>Registered by</th>
-                                                                                <th>Registered date</th>
-                                                                                <th>Account funds (MK)</th>
-                                                                                <th>Actions</th>
-                                                                                
-
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <?php
-                                                                        
-
-                                                                               
-                                                                            
-                                                                             
-
-                                                                                $sql = "SELECT * FROM debtor";
-
-                                                                       
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $debtor_ID = $row["debtor_ID"];
-                                                                                        $name = $row["name"];
-                                                                                        $type  = $row["debtor_type"];
-                                                                                        $phone = $row["phone"];
-                                                                                        $by = $row["user_ID"];
-                                                                                        $date = $row['registered_date'];
-                                                                                        $funds = $row['account_funds'];
-                                                                                        
-                                                                                     
-
-
-
-                                                                                        echo "
-                                                   <tr class='odd gradeX'>
-                                                       <td>$debtor_ID</td>
-                                                       <td>$name</td>
-                                                       <td>$type</td>
-                                                       <td>$phone</td>
-                                                       <td>$by</td>
-                                                       <td>$date</td>
-                                                       <td>$funds</td>
-                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
-                                                       
-                                                     
-                                                                                                           
-                                                         
-                                                       
-                                                        
-                                                   </tr>	
-                                               ";
-                                                                                    }
-                                                                                }
-                                                                            
-
-
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
-
-
-                                                                </div>
-                                                            </div>
 
                                                         </div>
+
+
+
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary "> Fullname</label>
+                                                            <select class="form-control" name="trans_type">
+                                                                <option value="<?php echo $trans_type; ?>"><?php echo $trans_type; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+
+
+
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary ">Account Type</label>
+                                                            <select class="form-control" name="trans_amount">
+                                                                <option value="<?php echo $trans_amount; ?>"><?php echo $trans_amount; ?> </option>
+                                                            </select>
+
+
+
+                                                        </div>
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary ">Phone</label>
+                                                            <select class="form-control" name="trans_amount">
+                                                                <option value="<?php echo $trans_amount; ?>"><?php echo $trans_amount; ?> </option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Registerd date</label>
+                                                            <select class="form-control" name="trans_date">
+
+                                                                <option value="<?php echo $trans_status; ?>"><?php echo $trans_date; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Time</label>
+                                                            <select class="form-control" name="trans_time">
+                                                                <option value="<?php echo $trans_time; ?>"><?php echo $trans_time; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Debtor ID</label>
+                                                            <select class="form-control" name="debtor_id">
+                                                                <option value="<?php echo $debtor_id; ?>"><?php echo $debtor_id; ?></option>
+                                                            </select>
+
+
+
+                                                        </div>
+
+
+
+
+
+
 
                                                     </div>
 
 
-                        </form>
+
+
+                                                </div>
 
 
 
+                                        </div>
+
+                                        <div class="card">
+
+                                            <div class="card-header">
+                                                <h5>Add Payment Details</h5>
+
+
+                                            </div>
+
+                                            <div id="myModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h5 class="modal-title">Save Payment</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+
+
+
+
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-3">
+                                                                    <button class="btn btn-primary" name="print_save_payment"> Save & Print Receipt</button>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-3">
+                                                                    <button class="btn btn-success" name="save_payment"> Save Only</button>
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+
+
+
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="card-block">
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <select id="select_payment_type" name="select_payment_type" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Payment Type</option>
+
+                                                            <option value="Cash">Cash</option>
+                                                            <option value="Cheque">Cheque</option>
+                                                            <option value="Bank_transfer">Bank transfer</option>
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <select id="bank_account_name" name="bank_account_name" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Company Bank Account</option>
+
+
+                                                            <?php
+                                                            $sql = "SELECT * FROM bank_account";
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+
+
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    $name = $row["bank_name"];
+                                                                    $bank_id = $row["bank_ID"];
+                                                                    echo "<option value='$bank_id'>$name</option>";
+                                                                }
+                                                            }
+
+                                                            if ($value = 1) {
+                                                            }
+
+
+                                                            ?>
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount (MK)" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="cheque_number" name="cheque_number" placeholder="Cheque number " require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Bank name" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="account_name" name="account_name" placeholder="Account name" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" id="description" name="description" placeholder="Description (Optional)" require="">
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12"><label>Upload scanned cheque file / Other supporting documents</label></div>
+                                                    <div class="col-sm-12">
+                                                        <input type="file" class="form-control" id="cheque_file" name="image" placeholder=" " require="">
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <input type="button" data-toggle="modal" data-target="#myModal" value="save payment" class="btn btn-success">
+                                                <input type="submit" name="back" value="back" class="btn btn-primary">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Transaction item list</h5>
+                                                        <div class="card-block table-border-style">
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table" id="transaction_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Item_ID</th>
+                                                                            <th>Crop</th>
+                                                                            <th>Variety</th>
+                                                                            <th>Class</th>
+
+                                                                            <th>Quantity</th>
+                                                                            <th>Price per kg</th>
+                                                                            <th>Discount</th>
+                                                                            <th>amount</th>
+
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        <?php
+
+
+
+
+                                                                        $order_id = $_GET['order_id'];
+
+                                                                        $sql = "SELECT `item_ID`, `crop`, `variety`, `class`, `quantity`,`price_per_kg`,`discount_price`,`total_price` FROM
+                                                                                `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE order_ID = '$order_id'";
+
+
+
+                                                                        $result = $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+                                                                                $item_ID = $row["item_ID"];
+                                                                                $crop   = $row["crop"];
+                                                                                $variety = $row["variety"];
+                                                                                $class = $row["class"];
+                                                                                $quantity = $row['quantity'];
+                                                                                $price = $row['price_per_kg'];
+                                                                                $discount = $row['discount_price'];
+                                                                                $total_price = $row['total_price'];
+
+
+
+
+                                                                                echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$item_ID</td>
+                                                       <td>$crop</td>
+                                                       <td>$variety</td>
+                                                       <td>$class</td>
+                                                       <td>$quantity</td>
+                                                       <td>$price</td>
+                                                       <td>$discount</td>
+                                                       <td>$total_price</td>
+                                                    
+                                                         
+                                                       
+                                                       
+                                                   </tr>	
+                                               ";
+                                                                            }
+                                                                        }
+
+
+
+                                                                        ?>
+                                                                        <tr>
+                                                                            <th scope="row">-</th>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+
+
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+                                </div>
+                                <!-- Page body end -->
+                            </div>
+                        </div>
+                        <!-- Main-body end -->
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-
         </div>
-        <!-- Page body end -->
-    </div>
-    </div>
-    <!-- Main-body end -->
-    <div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -956,6 +1238,235 @@ if (in_array($position, $restricted)) {
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+<?php
 
+
+if (isset($_POST['place_order'])) {
+
+    if ($_SESSION['type'] = "customer") {
+
+
+
+        // since reguler customer are registered when the user adds the first
+        // item, the code here is trying to include the customer's id to the temp session list  
+
+        $name = $_SESSION['customer_name'];
+
+        echo ("<script> alert('$name !');
+        </script>");
+
+
+        $sql = "SELECT * FROM `debtor` WHERE `name` like '%$name%' AND `debtor_type`='customer'";
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+
+
+            while ($row = $result->fetch_assoc()) {
+                unset($_SESSION['customer_ID']);
+                $_SESSION['customer_ID'] =  $row["debtor_ID"];
+            }
+        }
+        $object = new main();
+        $object->place_order();
+    } else {
+        $object = new main();
+        $object->place_order();
+
+        echo ("<script> alert('not working !');
+        </script>");
+    }
+}
+
+
+
+
+if (isset($_FILES['image'])) {
+    $errors = array();
+    $file_name = $_FILES['image']['name'];
+    $file_size = $_FILES['image']['size'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
+
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
+
+
+    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+    $extensions = array("pdf");
+
+    if (in_array($file_ext, $extensions) === false) {
+        $errors[] = "extension not allowed, please choose pdf.";
+    }
+
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "documents/" . $newfilename);
+        echo "Success";
+    } else {
+        print_r($errors);
+    }
+}
+
+
+if (isset($_POST['print_save_payment'])) {
+
+
+
+    // $_POST[trans_date] is used to get the transaction payment
+    $uploaded_file = $newfilename;
+    $save_type = "save_n_print";
+
+
+    if ($_POST['select_payment_type'] == "Cheque") {
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            $uploaded_file,
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            $_POST['cheque_number'],
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+        );
+    }
+    if ($_POST['select_payment_type'] == "Cash") {
+
+
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+
+        );
+    }
+    if ($_POST['select_payment_type'] == "Bank_transfer") {
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+
+        );
+    }
+}
+
+if (isset($_POST['save_payment'])) {
+    // $_POST[trans_date] is used to get the transaction payment
+    $uploaded_file = $newfilename;
+    $save_type = "save";
+
+
+    if ($_POST['select_payment_type'] == "Cheque") {
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            $uploaded_file,
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            $_POST['cheque_number'],
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+        );
+    }
+    if ($_POST['select_payment_type'] == "Cash") {
+
+
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+        );
+    }
+    if ($_POST['select_payment_type'] == "Bank_transfer") {
+
+
+        $object = new main;
+        $object->add_debtor_payment(
+            $_POST['select_payment_type'],
+            $_POST['amount'],
+            '-',
+            $_SESSION['user'],
+            $_POST['trans_id'],
+            $_POST['debtor_id'],
+            $_POST['trans_amount'],
+            $_POST['trans_date'],
+            '-',
+            '-',
+            '-',
+            $_POST['description'],
+            $save_type,
+            $_POST['bank_account_name']
+
+        );
+    }
+}
+
+
+
+
+
+?>
 
 </html>

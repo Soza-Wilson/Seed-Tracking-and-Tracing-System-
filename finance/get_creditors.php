@@ -588,6 +588,24 @@ if (isset($_POST['creditor_name_search'])){
 
 
   $result = $con->query($sql);
+
+echo" <thead>
+<tr>
+    <th>ID </th>
+    <th>Name</th>
+
+    <th>Phone</th>
+    <th>Registered by</th>
+    <th>Registered date</th>
+    <th>Account funds (MK)</th>
+    <th>Actions</th>
+
+
+
+</tr>
+</thead>";  
+
+
   if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
           $creditor_ID = $row["creditor_ID"];
@@ -603,6 +621,8 @@ if (isset($_POST['creditor_name_search'])){
 
 
           echo "
+
+         
 <tr class='odd gradeX'>
 <td>$creditor_ID</td>
 <td>$name</td>
@@ -623,6 +643,120 @@ if (isset($_POST['creditor_name_search'])){
       }
 
 
+
+
+}
+else{
+
+  echo "
+  <tr class='odd gradeX'>
+  <td>Unavailable !</td>
+  <td>-</td>
+  
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  
+  
+                                           
+  
+  
+  
+  </tr>	
+  ";
+
+
+}
+
+}
+
+if(isset($_POST['debtor_name_search'])){
+
+
+  $debtor_name = $_POST['debtor_name_search'];
+
+  
+  $sql = "SELECT * FROM debtor WHERE `name`  like '%$debtor_name%'";
+
+       echo" <thead>
+       <tr>
+           <th>ID </th>
+           <th>Name</th>
+           <th>Type</th>
+           <th>Phone</th>
+           <th>Registered by</th>
+           <th>Registered date</th>
+           <th>Account funds (MK)</th>
+           <th>Actions</th>
+           
+
+         
+       </tr>
+   </thead> ";                                                                
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $debtor_ID = $row["debtor_ID"];
+          $name = $row["name"];
+          $type  = $row["debtor_type"];
+          $phone = $row["phone"];
+          $by = $row["user_ID"];
+          $date = $row['registered_date'];
+          $funds = $row['account_funds'];
+          
+       
+
+
+
+          echo "
+
+                  
+<tr class='odd gradeX'>
+<td>$debtor_ID</td>
+<td>$name</td>
+<td>$type</td>
+<td>$phone</td>
+<td>$by</td>
+<td>$date</td>
+<td>$funds</td>
+<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+
+
+                             
+
+
+
+</tr>	
+";
+
+
+
+      }
+}
+
+else{
+
+  echo "
+  <tr class='odd gradeX'>
+  <td>Unavailable !</td>
+  <td>-</td>
+  
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  
+  
+                                           
+  
+  
+  
+  </tr>	
+  ";
 
 
 }
