@@ -68,25 +68,7 @@ if (in_array($position, $restricted)) {
 
 
 
-            $('#create_csv_file').click(()=>{
-             
-                let fromDateValue = $('#fromDateValue').val();
-                let toDateValue = $('#toDateValue').val();
-                let typeValue = $('#typeValue').val();
-                let bankAccount = $('#select_bank_name').val();
-
-
-                $.post('finance_csv_handler.php', {
-                    fromDateValue: fromDateValue,
-                    toDateValue: toDateValue,
-                    typeValue: typeValue,
-                    bankAccount: bankAccount
-                },data => {
-                    $('#ledger_table').html(data);
-
-                });
-
-            });
+           
 
 
 
@@ -536,6 +518,8 @@ if (in_array($position, $restricted)) {
 
 
                                                 </div>
+
+    </form>
                                                 <div class="card-block">
 
                                                     <div class="form-group row">
@@ -592,19 +576,24 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
 
-
+                                                    <form action="finance_csv_handler.php" method="POST">    
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <button type="button" class="ti-plus btn btn-success " data-toggle="modal" data-target="#myModal">  new</button>
-                                                            <button type="button" class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
 
+                 
+                    
+                  
+                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
 
+                
 
                                                             </select>
+                                                                  
                                                         </div>
 
                                                     </div>
-
+                                                    </form> 
 
                                                 </div>
 
@@ -742,7 +731,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
 
-                        </form>
+                      
 
 
 
