@@ -73,8 +73,9 @@ if (in_array($position, $restricted)) {
 
 
             $('#get_data').click(() => {
-
-
+       
+                
+            
 
 
 
@@ -82,6 +83,12 @@ if (in_array($position, $restricted)) {
                 let toDateValue = $('#toDateValue').val();
                 let typeValue = $('#typeValue').val();
                 let bankAccount = $('#select_bank_name').val();
+
+                $('#ledger_type_hidden').val(typeValue);
+                $('#bank_name_hidden').val(bankAccount);
+                $('#from_hidden').val(fromDateValue);
+                $('#to_hidden').val(toDateValue);
+                $('#filter').val("haghgd");
 
 
                 $.post('get_creditors.php', {
@@ -569,7 +576,7 @@ if (in_array($position, $restricted)) {
 
                                                            
 
-                                                            <button name="get_data" id="get_data" value="" class="ti-search btn btn-primary"></button>
+                                                        <input type="button" name="get_data" id="get_data" value="get data" class="btn btn-primary" />
 
                                                             <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
                                                         </div>
@@ -580,6 +587,14 @@ if (in_array($position, $restricted)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
                                                             <button type="button" class="ti-plus btn btn-success " data-toggle="modal" data-target="#myModal">  new</button>
+
+
+                                                            <input type="hidden" name="ledger_type_hidden" id="ledger_type_hidden">
+                                                            <input type="hidden" name="bank_name_hidden" id="bank_name_hidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filtre" id="filter">
+
 
                  
                     
