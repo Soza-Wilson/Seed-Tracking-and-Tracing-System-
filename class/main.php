@@ -1976,8 +1976,7 @@ if ($result->num_rows > 0) {
         }
       } else if ($amount > $balance) {
 
-        echo ("<script> alert('Error Amount greater than required balance ');
-        </script>");
+        
       }
     }
   }

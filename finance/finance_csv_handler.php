@@ -233,8 +233,10 @@ if (isset($_POST['fromDateValue'])) {
 
     else{
 
-      $test=$_POST['filer'];
-
+      $bankAccount = $_POST['bank_name_hidden'];
+      $fromDateValue = $_POST['from_hidden'];
+      $toDateValue = $_POST['to_hidden'];
+      $ledger_type = $_POST['ledger_type_hidden'];
       $date = date('d-m-y h:i');
       $filename = "Ledger $date.csv";
       $fp = fopen('php://output', 'w');
@@ -251,7 +253,9 @@ if (isset($_POST['fromDateValue'])) {
       `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
        `reference_bank_amount`, `entry_date`, `entry_time` FROM 
      `ledger`  INNER JOIN user ON user.user_ID = ledger.user_ID 
-     INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID ORDER BY `ledger_ID` DESC";
+     INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID WHERE
+      bank_account.bank_ID = '$bankAccount' AND ledger.ledger_type = 'debit'
+       AND ledger.entry_date BETWEEN '$fromDateValue' AND '$toDateValue' ORDER BY `ledger_ID` DESC";
       $result = $con->query($sql);
       if($result->num_rows>0)
       {

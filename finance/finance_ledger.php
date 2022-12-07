@@ -593,7 +593,7 @@ if (in_array($position, $restricted)) {
                                                             <input type="hidden" name="bank_name_hidden" id="bank_name_hidden">
                                                             <input type="hidden" name="from_hidden" id="from_hidden">
                                                             <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filtre" id="filter">
+                                                            <input type="hidden" name="filter" id="filter">
 
 
                  
