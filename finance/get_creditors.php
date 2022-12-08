@@ -761,3 +761,37 @@ else{
 
 }
 }
+
+if(isset($_POST["debtor_outstanding_type_filter"])){
+
+  $type = $_POST["debtor_outstanding_type_filter"];
+
+  if($type == "customer" || $type =="agro_dealer" || $type == "b_to_b"){
+
+    $sql="SELECT `debtor_ID`, `name` FROM `debtor` WHERE `debtor_type`='$type'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $debtor_ID = $row["debtor_ID"];
+            $debtor_name = $row["name"];
+
+
+            echo" 
+
+                                                        <datalist id='names'>
+                                                            <option value='$debtor_ID'>$debtor_name</option>
+                                                        </datalist>
+            
+            ";
+        }
+      }
+
+
+  }
+
+  
+ 
+
+
+}
