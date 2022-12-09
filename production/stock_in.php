@@ -1356,7 +1356,7 @@ if (isset($_FILES['image'])) {
     }
 
     if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "stock_in_documents/" . $newfilename);
+        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/production/stock_in_documents/" . $newfilename);
         echo "Success";
     } else {
         print_r($errors);

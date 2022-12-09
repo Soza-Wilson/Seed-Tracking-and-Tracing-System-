@@ -878,8 +878,7 @@ if (isset($_POST['process_order_btn'])) {
     $C_D_ID = $_POST['order_for'];
     $type = $_POST['order_type'];
   
-    echo ("<script> alert('$type');
-    </script>");
+  
 
     $object = new main();
     $object->production_process_order($order_ID, $C_D_ID, $type,$printSave);

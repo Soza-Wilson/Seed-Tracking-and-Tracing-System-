@@ -795,3 +795,65 @@ if(isset($_POST["debtor_outstanding_type_filter"])){
 
 
 }
+
+if(isset($_POST["payment_debtor_data_filter"])){
+
+  $fromValue = $_POST['from'];
+  $toValue = $_POST['to'];
+  $typeValue = $_POST['payment_debtor_data_filter'];
+
+
+  
+  $sql = "SELECT `transaction_ID`, `type`, `action_name`,
+   `action_ID`, `C_D_ID`, `amount`,
+  `trans_date`, `trans_time`, `trans_status`,
+   `user_ID` FROM `transaction` WHERE 
+    `trans_date` BETWEEN '$fromValue' AND '$toValue'";
+
+// `trans_status` = 'partly_payed' OR
+// `trans_status` = 'payment_pending'
+//  AND `type` ='customer_order'
+//   OR `type` ='grower_order' AND
+     
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $transaction_ID = $row["transaction_ID"];
+        $type  = $row["type"];
+        $amount = $row["amount"];
+        $trans_date = $row["trans_date"];
+        $trans_time = $row['trans_time'];
+        $trans_status = $row['trans_status'];
+
+
+
+
+
+        echo "
+<tr class='odd gradeX'>
+<td>$transaction_ID</td>
+<td>$type</td>
+<td>$amount</td>
+<td>$trans_date</td>
+<td>$trans_time</td>
+<td>$fromValue</td>
+<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+
+
+                                   
+
+
+
+</tr>	
+";
+    }
+}
+
+
+
+
+
+
+
+}

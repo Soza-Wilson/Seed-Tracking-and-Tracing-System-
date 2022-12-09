@@ -264,8 +264,9 @@ $result = mysqli_query($con,$sql);
                  
             
 
-          
-
+           let test = <?php echo json_encode($amount)?>;
+           alert(test);
+              
             const data = {
                 labels: <?php echo json_encode($day)?>,
                 datasets: [{

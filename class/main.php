@@ -906,7 +906,7 @@ class main
     global $con;
     $pdfType = "dispatch_note";
     $user_ID = $_SESSION['user'];
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:i:s");
     $transaction_ID = $this->generate_user("transaction");
     $amount = "";

@@ -132,7 +132,7 @@ action_name varchar(100),
 action_ID varchar(100),
 C_D_ID varchar(100),
 amount varchar(100),
-trans_date varchar(100),
+trans_date date,
 trans_time varchar(100),
 
 trans_status varchar(100),
