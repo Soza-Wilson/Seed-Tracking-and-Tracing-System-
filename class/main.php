@@ -947,7 +947,7 @@ class main
 
     //step 4 deduct funds from customer account, call create pdf class for dispatch notes and delivery notes etc
 
-    if ($type == "customer_order" || $type == "b_to_b_order" || $type == "agro_dealer_order") {
+    if ($type == "customer" || $type == "b_to_b_order" || $type == "agro_dealer_order") {
 
       $temp_amount = (int)$amount;
 

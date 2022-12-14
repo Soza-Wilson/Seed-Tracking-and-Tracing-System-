@@ -424,48 +424,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -584,7 +543,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -593,7 +552,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
                                         <span class="pcoded-mcaret"></span>
@@ -602,7 +561,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditors.php" class="waves-effect waves-dark">
+                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
@@ -631,13 +590,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                               
                                 <li class="pcoded-hasmenu">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
@@ -781,7 +734,7 @@ if (in_array($position, $restricted)) {
                                                                             
  
 
-                                                                                $sql = "SELECT * FROM `transaction` WHERE type ='customer_order' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
+                                                                                $sql = "SELECT * FROM `transaction` WHERE type =' customer' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {

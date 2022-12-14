@@ -770,7 +770,6 @@ if (in_array($position, $restricted)) {
                                                                 <select id="debtor_type" name="debtor_type" class="form-control" required="">
                                                                     <option value="type_not_selected">Select Order Type</option>
                                                                     <option value="agro_dealer">To agro dealer</option>
-
                                                                     <option value="b_to_b">B to B (LPO)</option>
                                                                     <option value="customer">Customer</option>
 

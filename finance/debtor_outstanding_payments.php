@@ -369,13 +369,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> statements</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                               
                                 <li class="pcoded-hasmenu">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
@@ -554,8 +548,8 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                                        $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type` ='customer_order' OR `type` ='grower_order'";
+                                                                        $sql ="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type` =' customer'";
 
 
 
