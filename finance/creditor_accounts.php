@@ -558,7 +558,7 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
+                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
                                         <span class="pcoded-mcaret"></span>
