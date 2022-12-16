@@ -949,6 +949,9 @@ class main
 
     if ($type == "customer" || $type == "b_to_b_order" || $type == "agro_dealer_order") {
 
+
+
+     
       $temp_amount = (int)$amount;
 
       $sql = "UPDATE `debtor` SET `account_funds`= account_funds-$temp_amount WHERE `debtor_ID`= '$C_D_ID'";
