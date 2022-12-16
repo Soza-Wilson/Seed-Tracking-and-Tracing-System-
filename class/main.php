@@ -482,7 +482,7 @@ class main
         /// finalizing order by updating the total of all added atems in the order 
         
 
-        $sql = " UPDATE `order_table` SET `order_type`=' $order_type',
+        $sql = " UPDATE `order_table` SET `order_type`='$order_type',
       `customer_id`='$customer_id',`customer_name`='$customer_name',`user_ID`='$user_ID',
       `status`='$status',`date`='$date',`time`='$time',
       `count`='$count',`total_amount`='$sum' WHERE order_ID ='$order_ID'";
@@ -1086,7 +1086,7 @@ class main
 
 
 
-
+ 
 
   //add creditor function 
   function add_creditor($source, $name, $phone, $email, $description, $files)

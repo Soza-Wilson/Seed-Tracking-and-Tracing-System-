@@ -1401,7 +1401,7 @@ if (isset($_POST['add_item'])) {
         default:
 
             echo ("<script> alert('Please add customer details');
-        </script>");;
+        </script>");
     }
 }
 
