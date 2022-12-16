@@ -1200,7 +1200,7 @@ if (isset($_POST['add_item'])) {
 
     //checking if user has added customer details before adding items to order
 
-    $debtor_type = "";
+    $debtor_type ="";
 
     if (!empty($_SESSION['order'])) {
 
