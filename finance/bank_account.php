@@ -363,9 +363,8 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="grower.php">Bank accounts</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="bank_account.php">Bank accounts</a>
                                             </li>
 
                                         </ul>

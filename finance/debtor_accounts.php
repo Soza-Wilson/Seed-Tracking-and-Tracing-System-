@@ -646,18 +646,17 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add payment </h5>
+                                            <h5 class="m-b-10">Debtor Accounts </h5>
 
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="debtor_accounts.php">  Debtor Accounts</a>
                                             </li>
                                         </ul>
                                     </div>

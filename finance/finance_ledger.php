@@ -417,11 +417,10 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Ledger</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="finance_ledger.php">Ledger</a>
                                             </li>
                                         </ul>
                                     </div>

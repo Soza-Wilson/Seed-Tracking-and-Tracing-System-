@@ -548,7 +548,7 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
-                                    <a href="add_payment.php" class="waves-effect waves-dark">
+                                    <a href="add_payback_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payback Payment </span>
                                         <span class="pcoded-mcaret"></span>
@@ -630,7 +630,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add payment </h5>
+                                            <h5 class="m-b-10">Creditor OutStanding Payments</h5>
 
                                         </div>
                                     </div>
