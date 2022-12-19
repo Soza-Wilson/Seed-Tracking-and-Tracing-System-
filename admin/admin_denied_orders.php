@@ -218,10 +218,11 @@ if (in_array($position, $restricted)) {
 
                                 <li class="pcoded-hasmenu">
 
+                                    
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="admin_dashboard.php" class="waves-effect waves-dark">
-                                               
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
@@ -232,6 +233,9 @@ if (in_array($position, $restricted)) {
 
 
                                         </li>
+
+
+                             
 
 
                                     </ul>
@@ -282,7 +286,7 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -329,6 +333,21 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                
+
+                            </ul>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="view_ledger.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+    </li>
 
                             </ul>
 
@@ -351,7 +370,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             
-                                            <li class="breadcrumb-item"><a href="admin_denied_orders.php">Denied orders </a>
+                                            <li class="breadcrumb-item"><a href="admin_denied_orders.php">Denied Orders </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -398,14 +417,13 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Order ID</th>
-                                                                <th>order number</th>
-                                                                <th>order type</th>
-                                                                <th>Customer name</th>
-                                                                <th>reqiested by</th>
+                                                                <th>Order ID</th>                                                           
+                                                                <th>Order type</th>
+                                                                <th>Customer Name</th>
+                                                                <th>Reqiested By</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
-                                                                <th>count</th>
+                                                                <th>Count</th>
                                                                 <th>Total</th>
                                                                 <th>Action</th>
 
@@ -441,7 +459,6 @@ if (in_array($position, $restricted)) {
                                                                     echo "
 											<tr class='odd gradeX'>
 											    <td>$order_ID</td>
-												<td>$order_book_number</td>
                                                 <td>$order_type</td>
 												<td>$customer_name</td>
                                                 <td>$user</td>
