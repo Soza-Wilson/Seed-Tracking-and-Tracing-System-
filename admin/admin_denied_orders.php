@@ -400,6 +400,89 @@ if (in_array($position, $restricted)) {
 
                                         <div class="card">
                                             <div class="card-header">
+                                                <h5>Filter </h5>
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <label>Transaction Type</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Search by name</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label>To :</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
+                                                            <option value="type_not_selected">Order Type</option>
+                                                            <option value="customer">Customer Order</option>                                                            
+                                                            <option value="b_to_b">Business Order</option>
+                                                            <option value="agro_dealer">Agro Dealer Order</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
+
+                                                        <datalist id="names">
+                                                          
+                                                        </datalist>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                    </div>
+
+
+                                                    <div class="col-sm-3">
+
+
+
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+
+                                                        <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
+                                                    </div>
+                                                </div>
+
+
+                                                <form action="finance_csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
                                                 <h5>All active orders</h5>
 
                                                 <div class="card-header-right">
