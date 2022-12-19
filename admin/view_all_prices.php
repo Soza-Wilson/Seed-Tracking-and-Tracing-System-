@@ -246,7 +246,7 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="view_registered_users.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Users</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -281,7 +281,7 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -294,21 +294,21 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="admin_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="map-google.html" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="map-google.html" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -316,7 +316,7 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="map-google.html" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -347,7 +347,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">View all prices </h5>
+                                            <h5 class="m-b-10">View All Prices </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -409,9 +409,9 @@ if (in_array($position, $restricted)) {
                                                                 <th>Sell Pre-Basic</th>
                                                                 <th>Sell Basic</th>
                                                                 <th>Sell Certified</th>
-                                                                <th>Buy Back Pre-basic</th>
-                                                                <th>Buy Back Basic</th>
-                                                                <th>Buy Back Certified</th>
+                                                                <th>Buyback Pre-basic</th>
+                                                                <th>Buyback Basic</th>
+                                                                <th>Buyback Certified</th>
                                                                 
                                                                 
                                                             </tr>

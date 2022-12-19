@@ -314,14 +314,14 @@ if (in_array($position, $restricted)) {
                                         <li class="">
                                             <a href="add_user.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register User</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="view_registered_users.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Users</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -341,14 +341,14 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="add_product.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register Product</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="active">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -356,7 +356,7 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="set_buy_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -371,21 +371,21 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="admin_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="admin_processed_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="admin_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -393,7 +393,7 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="admin_all_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -423,7 +423,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Set Sell prices</h5>
+                                            <h5 class="m-b-10">Set sell prices</h5>
 
                                         </div>
                                     </div>
@@ -432,7 +432,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             
-                                            <li class="breadcrumb-item"><a href="set_price.php">Set Sell prices</a>
+                                            <li class="breadcrumb-item"><a href="set_price.php">Set Sell Prices</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -502,7 +502,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Basic Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input id="basic" type="text" class="form-control" name="basic" placeholder="price per kg" require="">
+                                                        <input id="basic" type="text" class="form-control" name="basic" placeholder="Price per kg" require="">
                                                     </div>
 
                                                 </div>

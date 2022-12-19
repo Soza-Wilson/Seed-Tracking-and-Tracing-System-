@@ -239,7 +239,7 @@ if (in_array($position, $restricted)) {
                                         <li class="">
                                             <a href="add_user.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register User</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -266,14 +266,14 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="add_product.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register Product</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -281,7 +281,7 @@ if (in_array($position, $restricted)) {
                                 <li class="">
                                     <a href="set_buy_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -301,7 +301,7 @@ if (in_array($position, $restricted)) {
                                 <li>
                                     <a href="admin_approved_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -357,7 +357,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Pending orders </h5>
+                                            <h5 class="m-b-10">Pending Orders </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
