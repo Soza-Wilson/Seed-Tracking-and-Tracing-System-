@@ -358,14 +358,14 @@ if (empty($test)) {
                                 <li class="">
                                     <a href="add_product.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register Product</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -373,7 +373,7 @@ if (empty($test)) {
                                 <li class="">
                                     <a href="set_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -391,28 +391,28 @@ if (empty($test)) {
                                 <li>
                                     <a href="admin_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">pending orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="admin_approved_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="admin_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">denied orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="admin_processed_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">processed orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -421,7 +421,7 @@ if (empty($test)) {
                                 <li class="">
                                     <a href="admin_all_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all orders</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -434,7 +434,7 @@ if (empty($test)) {
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="active">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <a href="view_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
                                         <span class="pcoded-mcaret"></span>
