@@ -298,14 +298,23 @@ if (in_array($position, $restricted)) {
 
                                 <li class="pcoded-hasmenu">
 
-                                    <ul class="pcoded-item pcoded-left-item">
+                                <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="admin_dashboard.html" class="waves-effect waves-dark">
-                                               <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                            <a href="admin_dashboard.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
 
+
+
+
+
+
                                         </li>
+
+
+                             
 
 
                                     </ul>

@@ -182,7 +182,7 @@ if (empty($test)) {
                             </div>
                         </div>
                         <a href="index.html">
-                            <span>Finance</span>
+                            <span>admin</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -260,7 +260,7 @@ if (empty($test)) {
 
                                 <li class="pcoded-hasmenu">
 
-                                    <ul class="pcoded-item pcoded-left-item">
+                                <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="admin_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -276,20 +276,23 @@ if (empty($test)) {
                                         </li>
 
 
+                             
+
+
                                     </ul>
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="add_user.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register User</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="view_registered_users.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Users</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -420,11 +423,9 @@ if (empty($test)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Ledger</a>
+                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                           
+                                            <li class="breadcrumb-item"><a href="view_ledger.php">Ledger</a>
                                             </li>
                                         </ul>
                                     </div>
