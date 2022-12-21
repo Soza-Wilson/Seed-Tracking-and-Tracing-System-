@@ -463,6 +463,7 @@ if (in_array($position, $restricted)) {
                                                             <option value="customer">Customer Order</option>                                                            
                                                             <option value="b_to_b">Business Order</option>
                                                             <option value="agro_dealer">Agro Dealer Order</option>
+                                                            <option value="grower">Grower Order</option>
                                                         </select>
                                                     </div>
 

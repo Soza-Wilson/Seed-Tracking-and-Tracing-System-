@@ -637,11 +637,9 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!"> Outstanding Creditor Payment</a>
+                                                <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                            
+                                            <li class="breadcrumb-item"><a href="creditor_outstanding_payments.php"> Outstanding Creditor Payment</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -695,6 +693,7 @@ if (in_array($position, $restricted)) {
                                                             <option value="customer">Customer Order</option>                                                            
                                                             <option value="b_to_b">Business Order</option>
                                                             <option value="agro_dealer">Agro Dealer Order</option>
+                                                            
                                                         </select>
                                                     </div>
 
@@ -779,8 +778,11 @@ if (in_array($position, $restricted)) {
                                                                             
                                                                              
 
-                                                                                $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `type` = 'creditor_buy_back' AND `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' ";
+                                                                                // $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                                //  `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `type` = 'creditor_buy_back'";
+
+                                                                               $sql="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type` ='creditor_buy_back'";
 
                                                                        
 

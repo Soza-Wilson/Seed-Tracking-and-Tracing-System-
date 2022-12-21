@@ -436,9 +436,6 @@ class main
     $temp =  $_SESSION['order'];
  
 
-    echo ("<script> alert('$temp!');
-     </script>");
-
    // checking is order has items added 
 
     if (empty($temp)) {
