@@ -798,6 +798,20 @@ if(isset($_POST["debtor_outstanding_type_filter"])){
 
 if(isset($_POST["payment_debtor_data_filter"])){
 
+
+echo "<thead>
+                                                                        <tr>
+                                                                            <th>ID</th>
+                                                                            <th>Type</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Date</th>
+
+                                                                            <th>Time</th>
+                                                                            <th>Status</th>
+                                                                            <th>Actions</th>
+                                                                        </tr>
+                                                                    </thead>";
+
   $fromValue = $_POST['from'];
   $toValue = $_POST['to'];
   $typeValue = $_POST['payment_debtor_data_filter'];
@@ -807,7 +821,7 @@ if(isset($_POST["payment_debtor_data_filter"])){
   $sql = "SELECT `transaction_ID`, `type`, `action_name`,
    `action_ID`, `C_D_ID`, `amount`,
   `trans_date`, `trans_time`, `trans_status`,
-   `user_ID` FROM `transaction` WHERE 
+   `user_ID` FROM `transaction` WHERE `type`='$typeValue' AND 
     `trans_date` BETWEEN '$fromValue' AND '$toValue'";
 
 // `trans_status` = 'partly_payed' OR
@@ -849,6 +863,29 @@ if ($result->num_rows > 0) {
 ";
     }
 }
+
+else{
+
+ 
+
+
+
+echo "
+<tr class='odd gradeX'>
+<td> No Data Found </td>
+
+
+
+                                   
+
+
+
+</tr>	
+";
+
+}
+
+
 
 
 

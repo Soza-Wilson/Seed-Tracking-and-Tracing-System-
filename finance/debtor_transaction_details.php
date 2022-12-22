@@ -8,7 +8,30 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$order_ID = $_GET['order_id'];
 
+if(!empty($order_ID)){
+
+$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
+
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        
+        $amount = $row["total_amount"];
+        $customer = $row["customer_id"];
+        $user_requested = $row["user_ID"];
+        $date = $row["date"];
+        $time = $row["time"];
+      
+
+    }
+
+}
+
+
+}
 
 if (empty($test)) {
 
@@ -24,16 +47,14 @@ if (in_array($position, $restricted)) {
 
 ?>
 
-
-
 <head>
     <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -53,74 +74,42 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#typeValue').change(() => {
-                let debtor_outstanding_type_filter = $('#typeValue').val();
-               
-                
-                $.post('get_creditors.php', {
-                    debtor_outstanding_type_filter: debtor_outstanding_type_filter,                    
-                    }, function(data) {
-                        $('#names').html(data);
 
+       $(document).ready(()=>{
 
-                    })
-            });
+        $("debtor_outstanding_order_details").click(()=>{
 
+            alert("key working");
 
-            $('#get_data').click(()=>{
-                 
-                let payment_debtor_data_filter = $('#typeValue').val();
-                let debtor_id = $('#debtor').val();
-                let from = $('#fromDateValue').val();
-                let to = $('#toDateValue').val();
-
-                $('#trans_type_hidden').val(payment_debtor_data_filter);
-                $('#debtor_hidden').val(debtor_id);
-                $('#from_hidden').val(from);
-                $('#to_hidden').val(to);
-                $('#filter').val("haghgd");
-
-
-                $.post('get_creditors.php', {
-                    payment_debtor_data_filter: payment_debtor_data_filter,   
-                    debtor_id: debtor_id,
-                    from: from,
-                    to: to,                 
-                    }, function(data) {
-                        $('#dataTable').html(data);
-
-
-                    })
-
-            });
+           
+             
 
         });
 
+        
 
-
-       
-           
-
-           
 
         
-    </script>
 
+       });
 
+        </script>
 </head>
 
 <body>
+
+
+    <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -195,9 +184,11 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
-                            <span>Finance</span>
+                        <a href="">
+
+                        <span>finance</span>
                         </a>
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
@@ -208,7 +199,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-
+                           
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -216,6 +207,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
+                           
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
@@ -224,13 +216,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-
+                                    
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-
+                                    
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -249,11 +241,10 @@ if (in_array($position, $restricted)) {
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
                                 </div>
 
@@ -262,25 +253,39 @@ if (in_array($position, $restricted)) {
                                         <li class="more-details">
                                             <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
                                             <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
 
-                            </div>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="finance_dashboard.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
 
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
+
+                            </div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="pcoded-hasmenu">
+
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+
+
+
+
+
+                                        </li>
+
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Debtor Payments</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -318,7 +323,6 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                             </ul>
-
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
@@ -363,8 +367,8 @@ if (in_array($position, $restricted)) {
 
 
 
+                            
                             </ul>
-                            </li>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -395,8 +399,8 @@ if (in_array($position, $restricted)) {
 
 
                             </ul>
-                            </li>
-                            </ul>
+
+                           
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -406,8 +410,8 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Debtor Oustanding Payments</h5>
-
+                                            <h5 class="m-b-10">Transaction Details </h5>
+                                            <p class="m-b-0"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -415,100 +419,123 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                          
-                                            <li class="breadcrumb-item"><a href="debtor_outstanding_payments.php"> Outstanding Debtor Payment</a>
+                                            
+                                            
+                                            </li>
+                                            <li class="breadcrumb-item"><a href="admin_view_order_items.php">Transaction Details </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Page-header end -->
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-
-                                    <!-- Page body start -->
+                                    <!-- Page-body start -->
                                     <div class="page-body">
+                                        <!-- Basic table card start -->
+                                        <!-- Basic table card end -->
+                                        <!-- Inverse table card start -->
+
+                                        <!-- Inverse table card end -->
+                                        <!-- Hover table card start -->
+
+                                        <!-- Hover table card end -->
+                                        <!-- Contextual classes table starts -->
 
 
+                                        <!-- Contextual classes table ends -->
+                                        <!-- Background Utilities table start -->
 
-
-
+                                        
 
                                         <div class="card">
+                                        <form action="admin_view_order_items.php" method="POST">
                                             <div class="card-header">
-                                                <h5>Filter </h5>
+                                                <h5>Order details</h5>
 
-
-                                            </div>
-                                            <div class="card-block">
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-3">
-                                                        <label>Transaction Type</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Search by name</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
                                                 </div>
-
-
                                                 <div class="form-group row">
-                                                    <div class="col-sm-3">
-                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Transaction Type</option>
-                                                            <option value="customer">Customer Order</option>                                                            
-                                                            <option value="b_to_b">Business Order</option>
-                                                            <option value="agro_dealer">Agro Dealer Order</option>
-                                                            <option value="grower">Grower Order</option>
-                                                        </select>
+
+
+                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Order ID</label>
+                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
+
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Amount</label>
+                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
+
+
+
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
+                                                        <label class="badge badge-primary ">Order For</label>
+                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
 
-                                                        <datalist id="names">
-                                                          
-                                                        </datalist>
+
+
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                        <label class="badge badge-primary ">Requested By</label>
+                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+
+
+
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                        <label class="badge badge-primary ">Order Date</label>
+                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+
+
+
                                                     </div>
 
+                                                    <div class="col-sm-2">
 
-                                                    <div class="col-sm-3">
+                                                        <label class="badge badge-primary ">Time</label>
+                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
+                                                       
 
 
-
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
-
-                                                        <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
                                                     </div>
-                                                </div>
+                                              
+                                                    <div class="card-block">
 
 
-                                                <form action="finance_csv_handler.php" method="POST">
+                                                    </form>
+                                               
+
+                                                    <form action="finance_csv_handler.php" method="POST">
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='debtor_outstanding_filter' name='debtor_outstanding_filter'> CSV</button>
+                                                            <button class="ti-download btn btn-success " id='debtor_outstanding_order_details' name='debtor_outstanding_order_details'> CSV</button>
 
 
 
@@ -516,11 +543,9 @@ if (in_array($position, $restricted)) {
 
 
                                                             
-                                                            <input type="hidden" name="trans_type_hidden" id="trans_type_hidden">
-                                                            <input type="hidden" name="debtor" id="debtor">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
+                                                            <input type="hidden" name="customer_name" id="customer_name">
+                                                            <input type="hidden" name="order_id" id="order_id">
+                                                           
 
 
 
@@ -533,200 +558,214 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                 </form>
 
+ 
+                                               
+
                                             </div>
-                                        </div>
 
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>Transaction list</h5>
-                                                        <div class="card-block table-border-style">
-                                                            <div class="table-responsive" id="table_test">
-                                                                <table class="table" id="dataTable">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>ID</th>
-                                                                            <th>Type</th>
-                                                                            <th>Amount</th>
-                                                                            <th>Date</th>
-
-                                                                            <th>Time</th>
-                                                                            <th>Status</th>
-                                                                            <th>Actions</th>
-
-
-
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-
-                                                                        <?php
-
-
-
-
-
-
-                                                                        $sql ="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type` ='customer'";
-
-
-
-                                                                        $result = $con->query($sql);
-                                                                        if ($result->num_rows > 0) {
-                                                                            while ($row = $result->fetch_assoc()) {
-                                                                                $transaction_ID = $row["transaction_ID"];
-                                                                                $order_ID = $row["action_ID"];
-                                                                                $type  = $row["type"];
-                                                                                $amount = $row["amount"];
-                                                                                $trans_date = $row["trans_date"];
-                                                                                $trans_time = $row['trans_time'];
-                                                                                $trans_status = $row['trans_status'];
-
-
-
-
-
-                                                                                echo "
-                                                   <tr class='odd gradeX'>
-                                                       <td>$transaction_ID</td>
-                                                       <td>$type</td>
-                                                       <td>$amount</td>
-                                                       <td>$trans_date</td>
-                                                       <td>$trans_time</td>
-                                                       <td>$trans_status</td>
-                                                       <td><a href='debtor_transaction_details.php?order_id=$order_ID'  class='btn btn-success'>view</a> </td>
-                                                       
-                                                     
-                                                                                                           
-                                                         
-                                                       
-                                                        
-                                                   </tr>	
-                                               ";
-                                                                            }
-                                                                        }
-
-
-
-                                                                        ?>
-                                                                        <tr>
-                                                                            <th scope="row">-</th>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-
-
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
 
                                                 </div>
 
-
-                                                </form>
-
+                                                
 
 
                                             </div>
                                         </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Items</h5>
+
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item ID</th>
+                                                                <th>Crop</th>
+                                                                <th>Variety</th>
+                                                                <th>Class</th>
+                                                                <th>Quantity</th>
+                                                                <th>price per kg</th>
+                                                                <th>Discount</th>
+                                                                <th>Total price</th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <?php
+                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
+                                                             `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
+
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+
+
+                                                                    $item_ID      = $row["item_ID"];
+                                                                    $crop     = $row["crop"];
+                                                                    $variety = $row["variety"];
+                                                                    $class    = $row['class'];
+                                                                    $quantity = $row['quantity'];
+                                                                    $price_per_kg = $row['price_per_kg'];
+                                                                    $discount_price = $row['discount_price'];
+                                                                    $total_price = $row['total_price'];
+
+                                                                    echo "
+											<tr class='odd gradeX'>
+                                            <td>$item_ID</td>
+                                            <td>$crop</td>
+                                            <td>$variety</td>
+                                            <td>$class</td>
+                                            <td>$quantity</td>
+                                            <td>$price_per_kg </td>
+                                            <td>$discount_price</td>
+                                            <td>$total_price</td>
+												
+											</tr>	
+                                    
+												
+										";
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="card-block">
+                                                <a href='admin_pending_orders.php' class='btn btn-primary'>Back </a>
+                                               
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Background Utilities table end -->
                                     </div>
-
-
-                                    <!-- Basic Form Inputs card end -->
-                                    <!-- Input Grid card start -->
-
+                                    <!-- Page-body end -->
                                 </div>
-                                <!-- Page body end -->
                             </div>
-                        </div>
-                        <!-- Main-body end -->
-                        <div>
+                            <!-- Main-body end -->
 
+                            <div id="styleSelector">
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
 
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
-        to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="assets/images/browser/chrome.png" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="assets/images/browser/firefox.png" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="assets/images/browser/opera.png" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="assets/images/browser/safari.png" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="assets/images/browser/ie.png" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
     </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
+    <![endif]-->
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
     <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
     <!-- waves js -->
     <script src="assets/pages/waves/js/waves.min.js"></script>
-
     <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
     <!-- Custom js -->
     <script src="assets/js/pcoded.min.js"></script>
     <script src="assets/js/vertical-layout.min.js "></script>
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+<?php
+
+if(isset($_POST['approve_order'])){
+
+  
+  $ID = $_POST['order_id'];
+
+   $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
+   $statement = $con->prepare($sql);
+    $statement->execute();
+     
+    echo ("<script> alert('Order approved!');
+    </script>");
+
+}
+
+if(isset($_POST['deny_order'])){
 
 
+    $ID = $_POST['order_id'];
+
+    $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$ID'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    echo ("<script> alert('Order denied!');
+    </script>");
+}
+ 
+ 
+
+
+?>
 </html>
