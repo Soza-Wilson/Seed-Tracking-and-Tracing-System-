@@ -815,6 +815,7 @@ echo "<thead>
   $fromValue = $_POST['from'];
   $toValue = $_POST['to'];
   $typeValue = $_POST['payment_debtor_data_filter'];
+  $page_type = $_POST['page_type'];
 
 
   
@@ -834,6 +835,7 @@ $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $transaction_ID = $row["transaction_ID"];
+        $order_ID = $row["action_ID"];
         $type  = $row["type"];
         $amount = $row["amount"];
         $trans_date = $row["trans_date"];
@@ -852,7 +854,7 @@ if ($result->num_rows > 0) {
 <td>$trans_date</td>
 <td>$trans_time</td>
 <td>$fromValue</td>
-<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+<td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$page_type'  class='btn btn-success'>view</a> </td>
 
 
                                    
@@ -894,3 +896,105 @@ echo "
 
 
 }
+
+if(isset($_POST["processed_debtor_data_filter"])){
+
+
+  echo "<thead>
+                                                                          <tr>
+                                                                              <th>ID</th>
+                                                                              <th>Type</th>
+                                                                              <th>Amount</th>
+                                                                              <th>Date</th>
+  
+                                                                              <th>Time</th>
+                                                                              <th>Status</th>
+                                                                              <th>Actions</th>
+                                                                          </tr>
+                                                                      </thead>";
+  
+    $fromValue = $_POST['from'];
+    $toValue = $_POST['to'];
+    $typeValue = $_POST['processed_debtor_data_filter'];
+    $page_type = $_POST['page_type'];
+  
+  
+    
+    $sql = "SELECT `transaction_ID`, `type`, `action_name`,
+     `action_ID`, `C_D_ID`, `amount`,
+    `trans_date`, `trans_time`, `trans_status`,
+     `user_ID` FROM `transaction` WHERE `type`='$typeValue' AND `trans_status`= 'fully_payed' AND 
+      `trans_date` BETWEEN '$fromValue' AND '$toValue'";
+  
+  // `trans_status` = 'partly_payed' OR
+  // `trans_status` = 'payment_pending'
+  //  AND `type` ='customer_order'
+  //   OR `type` ='grower_order' AND
+       
+  
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $transaction_ID = $row["transaction_ID"];
+
+          $order_ID = $row["action_ID"];
+          $type  = $row["type"];
+          $amount = $row["amount"];
+          $trans_date = $row["trans_date"];
+          $trans_time = $row['trans_time'];
+          $trans_status = $row['trans_status'];
+  
+  
+  
+  
+  
+          echo "
+  <tr class='odd gradeX'>
+  <td>$transaction_ID</td>
+  <td>$type</td>
+  <td>$amount</td>
+  <td>$trans_date</td>
+  <td>$trans_time</td>
+  <td>$fromValue</td>
+  <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$page_type'  class='btn btn-success'>view</a> </td>
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+      }
+  }
+  
+  else{
+  
+   
+  
+  
+  
+  echo "
+  <tr class='odd gradeX'>
+  <td> No Data Found </td>
+  
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+}
+  

@@ -84,6 +84,7 @@ if (in_array($position, $restricted)) {
                 let debtor_id = $('#debtor').val();
                 let from = $('#fromDateValue').val();
                 let to = $('#toDateValue').val();
+                let page_type = "debtor_outstanding";
 
                 $('#trans_type_hidden').val(payment_debtor_data_filter);
                 $('#debtor_hidden').val(debtor_id);
@@ -96,7 +97,8 @@ if (in_array($position, $restricted)) {
                     payment_debtor_data_filter: payment_debtor_data_filter,   
                     debtor_id: debtor_id,
                     from: from,
-                    to: to,                 
+                    to: to,
+                    page_type: page_type,                 
                     }, function(data) {
                         $('#dataTable').html(data);
 
@@ -584,6 +586,7 @@ if (in_array($position, $restricted)) {
                                                                                 $trans_date = $row["trans_date"];
                                                                                 $trans_time = $row['trans_time'];
                                                                                 $trans_status = $row['trans_status'];
+                                                                                $trans_details = "debtor_outstanding";
 
 
 
@@ -597,7 +600,7 @@ if (in_array($position, $restricted)) {
                                                        <td>$trans_date</td>
                                                        <td>$trans_time</td>
                                                        <td>$trans_status</td>
-                                                       <td><a href='debtor_transaction_details.php?order_id=$order_ID'  class='btn btn-success'>view</a> </td>
+                                                       <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
                                                        
                                                      
                                                                                                            

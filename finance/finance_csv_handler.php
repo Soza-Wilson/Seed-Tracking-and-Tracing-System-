@@ -438,6 +438,145 @@ $sql = "SELECT `transaction_ID`, `type`, `action_name`,
 
   }
 
+
+  ///filter for debtor processed pay
+
+
+
+  if(isset($_POST["debtor_processed_filter"])){
+
+
+    $filter =$_POST['filter'];
+  
+    if(empty($filter)){
+
+
+      $date = date('d-m-y h:i');
+      $filename = "Processed Transactions $date.csv";
+      $fp = fopen('php://output', 'w');
+      
+      //create header 
+
+
+      $header = array("ID","Transaction Type","Amount", "Entry Date","Entry Time","status");	
+      fputcsv($fp, $header);
+      
+      //create body
+
+      $sql ="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+      `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE 
+      `trans_status` = 'partly_payed' OR `trans_status` = 'fully_payed' ORDER BY `transaction_ID` DESC";
+      
+      $result = $con->query($sql);
+      if($result->num_rows>0)
+      {
+          while($row=$result->fetch_assoc())
+          {
+
+          $transaction_ID = $row["transaction_ID"];                                 
+          $type = $row["type"];
+          $amount  = $row['amount'];
+          $trans_date = $row['trans_date'];
+          $trans_time= $row['trans_time'];
+          $trans_status = $row['trans_status'];
+         
+        
+          
+              $list = array($transaction_ID,$type,$amount,$trans_date,$trans_time,$trans_status);
+          
+          fputcsv($fp, $list);
+      }
+      
+      //close file
+      fclose($fp);
+      
+      //download file
+      header("Content-Description: File Transfer");
+      header('Content-type: application/csv');
+      header('Content-Disposition: attachment; filename='.$filename);
+      
+      exit;
+
+
+}
+
+
+    }
+
+    else{
+
+      
+      $fromValue = $_POST['from_hidden'];
+      $toValue = $_POST['to_hidden'];
+      $typeValue = $_POST['trans_type_hidden'];
+
+
+      $date = date('d-m-y h:i');
+      $filename = "Processed Transactions $date.csv";
+      $fp = fopen('php://output', 'w');
+      
+      //create header 
+
+
+      $header = array("ID","Transaction Type","Amount", "Entry Date","Entry Time","status");	
+      fputcsv($fp, $header);
+      
+      //create body
+      
+      
+
+
+
+
+$sql = "SELECT `transaction_ID`, `type`, `action_name`,
+ `action_ID`, `C_D_ID`, `amount`,
+`trans_date`, `trans_time`, `trans_status`,
+ `user_ID` FROM `transaction` WHERE `type` = '$typeValue' AND `trans_status` = 'fully_payed' AND
+  `trans_date` BETWEEN '$fromValue' AND '$toValue' ORDER BY `transaction_ID` DESC";
+
+      $result = $con->query($sql);
+      if($result->num_rows>0)
+      {
+          while($row=$result->fetch_assoc())
+          {
+
+          $transaction_ID = $row["transaction_ID"];                                 
+          $type = $row["type"];
+          $amount  = $row['amount'];
+          $trans_date = $row['trans_date'];
+          $trans_time= $row['trans_time'];
+          $trans_status = $row['trans_status'];
+        
+          
+          $list = array($transaction_ID,$type,$amount,$trans_date,$trans_time,$trans_status);
+          
+          fputcsv($fp, $list);
+      }
+      
+      //close file
+      fclose($fp);
+      
+      //download file
+      header("Content-Description: File Transfer");
+      header('Content-type: application/csv');
+      header('Content-Disposition: attachment; filename='.$filename);
+      
+      exit;
+
+
+}
+
+
+
+
+    }
+
+
+
+
+
+  }
+
   if(isset($_POST["debtor_outstanding_order_details"])){
 
 

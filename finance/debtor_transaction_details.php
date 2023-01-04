@@ -9,6 +9,57 @@ session_start();
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 $order_ID = $_GET['order_id'];
+$page_type = $_GET['transaction_details'];
+$post_page_type = $_POST['page_type'];
+
+if(!empty($page_type)){
+
+    if($page_type=="debtor_processed"){
+
+        $processed ="active";
+    $outstanding="-";
+    
+    
+    
+    }
+    else if($page_type=="debtor_outstanding"){
+    
+    $processed ="-";
+    $outstanding="active";
+    
+    }
+
+    
+}
+
+else{
+
+    
+
+    if($post_page_type=="debtor_processed"){
+
+        $processed ="active";
+    $outstanding="-";
+    
+    
+    
+    }
+    else if($post_page_type=="debtor_outstanding"){
+    
+    $processed ="-";
+    $outstanding="active";
+    
+    }
+
+
+
+
+
+}
+
+
+
+
 
 if(!empty($order_ID)){
 
@@ -295,7 +346,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $processed; ?>">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -304,7 +355,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="active">
+                                <li class="<?php echo $outstanding; ?>">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>

@@ -64,280 +64,58 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            $('#typeValue').change(() => {
+                let debtor_outstanding_type_filter = $('#typeValue').val();
+               
+                
+                $.post('get_creditors.php', {
+                    debtor_outstanding_type_filter: debtor_outstanding_type_filter,                    
+                    }, function(data) {
+                        $('#names').html(data);
 
-            $('#select_payment_type').change(function() {
 
+                    })
+            });
+
+
+            $('#get_data').click(()=>{
+
+                
                  
+                let processed_debtor_data_filter = $('#typeValue').val();
+                let debtor_id = $('#debtor').val();
+                let from = $('#fromDateValue').val();
+                let to = $('#toDateValue').val();
+                let page_type = "processed";
 
 
-                let payment_type = $('#select_payment_type').val();
-
-                if (payment_type==="Cheque"){
-                    $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
-                    $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
-
-                }
-                else if (payment_type==="Cash"){
-
-                    $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
-                }
+                $('#trans_type_hidden').val(processed_debtor_data_filter);
+                $('#debtor_hidden').val(debtor_id);
+                $('#from_hidden').val(from);
+                $('#to_hidden').val(to);
+                $('#filter').val("haghgd");
 
 
-                // var crop_data = $('#select_crop').val();
-                // var variety_data = $('#select_variety').val();
-                // var class_data = $('#select_class').val();
-
-                // if (crop_data == 0) {
-
-                //     alert('Select crop and variety');
-
-
-                // } else if (variety_data == 0) {
-
-                //     alert('Select crop and variety');
-
-                // } else {
-
-                //     $.post('get_prices.php', {
-                //         crop_data: crop_data,
-                //         variety_data: variety_data,
-                //         class_data: class_data
-                //     }, function(data) {
-
-                //         $('#price_per_kg').val(data);
-
-                //     });
-                // }
-
-
-
-
-            });
-
-
-            $('#debtor_type').change(function() {
-
-                var type_value = $('#debtor_type').val();
-
-                if (type_value == 'agro_dealer') {
-
-                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
-                    $('#description').attr('placeholder', 'agro dealer phone');
-
-
-                } else if (type_value == 'b_to_b') {
-
-                    $('#customer_name').attr('placeholder', 'Search Business by name');
-                    $('#description').attr('placeholder', 'Business description');
-
-
-
-                } else if (type_value == 'customer') {
-
-                    $('#customer_name').attr('placeholder', 'Enter customer name');
-                    $('#description').attr('placeholder', 'Enter customer phone number ');
-
-
-                } else if (type_value == 'grower') {
-
-                    $('#customer_name').attr('placeholder', 'Search grower by name');
-                    $('#description').attr('placeholder', 'grower farm crop and variety ');
-
-
-                }
-
-
-
-                $("#search_main_certificate").on("input", function() {
-
-
-                    var main_certificate_value = $('#search_main_certificate').val();
-                    var main_quantity_value = $('#main_quantity').val();
-                    var crop_value = $('#select_crop').val();
-                    var variety_value = $('#select_variety').val();
-                    var class_result = $('#select_class').val();
-
-
-                    $.post('farm_get_certificate.php', {
-                        main_certificate_value: main_certificate_value,
-                        main_quantity_value: main_quantity_value,
-                        crop_value: crop_value,
-                        variety_value: variety_value,
-                        class_value: class_value
+                $.post('get_creditors.php', {
+                    processed_debtor_data_filter: processed_debtor_data_filter,   
+                    debtor_id: debtor_id,
+                    from: from,
+                    to: to,
+                    page_type: page_type,                 
                     }, function(data) {
-                        $('#main_certificate').html(data);
+                        $('#dataTable').html(data);
 
 
                     })
 
-                });
-
-
-
-
-
-
-
-
             });
 
-            $('#customer_name').on("input", function() {
+          
 
 
-                let type_value = $('#debtor_type').val();
-                let search_value = $('#customer_name').val();
-                let search_result = $('#search_result').val();
+           
 
-                if (type_value == "type_not_selected") {
-
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1]);
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "b_to_b") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    })
-
-
-
-
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-                }
-
-            });
+           
 
         });
     </script>
@@ -691,10 +469,11 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group row">
                                                     <div class="col-sm-3">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Transaction Type</option>
+                                                        <option value="type_not_selected">Transaction Type</option>
                                                             <option value="customer">Customer Order</option>                                                            
                                                             <option value="b_to_b">Business Order</option>
                                                             <option value="agro_dealer">Agro Dealer Order</option>
+                                                            <option value="grower">Grower Order</option>
                                                         </select>
                                                     </div>
 
@@ -732,7 +511,14 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
+                                                            <button class="ti-download btn btn-primary " id='debtor_processed_filter' name='debtor_processed_filter'> CSV</button>
+
+
+                                                            <input type="hidden" name="trans_type_hidden" id="trans_type_hidden">
+                                                            <input type="hidden" name="debtor" id="debtor">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
 
 
 
@@ -754,7 +540,7 @@ if (in_array($position, $restricted)) {
                                                             <h5>Transaction list</h5>
                                                             <div class="card-block table-border-style">
                                                                 <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
+                                                                    <table class="table" id="dataTable">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>ID</th>
@@ -788,11 +574,13 @@ if (in_array($position, $restricted)) {
                                                                                 if ($result->num_rows > 0) {
                                                                                     while ($row = $result->fetch_assoc()) {
                                                                                         $transaction_ID = $row["transaction_ID"];
+                                                                                        $order_ID = $row["action_ID"];
                                                                                         $type  = $row["type"];
                                                                                         $amount = $row["amount"];
                                                                                         $trans_date = $row["trans_date"];
                                                                                         $trans_time = $row['trans_time'];
                                                                                         $trans_status = $row['trans_status'];
+                                                                                        $trans_details = "debtor_processed";
                                                                                         
                                                                                      
 
@@ -806,7 +594,7 @@ if (in_array($position, $restricted)) {
                                                        <td>$trans_date</td>
                                                        <td>$trans_time</td>
                                                        <td>$trans_status</td>
-                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+                                                       <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$trans_details' class='btn btn-success'>view</a> </td>
                                                        
                                                      
                                                                                                            
