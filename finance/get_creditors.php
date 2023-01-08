@@ -706,6 +706,9 @@ if(isset($_POST['debtor_name_search'])){
           $by = $row["user_ID"];
           $date = $row['registered_date'];
           $funds = $row['account_funds'];
+
+          $object = new main();
+          $newDate = $object->change_date_format($date);
           
        
 
@@ -720,7 +723,7 @@ if(isset($_POST['debtor_name_search'])){
 <td>$type</td>
 <td>$phone</td>
 <td>$by</td>
-<td>$date</td>
+<td>$newDate</td>
 <td>$funds</td>
 <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
 
@@ -822,7 +825,7 @@ echo "<thead>
   $sql = "SELECT `transaction_ID`, `type`, `action_name`,
    `action_ID`, `C_D_ID`, `amount`,
   `trans_date`, `trans_time`, `trans_status`,
-   `user_ID` FROM `transaction` WHERE `type`='$typeValue' AND 
+   `user_ID` FROM `transaction` WHERE  `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type`='$typeValue' AND 
     `trans_date` BETWEEN '$fromValue' AND '$toValue'";
 
 // `trans_status` = 'partly_payed' OR
@@ -842,6 +845,9 @@ if ($result->num_rows > 0) {
         $trans_time = $row['trans_time'];
         $trans_status = $row['trans_status'];
 
+        $object = new main();
+        $newDate = $object->change_date_format($trans_date);
+
 
 
 
@@ -851,7 +857,7 @@ if ($result->num_rows > 0) {
 <td>$transaction_ID</td>
 <td>$type</td>
 <td>$amount</td>
-<td>$trans_date</td>
+<td>$newDate</td>
 <td>$trans_time</td>
 <td>$fromValue</td>
 <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$page_type'  class='btn btn-success'>view</a> </td>
@@ -943,6 +949,7 @@ if(isset($_POST["processed_debtor_data_filter"])){
           $trans_date = $row["trans_date"];
           $trans_time = $row['trans_time'];
           $trans_status = $row['trans_status'];
+          $trans_details = "debtor_processed";
   
   
   
@@ -956,7 +963,7 @@ if(isset($_POST["processed_debtor_data_filter"])){
   <td>$trans_date</td>
   <td>$trans_time</td>
   <td>$fromValue</td>
-  <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$page_type'  class='btn btn-success'>view</a> </td>
+  <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
   
   
                                      
@@ -996,5 +1003,135 @@ if(isset($_POST["processed_debtor_data_filter"])){
   
   
   
+}
+//// Get registered creditors 
+
+if(isset($_POST["external_creditor_value"])){
+
+
+  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+   `email`, `description`, `user_ID`, `creditor_files`, 
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $creditr_ID = $row["creditor_ID"];
+        $creditor_name =$row['name'];
+       
+    
+
+
+
+
+
+        echo "
+
+        <option value'$creditor_ID'>$creditor_name</option>
+                                  
+
+";
+    }
+  
+  
+  
+  }
+
+
+}
+
+if(isset($_POST["internal_creditor_value"])){
+
+
+  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+   `email`, `description`, `user_ID`, `creditor_files`, 
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='MUSECO'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $creditr_ID = $row["creditor_ID"];
+        $creditor_name =$row['name'];
+       
+    
+
+
+
+
+
+        echo "
+
+        <option value'$creditor_ID'>$creditor_name</option>
+                                  
+
+";
+    }
+  
+  
+  
+  }
+
+
+}
+
+
+
+
+///// Getting registered creditor accounts for finance creditor pages 
+
+
+if(isset($_POST["externalCreditorData"])){
+
+
+  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+   `email`, `description`, `user_ID`, `creditor_files`, 
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
+
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $transaction_ID = $row["transaction_ID"];
+
+        $order_ID = $row["action_ID"];
+        $type  = $row["type"];
+    
+
+
+
+
+
+        echo "
+<tr class='odd gradeX'>
+<td>$transaction_ID</td>
+<td>$type</td>
+<td>$amount</td>
+<td>$trans_date</td>
+<td>$trans_time</td>
+<td>$fromValue</td>
+<td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$page_type'  class='btn btn-success'>view</a> </td>
+
+
+                                   
+
+
+
+</tr>	
+";
+    }
+  
+  
+  
+  }
+
+
+
+}
+
+if(isset($_POST["externalCreditorData"])){
+
+
+
+
 }
   

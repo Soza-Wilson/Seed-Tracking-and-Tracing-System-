@@ -310,7 +310,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -331,7 +331,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -340,7 +340,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -379,7 +379,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
@@ -476,19 +476,13 @@ if (in_array($position, $restricted)) {
                                                         </select>
                                                     </div>
 
-                                                    <div class="col-sm-2">
-                                                        <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
+                                                    
 
-                                                        <datalist id="names">
-                                                          
-                                                        </datalist>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
@@ -499,7 +493,7 @@ if (in_array($position, $restricted)) {
 
                                                         <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
-                                                        <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
+                                                        <a href="debtor_outstanding_payments.php" class="ti-loop btn btn-danger"></a>
                                                     </div>
                                                 </div>
 
@@ -588,6 +582,9 @@ if (in_array($position, $restricted)) {
                                                                                 $trans_status = $row['trans_status'];
                                                                                 $trans_details = "debtor_outstanding";
 
+                                                                                $object = new main();
+                                                                                $newDate = $object->change_date_format($trans_date);
+
 
 
 
@@ -597,7 +594,7 @@ if (in_array($position, $restricted)) {
                                                        <td>$transaction_ID</td>
                                                        <td>$type</td>
                                                        <td>$amount</td>
-                                                       <td>$trans_date</td>
+                                                       <td>$newDate</td>
                                                        <td>$trans_time</td>
                                                        <td>$trans_status</td>
                                                        <td><a href='debtor_transaction_details.php?order_id=$order_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>

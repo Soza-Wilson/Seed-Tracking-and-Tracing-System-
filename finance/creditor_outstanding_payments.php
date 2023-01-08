@@ -64,6 +64,90 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(function() {
 
+
+        
+                        selectedType="";
+                
+                $('#typeValue').change(()=>{
+                   selectedType =  $('#typeValue').val();
+
+                    
+
+                    if (selectedType == "internal"){
+
+                       let internal_creditor_value = 'c';
+
+                        $.post('get_creditors.php', {
+                        internal_creditor_value: internal_creditor_value,
+                       
+                    }, function(data) {
+                        $('#names').html(data);
+                    })
+
+                    }
+
+                    else if(selectedType=="external"){
+
+                       let external_creditor_value ='c';
+
+                        $.post('get_creditors.php', {
+                        external_creditor_value: external_creditor_value,
+                       
+                    }, function(data) {
+                        $('#names').html(data);
+                    })
+
+
+                    }
+
+                   
+
+
+
+                });
+
+                $("#get_data").click(()=>{
+
+                let processed_debtor_data_filter = $('#typeValue').val();
+                let debtor_id = $('#debtor').val();
+                let from = $('#fromDateValue').val();
+                let to = $('#toDateValue').val();
+                let page_type = "processed";
+
+
+                $('#trans_type_hidden').val(processed_debtor_data_filter);
+                $('#debtor_hidden').val(debtor_id);
+                $('#from_hidden').val(from);
+                $('#to_hidden').val(to);
+                $('#filter').val("haghgd");
+
+
+                $.post('get_creditors.php', {
+                    processed_debtor_data_filter: processed_debtor_data_filter,   
+                    debtor_id: debtor_id,
+                    from: from,
+                    to: to,
+                    page_type: page_type,                 
+                    }, function(data) {
+                        $('#dataTable').html(data);
+
+
+                    })
+
+
+
+                   
+                });
+
+                $("#search_by_credname").on("input", ()=>{
+
+                    if(selectedType == 'type_not_selected'){
+                        alert("Please select Creditor type");
+                    }
+
+                });
+
+
             $('#cheque_number').prop("readonly", true);
                    $('#cheque_file').prop('readonly', true);
 
@@ -533,7 +617,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -554,7 +638,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -601,7 +685,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
@@ -687,21 +771,20 @@ if (in_array($position, $restricted)) {
 
 
                                                 <div class="form-group row">
-                                                    <div class="col-sm-3">
+                                                <div class="col-sm-3">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Transaction Type</option>
-                                                            <option value="customer">Customer Order</option>                                                            
-                                                            <option value="b_to_b">Business Order</option>
-                                                            <option value="agro_dealer">Agro Dealer Order</option>
-                                                            
+                                                            <option value="type_not_selected">Creditor Type</option>
+                                                            <option value="internal">Internal</option>
+                                                            <option value="external">External</option>
+
                                                         </select>
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
+                                                        <input list="names" id="search_by_credname" name="search_by_creadname" class="form-control" required="">
 
                                                         <datalist id="names">
-                                                          
+
                                                         </datalist>
                                                     </div>
 

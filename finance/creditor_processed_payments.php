@@ -14,7 +14,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","finance_admin","cashier");
+$restricted = array("system_administrator", "finance_admin", "cashier");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -62,283 +62,50 @@ if (in_array($position, $restricted)) {
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(() => {
 
-            $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            
+            selectedType="";
+                
+                $('#typeValue').change(()=>{
+                   selectedType =  $('#typeValue').val();
 
-            $('#select_payment_type').change(function() {
+                    
 
-                 
+                    if (selectedType == "internal"){
 
+                       let internal_creditor_value = 'c';
 
-                let payment_type = $('#select_payment_type').val();
-
-                if (payment_type==="Cheque"){
-                    $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
-                    $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
-
-                }
-                else if (payment_type==="Cash"){
-
-                    $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                    $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
-                }
-
-
-                // var crop_data = $('#select_crop').val();
-                // var variety_data = $('#select_variety').val();
-                // var class_data = $('#select_class').val();
-
-                // if (crop_data == 0) {
-
-                //     alert('Select crop and variety');
-
-
-                // } else if (variety_data == 0) {
-
-                //     alert('Select crop and variety');
-
-                // } else {
-
-                //     $.post('get_prices.php', {
-                //         crop_data: crop_data,
-                //         variety_data: variety_data,
-                //         class_data: class_data
-                //     }, function(data) {
-
-                //         $('#price_per_kg').val(data);
-
-                //     });
-                // }
-
-
-
-
-            });
-
-
-            $('#debtor_type').change(function() {
-
-                var type_value = $('#debtor_type').val();
-
-                if (type_value == 'agro_dealer') {
-
-                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
-                    $('#description').attr('placeholder', 'agro dealer phone');
-
-
-                } else if (type_value == 'b_to_b') {
-
-                    $('#customer_name').attr('placeholder', 'Search Business by name');
-                    $('#description').attr('placeholder', 'Business description');
-
-
-
-                } else if (type_value == 'customer') {
-
-                    $('#customer_name').attr('placeholder', 'Enter customer name');
-                    $('#description').attr('placeholder', 'Enter customer phone number ');
-
-
-                } else if (type_value == 'grower') {
-
-                    $('#customer_name').attr('placeholder', 'Search grower by name');
-                    $('#description').attr('placeholder', 'grower farm crop and variety ');
-
-
-                }
-
-
-
-                $("#search_main_certificate").on("input", function() {
-
-
-                    var main_certificate_value = $('#search_main_certificate').val();
-                    var main_quantity_value = $('#main_quantity').val();
-                    var crop_value = $('#select_crop').val();
-                    var variety_value = $('#select_variety').val();
-                    var class_result = $('#select_class').val();
-
-
-                    $.post('farm_get_certificate.php', {
-                        main_certificate_value: main_certificate_value,
-                        main_quantity_value: main_quantity_value,
-                        crop_value: crop_value,
-                        variety_value: variety_value,
-                        class_value: class_value
+                        $.post('get_creditors.php', {
+                        internal_creditor_value: internal_creditor_value,
+                       
                     }, function(data) {
-                        $('#main_certificate').html(data);
-
-
+                        $('#names').html(data);
                     })
+
+                    }
+
+                    else if(selectedType=="external"){
+
+                       let external_creditor_value ='c';
+
+                        $.post('get_creditors.php', {
+                        external_creditor_value: external_creditor_value,
+                       
+                    }, function(data) {
+                        $('#names').html(data);
+                    })
+
+
+                    }
+
+                   
+
+
 
                 });
 
-
-
-
-
-
-
-
-            });
-
-            $('#customer_name').on("input", function() {
-
-
-                let type_value = $('#debtor_type').val();
-                let search_value = $('#customer_name').val();
-                let search_result = $('#search_result').val();
-
-                if (type_value == "type_not_selected") {
-
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1]);
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "b_to_b") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    });
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    })
-
-
-
-
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-                    $.post('get_transactions.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-                        search_result: search_result,
-                    }, data => {
-                        $('#transaction_table').html(data);
-                    });
-
-
-                }
-
-            });
-
+            l
         });
     </script>
 
@@ -433,7 +200,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -441,7 +208,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -449,13 +216,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -467,14 +234,14 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
+
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -524,7 +291,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -533,7 +300,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -542,9 +309,9 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -563,7 +330,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="">
                                     <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -580,7 +347,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -594,7 +361,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="bank_account.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-credit-card"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Bank accounts</span>
@@ -602,8 +369,8 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                
-                                <li class="pcoded-hasmenu">
+
+                                <li class="">
                                     <a href="finance_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
@@ -612,7 +379,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -640,7 +407,7 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                           
+
                                             <li class="breadcrumb-item"><a href="creditor_processed_payments.php">Processed Creditor Payment</a>
                                             </li>
                                         </ul>
@@ -648,20 +415,20 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        
-                            <!-- Page-header end -->
-                            <div class="pcoded-inner-content">
-                                <!-- Main-body start -->
-                                <div class="main-body">
-                                    <div class="page-wrapper">
 
-                                        <!-- Page body start -->
-                                        <div class="page-body">
-                                            
- 
-                                       
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
 
-                                           
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+
+
+
+
+
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Filter </h5>
@@ -690,18 +457,18 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group row">
                                                     <div class="col-sm-3">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Transaction Type</option>
-                                                            <option value="customer">Customer Order</option>                                                            
-                                                            <option value="b_to_b">Business Order</option>
-                                                            <option value="agro_dealer">Agro Dealer Order</option>
+                                                            <option value="type_not_selected">Creditor Type</option>
+                                                            <option value="internal">Internal</option>
+                                                            <option value="external">External</option>
+
                                                         </select>
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
+                                                        <input list="names" id="search_by_credname" name="search_by_creadname" class="form-control" required="">
 
                                                         <datalist id="names">
-                                                          
+
                                                         </datalist>
                                                     </div>
 
@@ -720,7 +487,8 @@ if (in_array($position, $restricted)) {
 
                                                         <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
-                                                        <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
+                                                        
+                                                        <a href="creditor_processed_payments.php" class="ti-loop btn btn-danger"></a>
                                                     </div>
                                                 </div>
 
@@ -746,58 +514,58 @@ if (in_array($position, $restricted)) {
                                         </div>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Transaction list</h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID</th>
-                                                                                <th>Type</th>
-                                                                                <th>Amount</th>
-                                                                                <th>Date</th>
-                                                                               
-                                                                                <th>Time</th>
-                                                                                <th>Status</th>
-                                                                                <th>Actions</th>
-                                                                                
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Transaction list</h5>
+                                                        <div class="card-block table-border-style">
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table" id="transaction_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ID</th>
+                                                                            <th>Type</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Date</th>
 
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
+                                                                            <th>Time</th>
+                                                                            <th>Status</th>
+                                                                            <th>Actions</th>
 
-                                                                            <?php
-                                                                        
 
-                                                                               
-                                                                            
-                                                                             
 
-                                                                                $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        <?php
+
+
+
+
+
+
+                                                                        $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
                                                                                  `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
 
-                                                                       
 
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $transaction_ID = $row["transaction_ID"];
-                                                                                        $type  = $row["type"];
-                                                                                        $amount = $row["amount"];
-                                                                                        $trans_date = $row["trans_date"];
-                                                                                        $trans_time = $row['trans_time'];
-                                                                                        $trans_status = $row['trans_status'];
-                                                                                        
-                                                                                     
+
+                                                                        $result = $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+                                                                                $transaction_ID = $row["transaction_ID"];
+                                                                                $type  = $row["type"];
+                                                                                $amount = $row["amount"];
+                                                                                $trans_date = $row["trans_date"];
+                                                                                $trans_time = $row['trans_time'];
+                                                                                $trans_status = $row['trans_status'];
 
 
 
-                                                                                        echo "
+
+
+                                                                                echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$transaction_ID</td>
                                                        <td>$type</td>
@@ -814,59 +582,59 @@ if (in_array($position, $restricted)) {
                                                         
                                                    </tr>	
                                                ";
-                                                                                    }
-                                                                                }
-                                                                            
+                                                                            }
+                                                                        }
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+
+                                                                        ?>
+                                                                        <tr>
+                                                                            <th scope="row">-</th>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
 
 
-                                                                            </tr>
+                                                                        </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                    </tbody>
+                                                                </table>
 
 
-                                                                </div>
                                                             </div>
-
                                                         </div>
 
                                                     </div>
 
-
-                        </form>
-
+                                                </div>
 
 
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+                                </div>
+                                <!-- Page body end -->
+                            </div>
+                        </div>
+                        <!-- Main-body end -->
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-
         </div>
-        <!-- Page body end -->
-    </div>
-    </div>
-    <!-- Main-body end -->
-    <div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 
