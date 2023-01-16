@@ -8,85 +8,30 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
-$order_ID = $_GET['order_id'];
-$page_type = $_GET['transaction_details'];
-
-
-if(!empty($page_type)){
-
-    if($page_type=="debtor_processed"){
-
-        $processed ="active";
-    $outstanding="-";
-    $account_details="-";
-    
-    
-    
-    }
-    else if($page_type=="debtor_outstanding"){
-    
-    $processed ="-";
-    $outstanding="active";
-    $account_details="-";
-
-    
-    }
-
-    else if($page_type=="debtor_details"){
-
-        $processed ="-";
-        $outstanding="-";
-        $account_details="active";
-
-
-    }
-
-    
-}
-
-else{
-
-    
-
-    if($post_page_type=="debtor_processed"){
-
-        $processed ="active";
-    $outstanding="-";
-    
-    
-    
-    }
-    else if($post_page_type=="debtor_outstanding"){
-    
-    $processed ="-";
-    $outstanding="active";
-    
-    }
+$creditor_ID = $_GET['creditor_id'];
 
 
 
 
 
-}
 
 
 
 
+if(!empty($creditor_ID)){
 
-if(!empty($order_ID)){
-
-$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
+$sql="SELECT * FROM `creditor` WHERE `creditor_ID`='$creditor_ID'";
 
 
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         
-        $amount = $row["total_amount"];
-        $customer = $row["customer_id"];
-        $user_requested = $row["user_ID"];
-        $date = $row["date"];
-        $time = $row["time"];
+        $fullname = $row["name"];
+        $phone = $row["phone"];
+        $type = $row["source"];
+        $date = $row["registered_date"];
+        $account_funds =$row["account_funds"];
       
 
     }
@@ -149,6 +94,10 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
 
        $(document).ready(()=>{
+
+        $("#viewContract").prop('readonly', true);
+
+
 
         $("#back").click(()=>{
 
@@ -361,7 +310,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="<?php echo $processed; ?>">
+                                <li class="">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -370,7 +319,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="<?php echo $outstanding; ?>">
+                                <li class="">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -379,7 +328,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="<?php echo  $account_details;?>">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -417,7 +366,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="">
+                                <li class="active">
                                     <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
@@ -540,8 +489,8 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Order ID</label>
-                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
+                                                        <label class="badge badge-primary ">Fullname</label>
+                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $fullname; ?>" require="">
 
                                                     </div>
 
@@ -549,92 +498,94 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Amount</label>
-                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
+                                                        <label class="badge badge-primary ">Creditor Type</label>
+                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $type; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order For</label>
-                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
+                                                        <label class="badge badge-primary ">Phone</label>
+                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $phone; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Requested By</label>
-                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+                                                        <label class="badge badge-primary ">Registered Date</label>
+                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $date; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order Date</label>
-                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+                                                        <label class="badge badge-primary ">Account Funds </label>
+                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $account_funds; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Account Funds </label>
+                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $account_funds; ?>" require="">
 
-                                                        <label class="badge badge-primary ">Time</label>
-                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
-                                                       
 
 
                                                     </div>
-                                              
-                                                    <div class="card-block">
 
-
-                                                    </form>
-                                               
-
-                                                    <form action="finance_csv_handler.php" method="POST">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
-
-
-
-                                                            <button class="ti-download btn btn-success " id='debtor_outstanding_order_details' name='debtor_outstanding_order_details'> CSV</button>
-
-
-
-                                                
-
-
-                                                            
-                                                            <input type="hidden" name="customer_name" id="customer_name">
-                                                            <input type="hidden" name="order_id" id="order_id">
-
-                                                            <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
-
-                                                           
-
-
-
-
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                </form>
-
- 
-                                               
-
-                                            </div>
+                                                  
+                                                  
 
 
 
                                                 </div>
+
+                                              
+
+
+<div class="col-sm-3">
+
+
+
+    
+
+
+
+
+
+
+<a href="../files/production/stock_in_documents/<?php echo"$dir"?>" id="viewContract" class="btn btn-success"> View Contract</a>
+
+
+
+<input type="hidden" name="customer_name" id="customer_name">
+<input type="hidden" name="order_id" id="order_id">
+
+<input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+
+
+
+
+
+
+
+</select>
+
+</div>
+
+
+
+
+
+
+
+
+
+
 
                                                 
 
@@ -643,96 +594,94 @@ if (in_array($position, $restricted)) {
                                         </div>
 
                                         <div class="card">
-                                            <div class="card-header">
-                                                <h5>Items</h5>
+                                                        <div class="card-header">
+                                                            <h5>Accpont Transactions</h5>
+                                                            <div class="card-block table-border-style">
+                                                                <div class="table-responsive" id="table_test">
+                                                                    <table class="table" id="transaction_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Trans_ID</th>
+                                                                                <th>status</th>
+                                                                                <th>Time</th>
+                                                                                <th>Date</th>
+                                                                                <th>amount</th>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <?php
+                                                                        
+
+                                                                               
+                                                                            
+ 
+
+                                                                                $sql = "SELECT * FROM `transaction` WHERE `C_D_ID` ='$creditor_ID'";
+
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $trans_ID      = $row["transaction_ID"];
+                                                                                        $debtor_id = $row["C_D_ID"];
+                                                                                        $status   = $row["trans_status"];
+                                                                                        $time = $row["trans_time"];
+                                                                                        $date = $row["trans_date"];
+                                                                                        $amount = $row['amount'];
+                                                                                        $action_id = $row['action_ID'];
+                                                                                        $type= $row["type"];
+                                                                                        $debtor_id = $row["C_D_ID"];
+                                                                                        $status = $row["trans_status"];
+                                                                                        $page_type = "debtor_details";
+                                                                                        $trans_details = "creditor_details";
+                                                                                     
 
 
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Item ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>price per kg</th>
-                                                                <th>Discount</th>
-                                                                <th>Total price</th>
+
+                                                                                        echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$trans_ID</td>
+                                                       <td>$status</td>
+                                                       <td>$time</td>
+                                                       <td>$date</td>
+                                                       <td>$amount</td>
+                                                    
+                                                         
+                                                       
+                                                       
+                                                       <td><a href='creditor_transaction_details.php?stock_in_id=$action_id & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
+                                                   </tr>	
+                                               ";
+                                                                                    }
+                                                                                }
+                                                                            
 
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
-                                                             `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
+                                                                            ?>
+                                                                            <tr>
+                                                                                <th scope="row">-</th>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
 
 
-                                                                    $item_ID      = $row["item_ID"];
-                                                                    $crop     = $row["crop"];
-                                                                    $variety = $row["variety"];
-                                                                    $class    = $row['class'];
-                                                                    $quantity = $row['quantity'];
-                                                                    $price_per_kg = $row['price_per_kg'];
-                                                                    $discount_price = $row['discount_price'];
-                                                                    $total_price = $row['total_price'];
+                                                                            </tr>
 
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                            <td>$item_ID</td>
-                                            <td>$crop</td>
-                                            <td>$variety</td>
-                                            <td>$class</td>
-                                            <td>$quantity</td>
-                                            <td>$price_per_kg </td>
-                                            <td>$discount_price</td>
-                                            <td>$total_price</td>
-												
-											</tr>	
-                                    
-												
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                                        </tbody>
+                                                                    </table>
 
-                                                <div class="card-block">
 
-                                              
-                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
+                                                                </div>
+                                                            </div>
 
-                                                
-                                                
+                                                           
+                                                        </div>
 
-                                                
-                                               
-
-                                            </div>
-                                        </div>
-
-                                        <!-- Background Utilities table end -->
-                                    </div>
+                                                    </div>
                                     <!-- Page-body end -->
                                 </div>
                             </div>
@@ -821,4 +770,4 @@ if (in_array($position, $restricted)) {
 
 
 ?>
-</html>
+</html> 

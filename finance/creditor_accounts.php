@@ -786,7 +786,7 @@ if (in_array($position, $restricted)) {
                                                        <td>$by</td>
                                                        <td>$date</td>
                                                        <td>$funds</td>
-                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+                                                       <td><a href='account_details.php? creditor_id=$creditor_ID'  class='btn btn-success'>view</a> </td>
                                                        
                                                      
                                                                                                            

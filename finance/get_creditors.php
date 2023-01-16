@@ -8,7 +8,7 @@ include('../class/marketing.php');
 include('../class/main.php');
 
 
-if(isset($_POST['data_value'])){ 
+if (isset($_POST['data_value'])) {
 
 
 
@@ -25,65 +25,53 @@ if(isset($_POST['data_value'])){
       <option value='type_not_selected'>Select Bank Account</option>
       <option value='$bank_ID'>$bank_name</option>
   ";
-
     }
-
   }
-
-
-
 }
 
-if(isset($_POST['ledger_save_csv'])){
+if (isset($_POST['ledger_save_csv'])) {
 
 
   $date = date('d-m-y h:i');
   $filename = "All Orders $date.csv";
   $fp = fopen('php://output', 'w');
-  
+
   //create header 
 
 
-  $header = array("Order ID","Customer name","Date","Time","count","Total");	
+  $header = array("Order ID", "Customer name", "Date", "Time", "count", "Total");
   fputcsv($fp, $header);
-  
+
   //create body
-  
+
   $sql = "SELECT * FROM `order_table`";
   $result = $con->query($sql);
-  if($result->num_rows>0)
-  {
-      while($row=$result->fetch_assoc())
-      {
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
 
-      $order_ID 	 = $row["order_ID"];
-                              
+      $order_ID    = $row["order_ID"];
+
       $customer_name  = $row["customer_name"];
       $date    = $row['date'];
       $time = $row['time'];
       $count = $row['count'];
       $total = $row['total_amount'];
-      
-          $list = array($order_ID,$customer_name,$date,$time,$count,$total);
-      
+
+      $list = array($order_ID, $customer_name, $date, $time, $count, $total);
+
       fputcsv($fp, $list);
+    }
+
+    //close file
+    fclose($fp);
+
+    //download file
+    header("Content-Description: File Transfer");
+    header('Content-type: application/csv');
+    header('Content-Disposition: attachment; filename=' . $filename);
+
+    exit;
   }
-  
-  //close file
-  fclose($fp);
-  
-  //download file
-  header("Content-Description: File Transfer");
-  header('Content-type: application/csv');
-  header('Content-Disposition: attachment; filename='.$filename);
-  
-  exit;
-
-
-}
-
-
-
 }
 
 
@@ -248,7 +236,7 @@ if (isset($_POST['search_value'])) {
     }
   }
 
-  
+
 
 
   if ($_POST['type_value'] == "grower") {
@@ -299,8 +287,6 @@ if (isset($_POST['search_value'])) {
           ";
     }
   }
- 
-  
 }
 
 if (isset($_POST['fromDateValue'])) {
@@ -314,7 +300,7 @@ if (isset($_POST['fromDateValue'])) {
   if ($typeValue == "all") {
 
 
-    echo"
+    echo "
     <tr>
     <th>Entry ID</th>
     <th>Transaction type</th>
@@ -331,7 +317,7 @@ if (isset($_POST['fromDateValue'])) {
     <th>Action</th>
 </tr>
     ";
-    
+
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
@@ -398,11 +384,9 @@ if (isset($_POST['fromDateValue'])) {
               </tr>	
           ";
     }
-  }
+  } else if ($typeValue == "credit") {
 
-  else if($typeValue == "credit"){
-
-    echo"
+    echo "
     <tr>
     <th>Entry ID</th>
     <th>Transaction type</th>
@@ -419,7 +403,7 @@ if (isset($_POST['fromDateValue'])) {
     <th>Action</th>
 </tr>";
 
-      
+
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
@@ -485,13 +469,10 @@ if (isset($_POST['fromDateValue'])) {
               </tr>	
           ";
     }
-
-  }
-
-  else if($typeValue == "debit"){
+  } else if ($typeValue == "debit") {
 
 
-    echo"
+    echo "
     <tr>
     <th>Entry ID</th>
     <th>Transaction type</th>
@@ -507,7 +488,7 @@ if (isset($_POST['fromDateValue'])) {
 
     <th>Action</th>
 </tr>";
-      
+
     $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
     `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
      `reference_bank_amount`, `entry_date`, `entry_time` FROM 
@@ -572,24 +553,23 @@ if (isset($_POST['fromDateValue'])) {
               </tr>	
           ";
     }
-    
   }
 }
 
 
-if (isset($_POST['creditor_name_search'])){
+if (isset($_POST['creditor_name_search'])) {
 
 
-    $creditor_name = $_POST['creditor_name_search'];
+  $creditor_name = $_POST['creditor_name_search'];
 
-  
+
   $sql = "SELECT * FROM creditor WHERE `name`  like '%$creditor_name%' ";
 
 
 
   $result = $con->query($sql);
 
-echo" <thead>
+  echo " <thead>
 <tr>
     <th>ID </th>
     <th>Name</th>
@@ -603,24 +583,24 @@ echo" <thead>
 
 
 </tr>
-</thead>";  
+</thead>";
 
 
   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-          $creditor_ID = $row["creditor_ID"];
-          $name = $row["name"];
+    while ($row = $result->fetch_assoc()) {
+      $creditor_ID = $row["creditor_ID"];
+      $name = $row["name"];
 
-          $phone = $row["phone"];
-          $by = $row["user_ID"];
-          $date = $row['registered_date'];
-          $funds = $row['account_funds'];
-
-
+      $phone = $row["phone"];
+      $by = $row["user_ID"];
+      $date = $row['registered_date'];
+      $funds = $row['account_funds'];
 
 
 
-          echo "
+
+
+      echo "
 
          
 <tr class='odd gradeX'>
@@ -640,15 +620,10 @@ echo" <thead>
 
 </tr>	
 ";
-      }
+    }
+  } else {
 
-
-
-
-}
-else{
-
-  echo "
+    echo "
   <tr class='odd gradeX'>
   <td>Unavailable !</td>
   <td>-</td>
@@ -666,21 +641,18 @@ else{
   
   </tr>	
   ";
-
-
+  }
 }
 
-}
-
-if(isset($_POST['debtor_name_search'])){
+if (isset($_POST['debtor_name_search'])) {
 
 
   $debtor_name = $_POST['debtor_name_search'];
 
-  
+
   $sql = "SELECT * FROM debtor WHERE `name`  like '%$debtor_name%'";
 
-       echo" <thead>
+  echo " <thead>
        <tr>
            <th>ID </th>
            <th>Name</th>
@@ -694,27 +666,27 @@ if(isset($_POST['debtor_name_search'])){
 
          
        </tr>
-   </thead> ";                                                                
+   </thead> ";
 
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-          $debtor_ID = $row["debtor_ID"];
-          $name = $row["name"];
-          $type  = $row["debtor_type"];
-          $phone = $row["phone"];
-          $by = $row["user_ID"];
-          $date = $row['registered_date'];
-          $funds = $row['account_funds'];
+    while ($row = $result->fetch_assoc()) {
+      $debtor_ID = $row["debtor_ID"];
+      $name = $row["name"];
+      $type  = $row["debtor_type"];
+      $phone = $row["phone"];
+      $by = $row["user_ID"];
+      $date = $row['registered_date'];
+      $funds = $row['account_funds'];
 
-          $object = new main();
-          $newDate = $object->change_date_format($date);
-          
-       
+      $object = new main();
+      $newDate = $object->change_date_format($date);
 
 
 
-          echo "
+
+
+      echo "
 
                   
 <tr class='odd gradeX'>
@@ -734,15 +706,10 @@ if(isset($_POST['debtor_name_search'])){
 
 </tr>	
 ";
+    }
+  } else {
 
-
-
-      }
-}
-
-else{
-
-  echo "
+    echo "
   <tr class='odd gradeX'>
   <td>Unavailable !</td>
   <td>-</td>
@@ -760,49 +727,40 @@ else{
   
   </tr>	
   ";
-
-
-}
+  }
 }
 
-if(isset($_POST["debtor_outstanding_type_filter"])){
+if (isset($_POST["debtor_outstanding_type_filter"])) {
 
   $type = $_POST["debtor_outstanding_type_filter"];
 
-  if($type == "customer" || $type =="agro_dealer" || $type == "b_to_b"){
+  if ($type == "customer" || $type == "agro_dealer" || $type == "b_to_b") {
 
-    $sql="SELECT `debtor_ID`, `name` FROM `debtor` WHERE `debtor_type`='$type'";
+    $sql = "SELECT `debtor_ID`, `name` FROM `debtor` WHERE `debtor_type`='$type'";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $debtor_ID = $row["debtor_ID"];
-            $debtor_name = $row["name"];
+      while ($row = $result->fetch_assoc()) {
+        $debtor_ID = $row["debtor_ID"];
+        $debtor_name = $row["name"];
 
 
-            echo" 
+        echo " 
 
                                                         <datalist id='names'>
                                                             <option value='$debtor_ID'>$debtor_name</option>
                                                         </datalist>
             
             ";
-        }
       }
-
-
+    }
   }
-
-  
- 
-
-
 }
 
-if(isset($_POST["payment_debtor_data_filter"])){
+if (isset($_POST["payment_debtor_data_filter"])) {
 
 
-echo "<thead>
+  echo "<thead>
                                                                         <tr>
                                                                             <th>ID</th>
                                                                             <th>Type</th>
@@ -821,38 +779,38 @@ echo "<thead>
   $page_type = $_POST['page_type'];
 
 
-  
+
   $sql = "SELECT `transaction_ID`, `type`, `action_name`,
    `action_ID`, `C_D_ID`, `amount`,
   `trans_date`, `trans_time`, `trans_status`,
    `user_ID` FROM `transaction` WHERE  `trans_status` = 'partly_payed' OR `trans_status` = 'payment_pending' AND `type`='$typeValue' AND 
     `trans_date` BETWEEN '$fromValue' AND '$toValue'";
 
-// `trans_status` = 'partly_payed' OR
-// `trans_status` = 'payment_pending'
-//  AND `type` ='customer_order'
-//   OR `type` ='grower_order' AND
-     
+  // `trans_status` = 'partly_payed' OR
+  // `trans_status` = 'payment_pending'
+  //  AND `type` ='customer_order'
+  //   OR `type` ='grower_order' AND
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $transaction_ID = $row["transaction_ID"];
-        $order_ID = $row["action_ID"];
-        $type  = $row["type"];
-        $amount = $row["amount"];
-        $trans_date = $row["trans_date"];
-        $trans_time = $row['trans_time'];
-        $trans_status = $row['trans_status'];
+      $transaction_ID = $row["transaction_ID"];
+      $order_ID = $row["action_ID"];
+      $type  = $row["type"];
+      $amount = $row["amount"];
+      $trans_date = $row["trans_date"];
+      $trans_time = $row['trans_time'];
+      $trans_status = $row['trans_status'];
 
-        $object = new main();
-        $newDate = $object->change_date_format($trans_date);
-
-
+      $object = new main();
+      $newDate = $object->change_date_format($trans_date);
 
 
 
-        echo "
+
+
+      echo "
 <tr class='odd gradeX'>
 <td>$transaction_ID</td>
 <td>$type</td>
@@ -870,15 +828,13 @@ if ($result->num_rows > 0) {
 </tr>	
 ";
     }
-}
-
-else{
-
- 
+  } else {
 
 
 
-echo "
+
+
+    echo "
 <tr class='odd gradeX'>
 <td> No Data Found </td>
 
@@ -890,20 +846,10 @@ echo "
 
 </tr>	
 ";
-
+  }
 }
 
-
-
-
-
-
-
-
-
-}
-
-if(isset($_POST["processed_debtor_data_filter"])){
+if (isset($_POST["processed_debtor_data_filter"])) {
 
 
   echo "<thead>
@@ -918,44 +864,44 @@ if(isset($_POST["processed_debtor_data_filter"])){
                                                                               <th>Actions</th>
                                                                           </tr>
                                                                       </thead>";
-  
-    $fromValue = $_POST['from'];
-    $toValue = $_POST['to'];
-    $typeValue = $_POST['processed_debtor_data_filter'];
-    $page_type = $_POST['page_type'];
-  
-  
-    
-    $sql = "SELECT `transaction_ID`, `type`, `action_name`,
+
+  $fromValue = $_POST['from'];
+  $toValue = $_POST['to'];
+  $typeValue = $_POST['processed_debtor_data_filter'];
+  $page_type = $_POST['page_type'];
+
+
+
+  $sql = "SELECT `transaction_ID`, `type`, `action_name`,
      `action_ID`, `C_D_ID`, `amount`,
     `trans_date`, `trans_time`, `trans_status`,
      `user_ID` FROM `transaction` WHERE `type`='$typeValue' AND `trans_status`= 'fully_payed' AND 
       `trans_date` BETWEEN '$fromValue' AND '$toValue'";
-  
+
   // `trans_status` = 'partly_payed' OR
   // `trans_status` = 'payment_pending'
   //  AND `type` ='customer_order'
   //   OR `type` ='grower_order' AND
-       
-  
+
+
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-          $transaction_ID = $row["transaction_ID"];
+    while ($row = $result->fetch_assoc()) {
+      $transaction_ID = $row["transaction_ID"];
 
-          $order_ID = $row["action_ID"];
-          $type  = $row["type"];
-          $amount = $row["amount"];
-          $trans_date = $row["trans_date"];
-          $trans_time = $row['trans_time'];
-          $trans_status = $row['trans_status'];
-          $trans_details = "debtor_processed";
-  
-  
-  
-  
-  
-          echo "
+      $order_ID = $row["action_ID"];
+      $type  = $row["type"];
+      $amount = $row["amount"];
+      $trans_date = $row["trans_date"];
+      $trans_time = $row['trans_time'];
+      $trans_status = $row['trans_status'];
+      $trans_details = "debtor_processed";
+
+
+
+
+
+      echo "
   <tr class='odd gradeX'>
   <td>$transaction_ID</td>
   <td>$type</td>
@@ -972,16 +918,14 @@ if(isset($_POST["processed_debtor_data_filter"])){
   
   </tr>	
   ";
-      }
-  }
-  
-  else{
-  
-   
-  
-  
-  
-  echo "
+    }
+  } else {
+
+
+
+
+
+    echo "
   <tr class='odd gradeX'>
   <td> No Data Found </td>
   
@@ -993,85 +937,250 @@ if(isset($_POST["processed_debtor_data_filter"])){
   
   </tr>	
   ";
-  
   }
-  
-  
-  
-  
-  
-  
-  
-  
 }
 //// Get registered creditors 
 
-if(isset($_POST["external_creditor_value"])){
+if (isset($_POST["external_creditor_value"])) {
 
 
-  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+  $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
    `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $creditr_ID = $row["creditor_ID"];
-        $creditor_name =$row['name'];
-       
-    
+      $creditor_ID = $row["creditor_ID"];
+      $creditor_name = $row['name'];
 
 
 
 
 
-        echo "
 
-        <option value'$creditor_ID'>$creditor_name</option>
+
+      echo "
+
+        <option value = '$creditor_ID'>$creditor_name</option>
                                   
 
 ";
     }
-  
-  
-  
   }
-
-
 }
 
-if(isset($_POST["internal_creditor_value"])){
+if (isset($_POST["internal_creditor_value"])) {
 
 
-  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+  $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
    `registered_date`, `account_funds` FROM `creditor` WHERE `source`='MUSECO'";
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $creditr_ID = $row["creditor_ID"];
-        $creditor_name =$row['name'];
-       
-    
+      $creditor_ID = $row["creditor_ID"];
+      $creditor_name = $row['name'];
 
 
 
 
 
-        echo "
 
-        <option value'$creditor_ID'>$creditor_name</option>
+
+      echo "
+
+        <option value = '$creditor_ID'>$creditor_name</option>
+
+        
                                   
 
 ";
     }
-  
-  
-  
   }
+}
 
 
+////creditor data filter 
+
+if (isset($_POST["processed_creditor_data_filter"])) {
+
+
+  echo "<thead>
+                                                                          <tr>
+                                                                              <th>ID</th>
+                                                                              <th>Type</th>
+                                                                              <th>Amount</th>
+                                                                              <th>Date</th>
+  
+                                                                              <th>Time</th>
+                                                                              <th>Status</th>
+                                                                              <th>Actions</th>
+                                                                          </tr>
+                                                                      </thead>";
+
+
+
+
+
+  $fromValue = $_POST['from'];
+  $toValue = $_POST['to'];
+  $creditor_ID =$_POST['creditor'];
+  $page_type = $_POST['page_type'];
+
+
+
+  $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+  `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `C_D_ID` ='$creditor_ID' AND `type` ='creditor_buy_back' AND `trans_status`='fully_payed' AND 
+    `trans_date` BETWEEN '$fromValue' AND '$toValue'
+    ";
+
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $transaction_ID = $row["transaction_ID"];
+
+      $stock_in_ID = $row["action_ID"];
+      $type  = $row["type"];
+      $amount = $row["amount"];
+      $trans_date = $row["trans_date"];
+      $trans_time = $row['trans_time'];
+      $trans_status = $row['trans_status'];
+      $trans_details = "creditor_processed";
+
+
+
+
+
+      echo "
+  <tr class='odd gradeX'>
+  <td>$transaction_ID</td>
+  <td>$type</td>
+  <td>$fromValue</td>
+  <td>$trans_date</td>
+  <td>$trans_time</td>
+  <td>$fromValue</td>
+  <td><a href='creditor_transaction_details.php?stock_in_id=$stock_in_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+    }
+  } else {
+
+
+
+
+
+    echo "
+  <tr class='odd gradeX'>
+  <td> No Data Found </td>
+  
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+  }
+}
+
+
+if (isset($_POST["outstanding_creditor_data_filter"])) {
+
+
+  echo "<thead>
+                                                                          <tr>
+                                                                              <th>ID</th>
+                                                                              <th>Type</th>
+                                                                              <th>Amount</th>
+                                                                              <th>Date</th>
+  
+                                                                              <th>Time</th>
+                                                                              <th>Status</th>
+                                                                              <th>Actions</th>
+                                                                          </tr>
+                                                                      </thead>";
+
+
+
+
+
+  $fromValue = $_POST['from'];
+  $toValue = $_POST['to'];
+  $creditor_ID =$_POST['creditor'];
+  $page_type = $_POST['page_type'];
+
+
+
+  $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
+  `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `C_D_ID` ='$creditor_ID' AND `type` ='creditor_buy_back' AND `trans_status`='payment_pending' AND 
+    `trans_date` BETWEEN '$fromValue' AND '$toValue'
+    ";
+
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $transaction_ID = $row["transaction_ID"];
+
+      $stock_in_ID = $row["action_ID"];
+      $type  = $row["type"];
+      $amount = $row["amount"];
+      $trans_date = $row["trans_date"];
+      $trans_time = $row['trans_time'];
+      $trans_status = $row['trans_status'];
+      $trans_details = "creditor_outstanding";
+
+
+
+
+
+      echo "
+  <tr class='odd gradeX'>
+  <td>$transaction_ID</td>
+  <td>$type</td>
+  <td>$fromValue</td>
+  <td>$trans_date</td>
+  <td>$trans_time</td>
+  <td>$fromValue</td>
+  <td><a href='creditor_transaction_details.php?stock_in_id=$stock_in_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+    }
+  } else {
+
+
+
+
+
+    echo "
+  <tr class='odd gradeX'>
+  <td> No Data Found </td>
+  
+  
+  
+                                     
+  
+  
+  
+  </tr>	
+  ";
+  }
 }
 
 
@@ -1080,28 +1189,28 @@ if ($result->num_rows > 0) {
 ///// Getting registered creditor accounts for finance creditor pages 
 
 
-if(isset($_POST["externalCreditorData"])){
+if (isset($_POST["externalCreditorData"])) {
 
 
-  $sql="SELECT `creditor_ID`, `source`, `name`, `phone`,
+  $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
    `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
 
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $transaction_ID = $row["transaction_ID"];
+      $transaction_ID = $row["transaction_ID"];
 
-        $order_ID = $row["action_ID"];
-        $type  = $row["type"];
-    
-
+      $order_ID = $row["action_ID"];
+      $type  = $row["type"];
 
 
 
 
-        echo "
+
+
+      echo "
 <tr class='odd gradeX'>
 <td>$transaction_ID</td>
 <td>$type</td>
@@ -1119,19 +1228,7 @@ if ($result->num_rows > 0) {
 </tr>	
 ";
     }
-  
-  
-  
   }
-
-
-
 }
 
-if(isset($_POST["externalCreditorData"])){
 
-
-
-
-}
-  

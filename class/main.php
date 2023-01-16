@@ -721,13 +721,7 @@ class main
 
     // register transaction 
 
-    $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
-     `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
-     ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor',' $calculated_amount',
-     '$date','$time','payment_pending','$user_ID')";
-
-    $statement = $con->prepare($sql);
-    $statement->execute();
+   
 
     ///   update creditor funds account 
     $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`= $creditor";
@@ -743,6 +737,8 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
+    $this->stock_in_add_transaction($transaction_ID,$trans_type,$stock_ID,$creditor,$calculated_amount,$user_ID);
+
     echo ("<script> alert('New entry added');
        </script>");
   }
@@ -750,7 +746,29 @@ class main
 
 
 
+  function stock_in_add_transaction($transaction_ID,$trans_type,$stock_ID,$creditor,$calculated_amount,$user_ID){
 
+
+    $date = date("Y-m-d");
+    $time = date("H:i:s");
+    global $con;  
+
+    $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
+    `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
+    ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor',' $calculated_amount',
+    '$date','$time','payment_pending','$user_ID')";
+
+   $statement = $con->prepare($sql);
+   $statement->execute();
+
+  }
+
+
+    
+
+
+
+  
 
 
 

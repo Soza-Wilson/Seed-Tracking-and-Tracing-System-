@@ -64,48 +64,86 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript">
         $(document).ready(() => {
 
-            
-            selectedType="";
-                
-                $('#typeValue').change(()=>{
-                   selectedType =  $('#typeValue').val();
 
-                    
+            selectedType = "";
 
-                    if (selectedType == "internal"){
+            $('#typeValue').change(() => {
+                selectedType = $('#typeValue').val();
 
-                       let internal_creditor_value = 'c';
 
-                        $.post('get_creditors.php', {
+
+                if (selectedType == "internal") {
+
+                    let internal_creditor_value = 'c';
+
+                    $.post('get_creditors.php', {
                         internal_creditor_value: internal_creditor_value,
-                       
+
                     }, function(data) {
                         $('#names').html(data);
                     })
 
-                    }
+                } else if (selectedType == "external") {
 
-                    else if(selectedType=="external"){
+                    let external_creditor_value = 'c';
 
-                       let external_creditor_value ='c';
-
-                        $.post('get_creditors.php', {
+                    $.post('get_creditors.php', {
                         external_creditor_value: external_creditor_value,
-                       
+
                     }, function(data) {
                         $('#names').html(data);
                     })
 
 
-                    }
-
-                   
+                }
 
 
 
-                });
 
-            l
+
+            });
+
+            $("#get_data").click(() => {
+
+
+                let processed_creditor_data_filter = $('#typeValue').val();
+                let creditor = $('#search_by_credname').val();
+                let from = $('#fromDateValue').val();
+                let to = $('#toDateValue').val();
+                let page_type = "processed";
+
+
+                $('#trans_type_hidden').val(processed_creditor_data_filter);
+                $('#debtor_hidden').val(creditor);
+                $('#from_hidden').val(from);
+                $('#to_hidden').val(to);
+                $('#filter').val("haghgd");
+
+
+                $.post('get_creditors.php', {
+                    processed_creditor_data_filter: processed_creditor_data_filter,
+                    creditor: creditor,
+                    from: from,
+                    to: to,
+                    page_type: page_type,
+                }, function(data) {
+                    $('#dataTable').html(data);
+
+
+                })
+
+
+
+
+
+
+
+            });
+
+
+
+
+
         });
     </script>
 
@@ -465,6 +503,8 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
+
+
                                                         <input list="names" id="search_by_credname" name="search_by_creadname" class="form-control" required="">
 
                                                         <datalist id="names">
@@ -481,13 +521,21 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
 
+                                                    <input type="hidden" name="typeValueHidden" id="typeValueHidden">
+                                                    <input type="hidden" name="creditorHidden" id="creditorHidden">
+                                                    <input type="hidden" name="from_hidden" id="from_hidden">
+                                                    <input type="hidden" name="to_hidden" id="to_hidden">
+                                                    <input type="hidden" name="filter" id="filter">
+
+
+
                                                     <div class="col-sm-3">
 
 
 
                                                         <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
-                                                        
+
                                                         <a href="creditor_processed_payments.php" class="ti-loop btn btn-danger"></a>
                                                     </div>
                                                 </div>
@@ -499,7 +547,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
+                                                          
 
 
 
@@ -521,7 +569,7 @@ if (in_array($position, $restricted)) {
                                                         <h5>Transaction list</h5>
                                                         <div class="card-block table-border-style">
                                                             <div class="table-responsive" id="table_test">
-                                                                <table class="table" id="transaction_table">
+                                                                <table class="table" id="dataTable">
                                                                     <thead>
                                                                         <tr>
                                                                             <th>ID</th>
@@ -547,33 +595,37 @@ if (in_array($position, $restricted)) {
 
 
                                                                         $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `type`='creditor_buy_back' AND `trans_status` = 'fully_payed'";
 
 
 
                                                                         $result = $con->query($sql);
                                                                         if ($result->num_rows > 0) {
                                                                             while ($row = $result->fetch_assoc()) {
-                                                                                $transaction_ID = $row["transaction_ID"];
+                                                                                $stock_in_ID = $row["action_ID"];
                                                                                 $type  = $row["type"];
                                                                                 $amount = $row["amount"];
                                                                                 $trans_date = $row["trans_date"];
                                                                                 $trans_time = $row['trans_time'];
                                                                                 $trans_status = $row['trans_status'];
-
+                                                                                $trans_details = "creditor_processed";
 
 
 
 
                                                                                 echo "
                                                    <tr class='odd gradeX'>
-                                                       <td>$transaction_ID</td>
+                                                       <td>$stock_in_ID</td>
                                                        <td>$type</td>
                                                        <td>$amount</td>
                                                        <td>$trans_date</td>
                                                        <td>$trans_time</td>
                                                        <td>$trans_status</td>
-                                                       <td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+
+                                                       
+
+
+                                                       <td><a href='creditor_transaction_details.php?stock_in_id=$stock_in_ID & transaction_details=$trans_details'  class='btn btn-success'>view</a> </td>
                                                        
                                                      
                                                                                                            

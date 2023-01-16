@@ -8,13 +8,13 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
-$order_ID = $_GET['order_id'];
+$stock_in_ID = $_GET['stock_in_id'];
 $page_type = $_GET['transaction_details'];
 
 
 if(!empty($page_type)){
 
-    if($page_type=="debtor_processed"){
+    if($page_type=="creditor_processed"){
 
         $processed ="active";
     $outstanding="-";
@@ -23,7 +23,7 @@ if(!empty($page_type)){
     
     
     }
-    else if($page_type=="debtor_outstanding"){
+    else if($page_type=="creditor_outstanding"){
     
     $processed ="-";
     $outstanding="active";
@@ -32,7 +32,7 @@ if(!empty($page_type)){
     
     }
 
-    else if($page_type=="debtor_details"){
+    else if($page_type=="creditor_details"){
 
         $processed ="-";
         $outstanding="-";
@@ -73,20 +73,37 @@ else{
 
 
 
-if(!empty($order_ID)){
+if(!empty($stock_in_ID)){
 
-$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
+
+
+$sql="SELECT `stock_in_ID`, `certificate_ID`, `farm_ID`,creditor.name, user.fullname,
+stock_in.creditor_ID, stock_in.source, `crop`, `status`, 
+`variety`, `class`, `SLN`, `bincard`, 
+`number_of_bags`, `quantity`, `used_quantity`,
+ `available_quantity`, `processed_quantity`, 
+ `grade_outs_quantity`, `trash_quantity`, 
+ stock_in.description, `supporting_dir`, `date`, `time` FROM `stock_in` INNER JOIN `creditor` ON
+  stock_in.creditor_ID = creditor.creditor_ID INNER JOIN user ON user.user_ID = stock_in.user_ID INNER JOIN crop ON 
+  crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `stock_in_ID`='$stock_in_ID'";
 
 
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        
-        $amount = $row["total_amount"];
-        $customer = $row["customer_id"];
-        $user_requested = $row["user_ID"];
+        $crop = $row["crop"];
+        $variety =$row["variety"];
+        $class = $row["class"];
+        $SRN = $row["SLN"];
+        $bincard =$row["bincard"];
+        $bags = $row["number_of_bags"];
+        $quantity = $row["quantity"];
+        $creditor = $row["name"];
+        $user_requested = $row["fullname"];
         $date = $row["date"];
         $time = $row["time"];
+        $description = $row["description"];
+        $dir =  $row["supporting_dir"];
       
 
     }
@@ -150,15 +167,22 @@ if (in_array($position, $restricted)) {
 
        $(document).ready(()=>{
 
+
         $("#back").click(()=>{
 
-            let processsed_value = $("#processed_value").val();
-            if(processsed_value=='active'){
-                window.location='debtor_processed_payment.php';
-            }
-           else{
-           window.location='debtor_outstanding_payments.php';
-           }
+let processsed_value = $("#processed_value").val();
+if(processsed_value=='active'){
+    window.location='creditor_processed_payments.php';
+}
+else{
+window.location='creditor_outstanding_payments.php';
+}
+
+});
+
+       
+          
+             
 
         });
 
@@ -167,7 +191,7 @@ if (in_array($position, $restricted)) {
 
         
 
-       });
+     
 
         </script>
 </head>
@@ -361,7 +385,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="<?php echo $processed; ?>">
+                                <li class="">
                                     <a href="debtor_processed_payment.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -370,7 +394,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="<?php echo $outstanding; ?>">
+                                <li class="">
                                     <a href="debtor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -379,7 +403,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="<?php echo  $account_details;?>">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -399,7 +423,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $processed; ?>">
                                     <a href="creditor_processed_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
@@ -408,7 +432,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="">
+                                <li class="<?php echo $outstanding; ?>">
                                     <a href="creditor_outstanding_payments.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clip"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
@@ -417,7 +441,7 @@ if (in_array($position, $restricted)) {
 
                                 </li>
 
-                                <li class="">
+                                <li class="<?php echo $account_details; ?>">
                                     <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
@@ -521,7 +545,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                         <form action="admin_view_order_items.php" method="POST">
                                             <div class="card-header">
-                                                <h5>Order details</h5>
+                                                <h5>Transaction Details</h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -540,8 +564,8 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Order ID</label>
-                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
+                                                        <label class="badge badge-primary "> ID</label>
+                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $stock_in_ID; ?>" require="">
 
                                                     </div>
 
@@ -549,23 +573,23 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Amount</label>
-                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
+                                                        <label class="badge badge-primary ">Quantity</label>
+                                                        <input id="order_type" type="text" class="form-control " name="order_type" value="<?php echo $quantity; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order For</label>
-                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
+                                                        <label class="badge badge-primary ">Transaction For</label>
+                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $creditor; ?>" require="">
 
 
 
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Requested By</label>
+                                                        <label class="badge badge-primary ">Added By</label>
                                                         <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
@@ -573,7 +597,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order Date</label>
+                                                        <label class="badge badge-primary "> Date</label>
                                                         <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
@@ -601,11 +625,14 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-success " id='debtor_outstanding_order_details' name='debtor_outstanding_order_details'> CSV</button>
+                                                        
 
 
 
                                                 
+                                                   
+
+                                                        <a href="../files/production/stock_in_documents/<?php echo"$dir"?>" class="btn btn-success"> View Documents</a>
 
 
                                                             
@@ -644,7 +671,7 @@ if (in_array($position, $restricted)) {
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Items</h5>
+                                                <h5>Details</h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -657,79 +684,93 @@ if (in_array($position, $restricted)) {
                                                 </div>
 
 
+                                                <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary">Crop:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $crop; ?>">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary">Variety:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="fullname" required="" value="<?php echo $variety; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary ">Class:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $class; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary">Seed Receive Note #:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $SRN; ?>">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary">Bin Card #:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="fullname" required="" value="<?php echo $bincard; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary ">Number of Bags:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-1">
+                                                            <label class="badge badge-primary ">Description:</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $description; ?>">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+
+                                                    <div class="col-sm-4">
+
+                                                 
+
+                                                    <button class=" btn btn-success" id='back' name='back'>Back</button>
+
+
+                                                    
+
+                                                    </div>
+                                                    </div>
+
+
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Item ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>price per kg</th>
-                                                                <th>Discount</th>
-                                                                <th>Total price</th>
 
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
-                                                             `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-
-
-                                                                    $item_ID      = $row["item_ID"];
-                                                                    $crop     = $row["crop"];
-                                                                    $variety = $row["variety"];
-                                                                    $class    = $row['class'];
-                                                                    $quantity = $row['quantity'];
-                                                                    $price_per_kg = $row['price_per_kg'];
-                                                                    $discount_price = $row['discount_price'];
-                                                                    $total_price = $row['total_price'];
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                            <td>$item_ID</td>
-                                            <td>$crop</td>
-                                            <td>$variety</td>
-                                            <td>$class</td>
-                                            <td>$quantity</td>
-                                            <td>$price_per_kg </td>
-                                            <td>$discount_price</td>
-                                            <td>$total_price</td>
-												
-											</tr>	
-                                    
-												
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-                                                <div class="card-block">
-
-                                              
-                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
-
-                                                
-                                                
-
-                                                
-                                               
-
-                                            </div>
-                                        </div>
+                                            
+                                            
 
                                         <!-- Background Utilities table end -->
                                     </div>
@@ -813,7 +854,31 @@ if (in_array($position, $restricted)) {
 </body>
 <?php
 
+if(isset($_POST['back'])){
 
+    echo"<script>alert('$page_type')</script>";
+
+
+    // if($page_type=="creditor_processed"){
+
+    //     header("Location:creditor_processed_payments.php");
+
+
+    // }
+
+    // else if ($page_type=="creditor_outstanding"){
+
+    //     header("Location:creditor_outstanding_payments.php");
+
+
+    // }
+
+ 
+
+  
+
+
+}
 
 
  
