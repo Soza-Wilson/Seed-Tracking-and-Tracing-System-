@@ -138,7 +138,7 @@ if (in_array($position, $restricted)) {
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                           <span>marketing</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -150,15 +150,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -166,48 +158,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -367,7 +318,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Place Order</h5>
+                                            <h5 class="m-b-10">Denied Orders</h5>
                                           
                                         </div>
                                     </div>
@@ -378,7 +329,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Place Order</a>
+                                            <li class="breadcrumb-item"><a href="#!">Denied Orders</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -435,6 +386,8 @@ if (in_array($position, $restricted)) {
                                                                 <th>Order ID</th>
                                                                        
                                                                 <th>Customer name</th>
+                                                                <th>Order Type</th>
+                                                                <th>Requsted By</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>count</th>
@@ -446,7 +399,8 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                         <?php
-								$sql = "SELECT * FROM `order_table` WHERE status = 'denied'";
+								$sql = "SELECT `order_ID`, `order_type`, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, 
+                                order_table.time, `count`, `total_amount` FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID WHERE status = 'denied'";
 								$result = $con->query($sql);
 								if($result->num_rows>0)
 								{
@@ -454,10 +408,11 @@ if (in_array($position, $restricted)) {
 									{
 
 
-                                        
-										$order_ID 	 = $row["order_ID"];
-									
+                                        $order_ID 	 = $row["order_ID"];
+					
 										$customer_name  = $row["customer_name"];
+                                        $order_type = $row["order_type"];
+                                        $order_by =$row["fullname"];
 										$date    = $row['date'];
 										$time = $row['time'];
                                         $count = $row['count'];
@@ -467,8 +422,11 @@ if (in_array($position, $restricted)) {
 										echo"
 											<tr class='odd gradeX'>
 											    <td>$order_ID</td>
+                                                
 											
 												<td>$customer_name</td>
+                                                <td> $order_type</td>
+                                                <td>$order_by</td>
 												<td>$date</td>
                                                 <td>$time</t>
                                                 <td>$count</t>

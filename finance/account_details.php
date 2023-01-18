@@ -95,23 +95,13 @@ if (in_array($position, $restricted)) {
 
        $(document).ready(()=>{
 
-        $("#viewContract").prop('readonly', true);
+        
 
 
 
         $("#back").click(()=>{
 
-            let processsed_value = $("#processed_value").val();
-            if(processsed_value=='active'){
-                window.location='debtor_processed_payment.php';
-            }
-           else{
-           window.location='debtor_outstanding_payments.php';
-           }
-
-        });
-
-        
+           
 
 
         
@@ -566,6 +556,7 @@ if (in_array($position, $restricted)) {
 <input type="hidden" name="order_id" id="order_id">
 
 <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+<input type="hidden" name="outstanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
 
 
 

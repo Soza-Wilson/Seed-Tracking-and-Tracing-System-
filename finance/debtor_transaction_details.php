@@ -156,8 +156,12 @@ if (in_array($position, $restricted)) {
             if(processsed_value=='active'){
                 window.location='debtor_processed_payment.php';
             }
-           else{
+           else if(processsed_value=='active'){
            window.location='debtor_outstanding_payments.php';
+           }
+           else{
+            window.location='debtor_accounts.php';
+
            }
 
         });
@@ -601,7 +605,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-success " id='debtor_outstanding_order_details' name='debtor_outstanding_order_details'> CSV</button>
+                                                          
 
 
 
@@ -613,6 +617,8 @@ if (in_array($position, $restricted)) {
                                                             <input type="hidden" name="order_id" id="order_id">
 
                                                             <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                            <input type="hidden" name="oustsanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
+
 
                                                            
 

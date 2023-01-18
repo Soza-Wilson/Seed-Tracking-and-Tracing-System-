@@ -174,8 +174,12 @@ let processsed_value = $("#processed_value").val();
 if(processsed_value=='active'){
     window.location='creditor_processed_payments.php';
 }
-else{
+else if(outstanding_value=='active'){
 window.location='creditor_outstanding_payments.php';
+}
+
+else{
+    window.location='creditor_accounts.php';
 }
 
 });
@@ -640,6 +644,7 @@ window.location='creditor_outstanding_payments.php';
                                                             <input type="hidden" name="order_id" id="order_id">
 
                                                             <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                            <input type="hidden" name="oustanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
 
                                                            
 

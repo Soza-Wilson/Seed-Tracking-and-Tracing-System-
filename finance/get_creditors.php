@@ -611,7 +611,7 @@ if (isset($_POST['creditor_name_search'])) {
 <td>$by</td>
 <td>$date</td>
 <td>$funds</td>
-<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+<td><a href='account_details.php? creditor_id=$creditor_ID'  class='btn btn-success'>view</a> </td>
 
 
                                          
@@ -697,7 +697,7 @@ if (isset($_POST['debtor_name_search'])) {
 <td>$by</td>
 <td>$newDate</td>
 <td>$funds</td>
-<td><a href='stock_out_check_items.php? '  class='btn btn-success'>view</a> </td>
+<td><a href='debtor_account_details.php? debtor_id=$debtor_ID'  class='btn btn-success'>view</a> </td>
 
 
                              

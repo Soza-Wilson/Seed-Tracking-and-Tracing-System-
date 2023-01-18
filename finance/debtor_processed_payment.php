@@ -351,7 +351,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="creditors.php" class="waves-effect waves-dark">
+                                    <a href="creditor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Creditor accounts</span>
                                         <span class="pcoded-mcaret"></span>
@@ -560,7 +560,7 @@ if (in_array($position, $restricted)) {
                                                                              
 
                                                                                 $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`,
-                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed'";
+                                                                                 `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `trans_status` = 'fully_payed' AND `type` !='creditor_buy_back'";
 
                                                                        
 
