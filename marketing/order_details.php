@@ -4,23 +4,120 @@
 
 Ob_start();
 include('../class/main.php');
-session_start(); 
+session_start();
+
+
+
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
-if(empty($test)){
+if (empty($test)) {
 
-    header('Location:../login.php');
+    header('Location:../index.php');
+}
+
+$restricted = array("marketing_admin", "system_administrator", "marketing_officer");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+
+
+$test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
+$order_ID = $_GET['order_ID'];
+$page_type = $_GET['page_type'];
+
+
+if(!empty($page_type)){
+
+    if($page_type=="pending_orders"){
+
+        $pending ="active";
+    $processed="-";
+    $all="-";
+    $denied ="-";
+    
+    
+    
+    }
+    else if($page_type=="processed_orders"){
+    
+        $pending ="-";
+        $processed="active";
+        $all="-";
+        $denied ="-";
+
+    
+    }
+
+    else if($page_type=="all_orders"){
+
+        $pending ="-";
+        $processed="-";
+         $all="active";
+         $denied ="-";
+
+
+         
+    }
+
+    else if($page_type=="denied_orders"){
+
+        $pending ="-";
+        $processed="-";
+         $all="-";
+         $denied ="active";
+
+
+         
+    }
+
+    
+}
+
+
+
+
+
+
+
+if(!empty($order_ID)){
+
+$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
+
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        
+        $amount = $row["total_amount"];
+        $customer = $row["customer_id"];
+        $user_requested = $row["user_ID"];
+        $date = $row["date"];
+        $time = $row["time"];
+      
+
+    }
+
+}
 
 
 }
 
-// if($position !="marketing_admin" || $position !="admin" || $position !="marketing_officer"){
-     
-//     header('Location:javascript://history.go(-1)');
+if (empty($test)) {
 
-// }
+    header('Location:../index.php');
+}
 
+$restricted = array("system_administrator", "finance_admin", "cashier");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
 
 ?>
 
@@ -32,33 +129,67 @@ if(empty($test)){
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-      <!-- Meta -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-      <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-      <meta name="author" content="codedthemes" />
-      <!-- Favicon icon -->
-      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
-      <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
-      <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-  </head>
-  <body>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="codedthemes" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+
+       $(document).ready(()=>{
+
+        $("#back").click(()=>{
+
+            let processsed_value = $("#processed_value").val();
+            if(processsed_value=='active'){
+                window.location='debtor_processed_payment.php';
+            }
+           else if(processsed_value=='active'){
+           window.location='debtor_outstanding_payments.php';
+           }
+           else{
+            window.location='debtor_accounts.php';
+
+           }
+
+        });
+
+        
+
+
+        
+
+       });
+
+        </script>
+</head>
+
+<body>
+
+
     <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -86,7 +217,7 @@ if(empty($test)){
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -98,7 +229,7 @@ if(empty($test)){
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -134,14 +265,16 @@ if(empty($test)){
                                 </div>
                             </div>
                         </div>
+                        <a href="">
 
-                        <a href="">MArketing</a>
-                        
+                        <span>finance</span>
+                        </a>
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
@@ -155,7 +288,8 @@ if(empty($test)){
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -181,7 +315,7 @@ if(empty($test)){
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -194,7 +328,7 @@ if(empty($test)){
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -206,28 +340,34 @@ if(empty($test)){
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                   
-                                
-                                
+
+
+
                             </div>
-                           
-                            
-                          
-                            
-                                
-                               
-                            
-                                 
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
                             <ul class="pcoded-item pcoded-left-item">
-                              
-                               
-                    
-                            </ul>
-                    
-                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
-                    <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="pcoded-hasmenu">
+
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+
+
+
+
+
+                                        </li>
+
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
@@ -235,29 +375,30 @@ if(empty($test)){
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                               
 
-                                <li class="">
+                                <li class="<?php echo $pending;?>">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $processed;?>">
                                     <a href="view_processed_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $denied;?>">
                                     <a href="view_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $all;?>">
                                     <a href="view_all_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
@@ -277,21 +418,21 @@ if(empty($test)){
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
+                                
                     
                             </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
-                                <li class="active">
+                                <li class="">
                                     <a href="b_to_b.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Business </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
+                              
                     
                             </ul>
 
@@ -305,20 +446,20 @@ if(empty($test)){
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Business</h5>
+                                            <h5 class="m-b-10">Transaction Details </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="grower.php">Business</a>
+                                                <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
                                             
+                                            
+                                            </li>
+                                            <li class="breadcrumb-item"><a href="admin_view_order_items.php">Transaction Details </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -334,103 +475,24 @@ if(empty($test)){
                                         <!-- Basic table card start -->
                                         <!-- Basic table card end -->
                                         <!-- Inverse table card start -->
-                                        
+
                                         <!-- Inverse table card end -->
                                         <!-- Hover table card start -->
-                                       
+
                                         <!-- Hover table card end -->
                                         <!-- Contextual classes table starts -->
-                                        
-                                            
+
+
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
 
-                                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add new Business</button>
-
-                                    <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                     <div class="modal-dialog modal-lg">
-
-                                                     <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                             <h5 class="modal-title">Register new Business</h5>
-                                                            </div>
-                                                                <div class="modal-body">
-                                                                <form action="b_to_b.php" method="POST" enctype="multipart/form-data">
-
-                                                                <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_name" type="text" class="form-control" name="debtor_name"
-                                                                                placeholder="Name" require="">
-                                                                            </div>
-
-                                                                            
-                                                                        </div>
-
-                                                                        <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_description" type="text" class="form-control" name="debtor_description"
-                                                                                placeholder="Description" require="">
-                                                                            </div>
-
-                                                                            
-                                                                        </div>
-
-
-
-
-                                                                        <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_phone" type="text" class="form-control" name="debtor_phone"
-                                                                                placeholder="Phone number" require="">
-                                                                            </div>
-
-                                                                            
-                                                                        </div>
-
-                                                                       
-
-                                                                        <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_email" type="text" class="form-control" name="debtor_email"
-                                                                                placeholder="Email" require="">
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                            <input type="submit" name="register_business" value="Save" class="btn waves-effect waves-light btn-primary btn-block" />
-                                                                          </div>
-                                                                            
-                                                                        </div>
-
-
-                                                                         
-                                                                        
-
-                                                                        
-
-                                                                </form>
-                                                                    </div>
-                                                                         <div class="modal-footer">
-                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                          </div>
-                                                                         </div>
-
-                                                                             </div>
-                                                                                        </div>
-
-                                                                                        </div></div>
+                                        
 
                                         <div class="card">
+                                        <form action="admin_view_order_items.php" method="POST">
                                             <div class="card-header">
-                                                <h5>Registred Businesses </h5>
-                                              
+                                                <h5>Order details</h5>
+
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -440,74 +502,207 @@ if(empty($test)){
                                                         <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
+                                                <div class="form-group row">
+
+
+                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Order ID</label>
+                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
+
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Amount</label>
+                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Order For</label>
+                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Requested By</label>
+                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Order Date</label>
+                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Time</label>
+                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
+                                                       
+
+
+                                                    </div>
+                                              
+                                                    <div class="card-block">
+
+
+                                                    </form>
+                                               
+
+                                                    <form action="finance_csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                          
+
+
+
+                                                
+
+
+                                                            
+                                                            <input type="hidden" name="customer_name" id="customer_name">
+                                                            <input type="hidden" name="order_id" id="order_id">
+
+                                                            <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                            <input type="hidden" name="oustsanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
+
+
+                                                           
+
+
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+ 
+                                               
+
+                                            </div>
+
+
+
+                                                </div>
+
+                                                
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Items</h5>
+
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+
+
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
                                                         <thead>
-                                                        <tr>
-                                                                <th>Fullname</th>
-                                                                <th>Description</th>
-                                                                <th>Email </th>
-                                                                <th>phone</th>
-                                                                <th>Registered date</th>
-                                                                <th>registered by</th>
-                                                               
-                                                                <th>Action</th>
-                                                                
+                                                            <tr>
+                                                                <th>Item ID</th>
+                                                                <th>Crop</th>
+                                                                <th>Variety</th>
+                                                                <th>Class</th>
+                                                                <th>Quantity</th>
+                                                                <th>price per kg</th>
+                                                                <th>Discount</th>
+                                                                <th>Total price</th>
+
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                        <?php
+                                                            <?php
+                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
+                                                             `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
 
-                                   
-                              $sql="SELECT `debtor_ID`, `name`, debtor.phone, debtor.email, `description`, `fullname`, `debtor_files`, debtor.registered_date FROM `debtor`
-                              INNER JOIN user ON debtor.user_ID = user.user_ID WHERE `debtor_type` = 'b_to_b' ";
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
 
-								$result = $con->query($sql);
-								if($result->num_rows>0)
-								{
-									while($row=$result->fetch_assoc())
-									{    $name= $row['name'];
-                                        $description= $row['description'];
-                                        $debtor_id=$row['debtor_ID'];
-										$phone= $row['phone'];
-                                        $email =$row['email'];
-                                        $registered_date =$row['registered_date'];
-										$registered_by = $row['fullname'];
-                                        $dir = $row['debtor_files'];
-									
-										
-										
-										
-										
-										
-										echo"
+
+                                                                    $item_ID      = $row["item_ID"];
+                                                                    $crop     = $row["crop"];
+                                                                    $variety = $row["variety"];
+                                                                    $class    = $row['class'];
+                                                                    $quantity = $row['quantity'];
+                                                                    $price_per_kg = $row['price_per_kg'];
+                                                                    $discount_price = $row['discount_price'];
+                                                                    $total_price = $row['total_price'];
+
+                                                                    echo "
 											<tr class='odd gradeX'>
-                                                 <td>$name</td>
-                                                 <td>$description</td>
-											    <td>$email</td>
-												<td>$phone</td>
-												<td>$registered_date</td>
-												<td>$registered_by</td>
-                                               
-                                                
-                                               
-	
+                                            <td>$item_ID</td>
+                                            <td>$crop</td>
+                                            <td>$variety</td>
+                                            <td>$class</td>
+                                            <td>$quantity</td>
+                                            <td>$price_per_kg </td>
+                                            <td>$discount_price</td>
+                                            <td>$total_price</td>
 												
-                                                <td><a href='account_details.php? debtor_id=$debtor_id' class='btn btn-success'>View</a>
 											</tr>	
+                                    
+												
 										";
-									}
-								} 	
-							    ?> 
+                                                                }
+                                                            }
+                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
+
+                                                <div class="card-block">
+
+                                              
+                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
+
+                                                
+                                                
+
+                                                
+                                               
+
                                             </div>
                                         </div>
-                                       
+
                                         <!-- Background Utilities table end -->
                                     </div>
                                     <!-- Page-body end -->
@@ -588,54 +783,14 @@ if(empty($test)){
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
-
-
-
-</html>
-
 <?php
-if (isset($_FILES['image'])) {
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
-
-
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
-
-    $extensions = array("pdf");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a pdf file .";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
-
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/agro_dealer_documents/" . $newfilename);
-        echo "Success";
-    } else {
-        print_r($errors);
-    }
-}
-
-if(isset($_POST['register_business']))
-
-{
-
-  
-   
-    $object = new main();
-
-    $object -> register_B_to_B($_POST['debtor_name'],$_POST['debtor_description'],$_POST['debtor_phone'],$_POST['debtor_email'],"b_to_b","-");
 
 
 
 
-}
+ 
+ 
+
+
 ?>
+</html>

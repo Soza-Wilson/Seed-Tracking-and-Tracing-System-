@@ -92,7 +92,7 @@
         }
 
         if (table.length > 1) {
-            throw new Error("converting multiple table elements at once is not supported yet");
+            throw new Error("converting multiple table elements at once is not sported yet");
         }
 
         let csv = convert(table);

@@ -414,14 +414,7 @@ $("#female_quantity").prop("readonly","true");
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                                
 
                             </ul>
 
@@ -435,14 +428,7 @@ $("#female_quantity").prop("readonly","true");
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                                
 
                             </ul>
 

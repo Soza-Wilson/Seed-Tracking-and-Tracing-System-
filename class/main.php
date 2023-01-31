@@ -447,7 +447,7 @@ class main
       
       global $con;
       $status = "pending";
-      $date = date("d-m-Y");
+      $date = date("Y-m-d");
       $time = date("H:i:s");
       $sum = "";
       $count = "";

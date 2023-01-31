@@ -27,7 +27,7 @@ if (in_array($position, $restricted)) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -136,6 +136,10 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
+
+                        <a href="">
+                           <span>marketing</span>
+                        </a>
                         
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -147,15 +151,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                          
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -163,48 +159,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                           
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -326,14 +281,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                              
                     
                             </ul>
 
@@ -347,53 +295,12 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                                
                     
                             </ul>
 
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Payments</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                                <li class="">
-                                    <a href="b_to_b.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add Payment </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Processed Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clip"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Outstanding Payments</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
-
-
-
-
-
-
-
-                            </ul>
+                            
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -563,7 +470,10 @@ if (in_array($position, $restricted)) {
 								if($result->num_rows>0)
 								{
 									while($row=$result->fetch_assoc())
-									{    $name= $row['name'];
+									{   
+
+                                        $debtor_id=$row['debtor_ID'];
+                                         $name= $row['name'];
 										$phone= $row['phone'];
                                         $email =$row['email'];
                                         $registered_date =$row['registered_date'];
@@ -587,10 +497,8 @@ if (in_array($position, $restricted)) {
                                                
 	
 												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='creditor_documents/$dir' class='ti-bookmark-alt'></a>
+												<td><a href='account_details.php? debtor_id=$debtor_id' class='btn btn-success'>View</a>
+                                               
                                                 </td>
 											</tr>	
 										";
@@ -712,7 +620,7 @@ if (isset($_FILES['image'])) {
     }
 
     if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/agro_dealer_documents/" . $newfilename);
+        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/agro_dealer_contracts/" . $newfilename);
         echo "Success";
     } else {
         print_r($errors);

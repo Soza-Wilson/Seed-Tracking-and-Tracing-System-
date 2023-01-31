@@ -64,27 +64,63 @@ if (in_array($position, $restricted)) {
     <script src="assets/js/table2csv.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-                 
-            $("#save_csv").click(()=>{
+         $(document).ready(()=>{
 
-                $("all_orders").table2csv({
+$('#typeValue').change(() => {
+    let debtor_outstanding_type_filter = $('#typeValue').val();
+   
+    
+    $.post('get_data.php', {
+        debtor_outstanding_type_filter: debtor_outstanding_type_filter,                    
+        }, function(data) {
+            $('#names').html(data);
 
-                    separator:',',
-                    newline:'\n',
-                    quoteFields:true,
-                    filename:'table.csv',
 
-
-
-             
-            });
-
-            $("#all_orders").table2csv('return');
-
-     
-            
         })
+});
+
+$("#get_data").click(()=>{
+
+
+
+
+
+    let all_orders_data_filter = $('#typeValue').val();
+    let orders_type = "processed";
+    let debtor_id = $('#names').val();
+    let from = $('#fromDateValue').val();
+    let to = $('#toDateValue').val();
+    let page_type = "processed";
+
+    
+    $('#customer_type_hidden').val(all_orders_data_filter);
+    $('#customer_id_hidden').val(debtor_id);
+    $('#order_type_hidden').val(page_type);
+    $('#from_hidden').val(from);
+    $('#to_hidden').val(to);
+    $('#filter').val("haghgd");
+
+   
+
+
+    $.post('get_data.php', {
+        all_orders_data_filter:all_orders_data_filter,   
+        debtor_id:debtor_id,
+        from:from,
+        to:to,
+        page_type:page_type,                 
+        }, function(data) {
+            $('#dataTable').html(data);
+
+
+        })
+
+
+
+})   
+
+
+});
 
             </script>
 
@@ -165,7 +201,7 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a href="">
                            <span>marketing</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -225,25 +261,9 @@ if (in_array($position, $restricted)) {
                                     </div>
                                 </div>
                         
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
-                            <div class="p-15 p-b-0">
-                                <form class="form-material">
-                                    <div class="form-group form-primary">
-                                        <input type="text" name="footer-email" class="form-control" required="">
-                                        <span class="form-bar"></span>
-                                        <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                    </div>
-                                </form>
-                            </div>
+                            
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -307,14 +327,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                               
                     
                             </ul>
                     
@@ -328,14 +341,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                               
                     
                             </ul>
                     
@@ -378,14 +384,110 @@ if (in_array($position, $restricted)) {
                                     <!-- Page body start -->
                                     <div class="page-body">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>All Orders</h5>
-                                                        <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
-                                          
-                                                </div>
+                                            <div class="col-md-12">
+                                            <div class="card">
+                                            <div class="card-header">
+                                                <h5>Filter </h5>
+
+
                                             </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <label>Order Type</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Search by name</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label>To :</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
+                                                            <option value="type_not_selected">Order Type</option>
+                                                            <option value="customer">Customer</option>
+                                                            <option value="agro_dealer">Agro Dealer</option>
+                                                            <option value="b_to_b">Business</option>
+                                                            <option value="grower">Grower</option>
+
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+
+
+                                                    <select name="names" id="names" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+
+
+                                                    </select>
+
+
+                                                        
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                    </div>
+
+
+                                                    
+
+
+
+                                                    <div class="col-sm-3">
+
+
+
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+
+
+                                                        <a href="view_processed_orders.php" class="ti-loop btn btn-danger"></a>
+                                                    </div>
+                                                </div>
+
+
+                                                <form action="marketing_csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                            <button class="ti-download btn btn-primary " id='all_orders_save_csv' name='all_orders_save_csv'> CSV</button>
+
+
+                                                            <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
+                                                            <input type="hidden" name="customer_id_hidden" id="customer_id_hidden">
+                                                            <input type="hidden" name="order_type_hidden" id="order_type_hidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
                         
                                         
                                          </form>
@@ -403,20 +505,23 @@ if (in_array($position, $restricted)) {
                                             <div class="card-header">
                                                 
                                                
-                                                <button id="save_csv" name="save_csv" class="btn btn-success">Download CSV</button>
+                                               
                                             </div>
 
                                                             </form>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table id="all_orders" class="table table-hover">
-                                                        <thead>
+                                                    <table  class="table" id="dataTable">
+                                                    <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
                                                                        
                                                                 <th>Customer name</th>
+                                                                <th>Order Type</th>
+                                                                <th>Requsted By</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
+                                                                <th>Status</th>
                                                                 <th>count</th>
                                                                 <th>Total Price</th>
                                                                 <th>Action</th>
@@ -426,7 +531,8 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                         <?php
-								$sql = "SELECT * FROM `order_table`";
+								$sql = "SELECT `order_ID`, `order_type`,order_table.status, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, 
+                                order_table.time, `count`, `total_amount` FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID ";
 								$result = $con->query($sql);
 								if($result->num_rows>0)
 								{
@@ -436,25 +542,33 @@ if (in_array($position, $restricted)) {
 
                                         
 										$order_ID 	 = $row["order_ID"];
-									
+					
 										$customer_name  = $row["customer_name"];
+                                        $order_type = $row["order_type"];
+                                        $order_by =$row["fullname"];
 										$date    = $row['date'];
 										$time = $row['time'];
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
+                                        $status = $row['status'];
+                                        $page="all_orders";
 										
 										
 										echo"
 											<tr class='odd gradeX'>
 											    <td>$order_ID</td>
+                                                
 											
 												<td>$customer_name</td>
+                                                <td> $order_type</td>
+                                                <td>$order_by</td>
 												<td>$date</td>
                                                 <td>$time</t>
-                                                <td>$count</t>
+                                                <td>$status</td>
+                                                <td>$count</td>
                                                 <td>$total</td>
                                     
-												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
                                                 
 											</tr>	
 										";

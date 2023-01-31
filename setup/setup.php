@@ -373,7 +373,7 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 	                          order_book_number varchar(100),
 		                             user_ID varchar(100),            
 							                    status varchar(100),
-							                      date varchar(100),
+							                      date date,
 							                      time varchar(100),
                                     count varchar(100),
 						                      	total_amount varchar(100),

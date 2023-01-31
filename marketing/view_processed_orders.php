@@ -59,6 +59,67 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(()=>{
+
+            $('#typeValue').change(() => {
+                let debtor_outstanding_type_filter = $('#typeValue').val();
+               
+                
+                $.post('get_data.php', {
+                    debtor_outstanding_type_filter: debtor_outstanding_type_filter,                    
+                    }, function(data) {
+                        $('#names').html(data);
+
+
+                    })
+            });
+
+        $("#get_data").click(()=>{
+
+       
+
+                let orders_data_filter = $('#typeValue').val();
+                let orders_type = "processed";
+                let debtor_id = $('#names').val();
+                let from = $('#fromDateValue').val();
+                let to = $('#toDateValue').val();
+                let page_type = "processed";
+
+                
+                $('#customer_type_hidden').val(orders_data_filter);
+                $('#customer_id_hidden').val(debtor_id);
+                $('#order_type_hidden').val(page_type);
+                $('#from_hidden').val(from);
+                $('#to_hidden').val(to);
+                $('#filter').val("haghgd");
+
+               
+
+
+                $.post('get_data.php', {
+                   orders_data_filter:orders_data_filter,   
+                    debtor_id:debtor_id,
+                    from:from,
+                    to:to,
+                    page_type:page_type,                 
+                    }, function(data) {
+                        $('#dataTable').html(data);
+
+
+                    })
+
+
+
+        })   
+
+
+        });
+
+
+    </script>
 
 </head>
 
@@ -263,14 +324,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                               
                     
                             </ul>
                     
@@ -284,14 +338,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                                
                     
                             </ul>
                     
@@ -344,7 +391,7 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-3">
-                                                        <label>Transaction Type</label>
+                                                        <label>Order Type</label>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <label>Search by name</label>
@@ -362,9 +409,12 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group row">
                                                     <div class="col-sm-3">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Creditor Type</option>
-                                                            <option value="internal">Internal</option>
-                                                            <option value="external">External</option>
+                                                            <option value="type_not_selected">Order Type</option>
+                                                            <option value="customer">Customer</option>
+                                                            <option value="agro_dealer">Agro Dealer</option>
+                                                            <option value="b_to_b">Business</option>
+                                                            <option value="grower">Grower</option>
+
 
                                                         </select>
                                                     </div>
@@ -372,11 +422,14 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-2">
 
 
-                                                        <input list="names" id="search_by_credname" name="search_by_creadname" class="form-control" required="">
+                                                    <select name="names" id="names" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
 
-                                                        <datalist id="names">
 
-                                                        </datalist>
+                                                    </select>
+
+
+                                                        
                                                     </div>
 
                                                     <div class="col-sm-2">
@@ -388,11 +441,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
 
-                                                    <input type="hidden" name="typeValueHidden" id="typeValueHidden">
-                                                    <input type="hidden" name="creditorHidden" id="creditorHidden">
-                                                    <input type="hidden" name="from_hidden" id="from_hidden">
-                                                    <input type="hidden" name="to_hidden" id="to_hidden">
-                                                    <input type="hidden" name="filter" id="filter">
+                                                    
 
 
 
@@ -403,18 +452,26 @@ if (in_array($position, $restricted)) {
                                                         <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
 
-                                                        <a href="creditor_processed_payments.php" class="ti-loop btn btn-danger"></a>
+                                                        <a href="view_processed_orders.php" class="ti-loop btn btn-danger"></a>
                                                     </div>
                                                 </div>
 
 
-                                                <form action="finance_csv_handler.php" method="POST">
+                                                <form action="marketing_csv_handler.php" method="POST">
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
 
 
 
-                                                          
+                                                            <button class="ti-download btn btn-primary " id='orders_save_csv' name='orders_save_csv'> CSV</button>
+
+
+                                                            <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
+                                                            <input type="hidden" name="customer_id_hidden" id="customer_id_hidden">
+                                                            <input type="hidden" name="order_type_hidden" id="order_type_hidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
 
 
 
@@ -457,7 +514,7 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
@@ -495,6 +552,7 @@ if (in_array($position, $restricted)) {
 										$time = $row['time'];
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
+                                        $page="processed_orders";
 										
 										
 										echo"
@@ -510,7 +568,7 @@ if (in_array($position, $restricted)) {
                                                 <td>$count</t>
                                                 <td>$total</td>
                                     
-												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
                                                 
 											</tr>	
 										";

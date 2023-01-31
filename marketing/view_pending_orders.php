@@ -272,14 +272,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                               
                     
                             </ul>
                     
@@ -293,14 +286,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    
-                                </li>
+                                
                     
                             </ul>
                     
@@ -410,6 +396,7 @@ if (in_array($position, $restricted)) {
 										$time = $row['time'];
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
+                                        $page="pending_orders";
 										
 										
 										echo"
@@ -425,7 +412,7 @@ if (in_array($position, $restricted)) {
                                                 <td>$count</t>
                                                 <td>$total</td>
                                     
-												<td><a href='edit_order_items.php? order_ID=$order_ID' class='ti-pencil-alt'></a> / <a href='view_order_items.php? order_ID=$order_ID' class='ti-eye'></a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
                                                 
 											</tr>	
 										";

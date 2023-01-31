@@ -2,13 +2,15 @@
 <html lang="en">
 <?php
 
-
 Ob_start();
 include('../class/main.php');
 session_start();
 
+
+
+
 $test = $_SESSION['fullname'];
-$position= $_SESSION['position'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
@@ -22,21 +24,119 @@ if (in_array($position, $restricted)) {
     header('Location:../restricted_access/restricted_access.php');
 }
 
-?>
 
+$test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
+$debtor_ID = $_GET['debtor_id'];
+$page_type = '';
+
+
+if(!empty($page_type)){
+
+    if($page_type=="pending_orders"){
+
+        $pending ="active";
+    $processed="-";
+    $all="-";
+    $denied ="-";
+    
+    
+    
+    }
+    else if($page_type=="processed_orders"){
+    
+        $pending ="-";
+        $processed="active";
+        $all="-";
+        $denied ="-";
+
+    
+    }
+
+    else if($page_type=="all_orders"){
+
+        $pending ="-";
+        $processed="-";
+         $all="active";
+         $denied ="-";
+
+
+         
+    }
+
+    else if($page_type=="denied_orders"){
+
+        $pending ="-";
+        $processed="-";
+         $all="-";
+         $denied ="active";
+
+
+         
+    }
+
+    
+}
+
+
+
+
+
+
+
+if(!empty($debtor_ID)){
+
+$sql="SELECT `debtor_ID`, debtor.name, debtor.phone, debtor.email,debtor.description,user.fullname, 
+`debtor_files`, debtor.registered_date, `account_funds` FROM `debtor` INNER JOIN user ON user.user_ID = debtor.user_ID WHERE `debtor_ID`='$debtor_ID'";
+
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+
+        $name=$row["name"];
+        $amount = $row["account_funds"];
+        $debtor_id = $row["debtor_ID"];
+        $phone = $row["phone"];
+        $email = $row["email"];
+        $registered_by = $row["fullname"];
+        $registered_date =$row["registered_date"];
+        $files = $row["debtor_files"];
+      
+
+    }
+
+}
+
+
+}
+
+if (empty($test)) {
+
+    header('Location:../index.php');
+}
+
+$restricted = array("system_administrator", "finance_admin", "cashier");
+
+if (in_array($position, $restricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+
+?>
 
 <head>
     <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
@@ -52,17 +152,49 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript">
+
+       $(document).ready(()=>{
+
+        $("#back").click(()=>{
+
+            let processsed_value = $("#processed_value").val();
+            if(processsed_value=='active'){
+                window.location='debtor_processed_payment.php';
+            }
+           else if(processsed_value=='active'){
+           window.location='debtor_outstanding_payments.php';
+           }
+           else{
+            window.location='debtor_accounts.php';
+
+           }
+
+        });
+
+        
+
+
+        
+
+       });
+
+        </script>
 </head>
 
 <body>
+
+
+    <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -89,7 +221,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -101,7 +233,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -137,20 +269,22 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
-                           <span>marketing</span>
+                        <a href="">
+
+                        <span>Marketing</span>
                         </a>
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+                           
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -158,7 +292,8 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -184,7 +319,7 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -194,10 +329,10 @@ if (in_array($position, $restricted)) {
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -209,19 +344,33 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                
+
+
+
                             </div>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+
+                                <li class="pcoded-hasmenu">
+
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+
+
+
+
+
+                                        </li>
+
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="place_order.php" class="waves-effect waves-dark">
@@ -232,28 +381,28 @@ if (in_array($position, $restricted)) {
                                 </li>
                                
 
-                                <li class="">
+                                <li class="<?php echo $pending;?>">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $processed;?>">
                                     <a href="view_processed_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="<?php echo $denied;?>">
                                     <a href="view_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php echo $all;?>">
                                     <a href="view_all_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
@@ -263,7 +412,6 @@ if (in_array($position, $restricted)) {
                                
                     
                             </ul>
-
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
@@ -274,10 +422,10 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
+                                
                     
                             </ul>
-                    
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
@@ -288,13 +436,11 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
+                              
                     
                             </ul>
-                    
-                            
-                                </li>
-                            </ul>
+
+                           
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -304,18 +450,19 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Denied Orders</h5>
-                                          
+                                            <h5 class="m-b-10">Account  </h5>
+                                            <p class="m-b-0"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
+                                            
+                                            
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Denied Orders</a>
+                                            <li class="breadcrumb-item"><a href="account_details.php">Account  </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -327,27 +474,29 @@ if (in_array($position, $restricted)) {
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                  
-                                    <!-- Page body start -->
+                                    <!-- Page-body start -->
                                     <div class="page-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                
-                        
+                                        <!-- Basic table card start -->
+                                        <!-- Basic table card end -->
+                                        <!-- Inverse table card start -->
+
+                                        <!-- Inverse table card end -->
+                                        <!-- Hover table card start -->
+
+                                        <!-- Hover table card end -->
+                                        <!-- Contextual classes table starts -->
+
+
+                                        <!-- Contextual classes table ends -->
+                                        <!-- Background Utilities table start -->
+
                                         
-                                         </form>
-                                                                       
-                                                                   
-                                                                     
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Basic Form Inputs card end -->
-                                                            <!-- Input Grid card start -->
-                                                            <div class="card">
+
+                                        <div class="card">
+                                        <form action="admin_view_order_items.php" method="POST">
                                             <div class="card-header">
-                                                
-                                               
+                                                <h5>Account Details</h5>
+
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -357,11 +506,147 @@ if (in_array($position, $restricted)) {
                                                         <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
+                                                <div class="form-group row">
+
+
+                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">ID</label>
+                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $debtor_ID; ?>" require="">
+
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-primary ">Fullname</label>
+                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $name; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Phone</label>
+                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $phone; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Email</label>
+                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $email; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-primary ">Registered By</label>
+                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $registered_by; ?>" require="">
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-1">
+
+                                                        <label class="badge badge-primary ">Date </label>
+                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $registered_date; ?>" require="">
+                                                       
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-1">
+
+                                                            <label class="badge badge-primary ">Account Funds </label>
+                                                            <input id="time" type="text" class="form-control" name="time" value="<?php echo $amount; ?>" require="">
+
+
+
+                                                            </div>
+                                                                                                        
+                                                    <div class="card-block">
+
+
+                                                    </form>
+                                               
+
+                                                    <form action="finance_csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                          
+
+
+
+                                                
+
+
+                                                            
+                                                            <input type="hidden" name="customer_name" id="customer_name">
+                                                            <input type="hidden" name="order_id" id="order_id">
+
+                                                            <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                            <input type="hidden" name="oustsanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
+
+
+                                                           
+
+
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+ 
+                                               
+
+                                            </div>
+
+
+
+                                                </div>
+
+                                                
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Account Orders</h5>
+
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+
+
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
+                                                <table  class="table" id="dataTable">
+                                                    <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
                                                                        
@@ -370,6 +655,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Requsted By</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
+                                                                <th>Status</th>
                                                                 <th>count</th>
                                                                 <th>Total Price</th>
                                                                 <th>Action</th>
@@ -379,8 +665,8 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                         <?php
-								$sql = "SELECT `order_ID`, `order_type`, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, 
-                                order_table.time, `count`, `total_amount` FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID WHERE status = 'denied'";
+								$sql = "SELECT `order_ID`, `order_type`,order_table.status, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, 
+                                order_table.time, `count`, `total_amount` FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.customer_id='$debtor_ID'";
 								$result = $con->query($sql);
 								if($result->num_rows>0)
 								{
@@ -388,7 +674,8 @@ if (in_array($position, $restricted)) {
 									{
 
 
-                                        $order_ID 	 = $row["order_ID"];
+                                        
+										$order_ID 	 = $row["order_ID"];
 					
 										$customer_name  = $row["customer_name"];
                                         $order_type = $row["order_type"];
@@ -397,7 +684,8 @@ if (in_array($position, $restricted)) {
 										$time = $row['time'];
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
-                                        $page="denied_orders";
+                                        $status = $row['status'];
+                                        $page="all_orders";
 										
 										
 										echo"
@@ -410,114 +698,125 @@ if (in_array($position, $restricted)) {
                                                 <td>$order_by</td>
 												<td>$date</td>
                                                 <td>$time</t>
-                                                <td>$count</t>
+                                                <td>$status</td>
+                                                <td>$count</td>
                                                 <td>$total</td>
                                     
-                                                <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
                                                 
 											</tr>	
 										";
 									}
 								} 	
+
+                            
 							    ?> 
                                                         </tbody>
                                                     </table>
                                                 </div>
+
+                                                <div class="card-block">
+
+                                              
+                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
+
+                                                
+                                                
+
+                                                
+                                               
+
                                             </div>
                                         </div>
-                                       
+
                                         <!-- Background Utilities table end -->
                                     </div>
-                                                    <!-- Main-body end -->
-                                                    <div >
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- Page-body end -->
                                 </div>
                             </div>
+                            <!-- Main-body end -->
 
+                            <div id="styleSelector">
 
-                            <!-- Warning Section Starts -->
-                            <!-- Older IE warning message -->
-<!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
-        to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
-<script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-<script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-<!-- waves js -->
-<script src="assets/pages/waves/js/waves.min.js"></script>
 
-<!-- modernizr js -->
-<script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
-<!-- Custom js -->
-<script src="assets/js/pcoded.min.js"></script>
-<script src="assets/js/vertical-layout.min.js "></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="assets/images/browser/chrome.png" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="assets/images/browser/firefox.png" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="assets/images/browser/opera.png" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="assets/images/browser/safari.png" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="assets/images/browser/ie.png" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
+    </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+    <!-- Custom js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js "></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 <?php
 
 
- if(isset($_POST['place_order']))
- {
 
 
+ 
+ 
 
-$object = new main();
-$object -> check_order_book_number($_POST['order_note_number'],$_SESSION['user'],$_POST['customer_name'],$_POST['crop'],$_POST['variety'],$_POST['class'],$_POST['quantity'],$_POST['price_per_kg'],$_POST['total_price']);
-
-
-  
- }
 
 ?>
 </html>

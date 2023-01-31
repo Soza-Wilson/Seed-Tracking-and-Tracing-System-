@@ -1028,6 +1028,7 @@ if (isset($_POST["processed_creditor_data_filter"])) {
   $toValue = $_POST['to'];
   $creditor_ID =$_POST['creditor'];
   $page_type = $_POST['page_type'];
+ 
 
 
 

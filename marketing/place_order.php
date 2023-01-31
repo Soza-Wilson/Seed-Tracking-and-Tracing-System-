@@ -179,6 +179,9 @@ if (in_array($position, $restricted)) {
 
                 if (type_value == 'agro_dealer') {
 
+                    
+
+                     $('#lpoFiles').prop("readonly", true);
                     $('#customer_name').attr('placeholder', 'Search agro dealer by name');
                     $('#description').attr('placeholder', 'agro dealer phone');
 
@@ -202,6 +205,7 @@ if (in_array($position, $restricted)) {
 
 
                 } else if (type_value == 'b_to_b') {
+                    $('#lpoFiles').prop("readonly", false);
 
                     $('#customer_name').attr('placeholder', 'Search Business by name');
                     $('#description').attr('placeholder', 'Business description');
@@ -234,6 +238,7 @@ if (in_array($position, $restricted)) {
 
 
                 } else if (type_value == 'customer') {
+                    $('#lpoFiles').prop("readonly", true);
 
                     $('#customer_name').attr('placeholder', 'Enter customer name');
                     $('#description').attr('placeholder', 'Enter customer phone number ');
@@ -626,14 +631,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                               
 
                             </ul>
 
@@ -647,14 +645,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transactions</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                               
 
                             </ul>
 
@@ -960,17 +951,25 @@ if (in_array($position, $restricted)) {
                             <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
                         </div>
                     </div>
-
-
+                       
                     <div class="form-group row">
-                        <div class="col-sm-2">
+                    <div class="col-sm-2">
                             <label>Total Price :</label>
                         </div>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" name="total_price" id="total_price" placeholder="TOTAL PRICE">
                         </div class="form-group row" require="">
+                    </div>
 
+                    <div class="form-group row">
+                        
 
+                        <div class="col-sm-6">
+                            <label>Upload LPO (Available for B_to_B Orders only (OPTIONAL)):</label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="file" id="lpoFiles" class="form-control" name="lpoFiles" placeholder="-" require="">
+                        </div>
 
                         </br></br></br>
 
@@ -1096,7 +1095,11 @@ if (isset($_POST['place_order'])) {
 
 
     $type = $_SESSION['type'];
+
+   
+    
     switch ($type) {
+        
 
         case "customer":
 
@@ -1134,7 +1137,7 @@ if (isset($_POST['place_order'])) {
 
             break;
 
-        case "B_to_B":
+        case "b_to_b":
             $object = new main();
             $object->place_order();
 
