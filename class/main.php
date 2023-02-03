@@ -385,7 +385,7 @@ class main
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $order_type;
-
+      
       
 
     
@@ -456,6 +456,7 @@ class main
       $order_type = $_SESSION['type'];
       $customer_id = $_SESSION['customer_ID'];
       $customer_name = $_SESSION['customer_name'];
+      $lpoFile =$_SESSION['lpoFile'];
       
      
       
@@ -482,7 +483,7 @@ class main
         $sql = " UPDATE `order_table` SET `order_type`='$order_type',
       `customer_id`='$customer_id',`customer_name`='$customer_name',`user_ID`='$user_ID',
       `status`='$status',`date`='$date',`time`='$time',
-      `count`='$count',`total_amount`='$sum' WHERE order_ID ='$order_ID'";
+      `count`='$count',`total_amount`='$sum',`order_files`='$lpoFile' WHERE order_ID ='$order_ID'";
 
         $statement = $con->prepare($sql);
         $statement->execute();

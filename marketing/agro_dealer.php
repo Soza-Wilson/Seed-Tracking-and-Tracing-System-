@@ -223,11 +223,15 @@ if (in_array($position, $restricted)) {
                             
                                  
                             </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                              
-                               
-                    
+                                <li class="">
+                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
                             </ul>
                     
                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
@@ -295,10 +299,31 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a href="lpo.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-file"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">LPOs </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                                 
                     
                             </ul>
+                            
 
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                
+                                <li class="">
+                                    <a href="sales_list.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Sales </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                    
+                            </ul>
 
                             
                         </div>
@@ -317,10 +342,9 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+                                            
                                             <li class="breadcrumb-item"><a href="grower.php">Agro Dealer</a>
                                             </li>
                                             
@@ -479,6 +503,7 @@ if (in_array($position, $restricted)) {
                                         $registered_date =$row['registered_date'];
 										$registered_by = $row['fullname'];
                                         $dir = $row['debtor_files'];
+                                        $page_type="agro_dealer";
 									
 										
 										
@@ -497,7 +522,7 @@ if (in_array($position, $restricted)) {
                                                
 	
 												
-												<td><a href='account_details.php? debtor_id=$debtor_id' class='btn btn-success'>View</a>
+												<td><a href='account_details.php? debtor_id=$debtor_id&page_type=$page_type' class='btn btn-success'>View</a>
                                                
                                                 </td>
 											</tr>	

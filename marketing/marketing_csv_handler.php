@@ -321,5 +321,145 @@ if(isset($_POST['all_orders_save_csv'])){
     
 }
 
+if(isset($_POST['sales_save_csv'])){
 
-?>
+    $date = date('D-m-y h:i');
+    $filename = "Sales $date.csv";
+    $fp = fopen('php://output', 'w');
+    $filter= $_POST["filter"];
+    
+
+
+
+
+    $header = array("Order ID","Item Number","Crop","Variety", "Class","Quantity","Price Per Kg","Discount","Total price","Order By","Customer Name","Order Type","Date");	
+    fputcsv($fp, $header);
+    
+    //create body
+    
+     if(empty($filter)){
+
+        $sql = "SELECT item.order_ID,item.item_ID,crop.crop,user.fullname,variety.variety,item.class,item.price_per_kg,item.discount_price,order_table.order_type,item.quantity,item.total_price,order_table.date,order_table.customer_name
+        FROM item INNER JOIN crop ON crop.crop_ID = item.crop_ID INNER JOIN variety ON variety.variety_ID = item.variety_ID INNER JOIN order_table ON order_table.order_ID = item.order_ID 
+        INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.status='processed' ORDER BY order_table.order_ID DESC;";
+
+       $result = $con->query($sql);
+       if ($result->num_rows > 0) {
+           while ($row = $result->fetch_assoc()) {
+
+               $order_ID =$row["order_ID"];
+
+               $item_ID      = $row["item_ID"];
+               $crop     = $row["crop"];
+               $order_by=$row["fullname"];
+               $customer=$row["customer_name"];
+               $order_date=$row["date"];
+               $variety = $row["variety"];
+               $class    = $row['class'];
+               $quantity = $row['quantity'];
+               $price_per_kg = $row['price_per_kg'];
+               $order_type = $row['order_type'];
+               $discount_price = $row['discount_price'];
+               $total_price = $row['total_price'];
+
+            $list = array($order_ID,$item_ID,$crop,$variety,$class,$quantity,$price_per_kg,$discount_price,$total_price,$order_by,$customer,$order_type,$order_date);
+            fputcsv($fp, $list);
+                  
+            
+        }
+
+
+
+
+
+
+    
+    //close file
+    fclose($fp);
+    
+    //download file
+    header("Content-Description: File Transfer");
+    header('Content-type: application/csv');
+    header('Content-Disposition: attachment; filename='.$filename);
+    
+    exit;
+
+
+}
+
+
+     }
+
+     else{
+
+
+        $fromValue = $_POST['from_hidden'];
+        $toValue = $_POST['to_hidden'];
+        $customerType=$_POST["customer_type_hidden"];
+        $cropValue = $_POST["cropValueHidden"];
+        $varietyValue = $_POST["varietyValueHidden"];
+        $classValue = $_POST["classValueHidden"];
+        
+
+        $sql = "SELECT item.order_ID,item.item_ID,crop.crop,user.fullname,variety.variety,item.class,item.price_per_kg,item.discount_price,order_table.order_type,item.quantity,item.total_price,order_table.date,order_table.customer_name
+        FROM item INNER JOIN crop ON crop.crop_ID = item.crop_ID INNER JOIN variety ON variety.variety_ID = item.variety_ID INNER JOIN order_table ON order_table.order_ID = item.order_ID 
+        INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.status='processed' AND order_table.order_type='$customerType' AND item.crop_ID='$cropValue' AND item.variety_ID='$varietyValue' AND item.class='$classValue'
+         AND order_table.date BETWEEN '$fromValue' AND '$toValue' ORDER BY order_table.order_ID DESC;";
+       
+        $result = $con->query($sql);
+        if($result->num_rows>0)
+        {
+            while($row=$result->fetch_assoc())
+            {
+    
+    
+                $order_ID =$row["order_ID"];
+
+               $item_ID      = $row["item_ID"];
+               $crop     = $row["crop"];
+               $order_by=$row["fullname"];
+               $customer=$row["customer_name"];
+               $order_date=$row["date"];
+               $variety = $row["variety"];
+               $class    = $row['class'];
+               $quantity = $row['quantity'];
+               $price_per_kg = $row['price_per_kg'];
+               $order_type = $row['order_type'];
+               $discount_price = $row['discount_price'];
+               $total_price = $row['total_price'];
+
+            $list = array($order_ID,$item_ID,$crop,$variety,$class,$quantity,$price_per_kg,$discount_price,$total_price,$order_by,$customer,$order_type,$order_date);
+            fputcsv($fp, $list);
+                      
+                
+            }
+    
+    
+    
+    
+    
+    
+        
+        //close file
+        fclose($fp);
+        
+        //download file
+        header("Content-Description: File Transfer");
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename='.$filename);
+        
+        exit;
+    
+    
+    }
+
+
+
+
+
+     }
+    
+
+
+    
+}

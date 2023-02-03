@@ -27,102 +27,9 @@ if (in_array($position, $restricted)) {
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
-$order_ID = $_GET['order_ID'];
-$page_type = $_GET['page_type'];
 
 
-if(!empty($page_type)){
 
-    if($page_type=="pending_orders"){
-
-        $pending ="active";
-    $processed="-";
-    $all="-";
-    $denied ="-";
-     $agro_dealer="-";
-         $b_to_b="-";
-       $sales_order="-";
-    
-    }
-    else if($page_type=="processed_orders"){
-    
-        $pending ="-";
-        $processed="active";
-        $all="-";
-        $denied ="-";
- $agro_dealer="-";
-         $b_to_b="-";
-         $sales_order="-";
-    }
-
-    else if($page_type=="all_orders"){
-
-        $pending ="-";
-        $processed="-";
-         $all="active";
-         $denied ="-";
-          $agro_dealer="-";
-         $b_to_b="-";
-   $sales_order="-";
-
-         
-    }
-
-    else if($page_type=="denied_orders"){
-
-        $pending ="-";
-        $processed="-";
-         $all="-";
-         $denied ="active";
-         $agro_dealer="-";
-         $b_to_b="-";
-   $sales_order="-";
-
-         
-    }
-    else if($page_type=="agro_dealer"){
-
-        $pending ="-";
-        $processed="-";
-         $all="-";
-         $denied ="-";
-         $agro_dealer="active";
-         $b_to_b="-";
-         $sales_order="-";
-
-
-         
-    }
-    else if($page_type=="b_to_b"){
-
-        $pending ="-";
-        $processed="-";
-         $all="-";
-         $denied ="-";
-         $agro_dealer="-";
-         $b_to_b="active";
-            $sales_order="-";
-
-
-         
-    }
-
-    else if($page_type=="sales_order"){
-
-        $pending ="-";
-        $processed="-";
-         $all="-";
-         $denied ="-";
-         $agro_dealer="-";
-         $b_to_b="-";
-            $sales_order="active";
-
-
-         
-    }
-
-    
-}
 
 
 
@@ -132,9 +39,7 @@ if(!empty($page_type)){
 
 if(!empty($order_ID)){
 
-$sql="SELECT `order_ID`, `order_type`, `customer_id`, `customer_name`, `order_book_number`, 
-user.fullname, `status`, `date`, `time`, `count`, `total_amount`, `order_files` 
-FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID WHERE `order_ID`='$order_ID'";
+$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
 
 
 $result = $con->query($sql);
@@ -142,8 +47,8 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         
         $amount = $row["total_amount"];
-        $customer = $row["customer_name"];
-        $user_requested = $row["fullname"];
+        $customer = $row["customer_id"];
+        $user_requested = $row["user_ID"];
         $date = $row["date"];
         $time = $row["time"];
         $file = $row["order_files"];
@@ -210,6 +115,91 @@ if (in_array($position, $restricted)) {
 
        $(document).ready(()=>{
 
+
+        const loaded = "1";
+
+$.post('../production/get_products.php', {
+    loaded: loaded
+
+}, data => {
+    $('#select_crop').html(data);
+
+
+
+
+});
+
+
+
+$('#select_crop').change(function() {
+
+
+
+    var data = $('#select_crop').find(':selected');
+
+    if (data.val() == "0") {
+        alert("please select Crop ");
+    } else {
+
+
+
+
+        let crop_value = $('#select_crop').val();
+
+        $.post('../production/get_products.php', {
+            crop_value: crop_value
+
+        }, data => {
+            $('#select_variety').html(data);
+
+
+
+        });
+
+
+
+
+
+
+
+
+    }
+});
+
+$('#select_class').change(function() {
+
+    var crop_data = $('#select_crop').val();
+    var variety_data = $('#select_variety').val();
+    var class_data = $('#select_class').val();
+
+    if (crop_data == 0) {
+
+        alert('Select crop and variety');
+
+
+    } else if (variety_data == 0) {
+
+        alert('Select crop and variety');
+
+    } else {
+
+        $.post('get_prices.php', {
+            crop_data: crop_data,
+            variety_data: variety_data,
+            class_data: class_data
+        }, function(data) {
+
+            $('#price_per_kg').val(data);
+
+        });
+    }
+
+
+
+
+});
+
+
         $('#openLpoFile').click(()=>{
             let directory = $('#directorHidden').val();
             if(directory=="" || directory=="-"){
@@ -235,7 +225,52 @@ if (in_array($position, $restricted)) {
             history.back();
         });
 
-        
+         
+
+        $("#get_data").click(()=>{
+
+
+
+
+
+let sales_data_filter = $('#typeValue').val();
+let cropValue = $('#select_crop').val();
+let varietyValue = $('#select_variety').val();
+let classValue = $('#select_class').val();
+let from = $('#fromDateValue').val();
+let to = $('#toDateValue').val();
+let page_type ="sales_list";
+
+
+
+$('#customer_type_hidden').val(sales_data_filter);
+$('#cropValueHidden').val(cropValue);
+$('#varietyValueHidden').val(varietyValue);
+$('#classValueHidden').val(classValue);
+$('#from_hidden').val(from);
+$('#to_hidden').val(to);
+$('#filter').val("haghgd");
+
+
+
+
+$.post('get_data.php', {
+  sales_data_filter:sales_data_filter,   
+    cropValue:cropValue,
+    varietyValue:varietyValue,
+    classValue:classValue,
+    from:from,
+    to:to,
+    page_type:page_type,                 
+    }, function(data) {
+        $('#dataTable').html(data);
+
+
+    })
+
+
+
+})
 
 
         
@@ -403,13 +438,13 @@ if (in_array($position, $restricted)) {
 
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
-                            
+                           
 
                                 <li class="pcoded-hasmenu">
 
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                            <a href="marketing_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -491,7 +526,6 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                               
-                    
                                 <li class="">
                                     <a href="lpo.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-file"></i><b>FC</b></span>
@@ -499,15 +533,13 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
                     
                             </ul>
-                            
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
-                                <li class="<?php echo$sales_order;?>">
+                                <li class="active">
                                     <a href="sales_list.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Sales </span>
@@ -517,8 +549,6 @@ if (in_array($position, $restricted)) {
                                 
                     
                             </ul>
-
-                           
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -528,19 +558,19 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Order Details </h5>
+                                            <h5 class="m-b-10">Sales List </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="finance_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
                                             
                                             
                                             </li>
-                                            <li class="breadcrumb-item"><a href="admin_view_order_items.php">Order Details </a>
+                                            <li class="breadcrumb-item"><a href="sales_list.php">Sales List </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -571,111 +601,131 @@ if (in_array($position, $restricted)) {
                                         
 
                                         <div class="card">
-                                        
                                             <div class="card-header">
-                                                <h5>Order details</h5>
+                                                <h5>Filter </h5>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
+
+                                            </div>
+                                            <div class="card-block">
+
                                                 <div class="form-group row">
-
-
-                                                    <span class="pcoded-mcaret"></span>
-
-
                                                     <div class="col-sm-2">
-
-                                                        <label class="badge badge-primary ">Order ID</label>
-                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
-
+                                                        <label>Order Type</label>
                                                     </div>
-
-
-
                                                     <div class="col-sm-2">
-
-                                                        <label class="badge badge-primary ">Amount</label>
-                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
-
-
-
+                                                        <label>Select Crop</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Select Variety</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label>Select Class</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order For</label>
-                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
-
-
-
+                                                        <label>To :</label>
                                                     </div>
+                                                </div>
 
+
+                                                <div class="form-group row">
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Requested By</label>
-                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
+                                                            <option value="type_not_selected">Order Type</option>
+                                                            <option value="customer">Customer</option>
+                                                            <option value="agro_dealer">Agro Dealer</option>
+                                                            <option value="b_to_b">Business</option>
+                                                            <option value="grower">Grower</option>
 
 
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order Date</label>
-                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
-
-
-
+                                                        </select>
                                                     </div>
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Time</label>
-                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
-                                                       
+
+                                                    <select name="select_crop" id="select_crop" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
 
 
+                                                    </select>
+
+
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-2">
+
+
+                                                    <select name="select_variety" id="select_variety" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+
+
+                                                    </select>
+
+
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-1">
+
+
+                                                    <select name="select_class" id="select_class" class="form-control"> 
+                                                        <option value="not_selected">Class</option>
+                                                        <option value="pre_basic">Pre-Basic</option>
+                                                        <option value="basic">Basic</option>
+                                                        <option value="certified">Certified</option>
+
+
+                                                    </select>
+
+
+                                                        
                                                     </div>
 
-                                                    <div class="card-block" id="lpo_file">
-                                                                <button class="btn btn-success" id="openLpoFile">LPO File</button>
-                                                               
-                                                            
-                                                            </div>
-                                              
-                                                    <div class="card-block">
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                    </div>
 
 
-                                                   
-                                               
+                                                    
 
-                                                    <form action="finance_csv_handler.php" method="POST">
+
+
+                                                    <div class="col-sm-1">
+
+
+
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+
+
+                                                      
+                                                    </div>
+                                                </div>
+
+
+                                                <form action="marketing_csv_handler.php" method="POST">
                                                     <div class="form-group row">
                                                         <div class="col-sm-3">
 
 
 
-                                                          
+                                                            <button class="ti-download btn btn-primary " id='sales_save_csv' name='sales_save_csv'> CSV</button>
 
 
-
-                                                
-
-
-                                                            <input type="hidden" name="page_type_hidden" id="page_type_hidden"  value="<?php echo $page_type; ?>">
-                                                            <input type="hidden" name="directorHidden" id="directorHidden"  value="<?php echo $file; ?>">
-                                                            <input type="hidden" name="customer_name" id="customer_name">
-                                                            <input type="hidden" name="order_id" id="order_id">
-
-                                                            <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
-                                                            <input type="hidden" name="oustsanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
-
-
-                                                           
+                                                            <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
+                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
+                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
+                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
 
 
 
@@ -687,18 +737,6 @@ if (in_array($position, $restricted)) {
 
                                                     </div>
                                                 </form>
-
- 
-                                               
-
-                                            </div>
-
-
-
-                                                </div>
-
-                                                
-
 
                                             </div>
                                         </div>
@@ -721,10 +759,11 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
-                                                                <th>Item ID</th>
+                                                            <th>Order ID</th>
+                                                                <th>Item Number</th>
                                                                 <th>Crop</th>
                                                                 <th>Variety</th>
                                                                 <th>Class</th>
@@ -732,6 +771,11 @@ if (in_array($position, $restricted)) {
                                                                 <th>price per kg</th>
                                                                 <th>Discount</th>
                                                                 <th>Total price</th>
+                                                                <th>Order By</th>
+                                                                <th>Customer Name</th>
+                                                                <th>Order Type</th>
+                                                                <th>Date</th>
+                                                                <th>Action</th>
 
 
                                                             </tr>
@@ -739,25 +783,32 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                             <?php
-                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
-                                                             `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
+                                                            $sql = "SELECT item.order_ID,item.item_ID,crop.crop,user.fullname,variety.variety,item.class,item.price_per_kg,item.discount_price,order_table.order_type,item.quantity,item.total_price,order_table.date,order_table.customer_name
+                                                             FROM item INNER JOIN crop ON crop.crop_ID = item.crop_ID INNER JOIN variety ON variety.variety_ID = item.variety_ID INNER JOIN order_table ON order_table.order_ID = item.order_ID 
+                                                             INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.status='processed' ORDER BY order_table.order_ID DESC;";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
 
-
+                                                                    $order_ID =$row["order_ID"];
+                            
                                                                     $item_ID      = $row["item_ID"];
                                                                     $crop     = $row["crop"];
+                                                                    $order_by=$row["fullname"];
+                                                                    $customer=$row["customer_name"];
+                                                                    $order_date=$row["date"];
                                                                     $variety = $row["variety"];
                                                                     $class    = $row['class'];
                                                                     $quantity = $row['quantity'];
                                                                     $price_per_kg = $row['price_per_kg'];
+                                                                    $order_type = $row['order_type'];
                                                                     $discount_price = $row['discount_price'];
                                                                     $total_price = $row['total_price'];
-
+                                                                    $page="sales_order";
                                                                     echo "
 											<tr class='odd gradeX'>
+                                            <td>$order_ID</td>
                                             <td>$item_ID</td>
                                             <td>$crop</td>
                                             <td>$variety</td>
@@ -766,6 +817,12 @@ if (in_array($position, $restricted)) {
                                             <td>$price_per_kg </td>
                                             <td>$discount_price</td>
                                             <td>$total_price</td>
+                                            <td>$order_by</td>
+                                            <td>$order_type</td>
+                                            <td>$customer</td>
+                                            <td>$order_date</td>
+                                           <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>View Order</a></td>
+                                            
 												
 											</tr>	
                                     
@@ -781,8 +838,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="card-block">
 
                                               
-                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
-
+                                            
                                                 
                                                 
 

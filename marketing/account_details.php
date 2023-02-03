@@ -28,52 +28,28 @@ if (in_array($position, $restricted)) {
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 $debtor_ID = $_GET['debtor_id'];
-$page_type = '';
+$page_type = $_GET['page_type'];
 
 
 if(!empty($page_type)){
 
-    if($page_type=="pending_orders"){
+    if($page_type=="agro_dealer"){
 
-        $pending ="active";
-    $processed="-";
-    $all="-";
-    $denied ="-";
+        $agro_dealer ="active";
+    $b_to_b="-";
+    
     
     
     
     }
-    else if($page_type=="processed_orders"){
-    
-        $pending ="-";
-        $processed="active";
-        $all="-";
-        $denied ="-";
+    else if($page_type=="b_to_b"){
+        $agro_dealer ="-";
+        $b_to_b="active";
 
     
     }
 
-    else if($page_type=="all_orders"){
-
-        $pending ="-";
-        $processed="-";
-         $all="active";
-         $denied ="-";
-
-
-         
-    }
-
-    else if($page_type=="denied_orders"){
-
-        $pending ="-";
-        $processed="-";
-         $all="-";
-         $denied ="active";
-
-
-         
-    }
+    
 
     
 }
@@ -101,7 +77,7 @@ if ($result->num_rows > 0) {
         $email = $row["email"];
         $registered_by = $row["fullname"];
         $registered_date =$row["registered_date"];
-        $files = $row["debtor_files"];
+        $file = $row["debtor_files"];
       
 
     }
@@ -165,19 +141,21 @@ if (in_array($position, $restricted)) {
 
        $(document).ready(()=>{
 
+        let temp = $('#page_type_hidden').val();
+        $('#contract_files').hide();
+
+        if(temp=="agro_dealer"){
+        
+            $('#contract_files').show();
+            
+        }
+        
+        
+
+        
         $("#back").click(()=>{
 
-            let processsed_value = $("#processed_value").val();
-            if(processsed_value=='active'){
-                window.location='debtor_processed_payment.php';
-            }
-           else if(processsed_value=='active'){
-           window.location='debtor_outstanding_payments.php';
-           }
-           else{
-            window.location='debtor_accounts.php';
-
-           }
+           history.back();
 
         });
 
@@ -415,7 +393,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
-                                <li class="">
+                                <li class="<?php echo $agro_dealer;?>">
                                     <a href="agro_dealer.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered </span>
@@ -429,13 +407,14 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 
-                                <li class="">
+                                <li class="<?php echo $b_to_b;?>">
                                     <a href="b_to_b.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Business </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                
                               
                     
                             </ul>
@@ -493,7 +472,7 @@ if (in_array($position, $restricted)) {
                                         
 
                                         <div class="card">
-                                        <form action="admin_view_order_items.php" method="POST">
+                                      
                                             <div class="card-header">
                                                 <h5>Account Details</h5>
 
@@ -571,11 +550,16 @@ if (in_array($position, $restricted)) {
 
 
                                                             </div>
+
+                                                            <div class="card-block" id="contract_files">
+                                                                <a href="../files/marketing/agro_dealer_contracts/<?php echo$file;?>" class="btn btn-success">Contract Files</a>
+                                                            
+                                                            </div>
                                                                                                         
                                                     <div class="card-block">
 
 
-                                                    </form>
+                                                    
                                                
 
                                                     <form action="finance_csv_handler.php" method="POST">
@@ -594,6 +578,7 @@ if (in_array($position, $restricted)) {
                                                             
                                                             <input type="hidden" name="customer_name" id="customer_name">
                                                             <input type="hidden" name="order_id" id="order_id">
+                                                            <input type="hidden" name="page_type_hidden" id="page_type_hidden"  value="<?php echo $page_type; ?>">
 
                                                             <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
                                                             <input type="hidden" name="oustsanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
@@ -685,7 +670,7 @@ if (in_array($position, $restricted)) {
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
                                         $status = $row['status'];
-                                        $page="all_orders";
+                                        
 										
 										
 										echo"
@@ -702,7 +687,7 @@ if (in_array($position, $restricted)) {
                                                 <td>$count</td>
                                                 <td>$total</td>
                                     
-												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page_type' class='btn btn-success'>view</a></td>
                                                 
 											</tr>	
 										";

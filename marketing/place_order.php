@@ -647,6 +647,30 @@ if (in_array($position, $restricted)) {
                                 </li>
                                
 
+                                <li class="">
+                                    <a href="lpo.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-file"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">LPOs </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                    
+                            </ul>
+                            
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                
+                                <li class="">
+                                    <a href="sales_list.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Sales </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                    
                             </ul>
 
 
@@ -686,7 +710,7 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <form action="place_order.php" method="POST">
+                        <form action="place_order.php" method="POST" enctype="multipart/form-data">
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -968,7 +992,7 @@ if (in_array($position, $restricted)) {
                             <label>Upload LPO (Available for B_to_B Orders only (OPTIONAL)):</label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="file" id="lpoFiles" class="form-control" name="lpoFiles" placeholder="-" require="">
+                            <input type="file" id="image" class="form-control" name="image" placeholder="-" require="">
                         </div>
 
                         </br></br></br>
@@ -1148,6 +1172,74 @@ if (isset($_POST['place_order'])) {
 
 
    
+}
+ 
+
+
+
+if (isset($_FILES['image'])) {
+
+    if (!empty($_SESSION['order'])) {
+
+        $type = $_SESSION['type'];
+    } else {
+       $type = $_POST['debtor_type'];
+    }
+
+
+   if($type=='b_to_b'){
+
+    $errors = array();
+    $file_name = $_FILES['image']['name'];
+    $file_size = $_FILES['image']['size'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
+
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
+
+
+    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+    $extensions = array("pdf");
+
+    if (in_array($file_ext, $extensions) === false) {
+        $errors[] = "extension not allowed, please choose a pdf file .";
+    }
+
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/b_to_b_LPO/" . $newfilename);
+        echo "Success";
+    } else {
+        print_r($errors);
+    }
+   
+     if(empty($_SESSION['lpoFile'])){
+
+        $_SESSION['lpoFile'] = $newfilename;
+        
+     }
+     else{
+
+        unset($_SESSION['lpoFile']);
+        $_SESSION['lpoFile'] = $newfilename;
+
+
+     }
+
+   } 
+
+   else{
+
+    $_SESSION['lpoFile'] ="-";
+
+
+   }
+  
+    
 }
 
 if (isset($_POST['add_item'])) {

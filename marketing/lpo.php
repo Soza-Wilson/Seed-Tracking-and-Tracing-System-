@@ -26,7 +26,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>STTS</title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -59,6 +59,70 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script src="assets/js/table2csv.js"></script>
+
+    <script type="text/javascript">
+         $(document).ready(()=>{
+
+$('#typeValue').change(() => {
+    let debtor_outstanding_type_filter = $('#typeValue').val();
+   
+    
+    $.post('get_data.php', {
+        debtor_outstanding_type_filter: debtor_outstanding_type_filter,                    
+        }, function(data) {
+            $('#names').html(data);
+
+
+        })
+});
+
+$("#get_data").click(()=>{
+
+
+
+
+
+let lpo_data_filter = $('#businessName').val();
+let orders_type = "processed";
+let debtor_id = $('#names').val();
+let from = $('#fromDateValue').val();
+let to = $('#toDateValue').val();
+let page_type = "processed";
+
+
+$('#customer_type_hidden').val(lpo_data_filter);
+$('#customer_id_hidden').val(debtor_id);
+$('#order_type_hidden').val(page_type);
+$('#from_hidden').val(from);
+$('#to_hidden').val(to);
+$('#filter').val("haghgd");
+
+
+
+
+$.post('get_data.php', {
+    lpo_data_filter:lpo_data_filter,   
+    debtor_id:debtor_id,
+    from:from,
+    to:to,
+    page_type:page_type,                 
+    }, function(data) {
+        $('#dataTable').html(data);
+
+
+    })
+
+
+
+})   
+
+
+});
+
+            </script>
 
 </head>
 
@@ -137,7 +201,7 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a href="">
                            <span>marketing</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -149,7 +213,6 @@ if (in_array($position, $restricted)) {
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
                             
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
@@ -198,19 +261,9 @@ if (in_array($position, $restricted)) {
                                     </div>
                                 </div>
                         
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="p-15 p-b-0">
                                 
                             </div>
+                            
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -246,7 +299,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                     <a href="view_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
@@ -274,7 +327,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
+                               
                     
                             </ul>
                     
@@ -288,19 +341,15 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
-                    
-                                <li class="">
+                                <li class="active">
                                     <a href="lpo.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-file"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">LPOs </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
                     
                             </ul>
-                            
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -315,6 +364,7 @@ if (in_array($position, $restricted)) {
                                 
                     
                             </ul>
+                    
                             
                                 </li>
                             </ul>
@@ -327,7 +377,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Denied Orders</h5>
+                                            <h5 class="m-b-10">Local Purchase Orders</h5>
                                           
                                         </div>
                                     </div>
@@ -338,7 +388,7 @@ if (in_array($position, $restricted)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Denied Orders</a>
+                                            <li class="breadcrumb-item"><a href="#!">LPOs</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -354,8 +404,94 @@ if (in_array($position, $restricted)) {
                                     <!-- Page body start -->
                                     <div class="page-body">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                
+                                            <div class="col-md-12">
+                                            <div class="card">
+                                            <div class="card-header">
+                                                <h5>Filter </h5>
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    
+                                                    <div class="col-sm-4">
+                                                        <label>Search by name</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label>To :</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    
+
+                                                    <div class="col-sm-4">
+                                                   
+
+                                                 <input type="text" class="form-control" name="businessName" id="businessName" placeholder="Enter business name ">
+
+
+                                                        
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                    </div>
+
+
+                                                    
+
+
+
+                                                    <div class="col-sm-3">
+
+
+
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+
+
+                                                        <a href="lpo.php" class="ti-loop btn btn-danger"></a>
+                                                    </div>
+                                                </div>
+
+
+                                                <form action="marketing_csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                        
+
+
+                                                            <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
+                                                            <input type="hidden" name="customer_id_hidden" id="customer_id_hidden">
+                                                            <input type="hidden" name="order_type_hidden" id="order_type_hidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
                         
                                         
                                          </form>
@@ -368,23 +504,19 @@ if (in_array($position, $restricted)) {
                                                             <!-- Basic Form Inputs card end -->
                                                             <!-- Input Grid card start -->
                                                             <div class="card">
+
+                                                            <form method="POST" action="marketing_csv_handler.php">
                                             <div class="card-header">
                                                 
                                                
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
+                                               
                                             </div>
+
+                                                            </form>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
+                                                    <table  class="table" id="dataTable">
+                                                    <thead>
                                                         <tr>
                                                                 <th>Order ID</th>
                                                                        
@@ -393,17 +525,18 @@ if (in_array($position, $restricted)) {
                                                                 <th>Requsted By</th>
                                                                 <th>Date</th>
                                                                 <th>Time</th>
+                                                                <th>Status</th>
                                                                 <th>count</th>
                                                                 <th>Total Price</th>
-                                                                <th>Action</th>
+                                                               
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
                                                         <?php
-								$sql = "SELECT `order_ID`, `order_type`, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, 
-                                order_table.time, `count`, `total_amount` FROM `order_table` INNER JOIN user ON user.user_ID = order_table.user_ID WHERE status = 'denied'";
+								$sql = "SELECT `order_ID`,`order_files`,`order_type`,order_table.status, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, order_table.time, `count`, `total_amount` FROM `order_table` 
+                                INNER JOIN user ON user.user_ID = order_table.user_ID WHERE `order_type`='b_to_b' AND order_files !='' AND order_files !='-'";
 								$result = $con->query($sql);
 								if($result->num_rows>0)
 								{
@@ -411,7 +544,8 @@ if (in_array($position, $restricted)) {
 									{
 
 
-                                        $order_ID 	 = $row["order_ID"];
+                                        
+										$order_ID 	 = $row["order_ID"];
 					
 										$customer_name  = $row["customer_name"];
                                         $order_type = $row["order_type"];
@@ -420,7 +554,9 @@ if (in_array($position, $restricted)) {
 										$time = $row['time'];
                                         $count = $row['count'];
                                         $total = $row['total_amount'];
-                                        $page="denied_orders";
+                                        $status = $row['status'];
+                                        $page="lpo";
+                                        $files=$row['order_files'];
 										
 										
 										echo"
@@ -433,15 +569,18 @@ if (in_array($position, $restricted)) {
                                                 <td>$order_by</td>
 												<td>$date</td>
                                                 <td>$time</t>
-                                                <td>$count</t>
+                                                <td>$status</td>
+                                                <td>$count</td>
                                                 <td>$total</td>
                                     
-                                                <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
+												<td><a href='../files/marketing/b_to_b_LPO/$files' class='btn btn-primary'>File</a> <a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>order</a></td>
                                                 
 											</tr>	
 										";
 									}
 								} 	
+
+                            
 							    ?> 
                                                         </tbody>
                                                     </table>
@@ -527,20 +666,5 @@ if (in_array($position, $restricted)) {
 <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
-<?php
 
-
- if(isset($_POST['place_order']))
- {
-
-
-
-$object = new main();
-$object -> check_order_book_number($_POST['order_note_number'],$_SESSION['user'],$_POST['customer_name'],$_POST['crop'],$_POST['variety'],$_POST['class'],$_POST['quantity'],$_POST['price_per_kg'],$_POST['total_price']);
-
-
-  
- }
-
-?>
 </html>

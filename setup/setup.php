@@ -377,6 +377,7 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 							                      time varchar(100),
                                     count varchar(100),
 						                      	total_amount varchar(100),
+                                    order_files varchar(100),
 								
 							
                  FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
