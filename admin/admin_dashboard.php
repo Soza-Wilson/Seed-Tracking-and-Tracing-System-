@@ -481,8 +481,7 @@ $result = mysqli_query($con,$sql);
 
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
-                            <ul class="pcoded-item pcoded-left-item">
-
+                        
                                 <li class="pcoded-hasmenu">
 
                                     <ul class="pcoded-item pcoded-left-item">
@@ -605,6 +604,26 @@ $result = mysqli_query($con,$sql);
                                     <a href="view_ledger.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+    </li>
+
+                            </ul>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                    <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
 

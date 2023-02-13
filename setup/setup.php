@@ -48,7 +48,13 @@ if ($database === true) {
 
   mysqli_query($con, $sql);
 
+//// Approval table 
 
+$sql="CREATE TABLE approval(approval_ID varchar(100) PRIMARY KEY, depertment varchar(100),
+action_name varchar(100),description varchar(100),date date,time varchar(100),requested_id varchar(100),
+ requested_name varchar(100),action_id varchar(100),approved_ID varchar(100), approval_code varchar(100), FOREIGN KEY(approved_ID) REFERENCES user(user_ID))";
+
+mysqli_query($con, $sql);
   ///creditor table (goods in table. table type will specfy the source type)
 
 

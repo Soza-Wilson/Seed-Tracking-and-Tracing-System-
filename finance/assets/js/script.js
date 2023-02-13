@@ -226,13 +226,7 @@ function toggleFullScreen() {
     }
 }
 
-$('body').append('' +
-    '<div class="fixed-button">' +
-        '<a href="marketing_dashboard.php" target="_blank" class="btn btn-md btn-primary">' +
-            '<i class="fa fa-shopping-cart" aria-hidden="true"></i> home' +
-        '</a> ' +
-    '</div>' +
-'');
+
 var $window = $(window);
 var nav = $('.fixed-button');
 $window.scroll(function() {

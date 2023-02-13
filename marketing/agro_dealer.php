@@ -8,7 +8,7 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-$position= $_SESSION['position'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
@@ -34,33 +34,35 @@ if (in_array($position, $restricted)) {
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-      <!-- Meta -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-      <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-      <meta name="author" content="codedthemes" />
-      <!-- Favicon icon -->
-      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
-      <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
-      <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-  </head>
-  <body>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="codedthemes" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+</head>
+
+<body>
     <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -88,7 +90,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -100,7 +102,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -138,20 +140,20 @@ if (in_array($position, $restricted)) {
                         </div>
 
                         <a href="">
-                           <span>marketing</span>
+                            <span>marketing</span>
                         </a>
-                        
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                          
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -159,7 +161,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -167,13 +169,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                  
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -185,7 +187,7 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -198,7 +200,7 @@ if (in_array($position, $restricted)) {
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -210,18 +212,18 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                   
-                                
-                                
+
+
+
                             </div>
-                           
-                            
-                          
-                            
-                                
-                               
-                            
-                                 
+
+
+
+
+
+
+
+
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -233,9 +235,9 @@ if (in_array($position, $restricted)) {
                                     </a>
 
                             </ul>
-                    
-                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
-                    <ul class="pcoded-item pcoded-left-item">
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
+                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="place_order.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
@@ -272,12 +274,12 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
-                    
+
+
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
+
                                 <li class="active">
                                     <a href="agro_dealer.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
@@ -285,13 +287,13 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
-                    
+
+
                             </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
+
                                 <li class="">
                                     <a href="b_to_b.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
@@ -306,14 +308,14 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                    
+
+
                             </ul>
-                            
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
+
                                 <li class="">
                                     <a href="sales_list.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
@@ -321,11 +323,11 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                    
+
+
                             </ul>
 
-                            
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -344,10 +346,10 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="grower.php">Agro Dealer</a>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -363,100 +365,164 @@ if (in_array($position, $restricted)) {
                                         <!-- Basic table card start -->
                                         <!-- Basic table card end -->
                                         <!-- Inverse table card start -->
-                                        
+
                                         <!-- Inverse table card end -->
                                         <!-- Hover table card start -->
-                                       
+
                                         <!-- Hover table card end -->
                                         <!-- Contextual classes table starts -->
-                                        
-                                            
+
+
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
                                         <div class="card">
                                             <div class="card-header">
 
-                                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
+                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
 
-                                    <!-- Modal -->
+                                                <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
-                                                     <div class="modal-dialog modal-lg">
+                                                    <div class="modal-dialog modal-lg">
 
-                                                     <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                             <h5 class="modal-title">Register new agro dealer</h5>
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">Register new agro dealer</h5>
                                                             </div>
-                                                                <div class="modal-body">
+                                                            <div class="modal-body">
                                                                 <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
 
-                                                                <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_name" type="text" class="form-control" name="debtor_name"
-                                                                                placeholder="Name" require="">
-                                                                            </div>
+                                                                    <div class="form-group row">
 
-                                                                            
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_name" type="text" class="form-control" name="debtor_name" placeholder="Name" require="">
                                                                         </div>
 
 
+                                                                    </div>
 
-                                                                        <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_phone" type="text" class="form-control" name="debtor_phone"
-                                                                                placeholder="Phone number" require="">
-                                                                            </div>
 
-                                                                            
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_phone" type="text" class="form-control" name="debtor_phone" placeholder="Phone number" require="">
                                                                         </div>
 
 
-                                                                        <div class="form-group row">
-                                                                            
-                                                                            <div class="col-sm-12">
-                                                                                <input id="debtor_email" type="text" class="form-control" name="debtor_email"
-                                                                                placeholder="Email" require="">
-                                                                            </div>
+                                                                    </div>
 
-                                                                            
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_email" type="text" class="form-control" name="debtor_email" placeholder="Email" require="">
                                                                         </div>
 
 
+                                                                    </div>
 
-                                                                        <div class="form-group row">
-                                                                           
-                                                                            <div class="col-sm-12">
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
                                                                             <labe>Supporting documents :</label>
-                                                                                <input id="image" type="file" class="form-control" name="image"
-                                                                                placeholder="Phone number" require="">
-                                                                            </div>
-                                                                            <div class="modal-footer">
+                                                                                <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                        </div>
+                                                                        <div class="modal-footer">
                                                                             <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-primary btn-block" />
-                                                                          </div>
-                                                                            
                                                                         </div>
 
-                                                                        
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+
+
+
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>Seed Receive Note #:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>Bin card #:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>number of bags :</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label> Supporting Document:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="file" class="form-control" name="image" id="image">
+                                                                        </div class="form-group row" require="">
+
+
+
+
+
+
+                                                                        </br></br></br>
+
+
+                                                                        <div>
+
+                                                                        </div>
+
+
 
                                                                 </form>
-                                                                    </div>
-                                                                         <div class="modal-footer">
-                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                          </div>
-                                                                         </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
 
-                                                                             </div>
-                                                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                                                        </div></div>
+                                            </div>
+                                        </div>
 
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Registred growers </h5>
-                                              
+
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -471,46 +537,44 @@ if (in_array($position, $restricted)) {
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
                                                         <thead>
-                                                        <tr>
+                                                            <tr>
                                                                 <th>Fullname</th>
                                                                 <th>Email </th>
                                                                 <th>phone</th>
                                                                 <th>Registered date</th>
                                                                 <th>registered by</th>
-                                                               
+
                                                                 <th>Action</th>
-                                                                
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                        <?php
+                                                            <?php
 
-                                   
-                              $sql="SELECT `debtor_ID`, `name`, debtor.phone, debtor.email, `description`, `fullname`, `debtor_files`, debtor.registered_date FROM `debtor`
+
+                                                            $sql = "SELECT `debtor_ID`, `name`, debtor.phone, debtor.email, `description`, `fullname`, `debtor_files`, debtor.registered_date FROM `debtor`
                               INNER JOIN user ON debtor.user_ID = user.user_ID WHERE `debtor_type` = 'agro_dealer'";
 
-								$result = $con->query($sql);
-								if($result->num_rows>0)
-								{
-									while($row=$result->fetch_assoc())
-									{   
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
 
-                                        $debtor_id=$row['debtor_ID'];
-                                         $name= $row['name'];
-										$phone= $row['phone'];
-                                        $email =$row['email'];
-                                        $registered_date =$row['registered_date'];
-										$registered_by = $row['fullname'];
-                                        $dir = $row['debtor_files'];
-                                        $page_type="agro_dealer";
-									
-										
-										
-										
-										
-										
-										echo"
+                                                                    $debtor_id = $row['debtor_ID'];
+                                                                    $name = $row['name'];
+                                                                    $phone = $row['phone'];
+                                                                    $email = $row['email'];
+                                                                    $registered_date = $row['registered_date'];
+                                                                    $registered_by = $row['fullname'];
+                                                                    $dir = $row['debtor_files'];
+                                                                    $page_type = "agro_dealer";
+
+
+
+
+
+
+                                                                    echo "
 											<tr class='odd gradeX'>
                                                  <td>$name</td>
 											    <td>$email</td>
@@ -527,15 +591,15 @@ if (in_array($position, $restricted)) {
                                                 </td>
 											</tr>	
 										";
-									}
-								} 	
-							    ?> 
+                                                                }
+                                                            }
+                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                         <!-- Background Utilities table end -->
                                     </div>
                                     <!-- Page-body end -->
@@ -652,14 +716,10 @@ if (isset($_FILES['image'])) {
     }
 }
 
-if(isset($_POST['register_agro_dealer']))
+if (isset($_POST['register_agro_dealer'])) {
 
-{
-   
     $object = new main();
 
-    $object ->add_agro_dealer($_POST['debtor_name'],$_POST['debtor_phone'],$_POST['debtor_email'],"agro_dealer",$newfilename);
-
-
+    $object->add_agro_dealer($_POST['debtor_name'], $_POST['debtor_phone'], $_POST['debtor_email'], "agro_dealer", $newfilename);
 }
 ?>

@@ -7,7 +7,8 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-$position =$_SESSION['position'];
+$user_id=$_SESSION['user'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
@@ -15,11 +16,47 @@ if (empty($test)) {
 }
 
 
-$notRestricted = array("production_admin", "system_administrator","merl_officer","warehouse_officer");
+$notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
 
 if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
+}
+$stock_in_ID = $_GET["stock_in_id"];
+
+if (!empty($stock_in_ID)) {
+
+
+
+    $sql = "SELECT `stock_in_ID`, `certificate_ID`, `farm_ID`,creditor.name, user.fullname,
+    stock_in.creditor_ID, stock_in.source, `crop`, `status`, 
+    `variety`, `class`, `SLN`, `bincard`, 
+    `number_of_bags`, `quantity`, `used_quantity`,
+     `available_quantity`, `processed_quantity`, 
+     `grade_outs_quantity`, `trash_quantity`, 
+     stock_in.description, `supporting_dir`, `date`, `time` FROM `stock_in` INNER JOIN `creditor` ON
+      stock_in.creditor_ID = creditor.creditor_ID INNER JOIN user ON user.user_ID = stock_in.user_ID INNER JOIN crop ON 
+      crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `stock_in_ID`='$stock_in_ID'";
+
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $crop = $row["crop"];
+            $variety = $row["variety"];
+            $class = $row["class"];
+            $SRN = $row["SLN"];
+            $bincard = $row["bincard"];
+            $bags = $row["number_of_bags"];
+            $quantity = $row["quantity"];
+            $creditor = $row["name"];
+            $user_requested = $row["fullname"];
+            $date = $row["date"];
+            $time = $row["time"];
+            $description = $row["description"];
+            $dir =  $row["supporting_dir"];
+        }
+    }
 }
 
 ?>
@@ -58,6 +95,10 @@ if (in_array($position, $notRestricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details.js">
+
+    </script>
 </head>
 
 <body>
@@ -148,7 +189,7 @@ if (in_array($position, $notRestricted)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -156,7 +197,7 @@ if (in_array($position, $notRestricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -164,12 +205,12 @@ if (in_array($position, $notRestricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -198,13 +239,13 @@ if (in_array($position, $notRestricted)) {
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                           
+
                                         </li>
                                     </ul>
                                 </div>
                             </div>
 
-                           
+
                             <div class="p-15 p-b-0">
 
 
@@ -287,7 +328,7 @@ if (in_array($position, $notRestricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -308,8 +349,8 @@ if (in_array($position, $notRestricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -349,8 +390,8 @@ if (in_array($position, $notRestricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -365,7 +406,7 @@ if (in_array($position, $notRestricted)) {
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -432,7 +473,7 @@ if (in_array($position, $notRestricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="view_stock_in.php">View Stock In</a>
                                             </li>
 
@@ -462,122 +503,471 @@ if (in_array($position, $notRestricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Stock in transactions </h5>
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog modal-lg">
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h5 class="modal-title">Update stock in details </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
+
+                                                            <div class="card-block">
+
+
+
+
+
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-12">
+                                                                        <select id="select_crop" name="crop" class="form-control" required="">
+                                                                            <option value="crop_not_selected">Select Crop</option>
+
+
+
+
+
+                                                                        </select>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-12">
+                                                                        <select id="select_variety" name="variety" class="form-control" required="">
+                                                                            <option value="variety_not_selected">Select Variety</option>
+
+
+
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-12">
+                                                                        <select id="select_class" name="select_class" class="form-control" required="">
+                                                                            <option value="0">Select class</option>
+                                                                            <option value="basic">Basic</option>
+                                                                            <option value="pre_basic">Pre-Basic</option>
+                                                                            <option value="certified">Certified</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+
+
+                                                                    <div class="col-sm-12">
+
+                                                                        <input id="external_quantity" type="text" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="">
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+
+                                                                <div class="form-group row">
+
+
+                                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                                    <div class="col-sm-6">
+
+                                                                        <select id="certificate" name="certificate" class="form-control" required="">
+                                                                            <option value="no_certificate_selected">Select Certificate</option>
+                                                                            <option value="no_certificate_selected">-</option>
+
+
+
+
+
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+
+                                                                        <input id="search_certificate" type="text" class="form-control" name="search_certificate" placeholder="Search certificate" require="">
+
+
+
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                                                <div class="form-group row">
+
+                                                                    <div class="col-sm-12">
+
+                                                                        <a href="add_certificate.php" class="btn btn-success"><i class='icofont icofont-edit-alt'></i>
+                                                                            New certificate
+
+                                                                        </a>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+
+
+
+
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-4">
+                                                                    <label>Seed Receive Note #:</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-4">
+                                                                    <label>Bin card #:</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-4">
+                                                                    <label>number of bags :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    <labe>Supporting documents :</label>
+                                                                        <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <div class="col-sm-4" >
+                                                            <label for="bin_card" id="approval_label"> Enter Admin Approval Code</label>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="Enter code" require="">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button class="btn btn-success"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                        </div>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Stock in ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>Used Quantity</th>
-                                                                <th>Available Quantity</th>
-                                                                <th>Source</th>
-                                                                <th>Source_name</th>
-                                                                <th>SRN</th>
-                                                                <th>Added by</th>
-                                                                <th>added date</th>
-                                                                <th>Action</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-
-                                                            $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
-                              `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                               `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
-                              INNER JOIN user ON stock_in.user_ID = user.user_ID 
-                              INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                              INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $stock_in_id = $row['stock_in_ID'];
-                                                                    $crop      = $row['crop'];
-                                                                    $source = $row['source'];
-                                                                    $source_name = $row['name'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $quantity     = $row['quantity'];
-                                                                    $used_quantity = $row['used_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $date_added = $row['date'];
-                                                                    $user = $row['fullname'];
-                                                                    $srn = $row['SLN'];
-                                                                    $dir = $row['supporting_dir'];
-
-
-
-
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$stock_in_id</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$quantity</td>
-                                                <td> $used_quantity</td>
-                                                <td> $available_quantity</td>
-                                                <td>$source</td>
-                                                <td>$source_name</td>
-                                                <td>$srn</td>
-                                                <td>$user</td>
-                                                <td>$date_added</td>
-                                                
-                                               
-												
-												
-												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success'><i class='icofont icofont-eye-alt'></i>View </a>
-                                                
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
                                             </div>
                                         </div>
 
-                                        <!-- Background Utilities table end -->
+                                        <div class="card">
+                                            <form action="admin_view_order_items.php" method="POST">
+                                                <div class="card-header">
+                                                    <h5>Transaction Details</h5>
+
+                                                    <div class="card-header-right">
+                                                        <ul class="list-unstyled card-option">
+                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="form-group row">
+
+
+                                                        <span class="pcoded-mcaret"></span>
+
+
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary "> ID</label>
+                                                            <input id="stock_in_id" type="text" class="form-control" name="stock_in_id" value="<?php echo $stock_in_ID; ?>" require="">
+                                                            <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
+                                                             <input type="hidden" id="user_name" value="<?php echo $test; ?>">
+
+                                                        </div>
+
+
+
+
+
+                                                        <div class="col-sm-3">
+                                                            <label class="badge badge-primary ">Transaction For</label>
+                                                            <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $creditor; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-3">
+                                                            <label class="badge badge-primary ">Added By</label>
+                                                            <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary "> Date</label>
+                                                            <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary ">Time</label>
+                                                            <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="card-block">
+
+
+                                            </form>
+
+
+                                            <form action="finance_csv_handler.php" method="POST">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+
+
+
+
+
+
+
+
+
+
+                                                        <a href="../files/production/stock_in_documents/<?php echo "$dir" ?>" class="btn btn-success"><i class='icofont icofont-file-alt'></i> View Documents</a>
+
+
+
+                                                        <input type="hidden" name="customer_name" id="customer_name">
+                                                        <input type="hidden" name="order_id" id="order_id">
+
+                                                        <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                        <input type="hidden" name="oustanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
+
+
+
+
+
+
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+
+
+
+
+                                        </div>
                                     </div>
-                                    <!-- Page-body end -->
                                 </div>
                             </div>
-                            <!-- Main-body end -->
+                        </div>
 
-                            <div id="styleSelector">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Details</h5>
+
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                        <li><i class="fa fa-trash close-card"></i></li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Crop:</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $crop; ?>">
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Variety:</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $variety; ?>">
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Class:</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $class; ?>">
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Quantity (Kgs):</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $quantity; ?>">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Seed Receive Note #:</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $SRN; ?>">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Number of Bags:</label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Bin Card #:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control trans_details" name="fullname" required="" value="<?php echo $bincard; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Seed Source:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Processing status:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Description:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $description; ?>">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+                                    <div class="col-sm-1">
+                                        <button class=" btn btn-success" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
+                                    </div>
+                                    <div class="col-sm-0">
+                                        <button class=" btn btn-danger" id='back' name='back'><i class='icofont icofont-warning-alt'></i>Delete</button>
+                                    </div>
+
+                                </div>
+
 
                             </div>
+
+
+
+
+                            <!-- Background Utilities table end -->
                         </div>
+
+                        <!-- Background Utilities table end -->
                     </div>
+                    <!-- Page-body end -->
                 </div>
             </div>
+            <!-- Main-body end -->
+
+            <div id="styleSelector">
+
+            </div>
         </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <!-- Warning Section Starts -->

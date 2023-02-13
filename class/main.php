@@ -665,7 +665,7 @@ class main
 
     $stock_ID = $this->generate_user("stock");
     $user_ID = $_SESSION['user'];
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:i:s");
     global $con;  
 
@@ -678,7 +678,7 @@ class main
       $available_quantity =0;
 
     }
-
+    
 
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
      `creditor_ID`, `source`, `crop_ID`, `status`, `variety_ID`, `class`, `SLN`,
@@ -703,7 +703,8 @@ class main
       $temp_class = "buy_certified";
     }
 
-
+   
+    
 
     //calculate amount add stock in transaction 
 
@@ -745,7 +746,45 @@ class main
   }
 
 
+ function admin_approval($department,$action_name,$action_id,$description,$requested_ID,$requested_name){
 
+  $approval_ID  = $this->generate_user("approval");
+  $date = date("Y-m-d");
+  $time = date("H:i:s");
+  global $con; 
+
+  $sql="INSERT INTO `approval`(`approval_ID`, `depertment`, `action_name`, 
+  `action_id`, `description`, `date`, `time`, `requested_id`, 
+  `requested_name`) VALUES
+   ('$approval_ID','$department','$action_name','$action_id','$description',
+   '$date','$time','$requested_ID','$requested_name')";
+
+   $statement = $con->prepare($sql);
+   $statement->execute();
+
+
+ }
+
+
+ function admin_confirm_approval($approvalId,$approvalCode,$userId){
+  global $con;  
+
+  $sql="UPDATE `approval` SET `approved_ID`='$userId',`approval_code`='$approvalCode' WHERE `approval_ID`='$approvalId'";
+  $statement = $con->prepare($sql);
+   $statement->execute();
+  
+ }
+
+ function deny_acccess($approvalId){
+  global $con;
+  $sql="DELETE FROM `approval` WHERE `approval_ID`='$approvalId'";
+
+  $statement = $con->prepare($sql);
+  $statement->execute();
+
+
+
+ }
 
   function stock_in_add_transaction($transaction_ID,$trans_type,$stock_ID,$creditor,$calculated_amount,$user_ID){
 
@@ -1601,6 +1640,7 @@ if ($result->num_rows > 0) {
     '[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]',
     '[value-11]','[value-12]','[value-13]','[value-14]','[value-15]','[value-16]','[value-17]','[value-18]')";
   }
+  
 
 
 

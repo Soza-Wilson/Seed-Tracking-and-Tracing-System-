@@ -331,7 +331,7 @@ $.post('../marketing/get_transactions.php', {
                 <div class="spinner-layer spinner-red">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
-                    </div>
+                    </div>View 
                     <div class="gap-patch">
                         <div class="circle"></div>
                     </div>
