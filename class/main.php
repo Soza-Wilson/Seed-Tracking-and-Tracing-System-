@@ -342,53 +342,48 @@ class main
   //Marketing sales functions 
 
   // grower order is a little different from the normal order 
-   function grower_order($creditor_id,$creditor_name,$crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price,$farm_id){
+  function grower_order($creditor_id, $creditor_name, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price, $farm_id)
+  {
 
     global $con;
-      $order_ID = $this->generate_user("order");
-      $user = $_SESSION["user"];
-      $date = date("d-m-Y");
-      $time = date("H:i:s");
-         
-      $sql ="INSERT INTO `order_table`(`order_ID`, `order_type`,
+    $order_ID = $this->generate_user("order");
+    $user = $_SESSION["user"];
+    $date = date("d-m-Y");
+    $time = date("H:i:s");
+
+    $sql = "INSERT INTO `order_table`(`order_ID`, `order_type`,
        `customer_id`, `customer_name`, `order_book_number`, 
        `user_ID`, `status`, `date`, `time`, `count`, `total_amount`) 
       VALUES ('$order_ID','grower_order','$creditor_id','$creditor_name',
       '-','$user','pending','$date','$time','1','$total_price')";
 
-        $statement = $con->prepare($sql);
-        $statement->execute(); 
-        
-        $sql= "UPDATE `farm` SET `order_status`='confirmed' WHERE `farm_ID`='$farm_id'";
-        $statement = $con->prepare($sql);
-        $statement->execute();
-  
-        $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+    $statement = $con->prepare($sql);
+    $statement->execute();
 
+    $sql = "UPDATE `farm` SET `order_status`='confirmed' WHERE `farm_ID`='$farm_id'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
 
+    $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+  }
 
-
-
-
-   }
-
-  function temp_data($data_result, $order_note_number,$order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
+  function temp_data($data_result, $order_note_number, $order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
 
     // sessions for holding temp data when order is in progress
 
     if (empty($_SESSION['order'])) {
       global $con;
-      
+
       $order_ID = $this->generate_user("order");
       $_SESSION['order'] =  $order_ID;
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $order_type;
-      
-      
 
-    
+
+
+
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
     ('$order_ID')";
@@ -432,11 +427,11 @@ class main
   function place_order()
   {
 
-   
-    $temp =  $_SESSION['order'];
- 
 
-   // checking is order has items added 
+    $temp =  $_SESSION['order'];
+
+
+    // checking is order has items added 
 
     if (empty($temp)) {
 
@@ -444,7 +439,7 @@ class main
       echo ("<script> alert('No items add to order !');
     </script>");
     } else {
-      
+
       global $con;
       $status = "pending";
       $date = date("Y-m-d");
@@ -456,11 +451,11 @@ class main
       $order_type = $_SESSION['type'];
       $customer_id = $_SESSION['customer_ID'];
       $customer_name = $_SESSION['customer_name'];
-      $lpoFile =$_SESSION['lpoFile'];
-      
-     
-      
-      
+      $lpoFile = $_SESSION['lpoFile'];
+
+
+
+
 
 
 
@@ -474,11 +469,11 @@ class main
         }
       }
 
-      
+
 
       if (!empty($sum)) {
         /// finalizing order by updating the total of all added atems in the order 
-        
+
 
         $sql = " UPDATE `order_table` SET `order_type`='$order_type',
       `customer_id`='$customer_id',`customer_name`='$customer_name',`user_ID`='$user_ID',
@@ -496,18 +491,14 @@ class main
         unset($_SESSION['customer_name']);
         unset($_SESSION['order_book_number']);
 
-  
+
 
 
 
         echo ("<script> alert('Order placed !!');
         window.location='place_order.php';
          </script>");
-
-      
-      }
-
-      else{
+      } else {
 
         echo ("<script> alert('Can not process order. price not added to products !');
         </script>");
@@ -583,7 +574,7 @@ class main
     $item_ID = $this->generate_user("item");
 
 
-   
+
     $sql = "INSERT INTO `item`(`item_ID`, `order_ID`, `crop_ID`,
      `variety_ID`, `class`, `quantity`, `price_per_kg`, `discount_price`, 
      `total_price`) VALUES ('$item_ID','$order_ID','$crop','$variety','$class',
@@ -591,14 +582,12 @@ class main
 
     $statement = $con->prepare($sql);
     $statement->execute();
-     
 
 
-      echo ("<script> alert('Item added to order');
+
+    echo ("<script> alert('Item added to order');
       window.location='place_order.php';
       </script>");
-
-  
   }
 
   /// update order
@@ -667,18 +656,16 @@ class main
     $user_ID = $_SESSION['user'];
     $date = date("Y-m-d");
     $time = date("H:i:s");
-    global $con;  
+    global $con;
 
-    if($source == "External"){
+    if ($source == "External") {
 
       $available_quantity = $quantity;
-    }
-    else if($source == "MUSECO"){
- 
-      $available_quantity =0;
+    } else if ($source == "MUSECO") {
 
+      $available_quantity = 0;
     }
-    
+
 
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
      `creditor_ID`, `source`, `crop_ID`, `status`, `variety_ID`, `class`, `SLN`,
@@ -703,8 +690,8 @@ class main
       $temp_class = "buy_certified";
     }
 
-   
-    
+
+
 
     //calculate amount add stock in transaction 
 
@@ -723,7 +710,7 @@ class main
 
     // register transaction 
 
-   
+
 
     ///   update creditor funds account 
     $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`= $creditor";
@@ -739,76 +726,93 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    $this->stock_in_add_transaction($transaction_ID,$trans_type,$stock_ID,$creditor,$calculated_amount,$user_ID);
+    $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $calculated_amount, $user_ID);
 
     echo ("<script> alert('New entry added');
        </script>");
   }
 
 
- function admin_approval($department,$action_name,$action_id,$description,$requested_ID,$requested_name){
+  function admin_approval($department, $action_name, $action_id, $description, $requested_ID, $requested_name)
+  {
 
-  $approval_ID  = $this->generate_user("approval");
-  $date = date("Y-m-d");
-  $time = date("H:i:s");
-  global $con; 
+    $approval_ID  = $this->generate_user("approval");
+    $date = date("Y-m-d");
+    $time = date("H:i:s");
+    global $con;
 
-  $sql="INSERT INTO `approval`(`approval_ID`, `depertment`, `action_name`, 
+    $sql = "INSERT INTO `approval`(`approval_ID`, `depertment`, `action_name`, 
   `action_id`, `description`, `date`, `time`, `requested_id`, 
   `requested_name`) VALUES
    ('$approval_ID','$department','$action_name','$action_id','$description',
    '$date','$time','$requested_ID','$requested_name')";
 
-   $statement = $con->prepare($sql);
-   $statement->execute();
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
 
 
- }
+  function admin_confirm_approval($approvalId, $approvalCode, $userId)
+  {
+    global $con;
 
+    $sql = "UPDATE `approval` SET `approved_ID`='$userId',`approval_code`='$approvalCode' WHERE `approval_ID`='$approvalId'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
 
- function admin_confirm_approval($approvalId,$approvalCode,$userId){
-  global $con;  
+  function deny_acccess($approvalId)
+  {
+    global $con;
+    $sql = "DELETE FROM `approval` WHERE `approval_ID`='$approvalId'";
 
-  $sql="UPDATE `approval` SET `approved_ID`='$userId',`approval_code`='$approvalCode' WHERE `approval_ID`='$approvalId'";
-  $statement = $con->prepare($sql);
-   $statement->execute();
-  
- }
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+  function admin_deny_requested_access($approvalId)
+  {
+    global $con;
 
- function deny_acccess($approvalId){
-  global $con;
-  $sql="DELETE FROM `approval` WHERE `approval_ID`='$approvalId'";
+    $sql = "DELETE FROM `approval` WHERE `approval`.`approval_ID` = '$approvalId'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
 
-  $statement = $con->prepare($sql);
-  $statement->execute();
-
-
-
- }
-
-  function stock_in_add_transaction($transaction_ID,$trans_type,$stock_ID,$creditor,$calculated_amount,$user_ID){
+  function stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $calculated_amount, $user_ID)
+  {
 
 
     $date = date("Y-m-d");
     $time = date("H:i:s");
-    global $con;  
+    global $con;
 
     $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
     `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
     ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor',' $calculated_amount',
     '$date','$time','payment_pending','$user_ID')";
 
-   $statement = $con->prepare($sql);
-   $statement->execute();
-
+    $statement = $con->prepare($sql);
+    $statement->execute();
   }
 
 
-    
 
 
 
-  
+
+  function update_stock_in($source,$stock_in_ID,$certificate,$crop,$variety,$class,$srn,$bincard,$bags,$quantity,$description,$dir)
+  {
+    $sql = "";
+    if ($source == "External") {
+      $sql = "UPDATE `stock_in` SET`crop_ID`='[value-7]',`variety_ID`='[value-9]',`class`='[value-10]',`SLN`='[value-11]',`bincard`='[value-12]',`number_of_bags`='[value-13]',`quantity`='[value-14],
+      `description`='[value-20]',`supporting_dir`='[value-21]',`certificate_ID`='[value-3]' WHERE `stock_in_ID`='[value-1]'";
+    } else {
+
+      $sql = "UPDATE `stock_in` SET `SLN`='[value-11]',`bincard`='[value-12]',`number_of_bags`='[value-13]',`quantity`='[value-14],
+      `description`='[value-20]',`supporting_dir`='[value-21]', WHERE `stock_in_ID`='[value-1]'";
+    }
+  }
+
 
 
 
@@ -1006,7 +1010,7 @@ class main
 
 
 
-     
+
       $temp_amount = (int)$amount;
 
       $sql = "UPDATE `debtor` SET `account_funds`= account_funds-$temp_amount WHERE `debtor_ID`= '$C_D_ID'";
@@ -1021,10 +1025,9 @@ class main
 
         header('location:stock_out.php');
       }
-      
     } elseif ($type == "grower_order") {
 
-  
+
       $temp_amount = (int)$amount;
       $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$temp_amount WHERE `creditor_ID`= '$C_D_ID'";
 
@@ -1144,7 +1147,7 @@ class main
 
 
 
- 
+
 
   //add creditor function 
   function add_creditor($source, $name, $phone, $email, $description, $files)
@@ -1250,8 +1253,8 @@ class main
     global $con;
 
     if (!empty('$main_quantity')) {
-      
-      $sql ="INSERT INTO `farm`(`farm_ID`, `Hectors`, `crop_species`, 
+
+      $sql = "INSERT INTO `farm`(`farm_ID`, `Hectors`, `crop_species`, 
       `crop_variety`, `class`, `region`, `district`, `area_name`,
        `address`, `physical_address`, `EPA`, `user_ID`, `creditor_ID`, 
        `registered_date`, `previous_year_crop`, `other_year_crop`, `order_status`,
@@ -1279,43 +1282,35 @@ class main
 
 
 
-function grower_order_price($crop,$variety,$class){
+  function grower_order_price($crop, $variety, $class)
+  {
 
-  global $con;
+    global $con;
 
-   $sql="SELECT `prices_ID`, `crop_ID`, 
+    $sql = "SELECT `prices_ID`, `crop_ID`, 
    `variety_ID`, `sell_basic`,
     `sell_pre_basic`, 
     `sell_certified`,
      `buy_basic`,
      `buy_pre_basic`, `buy_certified` FROM `price` WHERE `crop_ID` ='$crop' AND `variety_ID`='$variety'";
 
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $basic= $row['sell_basic'];
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $basic = $row['sell_basic'];
         $pre_basic = $row['sell_pre_basic'];
-        
+      }
 
+      if ($class == "certified") {
+
+
+        return $basic;
+      } else if ($class == "basic") {
+
+        return $pre_basic;
+      }
     }
-
-  if($class=="certified"){
-    
-
-   return $basic;
-
   }
-  else if($class=="basic"){
-
-    return $pre_basic;
-  }
- 
-  
-
-
-}
-
-}
 
 
 
@@ -1324,99 +1319,92 @@ if ($result->num_rows > 0) {
 
   function assign_prcessing_quantity($stock_in_id, $assigned_quantity)
   {
-      
+
 
     global $con;
-     $grade_ID = $this->generate_user("grade_seed");
+    $grade_ID = $this->generate_user("grade_seed");
     $user_ID = $_SESSION['user'];
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $pdfType = "handover";
-    $total_quantity= "";
+    $total_quantity = "";
     $stock_in_quantity = "";
-    
+
 
     //Checking if all graded seed quantity are less than or equal to stock_in quantity
 
-    $sql="SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
+    $sql = "SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
     INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$stock_in_id'";
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $total_quantity= $row['total_graded'];
-            $stock_in_quantity = $row['quantity'];
-            
- 
-        }
-        // echo ("<script> alert('$total_quantity.$stock_in_quantity');
-        // window.location='process_seed.php';
-        // </script>");
+      while ($row = $result->fetch_assoc()) {
+        $total_quantity = $row['total_graded'];
+        $stock_in_quantity = $row['quantity'];
+      }
+      // echo ("<script> alert('$total_quantity.$stock_in_quantity');
+      // window.location='process_seed.php';
+      // </script>");
 
-        $stock = (int)$stock_in_quantity;
-        $total = (int)$total_quantity+(int)$assigned_quantity;
+      $stock = (int)$stock_in_quantity;
+      $total = (int)$total_quantity + (int)$assigned_quantity;
 
 
-       
 
-        if ($total>$stock){
-         
-            //echo ("<scriTY\t> alert('$stock.$total'); </script>");
 
-          echo ("<script> alert('Seed can not be assigned for processing, quantity exceeding available stock');
+      if ($total > $stock) {
+
+        //echo ("<scriTY\t> alert('$stock.$total'); </script>");
+
+        echo ("<script> alert('Seed can not be assigned for processing, quantity exceeding available stock');
           window.location='grading.php';
            </script>");
-  
-  
-        }
-  
-        else{
-          $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
+      } else {
+        $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
           `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
           ('$grade_ID','$date','$time','$assigned_quantity','0','$assigned_quantity','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
-      
-          $statement = $con->prepare($sql);
-          $statement->execute();
-      
-          // update stock in available quantity by subtracting assigned quantity with available 
-      
-      
-      
-          // create PDF file for assigned seed
-      
-          header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
-      
-      
-      
-          // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
-          // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
-      
-      
-      
-          // update stock in status and available quantity  
-      
-          // $t_g_quantity = $grade_out_quantity + $trash_quantity;
-      
-  
-          
-        }
-      
+
+        $statement = $con->prepare($sql);
+        $statement->execute();
+
+        // update stock in available quantity by subtracting assigned quantity with available 
+
+
+
+        // create PDF file for assigned seed
+
+        header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
+
+
+
+        // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
+        // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
+
+
+
+        // update stock in status and available quantity  
+
+        // $t_g_quantity = $grade_out_quantity + $trash_quantity;
+
+
+
       }
+    }
 
 
-      
-       
-      
-    
-     
 
 
-   
-
-  
 
 
-    
+
+
+
+
+
+
+
+
+
 
     // $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
 
@@ -1454,7 +1442,7 @@ if ($result->num_rows > 0) {
 
   // clean and process seed
 
-  function process_seed($grade_ID, $type, $assigned_quantity, $grade_outs_quantity, $trash_quantity,$available_quantity,$process_ID, $passed_process_type_id)
+  function process_seed($grade_ID, $type, $assigned_quantity, $grade_outs_quantity, $trash_quantity, $available_quantity, $process_ID, $passed_process_type_id)
   {
 
 
@@ -1463,13 +1451,13 @@ if ($result->num_rows > 0) {
 
     //Check if all processed transaction are greater are not more than the stock in quantity 
 
-   // $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
+    // $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
 
 
-        // echo("<script>$available_quantity</script>");
+    // echo("<script>$available_quantity</script>");
 
 
-    
+
 
     if ($type == "Cleaning ") {
 
@@ -1482,7 +1470,7 @@ if ($result->num_rows > 0) {
       $process_time = date("H:i:s");
 
       // update available quantity in gr
-      $this->update_available_quantity_grading($grade_ID,$available_quantity,$assigned_quantity);
+      $this->update_available_quantity_grading($grade_ID, $available_quantity, $assigned_quantity);
 
       $sql = "INSERT INTO `process_seed`(`process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID`) VALUES 
           ('$process_ID','$assigned_quantity','$process_date','$process_time','$grade_ID','$user')";
@@ -1498,12 +1486,11 @@ if ($result->num_rows > 0) {
 
       $statement = $con->prepare($sql);
       $statement->execute();
-      $this->update_available_quantity_grading($grade_ID,$available_quantity,$assigned_quantity);
+      $this->update_available_quantity_grading($grade_ID, $available_quantity, $assigned_quantity);
 
-       echo ("<script> alert('saved!');
+      echo ("<script> alert('saved!');
        window.location='process_seed.php';
        </script>");
-     
     } else {
 
       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
@@ -1523,7 +1510,7 @@ if ($result->num_rows > 0) {
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      $sql ="UPDATE `stock_in` INNER JOIN grading ON grading.stock_in_ID = stock_in.stock_in_ID INNER JOIN process_seed ON
+      $sql = "UPDATE `stock_in` INNER JOIN grading ON grading.stock_in_ID = stock_in.stock_in_ID INNER JOIN process_seed ON
        process_seed.grade_ID = grading.grade_ID SET stock_in.status = 'uncertified' WHERE process_seed.process_ID='$process_ID'";
 
       $statement = $con->prepare($sql);
@@ -1547,7 +1534,7 @@ if ($result->num_rows > 0) {
 
 
   function update_available_quantity_grading($grade_id, $available_quantity, $assigned_quantity)
-  {  
+  {
 
     global $con;
     $new_available_quantity = (int)$available_quantity - (int)$assigned_quantity;
@@ -1640,7 +1627,7 @@ if ($result->num_rows > 0) {
     '[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]',
     '[value-11]','[value-12]','[value-13]','[value-14]','[value-15]','[value-16]','[value-17]','[value-18]')";
   }
-  
+
 
 
 
@@ -1659,7 +1646,7 @@ if ($result->num_rows > 0) {
 
   // function register lab test
 
-  function register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc,$moisture_content,$oil_content, $grade, $crop, $variety, $farm)
+  function register_lab_test($stock_ID, $germ_perc, $shell_perc, $purity_perc, $defects_perc, $moisture_content, $oil_content, $grade, $crop, $variety, $farm)
   {
 
 
@@ -1694,9 +1681,9 @@ if ($result->num_rows > 0) {
       $user_ID = $_SESSION['user'];
       global $con;
 
-    
-     
-     
+
+
+
 
 
       $sql = "INSERT INTO `lab_test`(`test_ID`, `date`, `time`, `crop_ID`, `variety_ID`, 
@@ -2034,8 +2021,6 @@ if ($result->num_rows > 0) {
           header("Location:../class/pdf_handler.php? order_id=$order_id & debtor_id=$debtor_id & total=$trans_amount & payment_id=$payment_ID & type=$pdfType");
         }
       } else if ($amount > $balance) {
-
-        
       }
     }
   }

@@ -8,22 +8,22 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$approvalId = $_GET["approvalId"];
 $sql = "SELECT `approval_ID`, `depertment`, `action_name`, `action_id`, `description`, `date`, `time`, `requested_id`, 
-`requested_name`, `approved_ID`, `approval_code` FROM `approval` WHERE `approval_code` IS NULL ORDER BY `approval_ID` DESC";
-                            $result = $con->query($sql);
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $ID     = $row["approval_ID"];
-                                    $depertment = $row["depertment"];
-                                    $action_name     = $row["action_name"];
-                                    $action_id  = $row["action_id"];
-                                    $requested_name = $row['requested_name'];
-                                    $date = $row['date'];
-                                    $time = $row['time'];
-                                    $description = $row['description'];
-
-                                }
-                            }
+`requested_name`, `approved_ID`, `approval_code` FROM `approval` WHERE `approval_ID`='$approvalId' ORDER BY `approval_ID` DESC";
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $ID     = $row["approval_ID"];
+        $depertment = $row["depertment"];
+        $action_name     = $row["action_name"];
+        $action_id  = $row["action_id"];
+        $requested_name = $row['requested_name'];
+        $date = $row['date'];
+        $time = $row['time'];
+        $description = $row['description'];
+    }
+}
 
 if (empty($test)) {
 
@@ -75,8 +75,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-  
-   
+    <script type="text/javascript" src="assets/js/jsHandler/new.js"></script>
+
 
     </script>
 
@@ -485,73 +485,9 @@ if (in_array($position, $restricted)) {
 
 
                                                             <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Action Name:</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $action_name;?>">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Depertment:</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $depertment;?>">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Requested By :</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $requested_name;?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>date :</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $date;?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Time :</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require=""value="<?php echo $time;?>">
-                                                                    <input type="hidden" id="user" require=""value="<?php echo $_SESSION['user'];?>">
-                                                                    <input type="hidden" id="approval_id" placeholder="-" require=""value="<?php echo $ID;?>">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Description :</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <textarea name="" class="form-control" id="" cols="30" rows="3" ><?php echo $description;?></textarea>
 
 
-                                                                </div>
-                                                            </div>
-
-
-
-
-
-                                                            <div class="form-group row">
-
-
-                                                                <div class="modal-footer">
-                                                                    <a href="#" class="btn btn-success" id="approve_access" name="approve_access"><i class='icofont icofont-check'></i>Approve</a>
-                                                                    <a href="#" class="btn btn-danger" id="deny_access" name="deny_access"><i class='icofont icofont-not-allowed'></i>Deny</a>
-                                                                </div>
-
+                                                             
                                                             </div>
 
 
@@ -572,79 +508,87 @@ if (in_array($position, $restricted)) {
                                         </div>
 
                                         <div class="card">
-                                            <div class="card-header">
-                                                <h5>All current prices </h5>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+                                            <div class="card-block">
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>ID:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="approvalId" class="form-control" name="approvalId" placeholder="-" require="" value="<?php echo $ID; ?>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>depertment</th>
-
-                                                                <th>Acton Name</th>
-                                                                <th>Action Id</th>
-                                                                <th>Requested By</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-                                                          
-                                                          
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-
-                                                                    $ID     = $row["approval_ID"];
-                                                                    $depertment = $row["depertment"];
-                                                                    $action_name     = $row["action_name"];
-                                                                    $action_id  = $row["action_id"];
-                                                                    $requested_name = $row['requested_name'];
-                                                                    $date = $row['date'];
-                                                                    $time = $row['time'];
-                                                                    $description = $row['description'];
-                                                                
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-											    <td>$ID</td>
-												<td>$depertment</td>
-												<td>$action_name</td>
-												<td>$action_id</td>
-												<td>$requested_name</td>
-                                                <td>$date</td>
-												<td>$time</td>
-												<td><a href='grant_access_details.php? approvalId=$ID'  class='btn btn-success'><i class='icofont icofont-eye-alt'></i>View</td>
-												
-												
-												
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>Action Name:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $action_name; ?>">
+                                                    </div>
                                                 </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>Depertment:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $depertment; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>Requested By :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $requested_name; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>date :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $date; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>Time :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $time; ?>">
+                                                        <input type="hidden" id="user" require="" value="<?php echo $_SESSION['user']; ?>">
+                                                        <input type="hidden" id="approval_id" placeholder="-" require="" value="<?php echo $ID; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-4">
+                                                        <label>Description :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <textarea name="" class="form-control" id="" cols="30" rows="3"><?php echo $description; ?></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+
+
+                                                    <div class="modal-footer">
+                                                      
+                                                        <a href="#" class="btn btn-success" id="approve_access" name="approve_access"><i class='icofont icofont-check'></i>Approve</a>
+                                                        <a href="#" class="btn btn-danger" id="deny_access" name="deny_access"><i class='icofont icofont-not-allowed'></i>Deny</a>
+                                                    </div>
+
+                                                </div>
+
+
                                             </div>
+
                                         </div>
 
                                         <!-- Background Utilities table end -->

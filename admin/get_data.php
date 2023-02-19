@@ -10,10 +10,13 @@ if(isset($_POST["grantUserAccess"])){
 
 }
 if(isset($_POST["denyUserAccess"])){
-
+   $object = new main();
+   $object->admin_deny_requested_access($_POST['denyUserAccess']);
 
    
 }
+
+
 
 
 

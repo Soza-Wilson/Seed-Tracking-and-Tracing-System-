@@ -14,4 +14,26 @@ echo'
 
 }
 
+if(isset($_POST["checkApprovalCode"])){
+
+    $approvalCode = $_POST["checkApprovalCode"];
+    $sql="SELECT * FROM `approval` WHERE `approval_code`='$approvalCode'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+ 
+       echo'<input type="hidden" id="code_validity" class="form-control" placeholder="Enter code" require="" value="valid">';
+ 
+        
+    }
+ 
+    else{
+       echo'<input type="hidden" id="code_validity" class="form-control" placeholder="Enter code" require="" value="invalid">';
+ 
+ 
+    }
+ 
+ 
+ 
+ }
+
 ?>

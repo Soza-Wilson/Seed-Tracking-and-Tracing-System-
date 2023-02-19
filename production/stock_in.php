@@ -785,7 +785,7 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-12">
 
-                                                    <input id="external_quantity" type="text" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="">
+                                                    <input id="external_quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="">
 
 
 
@@ -894,7 +894,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Seed Receive Note #:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="">
                                                 </div>
                                             </div>
 
@@ -903,7 +903,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Bin card #:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                    <input type="number" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
                                                 </div>
                                             </div>
 
@@ -913,7 +913,7 @@ if (in_array($position, $restricted)) {
                                                     <label>number of bags :</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
                                                 </div>
                                             </div>
 

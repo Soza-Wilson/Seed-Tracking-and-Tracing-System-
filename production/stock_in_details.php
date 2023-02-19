@@ -50,6 +50,7 @@ if (!empty($stock_in_ID)) {
             $bags = $row["number_of_bags"];
             $quantity = $row["quantity"];
             $creditor = $row["name"];
+            $source=$row["source"];
             $user_requested = $row["fullname"];
             $date = $row["date"];
             $time = $row["time"];
@@ -96,7 +97,7 @@ if (!empty($stock_in_ID)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stockInDetails.js">
 
     </script>
 </head>
@@ -521,11 +522,11 @@ if (!empty($stock_in_ID)) {
 
 
 
-
-                                                                <div class="form-group row">
+                                               
+                                                                <div class="form-group row seed_details">
                                                                     <div class="col-sm-12">
                                                                         <select id="select_crop" name="crop" class="form-control" required="">
-                                                                            <option value="crop_not_selected">Select Crop</option>
+                                                                            <option value="0">Select Crop</option>
 
 
 
@@ -537,10 +538,10 @@ if (!empty($stock_in_ID)) {
 
                                                                 </div>
 
-                                                                <div class="form-group row">
+                                                                <div class="form-group row seed_details">
                                                                     <div class="col-sm-12">
                                                                         <select id="select_variety" name="variety" class="form-control" required="">
-                                                                            <option value="variety_not_selected">Select Variety</option>
+                                                                            <option value="0">Select Variety</option>
 
 
 
@@ -549,7 +550,7 @@ if (!empty($stock_in_ID)) {
 
                                                                 </div>
 
-                                                                <div class="form-group row">
+                                                                <div class="form-group row seed_details">
                                                                     <div class="col-sm-12">
                                                                         <select id="select_class" name="select_class" class="form-control" required="">
                                                                             <option value="0">Select class</option>
@@ -560,19 +561,28 @@ if (!empty($stock_in_ID)) {
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                                
 
                                                                 <div class="form-group row">
-
+                                                                <div class="col-sm-4">
+                                                                    <label>Quantity:</label>
+                                                                </div>
 
                                                                     <div class="col-sm-12">
 
-                                                                        <input id="external_quantity" type="text" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="">
+                                                                        <input id="quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="" value="<?php echo$quantity; ?>">
 
 
 
-                                                                    </div>
 
 
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-12">
+                                                                    <label id="warning_text"> <span >Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
+    </div>
 
                                                                 </div>
 
@@ -628,9 +638,12 @@ if (!empty($stock_in_ID)) {
                                                             </div>
 
                                                             <div class="form-group row">
+                                                            <div class="col-sm-4">
+                                                                    <label>Description:</label>
+                                                                </div>
 
                                                                 <div class="col-sm-12">
-                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
+                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="" value="<?php echo$description; ?>">
                                                                 </div>
 
 
@@ -648,7 +661,7 @@ if (!empty($stock_in_ID)) {
                                                                     <label>Seed Receive Note #:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo$SRN; ?>">
                                                                 </div>
                                                             </div>
 
@@ -657,7 +670,7 @@ if (!empty($stock_in_ID)) {
                                                                     <label>Bin card #:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                                    <input type="number" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo$bincard; ?>">
                                                                 </div>
                                                             </div>
 
@@ -666,7 +679,7 @@ if (!empty($stock_in_ID)) {
                                                                     <label>number of bags :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo$bags; ?>">
                                                                 </div>
                                                             </div>
 
@@ -697,10 +710,11 @@ if (!empty($stock_in_ID)) {
                                                         </div>
 
                                                         <div class="col-sm-4">
-                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="Enter code" require="">
+                                                            <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="Enter code" require="">
+                                                            <input type="text" id="code_validity" class="form-control" placeholder="Enter code" require="">
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-success"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-success" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -909,7 +923,7 @@ if (!empty($stock_in_ID)) {
                                         <label class="badge badge-primary ">Seed Source:</label>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                        <input type="text" class="form-control trans_details" name="seed_source" id="seed_source" required="" value="<?php echo $source; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
