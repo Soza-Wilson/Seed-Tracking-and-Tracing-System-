@@ -312,7 +312,7 @@ class main
     $sql = "SELECT `prices_ID` FROM `price` WHERE `crop_ID`='$crop' AND `variety_ID`='$variety'";
     $result =  $con->query($sql);
     $count = $result->num_rows;
-    if ($count === 1) {
+    if ($count ==1) {
 
 
 
@@ -710,33 +710,40 @@ class main
 
     // register transaction 
 
-
+   
 
     ///   update creditor funds account 
-    $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`= $creditor";
+    $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`='$creditor'";
     $result =  $con->query($sql);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         $account_funds = $row["account_funds"];
       }
     }
+    
+
+   
     $temp_funds = $account_funds - $calculated_amount;
+
+    echo ("<script> alert('$temp_funds');
+    </script>");
     $sql = "UPDATE `creditor` SET `account_funds`='$temp_funds' WHERE `creditor_ID`='$creditor'";
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $calculated_amount, $user_ID);
+    $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor,$temp_amount,$calculated_amount, $user_ID);
 
     echo ("<script> alert('New entry added');
+    window.location='stock_in.php';
        </script>");
   }
 
 
-  function admin_approval($department, $action_name, $action_id, $description, $requested_ID, $requested_name)
+  function admin_approval($approvalId, $department, $action_name, $action_id, $description, $requested_ID, $requested_name)
   {
 
-    $approval_ID  = $this->generate_user("approval");
+
     $date = date("Y-m-d");
     $time = date("H:i:s");
     global $con;
@@ -744,7 +751,7 @@ class main
     $sql = "INSERT INTO `approval`(`approval_ID`, `depertment`, `action_name`, 
   `action_id`, `description`, `date`, `time`, `requested_id`, 
   `requested_name`) VALUES
-   ('$approval_ID','$department','$action_name','$action_id','$description',
+   ('$approvalId','$department','$action_name','$action_id','$description',
    '$date','$time','$requested_ID','$requested_name')";
 
     $statement = $con->prepare($sql);
@@ -778,7 +785,7 @@ class main
     $statement->execute();
   }
 
-  function stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $calculated_amount, $user_ID)
+  function stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor,$transaction_price, $calculated_amount, $user_ID)
   {
 
 
@@ -787,10 +794,31 @@ class main
     global $con;
 
     $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
-    `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
-    ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor',' $calculated_amount',
+    `action_ID`, `C_D_ID`,`transaction_price`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
+    ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor','$transaction_price','$calculated_amount',
     '$date','$time','payment_pending','$user_ID')";
 
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+   
+
+
+
+
+  function update_stock_in($stockInId, $certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $quantity, $description, $fileDirectory,$creditorId)
+  {
+ 
+    global $con;
+    
+    //transaction details 
+
+    $transAmount = $this->get_transacton_details($stockInId);
+    $this->delete_transaction($stockInId,$transAmount,$creditorId);
+
+    $sql = "UPDATE `stock_in` SET`crop_ID`='$crop',`variety_ID`='$variety',`class`='$class',`SLN`='$srn',`bincard`='$binCardNumber',`number_of_bags`='$numberOfBags',`quantity`='$quantity',`available_quantity`='$quantity',
+      `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$certificate' WHERE `stock_in_ID`='$stockInId'";
     $statement = $con->prepare($sql);
     $statement->execute();
   }
@@ -798,28 +826,51 @@ class main
 
 
 
+  function get_transacton_details($actionId){
 
+    global $con;
 
-  function update_stock_in($source,$stock_in_ID,$certificate,$crop,$variety,$class,$srn,$bincard,$bags,$quantity,$description,$dir)
-  {
-    $sql = "";
-    if ($source == "External") {
-      $sql = "UPDATE `stock_in` SET`crop_ID`='[value-7]',`variety_ID`='[value-9]',`class`='[value-10]',`SLN`='[value-11]',`bincard`='[value-12]',`number_of_bags`='[value-13]',`quantity`='[value-14],
-      `description`='[value-20]',`supporting_dir`='[value-21]',`certificate_ID`='[value-3]' WHERE `stock_in_ID`='[value-1]'";
-    } else {
+   $sql="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `action_ID`='$actionId'";
+   $result = $con->query($sql);
+   if ($result->num_rows > 0) {
+       while ($row = $result->fetch_assoc()) {
+           $amount = $row["amount"];
+         
+       }
+       return $amount;
 
-      $sql = "UPDATE `stock_in` SET `SLN`='[value-11]',`bincard`='[value-12]',`number_of_bags`='[value-13]',`quantity`='[value-14],
-      `description`='[value-20]',`supporting_dir`='[value-21]', WHERE `stock_in_ID`='[value-1]'";
-    }
   }
 
+  
 
 
 
+  }
+
+  function delete_transaction($actionId,$transAmount,$creditorId){
+
+
+    global $con;
+
+    //Update creditor Account 
+
+    $sql = "UPDATE `creditor` SET `account_funds`=account_funds+$transAmount WHERE `creditor_ID`='$creditorId'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    //Delete transaction 
+
+    $sql="DELETE FROM `transaction` WHERE `action_ID`='$actionId'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+  
 
 
 
-
+  }
 
 
 

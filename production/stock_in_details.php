@@ -29,7 +29,7 @@ if (!empty($stock_in_ID)) {
 
 
     $sql = "SELECT `stock_in_ID`, `certificate_ID`, `farm_ID`,creditor.name, user.fullname,
-    stock_in.creditor_ID, stock_in.source, `crop`, `status`, 
+    stock_in.creditor_ID, stock_in.source,stock_in.crop_ID,stock_in.variety_ID,stock_in.certificate_ID, `crop`, `status`, 
     `variety`, `class`, `SLN`, `bincard`, 
     `number_of_bags`, `quantity`, `used_quantity`,
      `available_quantity`, `processed_quantity`, 
@@ -43,13 +43,17 @@ if (!empty($stock_in_ID)) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $crop = $row["crop"];
+            $cropId=$row["crop_ID"];
+            $varietyId=$row["variety_ID"];
             $variety = $row["variety"];
             $class = $row["class"];
+            $seedCertificate=$row["certificate_ID"];
             $SRN = $row["SLN"];
             $bincard = $row["bincard"];
             $bags = $row["number_of_bags"];
             $quantity = $row["quantity"];
             $creditor = $row["name"];
+            $creditorId= $row["creditor_ID"];
             $source=$row["source"];
             $user_requested = $row["fullname"];
             $date = $row["date"];
@@ -670,7 +674,7 @@ if (!empty($stock_in_ID)) {
                                                                     <label>Bin card #:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="number" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo$bincard; ?>">
+                                                                    <input type="number" id="bin_card" class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo$bincard; ?>">
                                                                 </div>
                                                             </div>
 
@@ -692,6 +696,7 @@ if (!empty($stock_in_ID)) {
                                                                 <div class="col-sm-12">
                                                                     <labe>Supporting documents :</label>
                                                                         <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                        <input id="directory" type="hidden" class="form-control" name="image" placeholder="Phone number" value="<?php echo"$dir"?>">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
@@ -711,7 +716,10 @@ if (!empty($stock_in_ID)) {
 
                                                         <div class="col-sm-4">
                                                             <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="Enter code" require="">
-                                                            <input type="text" id="code_validity" class="form-control" placeholder="Enter code" require="">
+                                                          <div id="code_validity">
+ 
+
+                                                          </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <button class="btn btn-success" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
@@ -814,6 +822,7 @@ if (!empty($stock_in_ID)) {
 
                                                         <input type="hidden" name="customer_name" id="customer_name">
                                                         <input type="hidden" name="order_id" id="order_id">
+                                                       <input type="hidden" name="approvalId" id="approvalId">
 
                                                         <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
                                                         <input type="hidden" name="oustanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
@@ -861,21 +870,37 @@ if (!empty($stock_in_ID)) {
                                         <label class="badge badge-primary">Crop:</label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $crop; ?>">
+                                       
+                                        <select class="form-control trans_details" id="crop">
+                                            <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
+                                            
+                                        <select>
+                                            <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID;?>">
+                                            <input type="text" id="creditorId" value="<?php echo $creditorId;?>">
                                     </div>
 
                                     <div class="col-sm-1">
                                         <label class="badge badge-primary">Variety:</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $variety; ?>">
+
+                                    <select class="form-control trans_details" id="variety">
+                                            <option value="<?php echo $varietyId;?>"><?php echo $variety; ?></option>
+                                            
+                                        <select>
+                                    
                                     </div>
 
                                     <div class="col-sm-1">
                                         <label class="badge badge-primary">Class:</label>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $class; ?>">
+
+                                    <select class="form-control trans_details" id="class">
+                                            <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
+                                            
+                                        <select>
+                                      
                                     </div>
 
                                 </div>
@@ -890,6 +915,8 @@ if (!empty($stock_in_ID)) {
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $quantity; ?>">
                                     </div>
+                                    
+                                   
                                     <div class="col-sm-1">
                                         <label class="badge badge-primary ">Seed Receive Note #:</label>
                                     </div>
@@ -907,6 +934,14 @@ if (!empty($stock_in_ID)) {
 
 
 
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">certificate:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control trans_details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $seedCertificate; ?>">
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group row">

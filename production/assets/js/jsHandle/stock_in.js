@@ -1,19 +1,87 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    $("#save").prop("disabled", true);
+   
+    $(".warning_text").css("color", "red").hide();
+    $("#warning_text").css("color", "red")
+
+
+    $(".general").on("input", function () {
+
+        let data = $('#creditor_source').find(':selected');
+
+        if (data.val() == "source_not_selected") {
+
+            alert("Please add seed information first!!!");
+
+        }
+ 
+
+        //Checking if all required external seed data has been added 
+        else if (data.val() == "External") {
+
+          
+
+            if(  $(".external-seed").val()=='0'||(".external-seed").val()=='not_selected'){
+
+                alert("Please add seed information first!!!");
+
+
+            }
+
+            if($("#external_quantity").val()==""){
+
+                alert("Please add seed quantity!!!");
+
+            }
+     
+
+        }
+
+         //Checking if all required internal seed data has been added 
+        else if (data.val() == "MUSECO") {
+
+            if ($("#search_farm_result").val() == "0") {
+
+                alert("Select Farm ID before adding information here !!")
+            }
+
+
+            if ($("#farm_quantity").val() == "") {
+
+                alert("Please add Seed quantity before adding information here !!")
+            }
+              
+        }
+
+      
+
+       
+
+    });
+
+      
+   
+
+   
+   
+
+
+
 
     const loaded = "1";
 
-$.post('get_products.php', {
-loaded: loaded
+    $.post('get_products.php', {
+        loaded: loaded
 
-}, data => {
-$('#select_crop').html(data);
-
-
-
-});
+    }, data => {
+        $('#select_crop').html(data);
 
 
-    $("#creditor_search").on("input", function() {
+
+    });
+
+
+    $("#creditor_search").on("input", function () {
 
         var data = $('#creditor_source').find(':selected');
 
@@ -28,7 +96,7 @@ $('#select_crop').html(data);
             $.post('get_creditors.php', {
                 data: data,
                 result_value: result_value
-            }, function(data) {
+            }, function (data) {
                 $('#search_result').html(data);
 
             })
@@ -41,7 +109,7 @@ $('#select_crop').html(data);
 
 
 
-    $("#farm_search").on("input", function() {
+    $("#farm_search").on("input", function () {
 
         var farm_value = $('#farm_search').val();
         var grower_value = $('#search_result').find(':selected');
@@ -50,7 +118,7 @@ $('#select_crop').html(data);
         $.post('get_creditors.php', {
             farm_value: farm_value,
             grower_data: grower_data
-        }, function(data) {
+        }, function (data) {
             $('#search_farm_result').html(data);
 
 
@@ -62,7 +130,7 @@ $('#select_crop').html(data);
     });
 
 
-    $("#search_certificate").on("input", function() {
+    $("#search_certificate").on("input", function () {
 
 
         var stockIn_quantity = $('#external_quantity').val();
@@ -72,7 +140,7 @@ $('#select_crop').html(data);
         var class_value = $('#select_class').val();
 
 
-       
+
 
 
 
@@ -82,7 +150,7 @@ $('#select_crop').html(data);
             crop_value: crop_value,
             variety_value: variety_value,
             class_value: class_value
-        }, function(data) {
+        }, function (data) {
             $('#certificate').html(data);
 
 
@@ -91,20 +159,20 @@ $('#select_crop').html(data);
 
     });
 
-    $('#select_crop').change(function() {
+    $('#select_crop').change(function () {
 
-       
+
         let crop_value = $('#select_crop').val();
-       
-       $.post('get_products.php', {
-           crop_value: crop_value
-          
-       }, data => {
-           $('#select_variety').html(data);
+
+        $.post('get_products.php', {
+            crop_value: crop_value
+
+        }, data => {
+            $('#select_variety').html(data);
 
 
 
-       });
+        });
 
 
 
@@ -112,7 +180,7 @@ $('#select_crop').html(data);
     });
 
 
-    $('#creditor_source').change(function() {
+    $('#creditor_source').change(function () {
 
 
         var data = $('#creditor_source').find(':selected');
@@ -120,6 +188,8 @@ $('#select_crop').html(data);
         if (data.val() == "source_not_selected") {
             alert("please select source ");
         } else if (data.val() == "MUSECO") {
+            $("#external").hide();
+            $("#internal").show();
 
             document.getElementById('creditor_name').readOnly = true;
             document.getElementById('creditor_email').readOnly = true;
@@ -131,13 +201,16 @@ $('#select_crop').html(data);
             $.post('get_creditors.php', {
                 search_value: search_value,
                 data: data
-            }, function(data) {
+            }, function (data) {
 
                 $('#search_result').html(data);
 
             })
 
         } else if (data.val() == "External") {
+
+            $("#internal").hide();
+            $("#external").show();
 
             document.getElementById('creditor_name').readOnly = false;
             document.getElementById('creditor_email').readOnly = false;
@@ -151,14 +224,14 @@ $('#select_crop').html(data);
 
 
 
-    $('#search_farm_result').change(function() {
+    $('#search_farm_result').change(function () {
 
         var data = $('#search_farm_result').find(':selected');
         var search_farm_result = data.val();
 
         $.post('get_creditors.php', {
             search_farm_result: search_farm_result
-        }, function(data) {
+        }, function (data) {
 
 
 
@@ -211,6 +284,8 @@ $('#select_crop').html(data);
 
 
     });
+
+
 
 
 

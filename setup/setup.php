@@ -48,13 +48,13 @@ if ($database === true) {
 
   mysqli_query($con, $sql);
 
-//// Approval table 
+  //// Approval table 
 
-$sql="CREATE TABLE approval(approval_ID varchar(100) PRIMARY KEY, depertment varchar(100),
+  $sql = "CREATE TABLE approval(approval_ID varchar(100) PRIMARY KEY, depertment varchar(100),
 action_name varchar(100),description varchar(100),date date,time varchar(100),requested_id varchar(100),
- requested_name varchar(100),action_id varchar(100),approved_ID varchar(100), approval_code varchar(100), FOREIGN KEY(approved_ID) REFERENCES user(user_ID))";
+ requested_name varchar(100),action_id varchar(100),approved_ID varchar(100), approval_code varchar(100), status varchar(100), FOREIGN KEY(approved_ID) REFERENCES user(user_ID))";
 
-mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
   ///creditor table (goods in table. table type will specfy the source type)
 
 
@@ -137,7 +137,8 @@ type varchar(100),
 action_name varchar(100),
 action_ID varchar(100),
 C_D_ID varchar(100),
-amount varchar(100),
+transaction_price INT,
+amount INT,
 trans_date date,
 trans_time varchar(100),
 
@@ -297,7 +298,7 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
 
 
   mysqli_query($con, $sql);
-  
+
   // process type table 
 
   $sql = "CREATE TABLE process_type(process_type_ID varchar(100) PRIMARY KEY,
@@ -307,10 +308,10 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                                     trash_quantity INT, 
                                     process_type varchar(100),
                                     FOREIGN KEY(process_ID) REFERENCES process_seed(process_ID))";
-   mysqli_query($con, $sql);
+  mysqli_query($con, $sql);
 
 
-         /// instection 
+  /// instection 
 
   $sql = "CREATE TABLE inspection( inspection_ID varchar(100) PRIMARY KEY,
    date varchar(100),

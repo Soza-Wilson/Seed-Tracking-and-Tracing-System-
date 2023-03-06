@@ -279,7 +279,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
+                                    <a href="set_buy_prices.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback prices</span>
                                         <span class="pcoded-mcaret"></span>

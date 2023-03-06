@@ -421,11 +421,9 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Stock in</a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                           
+                                            <li class="breadcrumb-item"><a href="stock_in.ph">Stock in</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -444,7 +442,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Add new creditor </button>
+                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-user"></i>new creditor </button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -530,7 +528,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="card-header">
                                                         <h5>Creditor </h5>
 
-                                                        <div ">
+                                                        <div>
                                                          
 
                                                         </div>
@@ -554,6 +552,7 @@ if (in_array($position, $restricted)) {
 
 
                                                                     </select>
+                                                                    <label id="warning_source" class="warning_text"> <span >Please select seed seed source <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
 
                                                             </div>
@@ -579,6 +578,8 @@ if (in_array($position, $restricted)) {
 
 
                                                                     </select>
+
+                                                                    <label id="warning_creditor"  class="warning_text"> <span >Please select Creditor <i class="icofont icofont-warning"></i></span></label>
 
                                                                 </div>
 
@@ -611,7 +612,7 @@ if (in_array($position, $restricted)) {
                                     </div>
 
                                    
-                                    <div class="card">
+                                    <div class="card" id="internal">
                                         <div class="card-header">
                                             <h5 id="heading">Select farm ( Source internal )</h5>
 
@@ -637,6 +638,7 @@ if (in_array($position, $restricted)) {
 
 
                                                     </select>
+                                                    <label id="warning_farm" class="warning_text"> <span >Please select farm ID <i class="icofont icofont-warning"></i></span></label>
 
                                                 </div>
 
@@ -697,11 +699,13 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-12">
 
-                                                    <input id="farm_quantity" type="text" class="form-control" name="farm_quantity" placeholder="Enter Quantity" require="">
+                                                    <input id="farm_quantity" type="text" class="form-control internal" name="farm_quantity" placeholder="Enter Quantity" require="">
+                                                    <label id="warning_farm_quantity" class="warning_text"> <span >Please add quantity <i class="icofont icofont-warning"></i></span></label>
 
 
 
                                                 </div>
+                                               
 
 
 
@@ -712,7 +716,7 @@ if (in_array($position, $restricted)) {
                                                     <label>Physical address :</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <textarea class="form-control" id="farm_physical_address">
+                                                    <textarea class="form-control internal" id="farm_physical_address">
                                                                                 </textarea>
                                                 </div>
                                             </div>
@@ -729,7 +733,7 @@ if (in_array($position, $restricted)) {
                                     <!-- Input Grid card start -->
 
 
-                                    <div class="card">
+                                    <div class="card" id="external">
                                         <div class="card-header">
                                             <h5>Select seed details ( Source external )</h5>
 
@@ -744,13 +748,14 @@ if (in_array($position, $restricted)) {
 
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <select id="select_crop" name="crop" class="form-control" required="">
+                                                    <select id="select_crop" name="crop" class="form-control external-seed" required="">
                                                         
 
 
 
 
                                                     </select>
+                                                    <label id="warning_crop" class="warning_text"> <span >Please select Crop <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
 
@@ -758,25 +763,27 @@ if (in_array($position, $restricted)) {
 
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <select id="select_variety" name="variety" class="form-control" required="">
-                                                        <option value="variety_not_selected">Select Variety</option>
+                                                    <select id="select_variety" name="variety" class="form-control external-seed" required="">
+                                                        <option value="0">Select Variety</option>
 
 
 
                                                     </select>
+                                                    <label id="warning_variety" class="warning_text"> <span >Please select variety<i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <select id="select_class" name="select_class" class="form-control" required="">
+                                                    <select id="select_class" name="select_class" class="form-control external-seed" required="">
                                                         <option value="0">Select class</option>
                                                         <option value="basic">Basic</option>
                                                         <option value="pre_basic">Pre-Basic</option>
                                                         <option value="certified">Certified</option>
 
                                                     </select>
+                                                    <label id="warning_class" class="warning_text"> <span >Please select seed class<i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
@@ -786,6 +793,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="col-sm-12">
 
                                                     <input id="external_quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="">
+                                                    <label id="warning_external_quantity" class="warning_text"> <span >Please add quantity <i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -804,7 +812,7 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-6">
 
-                                                    <select id="certificate" name="certificate" class="form-control" required="">
+                                                    <select id="certificate" name="certificate" class="form-control external-seed" required="">
                                                         <option value="no_certificate_selected">Select Certificate</option>
                                                         <option value="no_certificate_selected">-</option>
 
@@ -814,6 +822,7 @@ if (in_array($position, $restricted)) {
 
 
                                                     </select>
+                                                    <label id="warning_certificate" class="warning_text"> <span >Please select certificate <i class="icofont icofont-warning"></i></span></label>
 
                                                 </div>
 
@@ -833,8 +842,8 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-12">
 
-                                                    <a href="add_certificate.php" class="btn btn-success">
-                                                        Add New certificate
+                                                    <a href="add_certificate.php" class="btn btn-success"><i class="icofont icofont-edit-alt"></i>
+                                                        New certificate
 
                                                     </a>
 
@@ -854,7 +863,7 @@ if (in_array($position, $restricted)) {
 
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Item to stock</h5>
+                                            <h5>Other Details</h5>
 
 
                                         </div>
@@ -876,7 +885,8 @@ if (in_array($position, $restricted)) {
                                             <div class="form-group row">
 
                                                 <div class="col-sm-12">
-                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
+                                                    <input id="description" type="text" class="form-control general" name="description" placeholder="description" require="">
+                                                    <label id="warning_description" class="warning_text"> <span >Please add description <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
 
@@ -894,7 +904,8 @@ if (in_array($position, $restricted)) {
                                                     <label>Seed Receive Note #:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                    <input type="number" id="srn" class="form-control general" name="srn" placeholder="-" require="">
+                                                    <label id="warning_srn" class="warning_text"> <span >Please add Seed Receive Note <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
@@ -903,7 +914,8 @@ if (in_array($position, $restricted)) {
                                                     <label>Bin card #:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="number" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                    <input type="number" id="bin_card " class="form-control general" name="bin_card" placeholder="-" require="">
+                                                    <label id="warning_bin_card" class="warning_text"> <span >Please add Bin Card Number <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
@@ -913,7 +925,8 @@ if (in_array($position, $restricted)) {
                                                     <label>number of bags :</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                    <input type="number" id="number_of_bags" class="form-control general" name="number_of_bags" placeholder="-" require="">
+                                                    <label id="warning_bags" class="warning_text"> <span >Please add number of bags  <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
@@ -925,6 +938,7 @@ if (in_array($position, $restricted)) {
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <input type="file" class="form-control" name="image" id="image">
+                                                    <label id="warning_dir" class="warning_text"> <span >Please  upload supporting documents <i class="icofont icofont-warning"></i></span></label>
                                                 </div class="form-group row" require="">
 
 
@@ -934,21 +948,11 @@ if (in_array($position, $restricted)) {
 
                                                 </br></br></br>
 
-
                                                 <div>
 
+                                              
                                                 </div>
-
-                                                <br>
-                                                .
-                                                <div class="form-group">
-
-
-                                                    <input type="submit" name="add_to_stock" value="Add to stock" class="btn waves-effect waves-light btn-success btn-block" />
-                                                    <input type="submit" name="cancle_stock_in" value="cancle" class="btn waves-effect waves-light btn-danger  btn-block" />
-
-                                                </div>
-
+                                                
 
 
 
@@ -958,6 +962,30 @@ if (in_array($position, $restricted)) {
 
 
                                             </div>
+
+                                            <div class="form-group">
+                                            <div class="col-sm-6" >
+                                                      <label id="warning_text"> <span >Enter required information to continue <i class="icofont icofont-warning"></i></span></label>
+                                            </div>
+
+                                                </div>
+
+
+                                            <div class="form-group">
+
+                                            <div class="col-sm-1" >
+
+                                                <!-- <button type="submit" name="add_to_stock" id="save" class="btn waves-effect waves-light btn-success btn-block"><i class="icofont icofont-save"></i>save</button> -->
+                                                <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-block"><i class="icofont icofont-save"></i>save</button>
+
+
+
+    
+    </div>    
+                                                  
+
+                                                </div>
+
 
                                         </div>
                                         <!-- Input Grid card end -->
@@ -1096,8 +1124,7 @@ if (isset($_FILES['image'])) {
 
 if(isset($_POST['add_creditor'])){
 
-    echo ("<script> alert('certificate added!');
-                                </script>");
+   
 
     $object = new main();
     $object->add_creditor("External",$_POST['creditor_name'],$_POST['creditor_phone'], $_POST['creditor_email'],$_POST['creditor_description'],"dir");
