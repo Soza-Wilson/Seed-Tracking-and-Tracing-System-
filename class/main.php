@@ -312,7 +312,7 @@ class main
     $sql = "SELECT `prices_ID` FROM `price` WHERE `crop_ID`='$crop' AND `variety_ID`='$variety'";
     $result =  $con->query($sql);
     $count = $result->num_rows;
-    if ($count ==1) {
+    if ($count == 1) {
 
 
 
@@ -645,7 +645,7 @@ class main
 
 
 
-  function stock_in($creditor, $certificate, $farm, $status, $crop, $variety, $class, $source, $srn, $bincard, $bags, $quantity, $description, $supporting_dir)
+  function stock_in($creditor, $certificate, $farm, $status, $crop, $variety, $class, $source, $srn, $bincard, $bags, $quantity, $description, $supporting_dir, $user)
   {
 
 
@@ -653,7 +653,6 @@ class main
 
 
     $stock_ID = $this->generate_user("stock");
-    $user_ID = $_SESSION['user'];
     $date = date("Y-m-d");
     $time = date("H:i:s");
     global $con;
@@ -661,6 +660,7 @@ class main
     if ($source == "External") {
 
       $available_quantity = $quantity;
+      $this->use_certificate($certificate, $available_quantity);
     } else if ($source == "MUSECO") {
 
       $available_quantity = 0;
@@ -670,7 +670,7 @@ class main
     $sql = "INSERT INTO `stock_in`(`stock_in_ID`, `user_ID`, `certificate_ID`, `farm_ID`,
      `creditor_ID`, `source`, `crop_ID`, `status`, `variety_ID`, `class`, `SLN`,
       `bincard`, `number_of_bags`, `quantity`, `used_quantity`, `available_quantity`,`processed_quantity`,`grade_outs_quantity`, `trash_quantity`,
-       `description`, `supporting_dir`, `date`, `time`) VALUES ('$stock_ID','$user_ID',
+       `description`, `supporting_dir`, `date`, `time`) VALUES ('$stock_ID','$user',
        '$certificate','$farm','$creditor','$source','$crop','$status','$variety','$class',
        '$srn','$bincard','$bags','$quantity',0,$available_quantity,0,0,0,'$description',
        '$supporting_dir','$date','$time')";
@@ -710,7 +710,7 @@ class main
 
     // register transaction 
 
-   
+
 
     ///   update creditor funds account 
     $sql = "SELECT * FROM `creditor` WHERE `creditor_ID`='$creditor'";
@@ -720,24 +720,75 @@ class main
         $account_funds = $row["account_funds"];
       }
     }
-    
 
-   
+
+
     $temp_funds = $account_funds - $calculated_amount;
 
-    echo ("<script> alert('$temp_funds');
-    </script>");
+
     $sql = "UPDATE `creditor` SET `account_funds`='$temp_funds' WHERE `creditor_ID`='$creditor'";
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor,$temp_amount,$calculated_amount, $user_ID);
-
-    echo ("<script> alert('New entry added');
-    window.location='stock_in.php';
-       </script>");
+    $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $temp_amount, $calculated_amount, $user);
   }
+
+
+
+  function stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user_ID)
+  {
+
+
+    $date = date("Y-m-d");
+    $time = date("H:i:s");
+    global $con;
+
+    $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
+    `action_ID`, `C_D_ID`,`transaction_price`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
+    ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor','$transaction_price','$calculated_amount',
+    '$date','$time','payment_pending','$user_ID')";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+
+
+
+
+
+
+
+
+
+  function use_certificate($certificateID, $quantity)
+  {
+
+    global $con;
+
+
+    $sql = "UPDATE `certificate` SET `available_quantity`= available_quantity-$quantity WHERE `lot_number`='$certificateID'";
+
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   function admin_approval($approvalId, $department, $action_name, $action_id, $description, $requested_ID, $requested_name)
@@ -759,6 +810,16 @@ class main
   }
 
 
+
+
+
+
+
+
+
+
+  /// 
+
   function admin_confirm_approval($approvalId, $approvalCode, $userId)
   {
     global $con;
@@ -767,6 +828,7 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
   }
+
 
   function deny_acccess($approvalId)
   {
@@ -785,37 +847,37 @@ class main
     $statement->execute();
   }
 
-  function stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor,$transaction_price, $calculated_amount, $user_ID)
+
+
+
+
+
+
+
+  function update_stock_in($stockInId, $old_certificate, $new_certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $quantity, $description, $fileDirectory, $creditorId, $status)
   {
 
-
-    $date = date("Y-m-d");
-    $time = date("H:i:s");
     global $con;
 
-    $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
-    `action_ID`, `C_D_ID`,`transaction_price`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
-    ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor','$transaction_price','$calculated_amount',
-    '$date','$time','payment_pending','$user_ID')";
-
-    $statement = $con->prepare($sql);
-    $statement->execute();
-  }
-
-   
-
-
-
-
-  function update_stock_in($stockInId, $certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $quantity, $description, $fileDirectory,$creditorId)
-  {
- 
-    global $con;
-    
     //transaction details 
 
     $transAmount = $this->get_transacton_details($stockInId);
-    $this->delete_transaction($stockInId,$transAmount,$creditorId);
+    $certificate = $old_certificate;
+
+    if ($status == "not_null") {
+
+      $this->use_certificate($old_certificate, $quantity);
+
+      $certificate = $new_certificate;
+    }
+
+    //Checking status to see update type( != 4 and >1 restore and update creditor account, transaction and certificate)
+    //Checking status to see update type( 4 restore old certificate and update new certificate)
+    //Don't mind my code, at this point I'm starting to loose my sainity. 
+
+
+
+
 
     $sql = "UPDATE `stock_in` SET`crop_ID`='$crop',`variety_ID`='$variety',`class`='$class',`SLN`='$srn',`bincard`='$binCardNumber',`number_of_bags`='$numberOfBags',`quantity`='$quantity',`available_quantity`='$quantity',
       `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$certificate' WHERE `stock_in_ID`='$stockInId'";
@@ -823,32 +885,8 @@ class main
     $statement->execute();
   }
 
-
-
-
-  function get_transacton_details($actionId){
-
-    global $con;
-
-   $sql="SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `action_ID`='$actionId'";
-   $result = $con->query($sql);
-   if ($result->num_rows > 0) {
-       while ($row = $result->fetch_assoc()) {
-           $amount = $row["amount"];
-         
-       }
-       return $amount;
-
-  }
-
-  
-
-
-
-  }
-
-  function delete_transaction($actionId,$transAmount,$creditorId){
-
+  function restore_before_stock_in_update($actionId, $transAmount, $creditorId, $certificate, $quntity)
+  {
 
     global $con;
 
@@ -859,18 +897,100 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    //Delete transaction 
+    //Update transaction details, will change the transaction amount and price 
 
-    $sql="DELETE FROM `transaction` WHERE `action_ID`='$actionId'";
+    // $sql = "DELETE FROM `transaction` WHERE `action_ID`='$actionId'";
 
-    $statement = $con->prepare($sql);
-    $statement->execute();
 
-  
+
+
+    //If quantity or crop details has been changed when updating, we will need to update the certificate as well
+
+
+
+
+
+    //Restore Creditor account
+
+
+
+
+    //Restore certificate 
+
+
+
 
 
 
   }
+
+  function stock_in_update_transaction($transAmount, $creditorId,$stockInId)
+  {
+
+    global $con;
+
+    //Restore old account funds amount
+
+    $sql = "UPDATE `creditor` SET `account_funds`=account_funds+$transAmount WHERE `creditor_ID`='$creditorId'";
+
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+
+      $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$transAmount WHERE `creditor_ID`='$creditorId'";
+
+      $statement = $con->prepare($sql);
+     if($statement->execute()){
+
+      //Update transaction details 
+
+      $sql="UPDATE `transaction` SET `transaction_price`='[value-6]',`amount`='[value-7]',` WHERE 1";
+
+
+     }
+    }
+
+
+    //Update with new amount
+  }
+
+  function stock_in_update_creditor()
+  {
+
+   
+
+
+  }
+
+  function stock_in_update_certificate()
+  {
+  }
+
+
+
+
+ function calculate_amount(){
+
+
+ }
+
+
+  function get_transacton_details($actionId)
+  {
+
+    global $con;
+
+    $sql = "SELECT `transaction_ID`, `type`, `action_name`, `action_ID`, `C_D_ID`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID` FROM `transaction` WHERE `action_ID`='$actionId'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $amount = $row["amount"];
+      }
+      return $amount;
+    }
+  }
+
+
+
 
 
 
@@ -1243,9 +1363,9 @@ class main
   // production certicate functions 
 
 
-  function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory)
+  function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory,$user)
   {
-    $user_ID = $_SESSION['user'];
+    
     $added_date = date("d-m-Y");
     global $con;
 
@@ -1255,13 +1375,12 @@ class main
                       `available_quantity`, `assigned_quantity`, `status`, `directory`, `user_ID`) VALUES 
                       ('$lot_number','$crop','$variety','$class','$type','$source','$source_name',
                       '$date_tested','$expire_date','$added_date','$certificate_quantity',
-                      '$certificate_quantity','$certificate_quantity','available','$directory','$user_ID')";
+                      '$certificate_quantity','$certificate_quantity','available','$directory','$user')";
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    echo ("<script> alert('certificate added!');
-                                </script>");
+   
   }
 
 

@@ -38,7 +38,7 @@ class production
             }
         } else {
 
-            return "not working";
+            return "Certificate not found";
         }
     }
 

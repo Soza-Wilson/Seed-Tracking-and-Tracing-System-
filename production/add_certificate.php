@@ -25,7 +25,7 @@ if (in_array($position, $restricted)) {
 ?>
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -60,89 +60,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-             const loaded = "1";
-
-            $.post('get_products.php', {
-                    loaded: loaded
-                   
-                }, data => {
-                    $('#select_crop').html(data);
-
-
-
-                });
-
-
-            $("#quantity").on("input", function() {
-                var result = $("#quantity").val();
-                var result2 = $("#price_per_kg").val();
-                var total = result * result2;
-
-
-                $('#total_price').val(total);
-                // Print entered value in a div box
-                //$("#result").text($(this).val());
-            });
-
-
-
-            $('#select_crop').change(function() {
-
-                 let crop_value = $('#select_crop').val();
-               
-                $.post('get_products.php', {
-                    crop_value: crop_value
-                   
-                }, data => {
-                    $('#select_variety').html(data);
-
-
-
-                });
-
-               
-            });
-
-            $('#select_class').change(function() {
-
-                var crop_data = $('#select_crop').val();
-                var variety_data = $('#select_variety').val();
-                var class_data = $('#select_class').val();
-
-                if (crop_data == 0) {
-
-                    alert('Select crop and variety');
-
-
-                } else if (variety_data == 0) {
-
-                    alert('Select crop and variety');
-
-                } else {
-
-                    $.post('get_prices.php', {
-                        crop_data: crop_data,
-                        variety_data: variety_data,
-                        class_data: class_data
-                    }, function(data) {
-
-                        $('#price_per_kg').val(data);
-
-                    });
-                }
-
-
-
-
-            });
-
-
-
-        });
-    </script>
+    <script type="text/javascript" src="assets/js/jsHandle/add_certificate_.js"></script>
+   
 
 
 </head>
@@ -212,17 +131,9 @@ if (in_array($position, $restricted)) {
                             <i class="ti-menu"></i>
                         </a>
                         <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
-                        <a href="index.html">
+                        <a href="">
                             <span>PRODUCTION</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -235,15 +146,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -251,48 +154,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -376,6 +238,13 @@ if (in_array($position, $restricted)) {
                                     <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="grading.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -538,18 +407,17 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">certificate </h5>
+                                            <h5 class="m-b-10">New certificate </h5>
 
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Add certificate</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="php_certificate.php">Add certificate</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -570,13 +438,13 @@ if (in_array($position, $restricted)) {
                                     <!-- Input Grid card start -->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>add certificate </h5>
+                                            <h5>Register Certificate </h5>
 
 
                                         </div>
                                         <div class="card-block">
 
-                                            <form action="add_certificate.php" method="POST" enctype="multipart/form-data">
+                                            <!-- <form action="add_certificate.php" method="POST" enctype="multipart/form-data"> -->
 
 
 
@@ -598,17 +466,19 @@ if (in_array($position, $restricted)) {
 
 
                                                         </select>
+                                                        <label id="warning_crop" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <select id="select_variety" name="select_variety" class="form-control" required="">
-                                                            <option value="variety_not_selected">Select Variety</option>
+                                                            <option value="not_selected">Select Variety</option>
 
 
 
                                                         </select>
+                                                        <label id="warning_variety" class="warning_text"> <span>Please select seed variety<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                 </div>
@@ -621,17 +491,19 @@ if (in_array($position, $restricted)) {
                                                             <option value="certified">Certified</option>
 
                                                         </select>
+                                                        <label id="warning_class" class="warning_text"> <span>Please select seed class<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <select id="select_class" name="certificate_type" class="form-control" required="">
+                                                        <select id="certificate_type" name="certificate_type" class="form-control" required="">
                                                             <option value="0">Select type</option>
                                                             <option value="parent">Parent certificate </option>
                                                             <option value="male">male certificate</option>
                                                             <option value="female">female certificate</option>
 
                                                         </select>
+                                                        <label id="warning_certificate_type" class="warning_text"> <span>Please select Certificate type<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -648,6 +520,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-12">
                                                         <input id="lot_number" type="text" class="form-control" name="lot_number" placeholder="Lot number" require="">
+                                                        <label id="warning_lot_number" class="warning_text"> <span>Please enter Lot Number<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
 
@@ -656,7 +529,8 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Quantity" require="">
+                                                        <input id="quantity" type="number" class="form-control" name="quantity" placeholder="Quantity" require="">
+                                                        <label id="warning_quantity" class="warning_text"> <span>Please enter Quantity<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
 
@@ -673,6 +547,7 @@ if (in_array($position, $restricted)) {
 
 
                                                         </select>
+                                                        <label id="warning_source" class="warning_text"> <span>Please select seed source<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                 </div>
@@ -681,6 +556,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-12">
                                                         <input id="source_name" type="text" class="form-control" name="source_name" placeholder="Source Name" require="">
+                                                        <label id="warning_source_name" class="warning_text"> <span>Please enter source name <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
 
@@ -691,17 +567,21 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="date" id="date_tested" class="form-control" name="date_tested" require="">
+                                                        <label id="warning_test_date" class="warning_text"> <span>Please select tested date<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
+                                                    
                                                 </div>
 
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-                                                        <label>Expiry date:</label>
+                                                        <label>Expire date:</label>
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="date" id="expire_date" class="form-control" name="Expire_date" placeholder="-" require="">
+                                                        <label id="warning_expire_date" class="warning_text"> <span>Please select expire date<i class="icofont icofont-warning"></i></span></label>
                                                     </div>
+                                                   
                                                 </div>
 
 
@@ -712,12 +592,17 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-12">
-                                                        <input type="file" class="form-control" name="image" id="total_price" placeholder="TOTAL PRICE">
+                                                        <input type="file" class="form-control" name="file_directory" id="file_directory" >
+                                                        <input type="hidden" class="form-control" name="user" id="user" value="<?php echo $_SESSION['user']?>" >
+                                                        <input type="hidden" class="form-control" name="tempFile" id="tempFile" >
+
+                                                        <label id="warning_file" class="warning_text"> <span>Please upload required files<i class="icofont icofont-warning"></i></span></label>
+
                                                     </div class="form-group row" require="">
 
 
 
-
+                                                    <!-- </form> -->
 
 
                                                     </br></br></br>
@@ -730,10 +615,31 @@ if (in_array($position, $restricted)) {
                                                     <br>
                                                     .
                                                     <div class="form-group">
+                                                    <div class="col-sm-12">
 
 
-                                                        <input type="submit" name="add_certificate" value="Save Certificate" class="btn waves-effect waves-light btn-success btn-block" />
-                                                        <input type="submit" name="place_order" value="Cancle" class="btn waves-effect waves-light btn-danger  btn-block" />
+                                                    <button id="save_certificate" class="btn waves-effect waves-light btn-success  btn-block">
+                                                        <i class="icofont icofont-save"></i>
+                                                       Save
+                                                    </button>
+
+                                                    </div>
+
+                                                    
+
+    </br>
+
+                                                    <div class="col-sm-12">
+
+                                                    <button id="cancle" class="btn waves-effect waves-light btn-danger  btn-block">
+                                                        <i class="icon-close icons"></i>
+                                                       Cancle
+                                                    </button>
+                                                    </div>
+
+
+                                                        <!-- <input type="submit" name="add_certificate" value="Save Certificate" class="btn waves-effect waves-light btn-success btn-block" />
+                                                        <input type="submit" name="place_order" value="Cancle" class="btn waves-effect waves-light btn-danger  btn-block" /> -->
 
                                                     </div>
 
@@ -741,7 +647,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                            </form>
+                                           
 
 
 
@@ -839,66 +745,9 @@ if (in_array($position, $restricted)) {
 </body>
 <?php
 
-if (isset($_FILES['image'])) {
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-    $file_ext ="";
-
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
-
-
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
-
-    $extensions = array("pdf");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
-
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/production/seed_certificate/" . $newfilename);
-        echo "Success";
-    } else {
-        print_r($errors);
-    }
-}
-
-if (isset($_POST['place_order'])) {
-
-
-    $object = new main();
-
-    $object->place_order();
-}
-
-if (isset($_POST['add_certificate'])) {
 
 
 
-
-    $object = new main();
-
-    $object->add_certificate(
-        $_POST['lot_number'],
-        $_POST['select_crop'],
-        $_POST['select_variety'],
-        $_POST['class'],
-        $_POST['certificate_type'],
-        $_POST['source'],
-        $_POST['source_name'],
-        $_POST['date_tested'],
-        $_POST['Expire_date'],
-        $_POST['quantity'],
-        $newfilename
-    );
-}
 
 ?>
 

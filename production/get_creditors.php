@@ -235,7 +235,9 @@ if (isset($_POST['stockIn_certificate'])) {
     $data=$object->get_external_certificate($result_value,$quantity_value,$crop_value,$variety_value,$class_value);
 
   echo "
- <option value ='$data'>$data</option>";
+  <option value='no_certificate_selected'>Select Certificate</option>
+  <option value='not_certified'>Seed not certified</option>
+  <option value ='$data'>$data</option>";
 
 
   

@@ -2,9 +2,10 @@
 
 include('../class/main.php');
 
+$object = new main();
+
 if(isset($_POST['updateStockInRequest'])){
 
-$object = new main();
 $object->admin_approval($_POST['approvalId'],$_POST['depertment'],$_POST['updateStockInRequest'],$_POST['action_id'],$_POST['description'],$_POST['request_id'],$_POST['requestedName']);
 
 echo'
@@ -41,11 +42,40 @@ if(isset($_POST["checkApprovalCode"])){
  
  
  }
+//insert stock in
 
+if (isset($_POST["insertStockIn"])){
+
+  $source = $_POST['seedSource'];
+  $creditor = $_POST['insertStockIn'];
+  $srn =$_POST['srn'];
+  $bincard = $_POST['binCard'];
+  $bags = $_POST['bags'];
+  $quantity = $_POST['quantity'];
+  $description =$_POST['description'];
+  $crop = $_POST['crop'];
+  $variety = $_POST['variety'];
+  $class = $_POST['class'];
+  $farm_ID =$_POST['farmID'];
+  $certificate =$_POST['certificate'];
+  $status =$_POST['status'];
+  $status =$_POST['status'];
+  $dir=$_POST['fileDirectory'];
+  $user=$_POST['user'];
+  $object->stock_in($creditor, $certificate, $farm_ID, $status, $crop, $variety, $class, $source, $srn, $bincard, $bags, $quantity, $description, $dir,$user);
+
+
+
+
+}
+
+
+// update stock in 
  if(isset($_POST["updateStockIn"])){
 
   $stockInId=$_POST["stockInId"];
-  $certificate=$_POST["certificate"];
+  $old_certificate=$_POST["old_certificate"];
+  $new_certificate=$_POST["new_certificate"];
   $crop=$_POST["updateStockIn"];
   $variety=$_POST["variety"];
   $class=$_POST["seedClass"];
@@ -56,10 +86,8 @@ if(isset($_POST["checkApprovalCode"])){
   $description=$_POST["description"];
   $fileDirectory=$_POST["dir"];
   $creditorId=$_POST["creditorId"];
-
-
-   $object = new main();
-   $object->update_stock_in($stockInId,$certificate,$crop,$variety,$class,$srn,$binCardNumber,$numberOfBags,$quantity,$description,$fileDirectory,$creditorId);
+  $status=$_POST["status"];
+   $object->update_stock_in($stockInId,$old_certificate,$new_certificate,$crop,$variety,$class,$srn,$binCardNumber,$numberOfBags,$quantity,$description,$fileDirectory,$creditorId,$status);
   // $object->update_stock_in($_POST["stockInId"],$_POST["certificate"],$_POST["updateStockIn"],
   // $_POST["variety"],$_POST["seedClass"],$_POST["seedReceiveNote"],
   // $_POST["binCardNumber"],$_POST["bags"],$_POST["quantity"],$_POST["description"],$_POST["dir"]);
@@ -73,6 +101,22 @@ if(isset($_POST["checkApprovalCode"])){
 // $statement->execute();
 
 
+
+
+ }
+
+ // insert seed certificate 
+
+
+ if (isset($_POST["insertCertificate"])){
+
+  $test = $_POST["insertCertificate"];
+
+ 
+
+ $object-> add_certificate($test[4],$test[0],$test[1],$test[2],$test[3],
+ $test[5],$test[6],$test[7],$test[8],$test[9],$test[10],$test[11]);
+ 
 
 
  }

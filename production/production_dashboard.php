@@ -405,7 +405,7 @@ $result = mysqli_query($con,$sql);
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a href="">
                             <span>Production</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -507,6 +507,14 @@ $result = mysqli_query($con,$sql);
                                 </li>
 
                                 <li class="">
+                                    <a href="grading.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
                                     <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
@@ -562,7 +570,7 @@ $result = mysqli_query($con,$sql);
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                    <a href="add_certificate.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
                                         <span class="pcoded-mcaret"></span>
