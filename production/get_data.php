@@ -82,12 +82,13 @@ if (isset($_POST["insertStockIn"])){
   $srn=$_POST["seedReceiveNote"];
   $binCardNumber=$_POST["binCardNumber"];
   $numberOfBags=$_POST["bags"];
-  $quantity=$_POST["quantity"];
+  $newQuantity=$_POST["quantity"];
+  $oldQuantity=$_POST["oldQuantity"];
   $description=$_POST["description"];
   $fileDirectory=$_POST["dir"];
   $creditorId=$_POST["creditorId"];
   $status=$_POST["status"];
-   $object->update_stock_in($stockInId,$old_certificate,$new_certificate,$crop,$variety,$class,$srn,$binCardNumber,$numberOfBags,$quantity,$description,$fileDirectory,$creditorId,$status);
+   $object->update_stock_in($stockInId,$old_certificate,$new_certificate,$crop,$variety,$class,$srn,$binCardNumber,$numberOfBags,$newQuantity,$oldQuantity,$description,$fileDirectory,$creditorId,$status);
   // $object->update_stock_in($_POST["stockInId"],$_POST["certificate"],$_POST["updateStockIn"],
   // $_POST["variety"],$_POST["seedClass"],$_POST["seedReceiveNote"],
   // $_POST["binCardNumber"],$_POST["bags"],$_POST["quantity"],$_POST["description"],$_POST["dir"]);
@@ -105,18 +106,29 @@ if (isset($_POST["insertStockIn"])){
 
  }
 
- // insert seed certificate 
+// Insert external creditor 
+
+if(isset($_POST["insertExtCreditor"])){
+ 
+   $creditorData = $_POST["insertExtCreditor"];
+   $object->add_creditor("External",$creditorData[0],$creditorData[1],$creditorData[2],$creditorData[3],$creditorData[4],"-");
+
+}
+
+
+
+
+ // Insert seed certificate 
 
 
  if (isset($_POST["insertCertificate"])){
 
   $test = $_POST["insertCertificate"];
 
- 
-
  $object-> add_certificate($test[4],$test[0],$test[1],$test[2],$test[3],
- $test[5],$test[6],$test[7],$test[8],$test[9],$test[10],$test[11]);
- 
+ $test[6],$test[7],$test[8],$test[9],$test[5],$test[10],$test[11]);
+
+
 
 
  }

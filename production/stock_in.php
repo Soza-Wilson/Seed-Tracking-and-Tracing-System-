@@ -496,7 +496,8 @@ if (in_array($position, $restricted)) {
 
                                                                     <div class="col-sm-12">
                                                                         <input id="creditor_description" type="text" class="form-control" name="creditor_description" placeholder="Description" require="">
-                                                                        <label id="warning_creditor_description" class="warning_text"> <span>Please select add description <i class="icofont icofont-warning"></i></span></label>
+                                                                        <input id="user" type="hidden" class="form-control" name="user" value="<?php echo $_SESSION['user']; ?>">
+                                                                        <label id="warning_creditor_description" class="warning_text"> <span>Please add description <i class="icofont icofont-warning"></i></span></label>
                                                                     </div>
 
 
@@ -507,8 +508,6 @@ if (in_array($position, $restricted)) {
                                                                     <input type="submit" name="add_creditor" id="add_creditor" value="save " class="btn btn-success" />
 
                                                                 </div>
-
-
 
 
 
@@ -893,7 +892,7 @@ if (in_array($position, $restricted)) {
                                             <div class="form-group row">
 
                                                 <div class="col-sm-12">
-                                                    <input id="description" type="text" class="form-control general" name="description" placeholder="description" require="">
+                                                    <input id="description" type="text" class="form-control general" name="description" placeholder="Description" require="">
                                                     <label id="warning_description" class="warning_text"> <span>Please add description <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
@@ -987,12 +986,12 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-1">
 
-                                                 
-                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-block"><i class="icofont icofont-save"></i>save</button>
-                                                
-                                                 
 
-                                                  
+                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-block"><i class="icofont icofont-save"></i>save</button>
+
+
+
+
 
 
 

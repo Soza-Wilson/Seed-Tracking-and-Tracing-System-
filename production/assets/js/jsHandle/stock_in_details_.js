@@ -149,6 +149,7 @@ $(document).ready(() => {
             let variety = $("#variety").val();
             let seedClass = $("#class").val();
             let quantity = $("#ogQuantity").val();
+            let oldQuantity = $("#ogQuantity").val();
             let creditorId = $("#creditorId").val();
             let old_certificate = $("#seedCertificate").val();
             let new_certificate = "-";
@@ -161,6 +162,8 @@ $(document).ready(() => {
             let status = 0;
 
             if ($("#select_variety").val() !== "0") {
+
+              
               if ($("#select_variety").val() !== $("#variety").val()) {
                 crop = $("#select_crop").val();
                 variety = $("#select_variety").val();
@@ -171,6 +174,8 @@ $(document).ready(() => {
             }
 
             if ($("#select_class").val() !== "0") {
+
+          
               if ($("#select_class").val() !== $("#class").val()){
                 crop = $("#select_crop").val();
                 variety = $("#select_variety").val();
@@ -186,14 +191,19 @@ $(document).ready(() => {
               new_certificate = $("#certificate").val();
               status = status + 1;
             }
-
-            if($("#certificate").val()!=="no_certificate_selected"||$("#certificate").val()!=="Certificate not found"||$("#certificate").val()!=="not_certified"){
+                 
+            if ($("#certificate").val() !== $("#seedCertificate").val()){
+              if($("#certificate").val()!=="no_certificate_selected"||$("#certificate").val()!=="Certificate not found"||$("#certificate").val()!=="not_certified"){
               let quantity = $("#quantity").val();
               new_certificate = $("#certificate").val();
               status = status + 4;
 
              
             }
+
+          }
+
+          
 
             $.post(
               "get_data.php",
@@ -204,6 +214,7 @@ $(document).ready(() => {
                 variety: variety,
                 seedClass: seedClass,
                 quantity: quantity,
+                oldQuantity: oldQuantity,
                 new_certificate: new_certificate,
                 old_certificate: old_certificate,
                 seedReceiveNote: seedReceiveNote,
@@ -214,7 +225,7 @@ $(document).ready(() => {
                 status: status,
               },
               function (data) {
-                alert(status);
+                alert(data);
 
                 // alert("Entry successfully updated");
                 // window.location = "view_stock_in.php";
@@ -229,6 +240,20 @@ $(document).ready(() => {
   });
 
   //upload file using php
+  function check_certificate(){
+     let status=0;
+
+      if($("#certificate").val()!=="no_certificate_selected"||$("#certificate").val()!=="Certificate not found"||$("#certificate").val()!=="not_certified"){
+              let quantity = $("#quantity").val();
+              new_certificate = $("#certificate").val();
+              status = status + 4;
+              return status;
+
+             
+            }
+
+
+  }
 
   function uploadFile() {
     let formData = new FormData();

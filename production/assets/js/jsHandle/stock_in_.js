@@ -36,11 +36,13 @@ $(document).ready(function () {
           $("#warning_external_quantity").show();
           emptyFields = emptyFields + 1;
         }
-        if ($("#certificate").val() == "no_certificate_selected" || $("#certificate").val() == "Certificate not found") {
+        if (
+          $("#certificate").val() == "no_certificate_selected" ||
+          $("#certificate").val() == "Certificate not found"
+        ) {
           $("#warning_certificate").show();
           emptyFields = emptyFields + 1;
         }
-       
       } else if ($("#creditor_source").val() == "MUSECO") {
         if ($("#farm_quantity").val() == 0) {
           $("#warning_farm_quantity").show();
@@ -154,8 +156,17 @@ $(document).ready(function () {
             user: user,
           },
           function (data) {
-            alert("Data added succefully");
-            window.location.reload();
+            if(data=="Not set"){
+              alert (" Error :Buyback prices are not set !!")
+              window.location.reload();
+            }
+            else{
+
+               alert("Data added succefully");
+              window.location.reload();
+            }
+
+            
           }
         );
       }
@@ -297,34 +308,62 @@ $(document).ready(function () {
     $("#warning_creditor_description").hide();
   });
 
-
-  $("#add_creditor").click(()=>{
-
+  $("#add_creditor").click(() => {
     let save = confirm("Are you sure ?");
     if (save == true) {
       let emptyFields = 0;
       if ($("#creditor_name").val() == "") {
         $("#warning_creditor_name").show();
-        emptyFields = emptyFields + 1
-
+        emptyFields = emptyFields + 1;
       }
       if ($("#creditor_phone").val() == "") {
         $("#warning_creditor_phone").show();
-        emptyFields = emptyFields + 1
-
+        emptyFields = emptyFields + 1;
       }
       if ($("#creditor_description").val() == "") {
         $("#warning_creditor_description").show();
-        emptyFields = emptyFields + 1
-
+        emptyFields = emptyFields + 1;
       }
-      
-    
-    
+
+      if (emptyFields > 0) {
+        alert("Please fill out all required fields ");
+      } else if (emptyFields <= 0) {
+        //// Geting credior details
+        let data = [
+          $("#creditor_name").val(),
+          $("#creditor_phone").val(),
+          getEmail(),
+          $("#creditor_description").val(),
+          $("#user").val(),
+        ];
+
+        $.post(
+          "get_data.php",
+          {
+            insertExtCreditor: data,
+          },
+          function (data) {
+            if (data == "added") {
+              alert("Data added succefully");
+              window.location.reload();
+            } else {
+              alert("Error try again");
+            }
+          }
+        );
+      }
     }
 
-    
-  })
+    function getEmail() {
+      let emailData = "";
+      if ($("#creditor_email").val() == "") {
+        emailData = "-";
+      } else {
+        emailData = $("#creditor_email").val();
+      }
+      return emailData;
+    }
+  });
 
   $("#creditor_source").change(function () {
     var data = $("#creditor_source").find(":selected");
@@ -365,9 +404,6 @@ $(document).ready(function () {
     }
   });
 
-
-
-
   $("#search_farm_result").change(function () {
     var data = $("#search_farm_result").find(":selected");
     var search_farm_result = data.val();
@@ -398,20 +434,6 @@ $(document).ready(function () {
             $("#farm_physical_address").val(data.address);
           });
         $("#warning_farm").hide();
-
-        // $('#farm_crop').html(data)
-
-        // $('#farm_crop').empty();
-        // $('#farm_crop').append(new Option(crop, crop_id));
-
-        // $('#farm_variety').empty();
-        // $('#farm_variety').append(new Option(variety, variety_id));
-        // $('#farm_class').empty();
-        // $('#farm_class').append(new Option(class_value, class_value));
-
-        // $('#farm_physical_address').empty();
-        //
-        // ('#farm_physical_address').append(new text("working"));
       }
     );
   });

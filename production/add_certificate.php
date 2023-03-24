@@ -60,7 +60,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/add_certificate_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/add_certificate.js"></script>
    
 
 

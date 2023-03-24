@@ -159,11 +159,9 @@ if (isset($_POST['search_farm_result'])) {
     echo "
     <option value =''>error</option>";
   }
-
-
 }
 
- //function adding temp data to json file
+//function adding temp data to json file
 
 function add_data($data)
 {
@@ -212,7 +210,7 @@ if (isset($_POST['certificate_value'])) {
 
 
         echo "
-                <option value ='$lot_number'>$lot_number</option>";
+              <option value ='$lot_number'>$lot_number</option>";
       }
     } else {
 
@@ -231,55 +229,85 @@ if (isset($_POST['stockIn_certificate'])) {
   $variety_value = $_POST['variety_value'];
   $class_value = $_POST['class_value'];
 
-    $object = new production();
-    $data=$object->get_external_certificate($result_value,$quantity_value,$crop_value,$variety_value,$class_value);
 
-  echo "
-  <option value='no_certificate_selected'>Select Certificate</option>
-  <option value='not_certified'>Seed not certified</option>
-  <option value ='$data'>$data</option>";
+  $sql = "SELECT `lot_number`, `crop_ID`, 
+  `variety_ID`, `class`, `type`, `source`, 
+  `source_name`, `date_tested`, `expiry_date`,
+  `date_added`, `certificate_quantity`, 
+  `available_quantity`, `directory`, `user_ID` FROM
+  `certificate` WHERE available_quantity >= $quantity_value AND
+  `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' 
+  AND `source` ='External' AND `class`='$class_value' AND 
+  `lot_number` LIKE '%$result_value%'";
+
+  $result =  $con->query($sql);
+  if ($result->num_rows > 0) {
+    echo "<option value='no_certificate_selected'>Select Certificate</option>";
+ 
+    while ($row = $result->fetch_assoc()) {
+      $lot_number   = $row["lot_number"];
+     echo"<option value ='$lot_number'>$lot_number</option>";     
+    }
+    echo "<option value='not_certified'>Seed not certified</option>";
+  } else {
+   echo "<option value='no_certificate_selected'>Select Certificate</option>
+   <option value='not_certified'>Seed not certified</option>";
+    
+  }
 
 
-  
+
+  //   $object = new production();
+  //   $data=$object->get_external_certificate($result_value,$quantity_value,$crop_value,$variety_value,$class_value);
+
+  // echo "
+  // <option value='no_certificate_selected'>Select Certificate</option>
+  // <option value='not_certified'>Seed not certified</option>
+  // <option value ='$data'>$data</option>";
+
+  // while($data>0)
+
+
+
   // WHERE available_quantity >= $quantity_value AND
   // `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' 
   // AND `source` ='External' AND `class`='$class_value' AND 
   // `lot_number` LIKE '%$result_value%'
 
 
-//   
+  //   
 
 
 
 
-//   if (!empty($result_value)) {
+  //   if (!empty($result_value)) {
 
-//     echo "
-//     <option value ='hkhkkkk'>$quantity_value</option>";
+  //     echo "
+  //     <option value ='hkhkkkk'>$quantity_value</option>";
 
-//     $sql = "SELECT `lot_number`, `crop_ID`, 
-//     `variety_ID`, `class`, `type`, `source`, 
-//     `source_name`, `date_tested`, `expiry_date`,
-//      `date_added`, `certificate_quantity`, 
-//      `available_quantity`, `directory`, `user_ID` FROM
-//    `certificate` ";
+  //     $sql = "SELECT `lot_number`, `crop_ID`, 
+  //     `variety_ID`, `class`, `type`, `source`, 
+  //     `source_name`, `date_tested`, `expiry_date`,
+  //      `date_added`, `certificate_quantity`, 
+  //      `available_quantity`, `directory`, `user_ID` FROM
+  //    `certificate` ";
 
-// $result =  $con->query($sql);
-//   if ($result->num_rows > 0) {
-//     while ($row = $result->fetch_assoc()) {
-//       $lot_number   = $row["lot_number"];
+  // $result =  $con->query($sql);
+  //   if ($result->num_rows > 0) {
+  //     while ($row = $result->fetch_assoc()) {
+  //       $lot_number   = $row["lot_number"];
 
 
-//       echo "
-//               <option value ='$lot_number'>$lot_number</option>";
-//     }
-//   } else {
+  //       echo "
+  //               <option value ='$lot_number'>$lot_number</option>";
+  //     }
+  //   } else {
 
-//     echo "
-//               <option value ='Lot Number not available'>Lot Number not available</option>";
-//   }
+  //     echo "
+  //               <option value ='Lot Number not available'>Lot Number not available</option>";
+  //   }
 
-//   }
+  //   }
 
   //  $sql = "SELECT `lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, `user_ID` FROM
   //  `certificate` WHERE available_quantity >= $quantity_value AND `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' AND `source` ='External' AND `class`='$class_value' AND `lot_number` LIKE '%$result_value%'";
@@ -305,4 +333,4 @@ if (isset($_POST['stockIn_certificate'])) {
 
 
 
-  }
+}
