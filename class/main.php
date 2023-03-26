@@ -675,7 +675,8 @@ class main
 
       if ($temp_amount > 0) {
 
-        $calculated_amount = $temp_amount * $quantity;
+        $calculated_amount = (int)$temp_amount * (int)$quantity;
+        $transaction_price = (int)$temp_amount;
         $account_funds = "";
         $transaction_ID = $transaction_ID = $this->generate_user("transaction");
         $trans_type = "stock_in";
@@ -709,7 +710,7 @@ class main
         $statement->execute();
 
         $temp_class = "";
-        $temp_amount = "";
+      
 
         // register transaction 
         ///   update creditor funds account 
@@ -726,7 +727,7 @@ class main
         $statement = $con->prepare($sql);
         $statement->execute();
 
-        $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $temp_amount, $calculated_amount, $user);
+        $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user);
       } else {
 
         echo"Not set";
@@ -809,15 +810,17 @@ class main
 
     // $transAmount = $this->get_transacton_details($stockInId);
     // $certificate = $old_certificate;
-    if ($status < 4 || $status > 4) {
+    if ($status == 0) {
 
-      echo "four not";
-      // $this->stock_in_update_transaction($creditorId, $stockInId, $newQuantity, $crop, $variety, $class);
-      // $this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
+    
     } else if ($status == 4) {
+      $this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
+    }
+    else{
 
-      echo "four ";
-      //$this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
+      $this->stock_in_update_transaction($creditorId, $stockInId, $newQuantity, $crop, $variety, $class);
+      $this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
+
     }
 
 
@@ -828,10 +831,14 @@ class main
     //Need some pussy !!!!!!!!!!!
 
 
-    // $sql = "UPDATE `stock_in` SET`crop_ID`='$crop',`variety_ID`='$variety',`class`='$class',`SLN`='$srn',`bincard`='$binCardNumber',`number_of_bags`='$numberOfBags',`quantity`='$newQuantity',`available_quantity`='$newQuantity',
-    //   `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$new_certificate' WHERE `stock_in_ID`='$stockInId'";
-    // $statement = $con->prepare($sql);
-    // $statement->execute();
+    $sql = "UPDATE `stock_in` SET`crop_ID`='$crop',`variety_ID`='$variety',`class`='$class',`SLN`='$srn',`bincard`='$binCardNumber',`number_of_bags`='$numberOfBags',`quantity`='$newQuantity',`available_quantity`='$newQuantity',
+      `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$new_certificate' WHERE `stock_in_ID`='$stockInId'";
+    $statement = $con->prepare($sql);
+   if( $statement->execute()){
+    
+    echo "success";
+    
+   }
   }
 
 
@@ -887,14 +894,15 @@ class main
       $result =  $con->query($sql);
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-          $transaction_price = $row["$temp_class"];
+          $transaction_price =  $row["$temp_class"];
+
         }
       }
-      $new_amount = $transaction_price * $quantity;
+      $new_amount = (int)$transaction_price * (int)$quantity;
 
       /// Adding new amount tom creditor account 
 
-      $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$new_amount WHERE `creditor_ID`='$creditorId'";
+      $sql = "UPDATE `creditor` SET `account_funds`=account_funds+$new_amount WHERE `creditor_ID`='$creditorId'";
 
       $statement = $con->prepare($sql);
       if ($statement->execute()) {

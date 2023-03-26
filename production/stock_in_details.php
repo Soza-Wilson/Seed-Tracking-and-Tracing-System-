@@ -585,7 +585,7 @@ if (!empty($stock_in_ID)) {
 
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-12">
-                                                                    <label id="warning_text"> <span >Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
+                                                                    <label id="warning_certificate"> <span >Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
     </div>
 
                                                                 </div>
@@ -648,6 +648,7 @@ if (!empty($stock_in_ID)) {
 
                                                                 <div class="col-sm-12">
                                                                     <input id="description" type="text" class="form-control" name="description" placeholder="description" require="" value="<?php echo$description; ?>">
+                                                                    <label id="warning_description" class="warning-text"> <span >Please enter description  <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
 
 
@@ -666,6 +667,7 @@ if (!empty($stock_in_ID)) {
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo$SRN; ?>">
+                                                                    <label id="warning_srn" class="warning-text"> <span >Please enter SRN  <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -675,6 +677,7 @@ if (!empty($stock_in_ID)) {
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <input type="number" id="bin_card" class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo$bincard; ?>">
+                                                                    <label id="warning_bin_card" class="warning-text"> <span >Please enter bin card number  <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -684,6 +687,7 @@ if (!empty($stock_in_ID)) {
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo$bags; ?>">
+                                                                    <label id="warning_bags" class="warning-text"> <span >Please enter number of bags  <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -696,7 +700,7 @@ if (!empty($stock_in_ID)) {
                                                                 <div class="col-sm-12">
                                                                     <labe>Supporting documents :</label>
                                                                         <input id="fileDirectory" type="file" class="form-control" name="fileDirectory"  accept="pdf">
-                                                                        <input id="directory" type="text" class="form-control" name="image" placeholder="Phone number" value="<?php echo"$dir"?>">
+                                                                        <input id="directory" type="hidden" class="form-control" name="image" placeholder="Phone number" value="<?php echo"$dir"?>">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                 <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
@@ -754,7 +758,7 @@ if (!empty($stock_in_ID)) {
                                                         <div class="col-sm-2">
 
                                                             <label class="badge badge-primary "> ID</label>
-                                                            <input id="stock_in_id" type="text" class="form-control text-details" name="stock_in_id" value="<?php echo $stock_in_ID; ?>" require="">
+                                                            <input id="stock_in_id" type="text" class="form-control " name="stock_in_id" value="<?php echo $stock_in_ID; ?>" require="">
                                                             <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
                                                              <input type="hidden" id="user_name" value="<?php echo $test; ?>">
 
@@ -766,7 +770,7 @@ if (!empty($stock_in_ID)) {
 
                                                         <div class="col-sm-3">
                                                             <label class="badge badge-primary ">Transaction For</label>
-                                                            <input id="customer_name" type="text" class="form-control text-details" name="customer_name" value="<?php echo $creditor; ?>" require="">
+                                                            <input id="customer_name" type="text" class="form-control " name="customer_name" value="<?php echo $creditor; ?>" require="">
 
 
 
@@ -774,7 +778,7 @@ if (!empty($stock_in_ID)) {
 
                                                         <div class="col-sm-3">
                                                             <label class="badge badge-primary ">Added By</label>
-                                                            <input id="requested_user" type="text" class="form-control text-details" name="requested_user" value="<?php echo $user_requested; ?>" require="">
+                                                            <input id="requested_user" type="text" class="form-control " name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
 
@@ -782,7 +786,7 @@ if (!empty($stock_in_ID)) {
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary "> Date</label>
-                                                            <input id="search_main_certificate" type="text" class="form-control text-details" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+                                                            <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
 
@@ -791,7 +795,7 @@ if (!empty($stock_in_ID)) {
                                                         <div class="col-sm-2">
 
                                                             <label class="badge badge-primary ">Time</label>
-                                                            <input id="time" type="text" class="form-control text-details" name="time" value="<?php echo $time; ?>" require="">
+                                                            <input id="time" type="text" class="form-control " name="time" value="<?php echo $time; ?>" require="">
 
 
 

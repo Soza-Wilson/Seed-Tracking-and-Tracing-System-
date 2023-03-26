@@ -115,6 +115,123 @@ if(isset($_POST["insertExtCreditor"])){
 
 }
 
+if(isset($_POST["viewStockFilter"])){
+
+  $filterData = $_POST["viewStockFilter"];
+  $creditor = $filterData[0];
+
+  echo"<thead>
+  <tr>
+  <th>Stock In ID</th>
+  <th>Crop</th>
+  <th>Variety</th>
+  <th>Class</th>
+  <th>Quantity</th>
+  <th>Used Quantity</th>
+  <th>Available Quantity</th>
+  <th>Source</th>
+  <th>Source Name</th>
+  <th>SRN</th>
+  <th>Added By</th>
+  <th>Added Date</th>
+  <th>Action</th>
+
+  </tr>
+</thead>";
+
+  $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
+  `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
+   `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
+  INNER JOIN user ON stock_in.user_ID = user.user_ID 
+  INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
+  INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
+  INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE creditor.name like '%$filterData[0]%' AND stock_in.crop_ID ='$filterData[1]' AND stock_in.variety_ID='$filterData[2]' AND stock_in.class='$filterData[3]' AND stock_in.date BETWEEN '$filterData[4]' AND '$filterData[5]' ";
+
+                                $result = $con->query($sql);
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $stock_in_id = $row['stock_in_ID'];
+                                        $crop      = $row['crop'];
+                                        $source = $row['source'];
+                                        $source_name = $row['name'];
+                                        $variety     = $row['variety'];
+                                        $class     = $row['class'];
+                                        $quantity     = $row['quantity'];
+                                        $used_quantity = $row['used_quantity'];
+                                        $available_quantity = $row['available_quantity'];
+                                        $date_added = $row['date'];
+                                        $user = $row['fullname'];
+                                        $srn = $row['SLN'];
+                                        $dir = $row['supporting_dir'];
+
+
+                                        $object = new main();
+                                        $newDate = $object-> change_date_format($date_added);
+
+
+
+
+
+                                        echo "
+<tr class='odd gradeX'>
+                     <td>$stock_in_id</td>
+<td>$crop</td>
+<td>$variety</td>
+<td>$class</td>
+<td>$quantity</td>
+                    <td> $used_quantity</td>
+                    <td> $available_quantity</td>
+                    <td>$source</td>
+                    <td>$source_name</td>
+                    <td>$srn</td>
+                    <td>$user</td>
+                    <td>$newDate</td>
+                    
+                   
+
+
+<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success'><i class='icofont icofont-eye-alt'></i>View </a>
+                    
+                    </td>
+</tr>	
+";
+                                    }
+
+                                  }
+                                  else{
+
+                                    
+                                    echo "
+                                    <tr class='odd gradeX'>
+                                                         <td>Not Available</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                                        <td> -</td>
+                                                        <td> -</td>
+                                                        <td>-</td>
+                                                        <td>-e</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        
+                                                       
+                                    
+                                    
+                                    <td>
+                                                        
+                                                        </td>
+                                    </tr>	
+                                    ";
+                              
+
+
+                                  }
+
+
+}
+
 
 
 
@@ -130,6 +247,17 @@ if(isset($_POST["insertExtCreditor"])){
 
 
 
+
+ }
+
+
+ //assign seed for grading 
+
+
+ if (isset($_POST["assignSeed"])){
+
+   $seedData = $_POST["assignSeed"];
+   $object -> assign_prcessing_quantity($seedData[0],$seedData[1]);
 
  }
 

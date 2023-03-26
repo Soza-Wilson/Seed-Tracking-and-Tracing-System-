@@ -27,7 +27,7 @@ if (empty($test)) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -60,6 +60,10 @@ if (empty($test)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/grade_seed.js">
+
+</script>
 </head>
 
 <body>
@@ -138,6 +142,10 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
+                        
+                        <a href="index.html">
+                            <span>Production</span>
+                        </a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -149,15 +157,7 @@ if (empty($test)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -165,48 +165,7 @@ if (empty($test)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                           
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -268,7 +227,7 @@ if (empty($test)) {
 
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                            <a href="production_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -480,10 +439,9 @@ if (empty($test)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+                                            
                                             <li class="breadcrumb-item"><a href="admin_pending_orders.php">Grade seed </a>
 
                                             </li>
@@ -516,7 +474,7 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="grade_seed.php" method="POST">
+                                            
                                                 <div class="card-header">
                                                     <h5>Stock in details </h5>
 
@@ -677,7 +635,8 @@ if (empty($test)) {
                                                     <label>Assign quantity:</label>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <input type="text" id="Assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <input type="text" id="assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
+                                                    <label id="warning_assigned" class="warning-text"> <span >Please add quantity  <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
@@ -707,8 +666,8 @@ if (empty($test)) {
                                                 .
                                                 <div class="form-group">
 
-
-                                                    <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
+                                                  <button name="assign_seed" id="assign_seed" class="btn waves-effect waves-light btn-success btn-block">Assign seed</button>
+                                                   
                                                     <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
@@ -717,7 +676,7 @@ if (empty($test)) {
 
 
 
-                                                </form>
+                                          
 
 
 

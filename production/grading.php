@@ -511,7 +511,7 @@ if (in_array($position, $restricted)) {
                               INNER JOIN user ON stock_in.user_ID = user.user_ID 
                               INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
                               INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded'";
+                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' ORDER BY `stock_in_ID` DESC";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -530,6 +530,9 @@ if (in_array($position, $restricted)) {
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];
 
+                                                                    $object = new main();
+                                                                    $newDate = $object-> change_date_format($date_added);
+
 
 
 
@@ -543,7 +546,7 @@ if (in_array($position, $restricted)) {
 												<td>$quantity</td>
                                                 <td>$srn</td>
                                                 <td>$user</td>
-                                                <td>$date_added</td>
+                                                <td>$newDate</td>
                                                 
                                                
 												
@@ -620,6 +623,9 @@ if (in_array($position, $restricted)) {
                                                                     $grade_out_quantity = $row['grade_out_quantity'];
                                                                     $trash_quantity = $row['trash_quantity'];
 
+                                                                    $object = new main();
+                                                                    $newDate = $object-> change_date_format($date_added);
+
 
 
 
@@ -631,7 +637,7 @@ if (in_array($position, $restricted)) {
 												<td>$grade_out_quantity</td>
 												<td>$trash_quantity</td>
 												<td>$user</td>
-                                                <td>$date</td>
+                                                <td>$newDate</td>
                                                 <td>$time</td>
                                                 
                                                 

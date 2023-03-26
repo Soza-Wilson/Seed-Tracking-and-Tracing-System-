@@ -250,7 +250,7 @@ if (isset($_POST['stockIn_certificate'])) {
     }
     echo "<option value='not_certified'>Seed not certified</option>";
   } else {
-   echo "<option value='no_certificate_selected'>Select Certificate</option>
+   echo "<option value='not_found'>Certificate not found</option>
    <option value='not_certified'>Seed not certified</option>";
     
   }

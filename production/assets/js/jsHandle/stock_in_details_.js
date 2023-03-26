@@ -1,5 +1,6 @@
 $(document).ready(() => {
-  $("#warning_text").css("color", "red").hide();
+  $("#warning_certificate").css("color", "red").hide();
+  $(".warning-text").css("color", "red").hide();
   $(".text-details").prop("disabled", true);
 
   //getting crop data
@@ -15,10 +16,12 @@ $(document).ready(() => {
       $("#select_crop").html(data);
     }
   );
-
+  let for_certificate = 0;
+  let other = 0;
   $("#select_crop").change(function () {
     let crop_value = $("#select_crop").val();
     $("#warning_text").show();
+    for_certificate = for_certificate + 1;
 
     $.post(
       "get_products.php",
@@ -33,7 +36,18 @@ $(document).ready(() => {
 
   $("#quantity").on("input", () => {
     $("#warning_text").show();
+    for_certificate = for_certificate + 1;
   });
+
+  // Checking if fields are empty
+
+  let description = $("#description").val();
+  let seedReceiveNote = $("#srn").val();
+
+  let binCardNumber = $("#bin_card").val();
+  let bags = $("#number_of_bags").val();
+
+ 
 
   // getting certificarte data
   $("#search_certificate").on("input", function () {
@@ -105,7 +119,7 @@ $(document).ready(() => {
       function generateCode() {
         let code = "";
         const characters =
-          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()";
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         for (let i = 0; i < 8; i++) {
           code += characters.charAt(
             Math.floor(Math.random() * characters.length)
@@ -144,7 +158,17 @@ $(document).ready(() => {
           approvalId: approvalId,
         },
         function (data) {
-          if (data == "valid") {
+
+         let check = checkFields();
+         if(check>0){
+
+          alert("Please fillout all required textfields ")
+
+
+         }
+         else{
+
+           if (data == "valid") {
             let crop = $("#crop").val();
             let variety = $("#variety").val();
             let seedClass = $("#class").val();
@@ -162,8 +186,6 @@ $(document).ready(() => {
             let status = 0;
 
             if ($("#select_variety").val() !== "0") {
-
-              
               if ($("#select_variety").val() !== $("#variety").val()) {
                 crop = $("#select_crop").val();
                 variety = $("#select_variety").val();
@@ -174,36 +196,34 @@ $(document).ready(() => {
             }
 
             if ($("#select_class").val() !== "0") {
-
-          
-              if ($("#select_class").val() !== $("#class").val()){
+              if ($("#select_class").val() !== $("#class").val()) {
                 crop = $("#select_crop").val();
                 variety = $("#select_variety").val();
                 seedClass = $("#select_class").val();
                 new_certificate = $("#certificate").val();
                 status = status + 1;
               }
-             
             }
 
             if ($("#ogQuantity").val() !== $("#quantity").val()) {
-              let quantity = $("#quantity").val();
+              quantity = $("#quantity").val();
               new_certificate = $("#certificate").val();
               status = status + 1;
             }
-                 
-            if ($("#certificate").val() !== $("#seedCertificate").val()){
-              if($("#certificate").val()!=="no_certificate_selected"||$("#certificate").val()!=="Certificate not found"||$("#certificate").val()!=="not_certified"){
-              let quantity = $("#quantity").val();
-              new_certificate = $("#certificate").val();
-              status = status + 4;
 
-             
+            if (status == 0) {
+              if ($("#certificate").val() !== $("#seedCertificate").val()) {
+                if (
+                  $("#certificate").val() !== "no_certificate_selected" ||
+                  $("#certificate").val() !== "not_found" ||
+                  $("#certificate").val() !== "not_certified"
+                ) {
+                  quantity = $("#quantity").val();
+                  new_certificate = $("#certificate").val();
+                  status = status + 4;
+                }
+              }
             }
-
-          }
-
-          
 
             $.post(
               "get_data.php",
@@ -227,32 +247,75 @@ $(document).ready(() => {
               function (data) {
                 alert(data);
 
-                // alert("Entry successfully updated");
-                // window.location = "view_stock_in.php";
+                if (data == "success") {
+                  alert("Entry successfully updated");
+                  window.location = "view_stock_in.php";
+                } else {
+                  alert("Error");
+                }
               }
             );
           } else {
             alert("Code is Invalid. Check and add again ");
           }
+
+
+
+         }
+
+
+         
+          
+
+         
         }
       );
     }
   });
 
+  function checkFields(){
+
+      let other = 0;
+          if ($("#description").val() == "") {
+            $("#warning_description").show();
+            other = other+1;
+          }
+        
+          if ($("#srn").val() == 0) {
+            $("#warning_srn").show();
+            other = other+1;
+          }
+        
+          if ($("#bin_card").val() == 0) {
+            $("#warning_bin_card").show();
+            other = other+1;
+
+          }
+        
+          if ($("#number_of_bags").val() == 0) {
+            $("#warning_bags").show();
+            other = other+1;
+          }
+ 
+           return other;
+
+
+  }
+
   //upload file using php
-  function check_certificate(){
-     let status=0;
+  function check_certificate() {
+    let status = 0;
 
-      if($("#certificate").val()!=="no_certificate_selected"||$("#certificate").val()!=="Certificate not found"||$("#certificate").val()!=="not_certified"){
-              let quantity = $("#quantity").val();
-              new_certificate = $("#certificate").val();
-              status = status + 4;
-              return status;
-
-             
-            }
-
-
+    if (
+      $("#certificate").val() !== "no_certificate_selected" ||
+      $("#certificate").val() !== "Certificate not found" ||
+      $("#certificate").val() !== "not_certified"
+    ) {
+      let quantity = $("#quantity").val();
+      new_certificate = $("#certificate").val();
+      status = status + 4;
+      return status;
+    }
   }
 
   function uploadFile() {

@@ -35,7 +35,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
 ?>
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -154,7 +154,9 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a >
+
+                        production
                            
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -167,15 +169,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                           
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -183,48 +177,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -282,7 +235,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="production_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -299,15 +252,22 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="place_order.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a href="grading.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
                                         <span class="pcoded-mcaret"></span>
@@ -315,14 +275,14 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -402,7 +362,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -462,11 +422,10 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Active Lab Test</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="active_test.php">Active Lab Test</a>
                                             </li>
                                         </ul>
                                     </div>

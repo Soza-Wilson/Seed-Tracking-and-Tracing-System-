@@ -58,6 +58,11 @@ if (in_array($position, $notRestricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/view_stock_in.js">
+
+</script>
+   
 </head>
 
 <body>
@@ -464,6 +469,149 @@ if (in_array($position, $notRestricted)) {
 
                                         <div class="card">
                                             <div class="card-header">
+                                                <h5>Filter </h5>
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Creditor name</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Select Crop</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Select Variety</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label>Select Class</label>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>From :</label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label>To :</label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+
+                                                    <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
+                                                    <label id="warning_name" class="warning-text"> <span >Please enter Creditor name <i class="icofont icofont-warning"></i></span></label>
+                                                     
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+
+
+                                                    <select name="select_crop" id="select_crop" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+                                                     
+
+
+                                                    </select>
+                                                    <label id="warning_crop" class="warning-text"> <span >Please select crop  <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-2">
+
+
+                                                    <select name="select_variety" id="select_variety" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+                                                      
+
+
+                                                    </select>
+                                                    <label id="warning_variety" class="warning-text"> <span >Please select variety <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-1">
+
+
+                                                    <select name="select_class" id="select_class" class="form-control"> 
+                                                        <option value="not_selected">Class</option>
+                                                        <option value="pre_basic">Pre-Basic</option>
+                                                        <option value="basic">Basic</option>
+                                                        <option value="certified">Certified</option>
+
+
+                                                    </select>
+                                                    <label id="warning_class" class="warning-text"> <span >Please select class  <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                        
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                        <label id="warning_from" class="warning-text"> <span >Please select date <i class="icofont icofont-warning"></i></span></label>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
+                                                        <label id="warning_to" class="warning-text"> <span >Please select date <i class="icofont icofont-warning"></i></span></label>
+                                                    </div>
+
+
+                                                    
+
+
+
+                                                    <div class="col-sm-1">
+
+
+
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+
+
+                                                      
+                                                    </div>
+                                                </div>
+
+
+                                                <form action="csv_handler.php" method="POST">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+
+
+
+                                                            <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
+
+
+                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
+                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
+                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
+                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
+                                                            <input type="hidden" name="from_hidden" id="from_hidden">
+                                                            <input type="hidden" name="to_hidden" id="to_hidden">
+                                                            <input type="hidden" name="filter" id="filter">
+
+
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
                                                 <h5>Stock in transactions </h5>
 
                                                 <div class="card-header-right">
@@ -478,10 +626,10 @@ if (in_array($position, $notRestricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table id="dataTable" class="table table-hover" >
                                                         <thead>
                                                             <tr>
-                                                                <th>Stock in ID</th>
+                                                                <th>Stock In ID</th>
                                                                 <th>Crop</th>
                                                                 <th>Variety</th>
                                                                 <th>Class</th>
@@ -489,10 +637,10 @@ if (in_array($position, $notRestricted)) {
                                                                 <th>Used Quantity</th>
                                                                 <th>Available Quantity</th>
                                                                 <th>Source</th>
-                                                                <th>Source_name</th>
+                                                                <th>Source Name</th>
                                                                 <th>SRN</th>
-                                                                <th>Added by</th>
-                                                                <th>added date</th>
+                                                                <th>Added By</th>
+                                                                <th>Added Date</th>
                                                                 <th>Action</th>
 
                                                             </tr>
@@ -528,6 +676,10 @@ if (in_array($position, $notRestricted)) {
                                                                     $dir = $row['supporting_dir'];
 
 
+                                                                    $object = new main();
+                                                                    $newDate = $object-> change_date_format($date_added);
+
+
 
 
 
@@ -544,7 +696,7 @@ if (in_array($position, $notRestricted)) {
                                                 <td>$source_name</td>
                                                 <td>$srn</td>
                                                 <td>$user</td>
-                                                <td>$date_added</td>
+                                                <td>$newDate</td>
                                                 
                                                
 												
