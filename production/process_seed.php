@@ -259,14 +259,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
+                                    <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -325,7 +325,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="used_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -333,7 +333,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
                                         <span class="pcoded-mcaret"></span>
