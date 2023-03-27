@@ -235,7 +235,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="place_order.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
                                         <span class="pcoded-mcaret"></span>
