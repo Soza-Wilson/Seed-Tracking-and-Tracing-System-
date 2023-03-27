@@ -478,6 +478,8 @@ if (empty($test)) {
                                                 <div class="card-header">
                                                     <h5>Stock in details </h5>
 
+                                                    
+
                                                     <div class="card-header-right">
                                                         <ul class="list-unstyled card-option">
                                                             <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -487,8 +489,9 @@ if (empty($test)) {
                                                             <li><i class="fa fa-trash close-card"></i></li>
                                                         </ul>
                                                     </div>
+                                                    <form action="grade_seed.php" method="POST">
                                                     <div class="form-group row">
-
+                                                              
 
                                                         <span class="pcoded-mcaret"></span>
 
@@ -666,21 +669,23 @@ if (empty($test)) {
                                                 .
                                                 <div class="form-group">
 
-                                                  <button name="assign_seed" id="assign_seed" class="btn waves-effect waves-light btn-success btn-block">Assign seed</button>
+                                                
+                                                  <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
                                                    
                                                     <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
 
 
-
-
+    
 
                                           
 
 
 
                                             </div>
+
+    </form>
 
                                         </div>
                                         <!-- Input Grid card end -->
