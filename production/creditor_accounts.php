@@ -985,36 +985,36 @@ if (isset($_FILES['image'])) {
 if (isset($_POST['save_payment'])) {
 
  //// $_POST[trans_date] is used to get the transaction payment
- $uploaded_file = $newfilename;   
+//  $uploaded_file = $newfilename;   
 
-if($_POST['select_payment_type']=="Cheque"){
+// if($_POST['select_payment_type']=="Cheque"){
 
     
-    $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
+//     $object = new main;
+//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
     
 
-}
- if($_POST['select_payment_type']=="Cash"){
+// }
+//  if($_POST['select_payment_type']=="Cash"){
 
   
 
     
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+//       $object = new main;
+//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
+//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
 
   
    
-} if($_POST['select_payment_type']=="Bank_transfer"){
+// } if($_POST['select_payment_type']=="Bank_transfer"){
 
 
-      $object = new main;
-    $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-    $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+//       $object = new main;
+//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
+//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
 
-}
+// }
 
 
    

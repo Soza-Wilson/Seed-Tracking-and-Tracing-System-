@@ -373,7 +373,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inspection.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -488,7 +488,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Source_name</th>
                                                                 <th>SRN</th>
                                                                 <th>Added by</th>
-                                                                <th>added date</th>
+                                                                <th>Added date</th>
                                                                 <th>Action</th>
 
                                                             </tr>

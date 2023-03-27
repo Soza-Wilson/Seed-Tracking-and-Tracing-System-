@@ -498,7 +498,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
                                                         <select id="certificate_type" name="certificate_type" class="form-control" required="">
                                                             <option value="0">Select type</option>
-                                                            <option value="parent">Parent certificate </option>
+                                                            <option value="parent">certificate </option>
                                                             <option value="male">male certificate</option>
                                                             <option value="female">female certificate</option>
 

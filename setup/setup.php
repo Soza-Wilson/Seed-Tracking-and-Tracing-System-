@@ -482,7 +482,7 @@ values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admi
 
   mysqli_query($con, $sql);
 
-  $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maize'),
+  $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maizeOPV'),
 ('CP002','gnuts_shelled'),
 ('CP003','gnuts_unshelled'),
 ('CP004','sorghum'),
@@ -490,16 +490,17 @@ values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admi
 ('CP006','cowpea'),
 ('CP007','pigeonpea'),
 ('CP008','beans'),
-('CP009','soyabean')";
+('CP009','soyabean'),
+('CP0010','maizeHybrid')";
 
   mysqli_query($con, $sql);
 
 
   $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`)
 VALUES ('VT001','MLERA_ZM_623','CP001'),
-('VT002','THANZI_MH_44A','CP001'),
-('VT003','MANTHU_MH_36','CP001'),
-('VT004','NTONDO_MH_35','CP001'),
+('VT002','THANZI_MH_44A','CP0010'),
+('VT003','MANTHU_MH_36','CP0010'),
+('VT004','NTONDO_MH_35','CP0010'),
 ('VT005','LIMBA_ZM_523','CP001'),
 ('VT006','CHITALA','CP002'),
 ('VT007','CG7','CP002'),
