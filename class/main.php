@@ -95,7 +95,7 @@ class main
         header('Location:production/production_dashboard.php');
       } else if ($_SESSION['depertment'] == 3) {
 
-        header('Location:marketing/');
+        header('Location:marketing/marketing_dashboard.php');
       } else if ($_SESSION['depertment'] == 4) {
 
         header('Location:production/m&e_dashboard.php');
@@ -2297,7 +2297,7 @@ class main
 
       //update creditor funds 
 
-      $sql = "UPDATE creditor set `account_funds` = `account_funds`+$amount WHERE `creditor_ID`='$creditor_id'";
+      $sql = "UPDATE creditor set `account_funds` = `account_funds`-$amount WHERE `creditor_ID`='$creditor_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 

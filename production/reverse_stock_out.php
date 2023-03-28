@@ -29,7 +29,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -47,7 +47,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
 
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
       <!-- Google font-->     
-      <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+      
       <!-- Required Fremwork -->
       <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
       <!-- waves.css -->

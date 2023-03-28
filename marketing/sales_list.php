@@ -17,7 +17,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("marketing_admin", "system_administrator", "marketing_officer");
+$restricted = array("system_administrator","marketing_officer","marketing_system_administrator");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -61,17 +61,9 @@ if ($result->num_rows > 0) {
 
 }
 
-if (empty($test)) {
 
-    header('Location:../index.php');
-}
 
-$restricted = array("system_administrator", "finance_admin", "cashier");
 
-if (in_array($position, $restricted)) {
-} else {
-    header('Location:../restricted_access/restricted_access.php');
-}
 
 ?>
 
@@ -93,7 +85,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+   
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->

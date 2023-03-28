@@ -48,7 +48,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -219,14 +219,14 @@ if (in_array($position, $restricted)) {
 
 
                             </div>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home </div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="pcoded-hasmenu">
 
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="production_dashboard" class="waves-effect waves-dark">
+                                            <a href="production_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -277,14 +277,14 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="#" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="#" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -386,7 +386,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inspection.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -633,32 +633,7 @@ if (in_array($position, $restricted)) {
 </body>
 <?php
 
-if (isset($_POST['process_order_btn'])) {
 
-    $type = "";
-
-    $order_ID = $_POST['order_ID'];
-    $C_D_ID = $_POST['order_for'];
-    $temp = $_POST['order_type'];
-    if ($temp = "customer") {
-
-        $type = "customer_order";
-    } elseif ($temp = "b_to_b") {
-
-        $type = "b_to_b_order";
-    } elseif ($temp = "agro_dealer") {
-
-        $type = "agro_dealer_order";
-    } elseif ($temp = "grower") {
-
-        $type = "grower_order";
-    }
-
-
-
-    $object = new main();
-    $object->production_process_order($order_ID, $C_D_ID, $type);
-}
 
 
 
