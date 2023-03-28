@@ -976,7 +976,7 @@ class main
 
     $stock_out_ID = $this->generate_user('stock_out');
     $user_ID = $_SESSION['user'];
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:i:s");
     global $con;
 
@@ -2414,26 +2414,51 @@ class main
         header('Location:add_payback_payment.php');
 
         //update ledger
+        
 
         $this->ledger_new_entry("debit", $description, $amount, $bank_name, $transaction_id, $amount, "system");
       } else if ($amount > $ava_balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
     </script>");
+       mysqli_close($con);
       }
     }
   }
 
 
-  // function create pdf files using f
+// Creating database files 
+
+function create_back_up_file(){
+ global $con;
+ global $database;
+ global $localhost;
+ global $username;
+ global $password;
+ 
 
 
+$backup_file = $database . '_' . date("Y-m-d-H-i-s") . '.sql';
+
+// Connect to the database
 
 
+// Check if the connection was successful
+if (!$con) {
+    die('Could not connect: ');
+}
+
+// Select the database
+mysqli_select_db($con, $database);
+
+// Run the mysqldump command
+$command = "mysqldump --opt -h $localhost -u $username -p$password $database > $backup_file";
+system($command);
+
+// Close the connection
+mysqli_close($con);
 
 
-
-
-
+}
 
 }

@@ -11,15 +11,22 @@ $position = $_SESSION['position'];
 
 if (empty($test)) {
 
-    header('Location:../login.php');
+    header('Location:../index.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician", "field_officer");
+$restricted = array("production_admin", "system_administrator","warehouse_officer");
 
 if (in_array($position, $restricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
+
+// if($position !="warehouse_officer" || $position !="production_admin" || $position !="admin"){
+     
+//     header('Location:javascript://history.go(-1)');
+
+// }
+
 
 ?>
 
@@ -58,8 +65,9 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/available_certificates.js">
-        </script>
+    <script type="text/javascript" src="assets/js/jsHandle/view_stock_out.js">
+
+</script>
 </head>
 
 <body>
@@ -128,9 +136,19 @@ if (in_array($position, $restricted)) {
                             <i class="ti-menu"></i>
                         </a>
                         <div class="mobile-search waves-effect waves-light">
-                            
+                            <div class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <a href="">production</a>
+                        <a href="">
+                            <span>Production</span>
+                        </a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -164,7 +182,7 @@ if (in_array($position, $restricted)) {
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+                                   
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -205,43 +223,47 @@ if (in_array($position, $restricted)) {
 
 
                             </div>
-
-
-
-
-
-
-
-
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home </div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="production_dashboard.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
 
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Stock</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="stock_in.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Add Stock </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
+                                <li class="pcoded-hasmenu">
+
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="production_dashboard.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+
+
+
+
+
+                                        </li>
+
+
+                                    </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Stock</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li>
+                                            <a href="stock_in.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Add Stock </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="view_stock_in.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li class="">
                                     <a href="grading.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
@@ -249,36 +271,36 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="stock_out.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="inventory.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="stock_out.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-
-
+                                        <li class="active">
+                                            <a href="view_stock_out.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
 
-                            </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
+
+                                    </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                             <li class="">
@@ -304,7 +326,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                  </li>
                                 </ul> 
-
+                           
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -314,7 +336,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="available_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">available certificates</span>
@@ -338,11 +360,10 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-
                             </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower</div>
-                            <ul class="pcoded-item pcoded-left-item">
 
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
+                            <ul class="pcoded-item pcoded-left-item">
 
 
                                 <li class="">
@@ -376,6 +397,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
+
                             </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
@@ -391,14 +413,14 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li>
                                     <a href="active_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="">
                                     <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
@@ -415,7 +437,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Certificate</h5>
+                                            <h5 class="m-b-10">Order items </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -423,9 +445,9 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                            </li>
                                             
-                                            <li class="breadcrumb-item"><a href="available_certificate.php">available certificates</a>
+                                            <li class="breadcrumb-item"><a href="stock_out.php">Stock out </a>
+                                            </li>
                                             </li>
 
                                         </ul>
@@ -463,7 +485,9 @@ if (in_array($position, $restricted)) {
                                             <div class="card-block">
 
                                                 <div class="form-group row">
-                                                    
+                                                    <div class="col-sm-2">
+                                                        <label>Customer name</label>
+                                                    </div>
                                                     <div class="col-sm-2">
                                                         <label>Select Crop</label>
                                                     </div>
@@ -484,7 +508,12 @@ if (in_array($position, $restricted)) {
 
 
                                                 <div class="form-group row">
-                                                    
+                                                    <div class="col-sm-2">
+
+                                                    <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
+                                                    <label id="warning_name" class="warning-text"> <span >Please enter customer name <i class="icofont icofont-warning"></i></span></label>
+                                                     
+                                                    </div>
 
                                                     <div class="col-sm-2">
 
@@ -589,123 +618,107 @@ if (in_array($position, $restricted)) {
 
                                             </div>
                                         </div>
-
                                         <div class="card">
-                                            <div class="card-header">
-                                                <h5>Available certificates </h5>
+<div class="card-header">
+    <h5>All released seed</h5>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Lot number</th>
-                                                                <th>crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Certificate type</th>
-                                                                <th>Source</th>
-                                                                <th>Date tested</th>
-                                                                <th>Expire date</th>
-                                                                <th>Added date</th>
-                                                                <th>certificate quantity</th>
-                                                                <th>available quantity</th>
-                                                                <th>added by</th>
-                                                                <th>Action</th>
+    <div class="card-header-right">
+        <ul class="list-unstyled card-option">
+            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+            <li><i class="fa fa-window-maximize full-card"></i></li>
+            <li><i class="fa fa-minus minimize-card"></i></li>
+            <li><i class="fa fa-refresh reload-card"></i></li>
+            <li><i class="fa fa-trash close-card"></i></li>
+        </ul>
+    </div>
+</div>
+<div class="card-block table-border-style">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Crop</th>
+                    <th>Variety</th>
+                    <th>Class</th>
+                    <th>Customer name</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    
+            
+                    <th>Action</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                </tr>
+            </thead>
+            <tbody>
 
-                                                            <?php
-                                                            $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
-                                 `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
-                                 INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-                                 INNER JOIN user ON user.user_ID = certificate.user_ID";
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $lot_number = $row["lot_number"];
-                                                                    $crop      = $row["crop"];
-                                                                    $variety     = $row["variety"];
-                                                                    $class     = $row["class"];
-                                                                    $type  = $row["type"];
-                                                                    $source = $row['source'];
-                                                                    $date_tested = $row['date_tested'];
-                                                                    $expire_date = $row['expiry_date'];
-                                                                    $date_added = $row['date_added'];
-                                                                    $dir = $row['directory'];
-                                                                    $certificate_quantity = $row['certificate_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $fullname = $row['fullname'];
+                <?php
+                $sql = "SELECT `stock_out_ID`, crop.crop, variety.variety, item.class,
+                 user.fullname, order_table.customer_name, `Quntity`, stock_out.date,
+                  stock_out.time FROM `stock_out` INNER JOIN item ON item.item_ID = stock_out.item_ID INNER JOIN crop
+                 ON crop.crop_ID = item.crop_ID INNER JOIN variety on variety.variety_ID = item.variety_ID INNER JOIN 
+                 user on user.user_ID = stock_out.user_ID INNER JOIN order_table on order_table.order_ID = stock_out.order_ID;";
+
+                $result = $con->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
 
 
 
+                        $ID      = $row["stock_out_ID"];
+                        $crop    = $row["crop"];
+                        $variety  = $row["variety"];
+                        $class = $row['class'];
+                        $user = $row["fullname"];
+                        $date    = $row['date'];
+                        $time = $row['time'];
+                      
+                        $quantity = $row['Quntity'];
+                        
 
 
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$lot_number</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$type</td>
-												<td>$source</td>
-                                                <td>$date_tested</td>
-                                                <td>$expire_date</td>
-                                                <td>$date_added</td>
-                                              
-                                                <td>$certificate_quantity</td>
-                                                <td>$available_quantity</td>
-                                                <td>$fullname</td>
-												
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='certificate/$dir' class='ti-bookmark-alt'></a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                        echo "
+<tr class='odd gradeX'>
+    <td>$ID</td>
+    <td>$crop</td>
+    <td>$variety</td>
+    <td>$class</td>
+    <td>$user</td>
+    <td>$quantity</t>
+    <td>$date</td>
+    <td>$time</t>
+   
 
-                                        <!-- Background Utilities table end -->
+    <td><a href='process_order.php? stock_out_ID=$ID' class='btn btn-success'>view</a></td>
+</tr>	
+";
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+                                        
+                                        <!-- Page-body end -->
                                     </div>
-                                    <!-- Page-body end -->
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
+                                <!-- Main-body end -->
 
-                            <div id="styleSelector">
+                                <div id="styleSelector">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+        <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -746,25 +759,35 @@ if (in_array($position, $restricted)) {
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+        <!-- Warning Section Ends -->
+        <!-- Required Jquery -->
+        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+        <!-- Custom js -->
+        <script src="assets/js/pcoded.min.js"></script>
+        <script src="assets/js/vertical-layout.min.js "></script>
+        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
+<?php
+
+
+
+
+
+
+
+
+?>
 
 </html>

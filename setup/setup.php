@@ -421,7 +421,7 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                  order_ID varchar(100),
                                  Quntity INT,
                                  amount INT,
-                                 date varchar(100),
+                                 date date,
                                  time varchar(100),
                                  user_ID varchar(100),
                                  FOREIGN KEY(user_ID) REFERENCES user(user_ID),
