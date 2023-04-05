@@ -42,7 +42,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -319,7 +319,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -572,7 +572,7 @@ if (in_array($position, $restricted)) {
                                                                     $assigned_time = $row['processed_time'];
                                                                     $crop = $row['crop'];
                                                                     $variety = $row['variety'];
-                                                                    $class =$row['class'];
+                                                                    $class = $row['class'];
                                                                     $processed_quantity = $row['processed_quantity'];
                                                                     $grower_name = $row['name'];
                                                                     $variety = $row['variety'];

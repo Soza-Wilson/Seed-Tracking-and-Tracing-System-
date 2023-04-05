@@ -47,7 +47,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -369,13 +369,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="auth-normal-sign-in.html">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -428,7 +428,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="production_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -445,7 +445,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="place_order.php" class="waves-effect waves-dark">
+                                    <a href="view_stock.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
                                         <span class="pcoded-mcaret"></span>
@@ -453,7 +453,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Stock out</span>
                                         <span class="pcoded-mcaret"></span>
@@ -461,14 +461,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -485,7 +485,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -506,8 +506,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -1050,7 +1050,7 @@ if (in_array($position, $restricted)) {
         $purity_perc = $_POST['purity'];
         $defects_perc = $_POST['defects'];
         $grade = "";
-        $moisture_content= $_POST['moisture_content'];
+        $moisture_content = $_POST['moisture_content'];
         $oil_content = $_POST['oil_content'];
 
         $crop_id = $_POST['farm_crop'];

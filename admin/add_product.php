@@ -92,16 +92,16 @@ if (in_array($position, $restricted)) {
 
             });
 
-            $('#select_crop').change(()=>{
+            $('#select_crop').change(() => {
 
                 let data = $('#select_crop').find(':selected');
 
                 if (data.val() == "0") {
-                
+
                 } else {
 
 
-                        
+
                 }
 
             });
@@ -109,20 +109,20 @@ if (in_array($position, $restricted)) {
 
             $('#select_variety').change(() => {
 
-             let crop = $('#select_crop').val();
-             let variety = $('#select_variety').val();
-              $.post('get_pre_price.php', {
+                let crop = $('#select_crop').val();
+                let variety = $('#select_variety').val();
+                $.post('get_pre_price.php', {
                     crop_value: crop_value,
                     variety_value: variety_value
-                    
+
                 }, data => {
 
                     $('#select_crop').val(data);
 
                 });
 
-             
-            
+
+
 
             });
 
@@ -222,7 +222,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -230,7 +230,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -238,13 +238,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -294,7 +294,7 @@ if (in_array($position, $restricted)) {
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="admin_dashboard.php" class="waves-effect waves-dark">
-                                             
+
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
@@ -321,41 +321,41 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                     </ul>
-                            
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="active">
-                                    <a href="add_product.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="set_buy_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="active">
+                                            <a href="add_product.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="set_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            </ul>
+                                        <li class="">
+                                            <a href="set_buy_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
                             </ul>
 
 
@@ -404,11 +404,31 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
 
-    </li>
+                                </li>
 
                             </ul>
 
-                            
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                    <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -426,7 +446,7 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                            
+
                                             <li class="breadcrumb-item"><a href="add_product.php">Register new product</a>
                                             </li>
                                         </ul>
@@ -441,7 +461,7 @@ if (in_array($position, $restricted)) {
                                 <div class="page-wrapper">
 
                                     <!-- Page body start -->
-                                  
+
                                     <!-- Basic Form Inputs card end -->
                                     <!-- Input Grid card start -->
                                     <div class="card">
@@ -457,7 +477,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <select id="select_crop" name="crop" class="form-control" required="">
-                                                           
+
 
 
 
@@ -466,19 +486,19 @@ if (in_array($position, $restricted)) {
 
                                                 </div>
 
-                                            
+
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-                                                        <label>Register new crop species  </label>
+                                                        <label>Register new crop species </label>
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control" name="new_crop" id="pre_basic" placeholder="Register crop" require="">
                                                     </div>
                                                 </div>
 
-                                             
 
-                                                
+
+
 
                                                 <div class="form-group row">
 
@@ -493,107 +513,107 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
 
                                                         <Input type="submit" class="btn btn-primary" name="save_crop" value="save crop">
-                                                         
-                                                      
 
-                                                       
+
+
+
                                                     </div>
 
 
 
 
 
-                                         
-                                            <div id="test_one">
+
+                                                    <div id="test_one">
 
 
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
-
-                                    
-
-                                    
-                                    <!-- Input Grid card end -->
-                                    <!-- Input Validation card start -->
-
-                                    <!-- Input Validation card end -->
-                                    <!-- Input Alignment card start -->
-
-                                    <!-- Input Alignment card end -->
-                                </div>
-
-                                <div class="card">
-                                        
-                                        <div class="card-block">
-
-                                       
-
-                                                
-
-                                            
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Register new variety </label>
                                                     </div>
-                                                    <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Register crop" require="">
-                                                    </div>
+
+
                                                 </div>
 
-                                             
-
-                                                
-
-                                                <div class="form-group row">
+                                        </div>
 
 
-                                                    </br></br></br>
-                                                    <div>
 
-                                                    </div>
 
-                                                    <br>
+                                        <!-- Input Grid card end -->
+                                        <!-- Input Validation card start -->
 
-                                                    <div class="col-sm-12">
+                                        <!-- Input Validation card end -->
+                                        <!-- Input Alignment card start -->
 
-                                                        <Input type="submit" class="btn btn-success" name="save_variety" value="save variety">
-                                                         
-                                                      
+                                        <!-- Input Alignment card end -->
+                                    </div>
 
-                                                       
-                                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-block">
 
 
 
 
 
-                                            </form>
-                                            <div id="test_one">
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <label>Register new variety </label>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Register crop" require="">
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="form-group row">
+
+
+                                                </br></br></br>
+                                                <div>
+
+                                                </div>
+
+                                                <br>
+
+                                                <div class="col-sm-12">
+
+                                                    <Input type="submit" class="btn btn-success" name="save_variety" value="save variety">
+
+
+
+
+                                                </div>
+
+
+
+
+
+                                                </form>
+                                                <div id="test_one">
+
+
+                                                </div>
 
 
                                             </div>
 
-
                                         </div>
-
                                     </div>
+                                </div>
+                                <!-- Page body end -->
                             </div>
                         </div>
-                        <!-- Page body end -->
-                    </div>
-                </div>
-                <!-- Main-body end -->
-                <div>
+                        <!-- Main-body end -->
+                        <div>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -667,21 +687,17 @@ if (in_array($position, $restricted)) {
 
 if (isset($_POST['save_crop'])) {
 
- 
+
     $object = new main();
     $object->register_crop($_POST['new_crop']);
-    
-  
 }
 
 
-if(isset ($_POST['save_variety'])){
+if (isset($_POST['save_variety'])) {
 
-   
-     $object = new main();
-     $object->register_variety($_POST['new_variety'],$_POST['crop']);
-    
 
+    $object = new main();
+    $object->register_variety($_POST['new_variety'], $_POST['crop']);
 }
 ?>
 

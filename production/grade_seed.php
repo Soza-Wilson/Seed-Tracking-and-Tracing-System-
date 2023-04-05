@@ -18,8 +18,6 @@ $quantity = $_GET['quantity'];
 if (empty($test)) {
 
     header('Location:../login.php');
-
-
 }
 
 
@@ -44,7 +42,7 @@ if (empty($test)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -63,7 +61,7 @@ if (empty($test)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grade_seed.js">
 
-</script>
+    </script>
 </head>
 
 <body>
@@ -142,7 +140,7 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <a href="index.html">
                             <span>Production</span>
                         </a>
@@ -157,7 +155,7 @@ if (empty($test)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -165,7 +163,7 @@ if (empty($test)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -173,13 +171,13 @@ if (empty($test)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -260,12 +258,12 @@ if (empty($test)) {
                                             </a>
                                         </li>
                                         <li class="active">
-                                    <a href="grading.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="grading.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
                                         <li class="">
                                             <a href="stock_out.php" class="waves-effect waves-dark">
@@ -276,14 +274,14 @@ if (empty($test)) {
                                         </li>
 
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="view_stock_out.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="inventory.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -296,31 +294,31 @@ if (empty($test)) {
                                     </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
-                                    <a href="process_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="view_processed_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="process_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="view_processed_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="labels.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                 </li>
-                                </ul> 
+                                        <li>
+                                            <a href="labels.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -441,7 +439,7 @@ if (empty($test)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="admin_pending_orders.php">Grade seed </a>
 
                                             </li>
@@ -474,24 +472,24 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            
-                                                <div class="card-header">
-                                                    <h5>Stock in details </h5>
 
-                                                    
+                                            <div class="card-header">
+                                                <h5>Stock in details </h5>
 
-                                                    <div class="card-header-right">
-                                                        <ul class="list-unstyled card-option">
-                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                            <li><i class="fa fa-minus minimize-card"></i></li>
-                                                            <li><i class="fa fa-refresh reload-card"></i></li>
-                                                            <li><i class="fa fa-trash close-card"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <form action="grade_seed.php" method="POST">
+
+
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <form action="grade_seed.php" method="POST">
                                                     <div class="form-group row">
-                                                              
+
 
                                                         <span class="pcoded-mcaret"></span>
 
@@ -561,9 +559,9 @@ if (empty($test)) {
 
 
                                                         </div>
-                                                        
 
-                                                        
+
+
 
 
 
@@ -572,44 +570,44 @@ if (empty($test)) {
 
 
 
-                                           
 
 
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+
+                                            </div>
                                         </div>
 
 
 
+                                        <!-- Background Utilities table end -->
                                     </div>
 
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Assign seed for processing</h5>
+
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
+                                            </div>
 
 
+                                        </div>
 
-                                </div>
-                            </div>
-
-
-
-                            <!-- Background Utilities table end -->
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Assign seed for processing</h5>
-
-                                <div class="card-header-right">
-                                    <ul class="list-unstyled card-option">
-                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                        <li><i class="fa fa-trash close-card"></i></li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-
-                            <div class="card-block">
+                                        <div class="card-block">
 
 
 
@@ -621,10 +619,10 @@ if (empty($test)) {
 
 
 
-                                            
-                                           
 
-                                         
+
+
+
 
 
 
@@ -639,19 +637,19 @@ if (empty($test)) {
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <input type="text" id="assign_quantity" class="form-control" name="assign_quantity" placeholder="-" require="">
-                                                    <label id="warning_assigned" class="warning-text"> <span >Please add quantity  <i class="icofont icofont-warning"></i></span></label>
+                                                    <label id="warning_assigned" class="warning-text"> <span>Please add quantity <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                             </div>
 
-                                            
 
 
-                                            
-                                      
+
+
+
 
 
                                             <div class="form-group row">
-                                                
+
 
 
 
@@ -669,23 +667,23 @@ if (empty($test)) {
                                                 .
                                                 <div class="form-group">
 
-                                                
-                                                  <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
-                                                   
+
+                                                    <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
+
                                                     <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                 </div>
 
 
-    
 
-                                          
+
+
 
 
 
                                             </div>
 
-    </form>
+                                            </form>
 
                                         </div>
                                         <!-- Input Grid card end -->
@@ -696,26 +694,26 @@ if (empty($test)) {
 
                                         <!-- Input Alignment card end -->
                                     </div>
-                            
-                                
-                           
 
 
 
-                            <!-- Background Utilities table end -->
+
+
+
+                                    <!-- Background Utilities table end -->
+                                </div>
+                                <!-- Page-body end -->
+                            </div>
                         </div>
-                        <!-- Page-body end -->
+                        <!-- Main-body end -->
+
+                        <div id="styleSelector">
+
+                        </div>
                     </div>
-                </div>
-                <!-- Main-body end -->
-
-                <div id="styleSelector">
-
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -786,9 +784,8 @@ if (empty($test)) {
 
 if (isset($_POST['assign_seed'])) {
 
-   $object = new main();
-   $object -> assign_prcessing_quantity($_POST['stock_in_id'],$_POST['assign_quantity']);
-
+    $object = new main();
+    $object->assign_prcessing_quantity($_POST['stock_in_id'], $_POST['assign_quantity']);
 }
 
 

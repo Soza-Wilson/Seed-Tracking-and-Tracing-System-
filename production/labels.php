@@ -42,7 +42,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -126,7 +126,7 @@ if (in_array($position, $restricted)) {
                             <i class="ti-menu"></i>
                         </a>
                         <div class="mobile-search waves-effect waves-light">
-                            
+
                         </div>
 
                         <a href="#">production</a>
@@ -141,7 +141,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -149,7 +149,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -257,14 +257,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -426,7 +426,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="labels.php">Generate Labels</a>
                                             </li>
 

@@ -7,6 +7,7 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$user_id = $_SESSION['user'];
 $position = $_SESSION['position'];
 
 if (empty($test)) {
@@ -14,11 +15,51 @@ if (empty($test)) {
     header('Location:../login.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician", "field_officer");
 
-if (in_array($position, $restricted)) {
+$notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
+
+if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
+}
+$stock_out_ID = $_GET["stock_out_ID"];
+
+if (!empty($stock_out_ID)) {
+
+
+    $sql = "SELECT `stock_out_ID`, order_table.order_ID, crop.crop, variety.variety, item.class,
+                 user.fullname, order_table.customer_name, order_table.order_type,`Quntity`, stock_out.date,
+                  stock_out.time FROM `stock_out` INNER JOIN item ON item.item_ID = stock_out.item_ID INNER JOIN crop
+                 ON crop.crop_ID = item.crop_ID INNER JOIN variety on variety.variety_ID = item.variety_ID INNER JOIN 
+                 user on user.user_ID = stock_out.user_ID INNER JOIN order_table on order_table.order_ID = stock_out.order_ID WHERE `stock_out_ID`='$stock_out_ID'";
+
+
+
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+
+
+            $crop = $row["crop"];
+
+
+            $variety = $row["variety"];
+            $class = $row["class"];
+            $order_ID = $row["order_ID"];
+            $customer = $row["customer_name"];
+            $order_type = $row["order_type"];
+
+            $quantity = $row["Quntity"];
+
+            $user_requested = $row["fullname"];
+            $dat = $row["date"];
+            $time = $row["time"];
+
+            $object = new main();
+            $date = $object->change_date_format($dat);
+        }
+    }
 }
 
 ?>
@@ -58,7 +99,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/used_certificates.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
+
     </script>
 </head>
 
@@ -128,9 +170,20 @@ if (in_array($position, $restricted)) {
                             <i class="ti-menu"></i>
                         </a>
                         <div class="mobile-search waves-effect waves-light">
-
+                            <div class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <a href="">production</a>
+
+                        <a href="index.html">
+                            <span>Production</span>
+                        </a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -139,9 +192,6 @@ if (in_array($position, $restricted)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
 
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
@@ -163,7 +213,6 @@ if (in_array($position, $restricted)) {
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
-                                    </li>
 
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
@@ -193,13 +242,13 @@ if (in_array($position, $restricted)) {
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
+
                             <div class="p-15 p-b-0">
 
 
@@ -213,7 +262,8 @@ if (in_array($position, $restricted)) {
 
 
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
+                            </ul>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="production_dashboard.php" class="waves-effect waves-dark">
@@ -247,6 +297,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
+
                                 <li class="">
                                     <a href="stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-shopping-cart-full"></i><b>FC</b></span>
@@ -255,7 +306,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="active">
                                     <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
@@ -269,6 +320,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
 
 
 
@@ -312,7 +364,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li>
                                     <a href="available_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">available certificates</span>
@@ -320,7 +372,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="active">
+                                <li>
                                     <a href="used_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
@@ -335,7 +387,6 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
 
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower</div>
@@ -376,6 +427,7 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
 
                             <ul class="pcoded-item pcoded-left-item">
@@ -389,20 +441,22 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li>
                                     <a href="active_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="">
                                     <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -413,7 +467,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Certificate</h5>
+                                            <h5 class="m-b-10">Stock out</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -423,7 +477,7 @@ if (in_array($position, $restricted)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="used_certificates.php">used certificates</a>
+                                            <li class="breadcrumb-item"><a href="view_stock_out.php">View Stock out</a>
                                             </li>
 
                                         </ul>
@@ -452,255 +506,256 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
+
+
                                         <div class="card">
-                                            <div class="card-header">
-                                                <h5>Filter </h5>
+                                            <form action="admin_view_order_items.php" method="POST">
+                                                <div class="card-header">
+                                                    <h5>Order Details</h5>
 
-
-                                            </div>
-                                            <div class="card-block">
-
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-2">
-                                                        <label>Select Crop</label>
+                                                    <div class="card-header-right">
+                                                        <ul class="list-unstyled card-option">
+                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                        </ul>
                                                     </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <label>Select Class</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group row">
-
-
-                                                    <div class="col-sm-2">
-
-
-                                                        <select name="select_crop" id="select_crop" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-
-
-                                                        <select name="select_variety" id="select_variety" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-                                                    <div class="col-sm-1">
-
-
-                                                        <select name="select_class" id="select_class" class="form-control">
-                                                            <option value="not_selected">Class</option>
-                                                            <option value="pre_basic">Pre-Basic</option>
-                                                            <option value="basic">Basic</option>
-                                                            <option value="certified">Certified</option>
-
-
-                                                        </select>
-                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                        <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                        <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
-
-
-
-
-
-                                                    <div class="col-sm-1">
-
-
-
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
-
-
-
-                                                    </div>
-                                                </div>
-
-
-                                                <form action="csv_handler.php" method="POST">
                                                     <div class="form-group row">
-                                                        <div class="col-sm-3">
 
 
-
-                                                            <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
-
-
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
+                                                        <span class="pcoded-mcaret"></span>
 
 
+                                                        <div class="col-sm-2">
 
-
-
-                                                            </select>
+                                                            <label class="badge badge-primary "> order ID</label>
+                                                            <input id="stock_in_id" type="text" class="form-control " name="stock_in_id" value="<?php echo $order_ID; ?>" require="">
+                                                            <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
+                                                            <input type="hidden" id="user_name" value="<?php echo $test; ?>">
 
                                                         </div>
 
+
+
+
+
+
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Added By</label>
+                                                            <input id="requested_user" type="text" class="form-control " name="requested_user" value="<?php echo $user_requested; ?>" require="">
+
+
+
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary "> Customer name</label>
+                                                            <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $customer; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary "> Order Type</label>
+                                                            <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $order_type; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary "> Date</label>
+                                                            <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $date; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="col-sm-1">
+
+                                                            <label class="badge badge-primary ">Time</label>
+                                                            <input id="time" type="text" class="form-control " name="time" value="<?php echo $time; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="card-block">
+
+
+                                            </form>
+
+
+                                            <form action="finance_csv_handler.php" method="POST">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        <input type="hidden" name="customer_name" id="customer_name">
+                                                        <input type="hidden" name="order_id" id="order_id">
+                                                        <input type="hidden" name="approvalId" id="approvalId">
+
+                                                        <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
+                                                        <input type="hidden" name="oustanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
+
+
+
+
+
+
+
+                                                        </select>
+
                                                     </div>
-                                                </form>
 
-                                            </div>
-                                        </div>
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Used certificates </h5>
-
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
                                                 </div>
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Lot number</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Certificate type</th>
-                                                                <th>Source</th>
-                                                                <th>Date tested</th>
-                                                                <th>Expire date</th>
-                                                                <th>Added date</th>
-                                                                <th>Certificate quantity</th>
-                                                                <th>Available quantity</th>
-                                                                <th>Added by</th>
-                                                                <th>Action</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-                                                            $date = date("Y-m-d");
-                                                            $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
-                                 `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
-                                 INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-                                 INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0";
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $lot_number = $row["lot_number"];
-                                                                    $crop      = $row["crop"];
-                                                                    $variety     = $row["variety"];
-                                                                    $class     = $row["class"];
-                                                                    $type  = $row["type"];
-                                                                    $source = $row['source'];
-                                                                    $date_tested = $row['date_tested'];
-                                                                    $expire_date = $row['expiry_date'];
-                                                                    $date_added = $row['date_added'];
-                                                                    $dir = $row['directory'];
-                                                                    $certificate_quantity = $row['certificate_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $fullname = $row['fullname'];
+                                            </form>
 
 
 
 
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$lot_number</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$type</td>
-												<td>$source</td>
-                                                <td>$date_tested</td>
-                                                <td>$expire_date</td>
-                                                <td>$date_added</td>
-                                              
-                                                <td>$certificate_quantity</td>
-                                                <td>$available_quantity</td>
-                                                <td>$fullname</td>
-												
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='certificate/$dir' class='ti-bookmark-alt'></a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
                                         </div>
-
-                                        <!-- Background Utilities table end -->
                                     </div>
-                                    <!-- Page-body end -->
                                 </div>
                             </div>
-                            <!-- Main-body end -->
+                        </div>
 
-                            <div id="styleSelector">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Details</h5>
+
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                        <li><i class="fa fa-trash close-card"></i></li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Crop:</label>
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <select class="form-control trans_details " id="crop">
+                                            <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
+
+                                            <select>
+                                                <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID; ?>">
+                                                <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Variety:</label>
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                        <select class="form-control trans_details " id="variety">
+                                            <option value="<?php echo $varietyId; ?>"><?php echo $variety; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary">Class:</label>
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <select class="form-control trans_details " id="class">
+                                            <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-1">
+                                        <label class="badge badge-primary ">Quantity (Kgs):</label>
+                                    </div>
+
+
+
+
+                                    <div class="">
+                                        <input type="text" class="form-control trans_details " name="dob" id="ogQuantity" required="" value="<?php echo $quantity; ?>">
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="form-group row">
+
+
+                                    <div class="col-sm-0">
+                                        <button class=" btn btn-danger" id='back' name='back' onclick=history.back()><i class='icofont icofont-warning-alt'></i>Back</button>
+                                    </div>
+
+                                </div>
+
 
                             </div>
+
+
+
+
+                            <!-- Background Utilities table end -->
                         </div>
+
+                        <!-- Background Utilities table end -->
                     </div>
+                    <!-- Page-body end -->
                 </div>
             </div>
+            <!-- Main-body end -->
+
+            <div id="styleSelector">
+
+            </div>
         </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <!-- Warning Section Starts -->

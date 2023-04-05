@@ -6,16 +6,14 @@ Ob_start();
 include('../class/main.php');
 include('../class/production.php');
 
-session_start(); 
+session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 
-if(empty($test)){
+if (empty($test)) {
 
     header('Location:../login.php');
-
-
 }
 
 $restricted = array("production_admin", "system_administrator", "lab_technician", "field_officer");
@@ -34,8 +32,8 @@ if (in_array($position, $restricted)) {
 
 $data_list = new production();
 
-$failed_data[] = $data_list -> get_active_test("failed");
-$passed_data[] = $data_list -> get_active_test("passed");
+$failed_data[] = $data_list->get_active_test("failed");
+$passed_data[] = $data_list->get_active_test("passed");
 
 
 
@@ -52,14 +50,14 @@ $passed_data[] = $data_list -> get_active_test("passed");
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-  
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -77,11 +75,11 @@ $passed_data[] = $data_list -> get_active_test("passed");
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" >
+    <script type="text/javascript">
 
 
 
-</script>
+    </script>
 
 
 </head>
@@ -113,7 +111,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -125,7 +123,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -161,20 +159,20 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <span>production</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -182,7 +180,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -190,13 +188,13 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -208,7 +206,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -221,7 +219,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -233,7 +231,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                
+
                             </div>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
@@ -279,14 +277,14 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </li>
 
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -303,7 +301,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -324,11 +322,11 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
 
-                    
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -363,13 +361,13 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                 </li>
 
                             </ul>
-                    
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower</div>
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -384,7 +382,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -407,35 +405,35 @@ $passed_data[] = $data_list -> get_active_test("passed");
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
 
-<ul class="pcoded-item pcoded-left-item">
+                            <ul class="pcoded-item pcoded-left-item">
 
-   
-<li class="">
-        <a href="new_test.php" class="waves-effect waves-dark">
-            <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
-            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
-            <span class="pcoded-mcaret"></span>
-        </a>
-    </li>
 
-    <li >
-        <a href="active_test.php" class="waves-effect waves-dark">
-            <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
-            <span class="pcoded-mcaret"></span>
-        </a>
-    </li>   
-    <li class="active">
-        <a href="test_history.php" class="waves-effect waves-dark">
-            <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
-            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
-            <span class="pcoded-mcaret"></span>
-        </a>
-    </li>
-</ul>
-
-</ul>
+                                <li class="">
+                                    <a href="new_test.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
+
+                                <li>
+                                    <a href="active_test.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="test_history.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -447,7 +445,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Test History</h5>
-                                          
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -455,7 +453,7 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="test_history.php">Test History</a>
                                             </li>
                                         </ul>
@@ -468,57 +466,57 @@ $passed_data[] = $data_list -> get_active_test("passed");
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                  
+
                                     <!-- Page body start -->
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                
-                        
-                                        
-                                         </form>
-                                                                       
-                                                                   
-                                                                     
-                                                                    </div>
-                                                                </div>
 
-                               
-                                                                <div class="row">
+
+
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Lab test list </h5>
                                                         <div class="card-block table-border-style">
-                                                <div class="table-responsive" id="table_test">
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                        <th>test id</th>
-                                                                <th>Source</th>
-                                                                <th>Stock in id</th>
-                                                                <th>Area</th>
-                                                                <th>Physical address</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Stock in date</th>
-                                                                <th>Tested by</th>
-                                                                <th>Quantity</th>
-                                                                <th>Result</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>test id</th>
+                                                                            <th>Source</th>
+                                                                            <th>Stock in id</th>
+                                                                            <th>Area</th>
+                                                                            <th>Physical address</th>
+                                                                            <th>Crop</th>
+                                                                            <th>Variety</th>
+                                                                            <th>Class</th>
+                                                                            <th>Stock in date</th>
+                                                                            <th>Tested by</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Result</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
 
-                                                       
-                                                        <?php  
-                                                       
 
-                                                       global $con;
-                                                       $data[] = "";
-                                               
-                                                       $sql ="SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
+                                                                        <?php
+
+
+                                                                        global $con;
+                                                                        $data[] = "";
+
+                                                                        $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
                                                        farm.class,user.fullname,farm.area_name,
                                                        farm.physical_address,lab_test.germination_percentage,
                                                        lab_test.shelling_percentage,lab_test.purity_percentage,
@@ -529,26 +527,26 @@ $passed_data[] = $data_list -> get_active_test("passed");
                                                         INNER JOIN user ON user.user_ID = lab_test.user_ID INNER JOIN stock_in 
                                                         ON stock_in.stock_in_ID = lab_test.stock_in_ID ORDER BY lab_test.test_ID DESC
                                                        ";
-                                               
-                                               $result =  $con->query($sql);
-                                               if ($result->num_rows > 0) {
-                                                   while ($row = $result->fetch_assoc()) {
-                                                 
-                                                       $data[0] = $row["test_ID"];
-                                                       $data[1] = $row["source"];
-                                                       $data[2] = $row["stock_in_ID"];
-                                                       $data[3] = $row["area_name"];
-                                                       $data[4] = $row["physical_address"];
-                                                       $data[5]  = $row["crop"];
-                                                       $data[6]  = $row["variety"];
-                                                       $data[7] = $row["class"];
-                                                       $data[8] = $row["date"];
-                                                       $data[9] = $row["fullname"];
-                                                       $data[10] = $row["quantity"];
-                                                       $data[11] = $row["grade"];
-                                                      
-                                               
-                                                           echo"
+
+                                                                        $result =  $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+
+                                                                                $data[0] = $row["test_ID"];
+                                                                                $data[1] = $row["source"];
+                                                                                $data[2] = $row["stock_in_ID"];
+                                                                                $data[3] = $row["area_name"];
+                                                                                $data[4] = $row["physical_address"];
+                                                                                $data[5]  = $row["crop"];
+                                                                                $data[6]  = $row["variety"];
+                                                                                $data[7] = $row["class"];
+                                                                                $data[8] = $row["date"];
+                                                                                $data[9] = $row["fullname"];
+                                                                                $data[10] = $row["quantity"];
+                                                                                $data[11] = $row["grade"];
+
+
+                                                                                echo "
                                                        
                                                       
                                                             <tr>
@@ -575,66 +573,64 @@ $passed_data[] = $data_list -> get_active_test("passed");
 
                                                             </tr>
                                                            ";
+                                                                            }
+                                                                        }
+                                                                        ?>
 
-                                                   }
-                                                
-                                                }
-                                                           ?>
-                                                           
-                                                        </tbody>
-                                                    </table>
+                                                                    </tbody>
+                                                                </table>
 
-                                                    
-                                                </div>
-                                            </div>
-                                           
-                                                </div>
-                                                
-                                            </div>
-                        
-                                        
-                                         </form>
-                                                                       
-                                                                   
-                                                                     
-                                                                    </div>
-                                                                </div>                                 
-                                                            </div>
-
-                                                           
-                                                            <!-- Basic Form Inputs card end -->
-                                                            <!-- Input Grid card start -->
-                                                            
 
                                                             </div>
-                                                            <!-- Input Grid card end -->
-                                                            <!-- Input Validation card start -->
-                                                           
-                                                                        <!-- Input Validation card end -->
-                                                                        <!-- Input Alignment card start -->
-                                                                      
-                                                                        <!-- Input Alignment card end -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Page body end -->
                                                         </div>
-                                                    </div>
-                                                    <!-- Main-body end -->
-                                                    <div >
 
                                                     </div>
+
                                                 </div>
+
+
+                                                </form>
+
+
+
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+
                                 </div>
+                                <!-- Input Grid card end -->
+                                <!-- Input Validation card start -->
+
+                                <!-- Input Validation card end -->
+                                <!-- Input Alignment card start -->
+
+                                <!-- Input Alignment card end -->
                             </div>
+                        </div>
+                    </div>
+                    <!-- Page body end -->
+                </div>
+            </div>
+            <!-- Main-body end -->
+            <div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
-                            <!-- Warning Section Starts -->
-                            <!-- Older IE warning message -->
-<!--[if lt IE 10]>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
 <div class="ie-warning">
     <h1>Warning!!</h1>
     <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
@@ -676,32 +672,33 @@ $passed_data[] = $data_list -> get_active_test("passed");
     <p>Sorry for the inconvenience!</p>
 </div>
 <![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
-<script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-<script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-<!-- waves js -->
-<script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
 
-<!-- modernizr js -->
-<script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
-<!-- Custom js -->
-<script src="assets/js/pcoded.min.js"></script>
-<script src="assets/js/vertical-layout.min.js "></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- Custom js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js "></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 <?php
 
 
- 
 
- 
 
-?>   
+
+
+?>
+
 </html>

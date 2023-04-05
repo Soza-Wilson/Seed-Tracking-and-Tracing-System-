@@ -14,7 +14,7 @@ if (empty($test)) {
     header('Location:../login.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician","warehouse_officer");
+$restricted = array("production_admin", "system_administrator", "lab_technician", "warehouse_officer");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -42,7 +42,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
- 
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -151,7 +151,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -159,7 +159,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -167,13 +167,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -274,7 +274,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -291,7 +291,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -312,8 +312,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -333,7 +333,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="used_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -341,7 +341,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -353,8 +353,8 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -369,7 +369,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -378,7 +378,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="inspection.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -436,7 +436,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="grading.php">Grade new stock</a>
                                             </li>
 
@@ -482,30 +482,30 @@ if (in_array($position, $restricted)) {
                                                                 <h5 class="modal-title">Grade</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Stock in ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                              
-                                                                <th>SRN</th>
-                                                                <th>Added by</th>
-                                                                <th>added date</th>
-                                                                <th>Action</th>
+                                                                <div class="card-block table-border-style">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Stock in ID</th>
+                                                                                    <th>Crop</th>
+                                                                                    <th>Variety</th>
+                                                                                    <th>Class</th>
+                                                                                    <th>Quantity</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                                                    <th>SRN</th>
+                                                                                    <th>Added by</th>
+                                                                                    <th>added date</th>
+                                                                                    <th>Action</th>
 
-                                                            <?php
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <?php
 
 
-                                                            $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
+                                                                                $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
                               `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
                                `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
                               INNER JOIN user ON stock_in.user_ID = user.user_ID 
@@ -513,31 +513,31 @@ if (in_array($position, $restricted)) {
                               INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
                               INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' ORDER BY `stock_in_ID` DESC";
 
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $stock_in_id = $row['stock_in_ID'];
-                                                                    $crop      = $row['crop'];
-                                                                    $source = $row['source'];
-                                                                    $source_name = $row['name'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $quantity     = $row['quantity'];
-                                                                    $used_quantity = $row['used_quantity'];
-                                                                    $available_quantity = $row['available_quantity'];
-                                                                    $date_added = $row['date'];
-                                                                    $user = $row['fullname'];
-                                                                    $srn = $row['SLN'];
-                                                                    $dir = $row['supporting_dir'];
+                                                                                $result = $con->query($sql);
+                                                                                if ($result->num_rows > 0) {
+                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                        $stock_in_id = $row['stock_in_ID'];
+                                                                                        $crop      = $row['crop'];
+                                                                                        $source = $row['source'];
+                                                                                        $source_name = $row['name'];
+                                                                                        $variety     = $row['variety'];
+                                                                                        $class     = $row['class'];
+                                                                                        $quantity     = $row['quantity'];
+                                                                                        $used_quantity = $row['used_quantity'];
+                                                                                        $available_quantity = $row['available_quantity'];
+                                                                                        $date_added = $row['date'];
+                                                                                        $user = $row['fullname'];
+                                                                                        $srn = $row['SLN'];
+                                                                                        $dir = $row['supporting_dir'];
 
-                                                                    $object = new main();
-                                                                    $newDate = $object-> change_date_format($date_added);
-
-
+                                                                                        $object = new main();
+                                                                                        $newDate = $object->change_date_format($date_added);
 
 
 
-                                                                    echo "
+
+
+                                                                                        echo "
 											<tr class='odd gradeX'>
                                                  <td>$stock_in_id</td>
 											    <td>$crop</td>
@@ -556,13 +556,13 @@ if (in_array($position, $restricted)) {
                                                 </td>
 											</tr>	
 										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -577,7 +577,7 @@ if (in_array($position, $restricted)) {
 
                                         <div class="card">
                                             <div class="card-header">
-                                                
+
                                                 <h5><span>View graded stock</span></h5>
 
                                                 <div class="card-header-right">
@@ -603,7 +603,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Date</th>
                                                                 <th>Time</th>
                                                                 <th>Action</th>
-                                                                
+
 
                                                             </tr>
                                                         </thead>
@@ -611,7 +611,7 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                           $sql="SELECT `grade_ID`,user.fullname,`date`,`time`,`grade_out_quantity`,`trash_quantity`,`stock_in_ID` FROM `grading` INNER JOIN user ON grading.user_ID = user.user_ID";
+                                                            $sql = "SELECT `grade_ID`,user.fullname,`date`,`time`,`grade_out_quantity`,`trash_quantity`,`stock_in_ID` FROM `grading` INNER JOIN user ON grading.user_ID = user.user_ID";
                                                             $result = $con->query($sql);
                                                             if (!empty($result)) {
                                                                 while ($row = $result->fetch_assoc()) {
@@ -624,7 +624,7 @@ if (in_array($position, $restricted)) {
                                                                     $trash_quantity = $row['trash_quantity'];
 
                                                                     $object = new main();
-                                                                    $newDate = $object-> change_date_format($date_added);
+                                                                    $newDate = $object->change_date_format($date_added);
 
 
 
@@ -652,9 +652,7 @@ if (in_array($position, $restricted)) {
 											</tr>	
 										";
                                                                 }
-                                                            }
-
-                                                            else{
+                                                            } else {
 
                                                                 echo "
 											<tr class='odd gradeX'>
@@ -677,9 +675,6 @@ if (in_array($position, $restricted)) {
                                                 </td>
 											</tr>	
 										";
-
-
-
                                                             }
                                                             ?>
                                                         </tbody>

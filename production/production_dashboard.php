@@ -15,7 +15,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","finance_admin","cashier");
+$restricted = array("system_administrator", "finance_admin", "cashier");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -43,7 +43,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-  
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -129,6 +129,11 @@ if (in_array($position, $restricted)) {
 
         function Stock_bar_chart() {
 
+            <?php
+            $sql = "SELECT DATE_FORMAT(stock_in.date, '%M') AS month_name, SUM(stock_in.available_quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY stock_in.month_name";
+
+            ?>
+
 
             const labels = [
                 'January',
@@ -204,16 +209,27 @@ if (in_array($position, $restricted)) {
         function stock_pie_chart() {
 
 
+            <?php
+
+            $sql = "SELECT stock_in.status, SUM(stock_in.available_quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY stock_in.status;";
+            $result = mysqli_query($con, $sql);
+
+            $result = $con->query($sql);
+            foreach ($result as $row) {
+                $labels[] = $row['status'];
+                $amount[] = $row['quantity'];
+            }
+
+
+            ?>
+
+
 
             const data = {
-                labels: [
-                    'Certified',
-                    'Uprocessed',
-                    'Uncertified'
-                ],
+                labels: <?php echo json_encode($labels) ?>,
                 datasets: [{
                     label: 'My First Dataset',
-                    data: [300, 50, 100],
+                    data: <?php echo json_encode($amount) ?>,
                     backgroundColor: [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
@@ -240,35 +256,30 @@ if (in_array($position, $restricted)) {
 
         function seed_stock() {
 
-            
 
-          <?php 
-            
-$sql="SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
+
+            <?php
+
+            $sql = "SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
  INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
-$result = mysqli_query($con,$sql);
+            $result = mysqli_query($con, $sql);
 
-  $result = $con->query($sql);
-  foreach($result as $row){
-    $day[] = $row['crop'];
-    $amount[] = $row['quantity'];
-   
-
-
+            $result = $con->query($sql);
+            foreach ($result as $row) {
+                $day[] = $row['crop'];
+                $amount[] = $row['quantity'];
+            }
 
 
-  }
-            
-            
             ?>
-                 
-            
 
-           let test = <?php echo json_encode($amount)?>;
-          
-              
+
+
+            let test = <?php echo json_encode($amount) ?>;
+
+
             const data = {
-                labels: <?php echo json_encode($day)?>,
+                labels: <?php echo json_encode($day) ?>,
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
@@ -307,27 +318,27 @@ $result = mysqli_query($con,$sql);
                     ],
                     borderWidth: 1,
 
-                    data: <?php echo json_encode($amount)?>,
+                    data: <?php echo json_encode($amount) ?>,
                 }]
             };
 
             const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-};
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+            };
             const myChart = new Chart(
                 document.getElementById('seed_stock'),
                 config
             );
 
-    
+
 
         }
     </script>
@@ -388,7 +399,7 @@ $result = mysqli_query($con,$sql);
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-        <nav class="navbar header-navbar pcoded-header">
+            <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
@@ -418,7 +429,7 @@ $result = mysqli_query($con,$sql);
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                          
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -426,7 +437,7 @@ $result = mysqli_query($con,$sql);
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -434,13 +445,13 @@ $result = mysqli_query($con,$sql);
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -523,14 +534,14 @@ $result = mysqli_query($con,$sql);
                                 </li>
 
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -543,7 +554,7 @@ $result = mysqli_query($con,$sql);
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -564,8 +575,8 @@ $result = mysqli_query($con,$sql);
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -616,8 +627,8 @@ $result = mysqli_query($con,$sql);
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -632,7 +643,7 @@ $result = mysqli_query($con,$sql);
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -680,10 +691,6 @@ $result = mysqli_query($con,$sql);
                             </ul>
 
 
-                            
-                              
-
-                                
 
 
 
@@ -691,8 +698,12 @@ $result = mysqli_query($con,$sql);
 
 
 
-                    
-                            
+
+
+
+
+
+
                         </div>
                     </nav>
                     <div class="pcoded-content">

@@ -145,8 +145,8 @@ if (in_array($position, $restricted)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                           
-                            
+
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -154,7 +154,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -162,13 +162,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -261,14 +261,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -286,7 +286,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -307,8 +307,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -328,7 +328,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="used_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -336,7 +336,7 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li>
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -348,8 +348,8 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                
-                            <li class="">
+
+                                <li class="">
                                     <a href="grower.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -364,7 +364,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -386,8 +386,8 @@ if (in_array($position, $restricted)) {
 
                             <ul class="pcoded-item pcoded-left-item">
 
-                               
-                            <li class="active">
+
+                                <li class="active">
                                     <a href="new_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
@@ -401,7 +401,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>   
+                                </li>
                                 <li>
                                     <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
@@ -409,8 +409,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-    </ul>
-                            
+                            </ul>
+
                             </ul>
                         </div>
                     </nav>
@@ -430,7 +430,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="new_test.php">add lab test</a>
                                             </li>
 

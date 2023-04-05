@@ -26,7 +26,7 @@ if (in_array($position, $restricted)) {
 
 
 <head>
-    <title>MUSECO </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -240,34 +240,29 @@ if (in_array($position, $restricted)) {
 
         function seed_stock() {
 
-            
 
-          <?php 
-            
-$sql="SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
+
+            <?php
+
+            $sql = "SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
  INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
-$result = mysqli_query($con,$sql);
+            $result = mysqli_query($con, $sql);
 
-  $result = $con->query($sql);
-  foreach($result as $row){
-    $day[] = $row['crop'];
-    $amount[] = $row['quantity'];
-   
-
-
+            $result = $con->query($sql);
+            foreach ($result as $row) {
+                $day[] = $row['crop'];
+                $amount[] = $row['quantity'];
+            }
 
 
-  }
-            
-            
             ?>
-                 
-            
 
-          
+
+
+
 
             const data = {
-                labels: <?php echo json_encode($day)?>,
+                labels: <?php echo json_encode($day) ?>,
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
@@ -306,27 +301,27 @@ $result = mysqli_query($con,$sql);
                     ],
                     borderWidth: 1,
 
-                    data: <?php echo json_encode($amount)?>,
+                    data: <?php echo json_encode($amount) ?>,
                 }]
             };
 
             const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-};
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+            };
             const myChart = new Chart(
                 document.getElementById('seed_stock'),
                 config
             );
 
-    
+
 
         }
     </script>
@@ -418,7 +413,7 @@ $result = mysqli_query($con,$sql);
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -426,7 +421,7 @@ $result = mysqli_query($con,$sql);
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -481,155 +476,155 @@ $result = mysqli_query($con,$sql);
 
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
-                        
-                                <li class="pcoded-hasmenu">
 
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="active">
-                                            <a href="admin_dashboard.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
+                            <li class="pcoded-hasmenu">
 
-
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="active">
+                                        <a href="admin_dashboard.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
 
 
 
 
-                                        </li>
 
 
-                                    </ul>
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="">
-                                            <a href="add_user.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="view_registered_users.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Users</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="">
-                                            <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                        <li class="">
-                                            <a href="add_product.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="">
-                                            <a href="set_prices.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell prices</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                        <li class="">
-                                            <a href="set_prices.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li>
-                                            <a href="admin_pending_orders.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="admin_approved_orders.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="admin_denied_orders.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="admin_processed_orders.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                    </li>
 
 
-                                        <li class="">
-                                            <a href="admin_all_orders.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                </ul>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="add_user.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="view_registered_users.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Users</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                                    </ul>
+                                </ul>
 
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                                <li class="">
-                                    <a href="view_ledger.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
+                                    <li class="">
+                                        <a href="add_product.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-    </li>
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                            </ul>
+                                </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li>
+                                        <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                                <li class="">
-                                    <a href="grant_access_pending.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-lock"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
 
-                                    <a href="grant_access_approved.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-unlock"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
+                                    <li class="">
+                                        <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-    </li>
+                                </ul>
 
-                            </ul>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
+                                <ul class="pcoded-item pcoded-left-item">
+
+                                    <li class="">
+                                        <a href="view_ledger.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                                <ul class="pcoded-item pcoded-left-item">
+
+                                    <li class="">
+                                        <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                        <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                    </li>
+
+                                </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">

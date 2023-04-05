@@ -61,7 +61,7 @@ if (empty($test)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-           
+
             $('#get_data').click(() => {
 
 
@@ -77,7 +77,7 @@ if (empty($test)) {
                     fromDateValue: fromDateValue,
                     toDateValue: toDateValue,
                     typeValue: typeValue,
-                    bankAccount: bankAccount   
+                    bankAccount: bankAccount
                 }, data => {
                     $('#ledger_table').html(data);
 
@@ -95,7 +95,7 @@ if (empty($test)) {
                 data_value: data_value
             }, function(data) {
                 $('#select_bank_name').html(data);
-                
+
 
             });
 
@@ -194,7 +194,7 @@ if (empty($test)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                          
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -202,7 +202,7 @@ if (empty($test)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -260,7 +260,7 @@ if (empty($test)) {
 
                                 <li class="pcoded-hasmenu">
 
-                                <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="admin_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -276,7 +276,7 @@ if (empty($test)) {
                                         </li>
 
 
-                             
+
 
 
                                     </ul>
@@ -298,103 +298,41 @@ if (empty($test)) {
                                         </li>
 
                                     </ul>
-                          
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="add_product.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register Product</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="add_product.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register Product</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="set_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell Prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            </ul>
-                          
+                                        <li class="">
+                                            <a href="set_prices.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback Prices</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-
-
-
-
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li>
-                                    <a href="admin_pending_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_approved_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_denied_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_processed_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-
-                                <li class="">
-                                    <a href="admin_all_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                            </ul>
-
-
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
-                            <ul class="pcoded-item pcoded-left-item">
-
-                                <li class="active">
-                                    <a href="view_ledger.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-
-                                </li>
+                                    </ul>
 
 
 
@@ -402,10 +340,90 @@ if (empty($test)) {
 
 
 
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li>
+                                            <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
 
-                            </ul>
-                            </li>
+                                        <li class="">
+                                            <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+
+                                        <li class="active">
+                                            <a href="view_ledger.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+                                        </li>
+
+
+
+
+
+
+
+
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+
+                                        <li class="">
+                                            <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+                                            <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
 
                         </div>
                     </nav>
@@ -424,7 +442,7 @@ if (empty($test)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                           
+
                                             <li class="breadcrumb-item"><a href="view_ledger.php">Ledger</a>
                                             </li>
                                         </ul>
@@ -472,43 +490,58 @@ if (empty($test)) {
                                                         </div>
                                                     </div>
 
-                                                        
+
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-3">
+                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
+                                                            <option value="type_not_selected">Select ledger Type</option>
+                                                            <option value="all">all</option>
+                                                            <option value="credit">credit</option>
+                                                            <option value="debit">debit</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
+                                                            <option value="type_not_selected">Select Bank Account</option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
 
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
-                                                            <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                                <option value="type_not_selected">Select ledger Type</option>
-                                                                <option value="all">all</option>
-                                                                <option value="credit">credit</option>
-                                                                <option value="debit">debit</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                                            <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
-                                                                                <option value="type_not_selected">Select Bank Account</option>
+                                                    <div class="col-sm-3">
 
-                                                                            </select>
-                                                                        </div>
+                                                        <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
 
-                                                        <div class="col-sm-2">
-                                                            <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                        </div>
-
-
-                                                        <div class="col-sm-3">
-
-                                                            <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
-
-                                                            <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
-                                                        </div>
+                                                        <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                     </div>
+                                                </div>
 
+
+
+
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+
+                                                <div class="card">
 
 
 
@@ -516,80 +549,65 @@ if (empty($test)) {
 
                                                 </div>
 
-                                            </div>
+
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Ledger </h5>
+                                                        <span>all transactions are listed below </span>
+                                                        <div class="card-block table-border-style">
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table" id="ledger_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Entry ID</th>
+                                                                            <th>Transaction type</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Description</th>
+                                                                            <th>Bank account name</th>
+                                                                            <th>Reference Amount</th>
+                                                                            <th>Current Amount</th>
+                                                                            <th>Entry_date</th>
+                                                                            <th>Entry_time</th>
+                                                                            <th>Entry_by</th>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
 
-
-                                                    <div class="card">
-
-
-
-
-
-                                                    </div>
-
-
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Ledger </h5>
-                                                            <span>all transactions are listed below </span>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="ledger_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Entry ID</th>
-                                                                                <th>Transaction type</th>
-                                                                                <th>Amount</th>
-                                                                                <th>Description</th>
-                                                                                <th>Bank account name</th>
-                                                                                <th>Reference Amount</th>
-                                                                                <th>Current Amount</th>
-                                                                                <th>Entry_date</th>
-                                                                                <th>Entry_time</th>
-                                                                                <th>Entry_by</th>
-
-
-                                                                                <th>Action</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <?php
+                                                                        <?php
 
 
 
 
 
 
-                                                                            $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
+                                                                        $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
                                                                                  `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
                                                                                   `reference_bank_amount`, `entry_date`, `entry_time` FROM 
                                                                                 `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
                                                                                 INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
 
-                                                                            $result = $con->query($sql);
-                                                                            if ($result->num_rows > 0) {
-                                                                                while ($row = $result->fetch_assoc()) {
-                                                                                    $ledger_ID      = $row["ledger_ID"];
-                                                                                    $ledger_type  = $row["ledger_type"];
-                                                                                    $description = $row["description"];
-                                                                                    $amount = $row["amount"];
-                                                                                    $bank_name = $row["bank_name"];
-                                                                                    $bank_funds = $row["account_funds"];
-                                                                                    $user = $row["fullname"];
-                                                                                    $registered_date = $row['entry_date'];
-                                                                                    $registered_time = $row['entry_time'];
+                                                                        $result = $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+                                                                                $ledger_ID      = $row["ledger_ID"];
+                                                                                $ledger_type  = $row["ledger_type"];
+                                                                                $description = $row["description"];
+                                                                                $amount = $row["amount"];
+                                                                                $bank_name = $row["bank_name"];
+                                                                                $bank_funds = $row["account_funds"];
+                                                                                $user = $row["fullname"];
+                                                                                $registered_date = $row['entry_date'];
+                                                                                $registered_time = $row['entry_time'];
 
 
 
 
 
 
-                                                                                    echo "
+                                                                                echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$ledger_ID</td>
                                                        <td>$ledger_type</td>
@@ -611,38 +629,38 @@ if (empty($test)) {
 
                                                   
                                                ";
-                                                                                }
                                                                             }
+                                                                        }
 
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+                                                                        ?>
+                                                                        <tr>
+                                                                            <th scope="row">-</th>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
 
 
-                                                                            </tr>
+                                                                        </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                    </tbody>
+                                                                </table>
 
 
-                                                                </div>
                                                             </div>
-
                                                         </div>
 
                                                     </div>
+
+                                                </div>
 
 
                         </form>

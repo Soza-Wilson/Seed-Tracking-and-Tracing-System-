@@ -8,9 +8,9 @@ include('../class/production.php');
 session_start();
 
 $get_data = new production();
-$ID = $_GET["ID"] ;
-$data = $get_data -> get_test_details($ID);
- 
+$ID = $_GET["ID"];
+$data = $get_data->get_test_details($ID);
+
 
 ?>
 
@@ -32,7 +32,7 @@ $data = $get_data -> get_test_details($ID);
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -53,20 +53,20 @@ $data = $get_data -> get_test_details($ID);
         $(document).ready(function() {
 
 
-          
-
-
-
-               
-
-
-
-               
 
 
 
 
-      
+
+
+
+
+
+
+
+
+
+
 
 
             ////js code for sending  crop data and retrive certificate 
@@ -75,20 +75,20 @@ $data = $get_data -> get_test_details($ID);
 
             $("#search_main_certificate").on("input", function() {
 
-                
+
 
 
                 var lab_certificate_value = $('#search_main_certificate').val();
                 var quantity_value = $('#farm_quantity').val();
                 var variety_value = $('#farm_variety').val();
                 var class_value = $('#farm_class').val();
-               
-                
+
+
                 $.post('farm_get_certificate.php', {
-                 lab_certificate_value: lab_certificate_value,
-                 quantity_value: quantity_value,
-                 variety_value: variety_value,
-                 class_value: class_value
+                    lab_certificate_value: lab_certificate_value,
+                    quantity_value: quantity_value,
+                    variety_value: variety_value,
+                    class_value: class_value
                 }, function(data) {
                     $('#main_certificate').html(data);
 
@@ -101,25 +101,8 @@ $data = $get_data -> get_test_details($ID);
 
 
         });
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-           
-
-     
     </script>
-   
+
 </head>
 
 <body>
@@ -274,13 +257,13 @@ $data = $get_data -> get_test_details($ID);
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -333,7 +316,7 @@ $data = $get_data -> get_test_details($ID);
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                    <a href="production_dashboard.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -366,14 +349,14 @@ $data = $get_data -> get_test_details($ID);
                                 </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -390,7 +373,7 @@ $data = $get_data -> get_test_details($ID);
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -411,13 +394,13 @@ $data = $get_data -> get_test_details($ID);
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                    <a href="add_certificate.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
                                         <span class="pcoded-mcaret"></span>
@@ -432,7 +415,7 @@ $data = $get_data -> get_test_details($ID);
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="used_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -440,7 +423,7 @@ $data = $get_data -> get_test_details($ID);
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
                                         <span class="pcoded-mcaret"></span>
@@ -477,7 +460,7 @@ $data = $get_data -> get_test_details($ID);
                                 </li>
 
                                 <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                    <a href="inspection.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -491,7 +474,7 @@ $data = $get_data -> get_test_details($ID);
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                <li >
+                                <li>
                                     <a href="new_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
@@ -507,7 +490,7 @@ $data = $get_data -> get_test_details($ID);
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="register_farm.php" class="waves-effect waves-dark">
+                                    <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
@@ -565,91 +548,91 @@ $data = $get_data -> get_test_details($ID);
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
                                         <form action="lab_add_certificate.php" method="POST">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Select certificate</h5>
-
-
-
-
-                                            </div>
-                                            <div class="card-block">
-
-                                                <div class="form-group row">
-
-
-                                                    <span class="pcoded-mcaret"></span>
-
-
-                                                    <div class="col-sm-6">
-
-                                                        <select id="main_certificate" name="main_certificate" class="form-control" required="">
-                                                            <option value="no_certificate_selected">Select Certificate</option>
-                                                            <option value="no_certificate_selected">-</option>
-
-
-
-
-
-
-                                                        </select>
-
-                                                    </div>
-
-
-
-                                                    <div class="col-sm-6">
-
-                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
-
-
-
-                                                    </div>
-
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Select certificate</h5>
 
 
 
 
                                                 </div>
-                                                
+                                                <div class="card-block">
+
+                                                    <div class="form-group row">
 
 
-                                                
+                                                        <span class="pcoded-mcaret"></span>
+
+
+                                                        <div class="col-sm-6">
+
+                                                            <select id="main_certificate" name="main_certificate" class="form-control" required="">
+                                                                <option value="no_certificate_selected">Select Certificate</option>
+                                                                <option value="no_certificate_selected">-</option>
 
 
 
-                                                <!--                                                                                                            /*
+
+
+
+                                                            </select>
+
+                                                        </div>
+
+
+
+                                                        <div class="col-sm-6">
+
+                                                            <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
+
+
+
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <!--                                                                                                            /*
 add hybrid female crop certificate 
 */   -->
 
 
 
-                                              
 
-                                                <div class="col-sm-12">
 
-                                                    <a href="add_certificate.php" class="btn btn-primary">
-                                                        Add New certificate
+                                                    <div class="col-sm-12">
 
-                                                    </a>
+                                                        <a href="add_certificate.php" class="btn btn-primary">
+                                                            Add New certificate
+
+                                                        </a>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <!-- Background Utilities table end -->
+                                            </div>
+
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Lab test details </h5>
+
 
                                                 </div>
 
 
-                                            </div>
 
-                                            <!-- Background Utilities table end -->
-                                        </div>
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Lab test details </h5>
-
-
-                                            </div>
-
-
-                                          
 
                                                 <div class="card-block">
 
@@ -690,7 +673,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_variety" name="farm_variety" class="form-control">
 
-                                                                <option value="<?php echo $data[10];?>"><?php echo $data[2]; ?></option>
+                                                                <option value="<?php echo $data[10]; ?>"><?php echo $data[2]; ?></option>
 
 
 
@@ -705,7 +688,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_class" name="farm_class" class="form-control">
 
-                                                            <option value="<?php echo $data[3];?>"><?php echo $data[3];?></option>
+                                                                <option value="<?php echo $data[3]; ?>"><?php echo $data[3]; ?></option>
 
 
                                                             </select>
@@ -844,9 +827,9 @@ add hybrid female crop certificate
 
                                                             <input type="submit" name="add_certificate" value="save" class="btn waves-effect waves-light btn-primary btn-block" />
                                                             <a href="active_test.php" class="btn waves-effect waves-light btn-success btn-block">
-                                                        Back
+                                                                Back
 
-                                                    </a>
+                                                            </a>
 
 
                                                         </div>
@@ -855,29 +838,29 @@ add hybrid female crop certificate
 
 
 
-                                            </form>
+                                        </form>
 
 
 
-                                        </div>
-                                        <!-- Page-body end -->
                                     </div>
+                                    <!-- Page-body end -->
                                 </div>
-                                <!-- Main-body end -->
+                            </div>
+                            <!-- Main-body end -->
 
-                                <div id="styleSelector">
+                            <div id="styleSelector">
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-        <!--[if lt IE 10]>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -918,41 +901,40 @@ add hybrid female crop certificate
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-        <!-- Warning Section Ends -->
-        <!-- Required Jquery -->
-        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- jquery slimscroll js -->
-        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- modernizr js -->
-        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-        <!-- Custom js -->
-        <script src="assets/js/pcoded.min.js"></script>
-        <script src="assets/js/vertical-layout.min.js "></script>
-        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+    <!-- Custom js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js "></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 
-        <?php
+    <?php
 
-if(isset($_POST['add_certificate'])){
+    if (isset($_POST['add_certificate'])) {
 
-    $stock_ID = $_POST['stock_in'];
-    $quantity = $_POST['farm_quantity'];
-    $lab_id = $_POST['farm_grade'];
-    $lot_number = $_POST['main_certificate'];
+        $stock_ID = $_POST['stock_in'];
+        $quantity = $_POST['farm_quantity'];
+        $lab_id = $_POST['farm_grade'];
+        $lot_number = $_POST['main_certificate'];
 
-    $get_data->lab_certify_stock($quantity,$stock_ID,$lab_id,$lot_number);
-    
-}
-        
-        
-        ?>
+        $get_data->lab_certify_stock($quantity, $stock_ID, $lab_id, $lot_number);
+    }
+
+
+    ?>
 </body>
 
 </html>

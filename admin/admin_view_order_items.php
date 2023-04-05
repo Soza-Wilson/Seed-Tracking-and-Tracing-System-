@@ -29,7 +29,7 @@ $date = "";
 $time = "";
 
 
-if(empty($_GET['order_ID'])){
+if (empty($_GET['order_ID'])) {
 
     header('Location:admin_pending_orders.php');
 }
@@ -46,12 +46,10 @@ if ($result->num_rows > 0) {
 
         $order_type = $row["order_type"];
         $customer = $row["customer_name"];
-        $user_requested= $row["fullname"];
+        $user_requested = $row["fullname"];
         $date = $row['date'];
         $time = $row['time'];
-
     }
-
 }
 
 ?>
@@ -244,13 +242,13 @@ if ($result->num_rows > 0) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -410,48 +408,38 @@ if ($result->num_rows > 0) {
 
                             </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Menu Levels</span>
+
+                                <li class="">
+                                    <a href="view_ledger.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Menu Level 2.1</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="pcoded-hasmenu ">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Menu Level 2.2</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Menu Level 2.3</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
 
-                                    </ul>
                                 </li>
+
+                            </ul>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                    <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
+
                             </ul>
                         </div>
                     </nav>
@@ -504,155 +492,155 @@ if ($result->num_rows > 0) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
-                                        
+
 
                                         <div class="card">
-                                        <form action="admin_view_order_items.php" method="POST">
-                                            <div class="card-header">
-                                                <h5>Order details</h5>
+                                            <form action="admin_view_order_items.php" method="POST">
+                                                <div class="card-header">
+                                                    <h5>Order details</h5>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="form-group row">
-
-
-                                                    <span class="pcoded-mcaret"></span>
-
-
-                                                    <div class="col-sm-2">
-
-                                                        <label class="badge badge-primary ">Order ID</label>
-                                                        <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
-
+                                                    <div class="card-header-right">
+                                                        <ul class="list-unstyled card-option">
+                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                        </ul>
                                                     </div>
+                                                    <div class="form-group row">
+
+
+                                                        <span class="pcoded-mcaret"></span>
+
+
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary ">Order ID</label>
+                                                            <input id="order_id" type="text" class="form-control" name="order_id" value="<?php echo $order_ID; ?>" require="">
+
+                                                        </div>
 
 
 
-                                                    <div class="col-sm-2">
+                                                        <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Order type</label>
-                                                        <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $order_type; ?>" require="">
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order for</label>
-                                                        <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
+                                                            <label class="badge badge-primary ">Order type</label>
+                                                            <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $order_type; ?>" require="">
 
 
 
-                                                    </div>
+                                                        </div>
 
-                                                    <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Requested by</label>
-                                                        <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order date</label>
-                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Order for</label>
+                                                            <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
 
 
 
-                                                    </div>
+                                                        </div>
 
-                                                    <div class="col-sm-2">
-
-                                                        <label class="badge badge-primary ">time</label>
-                                                        <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
-                                                       
-
-
-                                                    </div>
-                                              
-                                                    <div class="card-block">
-                                               
-
-                                                <input type="submit" name="approve_order" value="approve order" class='btn btn-success'/>
-
-                                                <input type="submit" name="deny_order" value="Deny order" class='btn btn-danger'/>
-
-    </form>
-                                               
-
-                                            </div>
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Requested by</label>
+                                                            <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
 
-                                                </div>
+                                                        </div>
 
-                                                
+                                                        <div class="col-sm-2">
+                                                            <label class="badge badge-primary ">Order date</label>
+                                                            <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
-                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-sm-2">
+
+                                                            <label class="badge badge-primary ">time</label>
+                                                            <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
+
+
+
+                                                        </div>
+
+                                                        <div class="card-block">
+
+
+                                                            <input type="submit" name="approve_order" value="approve order" class='btn btn-success' />
+
+                                                            <input type="submit" name="deny_order" value="Deny order" class='btn btn-danger' />
+
+                                            </form>
+
+
                                         </div>
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Items</h5>
-
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
 
 
-                                            </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Item ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>class</th>
-                                                                <th>Quantity</th>
-                                                                <th>price per kg</th>
-                                                                <th>Discount</th>
-                                                                <th>Total price</th>
+                                    </div>
 
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
 
-                                                            <?php
-                                                            $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
+
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Items</h5>
+
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                                <div class="card-block table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item ID</th>
+                                                    <th>Crop</th>
+                                                    <th>Variety</th>
+                                                    <th>class</th>
+                                                    <th>Quantity</th>
+                                                    <th>price per kg</th>
+                                                    <th>Discount</th>
+                                                    <th>Total price</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php
+                                                $sql = "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
                                                              `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `order_ID` = '$order_ID'";
 
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
+                                                $result = $con->query($sql);
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
 
 
-                                                                    $item_ID      = $row["item_ID"];
-                                                                    $crop     = $row["crop"];
-                                                                    $variety = $row["variety"];
-                                                                    $class    = $row['class'];
-                                                                    $quantity = $row['quantity'];
-                                                                    $price_per_kg = $row['price_per_kg'];
-                                                                    $discount_price = $row['discount_price'];
-                                                                    $total_price = $row['total_price'];
+                                                        $item_ID      = $row["item_ID"];
+                                                        $crop     = $row["crop"];
+                                                        $variety = $row["variety"];
+                                                        $class    = $row['class'];
+                                                        $quantity = $row['quantity'];
+                                                        $price_per_kg = $row['price_per_kg'];
+                                                        $discount_price = $row['discount_price'];
+                                                        $total_price = $row['total_price'];
 
-                                                                    echo "
+                                                        echo "
 											<tr class='odd gradeX'>
                                             <td>$item_ID</td>
                                             <td>$crop</td>
@@ -667,35 +655,35 @@ if ($result->num_rows > 0) {
                                     
 												
 										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-                                                <div class="card-block">
-                                                <a href='admin_pending_orders.php' class='btn btn-primary'>Back </a>
-                                               
-
-                                            </div>
-                                        </div>
-
-                                        <!-- Background Utilities table end -->
+                                                    }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <!-- Page-body end -->
+
+                                    <div class="card-block">
+                                        <a href='admin_pending_orders.php' class='btn btn-primary'>Back </a>
+
+
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
 
-                            <div id="styleSelector">
-
+                                <!-- Background Utilities table end -->
                             </div>
+                            <!-- Page-body end -->
                         </div>
+                    </div>
+                    <!-- Main-body end -->
+
+                    <div id="styleSelector">
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- Warning Section Starts -->
@@ -763,21 +751,20 @@ if ($result->num_rows > 0) {
 </body>
 <?php
 
-if(isset($_POST['approve_order'])){
+if (isset($_POST['approve_order'])) {
 
-  
-  $ID = $_POST['order_id'];
 
-   $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
-   $statement = $con->prepare($sql);
+    $ID = $_POST['order_id'];
+
+    $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
+    $statement = $con->prepare($sql);
     $statement->execute();
-     
+
     echo ("<script> alert('Order approved!');
     </script>");
-
 }
 
-if(isset($_POST['deny_order'])){
+if (isset($_POST['deny_order'])) {
 
 
     $ID = $_POST['order_id'];
@@ -789,9 +776,10 @@ if(isset($_POST['deny_order'])){
     echo ("<script> alert('Order denied!');
     </script>");
 }
- 
- 
+
+
 
 
 ?>
+
 </html>

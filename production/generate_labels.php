@@ -12,7 +12,7 @@ $get_data = new production();
 //$data = $get_data -> get_test_details($ID);
 
 
- 
+
 
 ?>
 
@@ -34,7 +34,7 @@ $get_data = new production();
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -55,20 +55,20 @@ $get_data = new production();
         $(document).ready(function() {
 
 
-          
-
-
-
-               
-
-
-
-               
 
 
 
 
-      
+
+
+
+
+
+
+
+
+
+
 
 
             ////js code for sending  crop data and retrive certificate 
@@ -77,20 +77,20 @@ $get_data = new production();
 
             $("#search_main_certificate").on("input", function() {
 
-                
+
 
 
                 var lab_certificate_value = $('#search_main_certificate').val();
                 var quantity_value = $('#farm_quantity').val();
                 var variety_value = $('#farm_variety').val();
                 var class_value = $('#farm_class').val();
-               
-                
+
+
                 $.post('farm_get_certificate.php', {
-                 lab_certificate_value: lab_certificate_value,
-                 quantity_value: quantity_value,
-                 variety_value: variety_value,
-                 class_value: class_value
+                    lab_certificate_value: lab_certificate_value,
+                    quantity_value: quantity_value,
+                    variety_value: variety_value,
+                    class_value: class_value
                 }, function(data) {
                     $('#main_certificate').html(data);
 
@@ -103,25 +103,8 @@ $get_data = new production();
 
 
         });
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-           
-
-     
     </script>
-   
+
 </head>
 
 <body>
@@ -276,13 +259,13 @@ $get_data = new production();
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -375,7 +358,7 @@ $get_data = new production();
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -392,7 +375,7 @@ $get_data = new production();
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -413,8 +396,8 @@ $get_data = new production();
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -493,7 +476,7 @@ $get_data = new production();
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                                <li >
+                                <li>
                                     <a href="new_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
@@ -567,79 +550,79 @@ $get_data = new production();
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
                                         <form action="generate_labels.php" method="POST">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Download Labels </h5>
-
-
-
-
-                                            </div>
-                                            <div class="card-block">
-
-                                                <div class="form-group row">
-
-
-                                                    <span class="pcoded-mcaret"></span>
-
-
-                                                   
-
-
-
-                                                    
-
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Download Labels </h5>
 
 
 
 
                                                 </div>
-                                                
+                                                <div class="card-block">
+
+                                                    <div class="form-group row">
 
 
-                                                
+                                                        <span class="pcoded-mcaret"></span>
 
 
 
-                                                <!--                                                                                                            /*
+
+
+
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <!--                                                                                                            /*
 add hybrid female crop certificate 
 */   -->
 
 
 
-                                              
-                                                  
-                                                <div class="col-sm-12">
 
-                                              
 
-                                               
+                                                    <div class="col-sm-12">
 
-                                                   <input type="submit" name="save_pdf" value="Download PDF File" class="btn btn-success">
 
-                                                    <a href="add_certificate.php" class="btn btn-danger">
-                                                        Back
 
-                                                    </a>
+
+
+                                                        <input type="submit" name="save_pdf" value="Download PDF File" class="btn btn-success">
+
+                                                        <a href="add_certificate.php" class="btn btn-danger">
+                                                            Back
+
+                                                        </a>
+
+                                                    </div>
+
+
 
                                                 </div>
-                                                
 
-
+                                                <!-- Background Utilities table end -->
                                             </div>
 
-                                            <!-- Background Utilities table end -->
-                                        </div>
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Seed details </h5>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Seed details </h5>
 
 
-                                            </div>
+                                                </div>
 
 
-                                          
+
 
                                                 <div class="card-block">
 
@@ -680,7 +663,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_variety" name="farm_variety" class="form-control">
 
-                                                                <option value="<?php echo $_GET['variety'];?>"><?php echo $_GET['variety'];; ?></option>
+                                                                <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety'];; ?></option>
 
 
 
@@ -695,7 +678,7 @@ add hybrid female crop certificate
                                                         <div class="col-sm-12">
                                                             <select id="farm_class" name="farm_class" class="form-control">
 
-                                                            <option value="<?php echo $_GET['class'];?>"><?php echo $_GET['class'];?></option>
+                                                                <option value="<?php echo $_GET['class']; ?>"><?php echo $_GET['class']; ?></option>
 
 
                                                             </select>
@@ -773,10 +756,10 @@ add hybrid female crop certificate
                                                     </div>
 
 
-                                                    
-                                                  
 
-                                                    
+
+
+
 
 
                                                     <div class="form-group row">
@@ -802,8 +785,8 @@ add hybrid female crop certificate
                                                         <div class="form-group">
 
 
-                                                       
-                                                    </a>
+
+                                                            </a>
 
 
                                                         </div>
@@ -812,29 +795,29 @@ add hybrid female crop certificate
 
 
 
-                                            </form>
+                                        </form>
 
 
 
-                                        </div>
-                                        <!-- Page-body end -->
                                     </div>
+                                    <!-- Page-body end -->
                                 </div>
-                                <!-- Main-body end -->
+                            </div>
+                            <!-- Main-body end -->
 
-                                <div id="styleSelector">
+                            <div id="styleSelector">
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-        <!--[if lt IE 10]>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -875,40 +858,37 @@ add hybrid female crop certificate
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-        <!-- Warning Section Ends -->
-        <!-- Required Jquery -->
-        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- jquery slimscroll js -->
-        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- modernizr js -->
-        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-        <!-- Custom js -->
-        <script src="assets/js/pcoded.min.js"></script>
-        <script src="assets/js/vertical-layout.min.js "></script>
-        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+    <!-- Custom js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js "></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 
-        <?php
+    <?php
 
-if(isset($_POST['save_pdf'])){
+    if (isset($_POST['save_pdf'])) {
 
-    $lot_number = $_POST["lot_number"];
-   
-    header("Location:../class/pdf_handler.php? lot_number=$lot_number");
+        $lot_number = $_POST["lot_number"];
 
-   
-    
-}
-        
-        
-        ?>
+        header("Location:../class/pdf_handler.php? lot_number=$lot_number");
+    }
+
+
+    ?>
 </body>
 
 </html>

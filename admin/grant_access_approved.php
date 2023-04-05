@@ -10,20 +10,19 @@ $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 $sql = "SELECT `approval_ID`, `depertment`, `action_name`, `action_id`, `description`, `date`, `time`, `requested_id`, 
 `requested_name`, `approved_ID`, `approval_code` FROM `approval` ORDER BY `approval_ID` DESC";
-                            $result = $con->query($sql);
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $ID     = $row["approval_ID"];
-                                    $depertment = $row["depertment"];
-                                    $action_name     = $row["action_name"];
-                                    $action_id  = $row["action_id"];
-                                    $requested_name = $row['requested_name'];
-                                    $date = $row['date'];
-                                    $time = $row['time'];
-                                    $description = $row['description'];
-
-                                }
-                            }
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $ID     = $row["approval_ID"];
+        $depertment = $row["depertment"];
+        $action_name     = $row["action_name"];
+        $action_id  = $row["action_id"];
+        $requested_name = $row['requested_name'];
+        $date = $row['date'];
+        $time = $row['time'];
+        $description = $row['description'];
+    }
+}
 
 if (empty($test)) {
 
@@ -75,8 +74,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    
-   
+
+
 
     </script>
 
@@ -366,13 +365,13 @@ if (in_array($position, $restricted)) {
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
                                     <ul class="pcoded-item pcoded-left-item">
 
-                                        <li class="active">
+                                        <li class="">
                                             <a href="grant_access_pending.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-lock"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        <li class="">
+                                        <li class="active">
                                             <a href="grant_access_approved.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-unlock"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
@@ -489,7 +488,7 @@ if (in_array($position, $restricted)) {
                                                                     <label>Action Name:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $action_name;?>">
+                                                                    <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $action_name; ?>">
                                                                 </div>
                                                             </div>
 
@@ -498,7 +497,7 @@ if (in_array($position, $restricted)) {
                                                                     <label>Depertment:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $depertment;?>">
+                                                                    <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $depertment; ?>">
                                                                 </div>
                                                             </div>
 
@@ -507,7 +506,7 @@ if (in_array($position, $restricted)) {
                                                                     <label>Requested By :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $requested_name;?>">
+                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $requested_name; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -515,7 +514,7 @@ if (in_array($position, $restricted)) {
                                                                     <label>date :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $date;?>">
+                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $date; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -523,9 +522,9 @@ if (in_array($position, $restricted)) {
                                                                     <label>Time :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require=""value="<?php echo $time;?>">
-                                                                    <input type="hidden" id="user" require=""value="<?php echo $_SESSION['user'];?>">
-                                                                    <input type="hidden" id="approval_id" placeholder="-" require=""value="<?php echo $ID;?>">
+                                                                    <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $time; ?>">
+                                                                    <input type="hidden" id="user" require="" value="<?php echo $_SESSION['user']; ?>">
+                                                                    <input type="hidden" id="approval_id" placeholder="-" require="" value="<?php echo $ID; ?>">
                                                                 </div>
                                                             </div>
 
@@ -534,7 +533,7 @@ if (in_array($position, $restricted)) {
                                                                     <label>Description :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <textarea name="" class="form-control" id="" cols="30" rows="3" ><?php echo $description;?></textarea>
+                                                                    <textarea name="" class="form-control" id="" cols="30" rows="3"><?php echo $description; ?></textarea>
 
 
                                                                 </div>
@@ -607,8 +606,8 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
 
-                                                          
-                                                          
+
+
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
@@ -621,7 +620,7 @@ if (in_array($position, $restricted)) {
                                                                     $date = $row['date'];
                                                                     $time = $row['time'];
                                                                     $description = $row['description'];
-                                                                
+
 
                                                                     echo "
 											<tr class='odd gradeX'>

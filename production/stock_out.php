@@ -14,7 +14,7 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("production_admin", "system_administrator","warehouse_officer");
+$restricted = array("production_admin", "system_administrator", "warehouse_officer");
 
 if (in_array($position, $restricted)) {
 } else {
@@ -22,7 +22,7 @@ if (in_array($position, $restricted)) {
 }
 
 // if($position !="warehouse_officer" || $position !="production_admin" || $position !="admin"){
-     
+
 //     header('Location:javascript://history.go(-1)');
 
 // }
@@ -48,7 +48,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-  
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -156,7 +156,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -164,7 +164,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -172,13 +172,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -260,12 +260,12 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                         <li class="">
-                                    <a href="grading.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="grading.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
 
                                         <li class="active">
@@ -277,14 +277,14 @@ if (in_array($position, $restricted)) {
                                         </li>
 
                                         <li class="">
-                                            <a href="#" class="waves-effect waves-dark">
+                                            <a href="view_stock_out.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="#" class="waves-effect waves-dark">
+                                            <a href="inventory.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -297,133 +297,133 @@ if (in_array($position, $restricted)) {
                                     </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
-                                    <a href="process_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="view_processed_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="process_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="view_processed_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="labels.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                 </li>
-                                </ul> 
-                           
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">available certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="labels.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
 
-                                <li>
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">available certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            </ul>
+                                        <li>
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    </ul>
 
-
-                                <li class="">
-                                    <a href="grower.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="register_farm.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="registered_farms.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="inspection.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
+                                    <ul class="pcoded-item pcoded-left-item">
 
 
-                            </ul>
+                                        <li class="">
+                                            <a href="grower.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="register_farm.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
+                                        <li>
+                                            <a href="registered_farms.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                            <ul class="pcoded-item pcoded-left-item">
+                                        <li>
+                                            <a href="inspection.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
 
-                                <li class="">
-                                    <a href="new_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    </ul>
 
-                                <li>
-                                    <a href="active_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="test_history.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
+
+                                    <ul class="pcoded-item pcoded-left-item">
+
+
+                                        <li class="">
+                                            <a href="new_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="active_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="test_history.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -441,7 +441,7 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                            
+
                                             <li class="breadcrumb-item"><a href="stock_out.php">Stock out </a>
                                             </li>
                                             </li>
@@ -472,65 +472,65 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
                                         <div class="card">
-<div class="card-header">
-    <h5>All active orders</h5>
+                                            <div class="card-header">
+                                                <h5>All active orders</h5>
 
-    <div class="card-header-right">
-        <ul class="list-unstyled card-option">
-            <li><i class="fa fa fa-wrench open-card-option"></i></li>
-            <li><i class="fa fa-window-maximize full-card"></i></li>
-            <li><i class="fa fa-minus minimize-card"></i></li>
-            <li><i class="fa fa-refresh reload-card"></i></li>
-            <li><i class="fa fa-trash close-card"></i></li>
-        </ul>
-    </div>
-</div>
-<div class="card-block table-border-style">
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>order number</th>
-                    <th>order type</th>
-                    <th>Customer name</th>
-                    <th>reqiested by</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>count</th>
-                    <th>Total</th>
-                    <th>Action</th>
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-minus minimize-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                        <li><i class="fa fa-trash close-card"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Order ID</th>
+                                                                <th>order number</th>
+                                                                <th>order type</th>
+                                                                <th>Customer name</th>
+                                                                <th>reqiested by</th>
+                                                                <th>Date</th>
+                                                                <th>Time</th>
+                                                                <th>count</th>
+                                                                <th>Total</th>
+                                                                <th>Action</th>
 
-                </tr>
-            </thead>
-            <tbody>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-                <?php
-                $sql = "SELECT user.fullname,`order_ID`, `order_type`, `customer_id`, 
+                                                            <?php
+                                                            $sql = "SELECT user.fullname,`order_ID`, `order_type`, `customer_id`, 
                 `customer_name`, `order_book_number`, `status`, `date`, `time`, `count`,
                  `total_amount` FROM `order_table` INNER JOIN user ON order_table.user_ID = user.user_ID
                   WHERE order_table.status = 'approved'";
 
-                $result = $con->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
 
 
 
-                        $order_ID      = $row["order_ID"];
-                        $order_book_number     = $row["order_book_number"];
-                        $customer_name  = $row["customer_name"];
-                        $user = $row["fullname"];
-                        $date    = $row['date'];
-                        $time = $row['time'];
-                        $order_type = $row['order_type'];
-                        $count = $row['count'];
-                        $total = $row['total_amount'];
+                                                                    $order_ID      = $row["order_ID"];
+                                                                    $order_book_number     = $row["order_book_number"];
+                                                                    $customer_name  = $row["customer_name"];
+                                                                    $user = $row["fullname"];
+                                                                    $date    = $row['date'];
+                                                                    $time = $row['time'];
+                                                                    $order_type = $row['order_type'];
+                                                                    $count = $row['count'];
+                                                                    $total = $row['total_amount'];
 
-                        $total = $row['total_amount'];
+                                                                    $total = $row['total_amount'];
 
 
-                        echo "
+                                                                    echo "
 <tr class='odd gradeX'>
     <td>$order_ID</td>
     <td>$order_book_number</td>
@@ -545,32 +545,32 @@ if (in_array($position, $restricted)) {
     <td><a href='process_order.php? order_ID=$order_ID' class='btn btn-success'>view</a></td>
 </tr>	
 ";
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-                                        
-                                        <!-- Page-body end -->
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Page-body end -->
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Main-body end -->
+                                    <!-- Main-body end -->
 
-                                <div id="styleSelector">
+                                    <div id="styleSelector">
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-        <!--[if lt IE 10]>
+            <!-- Warning Section Starts -->
+            <!-- Older IE warning message -->
+            <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -611,25 +611,25 @@ if (in_array($position, $restricted)) {
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-        <!-- Warning Section Ends -->
-        <!-- Required Jquery -->
-        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- jquery slimscroll js -->
-        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-        <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
-        <!-- modernizr js -->
-        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-        <!-- Custom js -->
-        <script src="assets/js/pcoded.min.js"></script>
-        <script src="assets/js/vertical-layout.min.js "></script>
-        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="assets/js/script.js"></script>
+            <!-- Warning Section Ends -->
+            <!-- Required Jquery -->
+            <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+            <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+            <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+            <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+            <!-- waves js -->
+            <script src="assets/pages/waves/js/waves.min.js"></script>
+            <!-- jquery slimscroll js -->
+            <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+            <!-- waves js -->
+            <script src="assets/pages/waves/js/waves.min.js"></script>
+            <!-- modernizr js -->
+            <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+            <!-- Custom js -->
+            <script src="assets/js/pcoded.min.js"></script>
+            <script src="assets/js/vertical-layout.min.js "></script>
+            <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 <?php
 

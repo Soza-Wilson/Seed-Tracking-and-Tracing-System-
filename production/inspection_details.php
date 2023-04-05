@@ -4,15 +4,13 @@
 
 Ob_start();
 include('../class/main.php');
-session_start(); 
+session_start();
 
 $test = $_SESSION['fullname'];
 
-if(empty($test)){
+if (empty($test)) {
 
     header('Location:../login.php');
-
-
 }
 
 ?>
@@ -28,7 +26,7 @@ if(empty($test)){
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
@@ -53,17 +51,8 @@ if(empty($test)){
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" >
-
-$(document).ready(function(){
-
-
- 
-
-
-
-
-});
+    <script type="text/javascript">
+        $(document).ready(function() {
 
 
 
@@ -71,25 +60,8 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-    
-
-  
- 
-
-
-
-
-
-
-
-
-
-</script>
+        });
+    </script>
 
 
 </head>
@@ -121,7 +93,7 @@ $(document).ready(function(){
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -133,7 +105,7 @@ $(document).ready(function(){
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -176,7 +148,7 @@ $(document).ready(function(){
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
@@ -247,13 +219,13 @@ $(document).ready(function(){
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                   
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -265,7 +237,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -278,7 +250,7 @@ $(document).ready(function(){
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -290,7 +262,7 @@ $(document).ready(function(){
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                
+
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -300,14 +272,14 @@ $(document).ready(function(){
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                
+
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Stock</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="#" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Add Stock  </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Add Stock </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -328,29 +300,29 @@ $(document).ready(function(){
                                 </li>
 
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                               
-                               
-                    
+
+
+
+
                             </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -371,13 +343,13 @@ $(document).ready(function(){
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
-                    
+                                </li>
+                            </ul>
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="">
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                <li class="">
+                                    <a href="add_certifi" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
                                         <span class="pcoded-mcaret"></span>
@@ -406,13 +378,13 @@ $(document).ready(function(){
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
+
                             </ul>
-                    
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="chart.html" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
@@ -427,7 +399,7 @@ $(document).ready(function(){
                                     </a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -450,7 +422,7 @@ $(document).ready(function(){
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                           
+
                                             <li class="">
                                                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -458,14 +430,14 @@ $(document).ready(function(){
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                
+
                                         </ul>
                                     </li>
                                 </ul>
 
-                                
-                               
-                                
+
+
+
                             </ul>
                         </div>
                     </nav>
@@ -477,7 +449,7 @@ $(document).ready(function(){
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Add Inspection </h5>
-                                          
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -499,423 +471,411 @@ $(document).ready(function(){
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-                                  
+
                                     <!-- Page body start -->
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                
-                                        
-  <!--                                           /*
+
+
+                                                <!--                                           /*
 get crop details
-*/    -->                                      
-                                                  
+*/    -->
+
                                                 .
 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            
-
-
-                                                             <!--                                          /*
-add main crop certificate 
-*/     -->  
-
-                                                                                 
-                                                            
-                                                            <div class="card">
-                                                            <div class="card-header">
-                                                                    <h5>Select certificate</h5>
-
-                                                                
-                                                     
-
-                                                                </div>
-                                                          <div class ="card-block">
-
-                                                          <div class="form-group row">
-                                                                           
-
-                                                                           <span class="pcoded-mcaret"></span>
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-6">
-
-                                                                           <select id="main_certificate" name="main_certificate" class="form-control" required="">
-                                                                           <option value="no_certificate_selected">Select Inspection type </option>
-                                                                           <option value="no_certificate_selected">-</option>
-                                                                          
-                                                                           
-                                                                          
-                                                                          
-                                                                          
-                                                                          
-                                                                       </select>
-
-                                                                         </div>
-
-                                                                         
-
-                                                                         <div class="col-sm-1">
-
-                                                                        <label>Date</label>
-
-                                                                       
-                                                                               
-                                                                           </div>
-
-                                                                           <div class="col-sm-5">
-
-                                                                         <input id="main_quantity" type="date" class="form-control" name="main_quantity"
-                                                                               placeholder="Quantity" require="">
-
-                                                                       
-                                                                               
-                                                                           </div>
-
-                                                                          
-                                                                         
-                                                                       </div>
-                                                                      
-
-
-                                                                       <div class="form-group row">
-                                                                           
-
-                                                                           <span class="pcoded-mcaret"></span>
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-6">
-
-                                                                           <input id="male_quantity" type="text" class="form-control" name="male_quantity"
-                                                                             placeholder="Isolation" require="">
-
-                                                                         </div>
-
-                                                                         
-
-                                                                           <div class="col-sm-6">
-
-                                                                    <input id="male_quantity" type="text" class="form-control" name="male_quantity"
-                                                                             placeholder="Planting pattern" require="">
-
-
-      
-                                                                                        </div>
-                                                                         
-
-                                                                         
-
-                                                                         
-                                                                       </div>
-
-
-                                                                       
-<!--                                                                                                            /*
-add hybrid female crop certificate 
-*/   -->  
-
-                                                                            
-
-                                                                       <div class="form-group row">
-                                                                           
-
-                                                                           <span class="pcoded-mcaret"></span>
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-6">
-
-                                                                           <input id="male_quantity" type="text" class="form-control" name="male_quantity"
-                                                                             placeholder="Off-Type Plants (%)" require="">
-
-                                                                         </div>
-
-                                                                         <div class="col-sm-6">
-
-                                                                         <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                                               placeholder="Pest and Disease Incidence (%)" require="">
-
-                                                                       
-                                                                               
-                                                                           </div>
-
-                                                                           
-                                                                         
-
-                                                                           
-                                                                           
-
-                                                                         
-                                                                       </div>
-
-                                                                       <div class="form-group row">
-
-                                                                       <div class="col-sm-12">
-
-                                                            <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                             placeholder="Defective Plants (%)" require="">
-
-
-      
-                                                                </div>
-
-                                                                        </div>
-
-                                                          
-                                                          </div>
-
-                                                          
-                                                          
-
-                                                            </div>
-
-                                                            <div class="card">
-                                                            <div class="card-header">
-
-<!--                                                                                                              /*
-form add land history
-*/  -->  
-
-
-                                                              
-                                                                    <h5>Maize</h5>
-
-
-                                                                </div>
-                                                          <div class ="card-block">
-                                                        
-
-                                                        <div class="form-group row">
-                                                                           
-
-                                                                           
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-6">
-
-                                                                           <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                             placeholder="Pollinating Females (%)" require="">
-                                                                               
-                                                                            
-                                                                            </div>
-
-                                                                            <div class="col-sm-6">
-
-                                                                           <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                             placeholder="Female receptive Skills (%)" require="">
-                                                                               
-                                                                            
-                                                                            </div>
-
-
-                                                                          
-                                                                           
-
-                                                                         
-                                                                       </div>
-
-
-                                                                       
-
-                                                          
-                                                                       <div class="form-group row">
-                                                                           
-
-                                                                     
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-12">
-
-                                                                           <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                             placeholder="Male Elimination" require="">
-                                                                            
-                                                                            </div>
-
-                                                                            
-
-                                                                    
-                                                                       </div>
-
-                                                                       <div class="form-group row">
-                                                                       <div class="col-sm-6">
-
-                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                    placeholder="Off-Type cobs at shelling (%)" require="">
-    
- 
-                                                                </div>
-
-                                                                <div class="col-sm-6">
-
-                                                                <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate"
-                                                                placeholder="Defective cobs at shelling (%)" require="">
-    
- 
-                                                            </div>
-                                                                            
-
-                                                                            </div>
-
-
-
-
-
-                                                          
-                                                          </div>
-
-                                                        </div>
-
-
-                                                        <div class="card">
-
-<!--                                                                                                               /*
-form adding farm location details
-*/        -->  
-
-                                                                                                                
-
-                                                        <div class="card-header">
-                                                                    <h5>Remarks</h5>
-
-
-                                                                </div>
-
-                                                                <div class ="card-block">
-
-
-                                                                <div class="form-group row">
-                                                                           
-
-                                                                           <span class="pcoded-mcaret"></span>
-                                                                           
-                                                                           <div><label>Add remark</label></div>
-                                                                           
-                                                                           <div class="col-sm-12">
-
-
-                                                                           <textarea class="form-control">
-
-                                                                           </textarea>
-                                                                           
-                                                                            </div>
-
-                                                                            
-                                                                           
-                                                                         
-                                                                       </div>
-
-                                                                       <div class="form-group row">
-
-                                                                       <div><label>Upload Image </label></div>
-                                                                           
-
-                                                                          
-                                                                           
-                                                                           
-                                                                           <div class="col-sm-12">
-
-                                                                           <input id="area_name" type="file" class="form-control" name="area_name"
-                                                                               placeholder="Area name" require="">
-
-                                                                         
-
-                                                                         </div>
-
-
-                                                                           
-
-                                                                         
-                                                                       </div>
-
-                                                                       <div class="form-group row">
-                                                                           
-
-                                                                           <span class="pcoded-mcaret"></span>
-                                                                           
-                                                                           
-                                                                           
-
-                                                                         
-
-                                                                         
-                                                                           
-
-                                                                         
-                                                                       </div>
-                                                                       <div class="col-sm-12">
-
-                                                                               <input type="submit" name="save_farm" value="Save" class="btn btn-success " />
-
-</br>
-</br>
-
-                                                                                    <a href="add_certificate.php"class="btn btn-danger">
-                                                                             Cancle
-                                          
-                                                                                    </a>
-                                                                           
-                                                                           
-                                                                            </div>
-
-
-
-
-                                                                </div>
-
-                                                                
-                                                        
-                                                         
-
-
-                                                        </div>
-                                                                
-
-                                                           
-                                                            <!-- Basic Form Inputs card end -->
-                                                            <!-- Input Grid card start -->
-
-
-
-                                                                            
-                                                                    
-                                                                        
-                                                                    </form>
-
-                                                                    
-                                                                    
-                                                                </div>
-
-                                                            </div>
-                                                            <!-- Input Grid card end -->
-                                                            <!-- Input Validation card start -->
-                                                           
-                                                                        <!-- Input Validation card end -->
-                                                                        <!-- Input Alignment card start -->
-                                                                      
-                                                                        <!-- Input Alignment card end -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Page body end -->
-                                                        </div>
-                                                    </div>
-                                                    <!-- Main-body end -->
-                                                    <div >
-
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+                                    <!--                                          /*
+add main crop certificate 
+*/     -->
+
+
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Select certificate</h5>
+
+
+
+
+                                        </div>
+                                        <div class="card-block">
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-6">
+
+                                                    <select id="main_certificate" name="main_certificate" class="form-control" required="">
+                                                        <option value="no_certificate_selected">Select Inspection type </option>
+                                                        <option value="no_certificate_selected">-</option>
+
+
+
+
+
+
+                                                    </select>
+
+                                                </div>
+
+
+
+                                                <div class="col-sm-1">
+
+                                                    <label>Date</label>
+
+
+
+                                                </div>
+
+                                                <div class="col-sm-5">
+
+                                                    <input id="main_quantity" type="date" class="form-control" name="main_quantity" placeholder="Quantity" require="">
+
+
+
+                                                </div>
+
+
+
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="male_quantity" type="text" class="form-control" name="male_quantity" placeholder="Isolation" require="">
+
+                                                </div>
+
+
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="male_quantity" type="text" class="form-control" name="male_quantity" placeholder="Planting pattern" require="">
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+
+
+                                            <!--                                                                                                            /*
+add hybrid female crop certificate 
+*/   -->
+
+
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="male_quantity" type="text" class="form-control" name="male_quantity" placeholder="Off-Type Plants (%)" require="">
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Pest and Disease Incidence (%)" require="">
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                <div class="col-sm-12">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Defective Plants (%)" require="">
+
+
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+
+                                            <!--                                                                                                              /*
+form add land history
+*/  -->
+
+
+
+                                            <h5>Maize</h5>
+
+
+                                        </div>
+                                        <div class="card-block">
+
+
+                                            <div class="form-group row">
+
+
+
+
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Pollinating Females (%)" require="">
+
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Female receptive Skills (%)" require="">
+
+
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+
+
+
+
+                                            <div class="form-group row">
+
+
+
+
+
+                                                <div class="col-sm-12">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Male Elimination" require="">
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Off-Type cobs at shelling (%)" require="">
+
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+
+                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Defective cobs at shelling (%)" require="">
+
+
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="card">
+
+                                        <!--                                                                                                               /*
+form adding farm location details
+*/        -->
+
+
+
+                                        <div class="card-header">
+                                            <h5>Remarks</h5>
+
+
+                                        </div>
+
+                                        <div class="card-block">
+
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+                                                <div><label>Add remark</label></div>
+
+                                                <div class="col-sm-12">
+
+
+                                                    <textarea class="form-control">
+
+                                                                           </textarea>
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+                                                <div><label>Upload Image </label></div>
+
+
+
+
+
+                                                <div class="col-sm-12">
+
+                                                    <input id="area_name" type="file" class="form-control" name="area_name" placeholder="Area name" require="">
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+
+
+
+
+
+
+
+
+                                            </div>
+                                            <div class="col-sm-12">
+
+                                                <input type="submit" name="save_farm" value="Save" class="btn btn-success " />
+
+                                                </br>
+                                                </br>
+
+                                                <a href="add_certificate.php" class="btn btn-danger">
+                                                    Cancle
+
+                                                </a>
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+
+
+
+
+
+                                    </form>
+
+
+
                                 </div>
+
                             </div>
+                            <!-- Input Grid card end -->
+                            <!-- Input Validation card start -->
+
+                            <!-- Input Validation card end -->
+                            <!-- Input Alignment card start -->
+
+                            <!-- Input Alignment card end -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Page body end -->
+            </div>
+        </div>
+        <!-- Main-body end -->
+        <div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
-                            <!-- Warning Section Starts -->
-                            <!-- Older IE warning message -->
-<!--[if lt IE 10]>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
 <div class="ie-warning">
     <h1>Warning!!</h1>
     <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
@@ -957,25 +917,25 @@ form adding farm location details
     <p>Sorry for the inconvenience!</p>
 </div>
 <![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
-<script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-<script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-<!-- waves js -->
-<script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
 
-<!-- modernizr js -->
-<script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
-<!-- Custom js -->
-<script src="assets/js/pcoded.min.js"></script>
-<script src="assets/js/vertical-layout.min.js "></script>
-<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/SmoothScroll.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- Custom js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js "></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 <?php
 
@@ -985,72 +945,73 @@ form adding farm location details
 
 //main class object and passing register farm required variables 
 
- if(isset($_POST['save_farm'])){
+if (isset($_POST['save_farm'])) {
 
 
 
 
 
-if($_POST['variety']=='VT002' || $_POST['variety']=='VT003' || $_POST['variety']=='VT004'){
-
-
-    
+    if ($_POST['variety'] == 'VT002' || $_POST['variety'] == 'VT003' || $_POST['variety'] == 'VT004') {
 
 
 
-  $class = "hybrid";
-    $male = $_POST['male_certificate'];
-    $male_quantity = $_POST['male_quantity'];
-    $female = $_POST['female_certificate'];
-    $female_quantity = $_POST['female_quantity'];
-    $main= "-";
-    $main_quantity = "-";
-   
 
-    
-        
+
+
+        $class = "hybrid";
+        $male = $_POST['male_certificate'];
+        $male_quantity = $_POST['male_quantity'];
+        $female = $_POST['female_certificate'];
+        $female_quantity = $_POST['female_quantity'];
+        $main = "-";
+        $main_quantity = "-";
+    } else {
+
+
+
+
+        $class = $_POST['select_class'];
+        $male = "-";
+        $male_quantity = "-";
+        $female = "-";
+        $female_quantity = "-";
+        $main = $_POST['main_certificate'];
+        $main_quantity = $_POST['main_quantity'];
     }
 
-    else{
+    $object = new main();
+    $object->register_farm(
+        $_POST['hectors'],
+        $_POST['crop'],
+        $_POST['variety'],
+        $class,
+        $_POST['select_region'],
+        $_POST['select_district'],
+        $_POST['area_name'],
+        $_POST['address'],
+        $_POST['physical_address'],
+        $_POST['epa'],
+        $_POST['grower_search_result'],
+        $_POST['pre_crop'],
+        $_POST['other_select_crop'],
+        $main,
+        $main_quantity,
+        $male,
+        $male_quantity,
+        $female,
+        $female_quantity
+    );
+}
 
 
 
-       
-$class= $_POST['select_class'];
-$male = "-";
-$male_quantity ="-";
-$female = "-";
-$female_quantity ="-";
-$main= $_POST['main_certificate'];
-$main_quantity = $_POST['main_quantity'];
-
-       
-        
-
-
-    }
-
-   $object = new main();                                                                          
-    $object -> register_farm($_POST['hectors'],$_POST['crop'],$_POST['variety'],
-   $class,$_POST['select_region'],$_POST['select_district'],$_POST['area_name'],
-   $_POST['address'],$_POST['physical_address'],$_POST['epa'],$_POST['grower_search_result'],
-   $_POST['pre_crop'],$_POST['other_select_crop'],$main,$main_quantity,$male,$male_quantity,$female,$female_quantity);
-
-  
-
-    
-    
-  
- }
 
 
 
-    
 
-    
- 
-   
- 
- 
-?>   
+
+
+
+?>
+
 </html>

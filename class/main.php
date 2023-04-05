@@ -112,10 +112,6 @@ class main
     }
   }
 
-  // user logout function
-  function user_log_out()
-  {
-  }
 
 
 
@@ -649,7 +645,7 @@ class main
   {
 
     global $con;
-   
+
 
     //  Checking if prices are set before adding stock in 
 
@@ -710,7 +706,7 @@ class main
         $statement->execute();
 
         $temp_class = "";
-      
+
 
         // register transaction 
         ///   update creditor funds account 
@@ -730,7 +726,7 @@ class main
         $this->stock_in_add_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user);
       } else {
 
-        echo"Not set";
+        echo "Not set";
       }
     }
   }
@@ -811,16 +807,12 @@ class main
     // $transAmount = $this->get_transacton_details($stockInId);
     // $certificate = $old_certificate;
     if ($status == 0) {
-
-    
     } else if ($status == 4) {
       $this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
-    }
-    else{
+    } else {
 
       $this->stock_in_update_transaction($creditorId, $stockInId, $newQuantity, $crop, $variety, $class);
       $this->stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity);
-
     }
 
 
@@ -834,11 +826,10 @@ class main
     $sql = "UPDATE `stock_in` SET`crop_ID`='$crop',`variety_ID`='$variety',`class`='$class',`SLN`='$srn',`bincard`='$binCardNumber',`number_of_bags`='$numberOfBags',`quantity`='$newQuantity',`available_quantity`='$newQuantity',
       `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$new_certificate' WHERE `stock_in_ID`='$stockInId'";
     $statement = $con->prepare($sql);
-   if( $statement->execute()){
-    
-    echo "success";
-    
-   }
+    if ($statement->execute()) {
+
+      echo "success";
+    }
   }
 
 
@@ -895,7 +886,6 @@ class main
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           $transaction_price =  $row["$temp_class"];
-
         }
       }
       $new_amount = (int)$transaction_price * (int)$quantity;
@@ -953,6 +943,49 @@ class main
     }
   }
 
+
+  //  Delete stock in entry 
+
+
+  function delete_stock_in($creditor_id, $stock_in_id, $certificate, $quantity)
+  {
+    global $con;
+    // get transaction amount
+    (int)$amount = $this->get_transacton_details($stock_in_id);
+
+    // Restore creditor funds account 
+    $sql = "UPDATE `creditor` SET `account_funds`=account_funds-$amount WHERE `creditor_ID`='$creditor_id'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    // Restore certificate if seed is certified
+
+    if ($certificate == "not_certified") {
+    } else {
+
+      $sql = "UPDATE `certificate` SET `available_quantity`=available_quantity + $quantity  WHERE `lot_number`='$certificate'";
+      $statement = $con->prepare($sql);
+
+      $statement->execute();
+    }
+
+
+    // Delete transaction 
+
+    $sql = "DELETE FROM `transaction` WHERE transaction.action_ID ='$stock_in_id'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    // Delete entery 
+
+
+    $sql = "DELETE FROM stock_in WHERE stock_in.stock_in_ID ='$stock_in_id'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+    echo "deleted";
+  }
 
 
 
@@ -2414,51 +2447,57 @@ class main
         header('Location:add_payback_payment.php');
 
         //update ledger
-        
+
 
         $this->ledger_new_entry("debit", $description, $amount, $bank_name, $transaction_id, $amount, "system");
       } else if ($amount > $ava_balance) {
 
         echo ("<script> alert('Error Amount greater than required balance ');
     </script>");
-       mysqli_close($con);
+        mysqli_close($con);
       }
     }
   }
 
 
-// Creating database files 
+  // Creating database files 
 
-function create_back_up_file(){
- global $con;
- global $database;
- global $localhost;
- global $username;
- global $password;
- 
-
-
-$backup_file = $database . '_' . date("Y-m-d-H-i-s") . '.sql';
-
-// Connect to the database
+  function create_back_up_file()
+  {
+    global $con;
+    global $database;
+    global $localhost;
+    global $username;
+    global $password;
 
 
-// Check if the connection was successful
-if (!$con) {
-    die('Could not connect: ');
-}
 
-// Select the database
-mysqli_select_db($con, $database);
+    $backup_file = $database . '_' . date("Y-m-d-H-i-s") . '.sql';
 
-// Run the mysqldump command
-$command = "mysqldump --opt -h $localhost -u $username -p$password $database > $backup_file";
-system($command);
-
-// Close the connection
-mysqli_close($con);
+    // Connect to the database
 
 
-}
+    // Check if the connection was successful
+    if (!$con) {
+      die('Could not connect: ');
+    }
 
+    // Select the database
+    mysqli_select_db($con, $database);
+
+    // Run the mysqldump command
+    $command = "mysqldump --opt -h $localhost -u $username -p$password $database > $backup_file";
+    system($command);
+
+    // Close the connection
+    mysqli_close($con);
+  }
+  function get_progress()
+  {
+
+    $sql = "SELECT MONTH(date) AS month, YEAR(date) AS year, SUM(amount) AS total_amount
+  FROM transactions
+  WHERE YEAR(date) = [year_number]
+  GROUP BY MONTH(date), YEAR(date)";
+  }
 }

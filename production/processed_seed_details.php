@@ -44,7 +44,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -139,7 +139,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -147,7 +147,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -262,7 +262,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -279,7 +279,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li >
+                                <li>
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -424,7 +424,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="view_registered_users.php">Grade new stock</a>
                                             </li>
 
@@ -452,11 +452,11 @@ if (in_array($position, $restricted)) {
 
 
                                         <!-- Contextual classes table ends -->
-                                        
+
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Processing Type</h5>
-                                               
+
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -473,13 +473,13 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                             
+
                                                                 <th>Process Type</th>
                                                                 <th>Processed Quantity</th>
                                                                 <th>Grade Outs Quantity</th>
                                                                 <th>Trash Quantity</th>
-                                                               
-                                                                
+
+
 
 
                                                             </tr>
@@ -500,10 +500,10 @@ if (in_array($position, $restricted)) {
                                                                     $trash_quantity = $row['trash_quantity'];
                                                                     $grade_outs_quantity = $row['grade_outs_quantity'];
                                                                     $assigned_quantity = $row['processed_quantity'];
-                                                                   
-                                                                    
+
+
                                                                     $object = new main();
-                                                                    
+
 
 
 
@@ -536,32 +536,31 @@ if (in_array($position, $restricted)) {
 
                                         <div class="card">
 
-                                        <?php
+                                            <?php
 
-                                         $sql="SELECT `process_ID`, process_seed.assigned_quantity,creditor.name, `processed_date`, `processed_time` FROM `process_seed` 
+                                            $sql = "SELECT `process_ID`, process_seed.assigned_quantity,creditor.name, `processed_date`, `processed_time` FROM `process_seed` 
                                          INNER JOIN grading ON process_seed.grade_ID = process_seed.grade_ID 
                                          INNER JOIN stock_in ON grading.stock_in_ID = stock_in.stock_in_ID
                                         INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID WHERE `process_ID`='$process_id'";
-                                        
 
-                                        $result = $con->query($sql);
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $process_id = $row['process_ID'];
-                                                $name = $row['name'];
-                                                $assigned_quantity = $row['assigned_quantity'];
-                                                $processed_date = $row['processed_date'];
-                                                $processed_time = $row['processed_time'];
-                                                
-                                                $new_date = $object->change_date_format($processed_date);
 
+                                            $result = $con->query($sql);
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $process_id = $row['process_ID'];
+                                                    $name = $row['name'];
+                                                    $assigned_quantity = $row['assigned_quantity'];
+                                                    $processed_date = $row['processed_date'];
+                                                    $processed_time = $row['processed_time'];
+
+                                                    $new_date = $object->change_date_format($processed_date);
+                                                }
                                             }
-                                        }
-                                        
-                                        ?>
+
+                                            ?>
                                             <div class="card-header">
                                                 <h5>Processed Seed Details </h5>
-                                           
+
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -572,102 +571,102 @@ if (in_array($position, $restricted)) {
                                                     </ul>
                                                 </div>
 
-    </br>
+                                                </br>
 
-    <span>--</span>
+                                                <span>--</span>
                                                 <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>ID:</label>
+                                                    <div class="col-sm-2">
+                                                        <label>ID:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="type" class="form-control" name="type" value="<?php echo $process_id; ?>" require="">
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="type" class="form-control" name="type" value="<?php echo $process_id; ?>" require="">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Grower name:</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" value="<?php echo $name; ?>" require="">
-                                                    
-                                                </div>
-                                            </div>
-
-                                            
-
-                                        
-
-
 
                                                 <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Assigned Quantity:</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $assigned_quantity; ?> kg" require="">
-                                                </div>
-                                            </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Grower name:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" value="<?php echo $name; ?>" require="">
 
-                                            
-                                             
-                                            <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Process Date:</label>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $new_date; ?>" require="">
-                                                </div>
-                                            </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Process Time:</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $processed_time; ?>" require="">
-                                                </div>
-                                            </div>
+
+
+
+
+
 
                                                 <div class="form-group row">
-                                                
-
-
-
-
-
-
-                                                </br></br></br>
-
-
-                                                <div>
-
-                                                </div>
-
-                                                <br>
-                                                .
-                                                <div class="form-group">
-
-
-                                                  
-                                                    <input type="submit" name="cancle" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
-
+                                                    <div class="col-sm-2">
+                                                        <label>Assigned Quantity:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $assigned_quantity; ?> kg" require="">
+                                                    </div>
                                                 </div>
 
 
 
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Process Date:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $new_date; ?>" require="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Process Time:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="trash_quantity" class="form-control" name="trash_quantity" value="<?php echo $processed_time; ?>" require="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
 
 
-                                                </form>
 
 
 
+
+
+                                                    </br></br></br>
+
+
+                                                    <div>
+
+                                                    </div>
+
+                                                    <br>
+                                                    .
+                                                    <div class="form-group">
+
+
+
+                                                        <input type="submit" name="cancle" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+                                                    </div>
+
+
+
+
+
+                                                    </form>
+
+
+
+                                                </div>
                                             </div>
-                                            </div>
-                                            
+
                                         </div>
 
-                                        
+
 
                                         <!-- Background Utilities table end -->
                                     </div>

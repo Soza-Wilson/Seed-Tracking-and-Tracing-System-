@@ -41,7 +41,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-  
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -60,7 +60,7 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/expired_certificates.js">
 
-</script>
+    </script>
 </head>
 
 <body>
@@ -151,7 +151,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -159,7 +159,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -167,13 +167,13 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -222,7 +222,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                        
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -266,14 +266,14 @@ if (in_array($position, $restricted)) {
                                 </li>
 
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="view_stock_out.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -289,7 +289,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
@@ -310,8 +310,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                 </li>
-                                </ul> 
+                                </li>
+                            </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -432,7 +432,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
+
                                             <li class="breadcrumb-item"><a href="expied_certificates.php">expired certificates</a>
                                             </li>
 
@@ -471,7 +471,7 @@ if (in_array($position, $restricted)) {
                                             <div class="card-block">
 
                                                 <div class="form-group row">
-                                                    
+
                                                     <div class="col-sm-2">
                                                         <label>Select Crop</label>
                                                     </div>
@@ -492,66 +492,66 @@ if (in_array($position, $restricted)) {
 
 
                                                 <div class="form-group row">
-                                                    
+
 
                                                     <div class="col-sm-2">
 
 
-                                                    <select name="select_crop" id="select_crop" class="form-control"> 
-                                                        <option value="not_selected">Not Selected</option>
-                                                     
+                                                        <select name="select_crop" id="select_crop" class="form-control">
+                                                            <option value="not_selected">Not Selected</option>
 
 
-                                                    </select>
-                                                    <label id="warning_crop" class="warning-text"> <span >Please select crop  <i class="icofont icofont-warning"></i></span></label>
+
+                                                        </select>
+                                                        <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
 
 
-                                                        
+
                                                     </div>
-                                                    
+
                                                     <div class="col-sm-2">
 
 
-                                                    <select name="select_variety" id="select_variety" class="form-control"> 
-                                                        <option value="not_selected">Not Selected</option>
-                                                      
+                                                        <select name="select_variety" id="select_variety" class="form-control">
+                                                            <option value="not_selected">Not Selected</option>
 
 
-                                                    </select>
-                                                    <label id="warning_variety" class="warning-text"> <span >Please select variety <i class="icofont icofont-warning"></i></span></label>
+
+                                                        </select>
+                                                        <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
 
 
-                                                        
+
                                                     </div>
                                                     <div class="col-sm-1">
 
 
-                                                    <select name="select_class" id="select_class" class="form-control"> 
-                                                        <option value="not_selected">Class</option>
-                                                        <option value="pre_basic">Pre-Basic</option>
-                                                        <option value="basic">Basic</option>
-                                                        <option value="certified">Certified</option>
+                                                        <select name="select_class" id="select_class" class="form-control">
+                                                            <option value="not_selected">Class</option>
+                                                            <option value="pre_basic">Pre-Basic</option>
+                                                            <option value="basic">Basic</option>
+                                                            <option value="certified">Certified</option>
 
 
-                                                    </select>
-                                                    <label id="warning_class" class="warning-text"> <span >Please select class  <i class="icofont icofont-warning"></i></span></label>
+                                                        </select>
+                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
 
 
-                                                        
+
                                                     </div>
 
                                                     <div class="col-sm-2">
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                        <label id="warning_from" class="warning-text"> <span >Please select date <i class="icofont icofont-warning"></i></span></label>
+                                                        <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                     <div class="col-sm-2">
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                        <label id="warning_to" class="warning-text"> <span >Please select date <i class="icofont icofont-warning"></i></span></label>
+                                                        <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
 
-                                                    
+
 
 
 
@@ -562,7 +562,7 @@ if (in_array($position, $restricted)) {
                                                         <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
 
-                                                      
+
                                                     </div>
                                                 </div>
 
@@ -634,10 +634,10 @@ if (in_array($position, $restricted)) {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                       
+
                                                             <?php
 
-                                                            $date = date("Y-m-d"); 
+                                                            $date = date("Y-m-d");
                                                             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
                                  `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
                                  INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 

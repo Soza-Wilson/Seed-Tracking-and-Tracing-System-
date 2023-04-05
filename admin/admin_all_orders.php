@@ -24,7 +24,7 @@ if (in_array($position, $restricted)) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -147,7 +147,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -155,7 +155,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -163,14 +163,14 @@ if (in_array($position, $restricted)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
-                                    
+
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -200,7 +200,7 @@ if (in_array($position, $restricted)) {
                                     <ul>
                                         <li class="more-details">
                                             <a href="../other/user_profile.php"><i class="ti-user"></i>View Profile</a>
-                                            
+
                                             <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                         </li>
                                     </ul>
@@ -216,7 +216,7 @@ if (in_array($position, $restricted)) {
 
                                 <li class="pcoded-hasmenu">
 
-                                <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
                                             <a href="admin_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
@@ -232,7 +232,7 @@ if (in_array($position, $restricted)) {
                                         </li>
 
 
-                             
+
 
 
                                     </ul>
@@ -293,7 +293,7 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li >
+                                <li>
                                     <a href="admin_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
@@ -343,7 +343,27 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
 
-    </li>
+                                </li>
+
+                            </ul>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                            <ul class="pcoded-item pcoded-left-item">
+
+                                <li class="">
+                                    <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                    <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                                </li>
 
                             </ul>
                         </div>
@@ -363,7 +383,7 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                            
+
                                             <li class="breadcrumb-item"><a href="admin_all_orders.php"> Orders </a>
                                             </li>
                                         </ul>
@@ -422,7 +442,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-3">
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Order Type</option>
-                                                            <option value="customer">Customer Order</option>                                                            
+                                                            <option value="customer">Customer Order</option>
                                                             <option value="b_to_b">Business Order</option>
                                                             <option value="agro_dealer">Agro Dealer Order</option>
                                                         </select>
@@ -432,7 +452,7 @@ if (in_array($position, $restricted)) {
                                                         <input list="names" id="search_by_transname" name="search_by_transname" class="form-control" required="">
 
                                                         <datalist id="names">
-                                                          
+
                                                         </datalist>
                                                     </div>
 
@@ -504,7 +524,7 @@ if (in_array($position, $restricted)) {
                                                                 <th>Time</th>
                                                                 <th>Count</th>
                                                                 <th>Total</th>
-                                                              
+
 
                                                             </tr>
                                                         </thead>
@@ -523,7 +543,7 @@ if (in_array($position, $restricted)) {
 
 
                                                                     $order_ID      = $row["order_ID"];
-                                                                   
+
                                                                     $customer_name  = $row["customer_name"];
                                                                     $user = $row["fullname"];
                                                                     $date    = $row['date'];

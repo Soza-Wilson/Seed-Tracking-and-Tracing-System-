@@ -38,7 +38,7 @@ $(document).ready(function () {
         }
         if (
           $("#certificate").val() == "no_certificate_selected" ||
-          $("#certificate").val() == "Certificate not found"
+          $("#certificate").val() == "not_found"
         ) {
           $("#warning_certificate").show();
           emptyFields = emptyFields + 1;
@@ -156,17 +156,13 @@ $(document).ready(function () {
             user: user,
           },
           function (data) {
-            if(data=="Not set"){
-              alert (" Error :Buyback prices are not set !!")
+            if (data == "Not set") {
+              alert(" Error :Buyback prices are not set !!");
+              window.location.reload();
+            } else {
+              alert("Data added succefully");
               window.location.reload();
             }
-            else{
-
-               alert("Data added succefully");
-              window.location.reload();
-            }
-
-            
           }
         );
       }

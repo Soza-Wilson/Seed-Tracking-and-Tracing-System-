@@ -7,7 +7,7 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
-$user_id=$_SESSION['user'];
+$user_id = $_SESSION['user'];
 $position = $_SESSION['position'];
 
 if (empty($test)) {
@@ -43,18 +43,18 @@ if (!empty($stock_in_ID)) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $crop = $row["crop"];
-            $cropId=$row["crop_ID"];
-            $varietyId=$row["variety_ID"];
+            $cropId = $row["crop_ID"];
+            $varietyId = $row["variety_ID"];
             $variety = $row["variety"];
             $class = $row["class"];
-            $seedCertificate=$row["certificate_ID"];
+            $seedCertificate = $row["certificate_ID"];
             $SRN = $row["SLN"];
             $bincard = $row["bincard"];
             $bags = $row["number_of_bags"];
             $quantity = $row["quantity"];
             $creditor = $row["name"];
-            $creditorId= $row["creditor_ID"];
-            $source=$row["source"];
+            $creditorId = $row["creditor_ID"];
+            $source = $row["source"];
             $user_requested = $row["fullname"];
             $date = $row["date"];
             $time = $row["time"];
@@ -84,7 +84,7 @@ if (!empty($stock_in_ID)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -101,7 +101,7 @@ if (!empty($stock_in_ID)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details__.js">
 
     </script>
 </head>
@@ -316,7 +316,7 @@ if (!empty($stock_in_ID)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                    <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                         <span class="pcoded-mcaret"></span>
@@ -508,6 +508,48 @@ if (!empty($stock_in_ID)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
+                                        <div id="deleteModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h5 class="modal-title">Delete entry </h5>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <div class="card-block">
+
+                                                            <button class="btn btn-primary" id="delete_request" name="delete_request"> Request for approval</button>
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <div class="col-sm-4">
+                                                            <label for="bin_card" id="approval_label"> Enter Admin Approval Code</label>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <input type="text" id="accessCodeDelete" class="form-control" name="accessCodeDelete" placeholder="Enter code" require="">
+                                                            <div id="code_validity">
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button class="btn btn-success" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                        </div>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                         <div id="myModal" class="modal fade" role="dialog">
                                             <div class="modal-dialog modal-lg">
 
@@ -526,7 +568,7 @@ if (!empty($stock_in_ID)) {
 
 
 
-                                               
+
                                                                 <div class="form-group row seed_details">
                                                                     <div class="col-sm-12">
                                                                         <select id="select_crop" name="crop" class="form-control" required="">
@@ -565,28 +607,28 @@ if (!empty($stock_in_ID)) {
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                
+
 
                                                                 <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Quantity:</label>
-                                                                </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label>Quantity:</label>
+                                                                    </div>
 
                                                                     <div class="col-sm-12">
 
-                                                                        <input id="quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="" value="<?php echo$quantity; ?>">
+                                                                        <input id="quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="" value="<?php echo $quantity; ?>">
 
 
 
 
 
-                                                                </div>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-12">
-                                                                    <label id="warning_certificate"> <span >Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
-    </div>
+                                                                        <label id="warning_certificate"> <span>Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
+                                                                    </div>
 
                                                                 </div>
 
@@ -642,13 +684,13 @@ if (!empty($stock_in_ID)) {
                                                             </div>
 
                                                             <div class="form-group row">
-                                                            <div class="col-sm-4">
+                                                                <div class="col-sm-4">
                                                                     <label>Description:</label>
                                                                 </div>
 
                                                                 <div class="col-sm-12">
-                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="" value="<?php echo$description; ?>">
-                                                                    <label id="warning_description" class="warning-text"> <span >Please enter description  <i class="icofont icofont-warning"></i></span></label>
+                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="" value="<?php echo $description; ?>">
+                                                                    <label id="warning_description" class="warning-text"> <span>Please enter description <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
 
 
@@ -666,8 +708,8 @@ if (!empty($stock_in_ID)) {
                                                                     <label>Seed Receive Note #:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo$SRN; ?>">
-                                                                    <label id="warning_srn" class="warning-text"> <span >Please enter SRN  <i class="icofont icofont-warning"></i></span></label>
+                                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $SRN; ?>">
+                                                                    <label id="warning_srn" class="warning-text"> <span>Please enter SRN <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -676,8 +718,8 @@ if (!empty($stock_in_ID)) {
                                                                     <label>Bin card #:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="number" id="bin_card" class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo$bincard; ?>">
-                                                                    <label id="warning_bin_card" class="warning-text"> <span >Please enter bin card number  <i class="icofont icofont-warning"></i></span></label>
+                                                                    <input type="number" id="bin_card" class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $bincard; ?>">
+                                                                    <label id="warning_bin_card" class="warning-text"> <span>Please enter bin card number <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -686,8 +728,8 @@ if (!empty($stock_in_ID)) {
                                                                     <label>number of bags :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo$bags; ?>">
-                                                                    <label id="warning_bags" class="warning-text"> <span >Please enter number of bags  <i class="icofont icofont-warning"></i></span></label>
+                                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $bags; ?>">
+                                                                    <label id="warning_bags" class="warning-text"> <span>Please enter number of bags <i class="icofont icofont-warning"></i></span></label>
                                                                 </div>
                                                             </div>
 
@@ -699,11 +741,11 @@ if (!empty($stock_in_ID)) {
 
                                                                 <div class="col-sm-12">
                                                                     <labe>Supporting documents :</label>
-                                                                        <input id="fileDirectory" type="file" class="form-control" name="fileDirectory"  accept="pdf">
-                                                                        <input id="directory" type="hidden" class="form-control" name="image" placeholder="Phone number" value="<?php echo"$dir"?>">
+                                                                        <input id="fileDirectory" type="file" class="form-control" name="fileDirectory" accept="pdf">
+                                                                        <input id="directory" type="hidden" class="form-control" name="image" placeholder="Phone number" value="<?php echo "$dir" ?>">
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
+                                                                    <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
                                                                 </div>
 
                                                             </div>
@@ -714,16 +756,16 @@ if (!empty($stock_in_ID)) {
                                                     </div>
                                                     <div class="modal-footer">
 
-                                                        <div class="col-sm-4" >
+                                                        <div class="col-sm-4">
                                                             <label for="bin_card" id="approval_label"> Enter Admin Approval Code</label>
                                                         </div>
 
                                                         <div class="col-sm-4">
                                                             <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="Enter code" require="">
-                                                          <div id="code_validity">
- 
+                                                            <div id="code_validity">
 
-                                                          </div>
+
+                                                            </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <button class="btn btn-success" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
@@ -760,7 +802,7 @@ if (!empty($stock_in_ID)) {
                                                             <label class="badge badge-primary "> ID</label>
                                                             <input id="stock_in_id" type="text" class="form-control " name="stock_in_id" value="<?php echo $stock_in_ID; ?>" require="">
                                                             <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
-                                                             <input type="hidden" id="user_name" value="<?php echo $test; ?>">
+                                                            <input type="hidden" id="user_name" value="<?php echo $test; ?>">
 
                                                         </div>
 
@@ -826,7 +868,7 @@ if (!empty($stock_in_ID)) {
 
                                                         <input type="hidden" name="customer_name" id="customer_name">
                                                         <input type="hidden" name="order_id" id="order_id">
-                                                       <input type="hidden" name="approvalId" id="approvalId">
+                                                        <input type="hidden" name="approvalId" id="approvalId">
 
                                                         <input type="hidden" name="processed_value" id="processed_value" value="<?php echo $processed; ?>">
                                                         <input type="hidden" name="oustanding_value" id="outstanding_value" value="<?php echo $outstanding; ?>">
@@ -874,13 +916,13 @@ if (!empty($stock_in_ID)) {
                                         <label class="badge badge-primary">Crop:</label>
                                     </div>
                                     <div class="col-sm-2">
-                                       
+
                                         <select class="form-control trans_details text-details" id="crop">
                                             <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
-                                            
-                                        <select>
-                                            <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID;?>">
-                                            <input type="hidden" id="creditorId" value="<?php echo $creditorId;?>">
+
+                                            <select>
+                                                <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID; ?>">
+                                                <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
                                     </div>
 
                                     <div class="col-sm-1">
@@ -888,11 +930,11 @@ if (!empty($stock_in_ID)) {
                                     </div>
                                     <div class="col-sm-3">
 
-                                    <select class="form-control trans_details text-details" id="variety">
-                                            <option value="<?php echo $varietyId;?>"><?php echo $variety; ?></option>
-                                            
-                                        <select>
-                                    
+                                        <select class="form-control trans_details text-details" id="variety">
+                                            <option value="<?php echo $varietyId; ?>"><?php echo $variety; ?></option>
+
+                                            <select>
+
                                     </div>
 
                                     <div class="col-sm-1">
@@ -900,11 +942,11 @@ if (!empty($stock_in_ID)) {
                                     </div>
                                     <div class="col-sm-2">
 
-                                    <select class="form-control trans_details text-details" id="class">
+                                        <select class="form-control trans_details text-details" id="class">
                                             <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                            
-                                        <select>
-                                      
+
+                                            <select>
+
                                     </div>
 
                                 </div>
@@ -919,8 +961,8 @@ if (!empty($stock_in_ID)) {
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control trans_details text-details" name="dob" id="ogQuantity" required="" value="<?php echo $quantity; ?>">
                                     </div>
-                                    
-                                   
+
+
                                     <div class="col-sm-1">
                                         <label class="badge badge-primary ">Seed Receive Note #:</label>
                                     </div>
@@ -992,7 +1034,7 @@ if (!empty($stock_in_ID)) {
                                         <button class=" btn btn-success" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
                                     </div>
                                     <div class="col-sm-0">
-                                        <button class=" btn btn-danger" id='back' name='back'><i class='icofont icofont-warning-alt'></i>Delete</button>
+                                        <button class=" btn btn-danger" id='back' data-toggle="modal" data-target="#deleteModal" name='back'><i class='icofont icofont-trash'></i>Delete</button>
                                     </div>
 
                                 </div>

@@ -27,7 +27,7 @@ if (empty($test)) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -44,7 +44,7 @@ if (empty($test)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-   
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -317,14 +317,14 @@ if (empty($test)) {
                                         </li>
 
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="view_stock_out.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="view_pending_orders.php" class="waves-effect waves-dark">
+                                            <a href="inventory.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -516,8 +516,8 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">  
-                                            <!-- // " -->
+                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">
+                                                <!-- // " -->
                                                 <div class="card-header">
                                                     <h5>Seed details </h5>
 
@@ -686,7 +686,7 @@ if (empty($test)) {
                                                     <input type="hidden" name="receive_name" value="<?php echo $received_name; ?>">
                                                     <input type="hidden" name="passed_quantity" value="<?php echo $quantity; ?>">
                                                     <input type="hidden" name="stock_in_ID" value="<?php echo $stock_in; ?>">
-                                                    
+
                                                 </div>
                                             </div>
 
@@ -865,21 +865,14 @@ if (isset($_FILES['conformation_file'])) {
 }
 
 if (isset($_POST['confirm'])) {
- 
-        $object = new main();
-        $grade_id = $_POST['grade'];
-        $id = $_POST['receive_id'];
-        $name = $_POST['receive_name'];
-        $passed_quantity= $_POST['passed_quantity'];
-        $stock_in = $_POST['stock_in_ID'];
-        $object -> handover_conformation($id,$name,$newfilename,$grade_id,$passed_quantity,$stock_in);
 
-      
-  
-
-  
-
-
+    $object = new main();
+    $grade_id = $_POST['grade'];
+    $id = $_POST['receive_id'];
+    $name = $_POST['receive_name'];
+    $passed_quantity = $_POST['passed_quantity'];
+    $stock_in = $_POST['stock_in_ID'];
+    $object->handover_conformation($id, $name, $newfilename, $grade_id, $passed_quantity, $stock_in);
 }
 
 

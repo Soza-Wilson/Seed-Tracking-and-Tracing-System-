@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-  
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -234,13 +234,13 @@ if ($result->num_rows > 0) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -288,7 +288,7 @@ if ($result->num_rows > 0) {
 
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                            <a href="production_dashboard" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -330,14 +330,14 @@ if ($result->num_rows > 0) {
                                         </li>
 
                                         <li class="">
-                                            <a href="#" class="waves-effect waves-dark">
+                                            <a href="view_stock_out.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-export"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock out</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="#" class="waves-effect waves-dark">
+                                            <a href="inventoy.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main">inventory</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -351,31 +351,31 @@ if ($result->num_rows > 0) {
 
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="">
-                                    <a href="process_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="view_processed_seed.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="process_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="view_processed_seed.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="labels.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                 </li>
-                                </ul> 
+                                        <li>
+                                            <a href="labels.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-receipt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Generate Labels</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -440,7 +440,7 @@ if ($result->num_rows > 0) {
                                 </li>
 
                                 <li>
-                                    <a href="inspection" class="waves-effect waves-dark">
+                                    <a href="inspection.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
                                         <span class="pcoded-mcaret"></span>
@@ -494,15 +494,11 @@ if ($result->num_rows > 0) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
+
                                             </li>
-                                            <li class="breadcrumb-item"><a href="admin_pending_orders.php">stock out </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="admin_pending_orders.php">process order </a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="admin_pending_orders.php">check inventory </a>
+                                            <li class="breadcrumb-item"><a href="stock_out_check_items.php">check inventory </a>
                                             </li>
                                             </li>
 
@@ -678,8 +674,8 @@ if ($result->num_rows > 0) {
                                                 $class = $_GET['seed_class'];
                                                 $item_quantity = $_GET['quantity'];
                                                 $order_ID = $_GET['order_ID'];
-                                                $price_per_kg =$_GET['item_price'];
-                                                $discount_price = $_GET['discount_price']; 
+                                                $price_per_kg = $_GET['item_price'];
+                                                $discount_price = $_GET['discount_price'];
 
                                                 $sql = "SELECT `stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `Quntity`, `amount`, `date`, `time`, `user_ID` FROM `stock_out` WHERE `item_ID` = '$item_ID'";
 
@@ -799,7 +795,7 @@ if ($result->num_rows > 0) {
                                                         $user = $row['fullname'];
                                                         $srn = $row['SLN'];
                                                         $dir = $row['supporting_dir'];
-                                                       
+
 
 
                                                         echo "

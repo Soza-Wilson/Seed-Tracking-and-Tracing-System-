@@ -4,16 +4,14 @@
 
 Ob_start();
 include('../class/main.php');
-session_start(); 
+session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 
-if(empty($test)){
+if (empty($test)) {
 
     header('Location:../index.php');
-
-
 }
 
 $restricted = array("system_administrator");
@@ -33,33 +31,35 @@ if (in_array($position, $restricted)) {
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-      <!-- Meta -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-      <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
-      <meta name="author" content="codedthemes" />
-      <!-- Favicon icon -->
-      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-      <!-- Google font-->     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- Required Fremwork -->
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
-      <!-- waves.css -->
-      <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
-      <!-- themify-icons line icon -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
-      <!-- ico font -->
-      <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
-      <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-  </head>
-  <body>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="codedthemes" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+</head>
+
+<body>
     <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -87,7 +87,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-yellow">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -99,7 +99,7 @@ if (in_array($position, $restricted)) {
                         <div class="circle"></div>
                     </div>
                 </div>
-                
+
                 <div class="spinner-layer spinner-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -142,13 +142,13 @@ if (in_array($position, $restricted)) {
                             <i class="ti-more"></i>
                         </a>
                     </div>
-            
+
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -156,22 +156,22 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
-                                    <span><?php echo $_SESSION['fullname']?></span>
+                                    <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                   
-                                   
+
+
                                     <li class="waves-effect waves-light">
                                         <a href="auth-normal-sign-in.html">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -183,7 +183,7 @@ if (in_array($position, $restricted)) {
                     </div>
                 </div>
             </nav>
-    
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
@@ -193,10 +193,10 @@ if (in_array($position, $restricted)) {
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $_SESSION['fullname']?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
-                        
+
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
@@ -208,142 +208,162 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
-                                
+
                             </div>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
-                                <li class="pcoded-hasmenu">
-                                   
-                                    <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="admin_dashboard.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                  
-                                   
-                                       
-                                       
-                            
-                                    
-                                </li>
-                            
-                                 
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="">
-                                            <a href="add_user.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="view_registered_users.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                            
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li class="">
-                                    <a href="add_product.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li >
-                                    <a href="admin_pending_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_approved_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_denied_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="admin_processed_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
 
-                                <li class="">
-                                    <a href="admin_all_orders.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">all Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                            </ul>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="admin_dashboard.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
-                            <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="">
-                                    <a href="view_ledger.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
 
-    </li>
 
-                            </ul>
-                    
-                         
+
+
+                                    </li>
+
+
+                                </ul>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="add_user.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="view_registered_users.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="add_product.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Sell prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set Buyback prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li>
+                                        <a href="admin_pending_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_approved_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-thumb-up"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Approved Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_denied_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-thumb-down"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="admin_processed_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="">
+                                        <a href="admin_all_orders.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">all Orders</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Finacial Statemets</div>
+                                <ul class="pcoded-item pcoded-left-item">
+
+                                    <li class="">
+                                        <a href="view_ledger.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-list-ol"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Ledger</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grant Access</div>
+                                <ul class="pcoded-item pcoded-left-item">
+
+                                    <li class="">
+                                        <a href="grant_access_pending.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-lock"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pending Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                        <a href="grant_access_approved.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-unlock"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Approved Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -361,7 +381,7 @@ if (in_array($position, $restricted)) {
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
-                                           
+
                                             <li class="breadcrumb-item"><a href="view_registered_users.php">View Registered Users</a>
                                             </li>
                                         </ul>
@@ -379,14 +399,14 @@ if (in_array($position, $restricted)) {
                                         <!-- Basic table card start -->
                                         <!-- Basic table card end -->
                                         <!-- Inverse table card start -->
-                                        
+
                                         <!-- Inverse table card end -->
                                         <!-- Hover table card start -->
-                                       
+
                                         <!-- Hover table card end -->
                                         <!-- Contextual classes table starts -->
-                                        
-                                            
+
+
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
@@ -408,7 +428,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="table-responsive">
                                                     <table class="table table-hover">
                                                         <thead>
-                                                        <tr>
+                                                            <tr>
                                                                 <th>User ID</th>
                                                                 <th>Full Name</th>
                                                                 <th>Department</th>
@@ -422,25 +442,24 @@ if (in_array($position, $restricted)) {
                                                         </thead>
                                                         <tbody>
 
-                                                        <?php
-								$sql = "SELECT * FROM `user`";
-								$result = $con->query($sql);
-								if($result->num_rows>0)
-								{
-									while($row=$result->fetch_assoc())
-									{
-										$user_ID 	 = $row["user_ID"];
-										$fullname	 = $row["fullname"];
-										$department	 = $row["user_type_ID"];
-										$dob  = $row["DOB"];
-										$reg_date = $row['registered_date'];
-										$position  = $row['postion'];
-										$phone    = $row['phone'];
-										$email = $row['email'];
-										
-										
-										
-										echo"
+                                                            <?php
+                                                            $sql = "SELECT `user_ID`, usertype.user_type, `fullname`, `DOB`, `sex`, `registered_date`, `postion`, `phone`, `email`, `password`
+                                                             FROM `user` INNER JOIN usertype ON usertype.user_type_ID = user.user_type_ID";
+                                                            $result = $con->query($sql);
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    $user_ID      = $row["user_ID"];
+                                                                    $fullname     = $row["fullname"];
+                                                                    $department     = $row["user_type"];
+                                                                    $dob  = $row["DOB"];
+                                                                    $reg_date = $row['registered_date'];
+                                                                    $position  = $row['postion'];
+                                                                    $phone    = $row['phone'];
+                                                                    $email = $row['email'];
+
+
+
+                                                                    echo "
 											<tr class='odd gradeX'>
 											    <td>$user_ID</td>
 												<td>$fullname</td>
@@ -455,15 +474,15 @@ if (in_array($position, $restricted)) {
                                                 <a href='view_registered_users.php' class='ti-pencil-alt'></a></td>
 											</tr>	
 										";
-									}
-								} 	
-							    ?> 
+                                                                }
+                                                            }
+                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                         <!-- Background Utilities table end -->
                                     </div>
                                     <!-- Page-body end -->

@@ -21,7 +21,7 @@ if (empty($test)) {
 
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -38,7 +38,7 @@ if (empty($test)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -60,34 +60,32 @@ if (empty($test)) {
         $(document).ready(function() {
 
             $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+            $('#cheque_file').prop('readonly', true);
 
             $('#select_payment_type').change(function() {
 
-                 
+
 
 
                 let payment_type = $('#select_payment_type').val();
 
-                if (payment_type==="Cheque"){
+                if (payment_type === "Cheque") {
                     $('#cheque_number').prop("readonly", false);
-                   $('#cheque_file').prop('readonly', false);
-                   $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
-                }
-                else if (payment_type==="Bank_transfer"){
+                    $('#cheque_file').prop('readonly', false);
+                    $('#bank_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
+                } else if (payment_type === "Bank_transfer") {
                     $('#bank_name').prop('readonly', false);
-                   $('#account_name').prop('readonly', false);
+                    $('#account_name').prop('readonly', false);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', false);
+                    $('#cheque_file').prop('readonly', false);
 
-                }
-                else if (payment_type==="Cash"){
+                } else if (payment_type === "Cash") {
 
                     $('#bank_name').prop('readonly', true);
-                   $('#account_name').prop('readonly', true);
+                    $('#account_name').prop('readonly', true);
                     $('#cheque_number').prop("readonly", true);
-                   $('#cheque_file').prop('readonly', true);
+                    $('#cheque_file').prop('readonly', true);
                 }
 
 
@@ -493,13 +491,13 @@ if (empty($test)) {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -511,14 +509,14 @@ if (empty($test)) {
                     </div>
                 </div>
             </nav>
-           
+
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
-                           
+
                                 <div class="main-menu-header">
                                     <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
@@ -577,7 +575,7 @@ if (empty($test)) {
 
                                 </li>
 
-                                <li class="active">
+                                <li class="">
                                     <a href="debtor_accounts.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Debtor accounts</span>
@@ -586,9 +584,9 @@ if (empty($test)) {
 
                                 </li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Creditor payback</div>
                             <ul class="pcoded-item pcoded-left-item">
 
                                 <li class="">
@@ -624,7 +622,7 @@ if (empty($test)) {
                                     </a>
                                 </li>
 
-                                
+
 
 
 
@@ -654,7 +652,7 @@ if (empty($test)) {
 
                                 </li>
 
-                               
+
 
 
 
@@ -685,92 +683,92 @@ if (empty($test)) {
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Home</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">  Debtor Accounts</a>
+                                            <li class="breadcrumb-item"><a href="#!"> Debtor Accounts</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                            <!-- Page-header end -->
-                            <div class="pcoded-inner-content">
-                                <!-- Main-body start -->
-                                <div class="main-body">
-                                    <div class="page-wrapper">
 
-                                        <!-- Page body start -->
-                                        <div class="page-body">
-                                            
- 
-                                       
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
 
-                                           
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Filter </h5>
+                                    <!-- Page body start -->
+                                    <div class="page-body">
 
 
-                                                </div>
-                                                <div class="card-block">
 
-    </div>
+
+
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Filter </h5>
+
+
                                             </div>
+                                            <div class="card-block">
+
+                                            </div>
+                                        </div>
 
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h5>Transaction list</h5>
-                                                            <div class="card-block table-border-style">
-                                                                <div class="table-responsive" id="table_test">
-                                                                    <table class="table" id="transaction_table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>ID </th>
-                                                                                <th>Name</th>
-                                                                                <th>Type</th>
-                                                                                <th>Phone</th>
-                                                                                <th>Registered by</th>
-                                                                                <th>Registered date</th>
-                                                                                <th>Account funds (MK)</th>
-                                                                                <th>Actions</th>
-                                                                                
-
-                                                                              
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                            <?php
-                                                                        
-
-                                                                               
-                                                                            
-                                                                             
-
-                                                                                $sql = "SELECT * FROM creditor";
-
-                                                                       
-
-                                                                                $result = $con->query($sql);
-                                                                                if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                        $debtor_ID = $row["debtor_ID"];
-                                                                                        $name = $row["name"];
-                                                                                        $type  = $row["debtor_type"];
-                                                                                        $phone = $row["phone"];
-                                                                                        $by = $row["user_ID"];
-                                                                                        $date = $row['registered_date'];
-                                                                                        $funds = $row['account_funds'];
-                                                                                        
-                                                                                     
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Transaction list</h5>
+                                                        <div class="card-block table-border-style">
+                                                            <div class="table-responsive" id="table_test">
+                                                                <table class="table" id="transaction_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ID </th>
+                                                                            <th>Name</th>
+                                                                            <th>Type</th>
+                                                                            <th>Phone</th>
+                                                                            <th>Registered by</th>
+                                                                            <th>Registered date</th>
+                                                                            <th>Account funds (MK)</th>
+                                                                            <th>Actions</th>
 
 
 
-                                                                                        echo "
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        <?php
+
+
+
+
+
+
+                                                                        $sql = "SELECT * FROM creditor";
+
+
+
+                                                                        $result = $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+                                                                                $debtor_ID = $row["debtor_ID"];
+                                                                                $name = $row["name"];
+                                                                                $type  = $row["debtor_type"];
+                                                                                $phone = $row["phone"];
+                                                                                $by = $row["user_ID"];
+                                                                                $date = $row['registered_date'];
+                                                                                $funds = $row['account_funds'];
+
+
+
+
+
+                                                                                echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$debtor_ID</td>
                                                        <td>$name</td>
@@ -788,59 +786,59 @@ if (empty($test)) {
                                                         
                                                    </tr>	
                                                ";
-                                                                                    }
-                                                                                }
-                                                                            
+                                                                            }
+                                                                        }
 
 
-                                                                            ?>
-                                                                            <tr>
-                                                                                <th scope="row">-</th>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
-                                                                                <td>-</td>
+
+                                                                        ?>
+                                                                        <tr>
+                                                                            <th scope="row">-</th>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
+                                                                            <td>-</td>
 
 
-                                                                            </tr>
+                                                                        </tr>
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                    </tbody>
+                                                                </table>
 
 
-                                                                </div>
                                                             </div>
-
                                                         </div>
 
                                                     </div>
 
-
-                        </form>
-
+                                                </div>
 
 
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Basic Form Inputs card end -->
+                                    <!-- Input Grid card start -->
+
+                                </div>
+                                <!-- Page body end -->
+                            </div>
+                        </div>
+                        <!-- Main-body end -->
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-
         </div>
-        <!-- Page body end -->
-    </div>
-    </div>
-    <!-- Main-body end -->
-    <div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -947,9 +945,9 @@ if (isset($_POST['place_order'])) {
         </script>");
     }
 }
- 
 
-   
+
+
 
 if (isset($_FILES['image'])) {
     $errors = array();
@@ -980,47 +978,47 @@ if (isset($_FILES['image'])) {
         print_r($errors);
     }
 }
- 
+
 
 if (isset($_POST['save_payment'])) {
 
- //// $_POST[trans_date] is used to get the transaction payment
-//  $uploaded_file = $newfilename;   
+    //// $_POST[trans_date] is used to get the transaction payment
+    //  $uploaded_file = $newfilename;   
 
-// if($_POST['select_payment_type']=="Cheque"){
-
-    
-//     $object = new main;
-//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
-//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
-    
-
-// }
-//  if($_POST['select_payment_type']=="Cash"){
-
-  
-
-    
-//       $object = new main;
-//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
-//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-  
-   
-// } if($_POST['select_payment_type']=="Bank_transfer"){
+    // if($_POST['select_payment_type']=="Cheque"){
 
 
-//       $object = new main;
-//     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
-//     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
-
-// }
+    //     $object = new main;
+    //     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], $uploaded_file,$_SESSION['user'],$_POST['trans_id'],
+    //     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],$_POST['cheque_number'],'-','-',$_POST['description']);
 
 
-   
+    // }
+    //  if($_POST['select_payment_type']=="Cash"){
 
-   
-   
+
+
+
+    //       $object = new main;
+    //     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'],'-',$_SESSION['user'],$_POST['trans_id'],
+    //     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+
+
+    // } if($_POST['select_payment_type']=="Bank_transfer"){
+
+
+    //       $object = new main;
+    //     $object->add_debtor_payment($_POST['select_payment_type'],$_POST['amount'], '-',$_SESSION['user'],$_POST['trans_id'],
+    //     $_POST['debtor_id'],$_POST['trans_amount'],$_POST['trans_date'],'-','-','-',$_POST['description']);
+
+    // }
+
+
+
+
+
+
 }
 
 
