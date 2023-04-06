@@ -351,6 +351,78 @@ if (isset($_POST["insertCertificate"])) {
 
 if (isset($_POST["assignSeed"])) {
 
-  $seedData = $_POST["assignSeed"];
-  $object->assign_prcessing_quantity($seedData[0], $seedData[1]);
+
+
+  //   $seedData = $_POST["assignSeed"];
+  //   $object->assign_prcessing_quantity($seedData[0], $seedData[1]);
+  // }
+
+  // if (isset($_POST["inventoryFilter"])) {
+
+
+  //   $data = $_POST["inventoryFilter"];
+
+
+  //   echo "
+  //     <th>Crop</th>
+  //     <th>Variety</th>
+  //     <th>Quantity</th>
+
+  //     ";
+
+  //   $sql = "SELECT crop.crop,variety.variety,stock_in.class, SUM(stock_in.quantity) 
+  //    AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
+  //    INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID WHERE
+  //    stock_in.crop_ID ='$data[0]' AND stock_in.variety_ID='$data[1]' AND stock_in.class='$data[2]'
+  //    AND stock_in.status='$data[3]' GROUP BY crop.crop_ID DESC";
+
+  //   $result = $con->query($sql);
+  //   if ($result->num_rows > 0) {
+  //     while ($row = $result->fetch_assoc()) {
+  //       $crop    = $row["crop"];
+  //       $variety  = $row["variety"];
+  //       $quantity = $row['quantity'];
+
+
+
+
+  //       echo "
+  // <tr class='odd gradeX'>
+
+  // <td>$crop</td>
+  // <td>$variety</td>
+  // <td>$class</td>
+
+  // <td>$quantity</t>
+
+
+
+
+
+
+
+  //                     </td>
+  // </tr>	
+  // ";
+  //     }
+  //   } else {
+
+
+  //     echo "
+  //                                     <tr class='odd gradeX'>
+  //                                                          <td>Not Available</td>
+
+  //                                                         <td> -</td>
+  //                                                         <td> -</td>
+
+
+
+
+
+  //                                     <td>
+
+  //                                                         </td>
+  //                                     </tr>	
+  //                                     ";
+  //   }
 }

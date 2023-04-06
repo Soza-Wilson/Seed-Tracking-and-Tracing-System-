@@ -65,7 +65,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/view_stock_out_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/inventory.js">
 
     </script>
 </head>
@@ -553,16 +553,16 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-2">
 
 
-                                                        <select name="select_class" id="select_class" class="form-control">
+                                                        <select name="select_status" id="select_status" class="form-control">
                                                             <option value="not_selected">Select seed status </option>
-                                                            <option value="not_selected">Uncertified</option>
-                                                            <option value="pre_basic">Ungreaded</option>
-                                                            <option value="basic">Unprocessed</option>
+                                                            <option value="uncertified">Uncertified</option>
+                                                            <option value="ungraded">Ungreaded</option>
+                                                            <option value="unprocessed">Unprocessed</option>
                                                             <option value="certified">Certified</option>
 
 
                                                         </select>
-                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
+                                                        <label id="warning_status" class="warning-text"> <span>Please select seed status <i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -593,7 +593,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='stock_out_csv' name='stock_out_csv'> CSV</button>
+
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
@@ -619,7 +619,7 @@ if (in_array($position, $restricted)) {
                                         </div>
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>All released seed</h5>
+                                                <h5>All available seed</h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -657,12 +657,8 @@ if (in_array($position, $restricted)) {
                                                                 while ($row = $result->fetch_assoc()) {
 
 
-
-
                                                                     $crop    = $row["crop"];
                                                                     $variety  = $row["variety"];
-
-
 
                                                                     $quantity = $row['quantity'];
 
