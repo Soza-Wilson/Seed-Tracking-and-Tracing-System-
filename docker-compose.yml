@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.4.19
+    environment:
+      MYSQL_DATABASE: seed_tracking_DB
+      MYSQL_USER: seed_tracking_DB
+      MYSQL_PASSWORD: 123456sa. 
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+    networks:
+      - seed_tracking 
+  www:
+    depends_on:
+      - db
+    build: .
+  
+
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 80:80
+      - 433:433
+    networks:
+      - seed_tracking
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin:latest
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    networks:
+      - seed_tracking
+
+networks: 
+  seed_tracking:
+    driver: bridge
+

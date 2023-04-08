@@ -1,22 +1,47 @@
 <?php
 
-$con = mysqli_connect("localhost", "root", "");
+$con = mysqli_connect("localhost", "seed_tracking_DB", "123456sa.");
 $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB");
+
+
+$servername = "db";
+$username = "seed_tracking_DB";
+$password = "123456sa.";
+
+//Create connection
+$con = mysqli_connect($servername, $username, $password);
+
+// Check connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Create database
+$sql = "CREATE DATABASE myDB";
+if (mysqli_query($cnn, $sql)) {
+    echo "Database created successfully";
+} else {
+    echo "Error creating database: " . mysqli_error($cnn);
+}
+
+// Close connection
+
+
+
 
 if ($database === true) {
 
-  mysqli_select_db($con, "seed_tracking_DB");
+    $sql = "CREATE USER 'stts_user'@'localhost' IDENTIFIED BY 'zHe3TPmnCBH'";
+    mysqli_query($con, $sql);
 
-
-
-
-  $sql = "CREATE TABLE usertype(user_type_ID INT(10) PRIMARY KEY, 		
+    mysqli_select_db($con, "seed_tracking_DB");
+    $sql = "CREATE TABLE usertype(user_type_ID INT(10) PRIMARY KEY, 		
     				 user_type varchar(100)
   							)";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  $sql = "CREATE TABLE user(user_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE user(user_ID varchar(100) PRIMARY KEY, 
             user_type_ID INT(10),
     		fullname varchar(100),
 			DOB varchar(100),
@@ -30,36 +55,36 @@ if ($database === true) {
     			 		FOREIGN KEY(user_type_ID)REFERENCES usertype(user_type_ID)) ";
 
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  //crop table
+    //crop table
 
-  $sql = "CREATE TABLE crop (crop_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE crop (crop_ID varchar(100) PRIMARY KEY, 
       crop varchar(100))";
 
-  /// variety table
-  mysqli_query($con, $sql);
+    /// variety table
+    mysqli_query($con, $sql);
 
-  $sql = "CREATE TABLE variety (variety_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE variety (variety_ID varchar(100) PRIMARY KEY, 
  variety varchar(100),
  crop_ID varchar(100),
  FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  //// Approval table 
+    //// Approval table 
 
-  $sql = "CREATE TABLE approval(approval_ID varchar(100) PRIMARY KEY, depertment varchar(100),
+    $sql = "CREATE TABLE approval(approval_ID varchar(100) PRIMARY KEY, depertment varchar(100),
 action_name varchar(100),description varchar(100),date date,time varchar(100),requested_id varchar(100),
  requested_name varchar(100),action_id varchar(100),approved_ID varchar(100), approval_code varchar(100), status varchar(100), FOREIGN KEY(approved_ID) REFERENCES user(user_ID))";
 
-  mysqli_query($con, $sql);
-  ///creditor table (goods in table. table type will specfy the source type)
+    mysqli_query($con, $sql);
+    ///creditor table (goods in table. table type will specfy the source type)
 
 
-  ///// table recording all stock available		
-  $sql = "CREATE TABLE stock(stock_ID varchar(100) PRIMARY KEY,
+    ///// table recording all stock available		
+    $sql = "CREATE TABLE stock(stock_ID varchar(100) PRIMARY KEY,
                                    crop_ID varchar(100),
                                    variety_ID varchar(100),
                                    pre_basic varchar(100),
@@ -69,11 +94,11 @@ action_name varchar(100),description varchar(100),date date,time varchar(100),re
                                    FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID),
                                    FOREIGN KEY(variety_ID) REFERENCES variety(variety_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  ///// table recording certificate details of all items added to stock
+    ///// table recording certificate details of all items added to stock
 
-  $sql = "CREATE TABLE certificate(lot_number varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE certificate(lot_number varchar(100) PRIMARY KEY,
                                     crop_ID varchar(100), 
                                     variety_ID varchar(100),
                                     class varchar(100),
@@ -93,12 +118,12 @@ action_name varchar(100),description varchar(100),date date,time varchar(100),re
                                     FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID),
                                    FOREIGN KEY(variety_ID) REFERENCES variety(variety_ID))";
 
-  mysqli_query($con, $sql);
-  ////// creditor table (will store all details of the seed source )
+    mysqli_query($con, $sql);
+    ////// creditor table (will store all details of the seed source )
 
 
 
-  $sql = "CREATE TABLE creditor(creditor_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE creditor(creditor_ID varchar(100) PRIMARY KEY,
               source varchar(100), 
             name varchar(100),
            phone varchar(100),
@@ -111,10 +136,10 @@ action_name varchar(100),description varchar(100),date date,time varchar(100),re
             FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
 
-  mysqli_query($con, $sql);
-  // debtors (these will include agro dealer and customers )
+    mysqli_query($con, $sql);
+    // debtors (these will include agro dealer and customers )
 
-  $sql = "CREATE TABLE debtor(debtor_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE debtor(debtor_ID varchar(100) PRIMARY KEY,
   
 name varchar(100),
 phone varchar(100),
@@ -128,11 +153,11 @@ account_funds int,
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  ///transaction table 
+    ///transaction table 
 
-  $sql = "CREATE TABLE transaction (transaction_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE transaction (transaction_ID varchar(100) PRIMARY KEY, 
 type varchar(100),
 action_name varchar(100),
 action_ID varchar(100),
@@ -146,23 +171,23 @@ trans_status varchar(100),
 user_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  ///payment table 
+    ///payment table 
 
-  $sql = "CREATE TABLE payment(payment_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE payment(payment_ID varchar(100) PRIMARY KEY,
 type varchar(100),amount int,description varchar(100),documents varchar(100),cheque_number varchar(100),bank_name varchar(100),
 account_name varchar(100),date varchar(100),time varchar(100),
 user_ID varchar(100),transaction_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID), 
 FOREIGN KEY(transaction_ID)REFERENCES transaction(transaction_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  //farm table 
+    //farm table 
 
-  $sql = "CREATE TABLE farm( farm_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE farm( farm_ID varchar(100) PRIMARY KEY,
 Hectors varchar(100),     
   
        crop_species varchar(100), 
@@ -199,12 +224,12 @@ Hectors varchar(100),
                             FOREIGN KEY(crop_variety) REFERENCES variety(variety_ID))";
 
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  /// Bank account table 
+    /// Bank account table 
 
-  $sql = "CREATE TABLE bank_account(bank_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE bank_account(bank_ID varchar(100) PRIMARY KEY, 
 bank_name varchar(100),
 account_number varchar(100),
 account_funds int,
@@ -212,12 +237,12 @@ register_date varchar(100),
 user_ID varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  //ledger table 
+    //ledger table 
 
-  $sql = "CREATE TABLE ledger(ledger_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE ledger(ledger_ID varchar(100) PRIMARY KEY,
 ledger_type varchar(100),description varchar(100),
 amount int,bank_ID varchar(100),
 transaction_ID varchar(100),user_ID varchar(100),
@@ -227,12 +252,12 @@ entry_time varchar(100),
 FOREIGN KEY(user_ID) REFERENCES user(user_ID),
 FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  ///// stock in (table reording all stock in transactions )    
+    ///// stock in (table reording all stock in transactions )    
 
-  $sql = "CREATE TABLE stock_in(stock_in_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE stock_in(stock_in_ID varchar(100) PRIMARY KEY,
                                      user_ID varchar(100),
                                      certificate_ID varchar(100),
                                      farm_ID varchar(100),
@@ -260,13 +285,13 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                                      FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID),
                                    FOREIGN KEY(variety_ID) REFERENCES variety(variety_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
 
-  //// grading and seed processing tables 
+    //// grading and seed processing tables 
 
-  $sql = "CREATE TABLE grading( grade_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE grading( grade_ID varchar(100) PRIMARY KEY,
                            assigned_date date,
                            assigned_time varchar(100),
                            assigned_quantity INT,
@@ -281,10 +306,10 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                            FOREIGN KEY(assigned_by) REFERENCES user(user_ID),
                            FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  $sql = "CREATE TABLE process_seed(process_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE process_seed(process_ID varchar(100) PRIMARY KEY,
                                   assigned_quantity INT, 
                                   processed_date date,
                                   processed_time varchar(100),
@@ -297,23 +322,23 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                                   )";
 
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  // process type table 
+    // process type table 
 
-  $sql = "CREATE TABLE process_type(process_type_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE process_type(process_type_ID varchar(100) PRIMARY KEY,
                                     process_ID varchar(100),
                                     grade_outs_quantity INT,
                                     processed_quantity INT, 
                                     trash_quantity INT, 
                                     process_type varchar(100),
                                     FOREIGN KEY(process_ID) REFERENCES process_seed(process_ID))";
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  /// instection 
+    /// instection 
 
-  $sql = "CREATE TABLE inspection( inspection_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE inspection( inspection_ID varchar(100) PRIMARY KEY,
    date varchar(100),
    time varchar(100),
    farm_ID varchar(100),
@@ -336,11 +361,11 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
    FOREIGN KEY(user_ID) REFERENCES user(user_ID), 
                       FOREIGN KEY(farm_ID)REFERENCES farm(farm_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
 
-  $sql = "CREATE TABLE storage (entry_ID int(11) PRIMARY KEY, 
+    $sql = "CREATE TABLE storage (entry_ID int(11) PRIMARY KEY, 
      				user_ID varchar(100),crop varchar(100), 
      						variety varchar(100), 
      							class varchar(100),
@@ -353,12 +378,12 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
      								 	 					 date varchar(100),
      								 	 					 		time varchar(100),description varchar(300), FOREIGN KEY(user_ID)REFERENCES user(user_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
 
 
-  $sql = "CREATE TABLE price (prices_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE price (prices_ID varchar(100) PRIMARY KEY, 
 crop_ID varchar(100),
 variety_ID varchar(100),
 sell_basic varchar(100),
@@ -369,10 +394,10 @@ buy_pre_basic varchar(100),
 buy_certified varchar(100),
 FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  //// user place order table
-  $sql = "CREATE TABLE order_table( order_ID varchar(100) PRIMARY KEY,
+    //// user place order table
+    $sql = "CREATE TABLE order_table( order_ID varchar(100) PRIMARY KEY,
                                       
                                     order_type varchar(100),  
                                     customer_id varchar(100),
@@ -389,13 +414,13 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 							
                  FOREIGN KEY(user_ID) REFERENCES user(user_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  ///user add item to placed order (item table )
+    ///user add item to placed order (item table )
 
 
-  $sql = "CREATE TABLE Item( item_ID varchar(100) PRIMARY KEY, 
+    $sql = "CREATE TABLE Item( item_ID varchar(100) PRIMARY KEY, 
                               order_ID varchar(100),
 							                 crop_ID varchar(100),
 							                  variety_ID varchar(100),
@@ -410,12 +435,12 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                   FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID),
                                   FOREIGN KEY(variety_ID) REFERENCES variety(variety_ID))";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  ///// stock out table( table recording all stock out details)
+    ///// stock out table( table recording all stock out details)
 
 
-  $sql = "CREATE TABLE stock_out(stock_out_ID varchar(100) PRIMARY KEY,
+    $sql = "CREATE TABLE stock_out(stock_out_ID varchar(100) PRIMARY KEY,
                                  item_ID varchar(100),
                                  stock_in_ID varchar(100),
                                  order_ID varchar(100),
@@ -429,15 +454,15 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                  FOREIGN KEY(item_ID) REFERENCES item(item_ID)
                                  )";
 
-  // , 
-  // FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID), 
-  // FOREIGN KEY(item) REFERENCES item(item_ID)
+    // , 
+    // FOREIGN KEY(stock_in_ID) REFERENCES stock_in(stock_in_ID), 
+    // FOREIGN KEY(item) REFERENCES item(item_ID)
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  // create lab test table 
+    // create lab test table 
 
-  $sql = "CREATE TABLE lab_test(test_ID varchar(100)  PRIMARY KEY, 
+    $sql = "CREATE TABLE lab_test(test_ID varchar(100)  PRIMARY KEY, 
                                  date varchar(100),
                                  time varchar(100),
                                  crop_ID varchar(100),
@@ -461,13 +486,13 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                  )";
 
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
 
 
 
-  $sql = "insert into usertype
+    $sql = "insert into usertype
 values ('001','ADMIN'),
 ('2','PRODUCTION'),
 ('3','MARKETING'),
@@ -475,14 +500,14 @@ values ('001','ADMIN'),
 
 ('5','FINANCE');";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  $sql = "insert into user
+    $sql = "insert into user
 values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admin@example.com','0000');";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maizeOPV'),
+    $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maizeOPV'),
 ('CP002','gnuts_shelled'),
 ('CP003','gnuts_unshelled'),
 ('CP004','sorghum'),
@@ -493,10 +518,10 @@ values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admi
 ('CP009','soyabean'),
 ('CP0010','maizeHybrid')";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-  $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`)
+    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`)
 VALUES ('VT001','MLERA_ZM_623','CP001'),
 ('VT002','THANZI_MH_44A','CP0010'),
 ('VT003','MANTHU_MH_36','CP0010'),
@@ -525,9 +550,9 @@ VALUES ('VT001','MLERA_ZM_623','CP001'),
 ('VT0026','TIKOLORE','CP009'),
 ('VT0027 ','MAKWACHA','CP009')";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-  $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`, `variety_ID`, `sell_basic`, `sell_pre_basic`, `sell_certified`,`buy_basic`,`buy_pre_basic`,`buy_certified`) 
+    $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`, `variety_ID`, `sell_basic`, `sell_pre_basic`, `sell_certified`,`buy_basic`,`buy_pre_basic`,`buy_certified`) 
 VALUES ('PRC001','CP001','VT001','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC002','CP001','VT002','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC003','CP001','VT003','0.00','0.00','0.00','0.00','0.00','0.00'),
@@ -556,5 +581,5 @@ VALUES ('PRC001','CP001','VT001','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC0026','CP009','VT0026','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC0027','CP009','VT0027','0.00','0.00','0.00','0.00','0.00','0.00')";
 
-  mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 }

@@ -1,11 +1,15 @@
 <?php
 
 // database connection
-$localhost = "localhost";
-$username  = "root";
-$password  = "";
-$database        = "seed_tracking_db";
-$con = new mysqli($localhost, $username, $password, $database);
+// $localhost = 'db';
+// $username  = 'seed_tracking_DB';
+// $password  = '123456sa.';
+// $database  = 'seed_tracking_DB';
+// $con = new mysqli($localhost, $username, $password, $database);
+
+
+$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
+
 
 
 
@@ -65,15 +69,14 @@ class main
     $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
 
     $result =  $con->query($sql);
-
     $count = $result->num_rows;
 
     if ($count === 1) {
 
       $name = $result->fetch_assoc();
-      $department =
 
-        session_start();
+
+      session_start();
       $_SESSION['user'] = $name['user_ID'];
       $_SESSION['fullname'] = $name['fullname'];
       $_SESSION['depertment'] = $name['user_type_ID'];
