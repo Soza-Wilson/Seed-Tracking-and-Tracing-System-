@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost", "seed_tracking_DB", "123456sa.");
+$con = mysqli_connect("localhost", "", "");
 $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB");
 
 

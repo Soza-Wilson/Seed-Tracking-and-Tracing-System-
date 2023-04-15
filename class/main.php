@@ -8,7 +8,8 @@
 // $con = new mysqli($localhost, $username, $password, $database);
 
 
-$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
+//$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
+$con = mysqli_connect('localhost', 'root', '', 'seed_tracking_DB');
 
 
 
