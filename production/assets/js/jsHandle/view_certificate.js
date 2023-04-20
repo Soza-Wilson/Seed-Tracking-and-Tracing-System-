@@ -30,22 +30,26 @@ $(document).ready(function () {
 
   $("#get_data").click(() => {
     let filterData = [
+      $("#certificate_type").val(),
       $("#select_crop").val(),
       $("#select_variety").val(),
       $("#select_class").val(),
-      $("#select_status").val(),
+      $("#fromDateValue").val(),
+      $("#toDateValue").val(),
     ];
 
     if (checkFilterFields() > 0) {
       alert("Please fill out all required text fields ");
     } else {
+      toCsv();
       $.post(
         "get_data.php",
         {
-          inventoryFilter: filterData,
+        certificateFilter: filterData,
         },
         (data) => {
-          $("#dataTable").html(data);
+         
+        $("#dataTable").html(data);
         }
       );
     }
@@ -54,10 +58,7 @@ $(document).ready(function () {
   function checkFilterFields() {
     let textField = 0;
 
-    if ($("#creditorName").val() == "") {
-      textField = textField + 1;
-      $("#warning_name").show();
-    }
+  
     if ($("#select_crop").val() == 0) {
       textField = textField + 1;
       $("#warning_crop").show();
@@ -70,11 +71,33 @@ $(document).ready(function () {
       textField = textField + 1;
       $("#warning_class").show();
     }
-    if ($("#select_status").val() == "not_selected") {
+    if ($("#fromDateValue").val() == "") {
       textField = textField + 1;
-      $("#warning_status").show();
+      $("#warning_from").show();
+    }
+    if ($("#toDateValue").val() == "") {
+      textField = textField + 1;
+      $("#warning_to").show();
     }
 
     return textField;
+  }
+
+  function toCsv() {
+    let creditor = $("#creditorName").val();
+    let cropValue = $("#select_crop").val();
+    let varietyValue = $("#select_variety").val();
+    let classValue = $("#select_class").val();
+    let from = $("#fromDateValue").val();
+    let to = $("#toDateValue").val();
+    let page_type = "sales_list";
+
+    $("#creditor_hidden").val(creditor);
+    $("#cropValueHidden").val(cropValue);
+    $("#varietyValueHidden").val(varietyValue);
+    $("#classValueHidden").val(classValue);
+    $("#from_hidden").val(from);
+    $("#to_hidden").val(to);
+    $("#filter").val("haghgd");
   }
 });

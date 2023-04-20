@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/available_certificates.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate.js">
         </script>
 </head>
 
@@ -568,7 +568,8 @@ if (in_array($position, $restricted)) {
                                                             <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
 
 
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
+                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden" >
+                                                            <input type="hidden" name="certificate_type" id="certificate_type" value="available"value="available">
                                                             <input type="hidden" name="cropValueHidden" id="cropValueHidden">
                                                             <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
                                                             <input type="hidden" name="classValueHidden" id="classValueHidden">
@@ -606,7 +607,7 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
                                                                 <th>Lot number</th>
@@ -628,10 +629,11 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                             <?php
+                                                              $date = date("Y-m-d");
                                                             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
                                  `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
                                  INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-                                 INNER JOIN user ON user.user_ID = certificate.user_ID";
+                                 INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date'";
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {

@@ -349,6 +349,7 @@ if (isset($_POST["insertCertificate"])) {
 //assign seed for grading 
 
 
+
 if (isset($_POST["assignSeed"])) {
 
 
@@ -357,72 +358,283 @@ if (isset($_POST["assignSeed"])) {
   //   $object->assign_prcessing_quantity($seedData[0], $seedData[1]);
   // }
 
-  // if (isset($_POST["inventoryFilter"])) {
 
+}
 
-  //   $data = $_POST["inventoryFilter"];
-
-
-  //   echo "
-  //     <th>Crop</th>
-  //     <th>Variety</th>
-  //     <th>Quantity</th>
-
-  //     ";
-
-  //   $sql = "SELECT crop.crop,variety.variety,stock_in.class, SUM(stock_in.quantity) 
-  //    AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
-  //    INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID WHERE
-  //    stock_in.crop_ID ='$data[0]' AND stock_in.variety_ID='$data[1]' AND stock_in.class='$data[2]'
-  //    AND stock_in.status='$data[3]' GROUP BY crop.crop_ID DESC";
-
-  //   $result = $con->query($sql);
-  //   if ($result->num_rows > 0) {
-  //     while ($row = $result->fetch_assoc()) {
-  //       $crop    = $row["crop"];
-  //       $variety  = $row["variety"];
-  //       $quantity = $row['quantity'];
+//  if (isset($_POST["inventoryFilter"])) {
 
 
 
+//     $data = $_POST["inventoryFilter"];
 
-  //       echo "
-  // <tr class='odd gradeX'>
 
-  // <td>$crop</td>
-  // <td>$variety</td>
-  // <td>$class</td>
+//     echo "
 
-  // <td>$quantity</t>
+//       <th>Crop</th>
+//       <th>Variety</th>
+//       <th>Quantity</th>
+
+//       ";
+
+//     $sql = "SELECT crop.crop,variety.variety,stock_in.class, SUM(stock_in.quantity) 
+//      AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID 
+//      INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID WHERE
+//      stock_in.crop_ID ='$data[0]' AND stock_in.variety_ID='$data[1]' AND stock_in.class='$data[2]'
+//      AND stock_in.status='$data[3]' GROUP BY crop.crop_ID DESC";
+
+//     $result = $con->query($sql);
+//     if ($result->num_rows > 0) {
+//       while ($row = $result->fetch_assoc()) {
+//         $crop    = $row["crop"];
+//         $variety  = $row["variety"];
+//         $quantity = $row['quantity'];
 
 
 
 
+//         echo "
+//   <tr class='odd gradeX'>
 
+//   <td>$crop</td>
+//   <td>$variety</td>
+//   <td>$class</td>
 
-
-  //                     </td>
-  // </tr>	
-  // ";
-  //     }
-  //   } else {
-
-
-  //     echo "
-  //                                     <tr class='odd gradeX'>
-  //                                                          <td>Not Available</td>
-
-  //                                                         <td> -</td>
-  //                                                         <td> -</td>
+//   <td>$quantity</t>
 
 
 
 
 
-  //                                     <td>
 
-  //                                                         </td>
-  //                                     </tr>	
-  //                                     ";
-  //   }
+
+//                       </td>
+//   </tr>	
+//   ";
+//       }
+//     }  else {
+
+
+//       echo "
+//                                       <tr class='odd gradeX'>
+//                                                            <td>Not Available</td>
+//                                       <td>-</td>
+//                                       <td>-</td>
+//                                       <td>-</td>
+//                                       <td>-</td>
+//                                                           <td> -</td>
+//                                                           <td> -</td>
+//                                                           <td>-</td>
+//                                                           <td>-e</td>
+//                                                           <td>-</td>
+//                                                           <td>-</td>
+//                                                           <td>-</td>
+
+
+
+
+//                                       <td>
+
+//                                                           </td>
+//                                       </tr>	
+//                                       ";
+//     }
+//   }
+
+
+
+if (isset($_POST["inventoryFilter"])) {
+
+  $filterData = $_POST["inventoryFilter"];
+  $data = $filterData;
+
+
+
+  echo "<thead>
+    <tr>
+ 
+    <th>Crop</th>
+    <th>Variety</th>
+  
+    <th>Quantityyyyy</th>
+   
+  
+    </tr>
+  </thead>";
+
+  $sql = "SELECT crop.crop,variety.variety, SUM(stock_in.quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID WHERE  stock_in.crop_ID ='$data[0]' AND stock_in.variety_ID='$data[1]' AND stock_in.class='$data[2]'
+  AND stock_in.status='$data[3]' GROUP BY crop.crop_ID DESC";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+
+      $crop      = $row['crop'];
+      $variety   = $row['variety'];
+      $quantity  = $row['quantity'];
+
+
+      echo "
+  <tr class='odd gradeX'>
+                      
+  <td>$crop</td>
+  <td>$variety</td>
+
+  <td>$quantity</td>
+                      
+                      
+                     
+  
+  
+  
+                      
+                      </td>
+  </tr>	
+  ";
+    }
+  } else {
+
+
+    echo "
+                                      <tr class='odd gradeX'>
+                                                           <td>Unvailable</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                 
+                                  
+                                                         
+                                      
+                                      
+                                      <td>
+                                                          
+                                                          </td>
+                                      </tr>	
+                                      ";
+  }
+}
+
+
+
+if (isset($_POST["certificateFilter"])) {
+
+  $filterData = $_POST["certificateFilter"];
+  $data = $filterData;
+
+  echo "<thead>
+  <tr>
+
+  <th>Lot number</th>
+                                                              <th>cropPPPPP</th>
+                                                              <th>Variety</th>
+                                                              <th>Class</th>
+                                                              <th>Certificate type</th>
+                                                              <th>Source</th>
+                                                              <th>Date tested</th>
+                                                              <th>Expire date</th>
+                                                              <th>Added date</th>
+                                                              <th>certificate quantity</th>
+                                                              <th>available quantity</th>
+                                                              <th>added by</th>
+                                                              <th>Action</th>
+
+  </tr>
+</thead>";
+  $sql = "";
+
+  if ($data[0] == "available") {
+
+    $date = date("Y-m-d");
+    $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
+    `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+    INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
+    INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date'";
+  } else if ($data[0] == "used") {
+
+    $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
+      `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+      INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
+      INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0";
+  } else if ($data[0] == "expired") {
+
+
+    $date = date("Y-m-d");
+    $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
+    `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+     INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
+      INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `expiry_date` < '$date'";
+  }
+
+ 
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $lot_number = $row["lot_number"];
+        $crop      = $row["crop"];
+        $variety     = $row["variety"];
+        $class     = $row["class"];
+        $type  = $row["type"];
+        $source = $row['source'];
+        $date_tested = $row['date_tested'];
+        $expire_date = $row['expiry_date'];
+        $date_added = $row['date_added'];
+        $dir = $row['directory'];
+        $certificate_quantity = $row['certificate_quantity'];
+        $available_quantity = $row['available_quantity'];
+        $fullname = $row['fullname'];
+
+
+
+
+        echo "
+  <tr class='odd gradeX'>
+
+  <td>$lot_number</td>
+  <td>$crop</td>
+<td>$variety</td>
+<td>$class</td>
+<td>$type</td>
+<td>$source</td>
+                        <td>$date_tested</td>
+                        <td>$expire_date</td>
+                        <td>$date_added</td>
+                      
+                        <td>$certificate_quantity</td>
+                        <td>$available_quantity</td>
+                        <td>$fullname</td>
+
+
+<td><a href='view_registered_users.php' class='ti-eye'></a>/
+                        <a href='view_registered_users.php' class='ti-trash'></a>/
+                        <a href='view_registered_users.php' class='ti-pencil-alt'></a>
+                        <a href='certificate/$dir' class='ti-bookmark-alt'></a>
+                        </td>
+  </tr>	
+  ";
+      }
+    } else {
+
+
+      echo "
+                                      <tr class='odd gradeX'>
+                                                           <td>Unvailable</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+                                      <td>-</td>
+
+
+
+
+
+                                      <td>
+
+                                                          </td>
+                                      </tr>	
+                                      ";
+    }
 }
