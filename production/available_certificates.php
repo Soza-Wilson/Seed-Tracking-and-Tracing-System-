@@ -569,7 +569,7 @@ if (in_array($position, $restricted)) {
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden" >
-                                                            <input type="hidden" name="certificate_type" id="certificate_type" value="available"value="available">
+                                                            <input type="hidden" name="certificate_type" id="certificate_type" value="available">
                                                             <input type="hidden" name="cropValueHidden" id="cropValueHidden">
                                                             <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
                                                             <input type="hidden" name="classValueHidden" id="classValueHidden">

@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/expired_certificates.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate.js">
 
     </script>
 </head>
@@ -577,6 +577,8 @@ if (in_array($position, $restricted)) {
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
+                                                            <input type="hidden" name="certificate_type" id="certificate_type" value="expired">
+                                                            
                                                             <input type="hidden" name="cropValueHidden" id="cropValueHidden">
                                                             <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
                                                             <input type="hidden" name="classValueHidden" id="classValueHidden">
@@ -613,7 +615,7 @@ if (in_array($position, $restricted)) {
                                                 </div>
                                             </div>
                                             <div class="card-block table-border-style">
-                                                <div class="table-responsive">
+                                                <div id="dataTable"class="table-responsive">
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
