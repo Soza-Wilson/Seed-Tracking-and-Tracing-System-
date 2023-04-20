@@ -615,8 +615,8 @@ if (in_array($position, $restricted)) {
                                                 </div>
                                             </div>
                                             <div class="card-block table-border-style">
-                                                <div id="dataTable"class="table-responsive">
-                                                    <table class="table table-hover">
+                                                <div  class="table-responsive">
+                                                    <table  id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
                                                                 <th>Lot number</th>

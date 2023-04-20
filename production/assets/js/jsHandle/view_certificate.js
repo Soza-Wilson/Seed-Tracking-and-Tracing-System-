@@ -84,15 +84,15 @@ $(document).ready(function () {
   }
 
   function toCsv() {
-    let creditor = $("#creditorName").val();
+   
     let cropValue = $("#select_crop").val();
     let varietyValue = $("#select_variety").val();
     let classValue = $("#select_class").val();
     let from = $("#fromDateValue").val();
     let to = $("#toDateValue").val();
-    let page_type = "sales_list";
 
-    $("#creditor_hidden").val(creditor);
+
+   
     $("#cropValueHidden").val(cropValue);
     $("#varietyValueHidden").val(varietyValue);
     $("#classValueHidden").val(classValue);
