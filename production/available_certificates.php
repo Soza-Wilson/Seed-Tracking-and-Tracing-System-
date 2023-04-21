@@ -454,6 +454,65 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                               
+                                                            </div>
+                                                            <div class="modal-body">
+
+
+                                                              
+
+
+                                                               
+      
+
+
+                                                                <div class="form-group row">
+
+                                                                    <div class="col-sm-12">
+                                                                     <h5><span>Delete selected certificate ?</span></h5>
+                                                                    </div>
+
+                                                                   
+
+
+                                                                </div>
+                                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <input id="approval_code" type="text" class="form-control" name="approval _code" placeholder="Approval code" require="">
+                                                        <label id="warning_creditor_phone" class="warning_text"> <span>Please enter approval code <i class="icofont icofont-warning"></i></span></label>
+                                                    </div>
+
+
+                                                    </div>
+
+                                                                <div class="col-sm-6">
+
+                                                                    <input type="submit" name="add_creditor" id="add_creditor" value="Delete " class="btn btn-danger" />
+
+                                                                </div>
+
+
+
+
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Filter </h5>
@@ -658,10 +717,10 @@ if (in_array($position, $restricted)) {
                                                 <td>$fullname</td>
 												
 												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='certificate/$dir' class='ti-bookmark-alt'></a>
+												<td>
+                                                <a href='view_registered_users.php' data-toggle='modal' data-target='#myModal' class='ti-trash'></a>/
+                                               
+                                                <a href='../files/production/seed_certificate/$dir' class='ti-bookmark-alt'></a>
                                                 </td>
 											</tr>	
 										";
