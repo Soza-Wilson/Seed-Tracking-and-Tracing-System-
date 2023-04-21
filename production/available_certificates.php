@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/view_certificate.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
         </script>
 </head>
 
@@ -485,9 +485,9 @@ if (in_array($position, $restricted)) {
                                                                 </div>
                                                                 <div class="form-group row">
 
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12 confirm_group">
                                                         <input id="approval_code" type="text" class="form-control" name="approval _code" placeholder="Approval code" require="">
-                                                        <label id="warning_creditor_phone" class="warning_text"> <span>Please enter approval code <i class="icofont icofont-warning"></i></span></label>
+                                                        <label id="warning_creditor_phone" class="warning-text"> <span>Please enter approval code <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
 
@@ -495,7 +495,8 @@ if (in_array($position, $restricted)) {
 
                                                                 <div class="col-sm-6">
 
-                                                                    <input type="submit" name="add_creditor" id="add_creditor" value="Delete " class="btn btn-danger" />
+                                                                    <input type="submit" name="delete_certificate" id="delete_certificate" value="Delete " class="btn btn-danger" />
+                                                                    <input type="submit" name="confirm_code" id="confirm_code" value="Confirm " class="btn btn-danger confirm_group" />
 
                                                                 </div>
 

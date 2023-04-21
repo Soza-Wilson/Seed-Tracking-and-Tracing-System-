@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $(".warning-text").css("color", "red").hide();
+  $(".confirm_group").hide();
 
   const loaded = "1";
 
@@ -54,6 +55,59 @@ $(document).ready(function () {
       );
     }
   });
+
+  $("#delete_certificate").click(()=>{
+
+    request_approval()
+
+    $(".confirm_group").show();
+   $("#delete_certificate").hide();
+
+    
+  })
+
+  function request_approval(
+    actionName,
+    action_id,
+    depertment,
+    request_id,
+    requestedName,
+    description
+  ) {
+    if ($("#approvalId").val() == "") {
+      $("#approvalId").val(() => {
+        const characters = "0123456789";
+        let code = "APV";
+        for (let i = 0; i < 8; i++) {
+          code += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          );
+        }
+        return code;
+      });
+
+      let approvalId = $("#approvalId").val();
+
+      $.post(
+        "get_data.php",
+        {
+          updateStockInRequest: actionName,
+          depertment: depertment,
+          action_id: action_id,
+          request_id: request_id,
+          requestedName: requestedName,
+          approvalId: approvalId,
+          description: description,
+        },
+        function (data) {
+          alert("Request sent to Admin. Enter approval code to continue...");
+          return data;
+        }
+      );
+    } else {
+      alert("Request already sent. Enter conformation code to continue");
+    }
+  }
 
   function checkFilterFields() {
     let textField = 0;

@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $(".warning_text").css("color", "red").hide();
+  
   $("#save_certificate").click(() => {
     let validate = confirm("Are you sure ?");
     let emptyFields = 0;
