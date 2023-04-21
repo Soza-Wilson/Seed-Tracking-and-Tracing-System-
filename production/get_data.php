@@ -519,7 +519,7 @@ if (isset($_POST["certificateFilter"])) {
   $filterData = $_POST["certificateFilter"];
   $data = $filterData;
  
-  $fromValue = $data[4];
+ 
   echo "<thead>
   <tr>
 
@@ -547,13 +547,13 @@ if (isset($_POST["certificateFilter"])) {
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
     `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
     INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-    INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date' AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]' AND `date_added` BETWEEN '$data[4]' AND '$data[5]' ORDER BY `lot_number` DESC";
+    INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date' AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]' ORDER BY `lot_number` DESC";
   } else if ($data[0] == "used") {
     $date = date("Y-m-d");
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
       `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
       INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-      INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0 AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]' AND `date_added` BETWEEN '$data[4]' AND '$data[5]' ORDER BY `lot_number` DESC";
+      INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0 AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
 
   } else if ($data[0] == "expired") {
     $date = date("Y-m-d");
@@ -561,7 +561,7 @@ if (isset($_POST["certificateFilter"])) {
     `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, 
     `fullname` FROM `certificate` INNER JOIN crop ON certificate.crop_ID = crop.crop_ID 
     INNER JOIN variety ON certificate.variety_ID = variety.variety_ID INNER JOIN user ON
-     user.user_ID = certificate.user_ID WHERE `date_added` BETWEEN '$data[4]' AND '$data[5]' AND  `expiry_date` < '$date' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]' AND `date_added` BETWEEN '$data[4]' AND '$data[5]' ORDER BY `lot_number` DESC";
+     user.user_ID = certificate.user_ID WHERE `date_added` BETWEEN '$data[4]' AND '$data[5]' AND  `expiry_date` < '$date' ANDcertificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
   }
 
  

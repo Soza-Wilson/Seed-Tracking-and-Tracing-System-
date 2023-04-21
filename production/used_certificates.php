@@ -462,29 +462,23 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="form-group row">
 
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <label>Select Crop</label>
                                                     </div>
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
                                                         <label>Select Variety</label>
                                                     </div>
-                                                    <div class="col-sm-1">
+                                                    <div class="col-sm-3">
                                                         <label>Select Class</label>
                                                     </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
+                                                    
                                                 </div>
 
 
                                                 <div class="form-group row">
 
 
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
 
 
                                                         <select name="select_crop" id="select_crop" class="form-control">
@@ -499,7 +493,7 @@ if (in_array($position, $restricted)) {
 
                                                     </div>
 
-                                                    <div class="col-sm-2">
+                                                    <div class="col-sm-3">
 
 
                                                         <select name="select_variety" id="select_variety" class="form-control">
@@ -513,7 +507,7 @@ if (in_array($position, $restricted)) {
 
 
                                                     </div>
-                                                    <div class="col-sm-1">
+                                                    <div class="col-sm-3">
 
 
                                                         <select name="select_class" id="select_class" class="form-control">
@@ -530,16 +524,7 @@ if (in_array($position, $restricted)) {
 
                                                     </div>
 
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                        <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                        <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
+                                                   
 
 
 
@@ -563,7 +548,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
+                                                            <button class="ti-download btn btn-primary " id='certificate_csv' name='certificate_csv'> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
