@@ -65,7 +65,7 @@ $(document).ready(function () {
           get_source_name($("#source").val()),
           $("#date_tested").val(),
           $("#expire_date").val(),
-          $("#file_directory").val(),
+          $("#tempFile").val(),
           $("#user").val(),
         ];
         function get_source_name(source) {
