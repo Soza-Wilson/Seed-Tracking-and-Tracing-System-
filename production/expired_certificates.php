@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/view_certificate.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
 
     </script>
 </head>
@@ -668,9 +668,7 @@ if (in_array($position, $restricted)) {
                                                 <td>$fullname</td>
 												
 												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
+												<td>
                                                 <a href='certificate/$dir' class='ti-bookmark-alt'></a>
                                                 </td>
 											</tr>	

@@ -95,6 +95,12 @@ if (isset($_POST["deleteStockIn"])) {
   $object->delete_stock_in($stockData[0], $stockData[1], $stockData[2], $stockData[3]);
 }
 
+if (isset($_POST["deleteCertificate"])) {
+ $object->delete_certificate($_POST["deleteCertificate"]);
+}
+
+
+
 // Insert external creditor 
 
 if (isset($_POST["insertExtCreditor"])) {
@@ -545,20 +551,20 @@ if (isset($_POST["certificateFilter"])) {
 
     $date = date("Y-m-d");
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
-    `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+    `certificate_quantity`, `available_quantity`,`assigned_quantity`, `directory`, `fullname` FROM `certificate`
     INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
     INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date' AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]' ORDER BY `lot_number` DESC";
   } else if ($data[0] == "used") {
     $date = date("Y-m-d");
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
-      `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+      `certificate_quantity`, `available_quantity`,`assigned_quantity`, `directory`, `fullname` FROM `certificate`
       INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
       INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0 AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
 
   } else if ($data[0] == "expired") {
     $date = date("Y-m-d");
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, 
-    `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, 
+    `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `assigned_quantity`,`directory`, 
     `fullname` FROM `certificate` INNER JOIN crop ON certificate.crop_ID = crop.crop_ID 
     INNER JOIN variety ON certificate.variety_ID = variety.variety_ID INNER JOIN user ON
      user.user_ID = certificate.user_ID WHERE `date_added` BETWEEN '$data[4]' AND '$data[5]' AND  `expiry_date` < '$date' ANDcertificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
@@ -581,6 +587,10 @@ if (isset($_POST["certificateFilter"])) {
         $certificate_quantity = $row['certificate_quantity'];
         $available_quantity = $row['available_quantity'];
         $fullname = $row['fullname'];
+        $assigned_quantity =$row['assigned_quantity'];
+        $user =$_SESSION['user'];
+        $test =$_SESSION['fullname'];
+
 
 
 
@@ -603,9 +613,9 @@ if (isset($_POST["certificateFilter"])) {
                         <td>$fullname</td>
 
 
-<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                        <a href='view_registered_users.php' class='ti-trash'></a>/
-                        <a href='view_registered_users.php' class='ti-pencil-alt'></a>
+                          <td>
+                        <a href='delete_certificate.php? lot_number=$lot_number & requested_id = $user & requested_name=$test & certificate_quantity=$certificate_quantity & available_quantity=$available_quantity & assigned_quantity=$assigned_quantity'  class='ti-trash'></a>/
+                       
                         <a href='certificate/$dir' class='ti-bookmark-alt'></a>
                         </td>
   </tr>	

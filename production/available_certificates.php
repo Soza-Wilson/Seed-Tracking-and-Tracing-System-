@@ -454,65 +454,7 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
-                                        <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                               
-                                                            </div>
-                                                            <div class="modal-body">
-
-
-                                                              
-
-
-                                                               
-      
-
-
-                                                                <div class="form-group row">
-
-                                                                    <div class="col-sm-12">
-                                                                     <h5><span>Delete selected certificate ?</span></h5>
-                                                                    </div>
-
-                                                                   
-
-
-                                                                </div>
-                                                                <div class="form-group row">
-
-                                                    <div class="col-sm-12 confirm_group">
-                                                        <input id="approval_code" type="text" class="form-control" name="approval _code" placeholder="Approval code" require="">
-                                                        <label id="warning_creditor_phone" class="warning-text"> <span>Please enter approval code <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
-
-                                                    </div>
-
-                                                                <div class="col-sm-6">
-
-                                                                    <input type="submit" name="delete_certificate" id="delete_certificate" value="Delete " class="btn btn-danger" />
-                                                                    <input type="submit" name="confirm_code" id="confirm_code" value="Confirm " class="btn btn-danger confirm_group" />
-
-                                                                </div>
-
-
-
-
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
+                                       
 
                                         <div class="card">
                                             <div class="card-header">
@@ -677,7 +619,7 @@ if (in_array($position, $restricted)) {
                                                             <?php
                                                               $date = date("Y-m-d");
                                                             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
-                                 `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
+                                 `certificate_quantity`, `available_quantity`, `assigned_quantity`,`directory`, `fullname` FROM `certificate`
                                  INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
                                  INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date'";
                                                             $result = $con->query($sql);
@@ -695,8 +637,10 @@ if (in_array($position, $restricted)) {
                                                                     $dir = $row['directory'];
                                                                     $certificate_quantity = $row['certificate_quantity'];
                                                                     $available_quantity = $row['available_quantity'];
+                                                                    $assigned_quantity =$row['assigned_quantity'];
                                                                     $fullname = $row['fullname'];
-
+                                                                    $user =$_SESSION['user'];
+                                                                    $test =$_SESSION['fullname'];
 
 
 
@@ -719,7 +663,7 @@ if (in_array($position, $restricted)) {
 												
 												
 												<td>
-                                                <a href='view_registered_users.php' data-toggle='modal' data-target='#myModal' class='ti-trash'></a>/
+                                                <a href='delete_certificate.php? lot_number=$lot_number & requested_id = $user & requested_name=$test & certificate_quantity=$certificate_quantity & available_quantity=$available_quantity & assigned_quantity=$assigned_quantity'  class='ti-trash'></a>/
                                                
                                                 <a href='../files/production/seed_certificate/$dir' class='ti-bookmark-alt'></a>
                                                 </td>

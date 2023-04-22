@@ -46,25 +46,86 @@ $(document).ready(function () {
       $.post(
         "get_data.php",
         {
-        certificateFilter: filterData,
+          certificateFilter: filterData,
         },
         (data) => {
-         
-        $("#dataTable").html(data);
+          $("#dataTable").html(data);
         }
       );
     }
   });
 
-  $("#delete_certificate").click(()=>{
-
-    request_approval()
+  $("#delete_certificate").click(() => {
+    request_approval(
+      "Delete certificate",
+      $("#action_id").val(),
+      "Production",
+      $("#requested_id").val(),
+      $("#request_name").val(),
+      $("#request_name").val() + "requesting to delete certificate "
+    );
 
     $(".confirm_group").show();
-   $("#delete_certificate").hide();
+    $("#delete_certificate").hide();
+  });
 
-    
-  })
+  $("#confirm_code").click(() => {
+    let accessCode = $("#approvalCode").val();
+    let approvalId = $("#approvalId").val();
+    let lotNumber = $("#action_id").val();
+
+    if (accessCode == "") {
+      alert("Please Enter given approval code before submitting!!");
+    } else {
+      $.post(
+        "get_data.php",
+        {
+          checkApprovalCode: accessCode,
+          approvalId: approvalId,
+        },
+        function (data) {
+          if (data == "valid") {
+            let certificate_status = check_certificate(
+              $("#assigned_quantity").val(),
+              $("#available_quantity").val(),
+              $("#certificate_quantity").val()
+            );
+            if (certificate_status == "unused") {
+              $.post(
+                "get_data.php",
+                {
+                  deleteCertificate: lotNumber,
+                },
+                function () {
+                  alert("Certificate deleted");
+                  window.history.back();
+                }
+              );
+            } else {
+              alert("Operation failed , Certificate used ");
+              window.history.back();
+            }
+          } else {
+            alert("code is Invalid ");
+          }
+        }
+      );
+    }
+  });
+
+  function check_certificate(
+    assignedQuantity,
+    availableQuantity,
+    certificateQuantity
+  ) {
+    if (assignedQuantity == certificateQuantity) {
+      return "unused";
+    } else if (availableQuantity == certificateQuantity) {
+      return "unused";
+    } else {
+      return "used";
+    }
+  }
 
   function request_approval(
     actionName,
@@ -112,7 +173,6 @@ $(document).ready(function () {
   function checkFilterFields() {
     let textField = 0;
 
-  
     if ($("#select_crop").val() == 0) {
       textField = textField + 1;
       $("#warning_crop").show();
@@ -138,15 +198,12 @@ $(document).ready(function () {
   }
 
   function toCsv() {
-   
     let cropValue = $("#select_crop").val();
     let varietyValue = $("#select_variety").val();
     let classValue = $("#select_class").val();
     let from = $("#fromDateValue").val();
     let to = $("#toDateValue").val();
 
-
-   
     $("#cropValueHidden").val(cropValue);
     $("#varietyValueHidden").val(varietyValue);
     $("#classValueHidden").val(classValue);

@@ -991,6 +991,17 @@ class main
     echo "deleted";
   }
 
+  function delete_certificate($lot_number){
+
+    global $con;
+
+    $sql="DELETE FROM `certificate` WHERE `lot_number` ='$lot_number'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+
+  }
 
 
 
