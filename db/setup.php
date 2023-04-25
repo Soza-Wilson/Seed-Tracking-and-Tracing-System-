@@ -489,7 +489,19 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
     mysqli_query($con, $sql);
 
 
+$sql="CREATE TABLE growing_season(season varchar(100) PRIMARY KEY,opening_date date, closing_date date)";
 
+
+mysqli_query($con, $sql);
+
+$sql="CREATE TABLE contact(contract_ID varchar(100) PRIMARY KEY,season varchar(100), type varchar(100),grower varchar(100),agro_dealer varchar(100),dir varchar(100), user_ID varchar(100),  FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) REFERENCES debtor(debtor_ID),FOREIGN KEY(grower) REFERENCES creditor(creditor_ID))";
+
+mysqli_query($con, $sql);
+
+$sql="insert into growing_season values ('0000-0000',00-00-0000,00-00-0000)";
+
+mysqli_query($con, $sql);
 
 
     $sql = "insert into usertype
