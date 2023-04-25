@@ -644,9 +644,9 @@ if (in_array($position, $restricted)) {
 												<td>$requested_name</td>
                                                 <td>$date</td>
 												<td>$time</td>
-												<td><a href='' data-toggle='modal' data-target='#myModal' class='btn btn-success'><i class='icofont icofont-eye-alt'   data-bs-toggle='tooltip' data-bs-placement='top'
+												<td><a href='' data-toggle='modal' data-target='#myModal' class='btn btn-success' data-bs-toggle='tooltip' data-bs-placement='top'
                                                 data-bs-custom-class='custom-tooltip'
-                                                data-bs-title='This top tooltip is themed via CSS variables.></i>View</td>
+                                                data-bs-title='This top tooltip is themed via CSS variables.><i class='icofont icofont-eye-alt'></i>View</td>
 												
 												
 												

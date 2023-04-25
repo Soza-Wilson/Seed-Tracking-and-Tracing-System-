@@ -472,11 +472,11 @@ if (empty($test)) {
                                                 <div class="col-xl-3 col-md-12">
                                                     <div class="card ">
 
-                                                    <div class="card-header">
-                                                        <h5>logo </h5>
-                                                     
-                                                        
-                                                    </div>
+                                                        <div class="card-header">
+                                                            <h5>logo </h5>
+
+
+                                                        </div>
 
 
                                                         <div class="card-block ">
@@ -491,7 +491,13 @@ if (empty($test)) {
                                                                     <div class="card-body">
                                                                         <h5 class="card-title">Upload logo</h5>
                                                                         <p class="card-text">Upload company logo</p>
-                                                                        <a href="#" class="btn btn-success"><i class="icofont icofont-upload"></i> upload</a>
+
+                                                                        <div class="input-group">
+                                                                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                                        
+                                                                        </div>
+
+                                                                     
                                                                     </div>
                                                                 </div>
 
@@ -506,16 +512,16 @@ if (empty($test)) {
                                                     </div>
                                                 </div>
 
-                                               
+
                                                 <div class="col-xl-9 col-md-12">
                                                     <div class="card ">
 
-                                                    <div class="card-header">
-                                                        <h5>Addesss </h5>
-                                                     
-                                                        
-                                                    </div>
-                                                        
+                                                        <div class="card-header">
+                                                            <h5>Company Information</h5>
+
+
+                                                        </div>
+
 
 
                                                         <div class="card-block ">
@@ -523,51 +529,73 @@ if (empty($test)) {
 
                                                             <div class="col-md-12">
 
-                                                            <form action="add_user.php" method="POST">
-                                               
-                                                
-                                               
+                                                                <form action="add_user.php" method="POST">
 
-                                               
-                                               
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                    <textarea class="form-control internal" id="farm_physical_address">
+
+
+
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12"><label> Physical Address</label></div>
+                                                                        <div class="col-sm-12">
+                                                                            <textarea rows=7 class="form-control internal" id="farm_physical_address">
                                                                                 </textarea>
-                                                    </div>
-                                                </div>
+                                                                        </div>
+                                                                    </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="password_2" required="" placeholder="Repeat password">
-                                                    </div class="form-group row">
-                                                    </br></br></br>
-                                                    <div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" class="form-control" name="password_2" required="" placeholder="Enter Country name">
+                                                                        </div >
+                                                                        </br></br>
+                                                                        
+                                                                        
 
-                                                    </div>
+                                                                
+                                                                        </div>
 
-                                                    <br>
+                                                                        <div class="form-group row">
+
+                                                                        <div class="col-sm-12"><h6><label for="row">Growing season</label><h6></div>
+                                                                        </div>
+ 
+                                                                        <div class="form-group row">
+                                                                        <div class="col-sm-6">
+                                                                        <label for="row"><span>Opening date</span></label>
+                                                                            <input type="date" class="form-control" name="password_2" required="" placeholder="Repeat password">
+                                                                        </div >
+                                                                        <div class="col-sm-6">
+                                                                        <label for="row"><span>Opening date</span></label>
+                                                                            <input type="date" class="form-control" name="password_2" required="" placeholder="Repeat password">
+                                                                        </div >
+                                                                        </br></br></br>
+                                                                       
+
+                                                                        </div>
+
+                                                                        
 
 
 
-                                                    <div class="col-sm-12">
+                                                                        <div class="col-sm-12">
 
-                                                        <Input type="submit" class="btn btn-success" name="register" value="Register">
-
-                                                        <a href='view_all_prices.php' class='btn btn-primary'>Clear</a>
-
-
-                                                    </div>
+                                                                            <a href="#" class="btn btn-success"><i class="icofont icofont-save"></i> Save</a>
 
 
 
 
+                                                                        </div>
 
-                                            </form>
+
+
+
+
+                                                                </form>
 
                                                                 <!--logo card -->
 
-                                                                
+
 
 
 
@@ -580,8 +608,10 @@ if (empty($test)) {
                                                     </div>
                                                 </div>
 
+                                                
 
-                                             
+
+
 
 
 
@@ -605,116 +635,91 @@ if (empty($test)) {
 
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5>Ledger </h5>
-                                                        <span>all transactions are listed below </span>
+                                                        <h5>Previous seasons</h5>
+                                                      
                                                     </div>
-                                                        <div class="card-block table-border-style">
-                                                            <div class="table-responsive" id="table_test">
-                                                                <table class="table" id="ledger_table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Entry ID</th>
-                                                                            <th>Transaction type</th>
-                                                                            <th>Amount</th>
-                                                                            <th>Description</th>
-                                                                            <th>Bank account name</th>
-                                                                            <th>Reference Amount</th>
-                                                                            <th>Current Amount</th>
-                                                                            <th>Entry_date</th>
-                                                                            <th>Entry_time</th>
-                                                                            <th>Entry_by</th>
+                                                    <div class="card-block table-border-style">
+                                                        <div class="table-responsive" id="table_test">
+                                                            <table class="table" id="ledger_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Period</th>
+                                                                        <th>Opening date</th>
+                                                                        <th>Closing date</th>
+                                                                      
 
 
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
 
-                                                                        <?php
+                                                                    <?php
 
 
 
 
 
 
-                                                                        $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
+                                                                    $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
                                                                                  `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
                                                                                   `reference_bank_amount`, `entry_date`, `entry_time` FROM 
                                                                                 `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
                                                                                 INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
 
-                                                                        $result = $con->query($sql);
-                                                                        if ($result->num_rows > 0) {
-                                                                            while ($row = $result->fetch_assoc()) {
-                                                                                $ledger_ID      = $row["ledger_ID"];
-                                                                                $ledger_type  = $row["ledger_type"];
-                                                                                $description = $row["description"];
-                                                                                $amount = $row["amount"];
-                                                                                $bank_name = $row["bank_name"];
-                                                                                $bank_funds = $row["account_funds"];
-                                                                                $user = $row["fullname"];
-                                                                                $registered_date = $row['entry_date'];
-                                                                                $registered_time = $row['entry_time'];
+                                                                    $result = $con->query($sql);
+                                                                    if ($result->num_rows > 0) {
+                                                                        while ($row = $result->fetch_assoc()) {
+                                                                            $ledger_ID      = $row["ledger_ID"];
+                                                                            $ledger_type  = $row["ledger_type"];
+                                                                            $description = $row["description"];
+                                                                            $amount = $row["amount"];
+                                                                            $bank_name = $row["bank_name"];
+                                                                            $bank_funds = $row["account_funds"];
+                                                                            $user = $row["fullname"];
+                                                                            $registered_date = $row['entry_date'];
+                                                                            $registered_time = $row['entry_time'];
 
 
 
 
 
 
-                                                                                echo "
+                                                                            echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$ledger_ID</td>
                                                        <td>$ledger_type</td>
                                                        <td>$amount</td>
-                                                       <td>$description</td>
-                                                       <td>$bank_name</td>
-                                                       <td>$bank_funds</td>
-                                                       <td>$bank_funds</td>
-                                                       <td>$registered_date</td>
-                                                       <td>$registered_time</td>
-                                                       <td>$user</td>
-                                                      
-                                                    
-                                                         
-                                                       
-                                                       
                                                       <td><a href='view_transaction_details.php?' class='btn btn-success'>View</a></td>
                                                    </tr>	
 
                                                   
                                                ";
-                                                                            }
                                                                         }
+                                                                    }
 
 
 
-                                                                        ?>
-                                                                        <tr>
-                                                                            <th scope="row">-</th>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
+                                                                    ?>
+                                                                    <tr>
+                                                                        <th scope="row">-</th>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                       
 
 
-                                                                        </tr>
+                                                                    </tr>
 
-                                                                    </tbody>
-                                                                </table>
+                                                                </tbody>
+                                                            </table>
 
 
-                                                            </div>
                                                         </div>
-
                                                     </div>
 
                                                 </div>
+
+                                            </div>
 
 
                         </form>
