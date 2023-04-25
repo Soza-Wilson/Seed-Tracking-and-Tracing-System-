@@ -258,6 +258,19 @@ if (in_array($position, $restricted)) {
 
 
                                     </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Setup</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="setup.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    
+
+                                </ul>
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
@@ -631,7 +644,9 @@ if (in_array($position, $restricted)) {
 												<td>$requested_name</td>
                                                 <td>$date</td>
 												<td>$time</td>
-												<td><a href='' data-toggle='modal' data-target='#myModal' class='btn btn-success'><i class='icofont icofont-eye-alt'></i>View</td>
+												<td><a href='' data-toggle='modal' data-target='#myModal' class='btn btn-success'><i class='icofont icofont-eye-alt'   data-bs-toggle='tooltip' data-bs-placement='top'
+                                                data-bs-custom-class='custom-tooltip'
+                                                data-bs-title='This top tooltip is themed via CSS variables.></i>View</td>
 												
 												
 												

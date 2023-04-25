@@ -309,6 +309,19 @@ if (in_array($position, $restricted)) {
 
 
                                     </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Setup</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="setup.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    
+
+                                </ul>
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
