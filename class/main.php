@@ -1401,7 +1401,7 @@ class main
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    echo "added";
+    return "added";
 
     // if ($source == "External") {
     //   header('Location:stock_in.php');

@@ -99,6 +99,13 @@ if (isset($_POST["deleteCertificate"])) {
  $object->delete_certificate($_POST["deleteCertificate"]);
 }
 
+if(isset($_POST["registerGrower"])){
+
+  $growerData = $_POST["registerGrower"];
+  $returnData = $object->add_creditor($growerData[0],$growerData[1],$growerData[2],$growerData[3],"-",$growerData[4],$growerData[5]);
+  echo $returnData;
+}
+
 
 
 // Insert external creditor 

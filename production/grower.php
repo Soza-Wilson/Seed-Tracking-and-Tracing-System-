@@ -9,30 +9,18 @@ session_start();
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 
-
 if (empty($test)) {
 
     header('Location:../login.php');
 }
 
-$restricted = array("lab_technician", "production_admin", "system_administrator", "lab_technician", "field_officer");
 
-if (in_array($position, $restricted)) {
+$notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
+
+if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
-
-
-//$position !="lab_technician" || $position !="production_admin" || $position !="system_administrator" ||
-// if($position !=="lab_technician" || $position !=="field_officer"){
-
-//     header('Location:javascript://history.go(-1)');
-//header('Location:../restricted_access/restricted_access.php');
-
-// echo ("<script> alert('$position');
-// </script>");
-
-// }
 
 ?>
 
@@ -70,6 +58,11 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/grower.js">
+
+    </script>
+
 </head>
 
 <body>
@@ -148,7 +141,11 @@ if (in_array($position, $restricted)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="">production</a>
+
+                        <a href="index.html">
+                            <span>Production</span>
+                        </a>
+
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
@@ -156,9 +153,6 @@ if (in_array($position, $restricted)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
 
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
@@ -180,7 +174,6 @@ if (in_array($position, $restricted)) {
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
-                                    </li>
 
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
@@ -210,13 +203,13 @@ if (in_array($position, $restricted)) {
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
+
                             <div class="p-15 p-b-0">
 
 
@@ -264,6 +257,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
 
                                 <li class="">
                                     <a href="stock_out.php" class="waves-effect waves-dark">
@@ -394,6 +388,7 @@ if (in_array($position, $restricted)) {
 
                             </ul>
 
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
 
                             <ul class="pcoded-item pcoded-left-item">
@@ -407,20 +402,22 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li>
                                     <a href="active_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="">
                                     <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -441,7 +438,7 @@ if (in_array($position, $restricted)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="grower.php">grower</a>
+                                            <li class="breadcrumb-item"><a href="view_stock_in.php">Grower</a>
                                             </li>
 
                                         </ul>
@@ -491,6 +488,7 @@ if (in_array($position, $restricted)) {
 
                                                                         <div class="col-sm-12">
                                                                             <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
+                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
                                                                         </div>
 
 
@@ -501,7 +499,9 @@ if (in_array($position, $restricted)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="text" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
+                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
+                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+                                                                         
                                                                         </div>
 
 
@@ -511,7 +511,7 @@ if (in_array($position, $restricted)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                            <input id="creditor_email" type="text" class="form-control" name="creditor_email" placeholder="Email" require="">
+                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
                                                                         </div>
 
 
@@ -523,10 +523,14 @@ if (in_array($position, $restricted)) {
 
                                                                         <div class="col-sm-12">
                                                                             <labe>Supporting documents :</label>
-                                                                                <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
+
+                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <input type="submit" name="register_grower" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
+                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success btn-block" ><i class="icofont icofont-save"></i> Save</button>
                                                                         </div>
 
                                                                     </div>
@@ -613,7 +617,7 @@ if (in_array($position, $restricted)) {
 												<td><a href='view_registered_users.php' class='ti-eye'></a>/
                                                 <a href='view_registered_users.php' class='ti-trash'></a>/
                                                 <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                                <a href='creditor_documents/$dir' class='ti-bookmark-alt'></a>
+                                                <a href='../files/production/creditor_documents/$dir' class='ti-bookmark-alt'></a>
                                                 </td>
 											</tr>	
 										";
@@ -628,9 +632,6 @@ if (in_array($position, $restricted)) {
 
                                         <!-- Background Utilities table end -->
                                     </div>
-                                    <!-- Page-body end -->
-                                </div>
-                            </div>
                             <!-- Main-body end -->
 
                             <div id="styleSelector">
@@ -707,53 +708,4 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
-
-
 </html>
-
-<?php
-if (isset($_FILES['image'])) {
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
-
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
-
-
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
-
-    $extensions = array("pdf");
-
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-    }
-
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
-
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "creditor_documents/" . $newfilename);
-        echo "Success";
-    } else {
-        print_r($errors);
-    }
-}
-
-if (isset($_POST['register_grower'])) {
-
-    $source = "MUSECO";
-    $description = "-";
-    $files = "$newfilename";
-
-
-
-
-
-    $object = new main();
-
-    // $object->add_creditor($source, $_POST['creditor_name'], $_POST['creditor_phone'], $_POST['creditor_email'], $description, $files);
-}
-?>
