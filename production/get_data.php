@@ -102,9 +102,43 @@ if (isset($_POST["deleteCertificate"])) {
 if(isset($_POST["registerGrower"])){
 
   $growerData = $_POST["registerGrower"];
-  $returnData = $object->add_creditor($growerData[0],$growerData[1],$growerData[2],$growerData[3],"-",$growerData[4],$growerData[5]);
-  echo $returnData;
+  $growerName = strtolower($growerData[1]);
+  $returnData = $object->add_creditor($growerData[0],$growerName,$growerData[2],$growerData[3],"-",$growerData[4],"active");
+  echo $returnData[1];
+ 
+
 }
+
+// Check grower name 
+
+if (isset($_POST["checkGrowerName"])) {
+  $name = $_POST["checkGrowerName"];
+
+ $sql="SELECT `name` FROM `creditor` WHERE `source`='MUSECO' AND `name` LIKE '$name'";
+ $result = $con->query($sql);
+ if ($result->num_rows > 0) { 
+    echo true;
+ }
+ else{
+  echo false;
+ }
+
+
+}
+
+//Add creditor contract
+
+
+if(isset($_POST["registerContract"])){
+
+  $creditorData = $_POST["registerContract"];
+  $object->register_contract($creditorData[0],$creditorData[1],"grower",$creditorData[2]);
+
+
+}
+
+
+
 
 
 

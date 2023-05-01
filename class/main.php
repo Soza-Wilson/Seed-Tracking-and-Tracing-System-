@@ -156,8 +156,50 @@ class main
 
 
 
+ function update_business($name, $country, $physical_address, $logo_drectory){
+
+  global $con;
+  $sql="UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address',`logo`='$logo_drectory'";
+  $statement = $con->prepare($sql);
+  $statement->execute();
 
 
+ }
+
+ function update_season($opening_date,$closing_date){
+
+  global $con;
+  $season ="";
+  
+
+  $sql="SELECT * FROM growing_season";
+
+                            $result = $con->query($sql);
+                            if ($result->num_rows > 0) {
+                             while ($row = $result->fetch_assoc()) {
+                                     $season     = $row["season"];
+                                     }
+
+                             }
+
+                             if($season === "0000-0000"){
+
+                              $date = date("Y");
+                              $int_value = (int)$date + 1;
+                              $season = $date."-".$int_value ;
+                              
+                              $sql="UPDATE `growing_season` SET `season`='$season',`opening_date`='$opening_date',`closing_date`='$closing_date'";
+
+                              $statement = $con->prepare($sql);
+                              $statement->execute();
+
+
+                             }
+
+
+
+
+ }
 
 
 
@@ -1387,21 +1429,23 @@ class main
 
 
   //add creditor function 
-  function add_creditor($source, $name, $phone, $email, $description, $user, $files)
+  function add_creditor($source, $name, $phone, $email, $description, $user,$status)
   {
 
     $creditor_ID = $this->generate_user("creditor");
     $date = date("d-m-Y");
-    global $con;
+    global $con; 
 
-    $sql = "INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID`, `creditor_files`, `registered_date`, `account_funds`) VALUES
-  ('$creditor_ID','$source','$name','$phone','$email','$description','$user','$files','$date',0)";
+    $sql = "INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID`,`registered_date`, `account_funds`,`status`) VALUES
+  ('$creditor_ID','$source','$name','$phone','$email','$description','$user','$date',0,'$status')";
 
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    return "added";
+  
+
+    return  ["added",$creditor_ID];
 
     // if ($source == "External") {
     //   header('Location:stock_in.php');
@@ -1409,6 +1453,42 @@ class main
 
     //   header('Location:grower.php');
     // }
+  }
+
+ function get_season(){
+ global $con;
+
+ $sql="SELECT max(season) AS season FROM growing_season";
+ $result = $con->query($sql);
+ if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {
+         $season = $row['season'];
+     }
+          return $season;
+    }
+
+
+ }
+
+  function register_contract($creditor_id,$user_id,$type,$contract_directory){
+
+    global $con;
+    $contract_ID = $this->generate_user("contract");
+    $season = $this->get_season();
+    
+
+    $sql="INSERT INTO `contract`(`contract_ID`, `season`, `type`, `grower`, `dir`, `user_ID`) VALUES 
+    ('$contract_ID','$season','$type','$creditor_id','$contract_directory','$user_id')";
+
+    $statement = $con->prepare($sql);
+   if ($statement->execute()) {
+
+     echo "Grower registered ";
+   }
+   
+
+
+     
   }
 
 

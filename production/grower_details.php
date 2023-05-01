@@ -8,6 +8,7 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$creditor_id = $_GET['creditor_id'];
 
 if (empty($test)) {
 
@@ -20,6 +21,26 @@ $notRestricted = array("production_admin", "system_administrator", "merl_officer
 if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
+}
+
+
+$sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`status`,creditor.registered_date FROM `creditor`
+INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_ID`='$creditor_id'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+   while ($row = $result->fetch_assoc()) {
+       $creditor_id = $row['creditor_ID'];
+       $name = $row['name'];
+       $phone = $row['phone'];
+       $email = $row['email'];
+       $registered_date = $row['registered_date'];
+       $registered_by = $row['fullname'];
+       $status =$row['status'];
+       $dir = $row['file_directory'];
+
+   }
+
 }
 
 ?>
@@ -469,7 +490,7 @@ if (in_array($position, $notRestricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Add new grower</button>
+                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-list"></i>Contracts</button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -481,64 +502,7 @@ if (in_array($position, $notRestricted)) {
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 <h5 class="modal-title">Register new grower</h5>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
-                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
-                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
-                                                                         
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <labe>Supporting documents :</label>
-                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
-                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
-
-                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success btn-block" ><i class="icofont icofont-save"></i> Save</button>
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-                                                                </form>
-                                                            </div>
+                                                           
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                             </div>
@@ -564,72 +528,77 @@ if (in_array($position, $notRestricted)) {
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Fullname</th>
-                                                                <th>Email </th>
-                                                                <th>phone</th>
-                                                                <th>Registered date</th>
-                                                                <th>registered by</th>
-                                                                <td>status</td>
+                                            <div class="modal-body">
+                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
 
-                                                                <th>Action</th>
+                                                                    <div class="form-group row">
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
+                                                                        <div class="col-sm-12">
+                                                                        <label class="label bg-primary">Grower Name :</label>
+                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" value="<?php echo $name?>">
+                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
 
 
-                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`status`,creditor.registered_date FROM `creditor`
-                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE source = 'MUSECO' AND status = 'active'";
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $creditor_id = $row['creditor_ID'];
-                                                                    $name = $row['name'];
-                                                                    $phone = $row['phone'];
-                                                                    $email = $row['email'];
-                                                                    $registered_date = $row['registered_date'];
-                                                                    $registered_by = $row['fullname'];
-                                                                    $status =$row['status'];
-                                                                    $dir = $row['file_directory'];
+                                                                    </div>
 
 
 
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                        <label class="label bg-primary">Phone Number :</label>
+                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone?>">
+                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+                                                                         
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                        <label class="label bg-primary">Email (Optional) :</label>
+                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email?>">
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                        <label class="label bg-primary">Status :</label>
+                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email"  value="<?php echo $status?>">
+                                                                        </div>
+
+
+                                                                    </div>
 
 
 
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$name</td>
-											    <td>$email</td>
-												<td>$phone</td>
-												<td>$registered_date</td>
-												<td>$registered_by</td>
-                                                <td>$status</td>
-                                               
-                                                
-                                               
-	
-												
-												<td>
-                                                <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success'><i class='icofont icofont-eye'></i>View</a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <label class="label bg-primary">Add new contract file:</label>
+                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
+
+                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success btn-block" ><i class="icofont icofont-save"></i> Update</button>
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+                                                                </form>
+                                                            </div>
                                         </div>
 
                                         <!-- Background Utilities table end -->

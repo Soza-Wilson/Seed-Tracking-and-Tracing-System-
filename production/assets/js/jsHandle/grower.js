@@ -6,39 +6,7 @@ $(document).ready(() => {
     if (fields > 0) {
       alert("Please fill out all required fields !!");
     } else {
-     
-      let growerData = [
-        "MUSECO",
-        $("#creditor_name").val(),
-        $("#creditor_phone").val(),
-        $("#creditor_email").val(),
-        $("#user").val(),
-        $("#tempFile").val(),
-      ];
-
-      $.post(
-        "get_data.php",
-        {
-          registerGrower: growerData,
-        },
-        (data) => {
-            if(data == "added"){
-                 alert("Grower registered");
-                 window.location.reload();
-
-            }
-            else{
-
-                alert("Error: Grower not registered ");
-                window.location.reload();
-
-            }
-
-        
-
-          
-        }
-      );
+      checkName();
     }
   });
 
@@ -71,6 +39,118 @@ $(document).ready(() => {
 
     return emptyFields;
   }
+
+  function checkName(){
+ 
+    
+
+    $.post(
+      "get_data.php",
+      {
+        checkGrowerName:$("#creditor_name").val(),
+      },
+      (data) => {
+          if(data == true){
+               alert("Error: Grower name already exists (Rename or activate already existing Grower )");
+               
+          }
+          else{
+            
+            registerGrower();
+                           
+
+          }
+
+      
+
+        
+      }
+    );
+
+
+
+  
+
+  }
+
+  // register grower 
+
+  function registerGrower(){
+
+    let growerData = [
+      "MUSECO",
+      $("#creditor_name").val(),
+      $("#creditor_phone").val(),
+      $("#creditor_email").val(),
+      $("#user").val(),
+    
+    ];
+
+    $.post(
+      "get_data.php",
+      {
+        registerGrower: growerData,
+      },
+      (data) => {
+          if(data !==""){
+              addContract(data);
+
+          }
+          else{
+
+              alert("Error: Grower not registered ");
+              window.location.reload();
+
+          }
+
+      
+
+        
+      }
+    )
+  }
+
+  function addContract(creditorID){
+
+ 
+    let contractData = [
+       creditorID,
+      $("#user").val(),
+      $("#tempFile").val(),
+    ];
+
+    alert (contractData[1])
+
+    $.post(
+      "get_data.php",
+      {
+        registerContract: contractData,
+      },
+      (data) => {
+
+        alert(data);
+
+          // if(data !==""){
+          //     addContract(data);
+
+          // }
+          // else{
+
+          //     alert("Error: Grower not registered ");
+          //     window.location.reload();
+
+          // }
+
+      
+
+        
+      }
+    )
+        
+      }
+
+     
+
 
   /// upload file using PHP
   function uploadFile() {

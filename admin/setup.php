@@ -13,6 +13,25 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
+else{
+
+    $sql="SELECT * FROM client";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $business_name     = $row["business_name"];
+            $country  = $row["country"];
+            $address = $row["physical_address"];
+            $logo = $row["logo"];
+
+        }
+
+    } 
+    $date = date("Y");
+    $int_value = (int)$date + 1;
+    $season = "(".$date. " - ". $int_value .")";
+}
+
 
 
 
@@ -59,48 +78,9 @@ if (empty($test)) {
 
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <script type="text/javascript" src="assets/js/jsHandler/setup.js"></script>
 
-            $('#get_data').click(() => {
-
-
-
-
-                let fromDateValue = $('#fromDateValue').val();
-                let toDateValue = $('#toDateValue').val();
-                let typeValue = $('#typeValue').val();
-                let bankAccount = $('#select_bank_name').val();
-
-
-                $.post('../finance/get_creditors.php', {
-                    fromDateValue: fromDateValue,
-                    toDateValue: toDateValue,
-                    typeValue: typeValue,
-                    bankAccount: bankAccount
-                }, data => {
-                    $('#ledger_table').html(data);
-
-                });
-
-
-            });
-
-
-
-
-            var data_value = "bank";
-
-            $.post('../finance/get_creditors.php', {
-                data_value: data_value
-            }, function(data) {
-                $('#select_bank_name').html(data);
-
-
-            });
-
-
-        });
+       
     </script>
 
 
@@ -457,7 +437,7 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-                        <form action="finance_ledger.php" method="POST">
+                      
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -487,13 +467,14 @@ if (empty($test)) {
                                                                 <!--logo card -->
 
                                                                 <div class="card" style="width: 18rem;">
-                                                                    <img src="assets/images/company_logo.png" class="card-img-top" alt="...">
+                                                                    <img src="../files/business_logo/<?php echo $logo;?>" class="card-img-top" alt="...">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Upload logo</h5>
-                                                                        <p class="card-text">Upload company logo</p>
+                                                                        <h5 class="label bg-primary">Upload logo </h5>
+                                                                      
 
                                                                         <div class="input-group">
-                                                                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                                            <input type="file" class="form-control" accept=".jpg,.png" id="file_directory" aria-label="Upload">
+                                                                            <input type="hidden" class="form-control" accept=".jpg" id="tempFile" aria-label="Upload" value="<?php echo $logo;?>">
                                                                         
                                                                         </div>
 
@@ -517,7 +498,7 @@ if (empty($test)) {
                                                     <div class="card ">
 
                                                         <div class="card-header">
-                                                            <h5>Company Information</h5>
+                                                            <h5>Business Information</h5>
 
 
                                                         </div>
@@ -529,26 +510,16 @@ if (empty($test)) {
 
                                                             <div class="col-md-12">
 
-                                                                <form action="add_user.php" method="POST">
+                                                               
 
 
 
-
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-12"><label> Physical Address</label></div>
+                                                                <div class="form-group row">
+                                                                <div class="col-sm-12"><label class="label bg-primary"> Business name</label></div>
                                                                         <div class="col-sm-12">
-                                                                            <textarea rows=7 class="form-control internal" id="farm_physical_address">
-                                                                                </textarea>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" class="form-control" name="password_2" required="" placeholder="Enter Country name">
+                                                                            <input type="text" class="form-control" id="business_name" required="" placeholder="Business Name" value="<?php echo $business_name;?>">
                                                                         </div >
-                                                                        </br></br>
+                                                                       
                                                                         
                                                                         
 
@@ -556,18 +527,42 @@ if (empty($test)) {
                                                                         </div>
 
                                                                         <div class="form-group row">
+                                                                        <div class="col-sm-12"><label class="label bg-primary"> Country name </label></div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" class="form-control" id="country" required="" placeholder="Enter Country name" value="<?php echo $country;?>">
+                                                                        </div >
+                                                                       
+                                                                        
+                                                                        
 
-                                                                        <div class="col-sm-12"><h6><label for="row">Growing season</label><h6></div>
+                                                                
+                                                                        </div>
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12" ><label  class="label bg-primary"> Physical Address</label></div>
+                                                                        <div class="col-sm-12">
+                                                                            
+
+                                                                                <textarea rows=7 type="address" class="form-control internal" required="" id="physical_address" placeholder="Format: ADDRESS PLACE/ P.O BOX 0000/  CITY NAME/ AREA ( This will be disprayed on all documents generated by the system.)"><?php echo $address;?></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    
+
+                                                                        <div class="form-group row">
+                                         
+                                                                        <div class="col-sm-12"><h6><label for="row"  class="label bg-primary">Growing season <?php echo $season;?></label><h6></div>
                                                                         </div>
  
                                                                         <div class="form-group row">
                                                                         <div class="col-sm-6">
-                                                                        <label for="row"><span>Opening date</span></label>
-                                                                            <input type="date" class="form-control" name="password_2" required="" placeholder="Repeat password">
+                                                                        <label for="row" class="label bg-success">Opening date</label>
+                                                                            <input type="date" class="form-control" name="opening_date" id="opening_date" required="" placeholder="Repeat password">
                                                                         </div >
                                                                         <div class="col-sm-6">
-                                                                        <label for="row"><span>Opening date</span></label>
-                                                                            <input type="date" class="form-control" name="password_2" required="" placeholder="Repeat password">
+                                                                        <label for="row"  class="label bg-danger"><span>Closing date</span></label>
+                                                                            <input type="date" class="form-control" name="closing_date" id="closing_date" required="" placeholder="Repeat password">
                                                                         </div >
                                                                         </br></br></br>
                                                                        
@@ -580,18 +575,21 @@ if (empty($test)) {
 
                                                                         <div class="col-sm-12">
 
-                                                                            <a href="#" class="btn btn-success"><i class="icofont icofont-save"></i> Save</a>
+                                                                           
+
+                                                                            <button id="save" class="btn btn-success"><i class="icofont icofont-save" data-toggle="tooltip" data-placement="left" data-original-title=".icofont-home"></i> save</button>
 
 
 
 
                                                                         </div>
+                                                                        
 
 
 
 
 
-                                                                </form>
+                                                           
 
                                                                 <!--logo card -->
 
@@ -635,7 +633,7 @@ if (empty($test)) {
 
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5>Previous seasons</h5>
+                                                        <h5>Previous active seasons</h5>
                                                       
                                                     </div>
                                                     <div class="card-block table-border-style">
@@ -661,25 +659,15 @@ if (empty($test)) {
 
 
 
-                                                                    $sql = "SELECT `ledger_ID`, `ledger_type`, `description`,
-                                                                                 `amount`, `transaction_ID`,user.fullname,bank_account.bank_name,account_funds,
-                                                                                  `reference_bank_amount`, `entry_date`, `entry_time` FROM 
-                                                                                `ledger` INNER JOIN user ON user.user_ID = ledger.user_ID 
-                                                                                INNER JOIN bank_account ON bank_account.bank_ID = ledger.bank_ID";
+                                                                    $sql = "SELECT * FROM growing_season";
 
                                                                     $result = $con->query($sql);
                                                                     if ($result->num_rows > 0) {
                                                                         while ($row = $result->fetch_assoc()) {
-                                                                            $ledger_ID      = $row["ledger_ID"];
-                                                                            $ledger_type  = $row["ledger_type"];
-                                                                            $description = $row["description"];
-                                                                            $amount = $row["amount"];
-                                                                            $bank_name = $row["bank_name"];
-                                                                            $bank_funds = $row["account_funds"];
-                                                                            $user = $row["fullname"];
-                                                                            $registered_date = $row['entry_date'];
-                                                                            $registered_time = $row['entry_time'];
-
+                                                                            $season= $row["season"];
+                                                                            $opening_date  = $row["opening_date"];
+                                                                            $closing_date  = $row["closing_date"];
+                                                                           
 
 
 
@@ -687,10 +675,10 @@ if (empty($test)) {
 
                                                                             echo "
                                                    <tr class='odd gradeX'>
-                                                       <td>$ledger_ID</td>
-                                                       <td>$ledger_type</td>
-                                                       <td>$amount</td>
-                                                      <td><a href='view_transaction_details.php?' class='btn btn-success'>View</a></td>
+                                                       <td>$season</td>
+                                                       <td>$opening_date</td>
+                                                       <td>$closing_date</td>
+                                                    
                                                    </tr>	
 
                                                   
@@ -722,7 +710,7 @@ if (empty($test)) {
                                             </div>
 
 
-                        </form>
+          
 
 
 
@@ -819,10 +807,7 @@ if (empty($test)) {
 
 
 
-if (isset($_POST['save_ledger'])) {
-    $object = new main;
-    $object->ledger_new_entry($_POST['ledger_type'], $_POST['description'], $_POST['amount'], $_POST['bank_name'], "-", "-", "user");
-}
+
 
 
 

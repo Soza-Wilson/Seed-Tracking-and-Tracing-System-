@@ -10,12 +10,9 @@ session_start();
 //$type = $_GET['type'];
 
 
-if(empty( $_GET['type'])){
- $pdf_type = "labels";
-    
-}
-
-else{
+if (empty($_GET['type'])) {
+    $pdf_type = "labels";
+} else {
 
     $pdf_type = $_GET['type'];
 }
@@ -24,26 +21,71 @@ else{
 
 class PDF extends FPDF
 {
+    function get_details()
+    {
+
+        global $con;
+        $sql = "SELECT `business_name`, `country`, `physical_address`, `logo` FROM `client`";
+
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $name = $row["business_name"];
+                $country  = $row["country"];
+                $physical_address = $row["physical_address"];
+                $logo = $row["logo"];
+            }
+            return $data = [$name, $country, $physical_address, $logo];
+        }
+    }
+
+    function logo_resize($address_count)
+    {
+        $width = 44;
+        $height = 33;
+        if ((int)$address_count === 5) {
+            return $size = [$width, $height];
+        } else if ((int)$address_count > 5) {
+            $new_count = (int)$address_count - 5;
+            $width = $width + ($new_count * 8);
+            $height = $height + ($new_count * 8);
+            return $size = [$width, $height];
+        }
+    }
+
     // Page header
     function Header()
     {
-        // Logo
-        $this->Image('../pdf/logo.png', 0, 5, 0);
-        // Arial bold 15
-        $this->SetFont('Arial', '', 10);
-        // Move to the right
-        $this->Cell(80);
-        // Title
-        // $this->Cell(20,10,'   P.O Box 2281, Lilongwe,Malawi',0,0,'');
-        // //
-        // $this->Cell(20,24,'Along Likuni Road',0,0,'c');
-        // $this->Cell(20,31,'Tel: +265 (0) 994870500/400/500',0,0,'c');
-        // $this->Cell(20,39,'info@musecomalawi.com',0,0,'c');
-        // $this->Cell(20,46,'www.musecomalawi.com',0,0,'c');
 
 
-        // Line break
-        $this->Ln(20);
+        $data = $this->get_details();
+        $address = explode(",", $data[2]);
+        $address_count = 0;
+        foreach ($address as $item) {
+            $address_count++;
+        }
+        $resize = $this->logo_resize($address_count);
+
+        $this->Cell(0, 0, '', 1, 0, 'C');
+        $this->Ln();
+
+        //change logo image
+
+        $this->Image('../files/business_logo/' . $data[3], 10, 11, $resize[0], $resize[1]);
+
+        // font Arial  
+        $this->SetFont('Arial', 'I', 10);
+
+
+        //get address details 
+
+        foreach ($address as $item) {
+
+            $this->Cell(90, 7, '', 0, "C");
+            $this->Cell(90, 7, $item, 0, 1, 'C');
+        }
+        $this->Cell(0, 0, '', 1, 0, 'C');
+        $this->Ln();
     }
 
     // Page footer
@@ -122,7 +164,7 @@ class pdf_handler
         // for($i=1;$i<=20;$i++)
         //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
         $pdf->Cell(80, 40, '', 0, 0, 'c');
-        $pdf->Cell(60, 40, 'SALES RECEIPT ', 0);
+        $pdf->Cell(60, 20, 'SALES RECEIPT ', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
 
@@ -258,11 +300,11 @@ class pdf_handler
 
         $pdf->SetFont('Times', 'B', '', 10);
         $pdf->Cell(60, 5, "Issued by: $user_name", 0, 0, '');
-        $pdf->Ln();
+        $pdf->Ln(10);
 
-        $pdf->Cell(100, 10, 'Signature : .........................', 0, 0, '');
+        $pdf->Cell(100, 10, 'Signature : ..............................................................', 0, 0, '');
         $pdf->Ln();
-        $pdf->Cell(60, 5, 'With thanks', 0, 0, '');
+      
         $pdf->Ln();
 
 
@@ -290,7 +332,7 @@ class pdf_handler
         // for($i=1;$i<=20;$i++)
         //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
         $pdf->Cell(80, 60, '', 0, 0, 'c');
-        $pdf->Cell(60, 35, 'DELIVERY NOTE', 0);
+        $pdf->Cell(60, 20, 'DELIVERY NOTE', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
 
@@ -354,7 +396,7 @@ class pdf_handler
         // for($i=1;$i<=20;$i++)
         //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
         $pdf->Cell(80, 60, '', 0, 0, 'c');
-        $pdf->Cell(60, 35, 'DELIVERY NOTE', 0);
+        $pdf->Cell(60, 20, 'DELIVERY NOTE', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
 
@@ -451,7 +493,7 @@ class pdf_handler
         // for($i=1;$i<=20;$i++)
         //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
         $pdf->Cell(80, 60, '', 0, 0, 'c');
-        $pdf->Cell(60, 35, 'SEED HANDOVER', 0);
+        $pdf->Cell(60, 20, 'SEED HANDOVER', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
 
@@ -592,7 +634,7 @@ class pdf_handler
         // for($i=1;$i<=20;$i++)
         //     $pdf->Cell(0,10,'Printing line number '.$i,0,1);
         $pdf->Cell(80, 60, '', 0, 0, 'c');
-        $pdf->Cell(60, 35, 'DISPATCH NOTE', 0);
+        $pdf->Cell(0, 35, 'DISPATCH NOTE', 0);
         $pdf->Ln();
         $pdf->SetFont('Times', 'B', '', 12);
         $date = date("d-m-Y");
@@ -702,7 +744,7 @@ class pdf_handler
 
 
         $number = $_GET['lot_number'];
-        
+
         $sql = "SELECT `lot_number`, `crop`,`variety`, `class`,
     `date_tested`, `expiry_date` FROM `certificate` 
     INNER JOIN crop ON crop.crop_ID = certificate.crop_ID
@@ -930,7 +972,7 @@ class pdf_handler
         $pdf->Ln();
 
 
-        
+
 
         $pdf->SetFont('Times', 'B', '', 10);
         // for($i=1;$i<=20;$i++)
@@ -982,8 +1024,8 @@ class pdf_handler
 
 
 
-        
-       
+
+
 
 
 
