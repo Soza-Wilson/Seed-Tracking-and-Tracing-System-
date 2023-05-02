@@ -571,7 +571,7 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
 
 
 
@@ -585,7 +585,7 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
+                                                            <button class="btn btn-primary btn-mat " id='stock_in_csv' name='stock_in_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
@@ -701,7 +701,7 @@ if (in_array($position, $notRestricted)) {
                                                
 												
 												
-												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success'><i class='icofont icofont-eye-alt'></i>View </a>
+												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>View </a>
                                                 
                                                 </td>
 											</tr>	

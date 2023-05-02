@@ -129,7 +129,7 @@ action_name varchar(100),description varchar(100),date date,time varchar(100),re
            phone varchar(100),
             email varchar(100),
             description varchar(100),
-            status varchar(100),
+            creditor_status varchar(100),
             user_ID varchar(100), 
             creditor_files varchar(100),
             registered_date varchar(100),

@@ -29,7 +29,7 @@ if (!empty($stock_in_ID)) {
 
 
     $sql = "SELECT `stock_in_ID`, `certificate_ID`, `farm_ID`,creditor.name, user.fullname,
-    stock_in.creditor_ID, stock_in.source,stock_in.crop_ID,stock_in.variety_ID,stock_in.certificate_ID, `crop`, `status`, 
+    stock_in.creditor_ID, stock_in.source,stock_in.crop_ID,stock_in.variety_ID,stock_in.certificate_ID, `crop`, stock_in.status, 
     `variety`, `class`, `SLN`, `bincard`, 
     `number_of_bags`, `quantity`, `used_quantity`,
      `available_quantity`, `processed_quantity`, 

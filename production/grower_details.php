@@ -24,7 +24,7 @@ if (in_array($position, $notRestricted)) {
 }
 
 
-$sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`status`,creditor.registered_date FROM `creditor`
+$sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
 INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_ID`='$creditor_id'";
 
 $result = $con->query($sql);
@@ -500,8 +500,76 @@ if ($result->num_rows > 0) {
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new grower</h5>
+                                                                <h5 class="modal-title">Download Contract</h5>
                                                             </div>
+
+                                                            <?php 
+                                                          
+                                                            
+                                                            
+                                                            ?>
+
+<div class="card">
+                                           
+                                           <div class="card-block table-border-style">
+                                               <div class="table-responsive">
+                                                   <table class="table table-hover">
+                                                       <thead>
+                                                           <tr>
+                                                               <th>Season </th>
+                                                               <th>Registered By </th>
+                                                               
+                                                               
+
+                                                              
+
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+
+                                                           <?php
+
+
+                                                           $sql="SELECT `season`, `dir`, user.fullname FROM `contract` INNER JOIN user ON contract.user_ID = user.user_ID INNER JOIN creditor ON contract.grower = creditor.creditor_ID WHERE contract.grower='$creditor_id' ORDER BY `season` DESC";
+
+                                                           $result = $con->query($sql);
+                                                           if ($result->num_rows > 0) {
+                                                               while ($row = $result->fetch_assoc()) {
+                                                                  
+                                                                   $season = $row['season'];
+                                                                   $name = $row['fullname'];
+                                                                   $file_directory =$row['dir'];
+                                                                  
+
+
+
+
+
+
+                                                                   echo "
+                                           <tr class='odd gradeX'>
+                                                <td>$season</td>
+                                               <td>$name</td>
+                                               
+                                              
+                                               
+                                              
+   
+                                               
+                                               <td>
+                                               <a href='../files/production/creditor_documents/$file_directory'  class='btn waves-effect waves-dark btn-success btn-outline-success btn-icon'> <i class='icofont icofont-download'></i></a>
+                                              
+                                               </td>
+                                           </tr>	
+                                       ";
+                                                               }
+                                                           }
+                                                           ?>
+                                                       </tbody>
+                                                   </table>
+                                               </div>
+                                           </div>
+                                                        </div>
                                                            
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -516,7 +584,7 @@ if ($result->num_rows > 0) {
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Registred growers </h5>
+                                                <h5>Grower Details </h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">

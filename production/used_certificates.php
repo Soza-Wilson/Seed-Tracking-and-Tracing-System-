@@ -548,7 +548,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='certificate_csv' name='certificate_csv'> CSV</button>
+                                                            <button class=" btn btn-primary " id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">

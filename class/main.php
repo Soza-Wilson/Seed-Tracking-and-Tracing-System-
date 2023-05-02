@@ -19,7 +19,7 @@ class main
 
 
   // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the department)
-
+   
   function generate_user($department)
   {
 
@@ -74,6 +74,7 @@ class main
 
     if ($count === 1) {
 
+      $this->check_season_closing();
       $name = $result->fetch_assoc();
 
 
@@ -1492,9 +1493,52 @@ class main
   }
 
 
+  function check_season_closing(){
+
+    $season = $this->get_season();
+    global $con;
+    // get colosing date 
+    $sql="SELECT closing_date FROM growing_season WHERE season='$season'";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $closing_date= $row['closing_date'];
+      }
+         if($closing_date < date("d-m-Y")){
+
+           $this->deactivate_growers($season);
+ 
+         }
+
+      }
+
+    }
 
 
+     function deactivate_growers($season){
 
+        global $con;
+      // getting all expired contracts
+
+      $sql="SELECT creditor_ID FROM creditor INNER JOIN contract ON contract.grower = creditor.creditor_ID INNER JOIN growing_season ON growing_season.season = contract.season WHERE growing_season.season='$season'";
+      $result = $con->query($sql);
+    //   Update all expired grower
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+      $creditor = $row['creditor_ID'];
+      $sql="UPDATE `creditor` SET `status`='inactive' WHERE creditor_ID='$creditor'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      }
+
+    }
+
+      global $con;
+     
+
+     }
 
 
 
