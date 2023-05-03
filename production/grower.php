@@ -13,7 +13,7 @@ if (empty($test)) {
 
     header('Location:../login.php');
 }
-
+  
 
 $notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
 
@@ -21,6 +21,8 @@ if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
+ $object = new main();
+ $object -> check_season_closing();
 
 ?>
 
@@ -58,8 +60,9 @@ if (in_array($position, $notRestricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/pagenation.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/grower.js">
+    <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
 
     </script>
 
@@ -655,7 +658,7 @@ if (in_array($position, $notRestricted)) {
                                            
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Fullname</th>
@@ -718,6 +721,13 @@ if (in_array($position, $notRestricted)) {
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <div id="pagination"> 
+
+
+                                                </div>
+
+                                                
+
                                             </div>
                                         </div>
                                                                 </div>

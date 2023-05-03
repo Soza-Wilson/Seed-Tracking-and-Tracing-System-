@@ -61,10 +61,11 @@ class main
 
 
   function user_log_in($email, $password)
-  {
+  { 
 
     $Email = $email;
     $Password = $password;
+   
 
     global $con;
     $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
@@ -74,8 +75,8 @@ class main
 
     if ($count === 1) {
 
-      $this->check_season_closing();
-      $name = $result->fetch_assoc();
+     
+      $name = $result->fetch_assoc(); 
 
 
       session_start();
@@ -1495,6 +1496,8 @@ class main
 
   function check_season_closing(){
 
+    
+
     $season = $this->get_season();
     global $con;
     // get colosing date 
@@ -1504,11 +1507,26 @@ class main
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
           $closing_date= $row['closing_date'];
-      }
-         if($closing_date < date("d-m-Y")){
+      }   
+      $date = new DateTime($closing_date);
+      $current = new DateTime(date("d-m-Y"));
+      $closing_date = $date->getTimestamp();
+      $current_date = $current->getTimestamp();
+  
+      
 
+         if($closing_date < $current_date){
+
+         
+         
            $this->deactivate_growers($season);
  
+         }
+
+         else{
+          echo ("<script> alert('Error');
+          </script>");
+
          }
 
       }
@@ -1526,16 +1544,18 @@ class main
     //   Update all expired grower
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-      $creditor = $row['creditor_ID'];
-      $sql="UPDATE `creditor` SET `status`='inactive' WHERE creditor_ID='$creditor'";
-      $statement = $con->prepare($sql);
-      $statement->execute();
+      $creditors[] = $row['creditor_ID'];
+      }
+      foreach($creditors as $id){
+        $sql="UPDATE `creditor` SET `creditor_status`='inactive' WHERE `creditor_ID`='$id'";
 
+        $statement = $con->prepare($sql);
+        $statement->execute();
       }
 
     }
 
-      global $con;
+    
      
 
      }

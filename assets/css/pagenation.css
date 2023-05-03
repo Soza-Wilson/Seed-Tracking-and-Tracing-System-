@@ -1,0 +1,18 @@
+#pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  #pagination a {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  #pagination a.active {
+    background-color: #333;
+    color: #fff;
+  }
