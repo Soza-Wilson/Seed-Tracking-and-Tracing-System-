@@ -1,12 +1,17 @@
 <?php
 
-$con = mysqli_connect("localhost", "", "");
+$con = mysqli_connect("localhost","root","","");
+
 $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB");
 
 
-$servername = "db";
-$username = "seed_tracking_DB";
-$password = "123456sa.";
+// $servername = "db";
+// $username = "seed_tracking_DB";
+// $password = "123456sa.";
+
+$servername = "localhost";
+$username = "root";
+$password = "";
 
 //Create connection
 $con = mysqli_connect($servername, $username, $password);
@@ -18,10 +23,10 @@ if (!$con) {
 
 // Create database
 $sql = "CREATE DATABASE myDB";
-if (mysqli_query($cnn, $sql)) {
+if (mysqli_query($con, $sql)) {
     echo "Database created successfully";
 } else {
-    echo "Error creating database: " . mysqli_error($cnn);
+    echo "Error creating database: " . mysqli_error($con);
 }
 
 // Close connection
@@ -502,6 +507,10 @@ FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) R
 mysqli_query($con, $sql);
 
 $sql="insert into growing_season values ('0000-0000',00-00-0000,00-00-0000)";
+
+mysqli_query($con, $sql);
+
+$sql="insert into client values ('-','-','-','-')";
 
 mysqli_query($con, $sql);
 

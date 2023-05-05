@@ -18,9 +18,8 @@ if(isset($_POST["denyUserAccess"])){
 }
 
 if(isset($_POST["updateBusiness"])){
-   $data =$_POST["updateBusiness"];
-
-      $object->update_business($data[0], $data[1], $data[2], $data[3]);
+   $data =$_POST["updateBusiness"]; 
+   $object->update_business($data[0], $data[1], $data[2], $data[3]);
   }
 
  if(isset($_POST["updateSeason"])){

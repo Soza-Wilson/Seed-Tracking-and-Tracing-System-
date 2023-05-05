@@ -1,4 +1,6 @@
 $(document).ready(() => {
+
+ 
   $("#file_directory").change(function () {
     $("#warning_file").hide();
     uploadFile();
@@ -35,20 +37,45 @@ $(document).ready(() => {
 
   function seasonDetails() {
    let seasonData = [$("#opening_date").val(), $("#closing_date").val()];
-
-    $.post(
-      "get_data.php",
-      {
-        updateSeason: seasonData,
-      },
-      function (data) {
-
+   var startDate = new Date(seasonData[0]);
+   var endDate = new Date(seasonData[1]);
+   var months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+   months -= startDate.getMonth();
+   months += endDate.getMonth();
+   
+if (months < 3){
+  
+  alert("Error : Season minimum is 3 months, please adjust date settings");
     
-        alert(" Details updated");
-        window.location.reload();
-      }
-    );
-  }
+   }
+else if(months > 6){
+
+  alert("Error : Season maximum is 6 months, please adjust date settings");
+    
+
+}   else{
+
+  $.post(
+    "get_data.php",
+    {
+      updateSeason: seasonData,
+    },
+    function (data) {
+
+      alert (data);
+      // alert(" Details updated");
+      // window.location.reload();
+    }
+  );
+}
+
+
+
+
+
+
+}
+   
 
   function uploadFile() {
     let formData = new FormData();

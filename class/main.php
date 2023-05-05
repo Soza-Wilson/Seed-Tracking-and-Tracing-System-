@@ -174,17 +174,17 @@ class main
   $season ="";
   
 
-  $sql="SELECT * FROM growing_season";
+  $sql="SELECT max(season) FROM growing_season";
 
                             $result = $con->query($sql);
                             if ($result->num_rows > 0) {
                              while ($row = $result->fetch_assoc()) {
-                                     $season     = $row["season"];
+                                     $season = $row["season"];
                                      }
 
                              }
 
-                             if($season === "0000-0000"){
+                             if($season == "0000-0000"){
 
                               $date = date("Y");
                               $int_value = (int)$date + 1;
@@ -1501,12 +1501,13 @@ class main
     $season = $this->get_season();
     global $con;
     // get colosing date 
-    $sql="SELECT closing_date FROM growing_season WHERE season='$season'";
+    $sql="SELECT opening_date,closing_date FROM growing_season WHERE season='$season'";
     $result = $con->query($sql);
 
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
           $closing_date= $row['closing_date'];
+          $opening_date=$row['opening_date'];
       }   
       $date = new DateTime($closing_date);
       $current = new DateTime(date("d-m-Y"));
@@ -1515,11 +1516,9 @@ class main
   
       
 
-         if($closing_date < $current_date){
-
-         
-         
+         if($closing_date < $current_date);
            $this->deactivate_growers($season);
+           $this->create_new_season($opening_date,$closing_date);
  
          }
 
@@ -1531,7 +1530,7 @@ class main
 
       }
 
-    }
+    
 
 
      function deactivate_growers($season){
@@ -1553,10 +1552,29 @@ class main
         $statement->execute();
       }
 
+        
+
     }
 
-    
-     
+
+
+    // New season when max season expire
+     }
+
+
+     function create_new_season($opening_date,$closing_date){
+      global $con;
+      $date = date("Y");
+      $int_value = (int)$date + 1;
+      $season = $date."-".$int_value ;
+      $sql="INSERT INTO `growing_season`(`season`, `opening_date`, `closing_date`) VALUES ('$season','$opening_date','$closing_date')";
+
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+
+
 
      }
 
