@@ -89,26 +89,22 @@ $(document).ready(() => {
   function addContract(creditorID) {
     let contractData = [creditorID, $("#user").val(), $("#tempFile").val()];
 
-    alert(contractData[1]);
-
     $.post(
       "get_data.php",
       {
         registerContract: contractData,
       },
       (data) => {
-        alert(data);
+        if(data !==""){
+            alert(data);
+            window.location.reload();
+        }
+        else{
 
-        // if(data !==""){
-        //     addContract(data);
+            alert("Error: Grower not registered ");
+            window.location.reload();
 
-        // }
-        // else{
-
-        //     alert("Error: Grower not registered ");
-        //     window.location.reload();
-
-        // }
+        }
       }
     );
   }
@@ -141,7 +137,7 @@ $(document).ready(() => {
 
   
 
-  let rowsPerPage = 2;
+  let rowsPerPage = 5;
   let currentPage = 1;
 
   function buildTable() {

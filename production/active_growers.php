@@ -7,11 +7,22 @@ include('../class/main.php');
 session_start();
 
 $test = $_SESSION['fullname'];
+$position = $_SESSION['position'];
 
 if (empty($test)) {
 
     header('Location:../login.php');
 }
+  
+
+$notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
+
+if (in_array($position, $notRestricted)) {
+} else {
+    header('Location:../restricted_access/restricted_access.php');
+}
+ $object = new main();
+ $object -> check_season_closing();
 
 ?>
 
@@ -49,10 +60,12 @@ if (empty($test)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/pagenation.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/registered_farms.js">
+    <script type="text/javascript" src="assets/js/jsHandle/grower.js">
 
     </script>
+
 </head>
 
 <body>
@@ -131,7 +144,10 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
-                        <a href="">production</a>
+
+                        <a href="index.html">
+                            <span>Production</span>
+                        </a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -140,9 +156,6 @@ if (empty($test)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
 
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
@@ -164,7 +177,6 @@ if (empty($test)) {
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
-                                    </li>
 
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
@@ -194,13 +206,13 @@ if (empty($test)) {
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
+
                             <div class="p-15 p-b-0">
 
 
@@ -241,7 +253,6 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
                                 <li class="">
                                     <a href="grading.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
@@ -249,6 +260,7 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
 
                                 <li class="">
                                     <a href="stock_out.php" class="waves-effect waves-dark">
@@ -265,7 +277,6 @@ if (empty($test)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
                                 <li class="">
                                     <a href="inventory.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
@@ -346,7 +357,9 @@ if (empty($test)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                            <li class="pcoded-hasmenu ">
+
+                               
+                            <li class="pcoded-hasmenu active pcoded-trigger">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
@@ -354,7 +367,7 @@ if (empty($test)) {
                                     </a>
                                     <ul class="pcoded-submenu">
                                         
-                                        <li class="">
+                                        <li class="active">
                                         <a href="active_growers.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
@@ -382,14 +395,13 @@ if (empty($test)) {
                                     </a>
                                 </li>
 
-                                <li class="active">
+                                <li>
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
 
                                 <li>
                                     <a href="inspection.php" class="waves-effect waves-dark">
@@ -400,8 +412,7 @@ if (empty($test)) {
                                 </li>
 
                             </ul>
-                            </li>
-                            </ul>
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
 
@@ -416,20 +427,22 @@ if (empty($test)) {
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li>
                                     <a href="active_test.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="">
                                     <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -440,7 +453,7 @@ if (empty($test)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">View farms</h5>
+                                            <h5 class="m-b-10">Grower</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -450,7 +463,7 @@ if (empty($test)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="registered_farms.php">View Farms</a>
+                                            <li class="breadcrumb-item"><a href="view_stock_in.php">Grower</a>
                                             </li>
 
                                         </ul>
@@ -480,113 +493,146 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Filter </h5>
+
+                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-plus"></i> New grower</button>
+
+                                                <!-- Modal -->
+                                                <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">Register new grower</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
+                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
 
 
-                                            </div>
-                                            <div class="card-block">
+                                                                    </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Grower </label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Crop</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <label>Select Class</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
 
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
+                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+                                                                         
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <labe>Supporting documents :</label>
+                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
+
+                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                        </div>
+
+                                       
+
+                                        <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- Tab variant tab card start -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5> Registered Growers 
+                                                        
+                                                    </h5>
+                                                </div>
+                                                <div class="card-block tab-icon">
+                                                    <!-- Row start -->
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <!-- <h6 class="sub-title">Tab With Icon</h6> -->
+                                                          
+                                                            <!-- Nav tabs -->
+                                                            
+                                                            <!-- Tab panes -->
+                                                            <div class="tab-content card-block">
+                                                                <div class="tab-pane active" id="home7" role="tabpanel">
+
+
+                                                                <div class="card">
+                                          
+                                            <div class="card-block">
+
+                                                
+
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-
+                                                         
+                                                        <label for="" class="label bg-primary">Grower name</label>
                                                         <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
-                                                        <label id="warning_name" class="warning-text"> <span>Please enter Creditor name <i class="icofont icofont-warning"></i></span></label>
+                                                        
 
                                                     </div>
 
-                                                    <div class="col-sm-2">
+                                                    <div class="">
+                                                         
+                                                         <label for="" class="label "></label>
+                                                         <button name="get_data" id="get_data" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
+                                                         
+ 
+                                                     </div>
 
+                                                  
+                                                 
 
-                                                        <select name="select_crop" id="select_crop" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-
-
-                                                        <select name="select_variety" id="select_variety" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-                                                    <div class="col-sm-1">
-
-
-                                                        <select name="select_class" id="select_class" class="form-control">
-                                                            <option value="not_selected">Class</option>
-                                                            <option value="pre_basic">Pre-Basic</option>
-                                                            <option value="basic">Basic</option>
-                                                            <option value="certified">Certified</option>
-
-
-                                                        </select>
-                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                        <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                        <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
-                                                    </div>
+                                                   
 
 
 
 
 
 
-                                                    <div class="col-sm-1">
-
-
-
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
-
-
-
-                                                    </div>
                                                 </div>
 
 
@@ -596,7 +642,7 @@ if (empty($test)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='stock_in_csv' name='stock_in_csv'> CSV</button>
+                                                            <button class="btn btn-success btn-mat " id='stock_in_csv' name='stock_in_csv'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
@@ -620,40 +666,20 @@ if (empty($test)) {
 
                                             </div>
                                         </div>
-
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Registered farms</h5>
-
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                                                <div class="card">
+                                           
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
-                                                                <th>Farm ID</th>
-                                                                <th>Grower</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Hectors</th>
-                                                                <th>Region</th>
-                                                                <th>District</th>
-                                                                <th>EPA</th>
-                                                                <th>Area name</th>
-                                                                <th>Address</th>
-                                                                <th>Location</th>
-                                                                <th>Land history(previous year)</th>
-                                                                <th>Land history(other year)</th>
+                                                                <th>Fullname</th>
+                                                                <th>Email </th>
+                                                                <th>Phone</th>
+                                                                <th>Registered date</th>
+                                                                <th>Registered by</th>
+                                                                <th>Status</th>
+
                                                                 <th>Action</th>
 
                                                             </tr>
@@ -663,33 +689,21 @@ if (empty($test)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
-                              `region`, `district`, `area_name`, `address`, `physical_address`, 
-                              `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
-                              `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
-                               `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
-                                INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
-                                variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
-                                ON farm.creditor_ID = creditor.creditor_ID";
+                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
+                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_status`='active'";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
-                                                                    $farm_id = $row['farm_ID'];
-                                                                    $grower_name = $row['name'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety     = $row['variety'];
-                                                                    $class     = $row['class'];
-                                                                    $hectors     = $row['Hectors'];
+                                                                    $creditor_id = $row['creditor_ID'];
+                                                                    $name = $row['name'];
+                                                                    $phone = $row['phone'];
+                                                                    $email = $row['email'];
                                                                     $registered_date = $row['registered_date'];
-                                                                    $region = $row['region'];
-                                                                    $district = $row['district'];
-                                                                    $epa = $row['EPA'];
-                                                                    $area_name = $row['area_name'];
-                                                                    $address = $row['address'];
-                                                                    $physical_address = $row['physical_address'];
-                                                                    $previous = $row['previous_year_crop'];
-                                                                    $other_previous = $row['other_year_crop'];
+                                                                    $registered_by = $row['fullname'];
+                                                                    $status =$row['creditor_status'];
+                                                                    $dir = $row['file_directory'];
+
 
 
 
@@ -697,28 +711,19 @@ if (empty($test)) {
 
                                                                     echo "
 											<tr class='odd gradeX'>
-                                                 <td>$farm_id</td>
-                                                 <td>$grower_name</td>
-											    <td>$crop</td>
-												<td>$variety</td>
-												<td>$class</td>
-												<td>$hectors</td>
-                                                <td>$region</td>
-                                                <td>$district</td>
-                                                <td>$epa</td>
-                                                <td>$area_name</td>
-                                                <td>$address</td>
-                                                <td>$physical_address</td>
-                                                <td>$previous</td>
-                                                <td>$other_previous</td>
+                                                 <td>$name</td>
+											    <td>$email</td>
+												<td>$phone</td>
+												<td>$registered_date</td>
+												<td>$registered_by</td>
+                                                <td>$status</td>
+                                               
                                                 
                                                
+	
 												
-												
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a>
-                                               
+												<td>
+                                                <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-eye'></i>View</a>
                                                 </td>
 											</tr>	
 										";
@@ -728,14 +733,39 @@ if (empty($test)) {
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <div id="pagination"> 
+
+
+                                                </div>
+
+                                                
+
                                             </div>
                                         </div>
+                                                                </div>
+                                                                <div class="tab-pane" id="profile7" role="tabpanel">
+
+                                                               
+                                                              
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!-- Row end -->
+                                                </div>
+                                            </div>
+                                            <!-- Tab variant tab card start -->
+                                        </div>
+                                    </div>
+
+
+                                        
+
 
                                         <!-- Background Utilities table end -->
                                     </div>
-                                    <!-- Page-body end -->
-                                </div>
-                            </div>
                             <!-- Main-body end -->
 
                             <div id="styleSelector">

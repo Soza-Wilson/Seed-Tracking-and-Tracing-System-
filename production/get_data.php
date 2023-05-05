@@ -105,7 +105,7 @@ if(isset($_POST["registerGrower"])){
   $growerName = strtolower($growerData[1]);
   $returnData = $object->add_creditor($growerData[0],$growerName,$growerData[2],$growerData[3],"-",$growerData[4],"active");
   echo $returnData[1];
- 
+    
 
 }
 
@@ -147,7 +147,10 @@ if(isset($_POST["registerContract"])){
 if (isset($_POST["insertExtCreditor"])) {
 
   $creditorData = $_POST["insertExtCreditor"];
-  $object->add_creditor("External", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4], "-");
+ $returnedData =  $object->add_creditor("External", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4],"-");
+
+ echo $returnedData[0];
+
 }
 
 if (isset($_POST["viewStockFilter"])) {

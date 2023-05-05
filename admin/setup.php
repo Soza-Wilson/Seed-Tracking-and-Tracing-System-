@@ -82,7 +82,7 @@ else{
 
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/setup_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/setup.js"></script>
 
        
     </script>

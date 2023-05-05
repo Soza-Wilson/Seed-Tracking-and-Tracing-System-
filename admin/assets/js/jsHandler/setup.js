@@ -29,6 +29,8 @@ $(document).ready(() => {
         updateBusiness: data,
       },
       function (data) {
+
+        alert(data);
         // alert("Business details updated");
         // window.location.reload();
       }
@@ -62,9 +64,9 @@ else if(months > 6){
     },
     function (data) {
 
-      alert (data);
-      // alert(" Details updated");
-      // window.location.reload();
+    
+      alert(" Details updated");
+      window.location.reload();
     }
   );
 }

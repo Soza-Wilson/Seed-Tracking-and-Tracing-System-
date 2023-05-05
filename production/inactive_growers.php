@@ -62,7 +62,7 @@ if (in_array($position, $notRestricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/pagenation.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/grower.js">
 
     </script>
 
@@ -358,12 +358,34 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                <li class="active">
-                                    <a href="grower.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
+                               
+                            <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                        <li class="">
+                                        <a href="active_growers.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="active">
+                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                       
+                            
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="register_farm.php" class="waves-effect waves-dark">
@@ -571,17 +593,7 @@ if (in_array($position, $notRestricted)) {
                                                             <!-- <h6 class="sub-title">Tab With Icon</h6> -->
                                                           
                                                             <!-- Nav tabs -->
-                                                            <ul class="nav nav-tabs md-tabs " role="tablist">
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><i class="icofont icofont-user"></i>Active Growers</a>
-                                                                    <div class="slide"></div>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><i class="icofont icofont-settings "></i>Inactive Growers</a>
-                                                                    <div class="slide"></div>
-                                                                </li>
-                                                                
-                                                            </ul>
+                                                            
                                                             <!-- Tab panes -->
                                                             <div class="tab-content card-block">
                                                                 <div class="tab-pane active" id="home7" role="tabpanel">
@@ -678,7 +690,7 @@ if (in_array($position, $notRestricted)) {
 
 
                                                             $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
-                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE source = 'MUSECO' AND creditor_status = 'active'";
+                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_status`='inactive'";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -733,146 +745,8 @@ if (in_array($position, $notRestricted)) {
                                                                 </div>
                                                                 <div class="tab-pane" id="profile7" role="tabpanel">
 
-                                                                <div class="card">
-                                          
-                                            <div class="card-block">
-
-                                                
-
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                         
-                                                        <label for="" class="label bg-primary">Grower name</label>
-                                                        <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
-                                                        
-
-                                                    </div>
-
-                                                    <div class="">
-                                                         
-                                                         <label for="" class="label "></label>
-                                                         <button name="get_data" id="get_data" class=" form-control btn btn-primary"><i class="icofont icofont-search"></i>Search</button>
-                                                         
- 
-                                                     </div>
-
-                                                  
-                                                 
-
-                                                   
-
-
-
-
-
-
-                                                </div>
-
-
-                                                <form action="csv_handler.php" method="POST">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
-
-
-
-                                                            <button class="btn btn-success btn-mat " id='stock_in_csv' name='stock_in_csv'> <i i class='icofont icofont-download'></i> Download growers</button>
-
-
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
-
-
-
-
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                                                <div class="card">
-
-                                                                
-
-                                         
-
-<div class="card-block table-border-style">
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Fullname</th>
-                    <th>Email </th>
-                    <th>Phone</th>
-                    <th>Registered date</th>
-                    <th>Registered by</th>
-                    <th>Status</th>
-
-                    <th>Action</th>
-
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php
-
-
-                $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
-                 INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE source = 'MUSECO' AND creditor_status = 'inactive'";
-
-                $result = $con->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $creditor_id = $row['creditor_ID'];
-                        $name = $row['name'];
-                        $phone = $row['phone'];
-                        $email = $row['email'];
-                        $registered_date = $row['registered_date'];
-                        $registered_by = $row['fullname'];
-                        $status =$row['creditor_status'];
-                        $dir = $row['file_directory'];
-
-
-
-
-
-
-                        echo "
-<tr class='odd gradeX'>
-     <td>$name</td>
-    <td>$email</td>
-    <td>$phone</td>
-    <td>$registered_date</td>
-    <td>$registered_by</td>
-    <td>$status</td>
-   
-    
-   
-
-    
-    <td>
-    <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-primary btn-mat'><i class='icofont icofont-settings'></i>Activate</a>  <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-eye'></i>View</a>
-    </td>
-</tr>	
-";
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
+                                                               
+                                                              
                                                                 </div>
                                                                 
                                                             </div>

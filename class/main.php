@@ -19,7 +19,7 @@ class main
 
 
   // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the department)
-   
+
   function generate_user($department)
   {
 
@@ -61,11 +61,11 @@ class main
 
 
   function user_log_in($email, $password)
-  { 
+  {
 
     $Email = $email;
     $Password = $password;
-   
+
 
     global $con;
     $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
@@ -75,8 +75,8 @@ class main
 
     if ($count === 1) {
 
-     
-      $name = $result->fetch_assoc(); 
+
+      $name = $result->fetch_assoc();
 
 
       session_start();
@@ -158,50 +158,6 @@ class main
 
 
 
- function update_business($name, $country, $physical_address, $logo_drectory){
-
-  global $con;
-  $sql="UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address',`logo`='$logo_drectory'";
-  $statement = $con->prepare($sql);
-  $statement->execute();
-
-
- }
-
- function update_season($opening_date,$closing_date){
-
-  global $con;
-  $season ="";
-  
-
-  $sql="SELECT max(season) FROM growing_season";
-
-                            $result = $con->query($sql);
-                            if ($result->num_rows > 0) {
-                             while ($row = $result->fetch_assoc()) {
-                                     $season = $row["season"];
-                                     }
-
-                             }
-
-                             if($season == "0000-0000"){
-
-                              $date = date("Y");
-                              $int_value = (int)$date + 1;
-                              $season = $date."-".$int_value ;
-                              
-                              $sql="UPDATE `growing_season` SET `season`='$season',`opening_date`='$opening_date',`closing_date`='$closing_date'";
-
-                              $statement = $con->prepare($sql);
-                              $statement->execute();
-
-
-                             }
-
-
-
-
- }
 
 
 
@@ -1035,16 +991,15 @@ class main
     echo "deleted";
   }
 
-  function delete_certificate($lot_number){
+  function delete_certificate($lot_number)
+  {
 
     global $con;
 
-    $sql="DELETE FROM `certificate` WHERE `lot_number` ='$lot_number'";
+    $sql = "DELETE FROM `certificate` WHERE `lot_number` ='$lot_number'";
 
     $statement = $con->prepare($sql);
     $statement->execute();
-
-
   }
 
 
@@ -1431,23 +1386,25 @@ class main
 
 
   //add creditor function 
-  function add_creditor($source, $name, $phone, $email, $description, $user,$status)
+  function add_creditor($source, $name, $phone, $email, $description, $user, $status)
   {
 
     $creditor_ID = $this->generate_user("creditor");
     $date = date("d-m-Y");
-    global $con; 
+    global $con;
 
-    $sql = "INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID`,`registered_date`, `account_funds`,`status`) VALUES
+    //  $sql="INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `creditor_status`, `user_ID`, `creditor_files`, `registered_date`, `account_funds`) VALUES
+    // //   ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]')";
+
+    $sql = "INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID`,`registered_date`, `account_funds`,`creditor_status`) VALUES
   ('$creditor_ID','$source','$name','$phone','$email','$description','$user','$date',0,'$status')";
 
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-  
 
-    return  ["added",$creditor_ID];
+    return ["added", $creditor_ID];
 
     // if ($source == "External") {
     //   header('Location:stock_in.php');
@@ -1457,126 +1414,151 @@ class main
     // }
   }
 
- function get_season(){
- global $con;
+  function get_season()
+  {
+    global $con;
 
- $sql="SELECT max(season) AS season FROM growing_season";
- $result = $con->query($sql);
- if ($result->num_rows > 0) {
-     while ($row = $result->fetch_assoc()) {
-         $season = $row['season'];
-     }
-          return $season;
+    $sql = "SELECT max(season) AS season FROM growing_season";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $season = $row['season'];
+      }
+      return $season;
     }
+  }
 
-
- }
-
-  function register_contract($creditor_id,$user_id,$type,$contract_directory){
+  function register_contract($creditor_id, $user_id, $type, $contract_directory)
+  {
 
     global $con;
     $contract_ID = $this->generate_user("contract");
     $season = $this->get_season();
-    
 
-    $sql="INSERT INTO `contract`(`contract_ID`, `season`, `type`, `grower`, `dir`, `user_ID`) VALUES 
+
+    $sql = "INSERT INTO `contract`(`contract_ID`, `season`, `type`, `grower`, `dir`, `user_ID`) VALUES 
     ('$contract_ID','$season','$type','$creditor_id','$contract_directory','$user_id')";
 
+    // echo  $creditor_id,$user_id,$type,$contract_directory;
+
     $statement = $con->prepare($sql);
-   if ($statement->execute()) {
-
-     echo "Grower registered ";
-   }
-   
-
-
-     
+    $statement->execute();
+    echo "Grower registered ";
   }
 
 
-  function check_season_closing(){
+  function check_season_closing()
+  {
 
-    
+
 
     $season = $this->get_season();
     global $con;
     // get colosing date 
-    $sql="SELECT opening_date,closing_date FROM growing_season WHERE season='$season'";
+    $sql = "SELECT opening_date,closing_date FROM growing_season WHERE season='$season'";
     $result = $con->query($sql);
 
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-          $closing_date= $row['closing_date'];
-          $opening_date=$row['opening_date'];
-      }   
-      $date = new DateTime($closing_date);
-      $current = new DateTime(date("d-m-Y"));
-      $closing_date = $date->getTimestamp();
-      $current_date = $current->getTimestamp();
-  
-      
-
-         if($closing_date < $current_date);
-           $this->deactivate_growers($season);
-           $this->create_new_season($opening_date,$closing_date);
- 
-         }
-
-         else{
-          echo ("<script> alert('Error');
-          </script>");
-
-         }
-
+        $closing_date = $row['closing_date'];
+        $opening_date = $row['opening_date'];
       }
 
-    
+      $target_date = '2023-06-01';
+      $current_date = date('Y-m-d');
 
 
-     function deactivate_growers($season){
+      $target_timestamp = strtotime($closing_date);
+      $current_timestamp = strtotime($current_date);
 
-        global $con;
-      // getting all expired contracts
+      if ($target_timestamp < $current_timestamp) {    
+       $this->deactivate_growers($season);
+       $this->create_new_season($opening_date,$closing_date);
+       
+      } 
 
-      $sql="SELECT creditor_ID FROM creditor INNER JOIN contract ON contract.grower = creditor.creditor_ID INNER JOIN growing_season ON growing_season.season = contract.season WHERE growing_season.season='$season'";
-      $result = $con->query($sql);
+    }
+  }
+
+
+
+
+  function deactivate_growers($season)
+  {
+
+    global $con;
+    // getting all expired contracts
+
+    $sql = "SELECT creditor_ID FROM creditor INNER JOIN contract ON contract.grower = creditor.creditor_ID INNER JOIN growing_season ON growing_season.season = contract.season WHERE growing_season.season='$season'";
+    $result = $con->query($sql);
     //   Update all expired grower
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-      $creditors[] = $row['creditor_ID'];
+        $creditors[] = $row['creditor_ID'];
       }
-      foreach($creditors as $id){
-        $sql="UPDATE `creditor` SET `creditor_status`='inactive' WHERE `creditor_ID`='$id'";
+      foreach ($creditors as $id) {
+        $sql = "UPDATE `creditor` SET `creditor_status`='inactive' WHERE `creditor_ID`='$id'";
 
         $statement = $con->prepare($sql);
         $statement->execute();
       }
-
-        
-
     }
 
 
 
     // New season when max season expire
-     }
+  }
 
 
-     function create_new_season($opening_date,$closing_date){
-      global $con;
+  function create_new_season($opening_date, $closing_date)
+  {
+    global $con;
+    $date = date("Y");
+    $int_value = (int)$date + 1;
+    $season = $date . "-" . $int_value;
+    $sql = "INSERT INTO `growing_season`(`season`, `opening_date`, `closing_date`) VALUES ('$season','$opening_date','$closing_date')";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+  //  Update seaso details 
+
+
+  function update_business($name, $country, $physical_address, $logo_drectory)
+  {
+
+    global $con;
+    $sql = "UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address',`logo`='$logo_drectory'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+  function update_season($opening_date, $closing_date)
+  {
+
+    global $con;
+    $season = "";
+
+
+    $sql = "SELECT max(season) AS season FROM growing_season";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $season = $row["season"];
+      }
+
       $date = date("Y");
       $int_value = (int)$date + 1;
-      $season = $date."-".$int_value ;
-      $sql="INSERT INTO `growing_season`(`season`, `opening_date`, `closing_date`) VALUES ('$season','$opening_date','$closing_date')";
+      $season = $date . "-" . $int_value;
+
+      $sql = "UPDATE `growing_season` SET `season`='$season',`opening_date`='$opening_date',`closing_date`='$closing_date'";
 
       $statement = $con->prepare($sql);
       $statement->execute();
-
-
-
-
-
-     }
+    }
+  }
 
 
 

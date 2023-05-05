@@ -22,12 +22,12 @@ if (!$con) {
 }
 
 // Create database
-$sql = "CREATE DATABASE myDB";
-if (mysqli_query($con, $sql)) {
-    echo "Database created successfully";
-} else {
-    echo "Error creating database: " . mysqli_error($con);
-}
+// $sql = "CREATE DATABASE myDB";
+// if (mysqli_query($con, $sql)) {
+//     echo "Database created successfully";
+// } else {
+//     echo "Error creating database: " . mysqli_error($con);
+// }
 
 // Close connection
 
@@ -506,13 +506,17 @@ FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) R
 
 mysqli_query($con, $sql);
 
-$sql="insert into growing_season values ('0000-0000',00-00-0000,00-00-0000)";
+
+$date = date("Y");
+$int_value = (int)$date + 1;
+$season = $date."-".$int_value ;
+$sql="insert into growing_season values ('$season',00-00-0000,00-00-0000)";
 
 mysqli_query($con, $sql);
 
 $sql="insert into client values ('-','-','-','-')";
 
-mysqli_query($con, $sql);
+mysqli_query($con,$sql);
 
 
 $sql="CREATE TABLE client(business_name varchar(100) PRIMARY KEY, country varchar(100),physical_address varchar(100),logo varchar(100))";
@@ -522,7 +526,7 @@ mysqli_query($con, $sql);
 $sql = "insert into client
 values ('','Malawi')";
 
-    mysqli_query($con, $sql);
+mysqli_query($con, $sql);
 
     $sql = "insert into usertype
 values ('001','ADMIN'),

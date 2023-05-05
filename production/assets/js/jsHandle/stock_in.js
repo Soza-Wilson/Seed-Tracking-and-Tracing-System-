@@ -339,11 +339,15 @@ $(document).ready(function () {
             insertExtCreditor: data,
           },
           function (data) {
-            if (data == "added") {
+
+
+
+            
+            if (data=="added") {
               alert("Data added succefully");
               window.location.reload();
             } else {
-              alert("Error try again");
+              alert("Error: Try again");
             }
           }
         );

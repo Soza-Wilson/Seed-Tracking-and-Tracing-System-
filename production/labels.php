@@ -344,12 +344,34 @@ if (in_array($position, $restricted)) {
 
 
 
-                                <li class="">
-                                    <a href="grower.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Grower </span>
+                              
+                            <li class="pcoded-hasmenu ">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                        <li class="">
+                                        <a href="active_growers.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                       
+                            
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="register_farm.php" class="waves-effect waves-dark">
