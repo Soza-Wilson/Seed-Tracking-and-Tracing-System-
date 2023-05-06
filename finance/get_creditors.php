@@ -946,7 +946,7 @@ if (isset($_POST["external_creditor_value"])) {
 
   $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
-   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='external'";
 
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
@@ -975,7 +975,7 @@ if (isset($_POST["internal_creditor_value"])) {
 
   $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
-   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='MUSECO'";
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='internal'";
 
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
@@ -1195,7 +1195,7 @@ if (isset($_POST["externalCreditorData"])) {
 
   $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`,
    `email`, `description`, `user_ID`, `creditor_files`, 
-   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='External'";
+   `registered_date`, `account_funds` FROM `creditor` WHERE `source`='external'";
 
 
   $result = $con->query($sql);

@@ -108,6 +108,8 @@ if (in_array($position, $restricted)) {
 
        });
 
+    });
+
         </script>
 </head>
 

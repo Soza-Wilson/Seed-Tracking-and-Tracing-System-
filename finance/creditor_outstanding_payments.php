@@ -513,7 +513,7 @@ if (in_array($position, $restricted)) {
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Creditor Type</option>
                                                             <option value="internal">Internal</option>
-                                                            <option value="external">External</option>
+                                                            <option value="external">external</option>
 
                                                         </select>
                                                     </div>

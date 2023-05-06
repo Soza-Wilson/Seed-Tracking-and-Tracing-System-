@@ -224,7 +224,7 @@ if (isset($_POST['search_value'])) {
     }
   }
 
-  if ($_POST['type_value'] == "External") {
+  if ($_POST['type_value'] == "external") {
 
     $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND type='creditor_buy_back' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 
@@ -278,7 +278,7 @@ if (isset($_POST['search_value'])) {
   }
 
 
-  if ($_POST['type_value'] == "MUSECO") {
+  if ($_POST['type_value'] == "internal") {
 
     $sql = "SELECT * FROM `transaction` WHERE `C_D_ID`='$C_D_ID' AND type='creditor_buy_back' AND trans_status = 'payment_pending' OR trans_status = 'partly_payed'";
 

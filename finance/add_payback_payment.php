@@ -207,7 +207,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                } else if (type_value == "External") {
+                } else if (type_value == "external") {
 
 
 
@@ -251,7 +251,7 @@ $.post('../marketing/get_transactions.php', {
 
 
 
-else if (type_value == "MUSECO") {
+else if (type_value == "internal") {
 
 
 
@@ -644,8 +644,8 @@ $.post('../marketing/get_transactions.php', {
                                                         <div class="col-sm-6">
                                                             <select id="debtor_type" name="debtor_type" class="form-control" required="">
                                                                 <option value="type_not_selected">Select Creditor Type</option>
-                                                                  <option value="External">External</option>
-                                                                <option value="MUSECO">MUSECO</option>
+                                                                  <option value="external">external</option>
+                                                                <option value="internal">internal</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-6">

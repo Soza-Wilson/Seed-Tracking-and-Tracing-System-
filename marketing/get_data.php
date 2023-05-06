@@ -126,9 +126,9 @@ if (isset($_POST['customer_value'])) {
 
 if (!empty($_POST['type_value'])) {
 
-  if ($_POST['type_value'] == "External") {
+  if ($_POST['type_value'] == "external") {
 
-    $sql = "SELECT * FROM `creditor` WHERE `name` like '%$value%' AND `source` ='External' AND `account_funds` < 0";
+    $sql = "SELECT * FROM `creditor` WHERE `name` like '%$value%' AND `source` ='external' AND `account_funds` < 0";
 
 
     $result =  $con->query($sql);
@@ -148,10 +148,10 @@ if (!empty($_POST['type_value'])) {
   }
 
 
-  if ($_POST['type_value'] == "MUSECO") {
+  if ($_POST['type_value'] == "internal") {
 
 
-    $sql = "SELECT * FROM `creditor` WHERE `name` like '%$value%' AND `source` ='MUSECO' AND `account_funds` < 0";
+    $sql = "SELECT * FROM `creditor` WHERE `name` like '%$value%' AND `source` ='internal' AND `account_funds` < 0";
 
 
     $result =  $con->query($sql);
