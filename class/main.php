@@ -688,11 +688,11 @@ class main
         $time = date("H:i:s");
 
 
-        if ($source == "External") {
+        if ($source == "external") {
 
           $available_quantity = $quantity;
           $this->use_certificate($certificate, $available_quantity);
-        } else if ($source == "MUSECO") {
+        } else if ($source == "internal") {
 
           $available_quantity = 0;
         }

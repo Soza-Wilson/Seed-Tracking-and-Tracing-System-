@@ -63,7 +63,7 @@ $(document).ready(() => {
 
   function registerGrower() {
     let growerData = [
-      "MUSECO",
+      "internal",
       $("#creditor_name").val(),
       $("#creditor_phone").val(),
       $("#creditor_email").val(),

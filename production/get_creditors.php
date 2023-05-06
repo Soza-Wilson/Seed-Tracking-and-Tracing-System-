@@ -201,7 +201,7 @@ if (isset($_POST['certificate_value'])) {
   if (!empty($result_value)) {
 
     $sql = "SELECT `lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, `user_ID` FROM
-     `certificate` WHERE available_quantity >= $quantity_value AND `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' AND `source` ='External' AND `class`='$class_value' AND `lot_number` LIKE '%$result_value%'";
+     `certificate` WHERE available_quantity >= $quantity_value AND `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' AND `source` ='external' AND `class`='$class_value' AND `lot_number` LIKE '%$result_value%'";
 
     $result =  $con->query($sql);
     if ($result->num_rows > 0) {
@@ -237,7 +237,7 @@ if (isset($_POST['stockIn_certificate'])) {
   `available_quantity`, `directory`, `user_ID` FROM
   `certificate` WHERE available_quantity >= $quantity_value AND
   `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' 
-  AND `source` ='External' AND `class`='$class_value' AND 
+  AND `source` ='external' AND `class`='$class_value' AND 
   `lot_number` LIKE '%$result_value%'";
 
   $result =  $con->query($sql);
@@ -271,7 +271,7 @@ if (isset($_POST['stockIn_certificate'])) {
 
   // WHERE available_quantity >= $quantity_value AND
   // `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' 
-  // AND `source` ='External' AND `class`='$class_value' AND 
+  // AND `source` ='external' AND `class`='$class_value' AND 
   // `lot_number` LIKE '%$result_value%'
 
 
@@ -310,7 +310,7 @@ if (isset($_POST['stockIn_certificate'])) {
   //   }
 
   //  $sql = "SELECT `lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, `user_ID` FROM
-  //  `certificate` WHERE available_quantity >= $quantity_value AND `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' AND `source` ='External' AND `class`='$class_value' AND `lot_number` LIKE '%$result_value%'";
+  //  `certificate` WHERE available_quantity >= $quantity_value AND `crop_ID` = '$crop_value' AND `variety_ID` = '$variety_value' AND `source` ='external' AND `class`='$class_value' AND `lot_number` LIKE '%$result_value%'";
 
   //   $result =  $con->query($sql);
   //   if ($result->num_rows > 0) {

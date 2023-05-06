@@ -114,7 +114,7 @@ if(isset($_POST["registerGrower"])){
 if (isset($_POST["checkGrowerName"])) {
   $name = $_POST["checkGrowerName"];
 
- $sql="SELECT `name` FROM `creditor` WHERE `source`='MUSECO' AND `name` LIKE '$name'";
+ $sql="SELECT `name` FROM `creditor` WHERE `source`='internal' AND `name` LIKE '$name'";
  $result = $con->query($sql);
  if ($result->num_rows > 0) { 
     echo true;
@@ -147,7 +147,7 @@ if(isset($_POST["registerContract"])){
 if (isset($_POST["insertExtCreditor"])) {
 
   $creditorData = $_POST["insertExtCreditor"];
- $returnedData =  $object->add_creditor("External", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4],"-");
+ $returnedData =  $object->add_creditor("external", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4],"-");
 
  echo $returnedData[0];
 

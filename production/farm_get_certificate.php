@@ -16,7 +16,7 @@ if (isset($_POST['grower_search_value'])) {
   $search_value = $_POST['grower_search_value'];
 
 
-  $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID` FROM `creditor` WHERE `name` LIKE '%$search_value%' AND `source` = 'MUSECO'";
+  $sql = "SELECT `creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID` FROM `creditor` WHERE `name` LIKE '%$search_value%' AND `source` = 'internal'";
   $result =  $con->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

@@ -26,7 +26,7 @@ class production
         `available_quantity`, `directory`, `user_ID` FROM
         `certificate` WHERE available_quantity >= $quantity AND
         `crop_ID` = '$crop' AND `variety_ID` = '$variety' 
-        AND `source` ='External' AND `class`='$class' AND 
+        AND `source` ='external' AND `class`='$class' AND 
         `lot_number` LIKE '%$user_input%'";
 
         $result =  $con->query($sql);

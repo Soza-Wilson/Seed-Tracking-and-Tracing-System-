@@ -70,7 +70,7 @@ $(document).ready(() => {
     );
   });
 
-  if ($("#seed_source").val() == "MUSECO") {
+  if ($("#seed_source").val() == "internal") {
     $(".seed_details").hide();
   }
 

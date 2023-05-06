@@ -34,7 +34,7 @@ $(document).ready(function () {
       if ($("#source").val() == "source_not_selected") {
         $("#warning_source").show();
         emptyFields = emptyFields + 1;
-      } else if ($("#source").val() == "External") {
+      } else if ($("#source").val() == "external") {
         if ($("#source_name").val() == "") {
           $("#warning_source_name").show();
         }
@@ -70,7 +70,7 @@ $(document).ready(function () {
           $("#user").val(),
         ];
         function get_source_name(source) {
-          if (source == "External") {
+          if (source == "external") {
             return $("#source_name").val();
           } else {
             return "-";

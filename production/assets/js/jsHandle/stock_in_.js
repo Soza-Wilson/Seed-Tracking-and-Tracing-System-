@@ -19,7 +19,7 @@ $(document).ready(function () {
         emptyFields = emptyFields + 1;
       }
 
-      if ($("#creditor_source").val() == "External") {
+      if ($("#creditor_source").val() == "external") {
         if ($("#select_crop").val() == "0") {
           $("#warning_crop").show();
           emptyFields = emptyFields + 1;
@@ -43,7 +43,7 @@ $(document).ready(function () {
           $("#warning_certificate").show();
           emptyFields = emptyFields + 1;
         }
-      } else if ($("#creditor_source").val() == "MUSECO") {
+      } else if ($("#creditor_source").val() == "internal") {
         if ($("#farm_quantity").val() == 0) {
           $("#warning_farm_quantity").show();
           emptyFields = emptyFields + 1;
@@ -110,7 +110,7 @@ $(document).ready(function () {
         //   console.log("rejected", err);
         // });
         // }
-        if ($("#creditor_source").val() == "External") {
+        if ($("#creditor_source").val() == "external") {
           formData[1] = $("#certificate").val();
           formData[4] = $("#select_crop").val();
           formData[5] = $("#select_variety").val();
@@ -123,7 +123,7 @@ $(document).ready(function () {
           } else {
             formData[3] = "certified";
           }
-        } else if ($("#creditor_source").val() == "MUSECO") {
+        } else if ($("#creditor_source").val() == "internal") {
           formData[1] = "";
           formData[2] = $("#search_farm_result").val();
           formData[3] = "ungraded";
@@ -370,7 +370,7 @@ $(document).ready(function () {
 
     if (data.val() == "source_not_selected") {
       alert("please select source ");
-    } else if (data.val() == "MUSECO") {
+    } else if (data.val() == "internal") {
       $("#external").hide();
       $("#internal").show();
       $("#warning_source").hide();
@@ -392,7 +392,7 @@ $(document).ready(function () {
           $("#search_result").html(data);
         }
       );
-    } else if (data.val() == "External") {
+    } else if (data.val() == "external") {
       $("#internal").hide();
       $("#external").show();
       $("#warning_source").hide();

@@ -325,37 +325,49 @@ if (in_array($position, $restricted)) {
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                                     <ul class="pcoded-item pcoded-left-item">
-                                        <li class="">
-                                            <a href="add_certificate.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Add certificate </span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="available_certificates.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">available certificates</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                    <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-book"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                    <li >
+                                    <a href="chart.html" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
-                                        <li>
-                                            <a href="used_certificates.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">used certificates</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                <li class="">
+                                    <a href="used_certificates.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
-                                        <li>
-                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                <li class="">
+                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
+                                       
+                            
+                                    </ul>
+                                </li>
                                     </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
