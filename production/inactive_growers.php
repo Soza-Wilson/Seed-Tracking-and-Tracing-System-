@@ -330,7 +330,7 @@ if (in_array($position, $notRestricted)) {
                                     <ul class="pcoded-submenu">
                                         
                                     <li >
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                    <a href="add_certificate.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
                                         <span class="pcoded-mcaret"></span>
@@ -504,89 +504,7 @@ if (in_array($position, $notRestricted)) {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
-
-                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-plus"></i> New grower</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new grower</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
-                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
-                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
-                                                                         
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <labe>Supporting documents :</label>
-                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
-                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
-
-                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                       
 
                                        
 
@@ -631,7 +549,7 @@ if (in_array($position, $notRestricted)) {
                                                     <div class="">
                                                          
                                                          <label for="" class="label "></label>
-                                                         <button name="get_data" id="get_data" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
+                                                         <button name="grower_filter" id="grower_filter" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
                                                          
  
                                                      </div>
@@ -655,16 +573,11 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="btn btn-success btn-mat " id='stock_in_csv' name='stock_in_csv'> <i i class='icofont icofont-download'></i> Download growers</button>
+                                                            <button class="btn btn-success btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
+                                                            <input type="hidden" name="type" id="type" value="inactive">
+                                                            
 
 
 
@@ -736,7 +649,7 @@ if (in_array($position, $notRestricted)) {
 	
 												
 												<td>
-                                                <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
+                                                <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
                                                 </td>
 											</tr>	
 										";

@@ -2,6 +2,7 @@
 
 include('../class/main.php');
 
+
 $object = new main();
 
 if (isset($_POST['updateStockInRequest'])) {
@@ -96,47 +97,49 @@ if (isset($_POST["deleteStockIn"])) {
 }
 
 if (isset($_POST["deleteCertificate"])) {
- $object->delete_certificate($_POST["deleteCertificate"]);
+  $object->delete_certificate($_POST["deleteCertificate"]);
 }
 
-if(isset($_POST["registerGrower"])){
+if (isset($_POST["registerGrower"])) {
 
   $growerData = $_POST["registerGrower"];
   $growerName = strtolower($growerData[1]);
-  $returnData = $object->add_creditor($growerData[0],$growerName,$growerData[2],$growerData[3],"-",$growerData[4],"active");
+  $returnData = $object->add_creditor($growerData[0], $growerName, $growerData[2], $growerData[3], "-", $growerData[4], "active");
   echo $returnData[1];
-    
-
 }
+
 
 // Check grower name 
 
 if (isset($_POST["checkGrowerName"])) {
   $name = $_POST["checkGrowerName"];
 
- $sql="SELECT `name` FROM `creditor` WHERE `source`='internal' AND `name` LIKE '$name'";
- $result = $con->query($sql);
- if ($result->num_rows > 0) { 
+  $sql = "SELECT `name` FROM `creditor` WHERE `source`='internal' AND `name` LIKE '$name'";
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
     echo true;
- }
- else{
-  echo false;
- }
-
-
+  } else {
+    echo false;
+  }
 }
 
 //Add creditor contract
 
 
-if(isset($_POST["registerContract"])){
+if (isset($_POST["registerContract"])) {
 
   $creditorData = $_POST["registerContract"];
-  $object->register_contract($creditorData[0],$creditorData[1],"grower",$creditorData[2]);
+  $object->register_contract($creditorData[0], $creditorData[1], "grower", $creditorData[2]);
+}
+
+if(isset($_POST["registerFarm"])){
+  
+  $farmData = $_POST["registerFarm"];
+  $object->register_farm();
+
 
 
 }
-
 
 
 
@@ -147,11 +150,141 @@ if(isset($_POST["registerContract"])){
 if (isset($_POST["insertExtCreditor"])) {
 
   $creditorData = $_POST["insertExtCreditor"];
- $returnedData =  $object->add_creditor("external", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4],"-");
+  $returnedData =  $object->add_creditor("external", $creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4], "-");
 
- echo $returnedData[0];
-
+  echo $returnedData[0];
 }
+
+
+// Update grower
+
+
+if (isset($_POST["updateGrowerDetails"])) {
+
+  $creditorData = $_POST["updateGrowerDetails"];
+  $returnedData =  $object->update_grower($creditorData[0], $creditorData[1], $creditorData[2], $creditorData[3], $creditorData[4]);
+  echo $returnedData;
+}
+if (isset($_POST["activateGrower"])) {
+  $growerData = $_POST["activateGrower"];
+  $returnedData =  $object->activate_grower($growerData[0], $growerData[1], $growerData[2]);
+  echo $returnedData;
+}
+
+if (isset($_POST["growerListFilter"])) {
+
+  $grower_data = $_POST["growerListFilter"];
+  $name = $grower_data[0];
+  $type = $grower_data[1];
+
+
+  echo "
+  <thead>
+  <tr>
+  <th>Fullname </th>
+  <th>Email </th>
+  <th>Phone</th>
+  <th>Registered date</th>
+  <th>Registered by</th>
+  <th>Status</th>
+
+  <th>Action</th>
+
+</tr>
+
+<thead>";
+
+  $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`creditor_status`,creditor.registered_date FROM `creditor`
+INNER JOIN user ON creditor.user_ID = user.user_ID WHERE `creditor_status`='$type' AND `name` LIKE '%$name%' ORDER BY `creditor_ID`";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $creditor_id = $row['creditor_ID'];
+      $name = $row['name'];
+      $phone = $row['phone'];
+      $email = $row['email'];
+      $registered_date = $row['registered_date'];
+      $registered_by = $row['fullname'];
+      $status = $row['creditor_status'];
+
+
+
+
+
+      if ($type == "active") {
+
+        echo "
+    <tr class='odd gradeX'>
+    <td>$name</td>
+    <td>$email</td>
+    <td>$phone</td>
+    <td>$registered_date</td>
+    <td>$registered_by</td>
+    <td>$status</td>
+    
+    
+    
+    
+    
+    <td>
+    <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-eye'></i>View</a>
+    </td>
+    </tr>	
+    ";
+      } else if ($type == "inactive") {
+
+
+        echo "
+    <tr class='odd gradeX'>
+                               <td>$name</td>
+        <td>$email</td>
+      <td>$phone</td>
+      <td>$registered_date</td>
+      <td>$registered_by</td>
+                              <td>$status</td>
+                             
+                              
+                             
+
+      
+      <td>
+                              <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
+                              </td>
+    </tr>	
+  ";
+      }
+    }
+  } else {
+
+
+    echo "
+  <tr class='odd gradeX'>
+                       <td>Not Available</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+                      <td> -</td>
+                      
+                      
+                     
+  
+  
+  <td>
+                      
+                      </td>
+  </tr>	
+  ";
+  }
+}
+
+
+
+
+// Table filter for view stock in 
+
+
 
 if (isset($_POST["viewStockFilter"])) {
 
@@ -568,8 +701,8 @@ if (isset($_POST["certificateFilter"])) {
 
   $filterData = $_POST["certificateFilter"];
   $data = $filterData;
- 
- 
+
+
   echo "<thead>
   <tr>
 
@@ -604,7 +737,6 @@ if (isset($_POST["certificateFilter"])) {
       `certificate_quantity`, `available_quantity`,`assigned_quantity`, `directory`, `fullname` FROM `certificate`
       INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
       INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0 AND certificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
-
   } else if ($data[0] == "expired") {
     $date = date("Y-m-d");
     $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, 
@@ -614,32 +746,32 @@ if (isset($_POST["certificateFilter"])) {
      user.user_ID = certificate.user_ID WHERE `date_added` BETWEEN '$data[4]' AND '$data[5]' AND  `expiry_date` < '$date' ANDcertificate.crop_ID ='$data[1]' AND certificate.variety_ID ='$data[2]' AND `class`='$data[3]'  ORDER BY `lot_number` DESC";
   }
 
- 
-    $result = $con->query($sql);
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $lot_number = $row["lot_number"];
-        $crop      = $row["crop"];
-        $variety     = $row["variety"];
-        $class     = $row["class"];
-        $type  = $row["type"];
-        $source = $row['source'];
-        $date_tested = $row['date_tested'];
-        $expire_date = $row['expiry_date'];
-        $date_added = $row['date_added'];
-        $dir = $row['directory'];
-        $certificate_quantity = $row['certificate_quantity'];
-        $available_quantity = $row['available_quantity'];
-        $fullname = $row['fullname'];
-        $assigned_quantity =$row['assigned_quantity'];
-        $user =$_SESSION['user'];
-        $test =$_SESSION['fullname'];
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $lot_number = $row["lot_number"];
+      $crop      = $row["crop"];
+      $variety     = $row["variety"];
+      $class     = $row["class"];
+      $type  = $row["type"];
+      $source = $row['source'];
+      $date_tested = $row['date_tested'];
+      $expire_date = $row['expiry_date'];
+      $date_added = $row['date_added'];
+      $dir = $row['directory'];
+      $certificate_quantity = $row['certificate_quantity'];
+      $available_quantity = $row['available_quantity'];
+      $fullname = $row['fullname'];
+      $assigned_quantity = $row['assigned_quantity'];
+      $user = $_SESSION['user'];
+      $test = $_SESSION['fullname'];
 
 
 
 
 
-        echo "
+      echo "
   <tr class='odd gradeX'>
 
   <td>$lot_number</td>
@@ -664,11 +796,11 @@ if (isset($_POST["certificateFilter"])) {
                         </td>
   </tr>	
   ";
-      }
-    } else {
+    }
+  } else {
 
 
-      echo "
+    echo "
                                       <tr class='odd gradeX'>
                                                            <td>Unvailable</td>
                                       <td>-</td>
@@ -692,5 +824,5 @@ if (isset($_POST["certificateFilter"])) {
                                                           </td>
                                       </tr>	
                                       ";
-    }
+  }
 }

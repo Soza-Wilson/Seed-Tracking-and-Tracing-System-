@@ -1,5 +1,6 @@
 <?php
 include('../class/main.php');
+$main = new main();
 if (isset($_POST['stock_in_csv'])) {
 
     $date = date('D-m-y h:i');
@@ -274,6 +275,60 @@ if (isset($_POST['stock_out_csv'])) {
 }
 
 
+// Downlaod grower's list CSV
+
+if (isset($_POST['grower_list'])) {
+
+    $date = date('d-m-Y ');
+    $season = $main->get_season();
+    $type = $_POST['type'];
+    $filename = "$season Grower's $type list $date.csv";
+    $fp = fopen('php://output', 'w');
+   
+ 
+    $header = array("Grower ID ", "Name ", "Email", "Phone", "Registered Date", "Registered By");
+    fputcsv($fp, $header);
+    
+   
+
+    $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`creditor_status`,creditor.registered_date FROM `creditor`
+    INNER JOIN user ON creditor.user_ID = user.user_ID WHERE `creditor_status`='$type' ORDER BY `creditor_ID`";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $creditor_id = $row['creditor_ID'];
+            $name = $row['name'];
+            $phone = $row['phone'];
+            $email = $row['email'];
+            $registered_date = $row['registered_date'];
+            $registered_by = $row['fullname'];
+            
+
+            $newDate = $main->change_date_format($registered_date);
+
+
+
+
+            $list = array($creditor_id, $name, $email, $phone, $newDate, $registered_by);
+            fputcsv($fp, $list);
+        }
+    }
+
+     //close file
+     fclose($fp);
+
+     //download file
+     header("Content-Description: File Transfer");
+     header('Content-type: application/csv');
+     header('Content-Disposition: attachment; filename=' . $filename);
+
+     exit;
+}
+
+
+// Download certificate CSV
+
 if (isset($_POST['certificate_csv'])) {
 
 
@@ -282,7 +337,7 @@ if (isset($_POST['certificate_csv'])) {
     $filename = "$type certificates $date.csv";
     $fp = fopen('php://output', 'w');
     $filter = $_POST["filter"];
-$sql="";
+    $sql = "";
 
 
 
@@ -295,7 +350,7 @@ $sql="";
     //create body
     if (empty($filter)) {
 
- 
+
 
         if ($type == "available") {
 
@@ -304,25 +359,24 @@ $sql="";
             `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
             INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
             INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date' ";
-          } else if ($type == "used") {
+        } else if ($type == "used") {
             $date = date("Y-m-d");
             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
               `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
               INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
               INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0";
-        
-          } else if ($type == "expired") {
+        } else if ($type == "expired") {
             $date = date("Y-m-d");
             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, 
             `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, 
             `fullname` FROM `certificate` INNER JOIN crop ON certificate.crop_ID = crop.crop_ID 
             INNER JOIN variety ON certificate.variety_ID = variety.variety_ID INNER JOIN user ON
              user.user_ID = certificate.user_ID WHERE `expiry_date` < '$date' ";
-          }
+        }
 
 
 
-       
+
 
         $result = $con->query($sql);
         if ($result->num_rows > 0) {
@@ -342,13 +396,13 @@ $sql="";
                 $fullname = $row['fullname'];
 
 
-                $object = new main();
-                $newDate = $object->change_date_format($date_added);
-
                 
-              
+                $newDate = $main->change_date_format($date_added);
 
-                $list = array($lot_number, $crop, $variety, $class, $type, $source, $date_tested, $expire_date, $date_added,$certificate_quantity,$available_quantity, $fullname);
+
+
+
+                $list = array($lot_number, $crop, $variety, $class, $type, $source, $date_tested, $expire_date, $date_added, $certificate_quantity, $available_quantity, $fullname);
                 fputcsv($fp, $list);
             }
 
@@ -371,7 +425,7 @@ $sql="";
     } else {
 
 
-$type= $_POST['certificate_type'];
+        $type = $_POST['certificate_type'];
         $fromValue = $_POST['from_hidden'];
         $toValue = $_POST['to_hidden'];
         $creditor_name = $_POST["creditor_hidden"];
@@ -387,23 +441,22 @@ $type= $_POST['certificate_type'];
             `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
             INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
             INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date' AND certificate.crop_ID ='$cropValue' AND certificate.variety_ID ='$varietyValue' AND `class`='$classValue' ORDER BY `lot_number` DESC";
-          } else if ($type == "used") {
+        } else if ($type == "used") {
             $date = date("Y-m-d");
             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
               `certificate_quantity`, `available_quantity`, `directory`, `fullname` FROM `certificate`
               INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
               INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` <= 0 AND certificate.crop_ID ='$cropValue' AND certificate.variety_ID ='$varietyValue' AND `class`='$classValue'  ORDER BY `lot_number` DESC";
-        
-          } else if ($type == "expired") {
+        } else if ($type == "expired") {
             $date = date("Y-m-d");
             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, 
             `expiry_date`, `date_added`, `certificate_quantity`, `available_quantity`, `directory`, 
             `fullname` FROM `certificate` INNER JOIN crop ON certificate.crop_ID = crop.crop_ID 
             INNER JOIN variety ON certificate.variety_ID = variety.variety_ID INNER JOIN user ON
              user.user_ID = certificate.user_ID WHERE `expiry_date` < '$date' AND certificate.crop_ID ='$cropValue' AND certificate.variety_ID ='$varietyValue' AND `class`='$classValue' ORDER BY `lot_number` DESC";
-          }
+        }
 
-          $result = $con->query($sql);
+        $result = $con->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 
@@ -426,10 +479,10 @@ $type= $_POST['certificate_type'];
                 $object = new main();
                 $newDate = $object->change_date_format($date_added);
 
-                
-              
 
-                $list = array($lot_number, $crop, $variety, $class, $type, $source, $date_tested, $expire_date, $date_added,$certificate_quantity,$available_quantity, $fullname);
+
+
+                $list = array($lot_number, $crop, $variety, $class, $type, $source, $date_tested, $expire_date, $date_added, $certificate_quantity, $available_quantity, $fullname);
                 fputcsv($fp, $list);
             }
 

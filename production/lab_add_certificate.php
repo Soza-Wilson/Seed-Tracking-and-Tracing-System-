@@ -408,7 +408,7 @@ $data = $get_data->get_test_details($ID);
                                     <ul class="pcoded-submenu">
                                         
                                     <li >
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                    <a href="add_certificate.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
                                         <span class="pcoded-mcaret"></span>

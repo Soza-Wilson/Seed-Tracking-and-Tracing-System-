@@ -66,502 +66,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            const loaded = "1";
-
-            $.post('get_products.php', {
-                loaded: loaded
-
-            }, data => {
-                $('#select_crop').html(data);
-
-
-
-
-            });
-
-
-
-
-
-            $("#grower_search").on("input", function() {
-
-
-
-                var grower_search_value = $('#grower_search').val();
-                $.post('farm_get_certificate.php', {
-                    grower_search_value: grower_search_value
-                }, function(data) {
-                    $('#grower_search_result').html(data);
-
-                });
-
-                /* 
-                   
-
-                
-                  
-
-
-
-                 var select = $('#creditor_source').find(':selected');
-                    var data = select.val();
-                    $.post('get_creditors.php',{data: data, result_value: result_value},function(data){
-                    $('#search_result').html(data);
-                
-                */
-
-
-            });
-
-
-            $("#search_certificate").on("input", function() {
-
-
-
-
-
-                var data = $('#quantity_result').val();
-
-                var certificate_value = $('#search_certificate').val();
-                var crop_value = $('#select_crop').val();
-                var variety_value = $('#select_variety').val();
-                var class_value = $('#select_class').val();
-
-
-
-                $.post('get_creditors.php', {
-                    certificate_value: certificate_value,
-                    data: data,
-                    crop_value: crop_value,
-                    variety_value: variety_value,
-                    class_value: class_value
-                }, function(data) {
-                    $('#certificate').html(data);
-
-
-
-                });
-
-            });
-
-
-            //js code for crop details
-
-            $('#select_crop').change(function() {
-
-
-
-                var data = $('#select_crop').find(':selected');
-
-                if (data.val() == "0") {
-                    alert("please select Crop ");
-                } else {
-
-
-
-
-                    let crop_value = $('#select_crop').val();
-
-                    $.post('get_products.php', {
-                        crop_value: crop_value
-
-                    }, data => {
-                        $('#select_variety').html(data);
-
-
-
-                    });
-
-
-
-
-
-                }
-            });
-
-
-
-
-
-
-
-            //js coede for retriving or required certificates (main, male and femaile certificates)
-
-
-
-            //js code for retriving location details 
-
-
-
-            //js code for adding farm location
-
-            $('#select_region').change(function() {
-
-                var region_data = $('#select_region').find(':selected');
-                if (region_data.val() == "0") {
-
-
-
-
-                } else if (region_data.val() == "central") {
-
-                    $('#select_district').empty();
-                    var myOptions = [{
-                            text: 'Select District',
-                            value: "0"
-                        },
-                        {
-                            text: 'Dedza',
-                            value: "dedza"
-                        },
-                        {
-                            text: 'Dowa',
-                            value: "dowa"
-                        },
-                        {
-                            text: 'Kasungu',
-                            value: "kasungu"
-                        },
-                        {
-                            text: 'Lilongwe',
-                            value: "lilongwe"
-                        },
-                        {
-                            text: 'Mchinji',
-                            value: "mchinji"
-                        },
-                        {
-                            text: 'Nkhotakota',
-                            value: "nkhotakota"
-                        },
-                        {
-                            text: 'Ntcheu',
-                            value: "ntcheu"
-                        },
-                        {
-                            text: 'Ntchisi',
-                            value: "ntchisi"
-                        },
-                        {
-                            text: 'Salima',
-                            value: "salima"
-                        },
-
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_district').append(new Option(el.text, el.value));
-                    });
-
-
-                } else if (region_data.val() == "northern") {
-
-                    $('#select_district').empty();
-                    var myOptions = [{
-                            text: 'Select District',
-                            value: "0"
-                        },
-                        {
-                            text: 'Chitipa',
-                            value: "chitipa"
-                        },
-                        {
-                            text: 'Kalonga',
-                            value: "kalonga"
-                        },
-                        {
-                            text: 'Likoma',
-                            value: "likoma"
-                        },
-                        {
-                            text: 'Mzimba',
-                            value: "mzimba"
-                        },
-                        {
-                            text: 'Mkhata Bay',
-                            value: "mchinji"
-                        },
-                        {
-                            text: 'Rumphi',
-                            value: "rumphi"
-                        },
-
-
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_district').append(new Option(el.text, el.value));
-                    });
-
-
-
-
-
-                } else if (region_data.val() == "southern") {
-
-                    $('#select_district').empty();
-                    var myOptions = [{
-                            text: 'Select District',
-                            value: "0"
-                        },
-                        {
-                            text: 'Balaka',
-                            value: "balaka"
-                        },
-                        {
-                            text: 'Blantyre',
-                            value: "blantyre"
-                        },
-                        {
-                            text: 'Chikwawa',
-                            value: "chikwawa"
-                        },
-                        {
-                            text: 'Chiradzulu',
-                            value: "chiradzulu"
-                        },
-                        {
-                            text: 'Machinga',
-                            value: "machinga"
-                        },
-                        {
-                            text: 'Mulanje',
-                            value: "mulanje"
-                        },
-                        {
-                            text: 'Mwanza',
-                            value: "mwanza"
-                        },
-                        {
-                            text: 'Nsanje',
-                            value: "nsanje"
-                        },
-                        {
-                            text: 'Thyolo',
-                            value: "thyolo"
-                        },
-                        {
-                            text: 'Phalombe',
-                            value: "phalombe"
-                        },
-                        {
-                            text: 'Zomba',
-                            value: "zomba"
-                        },
-                        {
-                            text: 'Neno',
-                            value: "neno"
-                        },
-
-
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_district').append(new Option(el.text, el.value));
-                    });
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-            });
-            //// js code checking to retrive right certificate
-
-            $('#select_variety').change(function() {
-
-
-                /*
-                  document.getElementById('certificate_main_quantity').readOnly=true;
-                        document.getElementById('search_main_certificate').readOnly=true;
-                        document.getElementById('main_certificate').readOnly=true;
-
-                         /// for other crops
-
-                       
-                         document.getElementById('male_quantity').readOnly=false;
-                        document.getElementById('search_male_certificate').readOnly=false;
-                        document.getElementById('male_certificate').readOnly=false;
-
-                      
-                        document.getElementById('female_quantity').readOnly=false;
-                        document.getElementById('search_female_certificate').readOnly=false;
-                        document.getElementById('female_certificate').readOnly=false;*/
-
-
-                var variety_data = $('#select_variety').find(':selected');
-                if (variety_data.val() == "VT002" || variety_data.val() == "VT003" || variety_data.val() == "VT004") {
-                    ///for hybrid maize
-
-                    document.getElementById('main_quantity').readOnly = true;
-                    document.getElementById('search_main_certificate').readOnly = true;
-                    document.getElementById('main_certificate').readOnly = true;
-
-
-                    document.getElementById('male_quantity').readOnly = false;
-                    document.getElementById('search_male_certificate').readOnly = false;
-                    document.getElementById('male_certificate').readOnly = false;
-
-
-                    document.getElementById('female_quantity').readOnly = false;
-                    document.getElementById('search_female_certificate').readOnly = false;
-                    document.getElementById('female_certificate').readOnly = false;
-
-
-
-                } else if (variety_data.val() !== "VT002" || variety_data.val() !== "VT003" || variety_data.val() !== "VT004") {
-
-                    //// for hybrid maize
-
-                    document.getElementById('main_quantity').readOnly = false;
-                    document.getElementById('search_main_certificate').readOnly = false;
-                    document.getElementById('main_certificate').readOnly = false;
-
-
-                    /// for other crops
-
-
-
-                    document.getElementById('male_quantity').readOnly = true;
-                    document.getElementById('search_male_certificate').readOnly = true;
-                    document.getElementById('male_certificate').readOnly = true;
-
-
-                    document.getElementById('female_quantity').readOnly = true;
-                    document.getElementById('search_female_certificate').readOnly = true;
-                    document.getElementById('female_certificate').readOnly = true;
-
-
-
-                }
-
-
-
-
-            });
-
-
-            ////js code for sending  crop data and retrive certificate 
-
-            //retriving main certificate data 
-
-            $("#search_main_certificate").on("input", function() {
-
-
-                var main_certificate_value = $('#search_main_certificate').val();
-                var main_quantity_value = $('#main_quantity').val();
-                var crop_value = $('#select_crop').val();
-                var variety_value = $('#select_variety').val();
-                var class_result = $('#select_class').val();
-
-                if (class_result == 'certified') {
-
-                    var class_value = 'basic'
-
-                } else if (class_result == 'basic') {
-
-                    var class_value = 'pre_basic'
-
-                }
-                $.post('farm_get_certificate.php', {
-                    main_certificate_value: main_certificate_value,
-                    main_quantity_value: main_quantity_value,
-                    crop_value: crop_value,
-                    variety_value: variety_value,
-                    class_value: class_value
-                }, function(data) {
-                    $('#main_certificate').html(data);
-
-                })
-
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // retriving male certificate data for hybrid maize 
-
-            $("#search_male_certificate").on("input", function() {
-
-                /*var main_certificate_value = $('#search_male_certificate').val();
-                   var main_quantity_value = $('#male_quantity').val();
-                   var crop_value = $('#select_crop').val();
-                   var variety_value = $('#select_variety').val();
-
-
-                   $.post('farm_get_certificate.php',{male_certificate_value: male_certificate_value, male_quantity_value:
-                                        male_quantity_value, crop_value: crop_value, variety_value: variety_value},function(data){
-                                       $('#male_certificate').html(data);
-
-                                    });*/
-                var male_quantity_value = $('#male_quantity').val();
-                var crop_value = $('#select_crop').val();
-                var variety_value = $('#select_variety').val();
-                var male_certificate_value = $('#search_male_certificate').val();
-                $.post('farm_get_certificate.php', {
-                    male_certificate_value: male_certificate_value,
-                    crop_value: crop_value,
-                    variety_value: variety_value,
-                    male_quantity_value: male_quantity_value
-                }, function(data) {
-                    $('#male_certificate').html(data);
-
-                });
-
-
-
-
-
-            });
-
-
-            // retriving female certificate data for hybrid maize 
-
-            $("#search_female_certificate").on("input", function() {
-
-                var female_quantity_value = $('#female_quantity').val();
-                var crop_value = $('#select_crop').val();
-                var variety_value = $('#select_variety').val();
-                var female_certificate_value = $('#search_female_certificate').val();
-                $.post('farm_get_certificate.php', {
-                    female_certificate_value: female_certificate_value,
-                    crop_value: crop_value,
-                    variety_value: variety_value,
-                    female_quantity_value: female_quantity_value
-                }, function(data) {
-                    $('#female_certificate').html(data);
-
-                });
-
-
-            });
-
-        });
-    </script>
+    <script type="text/javascript" src="assets/js/jsHandle/register_farm_.js"></script>
 
 
 </head>
@@ -807,47 +312,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="chart.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -856,32 +361,32 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li class="active">
@@ -980,7 +485,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="card">
                                                     <div class="card-header">
 
-                                                        <form action="register_farm.php" method="POST">
+                                                        <!-- <form action="register_farm.php" method="POST"> -->
                                                             <!-- /*
 get registered grower form
 */ -->
@@ -1002,6 +507,7 @@ get registered grower form
                                                                             <option value="0">Select Creditor</option>
 
                                                                         </select>
+                                                                        <label id="warning_select_creditor" class="warning_text"> <span>Please Select grower <i class="icofont icofont-warning"></i></span></label>
 
                                                                     </div>
 
@@ -1020,12 +526,61 @@ get registered grower form
                                                             </div>
                                                             <div class="col-sm-6">
 
-                                                                <a href="grower.php" class="btn btn-success">
-                                                                    Add new grower
+                                                                <a href="grower.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                                    new grower
 
                                                                 </a>
 
                                                             </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="card">
+                                                    <div class="card-header">
+
+                                                        <!-- <form action="register_farm.php" method="POST"> -->
+                                                            <!-- /*
+get registered grower form
+*/ -->
+
+                                                            <h5>Upload grower's farm list (Optional)</h5>
+
+                                                            <div>
+                                                            </div>
+                                                            <div class=" card-block">
+
+                                                                <div class="form-group row">
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <span class="pcoded-mcaret"></span>
+                                                                    <div class="col-sm-10">
+                                                                        
+                                                                    <input type="file" class="form-control" accept=".csv">
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-1">
+                                                                    <a href="grower.php" class="btn btn-success btn-mat"><i class="icofont icofont-upload"></i>
+                                                                    Upload
+
+                                                                </a>
+                                                                    </div>
+
+                                                                    <div class="col-sm-1">
+                                                                    <a href="grower.php" class="btn btn-info btn-mat"><i class="icofont icofont-info"></i>
+                                                                    Tips
+
+                                                                </a>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                           
 
                                                     </div>
 
@@ -1059,19 +614,36 @@ get crop details
 
 
                                                     </select>
+                                                    <label id="warning_crop" class="warning_text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
+
                                                 </div>
 
 
                                             </div>
 
                                             <div class="form-group row">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-6">
                                                     <select id="select_variety" name="variety" class="form-control" required="">
                                                         <option value="variety_not_selected">Select Variety</option>
 
+                                                    </select>
+                                                    <label id="warning_variety" class="warning_text"> <span>Please select variety<i class="icofont icofont-warning"></i></span></label>
 
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                   
+                                                    <label id="warning_variety" >Variety type</label>
+
+                                                </div>
+
+                                                <div class="col-sm-5"  >
+                                                <select id="variety_type" name="variety_type" class="form-control" required="">
+                                                        <option value="-">-</option>
+                                                      
 
                                                     </select>
+
                                                 </div>
 
                                             </div>
@@ -1085,7 +657,9 @@ get crop details
                                                         <option value="certified">Certified</option>
 
                                                     </select>
+                                                    <label id="warning_class" class="warning_text"> <span>Please Select class <i class="icofont icofont-warning"></i></span></label>
                                                 </div>
+                                                
                                             </div>
 
 
@@ -1094,7 +668,8 @@ get crop details
 
                                                 <div class="col-sm-12">
 
-                                                    <input id="hectors" type="text" class="form-control" name="hectors" placeholder="Hectors" require="">
+                                                    <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="">
+                                                    <label id="warning_hectors" class="warning_text"> <span>Please enter assigned hectors <i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1119,7 +694,43 @@ get crop details
 add main crop certificate 
 */     -->
 
+                                    <div class="card hybrid_items" >
+                                        <div class="card-header">
+                                            <h5>Breeding </h5>
 
+
+                                        </div>
+
+                                        <div class="card-block">
+
+                                            <div class="form-group row">
+
+                                                <div class="col-sm-12">
+
+                                                    <select id="seed_breeding" name="seed_breeding" class="form-control" required="">
+                                                        <option value="not_selected">Select breeding type</option>
+                                                        <option value="inbred">inbred </option>
+                                                        <option value="single_cross">single cross</option>
+                                                        
+                                                       
+
+                                                    </select>
+                                                    <label id="warning_breeding" class="warning_text"> <span>Please select breeding type<i class="icofont icofont-warning"></i></span></label>
+
+                                               
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
 
                                     <div class="card">
                                         <div class="card-header">
@@ -1139,7 +750,7 @@ add main crop certificate
 
                                                 <div class="col-sm-6">
 
-                                                    <select id="main_certificate" name="main_certificate" class="form-control" required="">
+                                                    <select id="main_certificate"  class="form-control" >
                                                         <option value="no_certificate_selected">Select Certificate</option>
                                                         <option value="no_certificate_selected">-</option>
 
@@ -1149,6 +760,8 @@ add main crop certificate
 
 
                                                     </select>
+
+                                                    <label id="warning_main_certificate" class="warning_text"> <span>Please Select Certificate <i class="icofont icofont-warning"></i></span></label>
 
                                                 </div>
 
@@ -1160,12 +773,13 @@ add main crop certificate
 
 
 
+
                                                 </div>
 
                                                 <div class="col-sm-3">
 
-                                                    <input id="main_quantity" type="text" class="form-control" name="main_quantity" placeholder="Quantity" require="">
-
+                                                    <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
+                                                    <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
                                                 </div>
@@ -1173,7 +787,7 @@ add main crop certificate
 
 
                                             </div>
-                                            <div class="card-header">
+                                            <div class="card-header hybrid_items">
 
                                                 <!--                                                                                                             /*
 add hybrid male crop certificate 
@@ -1190,7 +804,7 @@ add hybrid male crop certificate
                                             </div>
 
 
-                                            <div class="form-group row">
+                                            <div class="form-group row hybrid_items">
 
 
                                                 <span class="pcoded-mcaret"></span>
@@ -1209,6 +823,9 @@ add hybrid male crop certificate
 
                                                     </select>
 
+                                                    <label id="warning_male_certificate" class="warning_text"> <span>Please select male certificate <i class="icofont icofont-warning"></i></span></label>
+
+
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -1221,7 +838,8 @@ add hybrid male crop certificate
 
                                                 <div class="col-sm-3">
 
-                                                    <input id="male_quantity" type="text" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
+                                                    <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
+                                                    <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1241,7 +859,7 @@ add hybrid female crop certificate
 
 
 
-                                            <div class="form-group row">
+                                            <div class="form-group row hybrid_items">
 
 
                                                 <span class="pcoded-mcaret"></span>
@@ -1259,6 +877,8 @@ add hybrid female crop certificate
 
 
                                                     </select>
+                                                    <label id="warning_female_certificate" class="warning_text"> <span>Please select female certificate <i class="icofont icofont-warning"></i></span></label>
+
 
                                                 </div>
 
@@ -1272,7 +892,8 @@ add hybrid female crop certificate
 
                                                 <div class="col-sm-3">
 
-                                                    <input id="female_quantity" type="text" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
+                                                    <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
+                                                    <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1287,8 +908,8 @@ add hybrid female crop certificate
 
                                             <div class="col-sm-12">
 
-                                                <a href="add_certificate.php" class="btn btn-success">
-                                                    Add New certificate
+                                                <a href="add_certificate.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                    New certificate
 
                                                 </a>
 
@@ -1332,7 +953,6 @@ form add land history
                                                         <option value="fallow">Fallow</option>
                                                         <option value="maize">Maize</option>
                                                         <option value="G/nuts">Ground nuts</option>
-
                                                         <option value="soyabean">Soyabean </option>
                                                         <option value="rice">Rice</option>
                                                         <option value="sorgum">Sorgum</option>
@@ -1344,6 +964,8 @@ form add land history
 
 
                                                     </select>
+                                                    <label id="warning_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
+
                                                 </div>
 
 
@@ -1382,6 +1004,7 @@ form add land history
 
 
                                                     </select>
+                                                    <label id="warning_other_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
 
@@ -1436,6 +1059,7 @@ form adding farm location details
 
 
                                                     </select>
+                                                    <label id="warning_region" class="warning_text"> <span>Please select legion<i class="icofont icofont-warning"></i></span></label>
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -1448,10 +1072,12 @@ form adding farm location details
 
 
                                                     </select>
+                                                    <label id="warning_district" class="warning_text"> <span>Please select district<i class="icofont icofont-warning"></i></span></label>
                                                 </div>
                                                 <div class="col-sm-3">
 
                                                     <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA / Trading center " require="">
+                                                    <label id="warning_epa" class="warning_text"> <span>Please enter EPA / Area<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1471,6 +1097,7 @@ form adding farm location details
                                                 <div class="col-sm-6">
 
                                                     <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name / Estate" require="">
+                                                    <label id="warning_area_name" class="warning_text"> <span>Please enter area name<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1479,6 +1106,7 @@ form adding farm location details
                                                 <div class="col-sm-6">
 
                                                     <input id="address" type="text" class="form-control" name="address" placeholder="Address" require="">
+                                                    <label id="warning_address" class="warning_text"> <span>Please enter address<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1498,6 +1126,7 @@ form adding farm location details
                                                 <div class="col-sm-12">
 
                                                     <input id="physical_address" type="textarea" class="form-control" name="physical_address" placeholder="Directions " require="">
+                                                    <label id="warning_physical_address" class="warning_text"> <span>Please add directions <i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -1512,12 +1141,15 @@ form adding farm location details
                                             </div>
                                             <div class="col-sm-12">
 
-                                                <input type="submit" name="save_farm" value="save farm" class="btn btn-success " />
+
+
+                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-success btn-mat ">save</button> -->
+                                                <button class="btn btn-success btn-mat" id=save_farm ><i class="icofont icofont-save"></i>Save</button>
 
                                                 </br>
                                                 </br>
 
-                                                <a href="add_certificate.php" class="btn btn-danger">
+                                                <a href="register_farm.php" class="btn btn-danger btn-mat"><i class="icofont icofont-warning"></i>
                                                     Cancle
 
                                                 </a>
@@ -1547,7 +1179,7 @@ form adding farm location details
 
 
 
-                                    </form>
+                                  
 
 
 

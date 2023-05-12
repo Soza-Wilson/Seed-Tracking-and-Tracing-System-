@@ -167,19 +167,20 @@ class main
   function register_crop($crop_name)
   {
     global $con;
+    $name = strtolower($crop_name);
     $user_id = $this->generate_user("crop");
-    $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('$user_id','$crop_name')";
+    $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('$user_id','$name')";
     $statement = $con->prepare($sql);
     $statement->execute();
   }
 
-  function register_variety($variety_name, $crop_id)
+  function register_variety($variety_name, $crop_id,$variety_type)
   {
 
-
+    $v_name=strtolower($variety_name);
     global $con;
     $user_id = $this->generate_user("variety");
-    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`) VALUES ('$user_id','$variety_name','$crop_id')";
+    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`) VALUES ('$user_id','$v_name','$crop_id','$variety_type')";
     $statement = $con->prepare($sql);
     $statement->execute();
 
@@ -1414,6 +1415,60 @@ class main
     // }
   }
 
+  //Update creditor 
+
+
+
+  function update_grower($grower_id,$grower_name,$phone,$email,$file_directory){
+    global $con;
+    $sql="UPDATE `creditor` SET `name`='$grower_name',`phone`='$phone',`email`='$email' WHERE `creditor_ID`='$grower_id'";
+    $statement = $con->prepare($sql);
+    if($statement->execute()){
+
+     $season=$this->get_season();
+      // Update contract file
+      $sql="UPDATE `contract` SET `dir`='$file_directory' WHERE `season`='$season' AND `grower`='$grower_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+      return 'updated';
+
+
+
+    }
+
+    
+    }
+
+
+    // Activate inactive grower
+function activate_grower($grower_id,$file_directory,$user){
+
+
+  global $con;
+  $sql="UPDATE `creditor` SET `creditor_status`='active' WHERE `creditor_ID`='$grower_id'"; 
+  $statement = $con->prepare($sql);
+  $statement->execute();
+
+  $return_data = $this->register_contract($grower_id,$user,"grower",$file_directory);
+
+  if($return_data=="grower_registered"){
+    return "activated";
+  }
+
+  else{
+    return "error";
+  }
+
+
+
+}
+
+   
+
+ 
+  
+
   function get_season()
   {
     global $con;
@@ -1443,7 +1498,7 @@ class main
 
     $statement = $con->prepare($sql);
     $statement->execute();
-    echo "Grower registered ";
+    echo "grower_registered";
   }
 
 

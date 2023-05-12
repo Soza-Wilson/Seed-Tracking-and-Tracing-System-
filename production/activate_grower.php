@@ -8,19 +8,38 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$creditor_id = $_GET['creditor_id'];
 
 if (empty($test)) {
 
     header('Location:../login.php');
 }
 
-$restricted = array("production_admin", "system_administrator", "lab_technician", "warehouse_officer");
 
-if (in_array($position, $restricted)) {
+$notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
+
+if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
 
+
+$sql = "SELECT `creditor_ID`, `source`,`name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
+INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_ID`='$creditor_id'";
+
+$result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $creditor_id = $row['creditor_ID'];
+        $name = $row['name'];
+        $phone = $row['phone'];
+        $email = $row['email'];
+        $registered_date = $row['registered_date'];
+        $registered_by = $row['fullname'];
+        $status = $row['creditor_status'];
+        $dir = $row['file_directory'];
+    }
+}
 
 ?>
 
@@ -42,7 +61,7 @@ if (in_array($position, $restricted)) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -58,6 +77,11 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
+
+    </script>
+
 </head>
 
 <body>
@@ -126,9 +150,18 @@ if (in_array($position, $restricted)) {
                             <i class="ti-menu"></i>
                         </a>
                         <div class="mobile-search waves-effect waves-light">
-
+                            <div class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <a href="">
+
+                        <a href="index.html">
                             <span>Production</span>
                         </a>
 
@@ -139,9 +172,6 @@ if (in_array($position, $restricted)) {
 
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
 
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
@@ -163,7 +193,6 @@ if (in_array($position, $restricted)) {
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
-                                    </li>
 
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
@@ -193,13 +222,13 @@ if (in_array($position, $restricted)) {
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
+
                             <div class="p-15 p-b-0">
 
 
@@ -240,7 +269,6 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
                                 <li class="">
                                     <a href="grading.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
@@ -248,6 +276,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
 
                                 <li class="">
                                     <a href="stock_out.php" class="waves-effect waves-dark">
@@ -282,14 +311,14 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Seed processing</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li>
+                                <li class="">
                                     <a href="process_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Process seed </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="view_processed_seed.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Processed seed </span>
@@ -308,47 +337,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -358,32 +387,33 @@ if (in_array($position, $restricted)) {
 
 
 
-                            <li class="pcoded-hasmenu ">
+
+                                <li class="pcoded-hasmenu active pcoded-trigger">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -452,7 +482,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">View Processed Seed</h5>
+                                            <h5 class="m-b-10">Grower</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -462,7 +492,7 @@ if (in_array($position, $restricted)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="view_processed_seed.php">View Processed Seed</a>
+                                            <li class="breadcrumb-item"><a href="view_stock_in.php">Grower</a>
                                             </li>
 
                                         </ul>
@@ -492,127 +522,188 @@ if (in_array($position, $restricted)) {
                                         <!-- Background Utilities table start -->
 
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Processed seed </h5>
-                                                <span> View all processed seed</span>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+
+                                        <div class="card">
+
+
+
+
+                                            <!-- Modal -->
+                                            <div id="updateModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            
+                                                        </div>
+                                              
+
+
+                                                        <div class="card">
+
+                                                        <div class="col-sm-12">
+                                                        <label class="label bg-primary">Add new contract file (Optional):</label>
+                                                        <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                        <input type="hidden" class="form-control" name="tempFile" id="tempFile" value="<?php echo $dir?>">
+                                                        <input type="hidden" class="form-control" id="user" value="<?php echo $_SESSION['user'] ?>">
+
+
+                                                    </div>
+                                                       </br>
+                                                    <div class="col-sm-12">
+                                                         <button class="btn btn-success btn-mat request_for_approval" id="confirm_code"><i class="icofont icofont-check "></i>Confirm </button>
+                                                        <button class="btn btn-success btn-mat" id="activate_grower"><i class="icofont icofont-upload "></i> Save Contract</button>
+                                                       
+
+                                                    </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default btn-mat" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th> ID</th>
-                                                                <th>Grower Name</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Processed Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <?php
-
-                                                            $sql = "SELECT `process_type_ID`,process_type.process_ID,`crop`,creditor.name,
-                                                            `variety`,`class`,process_seed.processed_date,process_seed.processed_time,
-                                                            process_type.process_ID, process_type.grade_outs_quantity, 
-                                                            process_type.processed_quantity, process_type.trash_quantity
-                                                             FROM `process_type` INNER JOIN process_seed ON 
-                                                             process_type.process_ID = process_seed.process_ID
-                                                              INNER JOIN grading ON process_seed.grade_ID = grading.grade_ID 
-                                                              INNER JOIN stock_in ON grading.stock_in_ID=stock_in.stock_in_ID
-                                                               INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN 
-                                                             variety ON stock_in.variety_ID = variety.variety_ID INNER JOIN 
-                                                             creditor on stock_in.creditor_ID = creditor.creditor_ID WHERE
-                                                            process_type.process_type = 'Processing'";
-
-
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $process_id = $row['process_ID'];
-                                                                    $assigned_date = $row['processed_date'];
-                                                                    $assigned_time = $row['processed_time'];
-                                                                    $crop = $row['crop'];
-                                                                    $variety = $row['variety'];
-                                                                    $class = $row['class'];
-                                                                    $processed_quantity = $row['processed_quantity'];
-                                                                    $grower_name = $row['name'];
-                                                                    $variety = $row['variety'];
-                                                                    $grading_type = "Cleaning";
-                                                                    $object = new main();
-                                                                    $new_date = $object->change_date_format($assigned_date);
 
 
 
 
-                                                                    echo "
-											<tr class='odd gradeX'>
-                                                 <td>$process_id</td>
-                                                 <td>$grower_name</td>
-                                                 <td>$crop</td>
-                                                 <td>$variety</td>
-                                                 <td>$class</td>
-											    <td>$processed_quantity kg</td>
-												<td>$new_date</td>
-                                                <td>$assigned_time</td>
-                                                
-                                                
-                                               
-												
-												
-												
-                                                <td><a href='processed_seed_details.php? process_id=$process_id'  class='btn btn-success'>View</a>
-                                                </td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Grower Details </h5>
+
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
                                             </div>
                                         </div>
+                                        <div class="modal-body">
+                                            <form action="grower.php" method="POST" enctype="multipart/form-data">
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Registered By :</label>
+                                                        <input id="register_name" type="text" class="form-control" name="register_name" placeholder="Name" value="<?php echo $registered_by?>">
+                                                        <input id="grower_id" type="hidden" class="form-control" name="grower_id" placeholder="Name" value="<?php echo $_GET['creditor_id'] ?>">
+                                                        <input id="user" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['user'] ?>">
+                                                        <input id="user_name" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['fullname'] ?>">
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Grower Name :</label>
+                                                        <input id="creditor_name" type="text" class="form-control"  placeholder="Name" value="<?php echo $name ?>">
+                                                        <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                    </div>
+
+
+                                                </div>
 
 
 
-                                        <!-- Background Utilities table end -->
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Phone Number :</label>
+                                                        <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone ?>">
+                                                        <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Email (Optional) :</label>
+                                                        <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email ?>">
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Status :</label>
+                                                        <input id="status" type="email" class="form-control" name="creditor_email" value="<?php echo $status ?>">
+                                                    </div>
+
+
+                                                </div>
+
+
+
+                                                <div class="form-group row">
+
+                                                    
+                                                    <div class="col-sm-12">
+                                                        <button type="button" id="" value="Save" class="btn waves-effect waves-light btn-success btn-mat" data-toggle="modal" data-target="#updateModal"><i class="icofont icofont-save"></i> Activate Grower</button>
+                                                    </div>
+                                                
+                                                </div>
+
+                                                <div class="form-group row">
+
+                                                    
+                                                    <div class="col-sm-12">
+                                                        <button type="button" id="activate_back" value="Save" class="btn waves-effect waves-light btn-primary btn-mat" ><i class="icofont icofont-reverse"></i> Back</button>
+                                                    </div>
+                                                  
+
+                                                </div>
+
+
+
+                                            </form>
+                                        </div>
                                     </div>
-                                    <!-- Page-body end -->
+
+                                    <!-- Background Utilities table end -->
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
+                                <!-- Main-body end -->
 
-                            <div id="styleSelector">
+                                <div id="styleSelector">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+        <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -653,25 +744,25 @@ if (in_array($position, $restricted)) {
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+        <!-- Warning Section Ends -->
+        <!-- Required Jquery -->
+        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+        <!-- Custom js -->
+        <script src="assets/js/pcoded.min.js"></script>
+        <script src="assets/js/vertical-layout.min.js "></script>
+        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>

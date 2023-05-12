@@ -330,7 +330,7 @@ if (in_array($position, $notRestricted)) {
                                     <ul class="pcoded-submenu">
                                         
                                     <li >
-                                    <a href="chart.html" class="waves-effect waves-dark">
+                                    <a href="add_certificate.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
                                         <span class="pcoded-mcaret"></span>
@@ -562,8 +562,8 @@ if (in_array($position, $notRestricted)) {
                                                                         <div class="col-sm-12">
                                                                             <labe>Supporting documents :</label>
                                                                             <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
-                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
+                                                                            <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                            <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
 
                                                                                 <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
                                                                         </div>
@@ -575,7 +575,25 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                                </form>
+                                                                </form>  
+                                                                <div class="card" id="existingName">
+                                                                <div class="card-header">
+                                                    <h5> Activate Existing Inactive Grower
+                                                        
+                                                    </h5>
+                                                </div>
+
+                                                                <div class="card-block table-border-style">
+                                                               <div class="table-responsive">
+                                                               <table class="table table-hover" id="existingNameTable">
+
+                                                    </table>
+                                                </div>
+                                             </div>
+
+
+                                                                   
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -623,7 +641,8 @@ if (in_array($position, $notRestricted)) {
                                                     <div class="col-sm-2">
                                                          
                                                         <label for="" class="label bg-primary">Grower name</label>
-                                                        <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
+                                                        <input type="text" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
+
                                                         
 
                                                     </div>
@@ -631,7 +650,7 @@ if (in_array($position, $notRestricted)) {
                                                     <div class="">
                                                          
                                                          <label for="" class="label "></label>
-                                                         <button name="get_data" id="get_data" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
+                                                         <button name="grower_filter" id="grower_filter" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
                                                          
  
                                                      </div>
@@ -655,16 +674,11 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="btn btn-success btn-mat " id='stock_in_csv' name='stock_in_csv'> <i i class='icofont icofont-download'></i> Download growers</button>
+                                                            <button class="btn btn-success btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
+                                                            <input type="hidden" name="type" id="type" value="active">
+                                                           
 
 
 
@@ -702,8 +716,8 @@ if (in_array($position, $notRestricted)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
-                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_status`='active'";
+                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`creditor_status`,creditor.registered_date FROM `creditor`
+                                                             INNER JOIN user ON creditor.user_ID = user.user_ID WHERE `creditor_status`='active' ORDER BY `creditor_ID`";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -715,7 +729,7 @@ if (in_array($position, $notRestricted)) {
                                                                     $registered_date = $row['registered_date'];
                                                                     $registered_by = $row['fullname'];
                                                                     $status =$row['creditor_status'];
-                                                                    $dir = $row['file_directory'];
+                                                              
 
 
 

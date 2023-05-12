@@ -507,6 +507,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
                                                         <input type="text" class="form-control" name="new_crop" id="pre_basic" placeholder="Register crop" require="">
                                                     </div>
+                                                    
                                                 </div>
 
 
@@ -525,7 +526,8 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-12">
 
-                                                        <Input type="submit" class="btn btn-primary" name="save_crop" value="save crop">
+                                                     
+                                                        <button type="submit" class="btn btn-primary btn-mat" name="save_crop"><i class="icofont icofont-save"></i>Save</button>
 
 
 
@@ -573,8 +575,24 @@ if (in_array($position, $restricted)) {
                                                     <label>Register new variety </label>
                                                 </div>
                                                 <div class="col-sm-12">
+                                                    <label for="" class="label">Variety Name</label>
                                                     <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Register crop" require="">
                                                 </div>
+                                                <div class="col-sm-12">
+                                                <label for="" class="label">Variety type</label>
+                                                    <select id="variety_type" name="variety_type" class="form-control" required="">
+                                                        <option value="-">None</option>
+                                                        <option value="opv">OPV (Open Polinated Variety)</option>
+                                                        <option value="hybrid">Hybrid</option>
+                                                       
+
+
+
+
+
+                                                    </select>
+
+                                                    </div>
                                             </div>
 
 
@@ -593,7 +611,10 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-12">
 
-                                                    <Input type="submit" class="btn btn-success" name="save_variety" value="save variety">
+                                                   
+
+                                                    <button type="submit" class="btn btn-success btn-mat" name="save_variety"><i class="icofont icofont-save"></i>save variety</button>
+
 
 
 
@@ -710,7 +731,7 @@ if (isset($_POST['save_variety'])) {
 
 
     $object = new main();
-    $object->register_variety($_POST['new_variety'], $_POST['crop']);
+    $object->register_variety($_POST['new_variety'], $_POST['crop'],  $_POST['variety_type']);
 }
 ?>
 

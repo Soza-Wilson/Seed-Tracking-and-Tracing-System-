@@ -49,4 +49,35 @@ if (isset($_POST['crop_value'])) {
     }
 
 
+
+
+}
+
+if (isset($_POST['variety_type'])) {
+
+    $variety_ID = $_POST['variety_type'];
+
+ $sql = "SELECT variety_type FROM `variety` WHERE `variety_ID`='$variety_ID'";
+ $result =  $con->query($sql);
+ if ($result->num_rows > 0) {
+   
+     while ($row = $result->fetch_assoc()) {
+         $type= $row["variety_type"];
+
+         if($type=="-"){
+
+          echo"<option value='$type'>None</option>";
+
+         }
+         else{
+
+            echo"<option value='$type'>$type</option>";
+
+         }
+       
+
+     }
+ }
+
+
 }

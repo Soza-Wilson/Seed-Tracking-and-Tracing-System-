@@ -29,18 +29,16 @@ INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON cred
 
 $result = $con->query($sql);
 if ($result->num_rows > 0) {
-   while ($row = $result->fetch_assoc()) {
-       $creditor_id = $row['creditor_ID'];
-       $name = $row['name'];
-       $phone = $row['phone'];
-       $email = $row['email'];
-       $registered_date = $row['registered_date'];
-       $registered_by = $row['fullname'];
-       $status =$row['status'];
-       $dir = $row['file_directory'];
-
-   }
-
+    while ($row = $result->fetch_assoc()) {
+        $creditor_id = $row['creditor_ID'];
+        $name = $row['name'];
+        $phone = $row['phone'];
+        $email = $row['email'];
+        $registered_date = $row['registered_date'];
+        $registered_by = $row['fullname'];
+        $status = $row['creditor_status'];
+        $dir = $row['file_directory'];
+    }
 }
 
 ?>
@@ -80,7 +78,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/grower.js">
+    <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
 
     </script>
 
@@ -339,47 +337,47 @@ if ($result->num_rows > 0) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="chart.html" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -389,33 +387,33 @@ if ($result->num_rows > 0) {
 
 
 
-                              
-                            <li class="pcoded-hasmenu ">
+
+                                <li class="pcoded-hasmenu active pcoded-trigger">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
+                                        <li class="active">
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                       
-                            
+
                                     </ul>
                                 </li>
                                 <li>
@@ -522,66 +520,127 @@ if ($result->num_rows > 0) {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
+
+
+
+
                                         <div class="card">
-                                            <div class="card-header">
-
-                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-list"></i>Contracts</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Download Contract</h5>
-                                                            </div>
-
-                                                            <?php 
-                                                          
-                                                            
-                                                            
-                                                            ?>
-
-<div class="card">
-                                           
-                                           <div class="card-block table-border-style">
-                                               <div class="table-responsive">
-                                                   <table class="table table-hover">
-                                                       <thead>
-                                                           <tr>
-                                                               <th>Season </th>
-                                                               <th>Registered By </th>
-                                                               
-                                                               
-
-                                                              
-
-                                                           </tr>
-                                                       </thead>
-                                                       <tbody>
-
-                                                           <?php
 
 
-                                                           $sql="SELECT `season`, `dir`, user.fullname FROM `contract` INNER JOIN user ON contract.user_ID = user.user_ID INNER JOIN creditor ON contract.grower = creditor.creditor_ID WHERE contract.grower='$creditor_id' ORDER BY `season` DESC";
 
-                                                           $result = $con->query($sql);
-                                                           if ($result->num_rows > 0) {
-                                                               while ($row = $result->fetch_assoc()) {
-                                                                  
-                                                                   $season = $row['season'];
-                                                                   $name = $row['fullname'];
-                                                                   $file_directory =$row['dir'];
-                                                                  
+
+                                            <!-- Modal -->
+                                            <div id="updateModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h5 class="modal-title">Request for approval</h5>
+                                                        </div>
+                                              
+
+
+                                                        <div class="card">
+
+                                                        <div class="col-sm-12 request_for_approval" >
+                                                        <label class="label bg-danger">Enter Approval Code:</label>
+                                                        <input id="code" type="text" class="form-control" name="code" placeholder="Approval Code" >
+                                                        <input id="approvalId" type="hidden" class="form-control" name="approvalId" placeholder="Approval Code" >
+                                                       
+
+                                                    </div>
+                                                       </br>
+                                                    <div class="col-sm-12">
+                                                         <button class="btn btn-success btn-mat request_for_approval" id="confirm_code"><i class="icofont icofont-check "></i>Confirm </button>
+                                                        <button class="btn btn-success btn-mat" id="update_grower">Request for approval <i class="icofont icofont-question "></i></button>
+                                                       
+
+                                                    </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default btn-mat" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
 
 
 
 
 
 
-                                                                   echo "
+                                    <div class="card">
+                                        <div class="card-header">
+
+                                            <button type="button" class="btn btn-primary btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-list"></i>Contracts</button>
+
+                                            <!-- Modal -->
+                                            <div id="myModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h5 class="modal-title">Download Contract</h5>
+                                                        </div>
+
+                                                        <?php
+
+
+
+                                                        ?>
+
+                                                        <div class="card">
+
+                                                            <div class="card-block table-border-style">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Season </th>
+                                                                                <th>Registered By </th>
+
+
+
+
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                            <?php
+
+
+                                                                            $sql = "SELECT `season`, `dir`, user.fullname,creditor.name FROM `contract` INNER JOIN user ON contract.user_ID = user.user_ID INNER JOIN creditor ON contract.grower = creditor.creditor_ID WHERE contract.grower='$creditor_id' ORDER BY `season` DESC";
+
+                                                                            $result = $con->query($sql);
+                                                                            if ($result->num_rows > 0) {
+                                                                                while ($row = $result->fetch_assoc()) {
+
+                                                                                    $season = $row['season'];
+                                                                                    $name = $row['fullname'];
+                                                                                    $growerName = $row['name'];
+                                                                                    $file_directory = $row['dir'];
+
+
+
+
+
+
+
+                                                                                    echo "
                                            <tr class='odd gradeX'>
                                                 <td>$season</td>
                                                <td>$name</td>
@@ -597,130 +656,148 @@ if ($result->num_rows > 0) {
                                                </td>
                                            </tr>	
                                        ";
-                                                               }
-                                                           }
-                                                           ?>
-                                                       </tbody>
-                                                   </table>
-                                               </div>
-                                           </div>
-                                                        </div>
-                                                           
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                }
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Grower Details </h5>
+
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="grower.php" method="POST" enctype="multipart/form-data">
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Registered By :</label>
+                                                        <input id="register_name" type="text" class="form-control" name="register_name" placeholder="Name" value="<?php echo $name ?>">
+                                                        <input id="grower_id" type="hidden" class="form-control" name="grower_id" placeholder="Name" value="<?php echo $_GET['creditor_id'] ?>">
+                                                        <input id="user" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['user'] ?>">
+                                                        <input id="user_name" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['fullname'] ?>">
 
                                                     </div>
+
+
                                                 </div>
 
-                                            </div>
-                                        </div>
+                                                <div class="form-group row">
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Grower Details </h5>
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Grower Name :</label>
+                                                        <input id="creditor_name" type="text" class="form-control"  placeholder="Name" value="<?php echo $growerName ?>">
+                                                        <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                    </div>
 
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+
                                                 </div>
-                                            </div>
-                                            <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                        <label class="label bg-primary">Grower Name :</label>
-                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" value="<?php echo $name?>">
-                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-
-
-                                                                    </div>
 
 
 
-                                                                    <div class="form-group row">
+                                                <div class="form-group row">
 
-                                                                        <div class="col-sm-12">
-                                                                        <label class="label bg-primary">Phone Number :</label>
-                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone?>">
-                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
-                                                                         
-                                                                        </div>
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Phone Number :</label>
+                                                        <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone ?>">
+                                                        <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
 
-
-                                                                    </div>
+                                                    </div>
 
 
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                        <label class="label bg-primary">Email (Optional) :</label>
-                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email?>">
-                                                                        </div>
+                                                </div>
 
 
-                                                                    </div>
+                                                <div class="form-group row">
 
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                        <label class="label bg-primary">Status :</label>
-                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email"  value="<?php echo $status?>">
-                                                                        </div>
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Email (Optional) :</label>
+                                                        <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email ?>">
+                                                    </div>
 
 
-                                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Status :</label>
+                                                        <input id="status" type="email" class="form-control" name="creditor_email" value="<?php echo $status ?>">
+                                                    </div>
 
 
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <label class="label bg-primary">Add new contract file:</label>
-                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
-                                                                       <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                       <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
-
-                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success btn-block" ><i class="icofont icofont-save"></i> Update</button>
-                                                                        </div>
-
-                                                                    </div>
+                                                </div>
 
 
 
-                                                                </form>
-                                                            </div>
+                                                <div class="form-group row">
+
+                                                    <div class="col-sm-12">
+                                                        <label class="label bg-primary">Add new contract file (Optional):</label>
+                                                        <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                        <input type="hidden" class="form-control" name="tempFile" id="tempFile" value="<?php echo $file_directory?>">
+                                                        <input type="hidden" class="form-control" id="user" value="<?php echo $_SESSION['user'] ?>">
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="" value="Save" class="btn waves-effect waves-light btn-success btn-mat" data-toggle="modal" data-target="#updateModal"><i class="icofont icofont-save"></i> Update</button>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </form>
                                         </div>
-
-                                        <!-- Background Utilities table end -->
                                     </div>
-                            <!-- Main-body end -->
 
-                            <div id="styleSelector">
+                                    <!-- Background Utilities table end -->
+                                </div>
+                                <!-- Main-body end -->
 
+                                <div id="styleSelector">
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
+        <!-- Warning Section Starts -->
+        <!-- Older IE warning message -->
+        <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -761,25 +838,25 @@ if ($result->num_rows > 0) {
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+        <!-- Warning Section Ends -->
+        <!-- Required Jquery -->
+        <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+        <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        <!-- waves js -->
+        <script src="assets/pages/waves/js/waves.min.js"></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+        <!-- Custom js -->
+        <script src="assets/js/pcoded.min.js"></script>
+        <script src="assets/js/vertical-layout.min.js "></script>
+        <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>

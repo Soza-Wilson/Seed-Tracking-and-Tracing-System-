@@ -74,6 +74,7 @@ if ($database === true) {
     $sql = "CREATE TABLE variety (variety_ID varchar(100) PRIMARY KEY, 
  variety varchar(100),
  crop_ID varchar(100),
+ variety_type varchar(100),
  FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 
     mysqli_query($con, $sql);
@@ -214,7 +215,7 @@ Hectors varchar(100),
                other_year_crop varchar(100),
                order_status varchar(100),
                
-
+                breeding_type varchar(100),
                main_lot_number varchar(100),
               main_quantity varchar(100),
                                                                            
@@ -514,9 +515,7 @@ $sql="insert into growing_season values ('$season',00-00-0000,00-00-0000)";
 
 mysqli_query($con, $sql);
 
-$sql="insert into client values ('-','-','-','-')";
 
-mysqli_query($con,$sql);
 
 
 $sql="CREATE TABLE client(business_name varchar(100) PRIMARY KEY, country varchar(100),physical_address varchar(100),logo varchar(100))";
@@ -538,12 +537,16 @@ values ('001','ADMIN'),
 
     mysqli_query($con, $sql);
 
+    $sql="insert into client values ('-','-','-','-')";
+
+mysqli_query($con,$sql);
+
     $sql = "insert into user
 values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admin@example.com','0000');";
 
     mysqli_query($con, $sql);
 
-    $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maizeOPV'),
+    $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('CP001','maize'),
 ('CP002','gnuts_shelled'),
 ('CP003','gnuts_unshelled'),
 ('CP004','sorghum'),
@@ -551,40 +554,39 @@ values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admi
 ('CP006','cowpea'),
 ('CP007','pigeonpea'),
 ('CP008','beans'),
-('CP009','soyabean'),
-('CP0010','maizeHybrid')";
+('CP009','soyabean')";
 
     mysqli_query($con, $sql);
 
 
-    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`)
-VALUES ('VT001','MLERA_ZM_623','CP001'),
-('VT002','THANZI_MH_44A','CP0010'),
-('VT003','MANTHU_MH_36','CP0010'),
-('VT004','NTONDO_MH_35','CP0010'),
-('VT005','LIMBA_ZM_523','CP001'),
-('VT006','CHITALA','CP002'),
-('VT007','CG7','CP002'),
-('VT008','CG9','CP002'),
-('VT009','CG11','CP002'),
-('VT0010','CG13','CP002'),
-('VT0011','CHITALA','CP003'),
-('VT0012','CG7','CP003'),
-('VT0013','CG9','CP003'),
-('VT0014','CG11','CP003'),
-('VT0015','CG13','CP003'),
-('VT0016','PILIRA1','CP004'),
-('VT0017','FAYA_1469','CP005'),
-('VT0018','KILOMBERO','CP005'),
-('VT0019','SUDAN1','CP006'),
-('VT0020','CHITEDZE','CP007'),
-('VT0021','MWAIWATHUALIMI','CP007'),
-('VT0022','MNYAMBITILA','CP008'),
-('VT0023','KHOLOPHETHE','CP008'),
-('VT0024','NUA45','CP008'),
-('VT0025','BALABALA','CP008'),
-('VT0026','TIKOLORE','CP009'),
-('VT0027 ','MAKWACHA','CP009')";
+    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`)
+    VALUES ('VT001','MLERA_ZM_623','CP001','opv'),
+    ('VT002','THANZI_MH_44A','CP001','hybrid'),
+    ('VT003','MANTHU_MH_36','CP001','hybrid'),
+    ('VT004','NTONDO_MH_35','CP001','hybrid'),
+    ('VT005','LIMBA_ZM_523','CP001','opv'),
+    ('VT006','CHITALA','CP002','-'),
+    ('VT007','CG7','CP002','-'),
+    ('VT008','CG9','CP002','-'),
+    ('VT009','CG11','CP002','-'),
+    ('VT0010','CG13','CP002','-'),
+    ('VT0011','CHITALA','CP003','-'),
+    ('VT0012','CG7','CP003','-'),
+    ('VT0013','CG9','CP003','-'),
+    ('VT0014','CG11','CP003','-'),
+    ('VT0015','CG13','CP003','-'),
+    ('VT0016','PILIRA1','CP004','-'),
+    ('VT0017','FAYA_1469','CP005','-'),
+    ('VT0018','KILOMBERO','CP005','-'),
+    ('VT0019','SUDAN1','CP006','-'),
+    ('VT0020','CHITEDZE','CP007','-'),
+    ('VT0021','MWAIWATHUALIMI','CP007','-'),
+    ('VT0022','MNYAMBITILA','CP008','-'),
+    ('VT0023','KHOLOPHETHE','CP008','-'),
+    ('VT0024','NUA45','CP008','-'),
+    ('VT0025','BALABALA','CP008','-'),
+    ('VT0026','TIKOLORE','CP009','-'),
+    ('VT0027 ','MAKWACHA','CP009','-')";
 
     mysqli_query($con, $sql);
 
