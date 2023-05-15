@@ -59,8 +59,12 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
+        
 
     </script>
+
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 </head>
 
 <body>
@@ -505,85 +509,72 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-3">
-                                                        <label>Select Crop</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <label>Select Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <label>Select Class</label>
-                                                    </div>
-                                                    
-                                                </div>
-
+                                                
 
                                                 <div class="form-group row">
-
-
-                                                    <div class="col-sm-2">
-
-
-                                                        <select name="select_crop" id="select_crop" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-3">
-
-
-                                                        <select name="select_variety" id="select_variety" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-                                                    <div class="col-sm-3">
-
-
-                                                        <select name="select_class" id="select_class" class="form-control">
-                                                            <option value="not_selected">Class</option>
-                                                            <option value="pre_basic">Pre-Basic</option>
-                                                            <option value="basic">Basic</option>
-                                                            <option value="certified">Certified</option>
-
-
-                                                        </select>
-                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
                                                     
 
+                                                    <div class="col-sm-3">
+
+                                                    <label class="label bg-primary">Select Crop</label>
+                                                    <select name="select_crop" id="select_crop" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+                                                     
 
 
+                                                    </select>
+                                                    <label id="warning_crop" class="warning-text"> <span >Please select crop  <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-3">
+
+                                                    <label class="label bg-primary">Select Variety</label>
+                                                    <select name ="select_variety" id="select_variety" class="form-control"> 
+                                                        <option value="not_selected">Not Selected</option>
+                                                      
+
+
+                                                    </select>
+                                                    <label id="warning_variety" class="warning-text"> <span >Please select variety <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                        
+                                                    </div>
+                                                    <div class="col-sm-3">
+
+                                                    <label class="label bg-primary">Select Class</label>
+                                                    <select name="select_class" id="select_class" class="form-control"> 
+                                                        <option value="not_selected">Class</option>
+                                                        <option value="pre_basic">Pre-Basic</option>
+                                                        <option value="basic">Basic</option>
+                                                        <option value="certified">Certified</option>
+
+
+                                                    </select>
+                                                    <label id="warning_class" class="warning-text"> <span >Please select class  </span></label>
+
+
+                                                        
+                                                    </div>
+
+                                                  
+
+
+                                                    
 
 
 
                                                     <div class="col-sm-1">
 
 
+                                                        <br/>
+                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
 
-
-
+                                                      
                                                     </div>
                                                 </div>
 
@@ -594,7 +585,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="btn btn-primary " id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                            <button class="btn btn-primary btn-mat" id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
@@ -713,6 +704,9 @@ if (in_array($position, $restricted)) {
                                                             ?>
                                                         </tbody>
                                                     </table>
+                                                </div>
+                                                <div id="pagination">
+                                                    
                                                 </div>
                                             </div>
                                         </div>

@@ -494,25 +494,7 @@ if (in_array($position, $restricted)) {
 
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-2">
-                                                        <label>Grower</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Crop</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
+                                                
 
 
                                                 <div class="form-group row">
@@ -520,6 +502,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
+                                                    <label class="label bg-primary" >Grower</label>
                                                         <input list="grower_list" name="grower_list" class="form-control" placeholder="Select Grower " require="">
                                                         <datalist id="grower_list">
 
@@ -530,6 +513,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary" >Crop</label>
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Select Crop</option>
                                                             <option value="all">all</option>
@@ -540,6 +524,7 @@ if (in_array($position, $restricted)) {
 
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary" >Variety</label>
                                                         <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
                                                             <option value="type_not_selected">Select Variety </option>
 
@@ -547,19 +532,23 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary" >To:</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary" >From:</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
 
                                                     <div class="col-sm-2">
 
-                                                        <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+                                                       <br/>
+                                                        <button name="get_data" id="get_data"  class="btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
 
-                                                        <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
+                                                     
+                                                        <a href="labels.php" class="btn btn-danger btn-mat"> <i class="icofont icofont-warning"></i>Reset</a>
                                                     </div>
                                                 </div>
 

@@ -15,51 +15,86 @@ if (empty($test)) {
     header('Location:../login.php');
 }
 
-
+$main = new main();
 $notRestricted = array("production_admin", "system_administrator", "merl_officer", "warehouse_officer");
 
 if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
-$stock_in_ID = $_GET["stock_in_id"];
+$farm_id = $_GET["farm_id"];
 
-if (!empty($stock_in_ID)) {
+if (!empty($farm_id)) {
 
 
 
-    $sql = "SELECT `stock_in_ID`, `certificate_ID`, `farm_ID`,creditor.name, user.fullname,
-    stock_in.creditor_ID, stock_in.source,stock_in.crop_ID,stock_in.variety_ID,stock_in.certificate_ID, `crop`, stock_in.status, 
-    `variety`, `class`, `SLN`, `bincard`, 
-    `number_of_bags`, `quantity`, `used_quantity`,
-     `available_quantity`, `processed_quantity`, 
-     `grade_outs_quantity`, `trash_quantity`, 
-     stock_in.description, `supporting_dir`, `date`, `time` FROM `stock_in` INNER JOIN `creditor` ON
-      stock_in.creditor_ID = creditor.creditor_ID INNER JOIN user ON user.user_ID = stock_in.user_ID INNER JOIN crop ON 
-      crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID = stock_in.variety_ID WHERE `stock_in_ID`='$stock_in_ID'";
+    $sql = "SELECT `farm_ID`, `Hectors`, `crop_species`,crop.crop, 
+    `crop_variety`,variety.variety, `class`, `region`, `district`,
+     `area_name`, `address`, user.fullname,`physical_address`, `EPA`, farm.user_ID, 
+     farm.creditor_ID,creditor.name, farm.registered_date, `previous_year_crop`,
+      `other_year_crop`, `breeding_type`, `main_lot_number`, 
+      `main_quantity`, `male_lot_number`, `male_quantity`, `female_lot_number`, 
+    `female_quantity` FROM `farm` INNER JOIN crop ON 
+    crop.crop_ID= farm.crop_species INNER JOIN variety 
+    ON variety.variety_ID = farm.crop_variety INNER JOIN creditor ON
+     creditor.creditor_ID=farm.creditor_ID INNER JOIN user ON user.user_ID = farm.user_ID  WHERE `farm_ID`='$farm_id'";
 
 
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $crop = $row["crop"];
-            $cropId = $row["crop_ID"];
-            $varietyId = $row["variety_ID"];
+            $cropId = $row["crop_species"];
+            $varietyId = $row["crop_variety"];
             $variety = $row["variety"];
             $class = $row["class"];
-            $seedCertificate = $row["certificate_ID"];
-            $SRN = $row["SLN"];
-            $bincard = $row["bincard"];
-            $bags = $row["number_of_bags"];
-            $quantity = $row["quantity"];
-            $creditor = $row["name"];
-            $creditorId = $row["creditor_ID"];
-            $source = $row["source"];
-            $user_requested = $row["fullname"];
-            $date = $row["date"];
-            $time = $row["time"];
-            $description = $row["description"];
-            $dir =  $row["supporting_dir"];
+            $hectors = $row["Hectors"];
+            
+            $grower_name = $row["name"];
+            $grower_id = $row["creditor_ID"];
+            $registered_by = $row["fullname"];
+            $registered_date = $main->change_date_format($row["registered_date"]);
+
+
+            // certificates data
+
+
+            $main_lot_number = $row['main_lot_number'];
+            $main_quantity = $row['main_quantity'];
+
+
+
+            $male_lot_number = $row['male_lot_number'];
+            $male_quantity = $row['male_quantity'];
+
+
+
+            $female_lot_number = $row['female_lot_number'];
+            $female_quantity = $row['female_quantity'];
+
+
+
+            // region data 
+
+
+            $region = $row["region"];
+            $district = $row["district"];
+            $area_name = $row["area_name"];
+            $address = $row["address"];
+            $physical_address= $row["physical_address"];
+            $epa = $row["EPA"];
+
+
+            // land history
+
+            $previous_year = $row["previous_year_crop"];
+            $other_year = $row["other_year_crop"];
+
+
+
+
+
+
         }
     }
 }
@@ -101,7 +136,7 @@ if (!empty($stock_in_ID)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details__.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
 
     </script>
 </head>
@@ -284,7 +319,7 @@ if (!empty($stock_in_ID)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                     <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
@@ -359,47 +394,47 @@ if (!empty($stock_in_ID)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -409,32 +444,32 @@ if (!empty($stock_in_ID)) {
 
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -445,7 +480,7 @@ if (!empty($stock_in_ID)) {
                                     </a>
                                 </li>
 
-                                <li>
+                                <li class="active">
                                     <a href="registered_farms.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
@@ -503,7 +538,7 @@ if (!empty($stock_in_ID)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Stock in</h5>
+                                            <h5 class="m-b-10">Farm Details</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -513,7 +548,7 @@ if (!empty($stock_in_ID)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="view_stock_in.php">View Stock In</a>
+                                            <li class="breadcrumb-item"><a href="farm_details.php">Farm Details</a>
                                             </li>
 
                                         </ul>
@@ -575,7 +610,7 @@ if (!empty($stock_in_ID)) {
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-success" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-primary" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -704,7 +739,7 @@ if (!empty($stock_in_ID)) {
 
                                                                     <div class="col-sm-12">
 
-                                                                        <a href="add_certificate.php" class="btn btn-success"><i class='icofont icofont-edit-alt'></i>
+                                                                        <a href="add_certificate.php" class="btn btn-primary"><i class='icofont icofont-edit-alt'></i>
                                                                             New certificate
 
                                                                         </a>
@@ -802,7 +837,7 @@ if (!empty($stock_in_ID)) {
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-success" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-primary" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -814,7 +849,7 @@ if (!empty($stock_in_ID)) {
                                         <div class="card">
                                             <form action="admin_view_order_items.php" method="POST">
                                                 <div class="card-header">
-                                                    <h5>Transaction Details</h5>
+                                                    <h5>Registred Farm Details</h5>
 
                                                     <div class="card-header-right">
                                                         <ul class="list-unstyled card-option">
@@ -831,10 +866,10 @@ if (!empty($stock_in_ID)) {
                                                         <span class="pcoded-mcaret"></span>
 
 
-                                                        <div class="col-sm-2">
+                                                        <div class="col-sm-3">
 
-                                                            <label class="badge badge-primary "> ID</label>
-                                                            <input id="stock_in_id" type="text" class="form-control " name="stock_in_id" value="<?php echo $stock_in_ID; ?>" require="">
+                                                            <label class="label bg-primary "> Farm ID</label>
+                                                            <input id="farm_id" type="text" class="form-control " name="farm_id" value="<?php echo $farm_id; ?>" require="">
                                                             <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
                                                             <input type="hidden" id="user_name" value="<?php echo $test; ?>">
 
@@ -845,37 +880,30 @@ if (!empty($stock_in_ID)) {
 
 
                                                         <div class="col-sm-3">
-                                                            <label class="badge badge-primary ">Transaction For</label>
-                                                            <input id="customer_name" type="text" class="form-control " name="customer_name" value="<?php echo $creditor; ?>" require="">
+                                                            <label class="label bg-primary ">Grower Name</label>
+                                                            <input id="grower_name" type="text" class="form-control " name="grower_name" value="<?php echo $grower_name; ?>" require="">
 
 
 
                                                         </div>
 
                                                         <div class="col-sm-3">
-                                                            <label class="badge badge-primary ">Added By</label>
-                                                            <input id="requested_user" type="text" class="form-control " name="requested_user" value="<?php echo $user_requested; ?>" require="">
+                                                            <label class="label bg-primary ">Added By</label>
+                                                            <input id="registered_by" type="text" class="form-control " name="registered_by" value="<?php echo $registered_by; ?>" require="">
 
 
 
                                                         </div>
 
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary "> Date</label>
-                                                            <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $date; ?>" require="">
+                                                        <div class="col-sm-3">
+                                                            <label class="label bg-primary "> Registered Date</label>
+                                                            <input id="registered_date" type="text" class="form-control " name="registered_date" value="<?php echo $registered_date; ?>" require="">
 
 
 
                                                         </div>
 
-                                                        <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Time</label>
-                                                            <input id="time" type="text" class="form-control " name="time" value="<?php echo $time; ?>" require="">
-
-
-
-                                                        </div>
 
                                                         <div class="card-block">
 
@@ -896,7 +924,6 @@ if (!empty($stock_in_ID)) {
 
 
 
-                                                        <a href="../files/production/stock_in_documents/<?php echo "$dir" ?>" class="btn btn-success"><i class='icofont icofont-file-alt'></i> View Documents</a>
 
 
 
@@ -946,10 +973,9 @@ if (!empty($stock_in_ID)) {
 
 
                                 <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary">Crop:</label>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">Crop :</label>
 
                                         <select class="form-control trans_details text-details" id="crop">
                                             <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
@@ -959,10 +985,9 @@ if (!empty($stock_in_ID)) {
                                                 <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
                                     </div>
 
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary">Variety:</label>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">Variety:</label>
 
                                         <select class="form-control trans_details text-details" id="variety">
                                             <option value="<?php echo $varietyId; ?>"><?php echo $variety; ?></option>
@@ -971,10 +996,9 @@ if (!empty($stock_in_ID)) {
 
                                     </div>
 
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary">Class:</label>
-                                    </div>
-                                    <div class="col-sm-3">
+                                
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">Class:</label>
 
                                         <select class="form-control trans_details text-details" id="class">
                                             <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
@@ -985,29 +1009,40 @@ if (!empty($stock_in_ID)) {
 
                                 </div>
 
+                                <div class="form-group row">
+                                    
+                                    <div class="col-sm-12">
+                                    <label class="label bg-primary">Hectors:</label>
+                                        <input type="text" class="form-control trans_details text-details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $hectors; ?>">
+                                    </div>
+                                </div>
 
 
 
                                 <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Quantity (Kgs):</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="ogQuantity" required="" value="<?php echo $quantity; ?>">
+                                      
+
+
+
+                                    <div class="col-sm-6">
+                                        <label class="label bg-primary">certificate Lot Number :</label>
+
+                                        <select class="form-control trans_details text-details" id="variety">
+                                            <option value="<?php echo $main_lot_number; ?>"><?php echo $main_lot_number; ?></option>
+
+                                            <select>
+
                                     </div>
 
 
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Seed Receive Note #:</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $SRN; ?>">
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Number of Bags:</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
+                                    <div class="col-sm-6">
+                                        <label class="label bg-primary">assigned Quantity:</label>
+
+                                        <select class="form-control trans_details text-details" id="class">
+                                            <option value="<?php echo $main_quantity; ?>"><?php echo $main_quantity; ?></option>
+
+                                            <select>
+
                                     </div>
 
                                 </div>
@@ -1015,60 +1050,167 @@ if (!empty($stock_in_ID)) {
 
 
                                 <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary">certificate:</label>
+                                    
+
+
+
+                                    <div class="col-sm-6">
+
+                                        <label class="label bg-primary">Male Lot Number :</label>
+                                        <select class="form-control trans_details text-details" id="variety">
+                                            <option value="<?php echo $male_lot_number; ?>"><?php echo $male_lot_number; ?></option>
+
+                                            <select>
+
                                     </div>
-                                    <div class="col-sm-11">
-                                        <input type="text" class="form-control trans_details text-details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $seedCertificate; ?>">
+
+
+                                    <div class="col-sm-6">
+                                        <label class="label bg-primary">Assigned Quantity:</label>
+                                        <select class="form-control trans_details text-details" id="class">
+                                            <option value="<?php echo $male_quantity; ?>"><?php echo $male_quantity; ?></option>
+
+                                            <select>
+
                                     </div>
+
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary">Bin Card #:</label>
-                                    </div>
-                                    <div class="col-sm-11">
-                                        <input type="text" class="form-control trans_details text-details" name="fullname" required="" value="<?php echo $bincard; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Seed Source:</label>
-                                    </div>
-                                    <div class="col-sm-11">
-                                        <input type="text" class="form-control trans_details text-details" name="seed_source" id="seed_source" required="" value="<?php echo $source; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Processing status:</label>
-                                    </div>
-                                    <div class="col-sm-11">
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="form-group row">
-                                    <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Description:</label>
-                                    </div>
-                                    <div class="col-sm-11">
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $description; ?>">
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group row">
-
-                                    <div class="col-sm-2">
-                                        <button class=" btn btn-success" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
-                               
                                    
-                                        <button class=" btn btn-danger" id='back' data-toggle="modal" data-target="#deleteModal" name='back'><i class='icofont icofont-trash'></i>Delete</button>
+
+
+
+                                    <div class="col-sm-6">
+
+                                        <label class="label bg-primary">Female Lot Number:</label>
+                                        <select class="form-control trans_details text-details" id="variety">
+                                            <option value="<?php echo $female_lot_number; ?>"><?php echo $female_lot_number; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+
+                                        <label class="label bg-primary">assigned Quantity:</label>
+                                        <select class="form-control trans_details text-details" id="class">
+                                            <option value="<?php echo $female_quantity; ?>"><?php echo $female_quantity; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                                <div class="form-group row">
+                                    
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">Region:</label>
+                                        <select class="form-control trans_details text-details" id="crop">
+
+                                            <option value="<?php echo $cropId; ?>"><?php echo $region; ?></option>
+
+                                            <select>
+                                                <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID; ?>">
+                                                <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
+                                    </div>
+
+                                    
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">District:                      </label>
+
+                                        <select class="form-control trans_details text-details" id="variety">
+                                            <option value="<?php echo $varietyId; ?>"><?php echo $district; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+                                    
+                                    <div class="col-sm-4">
+                                    <label class="label bg-primary">Area name:</label>
+
+                                        <select class="form-control trans_details text-details" id="class">
+                                            <option value="<?php echo $class; ?>"><?php echo $area_name; ?></option>
+
+                                            <select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group row">
+                                    
+                                    <div class="col-sm-12">
+
+                                    <label class="label bg-primary">Address:</label>
+                                        <textarea class="form-control trans_details text-details" name="" id="address" cols="30" rows="3"><?php echo $address; ?>
+
+
+
+                                        </textarea>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                   
+                                    <div class="col-sm-12">
+                                       
+                                    <label class="label bg-primary">Physical Address:</label>
+                                        <textarea class="form-control trans_details text-details" name="" id="address" cols="30" rows="3"><?php echo $physical_address; ?>
+
+
+
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    
+                                    <div class="col-sm-12">
+                                    <label class="label bg-primary">EPA:</label>
+                                        <input type="text" class="form-control trans_details text-details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $epa; ?>">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                   
+                                    <div class="col-sm-6">
+                                    <label class="label bg-primary ">land History (Previous year):</label>
+                                        <input type="text" class="form-control trans_details text-details" name="dob" id="ogQuantity" required="" value="<?php echo $previous_year; ?>">
+                                    </div>
+
+
+                                   
+                                    <div class="col-sm-6">
+                                    <label class="label bg-primary ">land History (Other year):</label>
+                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $other_year; ?>">
+                                    </div>
+
+
+                                </div>
+
+
+
+                              
+
+                                <div class="form-group row">
+
+                                    <div class="col-sm-3">
+                                        <button class=" btn btn-primary btn-mat" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
+
+                                        <button class=" btn btn-danger btn-mat" id='back' data-toggle="modal" data-target="#deleteModal" name='back'><i class='icofont icofont-trash'></i>Delete</button>
                                     </div>
 
                                 </div>

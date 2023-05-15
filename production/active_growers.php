@@ -60,11 +60,14 @@ if (in_array($position, $notRestricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/pagenation.css">
+    
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
 
     </script>
+
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
 
@@ -507,7 +510,7 @@ if (in_array($position, $notRestricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-plus"></i> New grower</button>
+                                                <button type="button" class="btn btn-primary btn-mat " data-toggle="modal" data-target="#myModal"><i class="icofont icofont-plus"></i> New grower</button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -568,7 +571,7 @@ if (in_array($position, $notRestricted)) {
                                                                                 <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
+                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-primary  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
                                                                         </div>
 
                                                                     </div>
@@ -674,7 +677,7 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="btn btn-success btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
+                                                            <button class="btn btn-primary btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
                                                             <input type="hidden" name="type" id="type" value="active">
@@ -750,7 +753,7 @@ if (in_array($position, $notRestricted)) {
 	
 												
 												<td>
-                                                <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-eye'></i>View</a>
+                                                <a href='grower_details.php? creditor_id=$creditor_id'  class='btn btn-primary btn-mat'><i class='icofont icofont-eye'></i>View</a>
                                                 </td>
 											</tr>	
 										";

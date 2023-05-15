@@ -521,9 +521,11 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
                                                         <select id="select_class" name="class" class="form-control" required="">
                                                             <option value="0">Select class</option>
-                                                            <option value="basic">Basic</option>
+                                                            <option value="breeder">Breeder</option>
                                                             <option value="pre_basic">Pre-Basic</option>
+                                                            <option value="basic">Basic</option>
                                                             <option value="certified">Certified</option>
+                                                         
 
                                                         </select>
                                                         <label id="warning_class" class="warning_text"> <span>Please select seed class<i class="icofont icofont-warning"></i></span></label>
@@ -653,7 +655,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
 
 
-                                                    <button id="save_certificate" class="btn waves-effect waves-light btn-success  btn-block">
+                                                    <button id="save_certificate" class="btn waves-effect waves-light btn-success  btn-mat">
                                                         <i class="icofont icofont-save"></i>
                                                        Save
                                                     </button>
@@ -666,10 +668,9 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-12">
 
-                                                    <button id="cancle" class="btn waves-effect waves-light btn-danger  btn-block">
-                                                        <i class="icon-close icons"></i>
-                                                       Cancle
-                                                    </button>
+                                                    <a href="add_certificate.php" class="btn waves-effect waves-light btn-danger  btn-mat">  <i class="icofont icofont-"></i> Cancel</a>
+
+                                                    
                                                     </div>
 
 

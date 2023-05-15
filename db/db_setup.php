@@ -224,6 +224,7 @@ Hectors varchar(100),
 
              female_lot_number varchar(100),
              female_quantity varchar(100),
+             
 
 
             FOREIGN KEY(user_ID) REFERENCES user(user_ID), 

@@ -47,35 +47,71 @@ if (isset($_POST['main_certificate_value'])) {
   $variety_value = $_POST['variety_value'];
   $class_value = $_POST['class_value'];
 
-  if (!empty($quantity_value)) {
+  if ($crop_value == "CP001") {
 
 
-    $sql = "SELECT `lot_number` FROM
-                                `certificate` WHERE available_quantity >= $quantity_value AND  
-                               `crop_ID` = '$crop_value'  AND `variety_ID` = '$variety_value' 
-                                 AND `class`='$class_value' AND `lot_number`
-                                    LIKE '%$result_value%'";
+    if (!empty($quantity_value)) {
 
 
-    $result =  $con->query($sql);
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $lot_number   = $row["lot_number"];
+      $sql = "SELECT `lot_number` FROM
+                                  `certificate` WHERE available_quantity >= $quantity_value AND assigned_quantity >= $quantity_value AND
+                                 `crop_ID` = '$crop_value' 
+                                    AND `lot_number`
+                                      LIKE '%$result_value%'";
 
+
+      $result =  $con->query($sql);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $lot_number   = $row["lot_number"];
+
+
+          echo "
+                                                                  <option value ='$lot_number'>$lot_number</option>";
+        }
+      } else {
 
         echo "
-                                                                <option value ='$lot_number'>$lot_number</option>";
+                                                                  <option value ='not_selected'> 0 results, certificate not available</option>";
       }
     } else {
-
       echo "
-                                                                <option value ='null'> certificate not available</option>";
+                           <option value ='Lot Number not available'>Please add quantity first</option>
+                           
+                           ";
     }
   } else {
-    echo "
-                         <option value ='Lot Number not available'>Please add quantity first</option>
-                         
-                         ";
+
+    if (!empty($quantity_value)) {
+
+
+      $sql = "SELECT `lot_number` FROM
+                                  `certificate` WHERE available_quantity >= $quantity_value AND assigned_quantity >= $quantity_value AND
+                                 `crop_ID` = '$crop_value'  AND `variety_ID` = '$variety_value' 
+                                   AND `class`='$class_value' AND `lot_number`
+                                      LIKE '%$result_value%'";
+
+
+      $result =  $con->query($sql);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $lot_number   = $row["lot_number"];
+
+
+          echo "
+                                                                  <option value ='$lot_number'>$lot_number</option>";
+        }
+      } else {
+
+        echo "
+                                                                  <option value ='not_selected'> 0 results, certificate not available</option>";
+      }
+    } else {
+      echo "
+                           <option value ='Lot Number not available'>Please add quantity first</option>
+                           
+                           ";
+    }
   }
 }
 
@@ -97,8 +133,8 @@ if (isset($_POST['male_certificate_value'])) {
   if (!empty($result_value)) {
 
     $sql = "SELECT `lot_number` FROM
-                        `certificate` WHERE available_quantity >= $quantity_value AND  
-                       `crop_ID` = '$crop_value'  AND `variety_ID` = '$variety_value' 
+                        `certificate` WHERE available_quantity >= $quantity_value AND assigned_quantity >= $quantity_value AND
+                       `crop_ID` = '$crop_value'
                          AND `type`='male' AND `lot_number`
                             LIKE '%$result_value%'";
 
@@ -114,7 +150,7 @@ if (isset($_POST['male_certificate_value'])) {
     } else {
 
       echo "
-                                                <option value ='Lot Number not available'>Lot Number not available</option>";
+      <option value ='not_selected'> 0 results, certificate not available</option>";
     }
   }
 }
@@ -137,8 +173,8 @@ if (isset($_POST['female_certificate_value'])) {
   if (!empty($result_value)) {
 
     $sql = "SELECT `lot_number` FROM
-                        `certificate` WHERE assigned_quantity >= $quantity_value AND  
-                       `crop_ID` = '$crop_value'  AND `variety_ID` = '$variety_value' 
+                        `certificate` WHERE assigned_quantity >= $quantity_value AND assigned_quantity >= $quantity_value AND
+                       `crop_ID` = '$crop_value'
                          AND `type`='female' AND `lot_number`
                             LIKE '%$result_value%'";
 
@@ -154,7 +190,7 @@ if (isset($_POST['female_certificate_value'])) {
     } else {
 
       echo "
-                  <option value ='Lot Number not available'>Lot Number not available</option>";
+      <option value ='not_selected'> 0 results, certificate not available</option>";
     }
   }
 }
@@ -166,34 +202,31 @@ if (isset($_POST['female_certificate_value'])) {
 
 // lab get certificate 
 
-if (isset($_POST['lab_certificate_value'])) {
-;
-     
+if (isset($_POST['lab_certificate_value'])) {;
+
   $result_value = $_POST['lab_certificate_value'];
   $quantity_value = $_POST['quantity_value'];
   $variety_value = $_POST['variety_value'];
   $class_value = $_POST['class_value'];
 
 
-$sql="SELECT * FROM `certificate` WHERE `available_quantity` >= '$quantity_value' AND `variety_ID` = '$variety_value' AND  `class` = '$class_value' AND `lot_number` LIKE '%$result_value%'";
-  
+  $sql = "SELECT * FROM `certificate` WHERE `available_quantity` >= '$quantity_value' AND `variety_ID` = '$variety_value' AND  `class` = '$class_value' AND `lot_number` LIKE '%$result_value%'";
 
 
-$result =  $con->query($sql);
 
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $lot_number   = $row["lot_number"];
+  $result =  $con->query($sql);
 
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $lot_number   = $row["lot_number"];
+
+
+      echo "
+              <option value ='$lot_number'>$lot_number</option>";
+    }
+  } else {
 
     echo "
-              <option value ='$lot_number'>$lot_number</option>";
-  }
-} else {
-
-  echo "
               <option value ='Lot Number not available'>Lot Number not available</option>";
-}
-
-
+  }
 }

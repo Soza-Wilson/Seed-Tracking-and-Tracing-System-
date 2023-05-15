@@ -581,7 +581,7 @@ else{
 
                                                                            
 
-                                                                            <button id="save" class="btn btn-success"><i class="icofont icofont-save" data-toggle="tooltip" data-placement="left" data-original-title=".icofont-home"></i> save</button>
+                                                                            <button id="save" class="btn btn-success btn-mat" data-toggle="tooltip" data-placement="left" data-original-title="Update business details"><i class="icofont icofont-save" ></i> save</button>
 
 
 

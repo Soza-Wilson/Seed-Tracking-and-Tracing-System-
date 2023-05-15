@@ -21,6 +21,8 @@ if (empty($_GET['type'])) {
 
 class PDF extends FPDF
 {
+
+
     function get_details()
     {
 
@@ -41,9 +43,9 @@ class PDF extends FPDF
 
     function logo_resize($address_count)
     {
-        $width = 44;
-        $height = 33;
-        if ((int)$address_count === 5) {
+        $width = 40;
+        $height = 30;
+        if ((int)$address_count <= 5) {
             return $size = [$width, $height];
         } else if ((int)$address_count > 5) {
             $new_count = (int)$address_count - 5;
@@ -53,11 +55,13 @@ class PDF extends FPDF
         }
     }
 
+   
+
     // Page header
     function Header()
     {
 
-
+        $defaultAddressSize = 5;
         $data = $this->get_details();
         $address = explode(",", $data[2]);
         $address_count = 0;
@@ -71,7 +75,10 @@ class PDF extends FPDF
 
         //change logo image
 
+        // $this->Image('../files/business_logo/' . $data[3], 10, 11, $resize[0], $resize[1]);
+
         $this->Image('../files/business_logo/' . $data[3], 10, 11, $resize[0], $resize[1]);
+
 
         // font Arial  
         $this->SetFont('Arial', 'I', 10);
@@ -79,10 +86,19 @@ class PDF extends FPDF
 
         //get address details 
 
+
+
         foreach ($address as $item) {
 
             $this->Cell(90, 7, '', 0, "C");
             $this->Cell(90, 7, $item, 0, 1, 'C');
+            $defaultAddressSize-=1;
+        }
+
+        for ($i = 0; $i < $defaultAddressSize; $i++) {
+
+            $this->Cell(90, 7, '', 0, "C");
+            $this->Cell(90, 7, '', 0, 1, 'C');
         }
         $this->Cell(0, 0, '', 1, 0, 'C');
         $this->Ln();
@@ -304,7 +320,7 @@ class pdf_handler
 
         $pdf->Cell(100, 10, 'Signature : ..............................................................', 0, 0, '');
         $pdf->Ln();
-      
+
         $pdf->Ln();
 
 

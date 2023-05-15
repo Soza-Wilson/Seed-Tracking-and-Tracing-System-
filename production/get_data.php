@@ -133,11 +133,17 @@ if (isset($_POST["registerContract"])) {
 }
 
 if(isset($_POST["registerFarm"])){
+
+
+      
   
-  $farmData = $_POST["registerFarm"];
-  $object->register_farm();
+  $farmRegisterData = $_POST["registerFarm"];
+  $returnData = $object->register_farm($farmRegisterData[4],$farmRegisterData[1],$farmRegisterData[2],$farmRegisterData[3],
+  $farmRegisterData[13],$farmRegisterData[14],$farmRegisterData[16],$farmRegisterData[17],$farmRegisterData[18],
+  $farmRegisterData[15],$farmRegisterData[0],$farmRegisterData[11],$farmRegisterData[12],$farmRegisterData[5],
+  $farmRegisterData[6],$farmRegisterData[7],$farmRegisterData[8],$farmRegisterData[9],$farmRegisterData[10],$farmRegisterData[19],$farmRegisterData[20]);
 
-
+  echo $returnData;
 
 }
 

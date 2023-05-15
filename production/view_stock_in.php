@@ -63,6 +63,9 @@ if (in_array($position, $notRestricted)) {
 
     </script>
 
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
+
 </head>
 
 <body>
@@ -509,32 +512,12 @@ if (in_array($position, $notRestricted)) {
                                             </div>
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Creditor name</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Crop</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <label>Select Class</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
+                                               
 
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-
+                                                    <label class="label bg-primary">Creditor name</label>
                                                         <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
                                                         <label id="warning_name" class="warning-text"> <span>Please enter Creditor name <i class="icofont icofont-warning"></i></span></label>
 
@@ -542,7 +525,7 @@ if (in_array($position, $notRestricted)) {
 
                                                     <div class="col-sm-2">
 
-
+                                                    <label class="label bg-primary">Select Crop</label>
                                                         <select name="select_crop" id="select_crop" class="form-control">
                                                             <option value="not_selected">Not Selected</option>
 
@@ -557,7 +540,7 @@ if (in_array($position, $notRestricted)) {
 
                                                     <div class="col-sm-2">
 
-
+                                                    <label class="label bg-primary">Select Variety</label>
                                                         <select name="select_variety" id="select_variety" class="form-control">
                                                             <option value="not_selected">Not Selected</option>
 
@@ -571,7 +554,7 @@ if (in_array($position, $notRestricted)) {
                                                     </div>
                                                     <div class="col-sm-1">
 
-
+                                                    <label class="label bg-primary">Select Class</label>
                                                         <select name="select_class" id="select_class" class="form-control">
                                                             <option value="not_selected">Class</option>
                                                             <option value="pre_basic">Pre-Basic</option>
@@ -587,11 +570,13 @@ if (in_array($position, $notRestricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary">From :</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                         <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-primary">To :</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
@@ -604,8 +589,9 @@ if (in_array($position, $notRestricted)) {
                                                     <div class="col-sm-1">
 
 
-
+                                                        <br/>
                                                         <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
+                                                        <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -618,7 +604,7 @@ if (in_array($position, $notRestricted)) {
                                                         <div class="col-sm-3">
 
 
-
+                                                       
                                                             <button class="btn btn-primary btn-mat " id='stock_in_csv' name='stock_in_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
@@ -735,7 +721,7 @@ if (in_array($position, $notRestricted)) {
                                                
 												
 												
-												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>View </a>
+												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-primary btn-mat'><i class='icofont icofont-eye-alt'></i>view </a>
                                                 
                                                 </td>
 											</tr>	
@@ -746,6 +732,7 @@ if (in_array($position, $notRestricted)) {
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <div id="pagination"></div>
                                             </div>
                                         </div>
 

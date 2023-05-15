@@ -66,7 +66,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/register_farm_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/register_farm.js"></script>
 
 
 </head>
@@ -208,13 +208,7 @@ if (in_array($position, $restricted)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -233,7 +227,7 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Stock</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="#" class="waves-effect waves-dark">
+                                    <a href="stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Add Stock </span>
                                         <span class="pcoded-mcaret"></span>
@@ -465,7 +459,7 @@ if (in_array($position, $restricted)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="register_farm">Register farm</a>
+                                            <li class="breadcrumb-item"><a href="register_farm.php">Register farm</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -482,12 +476,120 @@ if (in_array($position, $restricted)) {
                                     <div class="page-body">
                                         <div class="row">
                                             <div class="col-md-12">
+
+
+
+
+
+
+                                          
+
+                                           
+
+                                                <!-- Modal -->
+                                                
+                                         
                                                 <div class="card">
+
+                                                <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">Register new grower</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
+                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
+                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+                                                                         
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <labe>Supporting documents :</label>
+                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                                            <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                            <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
+
+                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-primary  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
+                                                                        </div>
+
+                                                                    </div>
+
+
+
+                                                                </form>  
+                                                                <div class="card" id="existingName">
+                                                                <div class="card-header">
+                                                    <h5> Activate Existing Inactive Grower
+                                                        
+                                                    </h5>
+                                                </div>
+
+                                                                <div class="card-block table-border-style">
+                                                               <div class="table-responsive">
+                                                               <table class="table table-hover" id="existingNameTable">
+
+                                                    </table>
+                                                </div>
+                                             </div>
+
+
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                                     <div class="card-header">
+
 
                                                         <!-- <form action="register_farm.php" method="POST"> -->
                                                             <!-- /*
-get registered grower form
+get registered grower form                                 
 */ -->
 
                                                             <h5>Select grower</h5>
@@ -507,6 +609,7 @@ get registered grower form
                                                                             <option value="0">Select Creditor</option>
 
                                                                         </select>
+                                                                        <input type="hidden" id="user" value="<?php echo $_SESSION['user']?>">
                                                                         <label id="warning_select_creditor" class="warning_text"> <span>Please Select grower <i class="icofont icofont-warning"></i></span></label>
 
                                                                     </div>
@@ -526,7 +629,7 @@ get registered grower form
                                                             </div>
                                                             <div class="col-sm-6">
 
-                                                                <a href="grower.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                                <a href="active_growers.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
                                                                     new grower
 
                                                                 </a>
@@ -563,10 +666,10 @@ get registered grower form
                                                                     </div>
 
                                                                     <div class="col-sm-1">
-                                                                    <a href="grower.php" class="btn btn-success btn-mat"><i class="icofont icofont-upload"></i>
+                                                                    <button  class="btn btn-primary btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-upload"></i>
                                                                     Upload
 
-                                                                </a>
+                                                                    </button>
                                                                     </div>
 
                                                                     <div class="col-sm-1">
@@ -652,9 +755,12 @@ get crop details
                                                 <div class="col-sm-12">
                                                     <select id="select_class" name="select_class" class="form-control" required="">
                                                         <option value="0">Select class</option>
-                                                        <option value="basic">Basic</option>
-                                                        <option value="pre_basic">Pre-Basic</option>
-                                                        <option value="certified">Certified</option>
+                                                        <option value="Pre_basic">Basic</option>
+                                                        <option value="basic">Pre-Basic</option>
+                                                        <option value="certified">certified</option>
+
+                                                        
+                                                        
 
                                                     </select>
                                                     <label id="warning_class" class="warning_text"> <span>Please Select class <i class="icofont icofont-warning"></i></span></label>
@@ -748,7 +854,7 @@ add main crop certificate
                                                 <span class="pcoded-mcaret"></span>
 
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 inbred_items">
 
                                                     <select id="main_certificate"  class="form-control" >
                                                         <option value="no_certificate_selected">Select Certificate</option>
@@ -767,7 +873,7 @@ add main crop certificate
 
 
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 inbred_items">
 
                                                     <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
 
@@ -776,7 +882,7 @@ add main crop certificate
 
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 inbred_items">
 
                                                     <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
                                                     <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
@@ -796,7 +902,7 @@ add hybrid male crop certificate
 
 
 
-                                                <h5>Hybrid Certificate</h5>
+                                                <h5 class="single_cross_items">Hybrid Certificate</h5>
 
 
 
@@ -810,7 +916,7 @@ add hybrid male crop certificate
                                                 <span class="pcoded-mcaret"></span>
 
 
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 single_cross_items" >
 
                                                     <select id="male_certificate" name="male_certificate" class="form-control" required="">
                                                         <option value="no_certificate_selected">Select Male Certificate</option>
@@ -828,7 +934,7 @@ add hybrid male crop certificate
 
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 single_cross_items">
 
                                                     <input id="search_male_certificate" type="text" class="form-control" name="search_male_certificate" placeholder="Search Male certificate" require="">
 
@@ -836,7 +942,7 @@ add hybrid male crop certificate
 
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 single_cross_items">
 
                                                     <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
                                                     <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
@@ -865,8 +971,8 @@ add hybrid female crop certificate
                                                 <span class="pcoded-mcaret"></span>
 
 
-                                                <div class="col-sm-6">
-
+                                                <div class="col-sm-6 single_cross_items">
+ 
                                                     <select id="female_certificate" name="female_certificate" class="form-control" required="">
                                                         <option value="no_certificate_selected">Select Female Certificate</option>
                                                         <option value="no_certificate_selected">-</option>
@@ -882,7 +988,7 @@ add hybrid female crop certificate
 
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 single_cross_items">
 
                                                     <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Search Female Certificate" require="">
 
@@ -890,7 +996,7 @@ add hybrid female crop certificate
 
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-3 single_cross_items">
 
                                                     <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
                                                     <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
@@ -908,7 +1014,7 @@ add hybrid female crop certificate
 
                                             <div class="col-sm-12">
 
-                                                <a href="add_certificate.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                <a href="add_certificate.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
                                                     New certificate
 
                                                 </a>
@@ -1143,8 +1249,8 @@ form adding farm location details
 
 
 
-                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-success btn-mat ">save</button> -->
-                                                <button class="btn btn-success btn-mat" id=save_farm ><i class="icofont icofont-save"></i>Save</button>
+                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-primary btn-mat ">save</button> -->
+                                                <button class="btn btn-primary btn-mat" id=save_farm ><i class="icofont icofont-save"></i>Save</button>
 
                                                 </br>
                                                 </br>
@@ -1283,63 +1389,7 @@ form adding farm location details
 
 //main class object and passing register farm required variables 
 
-if (isset($_POST['save_farm'])) {
 
-
-
-
-
-    if ($_POST['variety'] == 'VT002' || $_POST['variety'] == 'VT003' || $_POST['variety'] == 'VT004') {
-
-
-
-
-
-
-        $class = "hybrid";
-        $male = $_POST['male_certificate'];
-        $male_quantity = $_POST['male_quantity'];
-        $female = $_POST['female_certificate'];
-        $female_quantity = $_POST['female_quantity'];
-        $main = "-";
-        $main_quantity = "-";
-    } else {
-
-
-
-
-        $class = $_POST['select_class'];
-        $male = "-";
-        $male_quantity = "-";
-        $female = "-";
-        $female_quantity = "-";
-        $main = $_POST['main_certificate'];
-        $main_quantity = $_POST['main_quantity'];
-    }
-
-    $object = new main();
-    $object->register_farm(
-        $_POST['hectors'],
-        $_POST['crop'],
-        $_POST['variety'],
-        $class,
-        $_POST['select_region'],
-        $_POST['select_district'],
-        $_POST['area_name'],
-        $_POST['address'],
-        $_POST['physical_address'],
-        $_POST['epa'],
-        $_POST['grower_search_result'],
-        $_POST['pre_crop'],
-        $_POST['other_select_crop'],
-        $main,
-        $main_quantity,
-        $male,
-        $male_quantity,
-        $female,
-        $female_quantity
-    );
-}
 
 
 

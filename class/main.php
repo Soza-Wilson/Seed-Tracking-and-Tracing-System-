@@ -174,10 +174,10 @@ class main
     $statement->execute();
   }
 
-  function register_variety($variety_name, $crop_id,$variety_type)
+  function register_variety($variety_name, $crop_id, $variety_type)
   {
 
-    $v_name=strtolower($variety_name);
+    $v_name = strtolower($variety_name);
     global $con;
     $user_id = $this->generate_user("variety");
     $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`) VALUES ('$user_id','$v_name','$crop_id','$variety_type')";
@@ -1419,55 +1419,47 @@ class main
 
 
 
-  function update_grower($grower_id,$grower_name,$phone,$email,$file_directory){
+  function update_grower($grower_id, $grower_name, $phone, $email, $file_directory)
+  {
     global $con;
-    $sql="UPDATE `creditor` SET `name`='$grower_name',`phone`='$phone',`email`='$email' WHERE `creditor_ID`='$grower_id'";
+    $sql = "UPDATE `creditor` SET `name`='$grower_name',`phone`='$phone',`email`='$email' WHERE `creditor_ID`='$grower_id'";
     $statement = $con->prepare($sql);
-    if($statement->execute()){
+    if ($statement->execute()) {
 
-     $season=$this->get_season();
+      $season = $this->get_season();
       // Update contract file
-      $sql="UPDATE `contract` SET `dir`='$file_directory' WHERE `season`='$season' AND `grower`='$grower_id'";
+      $sql = "UPDATE `contract` SET `dir`='$file_directory' WHERE `season`='$season' AND `grower`='$grower_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 
       return 'updated';
-
-
-
     }
-
-    
-    }
-
-
-    // Activate inactive grower
-function activate_grower($grower_id,$file_directory,$user){
-
-
-  global $con;
-  $sql="UPDATE `creditor` SET `creditor_status`='active' WHERE `creditor_ID`='$grower_id'"; 
-  $statement = $con->prepare($sql);
-  $statement->execute();
-
-  $return_data = $this->register_contract($grower_id,$user,"grower",$file_directory);
-
-  if($return_data=="grower_registered"){
-    return "activated";
   }
 
-  else{
-    return "error";
+
+  // Activate inactive grower
+  function activate_grower($grower_id, $file_directory, $user)
+  {
+
+
+    global $con;
+    $sql = "UPDATE `creditor` SET `creditor_status`='active' WHERE `creditor_ID`='$grower_id'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    $return_data = $this->register_contract($grower_id, $user, "grower", $file_directory);
+
+    if ($return_data == "grower_registered") {
+      return "activated";
+    } else {
+      return "error";
+    }
   }
 
 
 
-}
 
-   
 
- 
-  
 
   function get_season()
   {
@@ -1526,12 +1518,10 @@ function activate_grower($grower_id,$file_directory,$user){
       $target_timestamp = strtotime($closing_date);
       $current_timestamp = strtotime($current_date);
 
-      if ($target_timestamp < $current_timestamp) {    
-       $this->deactivate_growers($season);
-       $this->create_new_season($opening_date,$closing_date);
-       
-      } 
-
+      if ($target_timestamp < $current_timestamp) {
+        $this->deactivate_growers($season);
+        $this->create_new_season($opening_date, $closing_date);
+      }
     }
   }
 
@@ -1672,15 +1662,17 @@ function activate_grower($grower_id,$file_directory,$user){
     $male_certificate,
     $male_quantity,
     $female_certificate,
-    $female_quantity
-  ) {
+    $female_quantity,
+    $user,
+    $hybrid_type
 
+  ) {
 
 
 
     $farm_ID = $this->generate_user("farm");
     $registered_date = date("d-m-Y");
-    $user_ID = $_SESSION['user'];
+
     global $con;
 
     if (!empty('$main_quantity')) {
@@ -1692,7 +1684,7 @@ function activate_grower($grower_id,$file_directory,$user){
         `main_lot_number`, `main_quantity`, `male_lot_number`, `male_quantity`,
          `female_lot_number`, `female_quantity`) VALUES ('$farm_ID','$hectors',
          '$crop','$variety','$class','$region','$district','$area_name',
-         '$address','$physical_address','$epa','$user_ID','$grower_ID','$registered_date','$previous_year',
+         '$address','$physical_address','$epa','$user','$grower_ID','$registered_date','$previous_year',
          '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
 
 
@@ -1702,11 +1694,56 @@ function activate_grower($grower_id,$file_directory,$user){
 
       if ($statement = true) {
 
-        echo ("<script> alert('farm added!');
-                                </script>");
+        return "added";
 
-        $this->edit_quantity_certificate($main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity, $variety);
+        $this->change_assigned_certificate_quantity($hybrid_type, $main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity, $variety);
+        //return $this->edit_quantity_certificate($hybrid_type,$main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity, $variety);
+      } else {
+        return "Error";
       }
+    }
+  }
+
+
+  // function updating certificate quantity after registering farm 
+
+
+
+  function change_assigned_certificate_quantity(
+    $hybrid_type,
+    $main_lot_number,
+    $main_quantity,
+    $male_lot_number,
+    $male_quantity,
+    $female_lot_number,
+    $female_quantity,
+    $variety
+  ) {
+
+    global $con;
+
+    if ($hybrid_type == "hybrid_inbred") {
+
+      $newMaleQuantity = (int)$male_quantity;
+      $newFemaleQuantity = (int)$female_quantity;
+
+
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMaleQuantity WHERE `lot_number`='$male_lot_number'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newFemaleQuantity WHERE `lot_number`='$female_lot_number'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    } else {
+
+      $newMainQuantity = (int)$main_quantity;
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMainQuantity WHERE `lot_number`='$main_lot_number'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
     }
   }
 
@@ -1982,54 +2019,6 @@ function activate_grower($grower_id,$file_directory,$user){
 
 
 
-  // function updating certificate quantity after registering farm 
-
-  function edit_quantity_certificate(
-    $main_lot_number,
-    $main_quantity,
-    $male_lot_number,
-    $male_quantity,
-    $female_lot_number,
-    $female_quantity,
-    $variety
-  ) {
-
-    global $con;
-
-    // dont know this buggy code is working ,but its working ( code for hybrid is working for normal seed )
-
-
-    if ($variety == 'VT002' || $variety == 'VT003' || $variety == 'VT004') {
-
-
-      echo ("<script> alert('hybrid');
-                                </script>");
-
-
-      $sql1 = "UPDATE `certificate` SET `assigned_quantity`= assigned_quantity - $male_quantity
-                                WHERE `lot_number`= '$male_lot_number'";
-
-
-      $statement2 = $con->prepare($sql1);
-      $statement2->execute();
-
-
-
-      $sql2 = "UPDATE `certificate` SET `assigned_quantity`= assigned_quantity - $female_quantity
-                                WHERE `lot_number`= '$female_lot_number'";
-
-      $statement2 = $con->prepare($sql2);
-      $statement2->execute();
-    } else {
-
-
-      $sql = "UPDATE `certificate` SET `assigned_quantity`= assigned_quantity - $main_quantity
-                                WHERE `lot_number`= '$main_lot_number'";
-
-      $statement = $con->prepare($sql);
-      $statement->execute();
-    }
-  }
   // function register inspection log 
 
 
@@ -2715,3 +2704,5 @@ function activate_grower($grower_id,$file_directory,$user){
   GROUP BY MONTH(date), YEAR(date)";
   }
 }
+
+

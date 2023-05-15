@@ -98,14 +98,18 @@ $(document).ready(function () {
         (data) => {
           $("#variety_type").html(data);
 
+          let selectedCrop = $("#select_crop").val();
+
+          if (selectedCrop == "CP001") {
+            $("#select_class").html(
+              ' <option value="0">Select class</option> <option value="certified">Certified</option> '
+            );
+          }
+
           if ($("#variety_type").val() == "hybrid") {
             $(".hybrid_items").show();
-          }
-          else{
-
+          } else if($("#variety_type").val() == "-" || $("#variety_type").val() == "opv"){
             $(".hybrid_items").hide();
-
-            
           }
         }
       );
@@ -269,8 +273,6 @@ $(document).ready(function () {
   });
   //// js code checking to retrive right certificate
 
-
-
   //retriving main certificate data
 
   $("#search_main_certificate").on("input", function () {
@@ -352,19 +354,26 @@ $(document).ready(function () {
       }
     );
   });
+
+  $("#seed_breeding").change(() => {
+    if ($("#seed_breeding").val() == "single_cross") {
+      $(".single_cross_items").hide();
+      $(".inbred_items").show();
+    } else if ($("#seed_breeding").val() == "inbred") {
+      $(".single_cross_items").show();
+      $(".inbred_items").hide();
+    }
+  });
+
   $("#save_farm").click(() => {
-    //let validateValue = checkTextfield();
-
-    // if (validateValue > 0) {
-    //   alert("Please fill out all required fileds !!");
-    //   register_farm();
-    // }
-
-    register_farm()
+    let conformation = confirm("Are you sure");
+    if (conformation == true) {
+      register_farm();
+    }
   });
 
   // velify user data
-  function checkTextfield() {
+  function checkTextAllfield() {
     let emptyFields = 0;
     if (
       $("#grower_search_result").val() == "" ||
@@ -392,9 +401,13 @@ $(document).ready(function () {
     if ($("#hectors").val() == 0) {
       $("#warning_hectors").show();
       emptyFields = emptyFields + 1;
+
+
     }
 
-    if (
+    if($("#variety_type").val()=="-"||$("#variety_type").val()=="opv"){
+
+      if (
       $("#main_certificate").val() == "no_certificate_selected" ||
       $("#main_certificate").val() == "not_selected"
     ) {
@@ -406,6 +419,12 @@ $(document).ready(function () {
       $("#warning_certificate_quantity").show();
       emptyFields = emptyFields + 1;
     }
+
+
+
+    }
+
+    
 
     if ($("#pre_select_crop").val() == "0") {
       $("#warning_pre_year").show();
@@ -450,70 +469,74 @@ $(document).ready(function () {
     return emptyFields;
   }
 
-  function register_farm() {
-  
-    let main_certificate = $("#main_certificate").val();
-    let main_quantinty =  $("#main_quantity").val();
-    let male_certificate =  $("#male_certificate").val();
-    let male_quantity= $("#male_quantity").val();
-    let female_certificate= $("#female_certificate").val();
-    let female_quantity= $("#female_quantity").val();
-  
+
+  ///removing warning texts for empty fields 
 
 
-    if ($("#variety_type").val() == "-" || $("#variety_type").val() == "opv") {
-      hybrid_data = {
-        male_certificate: "-",
-        male_quantity: "-",
-        female_certificate: "-",
-        female_quantity: "-",
-      };
-    } else if ($("#variety_type").val() == "hybrid") {
 
-      if($("#seed_breeding").val()=="not_selected"){
 
-        alert("Please select breeding type")
-      }
-      else if(($("#seed_breeding").val()=="inbred")){
 
-        male_certificate= $("#male_certificate").val(),
-        male_quantity= $("#male_quantity").val(),
-        female_certificate= $("#female_certificate").val(),
-        female_quantity= $("#female_quantity").val()  
 
-        male_certificate= "-",
-        male_quantity= "-"
-      
+  function validateCertificateData(seedBreedingType) {
+    let emptyFields = 0;
+
+    if (seedBreedingType == "single_cross") {
+      if (
+        $("#main_certificate").val() == "no_certificate_selected" ||
+        $("#main_certificate").val() == "not_selected"
+      ) {
+        $("#warning_main_certificate").show();
+        emptyFields = emptyFields + 1;
       }
 
-      else if(($("#seed_breeding").val()=="single_cross")){
-
-        main_certificate= $("#main_certificate").val(),
-        main_quantinty= $("#main_quantity").val(),
-
-        male_certificate= "-",
-        male_quantity= "-",
-        female_certificate="-",
-        female_quantity= "-"  
-
-
+      if ($("#main_quantity").val() == 0) {
+        $("#warning_main_quantity").show();
+        emptyFields = emptyFields + 1;
       }
-         
-         
+      return emptyFields;
+    } else if (seedBreedingType == "inbred") {
+      if (
+        $("#male_certificate").val() == "no_certificate_selected" ||
+        $("#male_certificate").val() == "not_selected"
+      ) {
+        $("#warning_male_certificate").show();
+        emptyFields = emptyFields + 1;
+      }
+
+      if ($("#male_quantity").val() == 0) {
+        $("#warning_male_quantity").show();
+        emptyFields = emptyFields + 1;
+      }
+
+      if (
+        $("#female_certificate").val() == "no_certificate_selected" ||
+        $("#female_certificate").val() == "not_selected"
+      ) {
+        $("#warning_female_certificate").show();
+        emptyFields = emptyFields + 1;
+      }
+
+      if ($("#female_quantity").val() == 0) {
+        $("#warning_female_quantity").show();
+        emptyFields = emptyFields + 1;
+      }
+      return emptyFields;
     }
+  }
 
+  function register_farm() {
     farm_data = [
       $("#grower_search_result").val(),
       $("#select_crop").val(),
       $("#select_variety").val(),
       $("#select_class").val(),
       $("#hectors").val(),
-      main_certificate,
-      main_quantity,
-      male_certificate,
-      male_quantity,
-      female_certificate,
-      female_quantity,
+      $("#main_certificate").val(),
+      $("#main_quantity").val(),
+      $("#male_certificate").val(),
+      $("#male_quantity").val(),
+      $("#female_certificate").val(),
+      $("#female_quantity").val(),
       $("#pre_select_crop").val(),
       $("#other_select_crop").val(),
       $("#select_region").val(),
@@ -522,18 +545,67 @@ $(document).ready(function () {
       $("#area_name").val(),
       $("#address").val(),
       $("#physical_address").val(),
+      $("#user").val(),
+      "-"
     ];
-   
-    alert(farm_data[6]);
 
-    $.post(
-      "get_creditors.php",
-      {
-        registerFarm: farm_data,
-      },
-      function (data) {
-        
+    if ($("#variety_type").val() == "-" || $("#variety_type").val() == "opv") {
+      (farm_data[7] = "-"),
+        (farm_data[8] = "-"),
+        (farm_data[9] = "-"),
+        (farm_data[10] = "-");
+    } else if ($("#variety_type").val() == "hybrid") {
+      if ($("#seed_breeding").val() == "not_selected") {
+        alert("Please select breeding type");
+      } else if ($("#seed_breeding").val() == "inbred") {
+        (farm_data[5] = "-"),
+          (farm_data[6] = "-"),
+          (farm_data[7] = $("#male_certificate").val()),
+          (farm_data[8] = $("#male_quantity").val()),
+          (farm_data[9] = $("#female_certificate").val()),
+          (farm_data[10] = $("#female_quantity").val(),
+          farm_data[20]="hybrid_inbred");
+
+        // validateCertificateData("inbred");
+      } else if ($("#seed_breeding").val() == "single_cross") {
+        (farm_data[5] = $("#main_certificate").val()),
+          (farm_data[6] = $("#main_quantity").val()),
+          (farm_data[7] = "-"),
+          (farm_data[8] = "-"),
+          (farm_data[9] = "-"),
+          (farm_data[10] = "-");
+        // validateCertificateData("single_cross");
       }
-    );
+    }
+
+   
+
+    if (checkTextAllfield() > 0) {
+      alert("Please fill out all required fields !!");
+    } else if (validateCertificateData($("#seed_breeding").val())) {
+      alert("Please fill out all required certificate fields !!");
+    } else {
+      $.post(
+        "get_data.php",
+        {
+          registerFarm: farm_data,
+        },
+        (data) => {
+          if(data=="added"){
+
+            alert("Registered");
+            window.location.reload();
+          }
+
+          else{
+
+            alert("Error: something went wrong ");
+            window.location.reload();
+
+
+          }
+        }
+      );
+    }
   }
 });

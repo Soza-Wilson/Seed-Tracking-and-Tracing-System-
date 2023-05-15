@@ -573,7 +573,7 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="btn btn-success btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
+                                                            <button class="btn btn-primary btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
                                                             <input type="hidden" name="type" id="type" value="inactive">
@@ -649,7 +649,7 @@ if (in_array($position, $notRestricted)) {
 	
 												
 												<td>
-                                                <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
+                                                <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-primary btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
                                                 </td>
 											</tr>	
 										";
