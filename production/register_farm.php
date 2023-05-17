@@ -902,7 +902,7 @@ add hybrid male crop certificate
 
 
 
-                                                <h5 class="single_cross_items">Hybrid Certificate</h5>
+                                                <h5 class="single_cross_items">Hybrid Certificates</h5>
 
 
 
@@ -1098,7 +1098,7 @@ form add land history
                                                         <option value="0">Select crop</option>
                                                         <option value="fallow">Fallow</option>
                                                         <option value="maize">Maize</option>
-                                                        <option value="G/nuts">Ground nuts -shelled-</option>
+                                                        <option value="G/nuts">Ground nuts </option>
 
                                                         <option value="soyabean">Soyabean </option>
                                                         <option value="rice">Rice</option>

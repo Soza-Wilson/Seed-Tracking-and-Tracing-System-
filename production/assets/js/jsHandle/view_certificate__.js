@@ -102,7 +102,7 @@ $(document).ready(function () {
                 }
               );
             } else {
-              alert("Operation failed , Certificate used ");
+              alert("Operation failed , Certificate has been used ");
               window.history.back();
             }
           } else {

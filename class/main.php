@@ -1747,6 +1747,70 @@ class main
     }
   }
 
+  //  Update registered farm 
+
+
+
+
+
+  function update_farm(
+
+    $hectors,
+    $crop,
+    $variety,
+    $class,
+    $region,
+    $district,
+    $area_name,
+    $address,
+    $physical_address,
+    $epa,
+    $grower_ID,
+    $previous_year,
+    $other_year,
+    $main_certificate,
+    $main_quantity,
+    $male_certificate,
+    $male_quantity,
+    $female_certificate,
+    $female_quantity,
+    $user,
+    $hybrid_type
+
+
+
+  ){
+
+
+    $sql="UPDATE `farm` SET `farm_ID`='[value-1]',`Hectors`='[value-2]',`crop_species`='[value-3]',
+    `crop_variety`='[value-4]',`class`='[value-5]',`region`='[value-6]',`district`='[value-7]',
+    `area_name`='[value-8]',`address`='[value-9]',`physical_address`='[value-10]',`EPA`='[value-11]',
+    `user_ID`='[value-12]',`creditor_ID`='[value-13]',`registered_date`='[value-14]',
+    `previous_year_crop`='[value-15]',`other_year_crop`='[value-16]',`order_status`='[value-17]',
+    `breeding_type`='[value-18]',`main_lot_number`='[value-19]',`main_quantity`='[value-20]',
+    `male_lot_number`='[value-21]',`male_quantity`='[value-22]',`female_lot_number`='[value-23]',`female_quantity`='[value-24]' WHERE 1";
+
+
+
+
+
+  }
+
+
+  function restore_assigned_seed_certificates($hybrid_type,
+  $main_lot_number,
+  $main_quantity,
+  $male_lot_number,
+  $male_quantity,
+  $female_lot_number,
+  $female_quantity,
+  $variety){
+
+
+
+
+  }
+
 
 
 

@@ -1082,6 +1082,8 @@ if (!empty($stock_in_ID)) {
                             <!-- Background Utilities table end -->
                         </div>
 
+                        
+
                         <!-- Background Utilities table end -->
                     </div>
                     <!-- Page-body end -->

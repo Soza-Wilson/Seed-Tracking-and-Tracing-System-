@@ -49,7 +49,7 @@ if (!empty($farm_id)) {
             $variety = $row["variety"];
             $class = $row["class"];
             $hectors = $row["Hectors"];
-            
+
             $grower_name = $row["name"];
             $grower_id = $row["creditor_ID"];
             $registered_by = $row["fullname"];
@@ -81,7 +81,7 @@ if (!empty($farm_id)) {
             $district = $row["district"];
             $area_name = $row["area_name"];
             $address = $row["address"];
-            $physical_address= $row["physical_address"];
+            $physical_address = $row["physical_address"];
             $epa = $row["EPA"];
 
 
@@ -89,15 +89,13 @@ if (!empty($farm_id)) {
 
             $previous_year = $row["previous_year_crop"];
             $other_year = $row["other_year_crop"];
-
-
-
-
-
-
         }
     }
+} else {
+
+    header("Location: registered_farms.php");
 }
+
 
 ?>
 
@@ -136,7 +134,7 @@ if (!empty($farm_id)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/farm_details.js">
 
     </script>
 </head>
@@ -626,81 +624,165 @@ if (!empty($farm_id)) {
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        <h5 class="modal-title">Update stock in details </h5>
+                                                        <h5 class="modal-title">Update farm details </h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h5>Enter crop details</h5>
+
+                                                            </div>
+                                                            <div class="card-block">
+
+                                                                <div class="form-group row">
+
+                                                                    <div class="col-sm-12">
+                                                                    <label for="physsical_address" class="label bg-primary"> Select crop</label>
+                                                                        <select id="select_crop" name="crop" class="form-control" required="">
+
+
+
+
+
+                                                                        </select>
+                                                                        <label id="warning_crop" class="warning_text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+
+                                                                    <label for="physsical_address" class="label bg-primary"> Select variety</label>
+                                                                        <select id="select_variety" name="variety" class="form-control" required="">
+                                                                            <option value="variety_not_selected">Select Variety</option>
+
+                                                                        </select>
+                                                                        <label id="warning_variety" class="warning_text"> <span>Please select variety<i class="icofont icofont-warning"></i></span></label>
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-1">
+
+                                                                        <label id="warning_variety" class="label bg-primary"> Variety type</label>
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-5">
+                                                                        <select id="variety_type" name="variety_type" class="form-control" required="">
+                                                                            <option value="-">-</option>
+
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-12">
+
+                                                                    <label for="physsical_address" class="label bg-primary"> Select Seed Class</label>
+                                                                        <select id="select_class" name="select_class" class="form-control" required="">
+                                                                            <option value="0">Select class</option>
+                                                                            <option value="Pre_basic">Basic</option>
+                                                                            <option value="basic">Pre-Basic</option>
+                                                                            <option value="certified">certified</option>
+
+
+
+
+                                                                        </select>
+                                                                        <label id="warning_class" class="warning_text"> <span>Please Select class <i class="icofont icofont-warning"></i></span></label>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="form-group row">
+
+
+                                                                    <div class="col-sm-12">
+
+                                                                    <label for="physsical_address" class="label bg-primary"> Enter assigned hectors</label>
+
+                                                                        <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="">
+                                                                        <label id="warning_hectors" class="warning_text"> <span>Please enter assigned hectors <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                    </div>
+
+
+
+                                                                </div>
+
+
+
+
+
+
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <!-- Slelect breeding type -->
+
+                                                        <div class="card hybrid_items">
+                                                            <div class="card-header">
+                                                                <h5>Breeding </h5>
+
+
+                                                            </div>
 
                                                             <div class="card-block">
 
-
-
-
-
-
-                                                                <div class="form-group row seed_details">
-                                                                    <div class="col-sm-12">
-                                                                        <select id="select_crop" name="crop" class="form-control" required="">
-                                                                            <option value="0">Select Crop</option>
-
-
-
-
-
-                                                                        </select>
-                                                                    </div>
-
-
-                                                                </div>
-
-                                                                <div class="form-group row seed_details">
-                                                                    <div class="col-sm-12">
-                                                                        <select id="select_variety" name="variety" class="form-control" required="">
-                                                                            <option value="0">Select Variety</option>
-
-
-
-                                                                        </select>
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="form-group row seed_details">
-                                                                    <div class="col-sm-12">
-                                                                        <select id="select_class" name="select_class" class="form-control" required="">
-                                                                            <option value="0">Select class</option>
-                                                                            <option value="basic">Basic</option>
-                                                                            <option value="pre_basic">Pre-Basic</option>
-                                                                            <option value="certified">Certified</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-
                                                                 <div class="form-group row">
-                                                                    <div class="col-sm-4">
-                                                                        <label>Quantity:</label>
-                                                                    </div>
 
                                                                     <div class="col-sm-12">
 
-                                                                        <input id="quantity" type="number" class="form-control" name="external_quantity" placeholder="Enter Quantity" require="" value="<?php echo $quantity; ?>">
+                                                                        <select id="seed_breeding" name="seed_breeding" class="form-control" required="">
+                                                                            <option value="not_selected">Select breeding type</option>
+                                                                            <option value="inbred">inbred </option>
+                                                                            <option value="single_cross">single cross</option>
 
 
+
+                                                                        </select>
+                                                                        <label id="warning_breeding" class="warning_text"> <span>Please select breeding type<i class="icofont icofont-warning"></i></span></label>
 
 
 
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-12">
-                                                                        <label id="warning_certificate"> <span>Crop details changed. Please upload new Seed Certificate <i class="icofont icofont-warning"></i></span></label>
-                                                                    </div>
+
+
 
                                                                 </div>
 
+                                                            </div>
+
+
+
+                                                        </div>
+
+
+                                                        <!-- certificates -->
+
+
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h5>Select certificate</h5>
+
+
+
+
+                                                            </div>
+                                                            <div class="card-block">
 
                                                                 <div class="form-group row">
 
@@ -708,9 +790,9 @@ if (!empty($farm_id)) {
                                                                     <span class="pcoded-mcaret"></span>
 
 
-                                                                    <div class="col-sm-6">
-
-                                                                        <select id="certificate" name="certificate" class="form-control" required="">
+                                                                    <div class="col-sm-6 inbred_items">
+                                                                    <label for="physsical_address" class="label bg-primary"> Other Previous Year</label>
+                                                                        <select id="main_certificate" class="form-control">
                                                                             <option value="no_certificate_selected">Select Certificate</option>
                                                                             <option value="no_certificate_selected">-</option>
 
@@ -720,51 +802,402 @@ if (!empty($farm_id)) {
 
 
                                                                         </select>
-
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-
-                                                                        <input id="search_certificate" type="text" class="form-control" name="search_certificate" placeholder="Search certificate" require="">
-
-
+        
+                                                                        <label id="warning_main_certificate" class="warning_text"> <span>Please Select Certificate <i class="icofont icofont-warning"></i></span></label>
 
                                                                     </div>
 
 
-                                                                </div>
+
+                                                                    <div class="col-sm-3 inbred_items">
+
+                                                                         
+                                                                    <label for="physsical_address" class="label bg-primary">search for lot number</label>
+                                                                        <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
 
 
-                                                                <div class="form-group row">
 
-                                                                    <div class="col-sm-12">
 
-                                                                        <a href="add_certificate.php" class="btn btn-primary"><i class='icofont icofont-edit-alt'></i>
-                                                                            New certificate
+                                                                    </div>
 
-                                                                        </a>
+                                                                    <div class="col-sm-3 inbred_items">
+                                                                    <label for="physsical_address" class="label bg-primary"> Enter Certificate quantity</label>
+                                                                        <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
+                                                                        <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
+
 
                                                                     </div>
 
 
+
+                                                                </div>
+                                                                <div class="card-header hybrid_items">
+
+                                                                    <!--                                                                                                             /*
+add hybrid male crop certificate 
+*/      -->
+
+
+
+
+                                                                    <h5 class="single_cross_items">Hybrid Certificates</h5>
+
+
+
+
                                                                 </div>
 
 
-                                                            </div>
+                                                                <div class="form-group row hybrid_items">
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Description:</label>
+
+                                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                                    <div class="col-sm-6 single_cross_items">
+                                                                    <label for="physsical_address" class="label bg-primary">Male certificate</label>
+                                                                        <select id="male_certificate" name="male_certificate" class="form-control" required="">
+                                                                            <option value="no_certificate_selected">Select Male Certificate</option>
+                                                                            <option value="no_certificate_selected">-</option>
+
+
+
+
+
+
+                                                                        </select>
+
+                                                                        <label id="warning_male_certificate" class="warning_text"> <span>Please select male certificate <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-3 single_cross_items">
+                                                                    <label for="physsical_address" class="label bg-primary"> Search for lot number</label>
+                                                                        <input id="search_male_certificate" type="text" class="form-control" name="search_male_certificate" placeholder="Search Male certificate" require="">
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-3 single_cross_items">
+                                                                    <label for="physsical_address" class="label bg-primary">Enter Male certificate quantity</label>
+                                                                        <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
+                                                                        <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                    </div>
+
+
+
+
+
+                                                                </div>
+
+
+
+                                                                <!--                                                                                                            /*
+add hybrid female crop certificate 
+*/   -->
+
+
+
+                                                                <div class="form-group row hybrid_items">
+
+
+                                                                    <span class="pcoded-mcaret"></span>
+
+
+                                                                    <div class="col-sm-6 single_cross_items">
+
+                                                                    <label for="physsical_address" class="label bg-primary">Female certificate</label>
+                                                                        <select id="female_certificate" name="female_certificate" class="form-control" required="">
+                                                                            <option value="no_certificate_selected">Select Female Certificate</option>
+                                                                            <option value="no_certificate_selected">-</option>
+
+
+
+
+
+
+                                                                        </select>
+                                                                        <label id="warning_female_certificate" class="warning_text"> <span>Please select female certificate <i class="icofont icofont-warning"></i></span></label>
+
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-3 single_cross_items"> 
+                                                                    <label for="physsical_address" class="label bg-primary"> Searchfor lot number</label>
+
+                                                                        <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Search Female Certificate" require="">
+
+
+
+                                                                    </div>
+
+                                                                    <div class="col-sm-3 single_cross_items">
+                                                                    <label for="physsical_address" class="label bg-primary">enter  Female certificate quantity</label>
+
+                                                                        <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
+                                                                        <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                    </div>
+
+
+
+
+
+
                                                                 </div>
 
                                                                 <div class="col-sm-12">
-                                                                    <input id="description" type="text" class="form-control" name="description" placeholder="description" require="" value="<?php echo $description; ?>">
-                                                                    <label id="warning_description" class="warning-text"> <span>Please enter description <i class="icofont icofont-warning"></i></span></label>
+
+                                                                    <a href="add_certificate.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
+                                                                        New certificate
+
+                                                                    </a>
+
                                                                 </div>
 
 
                                                             </div>
 
+                                                            <div class="card">
+                                        <div class="card-header">
+
+                                            <!--                                                                                                              /*
+form add land history
+*/  -->
+
+
+
+                                            <h5>Add Land History</h5>
+
+
+                                        </div>
+                                        <div class="card-block">
+                                           
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-12">
+                                                <label for="physsical_address" class="label bg-primary"> Previous Year</label>
+                                                    <select id="pre_select_crop" name="pre_crop" class="form-control" required="">
+                                                        <option value="0">Select crop</option>
+                                                        <option value="fallow">Fallow</option>
+                                                        <option value="maize">Maize</option>
+                                                        <option value="G/nuts">Ground nuts</option>
+                                                        <option value="soyabean">Soyabean </option>
+                                                        <option value="rice">Rice</option>
+                                                        <option value="sorgum">Sorgum</option>
+                                                        <option value="cowpea">Cowpea</option>
+                                                        <option value="pegeonpea">Pigeonpea</option>
+                                                        <option value="beans">Beans</option>
+
+
+
+
+                                                    </select>
+                                                    <label id="warning_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+
+                                            
+
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-12">
+
+                                                <label for="physsical_address" class="label bg-primary"> Other Previous Year</label>
+                                                    <select id="other_select_crop" name="other_select_crop" class="form-control" required="">
+                                                        <option value="0">Select crop</option>
+                                                        <option value="fallow" selected>Fallow</option>
+                                                        <option value="maize">Maize</option>
+                                                        <option value="G/nuts">Ground nuts </option>
+
+                                                        <option value="soyabean">Soyabean </option>
+                                                        <option value="rice">Rice</option>
+                                                        <option value="sorgum">Sorgum</option>
+                                                        <option value="cowpea">Cowpea</option>
+                                                        <option value="pegeonpea">Pigeonpea</option>
+                                                        <option value="beans">Beans</option>
+
+
+
+                                                    </select>
+                                                    <label id="warning_other_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="card">
+
+                                        <!--                                                                                                               /*
+form adding farm location details
+*/        -->
+
+
+
+                                        <div class="card-header">
+                                            <h5>Location</h5>
+
+
+                                        </div>
+
+                                        <div class="card-block">
+
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-6">
+                                                <label for="physsical_address" class="label bg-primary">Region</label>
+                                                    <select id="select_region" name="select_region" class="form-control" required="">
+                                                        <option value="0">Select Region</option>
+                                                        <option value="central">Central Region</option>
+                                                        <option value="northern">Northern Region</option>
+                                                        <option value="southern">Southern Region</option>
+
+
+
+
+
+                                                    </select>
+                                                    <label id="warning_region" class="warning_text"> <span>Please select legion<i class="icofont icofont-warning"></i></span></label>
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                <label for="physsical_address" class="label bg-primary">District</label>
+                                                    <select id="select_district" name="select_district" class="form-control" required="">
+                                                        <option value="0">Select District</option>
+
+
+
+
+
+
+                                                    </select>
+                                                    <label id="warning_district" class="warning_text"> <span>Please select district<i class="icofont icofont-warning"></i></span></label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    
+                                                <label for="physsical_address" class="label bg-primary">EPA</label>
+                                                    <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA / Trading center " require="" value="<?php echo $epa?>">
+                                                    <label id="warning_epa" class="warning_text"> <span>Please enter EPA / Area<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-12">
+
+                                                <label for="area_name" class="label bg-primary">Area Name</label>
+
+                                                    <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name / Estate" require="" value="<?php echo $area_name ?>">
+                                                    <label id="warning_area_name" class="warning_text"> <span>Please enter area name<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                </div>
+
+                                                
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                               
+
+                                                <div class="col-sm-12">
+
+                                                <label for="address" class="label bg-primary"> Address</label>
+
+                                                <textarea id="address" class="form-control" name="address"  name="" id="" cols="30" rows="3"><?php echo $address?></textarea>
+
+                                                <label id="warning_address" class="warning_text"> <span>Please add directions <i class="icofont icofont-warning"></i></span></label>
+
+                                                   
+
+
+
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="form-group row">
+
+
+                                                <span class="pcoded-mcaret"></span>
+
+
+                                                <div class="col-sm-12">
+                                                 
+                                                <label for="physical_address" class="label bg-primary">Physical Address</label>
+                                                <textarea id="physical_address" type="textarea" class="form-control" name="physical_address" placeholder="Directions " name="" id="" cols="30" rows="3"><?php echo $physical_address;?></textarea>
+
+                                                  
+                                                    <label id="warning_physical_address" class="warning_text"> <span>Please add directions <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                </div>
 
 
 
@@ -772,56 +1205,41 @@ if (!empty($farm_id)) {
 
 
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Seed Receive Note #:</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="number" id="srn" class="form-control" name="srn" placeholder="-" require="" value="<?php echo $SRN; ?>">
-                                                                    <label id="warning_srn" class="warning-text"> <span>Please enter SRN <i class="icofont icofont-warning"></i></span></label>
-                                                                </div>
-                                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>Bin card #:</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="number" id="bin_card" class="form-control" name="bin_card" placeholder="-" require="" value="<?php echo $bincard; ?>">
-                                                                    <label id="warning_bin_card" class="warning-text"> <span>Please enter bin card number <i class="icofont icofont-warning"></i></span></label>
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-4">
-                                                                    <label>number of bags :</label>
-                                                                </div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="number" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $bags; ?>">
-                                                                    <label id="warning_bags" class="warning-text"> <span>Please enter number of bags <i class="icofont icofont-warning"></i></span></label>
-                                                                </div>
-                                                            </div>
+
+                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-primary btn-mat ">save</button> -->
+                                                <button class="btn btn-primary btn-mat" id="update_farm_details" ><i class="icofont icofont-save"></i>Save</button>
+
+                                                </br>
+                                                </br>
+
+                                                <a href="register_farm.php" class="btn btn-danger btn-mat"><i class="icofont icofont-warning"></i>
+                                                    Cancle
+
+                                                </a>
+
+
+                                            </div>
+
+
+
+
+                                        </div>
 
 
 
 
 
-                                                            <div class="form-group row">
 
-                                                                <div class="col-sm-12">
-                                                                    <labe>Supporting documents :</label>
-                                                                        <input id="fileDirectory" type="file" class="form-control" name="fileDirectory" accept="pdf">
-                                                                        <input id="directory" type="hidden" class="form-control" name="image" placeholder="Phone number" value="<?php echo "$dir" ?>">
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <a href="#" class="btn btn-primary" id="request_approval" name="request_approval"><i class='icofont icofont-save'></i>save</a>
-                                                                </div>
-
-                                                            </div>
+                                    </div>
 
 
 
-                                                        </form>
+
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
 
@@ -973,9 +1391,9 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">Crop :</label>
+                                        <label class="label bg-primary">Crop :</label>
 
                                         <select class="form-control trans_details text-details" id="crop">
                                             <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
@@ -985,9 +1403,9 @@ if (!empty($farm_id)) {
                                                 <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
                                     </div>
 
-                                    
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">Variety:</label>
+                                        <label class="label bg-primary">Variety:</label>
 
                                         <select class="form-control trans_details text-details" id="variety">
                                             <option value="<?php echo $varietyId; ?>"><?php echo $variety; ?></option>
@@ -996,9 +1414,9 @@ if (!empty($farm_id)) {
 
                                     </div>
 
-                                
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">Class:</label>
+                                        <label class="label bg-primary">Class:</label>
 
                                         <select class="form-control trans_details text-details" id="class">
                                             <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
@@ -1010,9 +1428,9 @@ if (!empty($farm_id)) {
                                 </div>
 
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-12">
-                                    <label class="label bg-primary">Hectors:</label>
+                                        <label class="label bg-primary">Hectors:</label>
                                         <input type="text" class="form-control trans_details text-details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $hectors; ?>">
                                     </div>
                                 </div>
@@ -1020,7 +1438,7 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                      
+
 
 
 
@@ -1050,7 +1468,7 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                    
+
 
 
 
@@ -1078,7 +1496,7 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                   
+
 
 
 
@@ -1111,9 +1529,9 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">Region:</label>
+                                        <label class="label bg-primary">Region:</label>
                                         <select class="form-control trans_details text-details" id="crop">
 
                                             <option value="<?php echo $cropId; ?>"><?php echo $region; ?></option>
@@ -1123,9 +1541,9 @@ if (!empty($farm_id)) {
                                                 <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
                                     </div>
 
-                                    
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">District:                      </label>
+                                        <label class="label bg-primary">District: </label>
 
                                         <select class="form-control trans_details text-details" id="variety">
                                             <option value="<?php echo $varietyId; ?>"><?php echo $district; ?></option>
@@ -1134,9 +1552,9 @@ if (!empty($farm_id)) {
 
                                     </div>
 
-                                    
+
                                     <div class="col-sm-4">
-                                    <label class="label bg-primary">Area name:</label>
+                                        <label class="label bg-primary">Area name:</label>
 
                                         <select class="form-control trans_details text-details" id="class">
                                             <option value="<?php echo $class; ?>"><?php echo $area_name; ?></option>
@@ -1149,10 +1567,10 @@ if (!empty($farm_id)) {
 
 
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-12">
 
-                                    <label class="label bg-primary">Address:</label>
+                                        <label class="label bg-primary">Address:</label>
                                         <textarea class="form-control trans_details text-details" name="" id="address" cols="30" rows="3"><?php echo $address; ?>
 
 
@@ -1163,10 +1581,10 @@ if (!empty($farm_id)) {
                                 </div>
 
                                 <div class="form-group row">
-                                   
+
                                     <div class="col-sm-12">
-                                       
-                                    <label class="label bg-primary">Physical Address:</label>
+
+                                        <label class="label bg-primary">Physical Address:</label>
                                         <textarea class="form-control trans_details text-details" name="" id="address" cols="30" rows="3"><?php echo $physical_address; ?>
 
 
@@ -1176,25 +1594,25 @@ if (!empty($farm_id)) {
                                 </div>
 
                                 <div class="form-group row">
-                                    
+
                                     <div class="col-sm-12">
-                                    <label class="label bg-primary">EPA:</label>
+                                        <label class="label bg-primary">EPA:</label>
                                         <input type="text" class="form-control trans_details text-details" name="seedCertificate" id="seedCertificate" required="" value="<?php echo $epa; ?>">
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                   
+
                                     <div class="col-sm-6">
-                                    <label class="label bg-primary ">land History (Previous year):</label>
+                                        <label class="label bg-primary ">land History (Previous year):</label>
                                         <input type="text" class="form-control trans_details text-details" name="dob" id="ogQuantity" required="" value="<?php echo $previous_year; ?>">
                                     </div>
 
 
-                                   
+
                                     <div class="col-sm-6">
-                                    <label class="label bg-primary ">land History (Other year):</label>
+                                        <label class="label bg-primary ">land History (Other year):</label>
                                         <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $other_year; ?>">
                                     </div>
 
@@ -1203,7 +1621,7 @@ if (!empty($farm_id)) {
 
 
 
-                              
+
 
                                 <div class="form-group row">
 

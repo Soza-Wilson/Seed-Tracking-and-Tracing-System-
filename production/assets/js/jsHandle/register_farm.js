@@ -79,6 +79,7 @@ $(document).ready(function () {
         },
         (data) => {
           $("#select_variety").html(data);
+       
         }
       );
     }
