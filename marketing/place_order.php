@@ -59,7 +59,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -502,7 +502,7 @@ if (in_array($position, $restricted)) {
                         </a>
                     </div>
 
-                    <div class="navbar-container container-fluid">
+                    <div class="navbar-container container-fluid ">
                         <ul class="nav-left">
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
@@ -772,7 +772,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
 
                                                         </br>
-                                                        <a href="grower_order.php" class="btn btn-success">Grower Order</a>
+                                                        <a href="grower_order.php" class="btn btn-success btn-mat">Grower Order</a>
 
 
                                                     </div>
@@ -1007,7 +1007,7 @@ if (in_array($position, $restricted)) {
                         <div class="form-group">
 
 
-                            <input type="submit" name="add_item" value="add item" class="btn waves-effect waves-light btn-primary btn-block" />
+                            <input type="submit" name="add_item" value="add item" class="btn waves-effect waves-light btn-success btn-mat btn-mat btn-block" />
                             <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                         </div>
@@ -1212,7 +1212,7 @@ if (isset($_FILES['image'])) {
 
     if (empty($errors) == true) {
         move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/b_to_b_LPO/" . $newfilename);
-        echo "Success";
+        echo "success btn-mat btn-mat";
     } else {
         print_r($errors);
     }

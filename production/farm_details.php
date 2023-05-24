@@ -32,12 +32,12 @@ if (!empty($farm_id)) {
     `crop_variety`,variety.variety, `class`, `region`, `district`,
      `area_name`, `address`, user.fullname,`physical_address`, `EPA`, farm.user_ID, 
      farm.creditor_ID,creditor.name, farm.registered_date, `previous_year_crop`,
-      `other_year_crop`, `breeding_type`, `main_lot_number`, 
+      `other_year_crop`, farm.breeding_type, `main_lot_number`, 
       `main_quantity`, `male_lot_number`, `male_quantity`, `female_lot_number`, 
     `female_quantity` FROM `farm` INNER JOIN crop ON 
     crop.crop_ID= farm.crop_species INNER JOIN variety 
     ON variety.variety_ID = farm.crop_variety INNER JOIN creditor ON
-     creditor.creditor_ID=farm.creditor_ID INNER JOIN user ON user.user_ID = farm.user_ID  WHERE `farm_ID`='$farm_id'";
+     creditor.creditor_ID=farm.creditor_ID INNER JOIN user ON user.user_ID = farm.user_ID  WHERE `farm_ID`='$farm_id' ORDER BY farm.farm_ID DESC";
 
 
     $result = $con->query($sql);
@@ -58,7 +58,8 @@ if (!empty($farm_id)) {
 
             // certificates data
 
-
+             
+            $breeding_type = $row['breeding_type'];
             $main_lot_number = $row['main_lot_number'];
             $main_quantity = $row['main_quantity'];
 
@@ -91,9 +92,18 @@ if (!empty($farm_id)) {
             $other_year = $row["other_year_crop"];
         }
     }
+
+    else{
+
+        header("Location: registered_farms.php");
+
+
+    }
+
+
 } else {
 
-    header("Location: registered_farms.php");
+   
 }
 
 
@@ -131,10 +141,10 @@ if (!empty($farm_id)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/farm_details.js">
+    <script type="text/javascript" src="assets/js/jsHandle/farm_details__.js">
 
     </script>
 </head>
@@ -588,7 +598,7 @@ if (!empty($farm_id)) {
 
                                                         <div class="card-block">
 
-                                                            <button class="btn btn-primary" id="delete_request" name="delete_request"> Request for approval</button>
+                                                            <button class="btn btn-primary btn-mat" id="delete_request" name="delete_request"> Request for approval</button>
 
 
                                                         </div>
@@ -608,7 +618,7 @@ if (!empty($farm_id)) {
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-primary" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-primary btn-mat" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -708,7 +718,7 @@ if (!empty($farm_id)) {
 
                                                                     <label for="physsical_address" class="label bg-primary"> Enter assigned hectors</label>
 
-                                                                        <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="">
+                                                                        <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="" value="<?php echo $hectors?>">
                                                                         <label id="warning_hectors" class="warning_text"> <span>Please enter assigned hectors <i class="icofont icofont-warning"></i></span></label>
 
 
@@ -791,9 +801,9 @@ if (!empty($farm_id)) {
 
 
                                                                     <div class="col-sm-6 inbred_items">
-                                                                    <label for="physsical_address" class="label bg-primary"> Other Previous Year</label>
+                                                                    <label for="physsical_address" class="label bg-primary"> certificate</label>
                                                                         <select id="main_certificate" class="form-control">
-                                                                            <option value="no_certificate_selected">Select Certificate</option>
+                                                                            <option value="<?php echo $main_lot_number;?>"><?php echo $main_lot_number;?></option>
                                                                             <option value="no_certificate_selected">-</option>
 
 
@@ -822,7 +832,7 @@ if (!empty($farm_id)) {
 
                                                                     <div class="col-sm-3 inbred_items">
                                                                     <label for="physsical_address" class="label bg-primary"> Enter Certificate quantity</label>
-                                                                        <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
+                                                                        <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require=""  value= "<?php echo $main_quantity;?>">
                                                                         <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
@@ -857,8 +867,8 @@ add hybrid male crop certificate
                                                                     <div class="col-sm-6 single_cross_items">
                                                                     <label for="physsical_address" class="label bg-primary">Male certificate</label>
                                                                         <select id="male_certificate" name="male_certificate" class="form-control" required="">
-                                                                            <option value="no_certificate_selected">Select Male Certificate</option>
-                                                                            <option value="no_certificate_selected">-</option>
+                                                                            <option value="<?php echo $male_lot_number?>"><?php echo $male_lot_number?></option>
+                                                                           
 
 
 
@@ -882,7 +892,7 @@ add hybrid male crop certificate
 
                                                                     <div class="col-sm-3 single_cross_items">
                                                                     <label for="physsical_address" class="label bg-primary">Enter Male certificate quantity</label>
-                                                                        <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
+                                                                        <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="" value="<?php echo $male_quantity?>">
                                                                         <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
@@ -913,9 +923,8 @@ add hybrid female crop certificate
 
                                                                     <label for="physsical_address" class="label bg-primary">Female certificate</label>
                                                                         <select id="female_certificate" name="female_certificate" class="form-control" required="">
-                                                                            <option value="no_certificate_selected">Select Female Certificate</option>
-                                                                            <option value="no_certificate_selected">-</option>
-
+                                                                            <option value="<?php echo $female_lot_number;?>"><?php echo $female_lot_number;?></option>
+                                                                          
 
 
 
@@ -939,7 +948,7 @@ add hybrid female crop certificate
                                                                     <div class="col-sm-3 single_cross_items">
                                                                     <label for="physsical_address" class="label bg-primary">enter  Female certificate quantity</label>
 
-                                                                        <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
+                                                                        <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="" value="<?php echo $female_quantity;?>">
                                                                         <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
@@ -1105,7 +1114,7 @@ form adding farm location details
                                                 <div class="col-sm-3">
                                                 <label for="physsical_address" class="label bg-primary">District</label>
                                                     <select id="select_district" name="select_district" class="form-control" required="">
-                                                        <option value="0">Select District</option>
+                                                        <option value="<?php echo $district?>"><?php echo $district?></option>
 
 
 
@@ -1255,7 +1264,7 @@ form adding farm location details
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-primary" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-primary btn-mat" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -1399,6 +1408,7 @@ form adding farm location details
                                             <option value="<?php echo $cropId; ?>"><?php echo $crop; ?></option>
 
                                             <select>
+                                            <input type="hidden" id="view_breeding_type" value="<?php echo $breeding_type;?>">
                                                 <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID; ?>">
                                                 <input type="hidden" id="creditorId" value="<?php echo $creditorId; ?>">
                                     </div>
@@ -1445,7 +1455,7 @@ form adding farm location details
                                     <div class="col-sm-6">
                                         <label class="label bg-primary">certificate Lot Number :</label>
 
-                                        <select class="form-control trans_details text-details" id="variety">
+                                        <select class="form-control trans_details text-details" id="old_certificate">
                                             <option value="<?php echo $main_lot_number; ?>"><?php echo $main_lot_number; ?></option>
 
                                             <select>
@@ -1456,7 +1466,7 @@ form adding farm location details
                                     <div class="col-sm-6">
                                         <label class="label bg-primary">assigned Quantity:</label>
 
-                                        <select class="form-control trans_details text-details" id="class">
+                                        <select class="form-control trans_details text-details" id="old_certificate_quantity">
                                             <option value="<?php echo $main_quantity; ?>"><?php echo $main_quantity; ?></option>
 
                                             <select>
@@ -1475,7 +1485,7 @@ form adding farm location details
                                     <div class="col-sm-6">
 
                                         <label class="label bg-primary">Male Lot Number :</label>
-                                        <select class="form-control trans_details text-details" id="variety">
+                                        <select class="form-control trans_details text-details" id="old_male_certificate">
                                             <option value="<?php echo $male_lot_number; ?>"><?php echo $male_lot_number; ?></option>
 
                                             <select>
@@ -1485,7 +1495,7 @@ form adding farm location details
 
                                     <div class="col-sm-6">
                                         <label class="label bg-primary">Assigned Quantity:</label>
-                                        <select class="form-control trans_details text-details" id="class">
+                                        <select class="form-control trans_details text-details" id="old_male_quantity">
                                             <option value="<?php echo $male_quantity; ?>"><?php echo $male_quantity; ?></option>
 
                                             <select>
@@ -1503,7 +1513,7 @@ form adding farm location details
                                     <div class="col-sm-6">
 
                                         <label class="label bg-primary">Female Lot Number:</label>
-                                        <select class="form-control trans_details text-details" id="variety">
+                                        <select class="form-control trans_details text-details" id="old_female_certificate">
                                             <option value="<?php echo $female_lot_number; ?>"><?php echo $female_lot_number; ?></option>
 
                                             <select>
@@ -1514,7 +1524,7 @@ form adding farm location details
                                     <div class="col-sm-6">
 
                                         <label class="label bg-primary">assigned Quantity:</label>
-                                        <select class="form-control trans_details text-details" id="class">
+                                        <select class="form-control trans_details text-details" id="old_female_quantity">
                                             <option value="<?php echo $female_quantity; ?>"><?php echo $female_quantity; ?></option>
 
                                             <select>
@@ -1532,9 +1542,9 @@ form adding farm location details
 
                                     <div class="col-sm-4">
                                         <label class="label bg-primary">Region:</label>
-                                        <select class="form-control trans_details text-details" id="crop">
+                                        <select class="form-control " id="selected_region">
 
-                                            <option value="<?php echo $cropId; ?>"><?php echo $region; ?></option>
+                                            <option value="<?php echo $region; ?>"><?php echo $region; ?></option>
 
                                             <select>
                                                 <input type="hidden" id="stockInId" value="<?php echo $stock_in_ID; ?>">
@@ -1545,8 +1555,8 @@ form adding farm location details
                                     <div class="col-sm-4">
                                         <label class="label bg-primary">District: </label>
 
-                                        <select class="form-control trans_details text-details" id="variety">
-                                            <option value="<?php echo $varietyId; ?>"><?php echo $district; ?></option>
+                                        <select class="form-control trans_details text-details" id="selected_district">
+                                            <option value="<?php echo $district; ?>"><?php echo $district; ?></option>
 
                                             <select>
 
@@ -1606,14 +1616,14 @@ form adding farm location details
 
                                     <div class="col-sm-6">
                                         <label class="label bg-primary ">land History (Previous year):</label>
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="ogQuantity" required="" value="<?php echo $previous_year; ?>">
+                                        <input type="text" class="form-control trans_details text-details" name="dob" id="land_history_previous_year" required="" value="<?php echo $previous_year; ?>">
                                     </div>
 
 
 
                                     <div class="col-sm-6">
                                         <label class="label bg-primary ">land History (Other year):</label>
-                                        <input type="text" class="form-control trans_details text-details" name="dob" id="dob" required="" value="<?php echo $other_year; ?>">
+                                        <input type="text" class="form-control trans_details text-details" name="dob" id="land_history_other_year" required="" value="<?php echo $other_year; ?>">
                                     </div>
 
 

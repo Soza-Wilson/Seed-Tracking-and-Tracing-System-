@@ -3,7 +3,7 @@
 <?php
 
 Ob_start();
-include('../class/main.php');
+
 include('../class/production.php');
 session_start();
 
@@ -48,7 +48,7 @@ $get_data = new production();
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
@@ -663,7 +663,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">stock in ID :</label>
+                                                            <label class="badge badge-success">stock in ID :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="stock_in" name="stock_in" class="form-control">
@@ -680,7 +680,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Crop :</label>
+                                                            <label class="badge badge-success">Crop :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_crop" name="farm_crop" class="form-control">
@@ -693,7 +693,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Variety:</label>
+                                                            <label class="badge badge-success ">Variety:</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_variety" name="farm_variety" class="form-control">
@@ -708,7 +708,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Class :</label>
+                                                            <label class="badge badge-success">Class :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_class" name="farm_class" class="form-control">
@@ -722,7 +722,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary"> Stock in Quantity :</label>
+                                                            <label class="badge badge-success"> Stock in Quantity :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_quantity" name="farm_quantity" class="form-control">
@@ -737,7 +737,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Grower :</label>
+                                                            <label class="badge badge-success">Grower :</label>
 
                                                             <br />
                                                         </div>
@@ -762,7 +762,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Production Year</label>
+                                                            <label class="badge badge-success ">Production Year</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_ID" name="farm_ID" class="form-control">
@@ -777,7 +777,7 @@ add hybrid female crop certificate
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Lot Number:</label>
+                                                            <label class="badge badge-success">Lot Number:</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="lot_number" name="lot_number" class="form-control">

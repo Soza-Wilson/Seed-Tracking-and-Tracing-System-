@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
 <head>
     <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js doesn't work if you view the ace via file:// -->
     <!--[if lt IE 10]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
@@ -545,7 +545,7 @@ if ($result->num_rows > 0) {
                                                         <div class="card">
 
                                                         <div class="col-sm-12">
-                                                        <label class="label bg-primary">Add new contract file (Optional):</label>
+                                                        <label class="label bg-success">Add new contract file (Optional):</label>
                                                         <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
                                                         <input type="hidden" class="form-control" name="tempFile" id="tempFile" value="<?php echo $dir?>">
                                                         <input type="hidden" class="form-control" id="user" value="<?php echo $_SESSION['user'] ?>">
@@ -603,7 +603,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Registered By :</label>
+                                                        <label class="label bg-success">Registered By :</label>
                                                         <input id="register_name" type="text" class="form-control" name="register_name" placeholder="Name" value="<?php echo $registered_by?>">
                                                         <input id="grower_id" type="hidden" class="form-control" name="grower_id" placeholder="Name" value="<?php echo $_GET['creditor_id'] ?>">
                                                         <input id="user" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['user'] ?>">
@@ -617,7 +617,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Grower Name :</label>
+                                                        <label class="label bg-success">Grower Name :</label>
                                                         <input id="creditor_name" type="text" class="form-control"  placeholder="Name" value="<?php echo $name ?>">
                                                         <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
@@ -630,7 +630,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Phone Number :</label>
+                                                        <label class="label bg-success">Phone Number :</label>
                                                         <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone ?>">
                                                         <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
 
@@ -643,7 +643,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Email (Optional) :</label>
+                                                        <label class="label bg-success">Email (Optional) :</label>
                                                         <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email ?>">
                                                     </div>
 
@@ -653,7 +653,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Status :</label>
+                                                        <label class="label bg-success">Status :</label>
                                                         <input id="status" type="email" class="form-control" name="creditor_email" value="<?php echo $status ?>">
                                                     </div>
 
@@ -675,7 +675,7 @@ if ($result->num_rows > 0) {
 
                                                     
                                                     <div class="col-sm-12">
-                                                        <button type="button" id="activate_back" value="Save" class="btn waves-effect waves-light btn-primary btn-mat" ><i class="icofont icofont-reverse"></i> Back</button>
+                                                        <button type="button" id="activate_back" value="Save" class="btn waves-effect waves-light btn-success btn-mat" ><i class="icofont icofont-reverse"></i> Back</button>
                                                     </div>
                                                   
 

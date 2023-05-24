@@ -56,7 +56,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -574,7 +574,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='confirm_for_processing.php? grade_id=$grade_ID & stock_in=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$assigned_by & user_ID=$user_ID' class='btn btn-primary'> view</a>
+												<td><a href='confirm_for_processing.php? grade_id=$grade_ID & stock_in=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$assigned_by & user_ID=$user_ID' class='btn btn-success'> view</a>
                                                 
                                                 </td>
 											</tr>	
@@ -675,7 +675,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & assigned_quantity=$assigned_quantity'  class='btn btn-primary'>Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & assigned_quantity=$assigned_quantity'  class='btn btn-success'>Process</a>
                                                 
                                                 </td>
 											</tr>	

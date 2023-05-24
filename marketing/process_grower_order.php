@@ -124,7 +124,7 @@ else if($class=="basic"){
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -257,48 +257,7 @@ $("#female_quantity").prop("readonly","true");
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                           
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -339,13 +298,7 @@ $("#female_quantity").prop("readonly","true");
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -453,11 +406,10 @@ $("#female_quantity").prop("readonly","true");
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Place Order</a>
+                                           
+                                            <li class="breadcrumb-item"><a href="#">Process grower order</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -588,8 +540,10 @@ $("#female_quantity").prop("readonly","true");
 
 </br>
 
-                        <div class="col-sm-2">
-                        <input type="submit" name="place_order" value="Request for discount" class="btn waves-effect waves-light btn-success  btn-block" />
+                        <div class="col-sm-1">
+                        
+
+                        <button type="submit" name="place_order"  class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat" > <i class="icofont icofont-warning"></i> Request for discount</button>
                         </div>
 
                         </div>
@@ -619,7 +573,7 @@ $("#female_quantity").prop("readonly","true");
 
 
                            
-                            <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-danger  btn-block" />
+                            <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-block btn-mat" />
 
                         </div>
 
@@ -634,6 +588,9 @@ $("#female_quantity").prop("readonly","true");
                     </div>
 
                 </div>
+
+            </div>
+
                 <!-- Input Grid card end -->
                 <!-- Input Validation card start -->
 

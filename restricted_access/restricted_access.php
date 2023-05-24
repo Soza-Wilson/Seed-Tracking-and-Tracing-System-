@@ -8,7 +8,7 @@ session_start();
     ?>
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>STTS </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -38,10 +38,10 @@ session_start();
       <!-- Font Awesome -->
       <link rel="stylesheet" type="text/css" href="../assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
   </head>
 
-  <body themebg-pattern="theme1">
+  <body themebg-pattern="theme2">
   <!-- Pre-loader start -->
   <div class="theme-loader">
       <div class="loader-track">
@@ -109,17 +109,17 @@ session_start();
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Restricted Access</h3>
+                                        <h3 class="text-center txt-success" style="color: red;">Restricted Access <i class="icofont icofont-warning"></i></h3>
                                     </div>
                                 </div>
                                
                                 
                                 <div class="row m-t-25 text-left">
                                     <div class="col-md-12">
-                                        <div class="checkbox-fade fade-in-primary">
+                                        <div class="checkbox-fade fade-in-success">
                                             <label>
                                                 <input type="checkbox" value="">
-                                                <span class="text-inverse">You are not allowed to access data from this page.</span>
+                                                <span class="text-inverse">You are not allowed to access data from this section.</span>
                                             </label>
                                         </div>
                                     </div>
@@ -128,9 +128,9 @@ session_start();
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         
-                                        <button type="button"  class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" name="back" onclick="history.go(-1);"  >Back</button></br>
+                                        <button type="button"  class="btn btn-success btn-md btn-block btn-mat waves-effect text-center m-b-20" name="back" onclick="history.go(-1);"  >Back</button></br>
                                          
-                                        <button type="submit" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20" name="sign_out">Sign out</button>
+                                        <button type="submit" class="btn btn-danger btn-md btn-block btn-mat waves-effect text-center m-b-20" name="sign_out"><i class="icofont icofont-sign out"></i> Sign out</button>
                                         
                                     </div>
                                 </div>

@@ -57,7 +57,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -533,7 +533,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-success btn-mat"></button>
 
 
                                                         <a href="creditor_processed_payments.php" class="ti-loop btn btn-danger"></a>

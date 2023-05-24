@@ -57,7 +57,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
 </head>
@@ -126,19 +126,9 @@ if (in_array($position, $restricted)) {
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                             <i class="ti-menu"></i>
                         </a>
-                        <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="index.html">
-                            <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                        
+                        <a href="">
+                           <span>Marketing</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -166,48 +156,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user"></h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -248,24 +197,10 @@ if (in_array($position, $restricted)) {
                                 </div>
                         
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </div>
                             </div>
-                            <div class="p-15 p-b-0">
-                                <form class="form-material">
-                                    <div class="form-group form-primary">
-                                        <input type="text" name="footer-email" class="form-control" required="">
-                                        <span class="form-bar"></span>
-                                        <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
-                                    </div>
-                                </form>
-                            </div>
+                            
                             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -380,11 +315,10 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="#!">Grower Order</a>
+                                            
+                                            <li class="breadcrumb-item"><a href="grower_order.php">Grower Order</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -517,7 +451,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID' class='btn btn-success'>View</a>
+												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID' class='btn btn-success btn-mat btn-mat'>View</a>
                                               </a>
                                                
                                                 </td>

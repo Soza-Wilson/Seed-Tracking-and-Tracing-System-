@@ -56,7 +56,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -502,7 +502,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                    <label class="label bg-primary" >Grower</label>
+                                                    <label class="label bg-success" >Grower</label>
                                                         <input list="grower_list" name="grower_list" class="form-control" placeholder="Select Grower " require="">
                                                         <datalist id="grower_list">
 
@@ -513,7 +513,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary" >Crop</label>
+                                                    <label class="label bg-success" >Crop</label>
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Select Crop</option>
                                                             <option value="all">all</option>
@@ -524,7 +524,7 @@ if (in_array($position, $restricted)) {
 
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary" >Variety</label>
+                                                    <label class="label bg-success" >Variety</label>
                                                         <select id="select_bank_name" name="select_bank_name" class="form-control" required="">
                                                             <option value="type_not_selected">Select Variety </option>
 
@@ -532,12 +532,12 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary" >To:</label>
+                                                    <label class="label bg-success" >To:</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary" >From:</label>
+                                                    <label class="label bg-success" >From:</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
@@ -545,7 +545,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-2">
 
                                                        <br/>
-                                                        <button name="get_data" id="get_data"  class="btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
+                                                        <button name="get_data" id="get_data"  class="btn btn-success btn-mat"><i class="icofont icofont-search"></i></button>
 
                                                      
                                                         <a href="labels.php" class="btn btn-danger btn-mat"> <i class="icofont icofont-warning"></i>Reset</a>

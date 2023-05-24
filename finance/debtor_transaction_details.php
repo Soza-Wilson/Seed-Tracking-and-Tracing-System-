@@ -142,7 +142,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -544,7 +544,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Order ID</label>
+                                                        <label class="badge badge-success btn-mat ">Order ID</label>
                                                         <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $order_ID; ?>" require="">
 
                                                     </div>
@@ -553,7 +553,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Amount</label>
+                                                        <label class="badge badge-success btn-mat ">Amount</label>
                                                         <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $amount; ?>" require="">
 
 
@@ -561,7 +561,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order For</label>
+                                                        <label class="badge badge-success btn-mat ">Order For</label>
                                                         <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $customer; ?>" require="">
 
 
@@ -569,7 +569,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Requested By</label>
+                                                        <label class="badge badge-success btn-mat ">Requested By</label>
                                                         <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
@@ -577,7 +577,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Order Date</label>
+                                                        <label class="badge badge-success btn-mat ">Order Date</label>
                                                         <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
@@ -586,7 +586,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Time</label>
+                                                        <label class="badge badge-success btn-mat ">Time</label>
                                                         <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
                                                        
 
@@ -726,7 +726,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="card-block">
 
                                               
-                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-primary">
+                                                <input type="submit" name="back" id="back" value="Back" class="btn btn-success btn-mat">
 
                                                 
                                                 

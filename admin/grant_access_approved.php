@@ -70,14 +70,14 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-
-
-
     </script>
+
+    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
 
@@ -599,7 +599,7 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>ID</th>
@@ -657,6 +657,12 @@ if (in_array($position, $restricted)) {
                                                             ?>
                                                         </tbody>
                                                     </table>
+
+                                                    
+                                                </div>
+                                                <div id="pagination">
+
+
                                                 </div>
                                             </div>
                                         </div>

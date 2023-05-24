@@ -58,13 +58,19 @@ if (in_array($position, $notRestricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/pagenation.css">
+    
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
 
+
+
+
     </script>
+
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
 
@@ -540,7 +546,7 @@ if (in_array($position, $notRestricted)) {
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
                                                          
-                                                        <label for="" class="label bg-primary">Grower name</label>
+                                                        <label for="" class="label bg-success">Grower name</label>
                                                         <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
                                                         
 
@@ -549,7 +555,7 @@ if (in_array($position, $notRestricted)) {
                                                     <div class="">
                                                          
                                                          <label for="" class="label "></label>
-                                                         <button name="grower_filter" id="grower_filter" class=" form-control btn btn-primary btn-mat"><i class="icofont icofont-search"></i>Search</button>
+                                                         <button name="grower_filter" id="grower_filter" class=" form-control btn btn-success btn-mat"><i class="icofont icofont-search"></i>Search</button>
                                                          
  
                                                      </div>
@@ -573,7 +579,7 @@ if (in_array($position, $notRestricted)) {
 
 
 
-                                                            <button class="btn btn-primary btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
+                                                            <button class="btn btn-success btn-mat " id='grower_list' name='grower_list'> <i i class='icofont icofont-download'></i> Download growers</button>
 
 
                                                             <input type="hidden" name="type" id="type" value="inactive">
@@ -615,8 +621,8 @@ if (in_array($position, $notRestricted)) {
                                                             <?php
 
 
-                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`dir` AS `file_directory`,`creditor_status`,creditor.registered_date FROM `creditor`
-                                                             INNER JOIN user ON creditor.user_ID = user.user_ID INNER JOIN `contract` ON creditor.creditor_ID = contract.grower WHERE `creditor_status`='inactive'";
+                                                            $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`creditor_status`,creditor.registered_date FROM `creditor`
+                                                            INNER JOIN user ON creditor.user_ID = user.user_ID WHERE `creditor_status`='inactive' ORDER BY `creditor_ID`";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -628,7 +634,7 @@ if (in_array($position, $notRestricted)) {
                                                                     $registered_date = $row['registered_date'];
                                                                     $registered_by = $row['fullname'];
                                                                     $status =$row['creditor_status'];
-                                                                    $dir = $row['file_directory'];
+                                                                    
 
 
 
@@ -649,7 +655,7 @@ if (in_array($position, $notRestricted)) {
 	
 												
 												<td>
-                                                <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-primary btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
+                                                <a href='activate_grower.php? creditor_id=$creditor_id'  class='btn btn-success btn-mat'><i class='icofont icofont-settings'></i>Activate</a>
                                                 </td>
 											</tr>	
 										";

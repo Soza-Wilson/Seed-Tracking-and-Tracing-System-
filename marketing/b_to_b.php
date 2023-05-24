@@ -54,7 +54,7 @@ if(empty($test)){
       <!-- ico font -->
       <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
       <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
   </head>
   <body>
@@ -371,7 +371,7 @@ if(empty($test)){
                                         <div class="card">
                                             <div class="card-header">
 
-                                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add new Business</button>
+                                            <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Add new Business</button>
 
                                     <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -428,7 +428,7 @@ if(empty($test)){
                                                                                 placeholder="Email" require="">
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                            <input type="submit" name="register_business" value="Save" class="btn waves-effect waves-light btn-primary btn-block" />
+                                                                            <input type="submit" name="register_business" value="Save" class="btn waves-effect waves-light btn-success btn-mat btn-block" />
                                                                           </div>
                                                                             
                                                                         </div>

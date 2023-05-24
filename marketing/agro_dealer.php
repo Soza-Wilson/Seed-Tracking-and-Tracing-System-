@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -378,7 +378,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
+                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -432,7 +432,7 @@ if (in_array($position, $restricted)) {
                                                                                 <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-primary btn-block" />
+                                                                            <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-success btn-mat btn-block" />
                                                                         </div>
 
                                                                     </div>

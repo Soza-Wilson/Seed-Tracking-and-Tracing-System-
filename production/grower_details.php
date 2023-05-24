@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grower_.js">
@@ -583,7 +583,7 @@ if ($result->num_rows > 0) {
                                     <div class="card">
                                         <div class="card-header">
 
-                                            <button type="button" class="btn btn-primary btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-list"></i>Contracts</button>
+                                            <button type="button" class="btn btn-success btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-list"></i>Contracts</button>
 
                                             <!-- Modal -->
                                             <div id="myModal" class="modal fade" role="dialog">
@@ -700,7 +700,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Registered By :</label>
+                                                        <label class="label bg-success">Registered By :</label>
                                                         <input id="register_name" type="text" class="form-control" name="register_name" placeholder="Name" value="<?php echo $name ?>">
                                                         <input id="grower_id" type="hidden" class="form-control" name="grower_id" placeholder="Name" value="<?php echo $_GET['creditor_id'] ?>">
                                                         <input id="user" type="hidden" class="form-control" name="register_name" placeholder="Name" value="<?php echo $_SESSION['user'] ?>">
@@ -714,7 +714,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Grower Name :</label>
+                                                        <label class="label bg-success">Grower Name :</label>
                                                         <input id="creditor_name" type="text" class="form-control"  placeholder="Name" value="<?php echo $growerName ?>">
                                                         <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
@@ -727,7 +727,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Phone Number :</label>
+                                                        <label class="label bg-success">Phone Number :</label>
                                                         <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" value="<?php echo $phone ?>">
                                                         <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
 
@@ -740,7 +740,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Email (Optional) :</label>
+                                                        <label class="label bg-success">Email (Optional) :</label>
                                                         <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" value="<?php echo $email ?>">
                                                     </div>
 
@@ -750,7 +750,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Status :</label>
+                                                        <label class="label bg-success">Status :</label>
                                                         <input id="status" type="email" class="form-control" name="creditor_email" value="<?php echo $status ?>">
                                                     </div>
 
@@ -762,7 +762,7 @@ if ($result->num_rows > 0) {
                                                 <div class="form-group row">
 
                                                     <div class="col-sm-12">
-                                                        <label class="label bg-primary">Add new contract file (Optional):</label>
+                                                        <label class="label bg-success">Add new contract file (Optional):</label>
                                                         <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
                                                         <input type="hidden" class="form-control" name="tempFile" id="tempFile" value="<?php echo $file_directory?>">
                                                         <input type="hidden" class="form-control" id="user" value="<?php echo $_SESSION['user'] ?>">

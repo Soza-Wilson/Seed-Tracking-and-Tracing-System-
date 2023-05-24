@@ -87,7 +87,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -485,7 +485,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Fullname</label>
+                                                        <label class="badge badge-success btn-mat ">Fullname</label>
                                                         <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $fullname; ?>" require="">
 
                                                     </div>
@@ -494,7 +494,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Debtor Type</label>
+                                                        <label class="badge badge-success btn-mat ">Debtor Type</label>
                                                         <input id="order_type" type="text" class="form-control" name="order_type" value="<?php echo $type; ?>" require="">
 
 
@@ -502,7 +502,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Phone</label>
+                                                        <label class="badge badge-success btn-mat ">Phone</label>
                                                         <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $phone; ?>" require="">
 
 
@@ -510,7 +510,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Registered Date</label>
+                                                        <label class="badge badge-success btn-mat ">Registered Date</label>
                                                         <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $date; ?>" require="">
 
 
@@ -518,7 +518,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Account Funds </label>
+                                                        <label class="badge badge-success btn-mat ">Account Funds </label>
                                                         <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $account_funds; ?>" require="">
 
 

@@ -132,20 +132,438 @@ if (isset($_POST["registerContract"])) {
   $object->register_contract($creditorData[0], $creditorData[1], "grower", $creditorData[2]);
 }
 
-if(isset($_POST["registerFarm"])){
+if (isset($_POST["registerFarm"])) {
 
 
-      
-  
+
+
   $farmRegisterData = $_POST["registerFarm"];
-  $returnData = $object->register_farm($farmRegisterData[4],$farmRegisterData[1],$farmRegisterData[2],$farmRegisterData[3],
-  $farmRegisterData[13],$farmRegisterData[14],$farmRegisterData[16],$farmRegisterData[17],$farmRegisterData[18],
-  $farmRegisterData[15],$farmRegisterData[0],$farmRegisterData[11],$farmRegisterData[12],$farmRegisterData[5],
-  $farmRegisterData[6],$farmRegisterData[7],$farmRegisterData[8],$farmRegisterData[9],$farmRegisterData[10],$farmRegisterData[19],$farmRegisterData[20]);
+  $returnData = $object->register_farm(
+    $farmRegisterData[4],
+    $farmRegisterData[1],
+    $farmRegisterData[2],
+    $farmRegisterData[3],
+    $farmRegisterData[13],
+    $farmRegisterData[14],
+    $farmRegisterData[16],
+    $farmRegisterData[17],
+    $farmRegisterData[18],
+    $farmRegisterData[15],
+    $farmRegisterData[0],
+    $farmRegisterData[11],
+    $farmRegisterData[12],
+    $farmRegisterData[5],
+    $farmRegisterData[6],
+    $farmRegisterData[7],
+    $farmRegisterData[8],
+    $farmRegisterData[9],
+    $farmRegisterData[10],
+    $farmRegisterData[19],
+    $farmRegisterData[20]
+  );
 
   echo $returnData;
-
 }
+
+if (isset($_POST["updateFarm"])) {
+
+
+
+
+  $farmRegisterData = $_POST["updateFarm"];
+  $returnData = $object->update_farm(
+    $farmRegisterData[4],
+    $farmRegisterData[1],
+    $farmRegisterData[2],
+    $farmRegisterData[3],
+    $farmRegisterData[13],
+    $farmRegisterData[14],
+    $farmRegisterData[16],
+    $farmRegisterData[17],
+    $farmRegisterData[18],
+    $farmRegisterData[15],
+    $farmRegisterData[0],
+    $farmRegisterData[11],
+    $farmRegisterData[12],
+    $farmRegisterData[5],
+    $farmRegisterData[6],
+    $farmRegisterData[7],
+    $farmRegisterData[8],
+    $farmRegisterData[9],
+    $farmRegisterData[10],
+    $farmRegisterData[19],
+    $farmRegisterData[20],
+    $farmRegisterData[21],
+    $farmRegisterData[22],
+    $farmRegisterData[23],
+    $farmRegisterData[24],
+    $farmRegisterData[25],
+    $farmRegisterData[26],
+    $farmRegisterData[27]
+  );
+
+  echo $returnData;
+}
+
+if (isset($_POST["deleteFarm"])) {
+
+  $farmDeleteData = $_POST["deleteFarm"];
+  $returnData = $object->delete_farm($farmDeleteData[0], $farmDeleteData[1], $farmDeleteData[2], $farmDeleteData[3], $farmDeleteData[4], $farmDeleteData[5], $farmDeleteData[6], $farmDeleteData[7]);
+  echo $returnData;
+}
+
+
+//  Filter  for registered farms 
+//  Registered farms filter by grower 
+
+if (isset($_POST["farm_filter_by_grower"])) {
+
+  $grower = $_POST["farm_filter_by_grower"];
+
+  echo " <thead>
+<tr>
+    <th>Farm ID</th>
+    <th>Grower</th>
+    <th>Crop</th>
+    <th>Variety</th>
+    <th>Class</th>
+    <th>Hectors</th>
+    <th>Region</th>
+    <th>District</th>
+    <th>EPA</th>
+    <th>Area name</th>
+    <th>Address</th>
+    <th>Location</th>
+    <th>Land history(previous year)</th>
+    <th>Land history(other year)</th>
+    <th>Action</th>
+
+</tr>
+</thead>";
+
+
+  $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+  `region`, `district`, `area_name`, `address`, `physical_address`, 
+  `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+  `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+   `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+    INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+    variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+    ON farm.creditor_ID = creditor.creditor_ID WHERE creditor.name LIKE '%$grower%'";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $farm_id = $row['farm_ID'];
+      $grower_name = $row['name'];
+      $crop = $row['crop'];
+      $variety     = $row['variety'];
+      $class     = $row['class'];
+      $hectors     = $row['Hectors'];
+      $registered_date = $row['registered_date'];
+      $region = $row['region'];
+      $district = $row['district'];
+      $epa = $row['EPA'];
+      $area_name = $row['area_name'];
+      $address = $row['address'];
+      $physical_address = $row['physical_address'];
+      $previous = $row['previous_year_crop'];
+      $other_previous = $row['other_year_crop'];
+
+
+
+
+
+      echo "
+<tr class='odd gradeX'>
+<td>$farm_id</td>
+<td>$grower_name</td>
+<td>$crop</td>
+<td>$variety</td>
+<td>$class</td>
+<td>$hectors</td>
+<td>$region</td>
+<td>$district</td>
+<td>$epa</td>
+<td>$area_name</td>
+<td>$address</td>
+<td>$physical_address</td>
+<td>$previous</td>
+<td>$other_previous</td>
+
+
+
+
+<td><a href='farm_details.php? farm_id=$farm_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>view</a>
+
+
+</td>
+</tr>	
+";
+    }
+  } else {
+
+    echo "<th> 0 results found</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (isset($_POST["farm_filter_by_crop"])) {
+
+  $crop = $_POST["farm_filter_by_crop"];
+
+  echo " <thead>
+<tr>
+    <th>Farm ID</th>
+    <th>Grower</th>
+    <th>Crop</th>
+    <th>Variety</th>
+    <th>Class</th>
+    <th>Hectors</th>
+    <th>Region</th>
+    <th>District</th>
+    <th>EPA</th>
+    <th>Area name</th>
+    <th>Address</th>
+    <th>Location</th>
+    <th>Land history(previous year)</th>
+    <th>Land history(other year)</th>
+    <th>Action</th>
+
+</tr>
+</thead>";
+
+
+  $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+  `region`, `district`, `area_name`, `address`, `physical_address`, 
+  `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+  `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+   `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+    INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+    variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+    ON farm.creditor_ID = creditor.creditor_ID WHERE crop.crop_ID ='$crop[0]' AND variety.variety_ID ='$crop[1]' AND `class` ='$crop[2]'";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $farm_id = $row['farm_ID'];
+      $grower_name = $row['name'];
+      $crop = $row['crop'];
+      $variety     = $row['variety'];
+      $class     = $row['class'];
+      $hectors     = $row['Hectors'];
+      $registered_date = $row['registered_date'];
+      $region = $row['region'];
+      $district = $row['district'];
+      $epa = $row['EPA'];
+      $area_name = $row['area_name'];
+      $address = $row['address'];
+      $physical_address = $row['physical_address'];
+      $previous = $row['previous_year_crop'];
+      $other_previous = $row['other_year_crop'];
+
+
+
+
+
+      echo "
+<tr class='odd gradeX'>
+<td>$farm_id</td>
+<td>$grower_name</td>
+<td>$crop</td>
+<td>$variety</td>
+<td>$class</td>
+<td>$hectors</td>
+<td>$region</td>
+<td>$district</td>
+<td>$epa</td>
+<td>$area_name</td>
+<td>$address</td>
+<td>$physical_address</td>
+<td>$previous</td>
+<td>$other_previous</td>
+
+
+
+
+<td><a href='farm_details.php? farm_id=$farm_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>view</a>
+
+
+</td>
+</tr>	
+";
+    }
+  } else {
+
+    echo "<th> 0 results found</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>";
+  }
+}
+
+
+
+if (isset($_POST["farm_filter_by_location"])) {
+
+  $location = $_POST["farm_filter_by_location"];
+
+  echo " <thead>
+<tr>
+    <th>Farm ID</th>
+    <th>Grower</th>
+    <th>Crop</th>
+    <th>Variety</th>
+    <th>Class</th>
+    <th>Hectors</th>
+    <th>Region</th>
+    <th>District</th>
+    <th>EPA</th>
+    <th>Area name</th>
+    <th>Address</th>
+    <th>Location</th>
+    <th>Land history(previous year)</th>
+    <th>Land history(other year)</th>
+    <th>Action</th>
+
+</tr>
+</thead>";
+
+
+  $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+  `region`, `district`, `area_name`, `address`, `physical_address`, 
+  `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+  `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+   `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+    INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+    variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+    ON farm.creditor_ID = creditor.creditor_ID WHERE `region` LIKE  '%$location[0]%' AND `district` LIKE '%$location[1]%'";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $farm_id = $row['farm_ID'];
+      $grower_name = $row['name'];
+      $crop = $row['crop'];
+      $variety     = $row['variety'];
+      $class     = $row['class'];
+      $hectors     = $row['Hectors'];
+      $registered_date = $row['registered_date'];
+      $region = $row['region'];
+      $district = $row['district'];
+      $epa = $row['EPA'];
+      $area_name = $row['area_name'];
+      $address = $row['address'];
+      $physical_address = $row['physical_address'];
+      $previous = $row['previous_year_crop'];
+      $other_previous = $row['other_year_crop'];
+
+
+
+
+
+      echo "
+<tr class='odd gradeX'>
+<td>$farm_id</td>
+<td>$grower_name</td>
+<td>$crop</td>
+<td>$variety</td>
+<td>$class</td>
+<td>$hectors</td>
+<td>$region</td>
+<td>$district</td>
+<td>$epa</td>
+<td>$area_name</td>
+<td>$address</td>
+<td>$physical_address</td>
+<td>$previous</td>
+<td>$other_previous</td>
+
+
+
+
+<td><a href='farm_details.php? farm_id=$farm_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>view</a>
+
+
+</td>
+</tr>	
+";
+    }
+  } else {
+
+    echo "<th> 0 results found</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>
+    <th>-</th>";
+  }
+}
+
+
+
+
+
+// Registered farms filter by crop
+
+
+
+
+
+// Registered farms filter by location
+
+
 
 
 

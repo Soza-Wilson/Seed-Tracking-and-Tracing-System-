@@ -3,7 +3,7 @@
 <?php
 
 Ob_start();
-include('../class/main.php');
+
 include('../class/production.php');
 
 session_start();
@@ -63,7 +63,7 @@ $passed_data[] = $data_list->get_active_test("passed");
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -552,7 +552,7 @@ $passed_data[] = $data_list->get_active_test("passed");
                                                                 <td> $data[11]</td>
 
                                                                 
-                                                                <td><a href='lab_add_certificate.php?ID=$lab_id' class='btn btn-primary'>Add Certificate</a>
+                                                                <td><a href='lab_add_certificate.php?ID=$lab_id' class='btn btn-success'>Add Certificate</a>
                                                
                                                 
                                                 </td>
@@ -666,7 +666,7 @@ $passed_data[] = $data_list->get_active_test("passed");
                                                                 <td> $data[11]</td>
 
                                                                 <td><a href='view_registered_users.php' class='btn btn-success'>view </a>
-                                                                <a href='view_registered_users.php' class='btn btn-primary'>Retest</a>
+                                                                <a href='view_registered_users.php' class='btn btn-success'>Retest</a>
                                                
                                                 
                                                 </td>

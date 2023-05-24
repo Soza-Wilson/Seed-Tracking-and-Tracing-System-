@@ -35,7 +35,7 @@
       <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
-  <body themebg-pattern="theme1">
+  <body themebg-pattern="theme3">
   <!-- Pre-loader start -->
   <div class="theme-loader">
       <div class="loader-track">
@@ -101,7 +101,7 @@
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Are you sure</h3>
+                                        <h3 class="text-center txt-success btn-mat btn-mat">Are you sure</h3>
                                     </div>
                                 </div>
                                
@@ -122,7 +122,7 @@
                                     <div class="col-md-6">
                                         
 
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">No</button>
+                                        <button type="button" class="btn btn-success btn-mat btn-mat btn-md btn-block waves-effect text-center m-b-20">No</button>
 
                                         
                                     </div>

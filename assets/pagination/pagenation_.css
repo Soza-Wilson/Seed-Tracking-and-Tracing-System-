@@ -9,10 +9,10 @@
     padding: 5px 10px;
     margin: 0 5px;
     text-decoration: none;
-    color: #448AFF;
+    color: #349347;
   }
   
   #pagination a.active {
-    background-color: #448AFF;
+    background-color: #2b985e;
     color: #fff;
   }

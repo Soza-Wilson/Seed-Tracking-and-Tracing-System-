@@ -56,7 +56,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
 </head>
@@ -419,7 +419,7 @@ if (in_array($position, $restricted)) {
                                         <form method="POST" action="view_order_items.php">
 
 
-                                        <Button name="back_to_page" class="btn btn-success" >Back</Button>
+                                        <Button name="back_to_page" class="btn btn-success btn-mat" >Back</Button>
                                         <Button name="cancle_order" class="btn btn-danger" >cancle_order</Button>
 
                                         echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";

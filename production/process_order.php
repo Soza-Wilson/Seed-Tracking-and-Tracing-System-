@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
-    >
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -145,6 +145,10 @@ if ($result->num_rows > 0) {
                             <i class="ti-menu"></i>
                         </a>
 
+                        <a href="">
+                            <span>Production</span>
+                        </a>
+
                         <a href="production"></a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -205,13 +209,7 @@ if ($result->num_rows > 0) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -258,6 +256,13 @@ if ($result->num_rows > 0) {
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
+                                        <li class="">
+                                    <a href="grading.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-brush-alt"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Grading </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
                                         <li class="active">
                                             <a href="stock_out.php" class="waves-effect waves-dark">
@@ -523,7 +528,7 @@ if ($result->num_rows > 0) {
                                                         <span class="pcoded-mcaret"></span>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Order ID</label>
+                                                            <label class="badge badge-success ">Order ID</label>
                                                             <select class="form-control" name="order_ID">
                                                                 <option value="<?php echo $order_ID; ?>"><?php echo $order_ID; ?></option>
                                                             </select>
@@ -534,7 +539,7 @@ if ($result->num_rows > 0) {
 
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Order Type</label>
+                                                            <label class="badge badge-success ">Order Type</label>
                                                             <select class="form-control" name="order_type">
                                                                 <option value="<?php echo $order_type; ?>"><?php echo $order_type; ?></option>
                                                             </select>
@@ -548,7 +553,7 @@ if ($result->num_rows > 0) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Order for</label>
+                                                            <label class="badge badge-success ">Order for</label>
                                                             <select class="form-control" name="order_for">
                                                                 <option value="<?php echo $customer_ID; ?>"><?php echo $customer; ?> </option>
                                                             </select>
@@ -558,7 +563,7 @@ if ($result->num_rows > 0) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Requested by</label>
+                                                            <label class="badge badge-success ">Requested by</label>
                                                             <select class="form-control" name="requested_by">
 
                                                                 <option value="<?php echo $user_requested; ?>"><?php echo $user_requested; ?></option>
@@ -569,7 +574,7 @@ if ($result->num_rows > 0) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Order date</label>
+                                                            <label class="badge badge-success ">Order date</label>
                                                             <select class="form-control" name="date">
                                                                 <option value="<?php echo $date; ?>"><?php echo $date; ?></option>
                                                             </select>
@@ -578,7 +583,7 @@ if ($result->num_rows > 0) {
 
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Order time</label>
+                                                            <label class="badge badge-success ">Order time</label>
                                                             <select class="form-control" name="time">
                                                                 <option value="<?php echo $time; ?>"><?php echo $time; ?></option>
                                                             </select>
@@ -618,7 +623,7 @@ if ($result->num_rows > 0) {
                                                             <div class="form-group row">
 
                                                                 <div class="col-sm-3">
-                                                                    <button class="btn btn-primary" name="print_process_order_btn"> Save & Print Dispatch note</button>
+                                                                    <button class="btn btn-success" name="print_process_order_btn"> Save & Print Dispatch note</button>
                                                                 </div>
 
 
@@ -715,7 +720,7 @@ if ($result->num_rows > 0) {
                                             <td>$total_price</td>
 
                                      
-                                            <td><a href='stock_out_check_items.php? crop_ID=$crop_ID & variety_ID=$variety_ID & seed_class=$class & item_ID=$item_ID & quantity=$quantity & order_ID=$order_ID & discount_price=$discount_price & item_price=$price_per_kg'  class='btn btn-success'>check inventory</a> </td>
+                                            <td><a href='stock_out_check_items.php? crop_ID=$crop_ID & variety_ID=$variety_ID & seed_class=$class & item_ID=$item_ID & quantity=$quantity & order_ID=$order_ID & discount_price=$discount_price & item_price=$price_per_kg'  class='btn btn-success btn-mat'>check inventory</a> </td>
                                             
 
 												
@@ -731,11 +736,14 @@ if ($result->num_rows > 0) {
                                                 </div>
 
                                                 <div class="card-block">
-                                                    <a href='stock_out.php' class='btn btn-primary'>Back </a>
+                                                  
 
                                                     <!-- <button value="process order" name="process_order_btn" class='btn btn-success'>Process Order</button> -->
 
-                                                    <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Process Order</button>
+                                                    <button type="button" class="btn btn-success btn-mat" data-toggle="modal" data-target="#myModal">Process Order</button>
+
+
+                                                    <a href='stock_out.php' class='btn btn-danger btn-mat'>Back </a>
 
 
 

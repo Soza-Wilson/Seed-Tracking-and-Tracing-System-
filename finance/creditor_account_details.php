@@ -74,7 +74,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -763,7 +763,7 @@ if (in_array($position, $restricted)) {
                                                         <span class="pcoded-mcaret"></span>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">ID</label>
+                                                            <label class="badge badge-success btn-mat ">ID</label>
                                                             <select class="form-control" name="trans_id">
                                                                 <option value="<?php echo $trans_id; ?>"><?php echo $trans_id; ?></option>
                                                             </select>
@@ -776,7 +776,7 @@ if (in_array($position, $restricted)) {
 
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary "> Fullname</label>
+                                                            <label class="badge badge-success btn-mat "> Fullname</label>
                                                             <select class="form-control" name="trans_type">
                                                                 <option value="<?php echo $trans_type; ?>"><?php echo $trans_type; ?></option>
                                                             </select>
@@ -790,7 +790,7 @@ if (in_array($position, $restricted)) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Account Type</label>
+                                                            <label class="badge badge-success btn-mat ">Account Type</label>
                                                             <select class="form-control" name="trans_amount">
                                                                 <option value="<?php echo $trans_amount; ?>"><?php echo $trans_amount; ?> </option>
                                                             </select>
@@ -800,7 +800,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Phone</label>
+                                                            <label class="badge badge-success btn-mat ">Phone</label>
                                                             <select class="form-control" name="trans_amount">
                                                                 <option value="<?php echo $trans_amount; ?>"><?php echo $trans_amount; ?> </option>
                                                             </select>
@@ -810,7 +810,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Registerd date</label>
+                                                            <label class="badge badge-success btn-mat ">Registerd date</label>
                                                             <select class="form-control" name="trans_date">
 
                                                                 <option value="<?php echo $trans_status; ?>"><?php echo $trans_date; ?></option>
@@ -821,7 +821,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Time</label>
+                                                            <label class="badge badge-success btn-mat ">Time</label>
                                                             <select class="form-control" name="trans_time">
                                                                 <option value="<?php echo $trans_time; ?>"><?php echo $trans_time; ?></option>
                                                             </select>
@@ -830,7 +830,7 @@ if (in_array($position, $restricted)) {
 
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Debtor ID</label>
+                                                            <label class="badge badge-success btn-mat ">Debtor ID</label>
                                                             <select class="form-control" name="debtor_id">
                                                                 <option value="<?php echo $debtor_id; ?>"><?php echo $debtor_id; ?></option>
                                                             </select>
@@ -882,7 +882,7 @@ if (in_array($position, $restricted)) {
                                                             <div class="form-group row">
 
                                                                 <div class="col-sm-3">
-                                                                    <button class="btn btn-primary" name="print_save_payment"> Save & Print Receipt</button>
+                                                                    <button class="btn btn-success btn-mat" name="print_save_payment"> Save & Print Receipt</button>
                                                                 </div>
 
 
@@ -1034,7 +1034,7 @@ if (in_array($position, $restricted)) {
 
 
                                                 <input type="button" data-toggle="modal" data-target="#myModal" value="save payment" class="btn btn-success">
-                                                <input type="submit" name="back" value="back" class="btn btn-primary">
+                                                <input type="submit" name="back" value="back" class="btn btn-success btn-mat">
 
                                             </div>
 

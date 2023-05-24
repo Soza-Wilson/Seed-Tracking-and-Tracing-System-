@@ -47,8 +47,8 @@ if (empty($test)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
+
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/registered_farms.js">
@@ -57,7 +57,7 @@ if (empty($test)) {
     </script>
 
     <!-- pagenation -->
-    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
     <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
@@ -199,13 +199,7 @@ if (empty($test)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -459,7 +453,7 @@ if (empty($test)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">View farms</h5>
+                                            <h5 class="m-b-10">Registered farms</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -469,7 +463,7 @@ if (empty($test)) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="registered_farms.php">View Farms</a>
+                                            <li class="breadcrumb-item"><a href="registered_farms.php"> farms</a>
                                             </li>
 
                                         </ul>
@@ -497,71 +491,55 @@ if (empty($test)) {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Filter </h5>
-
-
-                                            </div>
-                                            <div class="card-block">
 
 
 
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-3">
-                                                        <label class="label bg-primary">Grower </label>
-                                                        <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
-                                                        <label id="warning_name" class="warning-text"> <span>Please enter Creditor name <i class="icofont icofont-warning"></i></span></label>
-
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Tab variant tab card start -->
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Filter Registered Farms</h5>
                                                     </div>
+                                                    <div class="card-block tab-icon">
+                                                        <!-- Row start -->
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-xl-12">
+                                                                <!-- <h6 class="sub-title">Tab With Icon</h6> -->
+                                                                <div class="sub-title">Select Filter Type</div>
+                                                                <!-- Nav tabs -->
+                                                                <ul class="nav nav-tabs md-tabs " role="tablist">
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><i class="icofont icofont-ui-user"></i>Grower</a>
+                                                                        <div class="slide"></div>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><i class="icofont icofont-ui-search"></i>Crop</a>
+                                                                        <div class="slide"></div>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><i class="icofont icofont-ui-map"></i>Location</a>
+                                                                        <div class="slide"></div>
+                                                                    </li>
 
-                                                    <div class="col-sm-3">
-
-                                                        <label class="label bg-primary">Crop </label>
-                                                        <select name="select_crop" id="select_crop" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-
-                                                    <div class="col-sm-3">
-
-                                                        <label class="label bg-primary">Variety</label>
-                                                        <select name="select_variety" id="select_variety" class="form-control">
-                                                            <option value="not_selected">Not Selected</option>
-
-
-
-                                                        </select>
-                                                        <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                    </div>
-                                                    <div class="col-sm-2">
-
-                                                        <label class="label bg-primary">Class </label>
-
-                                                        <select name="select_class" id="select_class" class="form-control">
-                                                            <option value="not_selected">Class</option>
-                                                            <option value="pre_basic">Pre-Basic</option>
-                                                            <option value="basic">Basic</option>
-                                                            <option value="certified">Certified</option>
-
-
-                                                        </select>
-                                                        <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
+                                                                </ul>
+                                                                <!-- Tab panes -->
+                                                                <div class="tab-content card-block">
+                                                                    <div class="tab-pane active" id="home7" role="tabpanel">
 
 
 
-                                                    </div>
+
+
+                                                                        <div class="form-group row form-success">
+                                                                            <div class="col-sm-12">
+                                                                                <label class="label bg-success">Grower </label>
+                                                                                <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
+
+                                                                                <span class="form-bar"></span>
+                                                                               
+
+                                                                            </div>
 
 
 
@@ -570,48 +548,222 @@ if (empty($test)) {
 
 
 
-                                                    <div class="col-sm-1">
-
-
-                                                        <br />
-                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
-
-
-
-                                                    </div>
-                                                </div>
-
-
-                                                <form action="csv_handler.php" method="POST">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
-
-
-
-                                                            <button class=" btn btn-primary btn-mat " id='stock_in_csv' name='stock_in_csv'><i class="icofont icofont-download"></i> CSV</button>
-
-
-                                                            <input type="hidden" name="creditor_hidden" id="creditor_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
 
 
 
 
 
-                                                            </select>
+                                                                        </div>
+
+
+                                                                        
+                                                                      
+
+
+                                                                    </div>
+                                                                    <div class="tab-pane" id="profile7" role="tabpanel">
+
+
+
+
+
+                                                                        <div class="form-group row">
+
+
+                                                                            <div class="col-sm-4">
+
+                                                                                <label class="label bg-success">Crop </label>
+                                                                                <select name="select_crop" id="select_crop" class="form-control">
+                                                                                    <option value="not_selected">Not Selected</option>
+
+
+
+                                                                                </select>
+                                                                                <label id="warning_crop" class="warning-text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-sm-4">
+
+                                                                                <label class="label bg-success">Variety</label>
+                                                                                <select name="select_variety" id="select_variety" class="form-control">
+                                                                                    <option value="not_selected">Not Selected</option>
+
+
+
+                                                                                </select>
+                                                                                <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+
+                                                                                <label class="label bg-success">Class </label>
+
+                                                                                <select name="select_class" id="select_class" class="form-control">
+                                                                                    <option value="not_selected">Class</option>
+                                                                                    <option value="pre_basic">Pre-Basic</option>
+                                                                                    <option value="basic">Basic</option>
+                                                                                    <option value="certified">Certified</option>
+
+
+                                                                                </select>
+                                                                                <label id="warning_class" class="warning-text"> <span>Please select class <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                            </div>
+
+
+
+
+
+
+
+
+                                                                            <div class="col-sm-1">
+
+
+                                                                                <br />
+                                                                                <button name="get_data" id="get_crop_data" class=" btn btn-success btn-mat"><i class="icofont icofont-search"></i></button>
+
+
+
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        
+                                                                            
+                                                                       
+
+
+                                                                    </div>
+                                                                    <div class="tab-pane" id="messages7" role="tabpanel">
+
+
+
+
+
+
+
+                                                                        <div class="form-group row">
+
+
+                                                                            <div class="col-sm-6">
+                                                                                <label class="label bg-success">Region</label>
+                                                                                <select id="select_region" name="select_region" class="form-control" required="">
+                                                                                    <option value="0">Select Region</option>
+                                                                                    <option value="central">Central Region</option>
+                                                                                    <option value="northern">Northern Region</option>
+                                                                                    <option value="southern">Southern Region</option>
+
+
+
+
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                            <div class="col-sm-6">
+
+                                                                                <label class="label bg-success">Variety</label>
+                                                                                <select name="select_district" id="select_district" class="form-control">
+                                                                                    <option value="not_selected">Not Selected</option>
+
+
+
+                                                                                </select>
+                                                                                <label id="warning_variety" class="warning-text"> <span>Please select variety <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                                                            </div>
+
+
+
+
+
+
+
+
+
+
+                                                                        </div>
+
+
+                                                                        
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-3">
+
+
+
+                                                                                 
+
+
+                                                                                    
+                                                                                    
+
+
+
+
+
+                                                                                    </select>
+
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                      
+
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+                                                                <form action="csv_handler.php" method="POST">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-sm-3">
+
+
+
+                                                                                    <button class=" btn btn-success btn-mat " id='registered_farms_csv' name='registered_farms_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                                                    <input type="hidden" name="creditor_hidden" id="creditor_hidden">
+                                                                                    <input type="hidden" name="filter" id="filter">
+                                                                                    <input type="hidden" name="cropValueHidden" id="cropValueHidden">
+                                                                                    <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
+                                                                                    <input type="hidden" name="classValueHidden" id="classValueHidden">
+
+                                                                                    <input type="hidden" name="region_hidden" id="region_hidden">
+                                                                                    <input type="hidden" name="district_hidden" id="district_hidden">
+
+
+
+
+
+                                                                                   
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            </form>
+         
+                                                            </div>
 
                                                         </div>
-
+                                                        <!-- Row end -->
                                                     </div>
-                                                </form>
-
+                                                </div>
+                                                <!-- Tab variant tab card start -->
                                             </div>
                                         </div>
+
+
 
                                         <div class="card">
                                             <div class="card-header">
@@ -707,7 +859,7 @@ if (empty($test)) {
                                                
 												
 												
-												<td><a href='farm_details.php? farm_id=$farm_id' class='btn btn-primary btn-mat'><i class='icofont icofont-eye-alt'></i>view</a>
+												<td><a href='farm_details.php? farm_id=$farm_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>view</a>
                                                
                                                
                                                 </td>
@@ -720,7 +872,7 @@ if (empty($test)) {
                                                     </table>
                                                 </div>
 
-                                                <div id="pagination"> 
+                                                <div id="pagination">
 
 
                                                 </div>

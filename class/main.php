@@ -695,7 +695,7 @@ class main
           $this->use_certificate($certificate, $available_quantity);
         } else if ($source == "internal") {
 
-          $available_quantity = 0;
+          $available_quantity =  $quantity;
         }
 
 
@@ -1682,22 +1682,46 @@ class main
        `address`, `physical_address`, `EPA`, `user_ID`, `creditor_ID`, 
        `registered_date`, `previous_year_crop`, `other_year_crop`, `order_status`,
         `main_lot_number`, `main_quantity`, `male_lot_number`, `male_quantity`,
-         `female_lot_number`, `female_quantity`) VALUES ('$farm_ID','$hectors',
+         `female_lot_number`, `female_quantity`,`breeding_type`) VALUES ('$farm_ID','$hectors',
          '$crop','$variety','$class','$region','$district','$area_name',
          '$address','$physical_address','$epa','$user','$grower_ID','$registered_date','$previous_year',
-         '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity')";
+         '$other_year','unconfirmed','$main_certificate','$main_quantity','$male_certificate','$male_quantity','$female_certificate','$female_quantity','$hybrid_type')";
 
 
 
       $statement = $con->prepare($sql);
       $statement->execute();
 
+
+      if ($hybrid_type == "-") {
+
+        $newMainQuantity = (int)$main_quantity;
+
+        $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMainQuantity WHERE `lot_number`='$main_certificate'";
+        $statement = $con->prepare($sql);
+        $statement->execute();
+      } else  if ($hybrid_type == "hybrid_inbred") {
+
+
+
+        $newMaleQuantity = (int)$male_quantity;
+        $newFemaleQuantity = (int)$female_quantity;
+
+
+
+        $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMaleQuantity WHERE `lot_number`='$male_certificate'";
+        $statement = $con->prepare($sql);
+        $statement->execute();
+
+
+        $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newFemaleQuantity WHERE `lot_number`='$female_certificate'";
+        $statement = $con->prepare($sql);
+        $statement->execute();
+      }
+
       if ($statement = true) {
 
         return "added";
-
-        $this->change_assigned_certificate_quantity($hybrid_type, $main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity, $variety);
-        //return $this->edit_quantity_certificate($hybrid_type,$main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity, $variety);
       } else {
         return "Error";
       }
@@ -1724,6 +1748,8 @@ class main
 
     if ($hybrid_type == "hybrid_inbred") {
 
+
+
       $newMaleQuantity = (int)$male_quantity;
       $newFemaleQuantity = (int)$female_quantity;
 
@@ -1737,7 +1763,9 @@ class main
       $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newFemaleQuantity WHERE `lot_number`='$female_lot_number'";
       $statement = $con->prepare($sql);
       $statement->execute();
-    } else {
+    } else if ($hybrid_type == "-") {
+
+
 
       $newMainQuantity = (int)$main_quantity;
 
@@ -1765,7 +1793,7 @@ class main
     $address,
     $physical_address,
     $epa,
-    $grower_ID,
+    $farm_ID,
     $previous_year,
     $other_year,
     $main_certificate,
@@ -1775,40 +1803,139 @@ class main
     $female_certificate,
     $female_quantity,
     $user,
-    $hybrid_type
+    $hybrid_type,
+    $old_main_certificate,
+    $old_main_quantity,
+    $old_male_certificate,
+    $old_male_quantity,
+    $old_female_certificate,
+    $old_female_quantity,
+    $old_hybrid_type
 
 
 
-  ){
+  ) {
+    global $con;
 
+    $sql = "UPDATE `farm` SET `Hectors`='$hectors',`crop_species`='$crop',
+    `crop_variety`='$variety',`class`='$class',`region`='$region',`district`='$district',
+    `area_name`='$area_name',`address`='$address',`physical_address`='$physical_address',`EPA`='$epa',
+    `previous_year_crop`='$previous_year',`other_year_crop`='$other_year',
+    `main_lot_number`='$main_certificate',`main_quantity`='$main_quantity',
+    `male_lot_number`='$male_certificate',`male_quantity`='$male_quantity',`female_lot_number`='$female_certificate',`female_quantity`='$female_quantity',`breeding_type`='$hybrid_type' WHERE `farm_ID`='$farm_ID'";
 
-    $sql="UPDATE `farm` SET `farm_ID`='[value-1]',`Hectors`='[value-2]',`crop_species`='[value-3]',
-    `crop_variety`='[value-4]',`class`='[value-5]',`region`='[value-6]',`district`='[value-7]',
-    `area_name`='[value-8]',`address`='[value-9]',`physical_address`='[value-10]',`EPA`='[value-11]',
-    `user_ID`='[value-12]',`creditor_ID`='[value-13]',`registered_date`='[value-14]',
-    `previous_year_crop`='[value-15]',`other_year_crop`='[value-16]',`order_status`='[value-17]',
-    `breeding_type`='[value-18]',`main_lot_number`='[value-19]',`main_quantity`='[value-20]',
-    `male_lot_number`='[value-21]',`male_quantity`='[value-22]',`female_lot_number`='[value-23]',`female_quantity`='[value-24]' WHERE 1";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
 
+      $old_certificate = [$old_main_certificate, $old_main_quantity, $old_male_certificate, $old_male_quantity, $old_female_certificate, $old_female_quantity];
+      $new_certificate = [$main_certificate, $main_quantity, $male_certificate, $male_quantity, $female_certificate, $female_quantity];
 
+      self::restore_assigned_seed_certificates($old_hybrid_type, $old_certificate);
+      self::assign_farm_certificate_quantity($hybrid_type, $new_certificate);
 
-
-
+      return  "updated";
+    } else {
+      return "Error";
+    }
   }
 
 
-  function restore_assigned_seed_certificates($hybrid_type,
-  $main_lot_number,
-  $main_quantity,
-  $male_lot_number,
-  $male_quantity,
-  $female_lot_number,
-  $female_quantity,
-  $variety){
+
+
+  function delete_farm(
+    $farm_ID,
+    $old_hybrid_type,
+    $old_main_certificate,
+    $old_main_quantity,
+    $old_male_certificate,
+    $old_male_quantity,
+    $old_female_certificate,
+    $old_female_quantity
+    
+
+  ) {
+    global $con;
+
+    $sql = "DELETE FROM `farm` WHERE `farm_ID`='$farm_ID'";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+      $old_certificate = [$old_main_certificate, $old_main_quantity, $old_male_certificate, $old_male_quantity, $old_female_certificate, $old_female_quantity];
+      self::restore_assigned_seed_certificates($old_hybrid_type, $old_certificate);
+
+      return "deleted";
+    }
+  }
 
 
 
 
+
+
+
+  //    restoring assigned quantity to old certificates after updating farm details
+
+  static function restore_assigned_seed_certificates(
+    $hybrid_type,
+    $old_certificates
+
+  ) {
+
+    global $con;
+    if ($hybrid_type == "-") {
+
+      $oldMainQuantity = (int)$old_certificates[1];
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity+$oldMainQuantity WHERE `lot_number`='$old_certificates[0]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    } else  if ($hybrid_type == "hybrid_inbred") {
+
+
+
+      $oldMaleQuantity = (int)$old_certificates[3];
+      $oldFemaleQuantity = (int)$old_certificates[5];
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity+$oldMaleQuantity WHERE `lot_number`='$old_certificates[2]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity+$oldFemaleQuantity WHERE `lot_number`='$old_certificates[4]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    }
+  }
+
+
+  // assign new certificate quntities after registering or updating farm details
+
+  static function assign_farm_certificate_quantity(
+    $hybrid_type,
+    $new_certificates
+  ) {
+
+    global $con;
+    if ($hybrid_type == "-") {
+
+      $newMainQuantity = (int)$new_certificates[1];
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMainQuantity WHERE `lot_number`='$new_certificates[0]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    } else  if ($hybrid_type == "hybrid_inbred") {
+
+
+
+      $newMaleQuantity = (int)$new_certificates[3];
+      $newFemaleQuantity = (int)$new_certificates[5];
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newMaleQuantity WHERE `lot_number`='$new_certificates[2]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+
+
+      $sql = "UPDATE `certificate` SET `assigned_quantity`=assigned_quantity-$newFemaleQuantity WHERE `lot_number`='$new_certificates[4]'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+    }
   }
 
 
@@ -2090,7 +2217,7 @@ class main
 
   ///change date format from yyyy-mm-dd to dd-mm-yyyy
 
-  function change_date_format($date)
+  static function change_date_format($date)
   {
     $date = date_create($date);
     $date = date_format($date, "d-m-Y");
@@ -2768,5 +2895,3 @@ class main
   GROUP BY MONTH(date), YEAR(date)";
   }
 }
-
-

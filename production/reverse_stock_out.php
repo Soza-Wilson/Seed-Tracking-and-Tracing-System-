@@ -59,7 +59,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
       <!-- Font Awesome -->
       <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
   </head>
 
   <body themebg-pattern="theme1">
@@ -130,7 +130,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h5 class="text-center txt-primary">Process reversed</h5>
+                                        <h5 class="text-center txt-success">Process reversed</h5>
                                     </div>
                                 </div>
                               
@@ -138,7 +138,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
                              
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
+                                        <button type="button" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
                                     </div>
                                 </div>
                                 <hr/>

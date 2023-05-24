@@ -56,7 +56,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -527,7 +527,7 @@ if (in_array($position, $restricted)) {
                                                             <span class="pcoded-mcaret"></span>
 
                                                             <div class="col-sm-3">
-                                                                <label class="badge badge-primary ">ID</label>
+                                                                <label class="badge badge-success ">ID</label>
                                                                 <select class="form-control" name="grade_id">
                                                                     <option value="<?php echo $_GET['grade_id']; ?>"><?php echo $_GET['grade_id']; ?></option>
                                                                 </select>
@@ -539,7 +539,7 @@ if (in_array($position, $restricted)) {
 
                                                             <div class="col-sm-3">
 
-                                                                <label class="badge badge-primary ">Crop</label>
+                                                                <label class="badge badge-success ">Crop</label>
                                                                 <select class="form-control" name="crop">
                                                                     <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
                                                                 </select>
@@ -552,7 +552,7 @@ if (in_array($position, $restricted)) {
 
                                                             <div class="col-sm-3">
 
-                                                                <label class="badge badge-primary ">Variety</label>
+                                                                <label class="badge badge-success ">Variety</label>
                                                                 <select class="form-control" name="variety">
                                                                     <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety']; ?></option>
                                                                 </select>
@@ -566,7 +566,7 @@ if (in_array($position, $restricted)) {
 
 
                                                             <div class="col-sm-3">
-                                                                <label class="badge badge-primary ">Available Quantity</label>
+                                                                <label class="badge badge-success ">Available Quantity</label>
                                                                 <select class="form-control" name="available_quantity">
                                                                     <option value="<?php echo $_GET['available_quantity']; ?>"><?php echo $_GET['available_quantity']; ?></option>
                                                                 </select>

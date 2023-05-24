@@ -14,8 +14,15 @@ $(document).ready(() => {
     },
     (data) => {
       $("#select_crop").html(data);
+      let options = $("#select_crop").find("option");
+      set_selected_data("#select_crop", options, $("#crop").val(), "crop");
+    
     }
   );
+
+  options = $("#select_class").find("option");
+  set_selected_data("#select_class", options, $("#class").val(), "class");
+  
   let for_certificate = 0;
   let other = 0;
   $("#select_crop").change(function () {
@@ -30,6 +37,7 @@ $(document).ready(() => {
       },
       (data) => {
         $("#select_variety").html(data);
+        
       }
     );
   });
@@ -402,6 +410,79 @@ $(document).ready(() => {
       new_certificate = $("#certificate").val();
       status = status + 4;
       return status;
+    }
+  }
+
+
+  function set_selected_data(
+    select_element,
+    options,
+    selected_value,
+    select_type
+  ) {
+    // Loop through each option and do something
+    options.each(function () {
+      var value = $(this).val(); // Get the value of the option
+      var text = $(this).text(); // Get the text of the option
+      console.log("Value: " + value + ", Text: " + text);
+    });
+
+    var selectElement = $(select_element);
+
+    selectElement.empty();
+    $.each(options, function (index, option) {
+      var optionElement = $("<option>")
+        .val(option.value)
+        .text(option.text)
+        .appendTo(selectElement);
+    });
+
+    // Set a specific option as selected
+    var selectedValue = selected_value;
+    selectElement.val(selectedValue);
+
+    if (select_type == "crop") {
+      set_selected_variety();
+    } else if (select_type == "region") {
+      let region_data = $(select_element).find(":selected");
+      get_districts(region_data);
+      options = $("#select_district").find("option");
+      set_selected_data(
+        "#select_district",
+        options,
+        $("#selected_district").val(),
+        "district"
+      );
+    }
+  }
+
+  function set_selected_variety() {
+    var data = $("#select_crop").find(":selected");
+
+    if (data.val() == "0") {
+      alert("please select Crop ");
+    } else {
+      let crop_value = $("#select_crop").val();
+
+      $.post(
+        "get_products.php",
+        {
+          crop_value: crop_value,
+        },
+        (data) => {
+          $("#select_variety").html(data);
+
+          let options = $("#select_variety").find("option");
+          set_selected_data(
+            "#select_variety",
+            options,
+            $("#variety").val(),
+            "variety"
+          );
+
+         
+        }
+      );
     }
   }
 

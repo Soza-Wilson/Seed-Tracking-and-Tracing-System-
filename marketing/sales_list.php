@@ -99,7 +99,7 @@ if ($result->num_rows > 0) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -415,13 +415,7 @@ $.post('get_data.php', {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -600,31 +594,12 @@ $.post('get_data.php', {
                                             </div>
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Order Type</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Crop</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Select Variety</label>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <label>Select Class</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
+                                               
 
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
+                                                             <label class="label bg-success">Order Type</label>
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Order Type</option>
                                                             <option value="customer">Customer</option>
@@ -638,7 +613,7 @@ $.post('get_data.php', {
 
                                                     <div class="col-sm-2">
 
-
+                                                    <label class="label bg-success">Select Crop</label>
                                                     <select name="select_crop" id="select_crop" class="form-control"> 
                                                         <option value="not_selected">Not Selected</option>
 
@@ -651,7 +626,7 @@ $.post('get_data.php', {
                                                     
                                                     <div class="col-sm-2">
 
-
+                                                    <label class="label bg-success">Select Variety</label>
                                                     <select name="select_variety" id="select_variety" class="form-control"> 
                                                         <option value="not_selected">Not Selected</option>
 
@@ -663,7 +638,7 @@ $.post('get_data.php', {
                                                     </div>
                                                     <div class="col-sm-1">
 
-
+                                                    <label class="label bg-success">Select Class</label>
                                                     <select name="select_class" id="select_class" class="form-control"> 
                                                         <option value="not_selected">Class</option>
                                                         <option value="pre_basic">Pre-Basic</option>
@@ -678,10 +653,12 @@ $.post('get_data.php', {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">From :</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">To :</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
@@ -693,8 +670,8 @@ $.post('get_data.php', {
                                                     <div class="col-sm-1">
 
 
-
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+    </br>
+                                                        <button name="get_data" id="get_data" class="btn btn-success btn-mat btn-mat"><i class="icofont icofont-search"></i></button>
 
 
                                                       
@@ -708,7 +685,7 @@ $.post('get_data.php', {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='sales_save_csv' name='sales_save_csv'> CSV</button>
+                                                            <button class="btn btn-success btn-mat btn-mat " id='sales_save_csv' name='sales_save_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
@@ -813,7 +790,7 @@ $.post('get_data.php', {
                                             <td>$order_type</td>
                                             <td>$customer</td>
                                             <td>$order_date</td>
-                                           <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>View Order</a></td>
+                                           <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success btn-mat'>View Order</a></td>
                                             
 												
 											</tr>	

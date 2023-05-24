@@ -159,7 +159,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -568,7 +568,7 @@ else{
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary "> ID</label>
+                                                        <label class="badge badge-success btn-mat "> ID</label>
                                                         <input id="order_id" type="text" class="form-control" name="order_id" value= "<?php echo $stock_in_ID; ?>" require="">
 
                                                     </div>
@@ -577,7 +577,7 @@ else{
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Quantity</label>
+                                                        <label class="badge badge-success btn-mat ">Quantity</label>
                                                         <input id="order_type" type="text" class="form-control " name="order_type" value="<?php echo $quantity; ?>" require="">
 
 
@@ -585,7 +585,7 @@ else{
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Transaction For</label>
+                                                        <label class="badge badge-success btn-mat ">Transaction For</label>
                                                         <input id="customer_name" type="text" class="form-control" name="customer_name" value="<?php echo $creditor; ?>" require="">
 
 
@@ -593,7 +593,7 @@ else{
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary ">Added By</label>
+                                                        <label class="badge badge-success btn-mat ">Added By</label>
                                                         <input id="requested_user" type="text" class="form-control" name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
@@ -601,7 +601,7 @@ else{
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                        <label class="badge badge-primary "> Date</label>
+                                                        <label class="badge badge-success btn-mat "> Date</label>
                                                         <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
@@ -610,7 +610,7 @@ else{
 
                                                     <div class="col-sm-2">
 
-                                                        <label class="badge badge-primary ">Time</label>
+                                                        <label class="badge badge-success btn-mat ">Time</label>
                                                         <input id="time" type="text" class="form-control" name="time" value="<?php echo $time; ?>" require="">
                                                        
 
@@ -691,7 +691,7 @@ else{
 
                                                 <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary">Crop:</label>
+                                                            <label class="badge badge-success btn-mat">Crop:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $crop; ?>">
@@ -702,7 +702,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary">Variety:</label>
+                                                            <label class="badge badge-success btn-mat">Variety:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="fullname" required="" value="<?php echo $variety; ?>">
@@ -711,7 +711,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary ">Class:</label>
+                                                            <label class="badge badge-success btn-mat ">Class:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $class; ?>">
@@ -720,7 +720,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary">Seed Receive Note #:</label>
+                                                            <label class="badge badge-success btn-mat">Seed Receive Note #:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="user_id" id="user_id" required="" value="<?php echo $SRN; ?>">
@@ -731,7 +731,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary">Bin Card #:</label>
+                                                            <label class="badge badge-success btn-mat">Bin Card #:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="fullname" required="" value="<?php echo $bincard; ?>">
@@ -740,7 +740,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary ">Number of Bags:</label>
+                                                            <label class="badge badge-success btn-mat ">Number of Bags:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $bags; ?>">
@@ -749,7 +749,7 @@ else{
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-1">
-                                                            <label class="badge badge-primary ">Description:</label>
+                                                            <label class="badge badge-success btn-mat ">Description:</label>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control trans_details" name="dob" id="dob" required="" value="<?php echo $description; ?>">

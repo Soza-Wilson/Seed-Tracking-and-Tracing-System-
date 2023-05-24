@@ -62,7 +62,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -575,7 +575,7 @@ if (in_array($position, $restricted)) {
     <td>$count</t>
     <td>$total</td>
 
-    <td><a href='process_order.php? order_ID=$order_ID' class='btn btn-success'>view</a></td>
+    <td><a href='process_order.php? order_ID=$order_ID' class='btn btn-success btn-mat'>view</a></td>
 </tr>	
 ";
                                                                 }

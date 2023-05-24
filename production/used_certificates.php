@@ -55,7 +55,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
@@ -505,7 +505,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-3">
 
-                                                    <label class="label bg-primary">Select Crop</label>
+                                                    <label class="label bg-success">Select Crop</label>
                                                     <select name="select_crop" id="select_crop" class="form-control"> 
                                                         <option value="not_selected">Not Selected</option>
                                                      
@@ -520,7 +520,7 @@ if (in_array($position, $restricted)) {
                                                     
                                                     <div class="col-sm-3">
 
-                                                    <label class="label bg-primary">Select Variety</label>
+                                                    <label class="label bg-success">Select Variety</label>
                                                     <select name ="select_variety" id="select_variety" class="form-control"> 
                                                         <option value="not_selected">Not Selected</option>
                                                       
@@ -534,7 +534,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                     <div class="col-sm-3">
 
-                                                    <label class="label bg-primary">Select Class</label>
+                                                    <label class="label bg-success">Select Class</label>
                                                     <select name="select_class" id="select_class" class="form-control"> 
                                                         <option value="not_selected">Class</option>
                                                         <option value="pre_basic">Pre-Basic</option>
@@ -560,7 +560,7 @@ if (in_array($position, $restricted)) {
 
 
                                                         <br/>
-                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
+                                                        <button name="get_data" id="get_data" class=" btn btn-success btn-mat"><i class="icofont icofont-search"></i></button>
 
 
                                                       
@@ -574,7 +574,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class=" btn btn-primary btn-mat" id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                            <button class=" btn btn-success btn-mat" id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">

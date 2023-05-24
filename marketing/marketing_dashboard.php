@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <!-- am chart export.css -->
   
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
 </head>
 
 <body>

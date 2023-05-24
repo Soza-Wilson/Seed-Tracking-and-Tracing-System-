@@ -62,11 +62,11 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/register_farm.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/register_farm_.js"></script>
 
 
 </head>
@@ -208,7 +208,7 @@ if (in_array($position, $restricted)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    
+
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -482,159 +482,159 @@ if (in_array($position, $restricted)) {
 
 
 
-                                          
 
-                                           
+
+
 
                                                 <!-- Modal -->
-                                                
-                                         
+
+
                                                 <div class="card">
 
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
+                                                    <div id="myModal" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog modal-lg">
 
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new grower</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="grower.php" method="POST" enctype="multipart/form-data">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h5 class="modal-title">Register new grower</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="grower.php" method="POST" enctype="multipart/form-data">
 
-                                                                    <div class="form-group row">
+                                                                        <div class="form-group row">
 
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
-                                                                            <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                                            <div class="col-sm-12">
+                                                                                <input id="creditor_name" type="text" class="form-control" name="creditor_name" placeholder="Name" require="">
+                                                                                <label id="warning_creditor_name" class="warning_text"> <span>Please enter grower name <i class="icofont icofont-warning"></i></span></label>
+                                                                            </div>
+
+
                                                                         </div>
+
+
+
+                                                                        <div class="form-group row">
+
+                                                                            <div class="col-sm-12">
+                                                                                <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
+                                                                                <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
+
+                                                                            </div>
+
+
+                                                                        </div>
+
+
+                                                                        <div class="form-group row">
+
+                                                                            <div class="col-sm-12">
+                                                                                <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
+                                                                            </div>
+
+
+                                                                        </div>
+
+
+
+                                                                        <div class="form-group row">
+
+                                                                            <div class="col-sm-12">
+                                                                                <labe>Supporting documents :</label>
+                                                                                    <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                                                    <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                                    <input type="hidden" class="form-control" id="user" value="<?php echo $_SESSION['user'] ?>">
+
+                                                                                    <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-success  btn-mat"><i class="icofont icofont-save"></i> Save</button>
+                                                                            </div>
+
+                                                                        </div>
+
+
+
+                                                                    </form>
+                                                                    <div class="card" id="existingName">
+                                                                        <div class="card-header">
+                                                                            <h5> Activate Existing Inactive Grower
+
+                                                                            </h5>
+                                                                        </div>
+
+                                                                        <div class="card-block table-border-style">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table table-hover" id="existingNameTable">
+
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
 
 
                                                                     </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_phone" type="number" class="form-control" name="creditor_phone" placeholder="Phone number" require="">
-                                                                            <label id="warning_creditor_phone" class="warning_text"> <span>Please enter grower phone number <i class="icofont icofont-warning"></i></span></label>
-                                                                         
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="creditor_email" type="email" class="form-control" name="creditor_email" placeholder="Email (Optional)" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <labe>Supporting documents :</label>
-                                                                            <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
-                                                                            <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                            <input type="hidden" class="form-control"  id="user" value="<?php echo $_SESSION['user']?>">
-
-                                                                                <label id="warning_contract" class="warning_text"> <span>Please upload contract<i class="icofont icofont-warning"></i></span></label>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="save_grower" value="Save" class="btn waves-effect waves-light btn-primary  btn-mat" ><i class="icofont icofont-save"></i> Save</button>
-                                                                        </div>
-
-                                                                    </div>
-
-
-
-                                                                </form>  
-                                                                <div class="card" id="existingName">
-                                                                <div class="card-header">
-                                                    <h5> Activate Existing Inactive Grower
-                                                        
-                                                    </h5>
-                                                </div>
-
-                                                                <div class="card-block table-border-style">
-                                                               <div class="table-responsive">
-                                                               <table class="table table-hover" id="existingNameTable">
-
-                                                    </table>
-                                                </div>
-                                             </div>
-
-
-                                                                   
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
-                                                </div>
 
                                                     <div class="card-header">
 
 
                                                         <!-- <form action="register_farm.php" method="POST"> -->
-                                                            <!-- /*
+                                                        <!-- /*
 get registered grower form                                 
 */ -->
 
-                                                            <h5>Select grower</h5>
+                                                        <h5>Select grower</h5>
 
-                                                            <div>
+                                                        <div>
+                                                        </div>
+                                                        <div class=" card-block">
+
+                                                            <div class="form-group row">
                                                             </div>
-                                                            <div class=" card-block">
 
-                                                                <div class="form-group row">
-                                                                </div>
+                                                            <div class="form-group row">
+                                                                <span class="pcoded-mcaret"></span>
+                                                                <div class="col-sm-6">
+                                                                    <select id="grower_search_result" name="grower_search_result" class="form-control">
 
-                                                                <div class="form-group row">
-                                                                    <span class="pcoded-mcaret"></span>
-                                                                    <div class="col-sm-6">
-                                                                        <select id="grower_search_result" name="grower_search_result" class="form-control">
+                                                                        <option value="0">Select Creditor</option>
 
-                                                                            <option value="0">Select Creditor</option>
-
-                                                                        </select>
-                                                                        <input type="hidden" id="user" value="<?php echo $_SESSION['user']?>">
-                                                                        <label id="warning_select_creditor" class="warning_text"> <span>Please Select grower <i class="icofont icofont-warning"></i></span></label>
-
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <input id="grower_search" type="text" class="form-control" name="grower_search" placeholder="Search creditor by name" require="">
-                                                                    </div>
+                                                                    </select>
+                                                                    <input type="hidden" id="user" value="<?php echo $_SESSION['user'] ?>">
+                                                                    <label id="warning_select_creditor" class="warning_text"> <span>Please Select grower <i class="icofont icofont-warning"></i></span></label>
 
                                                                 </div>
 
-                                                            </div>
-
-                                                            <div class="col-sm-2">
-
-
+                                                                <div class="col-sm-6">
+                                                                    <input id="grower_search" type="text" class="form-control" name="grower_search" placeholder="Search creditor by name" require="">
+                                                                </div>
 
                                                             </div>
-                                                            <div class="col-sm-6">
 
-                                                                <a href="active_growers.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
-                                                                    new grower
+                                                        </div>
 
-                                                                </a>
+                                                        <div class="col-sm-2">
 
-                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <a href="active_growers.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                                new grower
+
+                                                            </a>
+
+                                                        </div>
 
                                                     </div>
 
@@ -644,314 +644,312 @@ get registered grower form
                                                     <div class="card-header">
 
                                                         <!-- <form action="register_farm.php" method="POST"> -->
-                                                            <!-- /*
+                                                        <!-- /*
 get registered grower form
 */ -->
 
-                                                            <h5>Upload grower's farm list (Optional)</h5>
+                                                        <h5>Upload grower's farm list (Optional)</h5>
 
-                                                            <div>
+                                                        <div>
+                                                        </div>
+                                                        <div class=" card-block">
+
+                                                            <div class="form-group row">
                                                             </div>
-                                                            <div class=" card-block">
+                                                            <form action="upload_excel_file.php" method="POST" enctype="multipart/form-data">
 
-                                                                <div class="form-group row">
-                                                                </div>
 
                                                                 <div class="form-group row">
                                                                     <span class="pcoded-mcaret"></span>
                                                                     <div class="col-sm-10">
-                                                                        
-                                                                    <input type="file" class="form-control" accept=".csv">
+
+                                                                        <input type="file" name="excelFile" class="form-control" >
 
                                                                     </div>
-
+                                                                    <!-- data-toggle="modal" data-target="#myModal" -->
                                                                     <div class="col-sm-1">
-                                                                    <button  class="btn btn-primary btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-upload"></i>
-                                                                    Upload
+                                                                        <button name="upload_excel" type="submit" class="btn btn-success btn-mat"><i class="icofont icofont-upload"></i>
+                                                                            Upload
 
-                                                                    </button>
+                                                                        </button>
                                                                     </div>
 
-                                                                    <div class="col-sm-1">
-                                                                    <a href="grower.php" class="btn btn-info btn-mat"><i class="icofont icofont-info"></i>
+                                                            </form>
+
+                                                            <div class="col-sm-1">
+                                                                <a href="grower.php" class="btn btn-info btn-mat"><i class="icofont icofont-info"></i>
                                                                     Tips
 
                                                                 </a>
-                                                                    </div>
-
-                                                                </div>
-
                                                             </div>
 
-                                                           
+                                                        </div>
 
                                                     </div>
 
+
+
                                                 </div>
 
+                                            </div>
 
-                                                <!--                                           /*
+
+                                            <!--                                           /*
 get crop details
 */    -->
 
-                                                .
+                                            .
 
-                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Enter crop details</h5>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Enter crop details</h5>
 
-                                        </div>
-                                        <div class="card-block">
+                                    </div>
+                                    <div class="card-block">
 
-                                            <div class="form-group row">
+                                        <div class="form-group row">
 
-                                                <div class="col-sm-12">
-                                                    <select id="select_crop" name="crop" class="form-control" required="">
-
-
-
+                                            <div class="col-sm-12">
+                                                <select id="select_crop" name="crop" class="form-control" required="">
 
 
-                                                    </select>
-                                                    <label id="warning_crop" class="warning_text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
 
-                                                </div>
 
+
+                                                </select>
+                                                <label id="warning_crop" class="warning_text"> <span>Please select crop <i class="icofont icofont-warning"></i></span></label>
 
                                             </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-6">
-                                                    <select id="select_variety" name="variety" class="form-control" required="">
-                                                        <option value="variety_not_selected">Select Variety</option>
 
-                                                    </select>
-                                                    <label id="warning_variety" class="warning_text"> <span>Please select variety<i class="icofont icofont-warning"></i></span></label>
+                                        </div>
 
-                                                </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6">
+                                                <select id="select_variety" name="variety" class="form-control" required="">
+                                                    <option value="variety_not_selected">Select Variety</option>
 
-                                                <div class="col-sm-1">
-                                                   
-                                                    <label id="warning_variety" >Variety type</label>
+                                                </select>
+                                                <label id="warning_variety" class="warning_text"> <span>Please select variety<i class="icofont icofont-warning"></i></span></label>
 
-                                                </div>
+                                            </div>
 
-                                                <div class="col-sm-5"  >
+                                            <div class="col-sm-1">
+
+                                                <label id="warning_variety">Variety type</label>
+
+                                            </div>
+
+                                            <div class="col-sm-5">
                                                 <select id="variety_type" name="variety_type" class="form-control" required="">
-                                                        <option value="-">-</option>
-                                                      
+                                                    <option value="-">-</option>
 
-                                                    </select>
 
-                                                </div>
+                                                </select>
 
                                             </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <select id="select_class" name="select_class" class="form-control" required="">
-                                                        <option value="0">Select class</option>
-                                                        <option value="Pre_basic">Basic</option>
-                                                        <option value="basic">Pre-Basic</option>
-                                                        <option value="certified">certified</option>
+                                        </div>
 
-                                                        
-                                                        
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <select id="select_class" name="select_class" class="form-control" required="">
+                                                    <option value="0">Select class</option>
+                                                    <option value="Pre_basic">Basic</option>
+                                                    <option value="basic">Pre-Basic</option>
+                                                    <option value="certified">certified</option>
 
-                                                    </select>
-                                                    <label id="warning_class" class="warning_text"> <span>Please Select class <i class="icofont icofont-warning"></i></span></label>
-                                                </div>
-                                                
+
+
+
+                                                </select>
+                                                <label id="warning_class" class="warning_text"> <span>Please Select class <i class="icofont icofont-warning"></i></span></label>
                                             </div>
 
-
-                                            <div class="form-group row">
-
-
-                                                <div class="col-sm-12">
-
-                                                    <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="">
-                                                    <label id="warning_hectors" class="warning_text"> <span>Please enter assigned hectors <i class="icofont icofont-warning"></i></span></label>
+                                        </div>
 
 
+                                        <div class="form-group row">
 
-                                                </div>
+
+                                            <div class="col-sm-12">
+
+                                                <input id="hectors" type="number" class="form-control" name="hectors" placeholder="Hectors" require="">
+                                                <label id="warning_hectors" class="warning_text"> <span>Please enter assigned hectors <i class="icofont icofont-warning"></i></span></label>
 
 
 
                                             </div>
-
-
-
 
 
 
                                         </div>
 
 
+
+
+
+
                                     </div>
 
 
-                                    <!--                                          /*
+                                </div>
+
+
+                                <!--                                          /*
 add main crop certificate 
 */     -->
 
-                                    <div class="card hybrid_items" >
-                                        <div class="card-header">
-                                            <h5>Breeding </h5>
-
-
-                                        </div>
-
-                                        <div class="card-block">
-
-                                            <div class="form-group row">
-
-                                                <div class="col-sm-12">
-
-                                                    <select id="seed_breeding" name="seed_breeding" class="form-control" required="">
-                                                        <option value="not_selected">Select breeding type</option>
-                                                        <option value="inbred">inbred </option>
-                                                        <option value="single_cross">single cross</option>
-                                                        
-                                                       
-
-                                                    </select>
-                                                    <label id="warning_breeding" class="warning_text"> <span>Please select breeding type<i class="icofont icofont-warning"></i></span></label>
-
-                                               
-
-                                                </div>
-
-
-
-
-                                            </div>
-
-                                        </div>
-
+                                <div class="card hybrid_items">
+                                    <div class="card-header">
+                                        <h5>Breeding </h5>
 
 
                                     </div>
 
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Select certificate</h5>
+                                    <div class="card-block">
+
+                                        <div class="form-group row">
+
+                                            <div class="col-sm-12">
+
+                                                <select id="seed_breeding" name="seed_breeding" class="form-control" required="">
+                                                    <option value="not_selected">Select breeding type</option>
+                                                    <option value="inbred">inbred </option>
+                                                    <option value="single_cross">single cross</option>
+
+
+
+                                                </select>
+                                                <label id="warning_breeding" class="warning_text"> <span>Please select breeding type<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                            </div>
 
 
 
 
                                         </div>
-                                        <div class="card-block">
 
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
+                                    </div>
 
 
-                                                <div class="col-sm-6 inbred_items">
 
-                                                    <select id="main_certificate"  class="form-control" >
-                                                        <option value="no_certificate_selected">Select Certificate</option>
-                                                        <option value="no_certificate_selected">-</option>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Select certificate</h5>
 
 
 
 
+                                    </div>
+                                    <div class="card-block">
+
+                                        <div class="form-group row">
 
 
-                                                    </select>
-
-                                                    <label id="warning_main_certificate" class="warning_text"> <span>Please Select Certificate <i class="icofont icofont-warning"></i></span></label>
-
-                                                </div>
+                                            <span class="pcoded-mcaret"></span>
 
 
+                                            <div class="col-sm-6 inbred_items">
 
-                                                <div class="col-sm-3 inbred_items">
-
-                                                    <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
+                                                <select id="main_certificate" class="form-control">
+                                                    <option value="no_certificate_selected">Select Certificate</option>
+                                                    <option value="no_certificate_selected">-</option>
 
 
 
 
-                                                </div>
-
-                                                <div class="col-sm-3 inbred_items">
-
-                                                    <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
-                                                    <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
-                                                </div>
+                                                </select>
+
+                                                <label id="warning_main_certificate" class="warning_text"> <span>Please Select Certificate <i class="icofont icofont-warning"></i></span></label>
+
+                                            </div>
+
+
+
+                                            <div class="col-sm-3 inbred_items">
+
+                                                <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" placeholder="Search certificate" require="">
+
 
 
 
                                             </div>
-                                            <div class="card-header hybrid_items">
 
-                                                <!--                                                                                                             /*
+                                            <div class="col-sm-3 inbred_items">
+
+                                                <input id="main_quantity" type="number" class="form-control" name="main_quantity" placeholder="Quantity" require="">
+                                                <label id="warning_certificate_quantity" class="warning_text"> <span>Please enter seed quantity<i class="icofont icofont-warning"></i></span></label>
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="card-header hybrid_items">
+
+                                            <!--                                                                                                             /*
 add hybrid male crop certificate 
 */      -->
 
 
 
 
-                                                <h5 class="single_cross_items">Hybrid Certificates</h5>
+                                            <h5 class="single_cross_items">Hybrid Certificates</h5>
 
+
+
+
+                                        </div>
+
+
+                                        <div class="form-group row hybrid_items">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-6 single_cross_items">
+
+                                                <select id="male_certificate" name="male_certificate" class="form-control" required="">
+                                                    <option value="no_certificate_selected">Select Male Certificate</option>
+                                                    <option value="no_certificate_selected">-</option>
+
+
+
+
+
+
+                                                </select>
+
+                                                <label id="warning_male_certificate" class="warning_text"> <span>Please select male certificate <i class="icofont icofont-warning"></i></span></label>
+
+
+                                            </div>
+
+                                            <div class="col-sm-3 single_cross_items">
+
+                                                <input id="search_male_certificate" type="text" class="form-control" name="search_male_certificate" placeholder="Search Male certificate" require="">
 
 
 
                                             </div>
 
+                                            <div class="col-sm-3 single_cross_items">
 
-                                            <div class="form-group row hybrid_items">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-6 single_cross_items" >
-
-                                                    <select id="male_certificate" name="male_certificate" class="form-control" required="">
-                                                        <option value="no_certificate_selected">Select Male Certificate</option>
-                                                        <option value="no_certificate_selected">-</option>
-
-
-
-
-
-
-                                                    </select>
-
-                                                    <label id="warning_male_certificate" class="warning_text"> <span>Please select male certificate <i class="icofont icofont-warning"></i></span></label>
-
-
-                                                </div>
-
-                                                <div class="col-sm-3 single_cross_items">
-
-                                                    <input id="search_male_certificate" type="text" class="form-control" name="search_male_certificate" placeholder="Search Male certificate" require="">
-
-
-
-                                                </div>
-
-                                                <div class="col-sm-3 single_cross_items">
-
-                                                    <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
-                                                    <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                </div>
-
-
+                                                <input id="male_quantity" type="number" class="form-control" name="male_quantity" placeholder="Male Quantity" require="">
+                                                <label id="warning_male_quantity" class="warning_text"> <span>Please enter male seed quantity<i class="icofont icofont-warning"></i></span></label>
 
 
 
@@ -959,356 +957,362 @@ add hybrid male crop certificate
 
 
 
-                                            <!--                                                                                                            /*
+
+
+                                        </div>
+
+
+
+                                        <!--                                                                                                            /*
 add hybrid female crop certificate 
 */   -->
 
 
 
-                                            <div class="form-group row hybrid_items">
+                                        <div class="form-group row hybrid_items">
 
 
-                                                <span class="pcoded-mcaret"></span>
+                                            <span class="pcoded-mcaret"></span>
 
 
-                                                <div class="col-sm-6 single_cross_items">
- 
-                                                    <select id="female_certificate" name="female_certificate" class="form-control" required="">
-                                                        <option value="no_certificate_selected">Select Female Certificate</option>
-                                                        <option value="no_certificate_selected">-</option>
+                                            <div class="col-sm-6 single_cross_items">
 
-
-
+                                                <select id="female_certificate" name="female_certificate" class="form-control" required="">
+                                                    <option value="no_certificate_selected">Select Female Certificate</option>
+                                                    <option value="no_certificate_selected">-</option>
 
 
 
-                                                    </select>
-                                                    <label id="warning_female_certificate" class="warning_text"> <span>Please select female certificate <i class="icofont icofont-warning"></i></span></label>
-
-
-                                                </div>
-
-                                                <div class="col-sm-3 single_cross_items">
-
-                                                    <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Search Female Certificate" require="">
 
 
 
-                                                </div>
-
-                                                <div class="col-sm-3 single_cross_items">
-
-                                                    <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
-                                                    <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
+                                                </select>
+                                                <label id="warning_female_certificate" class="warning_text"> <span>Please select female certificate <i class="icofont icofont-warning"></i></span></label>
 
 
+                                            </div>
 
-                                                </div>
+                                            <div class="col-sm-3 single_cross_items">
 
-
-
+                                                <input id="search_female_certificate" type="text" class="form-control" name="search_female_certificate" placeholder="Search Female Certificate" require="">
 
 
 
                                             </div>
 
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-3 single_cross_items">
 
-                                                <a href="add_certificate.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
-                                                    New certificate
+                                                <input id="female_quantity" type="number" class="form-control" name="female_quantity" placeholder="Female Quantity" require="">
+                                                <label id="warning_female_quantity" class="warning_text"> <span>Please enter female seed quantity<i class="icofont icofont-warning"></i></span></label>
 
-                                                </a>
+
 
                                             </div>
+
+
+
+
 
 
                                         </div>
 
+                                        <div class="col-sm-12">
 
+                                            <a href="add_certificate.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
+                                                New certificate
+
+                                            </a>
+
+                                        </div>
 
 
                                     </div>
 
-                                    <div class="card">
-                                        <div class="card-header">
-
-                                            <!--                                                                                                              /*
-form add land history
-*/  -->
-
-
-
-                                            <h5>Add Land History</h5>
-
-
-                                        </div>
-                                        <div class="card-block">
-                                            <label>
-                                                Previous year
-                                            </label>
-
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-12">
-                                                    <select id="pre_select_crop" name="pre_crop" class="form-control" required="">
-                                                        <option value="0">Select crop</option>
-                                                        <option value="fallow">Fallow</option>
-                                                        <option value="maize">Maize</option>
-                                                        <option value="G/nuts">Ground nuts</option>
-                                                        <option value="soyabean">Soyabean </option>
-                                                        <option value="rice">Rice</option>
-                                                        <option value="sorgum">Sorgum</option>
-                                                        <option value="cowpea">Cowpea</option>
-                                                        <option value="pegeonpea">Pigeonpea</option>
-                                                        <option value="beans">Beans</option>
-
-
-
-
-                                                    </select>
-                                                    <label id="warning_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
-
-                                                </div>
-
-
-
-
-
-                                            </div>
-
-
-                                            <label>
-
-                                                Other Previous Year
-                                            </label>
-
-
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-12">
-                                                    <select id="other_select_crop" name="other_select_crop" class="form-control" required="">
-                                                        <option value="0">Select crop</option>
-                                                        <option value="fallow">Fallow</option>
-                                                        <option value="maize">Maize</option>
-                                                        <option value="G/nuts">Ground nuts </option>
-
-                                                        <option value="soyabean">Soyabean </option>
-                                                        <option value="rice">Rice</option>
-                                                        <option value="sorgum">Sorgum</option>
-                                                        <option value="cowpea">Cowpea</option>
-                                                        <option value="pegeonpea">Pigeonpea</option>
-                                                        <option value="beans">Beans</option>
-
-
-
-                                                    </select>
-                                                    <label id="warning_other_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
-                                                </div>
-
-
-
-
-
-
-                                            </div>
-
-
-
-
-
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="card">
-
-                                        <!--                                                                                                               /*
-form adding farm location details
-*/        -->
-
-
-
-                                        <div class="card-header">
-                                            <h5>Location</h5>
-
-
-                                        </div>
-
-                                        <div class="card-block">
-
-
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-6">
-                                                    <select id="select_region" name="select_region" class="form-control" required="">
-                                                        <option value="0">Select Region</option>
-                                                        <option value="central">Central Region</option>
-                                                        <option value="northern">Northern Region</option>
-                                                        <option value="southern">Southern Region</option>
-
-
-
-
-
-                                                    </select>
-                                                    <label id="warning_region" class="warning_text"> <span>Please select legion<i class="icofont icofont-warning"></i></span></label>
-                                                </div>
-
-                                                <div class="col-sm-3">
-                                                    <select id="select_district" name="select_district" class="form-control" required="">
-                                                        <option value="0">Select District</option>
-
-
-
-
-
-
-                                                    </select>
-                                                    <label id="warning_district" class="warning_text"> <span>Please select district<i class="icofont icofont-warning"></i></span></label>
-                                                </div>
-                                                <div class="col-sm-3">
-
-                                                    <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA / Trading center " require="">
-                                                    <label id="warning_epa" class="warning_text"> <span>Please enter EPA / Area<i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                </div>
-
-
-
-
-                                            </div>
-
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-6">
-
-                                                    <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name / Estate" require="">
-                                                    <label id="warning_area_name" class="warning_text"> <span>Please enter area name<i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                </div>
-
-                                                <div class="col-sm-6">
-
-                                                    <input id="address" type="text" class="form-control" name="address" placeholder="Address" require="">
-                                                    <label id="warning_address" class="warning_text"> <span>Please enter address<i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                </div>
-
-
-
-
-                                            </div>
-
-                                            <div class="form-group row">
-
-
-                                                <span class="pcoded-mcaret"></span>
-
-
-                                                <div class="col-sm-12">
-
-                                                    <input id="physical_address" type="textarea" class="form-control" name="physical_address" placeholder="Directions " require="">
-                                                    <label id="warning_physical_address" class="warning_text"> <span>Please add directions <i class="icofont icofont-warning"></i></span></label>
-
-
-
-                                                </div>
-
-
-
-
-
-
-
-                                            </div>
-                                            <div class="col-sm-12">
-
-
-
-                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-primary btn-mat ">save</button> -->
-                                                <button class="btn btn-primary btn-mat" id=save_farm ><i class="icofont icofont-save"></i>Save</button>
-
-                                                </br>
-                                                </br>
-
-                                                <a href="register_farm.php" class="btn btn-danger btn-mat"><i class="icofont icofont-warning"></i>
-                                                    Cancle
-
-                                                </a>
-
-
-                                            </div>
-
-
-
-
-                                        </div>
-
-
-
-
-
-
-                                    </div>
-
-
-
-                                    <!-- Basic Form Inputs card end -->
-                                    <!-- Input Grid card start -->
-
-
-
-
-
-
-                                  
 
 
 
                                 </div>
 
+                                <div class="card">
+                                    <div class="card-header">
+
+                                        <!--                                                                                                              /*
+form add land history
+*/  -->
+
+
+
+                                        <h5>Add Land History</h5>
+
+
+                                    </div>
+                                    <div class="card-block">
+                                        <label>
+                                            Previous year
+                                        </label>
+
+                                        <div class="form-group row">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-12">
+                                                <select id="pre_select_crop" name="pre_crop" class="form-control" required="">
+                                                    <option value="0">Select crop</option>
+                                                    <option value="fallow">Fallow</option>
+                                                    <option value="maize">Maize</option>
+                                                    <option value="G/nuts">Ground nuts</option>
+                                                    <option value="soyabean">Soyabean </option>
+                                                    <option value="rice">Rice</option>
+                                                    <option value="sorgum">Sorgum</option>
+                                                    <option value="cowpea">Cowpea</option>
+                                                    <option value="pegeonpea">Pigeonpea</option>
+                                                    <option value="beans">Beans</option>
+
+
+
+
+                                                </select>
+                                                <label id="warning_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
+
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+
+                                        <label>
+
+                                            Other Previous Year
+                                        </label>
+
+
+                                        <div class="form-group row">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-12">
+                                                <select id="other_select_crop" name="other_select_crop" class="form-control" required="">
+                                                    <option value="0">Select crop</option>
+                                                    <option value="fallow">Fallow</option>
+                                                    <option value="maize">Maize</option>
+                                                    <option value="G/nuts">Ground nuts </option>
+
+                                                    <option value="soyabean">Soyabean </option>
+                                                    <option value="rice">Rice</option>
+                                                    <option value="sorgum">Sorgum</option>
+                                                    <option value="cowpea">Cowpea</option>
+                                                    <option value="pegeonpea">Pigeonpea</option>
+                                                    <option value="beans">Beans</option>
+
+
+
+                                                </select>
+                                                <label id="warning_other_pre_year" class="warning_text"> <span>Please select crop<i class="icofont icofont-warning"></i></span></label>
+                                            </div>
+
+
+
+
+
+
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="card">
+
+                                    <!--                                                                                                               /*
+form adding farm location details
+*/        -->
+
+
+
+                                    <div class="card-header">
+                                        <h5>Location</h5>
+
+
+                                    </div>
+
+                                    <div class="card-block">
+
+
+                                        <div class="form-group row">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-6">
+                                                <select id="select_region" name="select_region" class="form-control" required="">
+                                                    <option value="0">Select Region</option>
+                                                    <option value="central">Central Region</option>
+                                                    <option value="northern">Northern Region</option>
+                                                    <option value="southern">Southern Region</option>
+
+
+
+
+
+                                                </select>
+                                                <label id="warning_region" class="warning_text"> <span>Please select legion<i class="icofont icofont-warning"></i></span></label>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <select id="select_district" name="select_district" class="form-control" required="">
+                                                    <option value="0">Select District</option>
+
+
+
+
+
+
+                                                </select>
+                                                <label id="warning_district" class="warning_text"> <span>Please select district<i class="icofont icofont-warning"></i></span></label>
+                                            </div>
+                                            <div class="col-sm-3">
+
+                                                <input id="epa" type="text" class="form-control" name="epa" placeholder="EPA / Trading center " require="">
+                                                <label id="warning_epa" class="warning_text"> <span>Please enter EPA / Area<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                        <div class="form-group row">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-6">
+
+                                                <input id="area_name" type="text" class="form-control" name="area_name" placeholder="Area name / Estate" require="">
+                                                <label id="warning_area_name" class="warning_text"> <span>Please enter area name<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                            </div>
+
+                                            <div class="col-sm-6">
+
+                                                <input id="address" type="text" class="form-control" name="address" placeholder="Address" require="">
+                                                <label id="warning_address" class="warning_text"> <span>Please enter address<i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                        <div class="form-group row">
+
+
+                                            <span class="pcoded-mcaret"></span>
+
+
+                                            <div class="col-sm-12">
+
+                                                <input id="physical_address" type="textarea" class="form-control" name="physical_address" placeholder="Directions " require="">
+                                                <label id="warning_physical_address" class="warning_text"> <span>Please add directions <i class="icofont icofont-warning"></i></span></label>
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+                                        </div>
+                                        <div class="col-sm-12">
+
+
+
+                                            <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-success btn-mat ">save</button> -->
+                                            <button class="btn btn-success btn-mat" id=save_farm><i class="icofont icofont-save"></i>Save</button>
+
+                                            </br>
+                                            </br>
+
+                                            <a href="register_farm.php" class="btn btn-danger btn-mat"><i class="icofont icofont-warning"></i>
+                                                Cancle
+
+                                            </a>
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+
+
+                                <!-- Basic Form Inputs card end -->
+                                <!-- Input Grid card start -->
+
+
+
+
+
+
+
+
+
+
                             </div>
-                            <!-- Input Grid card end -->
-                            <!-- Input Validation card start -->
 
-                            <!-- Input Validation card end -->
-                            <!-- Input Alignment card start -->
-
-                            <!-- Input Alignment card end -->
                         </div>
+                        <!-- Input Grid card end -->
+                        <!-- Input Validation card start -->
+
+                        <!-- Input Validation card end -->
+                        <!-- Input Alignment card start -->
+
+                        <!-- Input Alignment card end -->
                     </div>
                 </div>
-                <!-- Page body end -->
             </div>
+            <!-- Page body end -->
         </div>
-        <!-- Main-body end -->
-        <div>
+    </div>
+    <!-- Main-body end -->
+    <div>
 
-        </div>
+    </div>
     </div>
     </div>
     </div>

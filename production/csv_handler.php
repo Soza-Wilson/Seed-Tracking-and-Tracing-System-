@@ -1,3 +1,4 @@
+
 <?php
 include('../class/main.php');
 $main = new main();
@@ -246,8 +247,8 @@ if (isset($_POST['stock_out_csv'])) {
                 $quantity = $row['Quntity'];
 
 
-                $object = new main();
-                $newDate = $object->change_date_format($date);
+               
+                $newDate = main::change_date_format($date);
 
 
 
@@ -284,12 +285,12 @@ if (isset($_POST['grower_list'])) {
     $type = $_POST['type'];
     $filename = "$season Grower's $type list $date.csv";
     $fp = fopen('php://output', 'w');
-   
- 
+
+
     $header = array("Grower ID ", "Name ", "Email", "Phone", "Registered Date", "Registered By");
     fputcsv($fp, $header);
-    
-   
+
+
 
     $sql = "SELECT `creditor_ID`, `source`, `name`, creditor.phone, creditor.email, `description`, `fullname`,`creditor_status`,creditor.registered_date FROM `creditor`
     INNER JOIN user ON creditor.user_ID = user.user_ID WHERE `creditor_status`='$type' ORDER BY `creditor_ID`";
@@ -303,7 +304,7 @@ if (isset($_POST['grower_list'])) {
             $email = $row['email'];
             $registered_date = $row['registered_date'];
             $registered_by = $row['fullname'];
-            
+
 
             $newDate = $main->change_date_format($registered_date);
 
@@ -315,16 +316,170 @@ if (isset($_POST['grower_list'])) {
         }
     }
 
-     //close file
-     fclose($fp);
+    //close file
+    fclose($fp);
 
-     //download file
-     header("Content-Description: File Transfer");
-     header('Content-type: application/csv');
-     header('Content-Disposition: attachment; filename=' . $filename);
+    //download file
+    header("Content-Description: File Transfer");
+    header('Content-type: application/csv');
+    header('Content-Disposition: attachment; filename=' . $filename);
 
-     exit;
+    exit;
 }
+
+
+
+//  Download registered farms 
+
+
+
+
+if (isset($_POST['registered_farms_csv'])) {
+
+
+    $date = date('D-m-y h:i');
+    $filename = "Grower's list $date.csv";
+    $fp = fopen('php://output', 'w');
+    $filter = $_POST["filter"];
+    $sql = "";
+
+
+
+    
+
+    $header = array("Farm ID ", "Grower", "Crop", "Variety", "class", "Hectors", "Region", "District", "EPA", "Area Name ", "Address", "Physical Address", "Land History(previous year)", "Land History(Other year)");
+    fputcsv($fp, $header);
+
+    $sql = "";
+    $creditor_name = $_POST["creditor_hidden"];
+    $cropValue = $_POST["cropValueHidden"];
+    $varietyValue = $_POST["varietyValueHidden"];
+    $classValue = $_POST["classValueHidden"];
+    $region = $_POST["region_hidden"];
+    $district = $_POST["district_hidden"];
+
+    
+
+
+
+
+
+    //create body
+    if (empty($filter)) {
+        $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+        `region`, `district`, `area_name`, `address`, `physical_address`, 
+        `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+        `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+         `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+          INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+          variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+          ON farm.creditor_ID = creditor.creditor_ID";
+    } else if ($filter == "grower_filter") {
+
+        $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+        `region`, `district`, `area_name`, `address`, `physical_address`, 
+        `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+        `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+         `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+          INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+          variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+          ON farm.creditor_ID = creditor.creditor_ID WHERE creditor.name LIKE '%$creditor_name%'";
+    } else if ($filter == "crop_filter") {
+
+        $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+        `region`, `district`, `area_name`, `address`, `physical_address`, 
+        `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+        `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+         `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+          INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+          variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+          ON farm.creditor_ID = creditor.creditor_ID WHERE crop.crop_ID ='$cropValue' AND variety.variety_ID ='$varietyValue' AND `class` ='$classValue'";
+    } else if ($filter == "location_filter") {
+
+        $sql = "SELECT `farm_ID`, `Hectors`,crop.crop,variety.variety, `class`, 
+        `region`, `district`, `area_name`, `address`, `physical_address`, 
+        `EPA`,creditor.name, farm.registered_date, `previous_year_crop`, 
+        `other_year_crop`, `main_lot_number`, `main_quantity`, `male_lot_number`,
+         `male_quantity`, `female_lot_number`, `female_quantity` FROM `farm`
+          INNER JOIN crop ON farm.crop_species = crop.crop_ID INNER JOIN 
+          variety ON farm.crop_variety = variety.variety_ID INNER JOIN creditor
+          ON farm.creditor_ID = creditor.creditor_ID WHERE `region` LIKE  '%$region%' AND `district` LIKE '%$district%'";
+    }
+
+    $result = $con->query($sql);
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $farm_id = $row['farm_ID'];
+            $grower_name = $row['name'];
+            $crop = $row['crop'];
+            $variety     = $row['variety'];
+            $class     = $row['class'];
+            $hectors     = $row['Hectors'];
+            $registered_date = $row['registered_date'];
+            $region = $row['region'];
+            $district = $row['district'];
+            $epa = $row['EPA'];
+            $area_name = $row['area_name'];
+            $address = $row['address'];
+            $physical_address = $row['physical_address'];
+            $previous = $row['previous_year_crop'];
+            $other_previous = $row['other_year_crop'];
+
+
+
+
+            $list = array($farm_id, $grower_name, $crop, $variety, $class, $hectors, $region, $district, $epa, $area_name, $address, $physical_address, $previous, $other_previous);
+            fputcsv($fp, $list);
+        }
+
+        //close file
+        fclose($fp);
+
+        //download file
+        header("Content-Description: File Transfer");
+        header('Content-type: application/csv');
+        header('Content-Disposition: attachment; filename=' . $filename);
+
+        exit;
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Download certificate CSV
@@ -396,7 +551,7 @@ if (isset($_POST['certificate_csv'])) {
                 $fullname = $row['fullname'];
 
 
-                
+
                 $newDate = $main->change_date_format($date_added);
 
 

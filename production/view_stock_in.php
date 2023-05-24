@@ -56,14 +56,14 @@ if (in_array($position, $notRestricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/view_stockin.js">
 
     </script>
 
-<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
     <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
@@ -517,7 +517,7 @@ if (in_array($position, $notRestricted)) {
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary">Creditor name</label>
+                                                    <label class="label bg-success">Creditor name</label>
                                                         <input type="test" class="form-control" id="creditorName" name="creditorName" placeholder="Enter name" require="">
                                                         <label id="warning_name" class="warning-text"> <span>Please enter Creditor name <i class="icofont icofont-warning"></i></span></label>
 
@@ -525,7 +525,7 @@ if (in_array($position, $notRestricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                    <label class="label bg-primary">Select Crop</label>
+                                                    <label class="label bg-success">Select Crop</label>
                                                         <select name="select_crop" id="select_crop" class="form-control">
                                                             <option value="not_selected">Not Selected</option>
 
@@ -540,7 +540,7 @@ if (in_array($position, $notRestricted)) {
 
                                                     <div class="col-sm-2">
 
-                                                    <label class="label bg-primary">Select Variety</label>
+                                                    <label class="label bg-success">Select Variety</label>
                                                         <select name="select_variety" id="select_variety" class="form-control">
                                                             <option value="not_selected">Not Selected</option>
 
@@ -554,7 +554,7 @@ if (in_array($position, $notRestricted)) {
                                                     </div>
                                                     <div class="col-sm-1">
 
-                                                    <label class="label bg-primary">Select Class</label>
+                                                    <label class="label bg-success">Select Class</label>
                                                         <select name="select_class" id="select_class" class="form-control">
                                                             <option value="not_selected">Class</option>
                                                             <option value="pre_basic">Pre-Basic</option>
@@ -570,13 +570,13 @@ if (in_array($position, $notRestricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary">From :</label>
+                                                    <label class="label bg-success">From :</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                         <label id="warning_from" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
 
                                                     <div class="col-sm-2">
-                                                    <label class="label bg-primary">To :</label>
+                                                    <label class="label bg-success">To :</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                         <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
                                                     </div>
@@ -590,7 +590,7 @@ if (in_array($position, $notRestricted)) {
 
 
                                                         <br/>
-                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
+                                                        <button name="get_data" id="get_data" class=" btn btn-success btn-mat"><i class="icofont icofont-search"></i></button>
                                                         <label id="warning_to" class="warning-text"> <span>Please select date <i class="icofont icofont-warning"></i></span></label>
 
 
@@ -605,7 +605,7 @@ if (in_array($position, $notRestricted)) {
 
 
                                                        
-                                                            <button class="btn btn-primary btn-mat " id='stock_in_csv' name='stock_in_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                            <button class="btn btn-success btn-mat " id='stock_in_csv' name='stock_in_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">
@@ -694,10 +694,8 @@ if (in_array($position, $notRestricted)) {
                                                                     $user = $row['fullname'];
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];
-
-
-                                                                    $object = new main();
-                                                                    $newDate = $object->change_date_format($date_added);
+                                                                   
+                                                                    $newDate = main::change_date_format($date_added);
 
 
 
@@ -721,7 +719,7 @@ if (in_array($position, $notRestricted)) {
                                                
 												
 												
-												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-primary btn-mat'><i class='icofont icofont-eye-alt'></i>view </a>
+												<td><a href='stock_in_details.php? stock_in_id=$stock_in_id' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i>view </a>
                                                 
                                                 </td>
 											</tr>	

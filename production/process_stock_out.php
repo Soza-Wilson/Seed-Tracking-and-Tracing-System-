@@ -75,7 +75,7 @@ else{
       <!-- Font Awesome -->
       <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
   </head>
 
   <body themebg-pattern="theme1">
@@ -146,7 +146,7 @@ else{
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h5 class="text-center txt-primary">Added to order item</h5>
+                                        <h5 class="text-center txt-success">Added to order item</h5>
                                     </div>
                                 </div>
                               
@@ -154,7 +154,7 @@ else{
                              
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
+                                        <button type="button" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
                                     </div>
                                 </div>
                                 <hr/>

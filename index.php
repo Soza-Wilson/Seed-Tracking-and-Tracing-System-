@@ -29,7 +29,7 @@ include('class/main.php');
 <!-- Font Awesome -->
 <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
 <!-- Style.css -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style_.css">
 <title>STTS</title>
 
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -44,7 +44,7 @@ include('class/main.php');
 <body>
 
 
-    <body themebg-pattern="theme1">
+    <body themebg-pattern="theme3">
         <!-- Pre-loader start -->
         <div class="theme-loader">
             <div class="loader-track">
@@ -111,7 +111,7 @@ include('class/main.php');
                         <form action="index.php" method="POST">
                             <div class="text-center">
 
-                                <h4 style="color:white;">Seed Tracking</h5>
+                            <h5 style="color: white;"><span >Seed Tracking</span></h5>
 
                             </div>
                             <div class="auth-box card">
@@ -121,13 +121,13 @@ include('class/main.php');
                                             <h3 class="text-center">Sign In</h3>
                                         </div>
                                     </div>
-                                    <div class="form-group form-primary">
+                                    <div class="form-group form-success">
                                         <label class="">Your Email Address</label>
                                         <input type="text" name="email" class="form-control" required="">
                                         <span class="form-bar"></span>
 
                                     </div>
-                                    <div class="form-group form-primary">
+                                    <div class="form-group form-success">
                                         <label class="">Password</label>
                                         <input type="password" name="password" class="form-control" required="">
                                         <span class="form-bar"></span>
@@ -135,22 +135,25 @@ include('class/main.php');
                                     </div>
                                     <div class="row m-t-25 text-left">
                                         <div class="col-12">
-                                            <div class="checkbox-fade fade-in-primary d-">
+                                            <div class="checkbox-fade fade-in-success d-">
 
                                             </div>
                                             <div class="forgot-phone text-right f-right">
-                                                <a href="#" class="text-right f-w-600"> Forgot Password?</a>
+                                               
+                                                <p class="text-inverse text-right m-b-0"><a href="#"><span >Forgot Password ?</span></a></p> 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row m-t-30">
                                         <div class="col-md-12">
 
-                                            <button name="login_btn" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">sign in</button>
+                                            <button name="login_btn" class="btn btn-success btn-md btn-block btn-mat waves-effect waves-light text-center m-b-20">sign in</button>
+                                            <p class="text-inverse text-left m-b-0">Dont have an account ? <a href="other/register.php"><span class="text-success">Sign Up</span></a></p> 
 
 
 
                                         </div>
+                                      
                                     </div>
                                     <hr />
                                     <div class="row">

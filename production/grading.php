@@ -56,7 +56,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -200,13 +200,7 @@ if (in_array($position, $restricted)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -504,7 +498,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal">Grade</button>
+                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Grade</button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">

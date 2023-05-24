@@ -57,7 +57,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
@@ -413,25 +413,12 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-3">
-                                                        <label>Order Type</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Search by name</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
+                                                
 
 
                                                 <div class="form-group row">
-                                                    <div class="col-sm-3">
+                                                <div class="col-sm-3">
+                                                    <label class="label bg-success">Order Type</label>
                                                         <select id="typeValue" name="typeValue" class="form-control" required="">
                                                             <option value="type_not_selected">Order Type</option>
                                                             <option value="customer">Customer</option>
@@ -444,8 +431,8 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
-
-
+                                                      
+                                                    <label class="label bg-success">Search by name</label>
                                                     <select name="names" id="names" class="form-control"> 
                                                         <option value="not_selected">Not Selected</option>
 
@@ -457,10 +444,12 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">From :</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">To :</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
@@ -471,12 +460,12 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-3">
 
+    </br>
+
+                                                        <button name="get_data" id="get_data" class=" btn btn-success btn-mat btn-mat"><i class="icofont icofont-search"></i></button>
 
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
-
-
-                                                        <a href="view_processed_orders.php" class="ti-loop btn btn-danger"></a>
+                                                        <a href="view_processed_orders.php" class="ti-loop btn btn-danger btn-mat"><i class="icofont icofont-refresh"></i></a>
                                                     </div>
                                                 </div>
 
@@ -487,7 +476,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='orders_save_csv' name='orders_save_csv'> CSV</button>
+                                                            <button class="btn btn-success btn-mat  " id='orders_save_csv' name='orders_save_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
@@ -592,7 +581,7 @@ if (in_array($position, $restricted)) {
                                                 <td>$count</t>
                                                 <td>$total</td>
                                     
-												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
+												<td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success btn-mat'>view</a></td>
                                                 
 											</tr>	
 										";

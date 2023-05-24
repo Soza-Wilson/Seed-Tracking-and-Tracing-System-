@@ -57,7 +57,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -413,27 +413,14 @@ $.post('get_data.php', {
                                             </div>
                                             <div class="card-block">
 
-                                                <div class="form-group row">
-                                                    
-                                                    <div class="col-sm-4">
-                                                        <label>Search by name</label>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>From :</label>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                        <label>To :</label>
-                                                    </div>
-                                                </div>
-
+                                               
 
                                                 <div class="form-group row">
                                                     
 
                                                     <div class="col-sm-4">
                                                    
-
+                                                    <label class="label bg-success">Search by name</label>
                                                  <input type="text" class="form-control" name="businessName" id="businessName" placeholder="Enter business name ">
 
 
@@ -441,10 +428,12 @@ $.post('get_data.php', {
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">From :</label>
                                                         <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
                                                     </div>
 
                                                     <div class="col-sm-2">
+                                                    <label class="label bg-success">To :</label>
                                                         <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
                                                     </div>
 
@@ -454,6 +443,8 @@ $.post('get_data.php', {
 
 
                                                     <div class="col-sm-3">
+
+</br>
 
 
 

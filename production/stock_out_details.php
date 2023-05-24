@@ -96,7 +96,7 @@ if (!empty($stock_out_ID)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
@@ -563,7 +563,7 @@ if (!empty($stock_out_ID)) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary "> order ID</label>
+                                                            <label class="badge badge-success "> order ID</label>
                                                             <input id="stock_in_id" type="text" class="form-control " name="stock_in_id" value="<?php echo $order_ID; ?>" require="">
                                                             <input type="hidden" id="request_id" value="<?php echo $user_id; ?>">
                                                             <input type="hidden" id="user_name" value="<?php echo $test; ?>">
@@ -577,14 +577,14 @@ if (!empty($stock_out_ID)) {
 
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Added By</label>
+                                                            <label class="badge badge-success ">Added By</label>
                                                             <input id="requested_user" type="text" class="form-control " name="requested_user" value="<?php echo $user_requested; ?>" require="">
 
 
 
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary "> Customer name</label>
+                                                            <label class="badge badge-success "> Customer name</label>
                                                             <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $customer; ?>" require="">
 
 
@@ -592,7 +592,7 @@ if (!empty($stock_out_ID)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary "> Order Type</label>
+                                                            <label class="badge badge-success "> Order Type</label>
                                                             <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $order_type; ?>" require="">
 
 
@@ -600,7 +600,7 @@ if (!empty($stock_out_ID)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary "> Date</label>
+                                                            <label class="badge badge-success "> Date</label>
                                                             <input id="search_main_certificate" type="text" class="form-control " name="search_main_certificate" value="<?php echo $date; ?>" require="">
 
 
@@ -609,7 +609,7 @@ if (!empty($stock_out_ID)) {
 
                                                         <div class="col-sm-1">
 
-                                                            <label class="badge badge-primary ">Time</label>
+                                                            <label class="badge badge-success ">Time</label>
                                                             <input id="time" type="text" class="form-control " name="time" value="<?php echo $time; ?>" require="">
 
 
@@ -686,7 +686,7 @@ if (!empty($stock_out_ID)) {
 
                                 <div class="form-group row">
                                     <div class="col-sm-1">
-                                        <label class="badge badge-primary">Crop:</label>
+                                        <label class="badge badge-success">Crop:</label>
                                     </div>
                                     <div class="col-sm-2">
 
@@ -699,7 +699,7 @@ if (!empty($stock_out_ID)) {
                                     </div>
 
                                     <div class="col-sm-1">
-                                        <label class="badge badge-primary">Variety:</label>
+                                        <label class="badge badge-success">Variety:</label>
                                     </div>
                                     <div class="col-sm-3">
 
@@ -711,7 +711,7 @@ if (!empty($stock_out_ID)) {
                                     </div>
 
                                     <div class="col-sm-1">
-                                        <label class="badge badge-primary">Class:</label>
+                                        <label class="badge badge-success">Class:</label>
                                     </div>
                                     <div class="col-sm-2">
 
@@ -729,7 +729,7 @@ if (!empty($stock_out_ID)) {
 
                                 <div class="form-group row">
                                     <div class="col-sm-1">
-                                        <label class="badge badge-primary ">Quantity (Kgs):</label>
+                                        <label class="badge badge-success ">Quantity (Kgs):</label>
                                     </div>
 
 

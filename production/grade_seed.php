@@ -56,7 +56,7 @@ if (empty($test)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/grade_seed.js">
@@ -529,7 +529,7 @@ if (empty($test)) {
                                                         <span class="pcoded-mcaret"></span>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">stock in ID</label>
+                                                            <label class="badge badge-success ">stock in ID</label>
                                                             <select class="form-control" name="stock_in_id">
                                                                 <option value="<?php echo $stock_in_ID; ?>"><?php echo $stock_in_ID; ?></option>
                                                             </select>
@@ -541,7 +541,7 @@ if (empty($test)) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Crop</label>
+                                                            <label class="badge badge-success ">Crop</label>
                                                             <select class="form-control" name="crop">
                                                                 <option value="<?php echo $crop; ?>"><?php echo $crop; ?></option>
                                                             </select>
@@ -554,7 +554,7 @@ if (empty($test)) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Variety</label>
+                                                            <label class="badge badge-success ">Variety</label>
                                                             <select class="form-control" name="variety">
                                                                 <option value="<?php echo $variety; ?>"><?php echo $variety; ?></option>
                                                             </select>
@@ -564,7 +564,7 @@ if (empty($test)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Class</label>
+                                                            <label class="badge badge-success ">Class</label>
                                                             <select class="form-control" name="class">
                                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
                                                             </select>
@@ -574,7 +574,7 @@ if (empty($test)) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Quantity</label>
+                                                            <label class="badge badge-success ">Quantity</label>
                                                             <select class="form-control" name="quantity">
                                                                 <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
                                                             </select>
@@ -586,7 +586,7 @@ if (empty($test)) {
 
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Stock In Date</label>
+                                                            <label class="badge badge-success ">Stock In Date</label>
                                                             <select class="form-control" name="quantity">
                                                                 <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
                                                             </select>

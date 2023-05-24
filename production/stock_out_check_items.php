@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 </head>
 
@@ -583,7 +583,7 @@ if ($result->num_rows > 0) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Crop</label>
+                                                            <label class="badge badge-success ">Crop</label>
                                                             <select class="form-control" name="crop">
                                                                 <option value="<?php echo $crop; ?>"><?php echo $crop; ?></option>
                                                             </select>
@@ -596,7 +596,7 @@ if ($result->num_rows > 0) {
 
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary ">Variety</label>
+                                                            <label class="badge badge-success ">Variety</label>
                                                             <select class="form-control" name="variety">
                                                                 <option value="<?php echo $variety; ?>"><?php echo $variety; ?></option>
                                                             </select>
@@ -606,7 +606,7 @@ if ($result->num_rows > 0) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Class</label>
+                                                            <label class="badge badge-success ">Class</label>
                                                             <select class="form-control" name="class">
                                                                 <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
                                                             </select>
@@ -616,7 +616,7 @@ if ($result->num_rows > 0) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Quantity</label>
+                                                            <label class="badge badge-success ">Quantity</label>
                                                             <select class="form-control" name="quantity">
                                                                 <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
                                                             </select>
@@ -625,7 +625,7 @@ if ($result->num_rows > 0) {
 
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">price per kd</label>
+                                                            <label class="badge badge-success ">price per kd</label>
                                                             <select class="form-control" name="price_per_kg">
                                                                 <option value="<?php echo $price_per_kg; ?>"><?php echo $price_per_kg; ?></option>
                                                             </select>
@@ -635,7 +635,7 @@ if ($result->num_rows > 0) {
                                                         </div>
 
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Discount price</label>
+                                                            <label class="badge badge-success ">Discount price</label>
                                                             <select class="form-control" name="discount_price">
                                                                 <option value="<?php echo $discount_price; ?>"><?php echo $discount_price; ?></option>
                                                             </select>
@@ -746,7 +746,7 @@ if ($result->num_rows > 0) {
 
                                     <div class="card-block">
 
-                                        <!-- <input type='button' value="back" onclick="history.back()" class='btn btn-primary'> -->
+                                        <!-- <input type='button' value="back" onclick="history.back()" class='btn btn-success'> -->
 
 
                                     </div>
@@ -845,7 +845,7 @@ if ($result->num_rows > 0) {
                                                 <td>$date_added</td>
                                           
 
-                                            <td><a href='process_stock_out.php? item_ID=$item_ID & item_quntity=$item_quantity & stock_in_ID=$stock_in_id & stock_in_quantity=$quantity & order_ID=$order_ID & price_per_kg=$price_per_kg & discount_price=$discount_price'  class='btn btn-primary'>Add to order item</a> </td>
+                                            <td><a href='process_stock_out.php? item_ID=$item_ID & item_quntity=$item_quantity & stock_in_ID=$stock_in_id & stock_in_quantity=$quantity & order_ID=$order_ID & price_per_kg=$price_per_kg & discount_price=$discount_price'  class='btn btn-success'>Add to order item</a> </td>
 
 												
 											</tr>	
@@ -861,7 +861,7 @@ if ($result->num_rows > 0) {
 
                                     <div class="card-block">
 
-                                        <input type='button' value="back" onclick="history.back()" class='btn btn-primary'>
+                                        <input type='button' value="back" onclick="history.back()" class='btn btn-success'>
 
 
                                     </div>

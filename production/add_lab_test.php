@@ -3,7 +3,7 @@
 <?php
 
 Ob_start();
-include('../class/main.php');
+
 include('../class/production.php');
 session_start();
 
@@ -61,7 +61,7 @@ if (in_array($position, $restricted)) {
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
@@ -711,7 +711,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Farm ID :</label>
+                                                            <label class="badge badge-success">Farm ID :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_ID" name="farm_ID" class="form-control">
@@ -726,7 +726,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">grower name / source name :</label>
+                                                            <label class="badge badge-success">grower name / source name :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_variety" name="farm_variety" class="form-control">
@@ -741,7 +741,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Physical address :</label>
+                                                            <label class="badge badge-success">Physical address :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <textarea class="form-control" id="farm_physical_address">
@@ -752,7 +752,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Crop :</label>
+                                                            <label class="badge badge-success">Crop :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_crop" name="farm_crop" class="form-control">
@@ -765,7 +765,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Variety:</label>
+                                                            <label class="badge badge-success">Variety:</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_variety" name="farm_variety" class="form-control">
@@ -780,7 +780,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Class :</label>
+                                                            <label class="badge badge-success">Class :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_class" name="farm_class" class="form-control">
@@ -794,7 +794,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Quantity :</label>
+                                                            <label class="badge badge-success">Quantity :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="farm_class" name="farm_class" class="form-control">
@@ -846,7 +846,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Germination (%) :</label>
+                                                            <label class="badge badge-success">Germination (%) :</label>
 
                                                             <br />
                                                         </div>
@@ -865,7 +865,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Shelling (%):</label>
+                                                            <label class="badge badge-success">Shelling (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
@@ -874,7 +874,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Oil Content (%):</label>
+                                                            <label class="badge badge-success">Oil Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <input type="text" id="oil_content" class="form-control" name="oil_content" placeholder="-" require="">
@@ -883,7 +883,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Moisture Content (%):</label>
+                                                            <label class="badge badge-success">Moisture Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <input type="text" id="moisture_content" class="form-control" name="moisture_content" placeholder="-" require="">
@@ -892,7 +892,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Purity (%):</label>
+                                                            <label class="badge badge-success">Purity (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <input type="text" id="purity" class="form-control" name="purity" placeholder="-" require="">
@@ -902,7 +902,7 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Defects (%) :</label>
+                                                            <label class="badge badge-success">Defects (%) :</label>
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <input type="text" id="defects" class="form-control" name="defects" placeholder="-" require="">
@@ -911,7 +911,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-primary">Grade :</label>
+                                                            <label class="badge badge-success">Grade :</label>
 
                                                         </div>
 

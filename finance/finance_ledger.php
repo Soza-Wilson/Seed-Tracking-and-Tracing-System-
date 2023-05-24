@@ -57,7 +57,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../assets/table-pagination.js"></script>
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -579,7 +579,7 @@ if (in_array($position, $restricted)) {
 
                                                            
 
-                                                        <input type="button" name="get_data" id="get_data" value="get data" class="btn btn-primary" />
+                                                        <input type="button" name="get_data" id="get_data" value="get data" class="btn btn-success btn-mat" />
 
                                                             <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
                                                         </div>
@@ -602,7 +602,7 @@ if (in_array($position, $restricted)) {
                  
                     
                   
-                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
+                                                            <button class="ti-download btn btn-success btn-mat " id='create_csv_file' name='create_csv_file'> CSV</button>
 
                 
 

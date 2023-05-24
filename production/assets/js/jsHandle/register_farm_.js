@@ -547,7 +547,8 @@ $(document).ready(function () {
       $("#address").val(),
       $("#physical_address").val(),
       $("#user").val(),
-      "-"
+      "-",
+    
     ];
 
     if ($("#variety_type").val() == "-" || $("#variety_type").val() == "opv") {
@@ -592,6 +593,7 @@ $(document).ready(function () {
           registerFarm: farm_data,
         },
         (data) => {
+          
           if(data=="added"){
 
             alert("Registered");

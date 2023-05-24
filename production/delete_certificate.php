@@ -51,7 +51,7 @@ if (empty($test)) {
       <!-- Font Awesome -->
       <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
 
       <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
@@ -174,7 +174,7 @@ if (empty($test)) {
                                
                              
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
+                                        <button type="button" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
                                     </div>
                                 </div>
                                 <hr/>

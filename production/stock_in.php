@@ -61,7 +61,7 @@ if (in_array($position, $restricted)) {
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -477,7 +477,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-primary btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-user"></i>new creditor </button>
+                                                <button type="button" class="btn btn-success btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-user"></i>new creditor </button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -540,7 +540,7 @@ if (in_array($position, $restricted)) {
                                                                 <div class="col-sm-6">
 
                                                                     
-                                                                    <button type="submit" name="add_creditor" id="add_creditor"  class="btn btn-primary btn-mat"><i class="icofont icofont-warning"></i>Save</button>
+                                                                    <button type="submit" name="add_creditor" id="add_creditor"  class="btn btn-success btn-mat"><i class="icofont icofont-warning"></i>Save</button>
 
                                                                 </div>
 
@@ -884,7 +884,7 @@ if (in_array($position, $restricted)) {
 
                                                 <div class="col-sm-12">
 
-                                                    <a href="add_certificate.php" class="btn btn-primary btn-mat"><i class="icofont icofont-edit-alt"></i>
+                                                    <a href="add_certificate.php" class="btn btn-success btn-mat"><i class="icofont icofont-edit-alt"></i>
                                                         New certificate
 
                                                     </a>
@@ -1022,7 +1022,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="col-sm-1">
 
 
-                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-primary btn-mat"><i class="icofont icofont-save"></i>save</button>
+                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-mat"><i class="icofont icofont-save"></i>save</button>
 
 
 
