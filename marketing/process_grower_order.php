@@ -108,7 +108,7 @@ else if($class=="basic"){
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
  
     <!-- waves.css -->
@@ -126,6 +126,10 @@ else if($class=="basic"){
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/place_order_.js"></script>
+
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">

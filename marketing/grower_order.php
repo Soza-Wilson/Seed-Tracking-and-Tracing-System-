@@ -41,7 +41,7 @@ if (in_array($position, $restricted)) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
    
     <!-- waves.css -->
@@ -60,6 +60,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
+   
 </head>
 
 <body>
@@ -451,7 +452,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID' class='btn btn-success btn-mat btn-mat'>View</a>
+												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID' class='btn btn-success btn-mat btn-mat'>Place order</a>
                                               </a>
                                                
                                                 </td>

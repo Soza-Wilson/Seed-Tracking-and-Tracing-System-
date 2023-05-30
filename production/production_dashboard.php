@@ -41,7 +41,7 @@ if (in_array($position, $restricted)) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
 
     <!-- waves.css -->
@@ -155,20 +155,20 @@ if (in_array($position, $restricted)) {
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-                        'rgba(45, 189, 79, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(41, 173, 72, 0.2)',
+                        // 'rgba(255, 159, 64, 0.2)',
+                        // 'rgba(255, 205, 86, 0.2)',
+                        // 'rgba(75, 192, 192, 0.2)',
+                        // 'rgba(54, 162, 235, 0.2)',
+                        // 'rgba(153, 102, 255, 0.2)',
+                        // 'rgba(201, 203, 207, 0.2)',
+                        // 'rgba(45, 189, 79, 0.2)',
+                        // 'rgba(255, 159, 64, 0.2)',
+                        // 'rgba(255, 205, 86, 0.2)',
+                        // 'rgba(75, 192, 192, 0.2)',
+                        // 'rgba(54, 162, 235, 0.2)',
+                        // 'rgba(153, 102, 255, 0.2)',
+                        // 'rgba(201, 203, 207, 0.2)',
 
                     ],
                     borderColor: [
@@ -190,7 +190,7 @@ if (in_array($position, $restricted)) {
                     ],
                     borderWidth: 1,
 
-                    data: [32, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                    data: [70, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
                 }]
             };
 
@@ -231,7 +231,7 @@ if (in_array($position, $restricted)) {
                     label: 'My First Dataset',
                     data: <?php echo json_encode($amount) ?>,
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
+                        'rgb(90,171, 77)',
                         'rgb(54, 162, 235)',
                         'rgb(255, 205, 86)'
                     ],
@@ -261,7 +261,7 @@ if (in_array($position, $restricted)) {
             <?php
 
             $sql = "SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
- INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
+             INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
             $result = mysqli_query($con, $sql);
 
             $result = $con->query($sql);
@@ -283,7 +283,7 @@ if (in_array($position, $restricted)) {
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(41, 173, 72, 0.2)',
                         'rgba(255, 159, 64, 0.2)',
                         'rgba(255, 205, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
@@ -300,7 +300,7 @@ if (in_array($position, $restricted)) {
 
                     ],
                     borderColor: [
-                        'rgb(255, 99, 132)',
+                        'rgb(30, 128, 53)',
                         'rgb(255, 159, 64)',
                         'rgb(255, 205, 86)',
                         'rgb(75, 192, 192)',

@@ -38,7 +38,7 @@ session_start();
       <!-- Font Awesome -->
       <link rel="stylesheet" type="text/css" href="../assets/icon/font-awesome/css/font-awesome.min.css">
       <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
+      <link rel="stylesheet" type="text/css" href="../assets/css/style_.css">
   </head>
 
   <body themebg-pattern="theme2">
@@ -117,9 +117,11 @@ session_start();
                                 <div class="row m-t-25 text-left">
                                     <div class="col-md-12">
                                         <div class="checkbox-fade fade-in-success">
-                                            <label>
-                                                <input type="checkbox" value="">
-                                                <span class="text-inverse">You are not allowed to access data from this section.</span>
+                                            <label class="text">
+                                               
+                                                <span class="text-inverse">You are not allowed to access data from this section.</span></br>
+                                                <span class="text-inverse">Please check with the system admin if you believe this is a mistake.</span>
+                                                
                                             </label>
                                         </div>
                                     </div>

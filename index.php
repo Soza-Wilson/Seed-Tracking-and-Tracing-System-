@@ -15,7 +15,7 @@ include('class/main.php');
 <meta name="author" content="codedthemes" />
 <!-- Favicon icon -->
 
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
 <!-- Required Fremwork -->
@@ -108,7 +108,7 @@ include('class/main.php');
                     <div class="col-sm-12">
                         <!-- Authentication card start -->
 
-                        <form action="index.php" method="POST">
+                        <form action="index.php" method="POST" >
                             <div class="text-center">
 
                             <h5 style="color: white;"><span >Seed Tracking</span></h5>
@@ -147,7 +147,7 @@ include('class/main.php');
                                     <div class="row m-t-30">
                                         <div class="col-md-12">
 
-                                            <button name="login_btn" class="btn btn-success btn-md btn-block btn-mat waves-effect waves-light text-center m-b-20">sign in</button>
+                                            <button name="login_btn" class="btn btn-success btn-md btn-block btn-mat waves-effect waves-light text-center m-b-20">sign in <i class=" fa fa-sign-in"></i></button>
                                             <p class="text-inverse text-left m-b-0">Dont have an account ? <a href="other/register.php"><span class="text-success">Sign Up</span></a></p> 
 
 

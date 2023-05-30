@@ -31,7 +31,7 @@ if (empty($test)) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -1015,27 +1015,7 @@ if (isset($_POST['save_farm'])) {
     }
 
     $object = new main();
-    $object->register_farm(
-        $_POST['hectors'],
-        $_POST['crop'],
-        $_POST['variety'],
-        $class,
-        $_POST['select_region'],
-        $_POST['select_district'],
-        $_POST['area_name'],
-        $_POST['address'],
-        $_POST['physical_address'],
-        $_POST['epa'],
-        $_POST['grower_search_result'],
-        $_POST['pre_crop'],
-        $_POST['other_select_crop'],
-        $main,
-        $main_quantity,
-        $male,
-        $male_quantity,
-        $female,
-        $female_quantity
-    );
+    
 }
 
 

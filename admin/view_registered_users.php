@@ -39,7 +39,7 @@ if (in_array($position, $restricted)) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -57,6 +57,10 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <!-- pagenation -->
+    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 </head>
 
 <body>
@@ -241,27 +245,38 @@ if (in_array($position, $restricted)) {
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                    
+
 
                                 </ul>
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="add_user.php" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="view_registered_users.php" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Roles</div>
+                                    <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">User accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
 
-                                </ul>
+                                        <li class="active">
+                                            <a href="view_registered_users.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Users</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href="user_other_accounts.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Other occounts</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
+                                    </ul>
+                                </li>
 
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                                 <ul class="pcoded-item pcoded-left-item">
@@ -422,78 +437,146 @@ if (in_array($position, $restricted)) {
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
 
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Registered users </h5>
-                                                <span>View and edit all registered users </span>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-minus minimize-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                        <li><i class="fa fa-trash close-card"></i></li>
-                                                    </ul>
+                  
+
+                                            <div class="col-xl-12 col-md-12">
+                                                <div class="card table-card">
+                                                    <div class="card-header">
+                                                        <h5>Assigned accounts</h5>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover" id="dataTable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="font-weight: 600;">
+                                                                            <div class="chk-option">
+                                                                                <div class="checkbox-fade fade-in-primary">
+                                                                                    <label class="check-task">
+                                                                                        <input type="checkbox" value="">
+                                                                                     <span class="cr">
+                                                                                        <i class="cr-icon fa fa-check txt-default"></i>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            User
+                                                                        </th>
+                                                                        <th style="font-weight: 600;">Department </th>
+                                                                        <th style="font-weight: 600;"> Phone</th>
+                                                                        <th style="font-weight: 600;"> Email</th>
+                                                                        <th style="font-weight: 600;">Due Date</th>
+                                                                        <th class='text-left' style="font-weight: 600;">Data Access</th>
+                                                                    </tr>
+
+
+
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <?php
+                                                                    $profile = "";
+                                                                    $sql = "SELECT `user_ID`, usertype.user_type, `fullname`, `DOB`, `sex`, `registered_date`,
+                                                                     `postion`, `phone`, `email`, `password`, `account_status`, `profile_picture` FROM `user`
+                                                                     INNER JOIN usertype ON usertype.user_type_ID =user.user_type_ID WHERE `account_status`='active'";
+
+                                                                    $result = $con->query($sql);
+                                                                    if ($result->num_rows > 0) {
+                                                                        while ($row = $result->fetch_assoc()) {
+                                                                            $user_id = $row['user_ID'];
+                                                                            $name      = $row["fullname"];
+                                                                            $position  = $row["postion"];
+                                                                            $department = $row["user_type"];
+                                                                            $date = main::change_date_format($row["registered_date"]);
+                                                                            $phone = $row["phone"];
+                                                                            $email = $row["email"];
+
+                                                                            if ($row["profile_picture"] == "") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $row["profile_picture"];
+                                                                            }
+
+
+                                                                            if (in_array("administrator", explode("_", $position))) {
+
+                                                                                $dataAccess = ["danger", "high"];
+                                                                            }
+                                                                            else if(in_array("officer", explode("_", $position))){
+
+                                                                                $dataAccess = ["success", "medium"];
+                                                                            }
+
+                                                                            else if(in_array("technician", explode("_", $position))){
+
+                                                                                $dataAccess = ["info", "low"];
+                                                                            }
+                                                                            // $registered_date = $row['entry_date'];
+                                                                            // $registered_time = $row['entry_time'];
+
+                                                                            echo "<tr>
+                                                                            <td>
+                                                                                <div class='chk-option'>
+                                                                                    <div class='checkbox-fade fade-in-primary'>
+                                                                                        <label class='check-task'>
+                                                                                            <input type='checkbox' value='>
+                                                                                            <span class='cr'>
+                                                                                                <i class='cr-icon fa fa-check txt-default'></i>
+                                                                                            </span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class='d-inline-block align-middle'>
+                                                                                    <img src='assets/images/$profile' alt='user image' class='img-radius img-40 align-top m-r-15'>
+                                                                                    <div class='d-inline-block'>
+                                                                                        <h6>$name</h6>
+                                                                                        <p class='text-muted m-b-0'>$position</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>$department</td>
+                                                                            <td>$phone</td>
+                                                                            <td>$email</td>
+                                                                            <td>$date</td>
+                                                                            <td class='text-left'><label class='label label-$dataAccess[0]'>$dataAccess[1]</label></td>
+                                                                         
+
+                                                                            <td><a href='view_user_details.php? user_id=$user_id & name=$name & depertment=$department & position=$position & phone=$phone & email=$email & date=$date & profile_picture=$profile' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i></a>
+                                                                        </tr>";
+                                                                        }
+                                                                    }
+                                                                    ?>
+
+
+
+                                                                </tbody>
+                                                            </table>
+
+
+                                                        </div>
+                                                        <div id="pagination">
+
+
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
-                                            <div class="card-block table-border-style">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>User ID</th>
-                                                                <th>Full Name</th>
-                                                                <th>Department</th>
-                                                                <th>Date of Birth</th>
-                                                                <th>Registered Date</th>
-                                                                <th>Position</th>
-                                                                <th>Phone</th>
-                                                                <th>Email</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
 
-                                                            <?php
-                                                            $sql = "SELECT `user_ID`, usertype.user_type, `fullname`, `DOB`, `sex`, `registered_date`, `postion`, `phone`, `email`, `password`
-                                                             FROM `user` INNER JOIN usertype ON usertype.user_type_ID = user.user_type_ID";
-                                                            $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    $user_ID      = $row["user_ID"];
-                                                                    $fullname     = $row["fullname"];
-                                                                    $department     = $row["user_type"];
-                                                                    $dob  = $row["DOB"];
-                                                                    $reg_date = $row['registered_date'];
-                                                                    $position  = $row['postion'];
-                                                                    $phone    = $row['phone'];
-                                                                    $email = $row['email'];
+                              
 
+                                      
 
-
-                                                                    echo "
-											<tr class='odd gradeX'>
-											    <td>$user_ID</td>
-												<td>$fullname</td>
-												<td>$department</td>
-												<td>$dob</td>
-												<td>$reg_date</td>
-												<td>$position</td>
-												<td>$phone</td>
-											    <td>$email</td>
-												<td><a href='view_registered_users.php' class='ti-eye'></a>/
-                                                <a href='view_registered_users.php' class='ti-trash'></a>/
-                                                <a href='view_registered_users.php' class='ti-pencil-alt'></a></td>
-											</tr>	
-										";
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <!-- Background Utilities table end -->
                                     </div>

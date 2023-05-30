@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","");
+$con = mysqli_connect("localhost", "root", "", "");
 
 $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB");
 
@@ -49,13 +49,15 @@ if ($database === true) {
     $sql = "CREATE TABLE user(user_ID varchar(100) PRIMARY KEY, 
             user_type_ID INT(10),
     		fullname varchar(100),
-			DOB varchar(100),
+			DOB date,
      sex varchar(100),
-			registered_date varchar(100),
+			registered_date date,
     		postion varchar(100),
 			phone varchar(100),
     			 email varchar(100),
     			 		password varchar(100),
+                        account_status varchar(100),
+                        profile_piture vatchar(500),
 
     			 		FOREIGN KEY(user_type_ID)REFERENCES usertype(user_type_ID)) ";
 
@@ -498,35 +500,35 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
     mysqli_query($con, $sql);
 
 
-$sql="CREATE TABLE growing_season(season varchar(100) PRIMARY KEY,opening_date date, closing_date date)";
+    $sql = "CREATE TABLE growing_season(season varchar(100) PRIMARY KEY,opening_date date, closing_date date)";
 
 
-mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
-$sql="CREATE TABLE contract(contract_ID varchar(100) PRIMARY KEY,season varchar(100), type varchar(100),grower varchar(100),agro_dealer varchar(100),dir varchar(100), user_ID varchar(100),  FOREIGN KEY(user_ID) REFERENCES user(user_ID),
+    $sql = "CREATE TABLE contract(contract_ID varchar(100) PRIMARY KEY,season varchar(100), type varchar(100),grower varchar(100),agro_dealer varchar(100),dir varchar(100), user_ID varchar(100),  FOREIGN KEY(user_ID) REFERENCES user(user_ID),
 FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) REFERENCES debtor(debtor_ID),FOREIGN KEY(grower) REFERENCES creditor(creditor_ID))";
 
-mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
 
-$date = date("Y");
-$int_value = (int)$date + 1;
-$season = $date."-".$int_value ;
-$sql="insert into growing_season values ('$season',00-00-0000,00-00-0000)";
+    $date = date("Y");
+    $int_value = (int)$date + 1;
+    $season = $date . "-" . $int_value;
+    $sql = "insert into growing_season values ('$season',00-00-0000,00-00-0000)";
 
-mysqli_query($con, $sql);
-
-
+    mysqli_query($con, $sql);
 
 
-$sql="CREATE TABLE client(business_name varchar(100) PRIMARY KEY, country varchar(100),physical_address varchar(100),logo varchar(100))";
-mysqli_query($con, $sql);
 
 
-$sql = "insert into client
+    $sql = "CREATE TABLE client(business_name varchar(100) PRIMARY KEY, country varchar(100),physical_address varchar(100),logo varchar(100))";
+    mysqli_query($con, $sql);
+
+
+    $sql = "insert into client
 values ('','Malawi')";
 
-mysqli_query($con, $sql);
+    mysqli_query($con, $sql);
 
     $sql = "insert into usertype
 values ('001','ADMIN'),
@@ -538,9 +540,9 @@ values ('001','ADMIN'),
 
     mysqli_query($con, $sql);
 
-    $sql="insert into client values ('-','-','-','-')";
+    $sql = "insert into client values ('-','-','-','-')";
 
-mysqli_query($con,$sql);
+    mysqli_query($con, $sql);
 
     $sql = "insert into user
 values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admin@example.com','0000');";

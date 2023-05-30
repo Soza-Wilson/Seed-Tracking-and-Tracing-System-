@@ -84,6 +84,7 @@ class main
       $_SESSION['fullname'] = $name['fullname'];
       $_SESSION['depertment'] = $name['user_type_ID'];
       $_SESSION['position'] = $name['postion'];
+      $_SESSION['account_status'] = $name['account_status'];
       if ($_SESSION['depertment'] == 1) {
 
         header('Location:admin/admin_dashboard.php');
@@ -108,9 +109,8 @@ class main
       } else if ($_SESSION['depertment'] == 5) {
 
         header('Location:finance/finance_dashboard.php');
-      } else {
-        echo ("<script> alert('Error on user identifying users type');
-        </script>");
+      } else if ($_SESSION['account_status'] == "unsigned") {
+        header('Location:other/account_status.php');
       }
     } else {
       echo ("<script> alert('wrong username or password');
@@ -137,7 +137,7 @@ class main
 
 
 
-  function check_user_data($fullname, $department, $dob, $sex, $position, $phone, $email, $password)
+  function check_user_data($fullname, $dob, $sex, $phone, $email, $password)
   {
 
 
@@ -150,9 +150,9 @@ class main
     $count = $result->num_rows;
 
     if ($count >= 1) {
+      return "Name or email already exists in the Database. Change and try again ";
     } else {
-
-      $this->register_user($fullname, $department, $dob, $sex, $position, $phone, $email, $password);
+      return $this->register_user($fullname, $dob, $sex, $phone, $email, $password);
     }
   }
 
@@ -211,25 +211,24 @@ class main
 
 
 
-  function register_user($fullname, $department, $dob, $sex, $position, $phone, $email, $password)
+  function register_user($fullname, $dob, $sex, $phone, $email, $password)
   {
 
 
-    $user_id = $this->generate_user($department);
+    $user_id = $this->generate_user("user");
     global $con;
-    $registered_date = date("d-m-Y");
+    $registered_date =  date("Y-m-d");;
+    $userFullName = strtolower($fullname);
 
-
-    $sql = "INSERT INTO `user`(`user_ID`, `user_type_ID`, `fullname`, `DOB`,`sex`, `registered_date`,
-                 `postion`, `phone`, `email`, `password`) 
-                       VALUES ('$user_id','$department','$fullname','$dob','$sex','$registered_date',
-                            '$position','$phone','$email','$password')";
+    $sql = "INSERT INTO `user`(`user_ID`, `fullname`, `DOB`,`sex`, `registered_date`,
+                `phone`, `email`, `password`,`account_status`) 
+                       VALUES ('$user_id','$userFullName','$dob','$sex','$registered_date',
+                            '$phone','$email','$password','unsigned')";
 
     $statement = $con->prepare($sql);
     $statement->execute();
 
-    echo ("<script> alert('user registered ');
-                                            </script>");
+    return "registered";
   }
   function update_user($user_id, $fullname, $department, $dob, $registered_date, $position, $phone, $email, $password)
   {
@@ -260,6 +259,19 @@ class main
     $statement->execute();
 
     header('Location:user_profile.php');
+  }
+
+  static function allocate_role_to_user($userId, $department, $role)
+  {
+
+    global $con;
+
+    $sql = "UPDATE `user` SET `user_type_ID`='$department',`postion`='$role',`account_status`='active' WHERE `user_ID`='$userId'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    return "registered";
   }
 
 
@@ -349,7 +361,7 @@ class main
     global $con;
     $order_ID = $this->generate_user("order");
     $user = $_SESSION["user"];
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:i:s");
 
     $sql = "INSERT INTO `order_table`(`order_ID`, `order_type`,
@@ -1851,7 +1863,7 @@ class main
     $old_male_quantity,
     $old_female_certificate,
     $old_female_quantity
-    
+
 
   ) {
     global $con;

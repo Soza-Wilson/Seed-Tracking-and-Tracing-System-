@@ -9,6 +9,7 @@ session_start();
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$user_id = $_SESSION['user'];
 
 if (empty($test)) {
 
@@ -43,7 +44,7 @@ if (in_array($position, $restricted)) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -63,358 +64,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-
-
-
-            $("#quantity").on("input", function() {
-                var result = $("#quantity").val();
-                var result2 = $("#price_per_kg").val();
-                var total = result * result2;
-
-
-                $('#total_price').val(total);
-                // Print entered value in a div box
-                //$("#result").text($(this).val());
-            });
-
-            $("#discount_price").on("input", () => {
-                var result = $("#quantity").val();
-                var result2 = $("#discount_price").val();
-                var total = result * result2;
-
-
-                $('#total_price').val(total);
-            })
-
-            const loaded = "1";
-
-            $.post('../production/get_products.php', {
-                loaded: loaded
-
-            }, data => {
-                $('#select_crop').html(data);
-
-
-
-
-            });
-
-
-
-            $('#select_crop').change(function() {
-
-
-
-                var data = $('#select_crop').find(':selected');
-
-                if (data.val() == "0") {
-                    alert("please select Crop ");
-                } else {
-
-
-
-
-                    let crop_value = $('#select_crop').val();
-
-                    $.post('../production/get_products.php', {
-                        crop_value: crop_value
-
-                    }, data => {
-                        $('#select_variety').html(data);
-
-
-
-                    });
-
-
-
-
-
-
-
-
-                }
-            });
-
-            $('#select_class').change(function() {
-
-                var crop_data = $('#select_crop').val();
-                var variety_data = $('#select_variety').val();
-                var class_data = $('#select_class').val();
-
-                if (crop_data == 0) {
-
-                    alert('Select crop and variety');
-
-
-                } else if (variety_data == 0) {
-
-                    alert('Select crop and variety');
-
-                } else {
-
-                    $.post('get_prices.php', {
-                        crop_data: crop_data,
-                        variety_data: variety_data,
-                        class_data: class_data
-                    }, function(data) {
-
-                        $('#price_per_kg').val(data);
-
-                    });
-                }
-
-
-
-
-            });
-
-
-            $('#debtor_type').change(function() {
-
-                var type_value = $('#debtor_type').val();
-
-                if (type_value == 'agro_dealer') {
-
-                    
-
-                     $('#lpoFiles').prop("readonly", true);
-                    $('#customer_name').attr('placeholder', 'Search agro dealer by name');
-                    $('#description').attr('placeholder', 'agro dealer phone');
-
-                    $('#select_class').empty();
-                    var myOptions = [{
-                            text: 'Select Class',
-                            value: "0"
-                        },
-                        {
-                            text: 'certified',
-                            value: "certified"
-                        }
-                    
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_class').append(new Option(el.text, el.value));
-                    });
-
-
-
-                } else if (type_value == 'b_to_b') {
-                    $('#lpoFiles').prop("readonly", false);
-
-                    $('#customer_name').attr('placeholder', 'Search Business by name');
-                    $('#description').attr('placeholder', 'Business description');
-
-                    $('#select_class').empty();
-                    var myOptions = [{
-                            text: 'Select Class',
-                            value: "0"
-                        },
-                        {
-                            text: 'basic',
-                            value: "basic"
-                        },
-                        {
-                            text: 'Pre-basic',
-                            value: "pre_basic"
-                        },
-                        {
-                            text: 'certified',
-                            value: "certified"
-                        }
-                    
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_class').append(new Option(el.text, el.value));
-                    });
-
-
-
-                } else if (type_value == 'customer') {
-                    $('#lpoFiles').prop("readonly", true);
-
-                    $('#customer_name').attr('placeholder', 'Enter customer name');
-                    $('#description').attr('placeholder', 'Enter customer phone number ');
-
-
-                    $('#select_class').empty();
-                    var myOptions = [{
-                            text: 'Select Class',
-                            value: "0"
-                        },
-                        {
-                            text: 'basic',
-                            value: "basic"
-                        },
-                        {
-                            text: 'Pre-basic',
-                            value: "pre_basic"
-                        },
-                        {
-                            text: 'certified',
-                            value: "certified"
-                        }
-                    
-
-                    ];
-
-                    $.each(myOptions, function(i, el) {
-                        $('#select_class').append(new Option(el.text, el.value));
-                    });
-
-
-                }
-                el
-
-
-                $("#search_main_certificate").on("input", function() {
-
-
-                    var main_certificate_value = $('#search_main_certificate').val();
-                    var main_quantity_value = $('#main_quantity').val();
-                    var crop_value = $('#select_crop').val();
-                    var variety_value = $('#select_variety').val();
-                    var class_result = $('#select_class').val();
-
-
-                    $.post('farm_get_certificate.php', {
-                        main_certificate_value: main_certificate_value,
-                        main_quantity_value: main_quantity_value,
-                        crop_value: crop_value,
-                        variety_value: variety_value,
-                        class_value: class_value
-                    }, function(data) {
-                        $('#main_certificate').html(data);
-
-
-                    })
-
-                });
-
-
-
-
-
-
-
-
-            });
-
-            $('#customer_name').on("input", function() {
-
-
-                let type_value = $('#debtor_type').val();
-                let search_value = $('#customer_name').val();
-
-                if (type_value == "type_not_selected") {
-
-                    alert('please select order type');
-                } else if (type_value == "agro_dealer") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Agro_dealer phone number )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1]);
-
-
-                    });
-
-
-
-
-                } else if (type_value == "b_to_b") {
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( Businesss description )');
-
-                    })
-
-                } else if (type_value == "customer") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-                        var temp_data = "-";
-
-
-                        if (test == null) {
-
-                            temp_data = "enter -"
-                        } else {
-
-                            temp_data = test[1];
-                        }
-
-
-                        $('#description').attr('placeholder', temp_data + ' (customer phone number) ');
-
-
-                    })
-
-
-
-
-
-
-
-                } else if (type_value == "grower") {
-
-
-                    $.post('get_data.php', {
-                        type_value: type_value,
-                        search_value: search_value,
-
-                    }, function(data) {
-                        $('#search_result').html(data);
-                        // $('#description').attr('value',$('#search_result').val() + '  ( Business description )');
-
-                        var data = $('#search_result').val();
-                        var test = data.split(',');
-
-                        $('#description').attr('value', test[1] + ' ( grower phone number )');
-
-                    })
-
-
-                }
-
-            });
-
-        });
-    </script>
+    <script type="text/javascript" src="assets/js/jsHandle/place_order_.js"></script>
 
 
 </head>
@@ -507,7 +157,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -515,7 +165,7 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
@@ -556,13 +206,7 @@ if (in_array($position, $restricted)) {
                                 </div>
 
                                 <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
+
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -631,7 +275,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
+
 
                             </ul>
 
@@ -645,7 +289,7 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
+
 
                                 <li class="">
                                     <a href="lpo.php" class="waves-effect waves-dark">
@@ -654,14 +298,14 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                    
+
+
                             </ul>
-                            
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
+
                                 <li class="">
                                     <a href="sales_list.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
@@ -669,8 +313,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                    
+
+
                             </ul>
 
 
@@ -699,10 +343,9 @@ if (in_array($position, $restricted)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Home</a>
-                                            </li>
+                                           
                                             <li class="breadcrumb-item"><a href="#!">Place Order</a>
                                             </li>
                                         </ul>
@@ -772,7 +415,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
 
                                                         </br>
-                                                        <a href="grower_order.php" class="btn btn-success btn-mat">Grower Order</a>
+                                                        <a href="grower_order.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i> Grower Order</a>
 
 
                                                     </div>
@@ -908,6 +551,7 @@ if (in_array($position, $restricted)) {
 
                     <div class="form-group row">
                         <div class="col-sm-12">
+                        <label class="label bg-primary">Crop:</label>
                             <select id="select_crop" name="crop" class="form-control" required="">
                                 <option value="0">Select crop</option>
                                 <option value="CP001">Maize</option>
@@ -929,8 +573,9 @@ if (in_array($position, $restricted)) {
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
+                        <label class="label bg-primary">Variety:</label>
                             <select id="select_variety" name="variety" class="form-control" required="">
-                                <option value="variety_not_selected">Select Variety</option>
+                                <option value="0">Select Variety</option>
 
 
 
@@ -940,6 +585,7 @@ if (in_array($position, $restricted)) {
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
+                        <label class="label bg-primary">Class:</label>
                             <select id="select_class" name="class" class="form-control" required="">
                                 <option value="0">Select class</option>
                                 <option value="basic">Basic</option>
@@ -952,46 +598,44 @@ if (in_array($position, $restricted)) {
                     <div class="form-group row">
 
                         <div class="col-sm-12">
-                            <input id="quantity" type="text" class="form-control" name="quantity" placeholder="Quantity" require="">
+                        <label class="label bg-primary">Quantity:</label>
+                            <input id="quantity" type="number" class="form-control" name="quantity" placeholder="Quantity" require="">
                         </div>
 
 
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Price Per Kg :</label>
-                        </div>
+                        
                         <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
+
+                              <label class="label bg-primary">Price per KG:</label>
+                            <input type="number" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="">
                         </div>
                     </div>
 
 
                     <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Enter Discount price:</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
-                        </div>
-                    </div>
                        
-                    <div class="form-group row">
-                    <div class="col-sm-2">
-                            <label>Total Price :</label>
-                        </div>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" name="total_price" id="total_price" placeholder="TOTAL PRICE">
+                        <label class="label bg-primary">Enter discount price:</label>
+                            <input type="number" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                       
+                        <div class="col-sm-12">
+                        <label class="label bg-primary">Total price:</label>
+                            <input type="number" class="form-control" name="total_price" id="total_price" placeholder="TOTAL PRICE">
                         </div class="form-group row" require="">
                     </div>
 
                     <div class="form-group row">
-                        
 
-                        <div class="col-sm-6">
-                            <label>Upload LPO (Available for B_to_B Orders only (OPTIONAL)):</label>
-                        </div>
+
+                       
                         <div class="col-sm-12">
+                        <label class="label bg-primary">Upload LPO (Available for B_to_B Orders only (OPTIONAL)):</label>
                             <input type="file" id="image" class="form-control" name="image" placeholder="-" require="">
                         </div>
 
@@ -1004,11 +648,17 @@ if (in_array($position, $restricted)) {
 
                         <br>
                         .
-                        <div class="form-group">
+                        <div class="form-group ">
 
 
-                            <input type="submit" name="add_item" value="add item" class="btn waves-effect waves-light btn-success btn-mat btn-mat btn-block" />
-                            <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-danger  btn-block" />
+                        <div class="col-sm-12 place_order_items">
+                                                                        </br>
+                            <button type="submit" name="add_item" class="btn btn-success btn-block btn-mat"><i class="icofont icofont-plus"></i> Add item</button>
+                                                                        </br>
+                             <button type="submit" name="place order" class="btn btn-success btn-block btn-mat"><i class="icofont icofont-cart"></i> Place order</button>
+                           
+
+                                                                        </div>
 
                         </div>
 
@@ -1031,7 +681,79 @@ if (in_array($position, $restricted)) {
 
                 <!-- Input Alignment card end -->
             </div>
+            <div class="card" id="approval_for_discount">
+
+                <div class="card-header">
+
+                    <h5>Request for approval</h5>
+                </div>
+
+                <div class="card-block">
+
+
+                <div class="form-group row">
+                        
+                        <div class="col-sm-5 requestDetails" >
+                            <label for="discount_price" class="label bg-primary">Original price</label>
+                            <input type="text" id="original_price" class="form-control" name="original_price" placeholder="-" require="">
+                            <input type="hidden" id="user_id" class="form-control" name="original_price" value="<?php echo $user_id?>">
+                            <input type="hidden" id="user_name" class="form-control" name="original_price" value="<?php echo $test;?>">
+                            <input type="hidden" id="approvalId" class="form-control" >
+                           
+                        </div>
+                        <div class="col-sm-1 requestDetails" >
+                                                                        </br>
+                         <label for="" class="text align-center">TO</label>
+                        </div>
+                        <div class="col-sm-5 requestDetails" >
+                        <label for="discount_price" class="label bg-primary">Discount price</label>
+                            <input type="text" id="discount" class="form-control" name="discount" placeholder="-" require="">
+                        </div>
+                    </div>
+                    <div class="form-group row requestDetails">
+                        
+                        <div class="col-sm-2">
+                           
+                           <a href="#discount" class="btn btn-success  btn-mat" id="discount_request"> <i class="icofont icofont-email"></i>Send request</a>
+                        </div>
+                        
+
+                  
+                </div>
+               
+              
+                <div class="form-group row">
+                <div class="col-sm-12 approvedDetails" >
+                            <label for="discount_price" class="label bg-primary">Enter code</label>
+                            <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="-" require="">
+                          
+                           
+             </div>
+             </div>
+                                                                        
+                        
+                        
+                   
+                    <div class="form-group row approvedDetails">
+                        
+                        <div class="col-sm-2">
+                           
+                           <a href="#original_price" class="btn btn-success  btn-mat" id="checkDiscountCode"> <i class="icofont icofont-unlock"></i>check code</a>
+
+                          
+                        </div>
+                        
+
+                  
+                </div>
+
+            
+            </div>
+
+
         </div>
+
+
     </div>
     <!-- Page body end -->
     </div>
@@ -1120,10 +842,10 @@ if (isset($_POST['place_order'])) {
 
     $type = $_SESSION['type'];
 
-   
-    
+
+
     switch ($type) {
-        
+
 
         case "customer":
 
@@ -1167,13 +889,8 @@ if (isset($_POST['place_order'])) {
 
             break;
     }
-
-
-
-
-   
 }
- 
+
 
 
 
@@ -1183,70 +900,59 @@ if (isset($_FILES['image'])) {
 
         $type = $_SESSION['type'];
     } else {
-       $type = $_POST['debtor_type'];
+        $type = $_POST['debtor_type'];
     }
 
 
-   if($type=='b_to_b'){
+    if ($type == 'b_to_b') {
 
-    $errors = array();
-    $file_name = $_FILES['image']['name'];
-    $file_size = $_FILES['image']['size'];
-    $file_tmp = $_FILES['image']['tmp_name'];
-    $file_type = $_FILES['image']['type'];
+        $errors = array();
+        $file_name = $_FILES['image']['name'];
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $file_type = $_FILES['image']['type'];
 
-    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
+        $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
 
 
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+        $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
 
-    $extensions = array("pdf");
+        $extensions = array("pdf");
 
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a pdf file .";
-    }
+        if (in_array($file_ext, $extensions) === false) {
+            $errors[] = "extension not allowed, please choose a pdf file .";
+        }
 
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
+        if ($file_size > 2097152) {
+            $errors[] = 'File size must be excately 2 MB';
+        }
 
-    if (empty($errors) == true) {
-        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/b_to_b_LPO/" . $newfilename);
-        echo "success btn-mat btn-mat";
+        if (empty($errors) == true) {
+            move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/b_to_b_LPO/" . $newfilename);
+            echo "success btn-mat btn-mat";
+        } else {
+            print_r($errors);
+        }
+
+        if (empty($_SESSION['lpoFile'])) {
+
+            $_SESSION['lpoFile'] = $newfilename;
+        } else {
+
+            unset($_SESSION['lpoFile']);
+            $_SESSION['lpoFile'] = $newfilename;
+        }
     } else {
-        print_r($errors);
+
+        $_SESSION['lpoFile'] = "-";
     }
-   
-     if(empty($_SESSION['lpoFile'])){
-
-        $_SESSION['lpoFile'] = $newfilename;
-        
-     }
-     else{
-
-        unset($_SESSION['lpoFile']);
-        $_SESSION['lpoFile'] = $newfilename;
-
-
-     }
-
-   } 
-
-   else{
-
-    $_SESSION['lpoFile'] ="-";
-
-
-   }
-  
-    
 }
 
 if (isset($_POST['add_item'])) {
 
     //checking if user has added customer details before adding items to order
 
-    $debtor_type ="";
+    $debtor_type = "";
 
     if (!empty($_SESSION['order'])) {
 

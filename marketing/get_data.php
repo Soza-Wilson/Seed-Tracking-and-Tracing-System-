@@ -1,14 +1,9 @@
 <?php
 
 
-$localhost = "localhost";
-$username  = "root";
-$password  = "";
-$database        = "seed_tracking_db";
 
 $type_value = "";
-$con = new mysqli($localhost, $username, $password, $database);
-include('../class/marketing.php');
+
 include('../class/main.php');
 
 
@@ -105,6 +100,40 @@ if (isset($_POST['search_value'])) {
     }
   }
 }
+
+
+
+
+
+if (isset($_POST['discountRequest'])) {
+
+  $object = new main();
+  $object->admin_approval($_POST['approvalId'], $_POST['depertment'],$_POST['discountRequest'], $_POST['action_id'], $_POST['description'], $_POST['request_id'], $_POST['requestedName']);
+ 
+
+  echo '
+<div class="" >
+<label for="bin_card" > Request for approval sent to ADMIN</label>
+</div>';
+}
+
+if (isset($_POST["checkApprovalCode"])) {
+
+  $approvalCode = $_POST["checkApprovalCode"];
+  $approvalId = $_POST["approvalId"];
+
+
+  $approvalCode = $_POST["checkApprovalCode"];
+  $sql = "SELECT * FROM `approval` WHERE `approval_code`='$approvalCode' AND  `approval_ID`='$approvalId'";
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+
+    echo 'valid';
+  } else {
+    echo 'invalid';
+  }
+}
+
 
 
 

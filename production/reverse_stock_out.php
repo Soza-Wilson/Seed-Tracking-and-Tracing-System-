@@ -45,7 +45,7 @@ $object -> reverse_stock_out($stock_out_ID,$item_ID,$quantity,$stock_in_ID);
       <meta name="author" content="codedthemes" />
       <!-- Favicon icon -->
 
-      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
       <!-- Google font-->     
       
       <!-- Required Fremwork -->

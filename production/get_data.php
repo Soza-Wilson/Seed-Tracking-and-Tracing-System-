@@ -108,6 +108,12 @@ if (isset($_POST["registerGrower"])) {
   echo $returnData[1];
 }
 
+if (isset($_POST["registerUser"])) {
+  // $userInput = $_POST["registerUSer"];
+  // echo $userInput[0];
+  echo "we here";
+}
+
 
 // Check grower name 
 
