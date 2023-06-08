@@ -548,12 +548,21 @@ if (in_array($position, $restricted)) {
 
 
                                                 </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Breeder Seed Price </label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="number" class="form-control" name="pre_basic" id="pre_basic" placeholder="Price per kg" require="">
+                                                    </div>
+                                                </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
                                                         <label>Pre-Basic Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="pre_basic" id="pre_basic" placeholder="Price per kg" require="">
+                                                        <input type="number" class="form-control" name="pre_basic" id="pre_basic" placeholder="Price per kg" require="">
                                                     </div>
                                                 </div>
 
@@ -562,7 +571,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Basic Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input id="basic" type="text" class="form-control" name="basic" placeholder="Price per kg" require="">
+                                                        <input id="basic" type="number" class="form-control" name="basic" placeholder="Price per kg" require="">
                                                     </div>
 
                                                 </div>
@@ -572,7 +581,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Certified:</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="certified" id="certified" placeholder="Price per kg" require="">
+                                                        <input type="number" class="form-control" name="certified" id="certified" placeholder="Price per kg" require="">
                                                     </div>
                                                 </div>
 

@@ -550,7 +550,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Pre-Basic Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="pre_basic_price" id="pre_basic_price" placeholder="Price per kg" require="">
+                                                        <input type="number" class="form-control" name="pre_basic_price" id="pre_basic_price" placeholder="Price per kg" require="">
                                                     </div>
                                                 </div>
 
@@ -559,7 +559,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Basic Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input id="basic" type="text" class="form-control" name="basic_price" id="basic_price" placeholder="Price per kg" require="">
+                                                        <input id="basic" type="number" class="form-control" name="basic_price" id="basic_price" placeholder="Price per kg" require="">
                                                     </div>
 
                                                 </div>
@@ -569,7 +569,7 @@ if (in_array($position, $restricted)) {
                                                         <label>Certified:</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="certified_price" id="certified_price" placeholder="Price per kg" require="">
+                                                        <input type="number" class="form-control" name="certified_price" id="certified_price" placeholder="Price per kg" require="">
                                                     </div>
                                                 </div>
 

@@ -397,6 +397,7 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
     $sql = "CREATE TABLE price (prices_ID varchar(100) PRIMARY KEY, 
 crop_ID varchar(100),
 variety_ID varchar(100),
+sell_breeder varchar(100),
 sell_basic varchar(100),
 sell_pre_basic varchar(100),
 sell_certified varchar(100),

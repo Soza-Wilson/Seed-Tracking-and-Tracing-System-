@@ -38,30 +38,27 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $farm_id = $row['farm_ID'];
         $crop_ID = $row['crop_ID'];
+
         $variety_ID = $row['variety_ID'];
+        $main_lot_number = $row['main_lot_number'];
         $main_quantity = $row['main_quantity'];
+        $male_lot_number = $row['male_lot_number'];
         $male_quantity = $row['male_quantity'];
+        $female_lot_number = $row['female_lot_number'];
         $female_quantity = $row['female_quantity'];
         $class = $row['class'];
-       
-
     }
 }
 
-if ($variety_ID=="VT003" || $variety_ID=="VT004" || $variety_ID=="VT004"){
+if ($variety_ID == "VT003" || $variety_ID == "VT004" || $variety_ID == "VT004") {
 
     $main_quantity_ = "-";
     $male_quantity_ = $male_quantity;
     $female_quantity_ = $female_quantity;
-
-
-}
-
-else{
+} else {
     $main_quantity_ = $main_quantity;
     $male_quantity_ = "-";
-    $female_quantity_ ="-";
-
+    $female_quantity_ = "-";
 }
 
 
@@ -69,26 +66,28 @@ else{
 
 
 
-if($class=="certified"){
-
-   $object = new main();
-   $price = $object->grower_order_price($crop_ID,$variety_ID,$class);    
-   $certificate_class="basic";
-   
-
-}
-
-else if($class=="basic"){
+if ($class == "certified") {
 
     $object = new main();
-    $price = $object->grower_order_price($crop_ID,$variety_ID,$class);   
-    $certificate_class="prebasic";
-   
+    $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
+    $certificate_class = "basic";
+} else if ($class == "basic") {
+
+    $object = new main();
+    $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
+    $certificate_class = "prebasic";
+} else if ($class == "pre_basic") {
 }
 
 
-  
+if ($crop_ID == "CP001") {
+    header("Location: hybred_order.php? main_certificate=$main_lot_number& male_certificate=$male_lot_number& female_certificate=$female_lot_number");
+}
+
 ?>
+
+
+
 
 
 
@@ -110,7 +109,7 @@ else if($class=="basic"){
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
- 
+
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -133,25 +132,23 @@ else if($class=="basic"){
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() {
+            const quntity = $("#certificate_quantity").val();
+            const price = $("#price_per_kg").val();
 
-$(document).ready(function() {
- const quntity = $("#certificate_quantity").val();
- const price = $("#price_per_kg").val();
+            let total = quntity * price;
 
- let total = quntity*price;
+            $("#total_price").val(total);
+            $("#total_price").prop("readonly", "true");
+            $("#certificate_quantity").prop("readonly", "true");
+            $("#price_per_kg").prop("readonly", "true");
+            $("#crop").prop("readonly", "true");
+            $("#variety").prop("readonly", "true");
+            $("#certificate_class").prop("readonly", "true");
+            $("#male_quantity").prop("readonly", "true");
+            $("#female_quantity").prop("readonly", "true");
 
- $("#total_price").val(total);
- $("#total_price").prop("readonly","true");
- $("#certificate_quantity").prop("readonly","true");
- $("#price_per_kg").prop("readonly","true");
-$("#crop").prop("readonly","true");
-$("#variety").prop("readonly","true");
-$("#certificate_class").prop("readonly","true");
-$("#male_quantity").prop("readonly","true");
-$("#female_quantity").prop("readonly","true");
-    
-});
-       
+        });
     </script>
 
 
@@ -261,14 +258,15 @@ $("#female_quantity").prop("readonly","true");
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -299,18 +297,19 @@ $("#female_quantity").prop("readonly","true");
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
 
                                 <div class="main-menu-content">
-                                   
+
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -335,7 +334,7 @@ $("#female_quantity").prop("readonly","true");
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
+
 
                                 <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
@@ -379,7 +378,7 @@ $("#female_quantity").prop("readonly","true");
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
+
 
                             </ul>
 
@@ -393,14 +392,14 @@ $("#female_quantity").prop("readonly","true");
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
+
 
                             </ul>
 
-                            
 
-                            
-                                </li>
+
+
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -420,7 +419,7 @@ $("#female_quantity").prop("readonly","true");
                                             <li class="breadcrumb-item">
                                                 <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                           
+
                                             <li class="breadcrumb-item"><a href="#">Process grower order</a>
                                             </li>
                                         </ul>
@@ -440,154 +439,154 @@ $("#female_quantity").prop("readonly","true");
 
 
 
-                                            
+
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    
-
-
-                       
-
-
-
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Basic Form Inputs card end -->
-            <!-- Input Grid card start -->
-            <div class="card">
-                <div class="card-header">
-                    <h5>Grower order details</h5>
-
-
-                </div>
-                <div class="card-block">
 
 
 
 
 
-                <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Crop :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="crop" class="form-control" name="crop" placeholder="Price per kg" require=""  value="<?php echo $_GET['crop'];?>">
-                            <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id'];?>">
-                            <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id'];?>">
-                        </div>
-                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Basic Form Inputs card end -->
+                                        <!-- Input Grid card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Grower order details</h5>
+
+
+                                            </div>
+                                            <div class="card-block">
 
 
 
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Variety :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="variety" class="form-control" name="variety" placeholder="Price per kg" require="" value="<?php echo $_GET['variety'];?>">
-                        </div>
-                    </div>
 
 
-                <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Class :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="certificate_class" class="form-control" name="certificate_class" placeholder="certificate_class" require=""  value="<?php echo $certificate_class;?>">
-                            <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id'];?>">
-                            <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name'];?>">
-                        </div>
-                    </div>
-                   
-                    
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Certificate Quantity :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="certificate_quantity" class="form-control" name="certificate_quantity" placeholder="Price per kg" require=""  value="<?php echo $main_quantity_;?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Male Certificate Quantity :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_;?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Female Certificate Quantity:</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="female_quantity" class="form-control" name="female_quantity" placeholder="Price per kg" require="" value="<?php echo $female_quantity_;?>">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Price Per Kg :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $price;?>">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Enter Discount price:</label>
-                        </div>
-                        <div class="col-sm-12">
-                        <div class="col-sm-12">
-                            <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
-                        </div>
-
-</br>
-
-                        <div class="col-sm-1">
-                        
-
-                        <button type="submit" name="place_order"  class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat" > <i class="icofont icofont-warning"></i> Request for discount</button>
-                        </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <div class="col-sm-2">
-                            <label>Total Price :</label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" name="total_price" id="total_price" placeholder="TOTAL PRICE">
-                        </div class="form-group row" require="">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Crop :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="crop" class="form-control" name="crop" placeholder="Price per kg" require="" value="<?php echo $_GET['crop']; ?>">
+                                                        <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id']; ?>">
+                                                        <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id']; ?>">
+                                                    </div>
+                                                </div>
 
 
 
-                        </br></br></br>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Variety :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="variety" class="form-control" name="variety" placeholder="Price per kg" require="" value="<?php echo $_GET['variety']; ?>">
+                                                    </div>
+                                                </div>
 
 
-                        <div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Class :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="certificate_class" class="form-control" name="certificate_class" placeholder="certificate_class" require="" value="<?php echo $certificate_class; ?>">
+                                                        <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
+                                                        <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+                                                    </div>
+                                                </div>
 
-                        </div>
 
-                        <br>
-                        .
-                        <div class="form-group">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Certificate Quantity :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="certificate_quantity" class="form-control" name="certificate_quantity" placeholder="Price per kg" require="" value="<?php echo $main_quantity_; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Male Certificate Quantity :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Female Certificate Quantity:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="female_quantity" class="form-control" name="female_quantity" placeholder="Price per kg" require="" value="<?php echo $female_quantity_; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Price Per Kg :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" id="price_per_kg" class="form-control" name="price_per_kg" placeholder="Price per kg" require="" value="<?php echo $price; ?>">
+                                                    </div>
+                                                </div>
 
 
-                           
-                            <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-block btn-mat" />
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Enter Discount price:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="col-sm-12">
+                                                            <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
+                                                        </div>
 
-                        </div>
+                                                        </br>
+
+                                                        <div class="col-sm-1">
+
+
+                                                            <button type="submit" name="place_order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat"> <i class="icofont icofont-warning"></i> Request for discount</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label>Total Price :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" name="total_price" id="total_price" placeholder="TOTAL PRICE">
+                                                    </div class="form-group row" require="">
+
+
+
+                                                    </br></br></br>
+
+
+                                                    <div>
+
+                                                    </div>
+
+                                                    <br>
+                                                    .
+                                                    <div class="form-group">
+
+
+
+                                                        <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-block btn-mat" />
+
+                                                    </div>
 
 
 
@@ -603,15 +602,15 @@ $("#female_quantity").prop("readonly","true");
 
             </div>
 
-                <!-- Input Grid card end -->
-                <!-- Input Validation card start -->
+            <!-- Input Grid card end -->
+            <!-- Input Validation card start -->
 
-                <!-- Input Validation card end -->
-                <!-- Input Alignment card start -->
+            <!-- Input Validation card end -->
+            <!-- Input Alignment card start -->
 
-                <!-- Input Alignment card end -->
-            </div>
+            <!-- Input Alignment card end -->
         </div>
+    </div>
     </div>
     <!-- Page body end -->
     </div>
@@ -697,20 +696,23 @@ $("#female_quantity").prop("readonly","true");
 
 if (isset($_POST['place_order'])) {
 
-    
-
-
-
-   $object = new main();
-   $object ->grower_order($_POST['creditor_id'],$_POST['creditor_name'],
-   $_POST['crop_id'],$_POST['variety_id'],$_POST['certificate_class'], $_POST['certificate_quantity'],
-    $_POST['price_per_kg'],$_POST['discount_price'], $_POST['total_price'],$farm_id);
-  
 
 
 
 
-   
+    $object = new main();
+    $object->grower_order(
+        $_POST['creditor_id'],
+        $_POST['creditor_name'],
+        $_POST['crop_id'],
+        $_POST['variety_id'],
+        $_POST['certificate_class'],
+        $_POST['certificate_quantity'],
+        $_POST['price_per_kg'],
+        $_POST['discount_price'],
+        $_POST['total_price'],
+        $farm_id
+    );
 }
 
 
