@@ -85,6 +85,7 @@ class main
       $_SESSION['depertment'] = $name['user_type_ID'];
       $_SESSION['position'] = $name['postion'];
       $_SESSION['account_status'] = $name['account_status'];
+      $_SESSION['profile'] = $name['profile_picture'];
       if ($_SESSION['depertment'] == 1) {
 
         header('Location:admin/admin_dashboard.php');
@@ -157,6 +158,31 @@ class main
   }
 
 
+  static function suspend_user_account($user_id)
+  {
+    global $con;
+    $sql = "UPDATE `user` SET `account_status`='suspended' WHERE `user_ID`='$user_id'";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+
+      return "suspended";
+    }
+  }
+
+
+  static function update_profile_picture($userId, $file)
+  {
+
+    global $con;
+
+    $sql = "UPDATE `user` SET `profile_picture`='$file' WHERE `user_ID`='$userId'";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+      return "updated";
+    }
+  }
+
+
 
 
 
@@ -211,7 +237,7 @@ class main
 
 
 
-  function register_user($fullname, $dob, $sex, $phone, $email, $password)
+  function register_user($fullname, $phone, $email, $password)
   {
 
 
@@ -220,9 +246,9 @@ class main
     $registered_date =  date("Y-m-d");;
     $userFullName = strtolower($fullname);
 
-    $sql = "INSERT INTO `user`(`user_ID`, `fullname`, `DOB`,`sex`, `registered_date`,
+    $sql = "INSERT INTO `user`(`user_ID`, `fullname`, `registered_date`,
                 `phone`, `email`, `password`,`account_status`) 
-                       VALUES ('$user_id','$userFullName','$dob','$sex','$registered_date',
+                       VALUES ('$user_id','$userFullName','$registered_date',
                             '$phone','$email','$password','unsigned')";
 
     $statement = $con->prepare($sql);
@@ -230,13 +256,16 @@ class main
 
     return "registered";
   }
-  function update_user($user_id, $fullname, $department, $dob, $registered_date, $position, $phone, $email, $password)
+  static function update_user($user_id,$fullname,$phone,$email)
   {
 
-    // $sql = "UPDATE `user` SET `user_type_ID`='$department',`fullname`='$fullname',
-    //     `DOB`='$dob',`registered_date`='$registered_date',`postion`='$position',`phone`='$phone',`email`='$email',`password`='$password' WHERE `user_ID`=''$user_id'";
+    $sql = "UPDATE `user` SET `fullname`='$fullname',`phone`='$phone',`email`='$email' WHERE `user_ID`='$user_id'";
+    global $con;
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
 
-    // $sql->execute();
+      return "updated";
+    }
   }
 
   function delete_user()
@@ -248,18 +277,6 @@ class main
 
   //admin set prices for all products function
 
-  function update_user_profile($user_ID, $fullname, $phone, $email, $password)
-  {
-
-    $sql = "UPDATE `user` SET `fullname`='$fullname',`phone`='$phone',
- `email`='$email',`password`='$password' WHERE `user_ID`='$user_ID'";
-    global $con;
-
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    header('Location:user_profile.php');
-  }
 
   static function allocate_role_to_user($userId, $department, $role)
   {

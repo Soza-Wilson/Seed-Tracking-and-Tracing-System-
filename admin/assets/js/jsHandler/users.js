@@ -12,7 +12,7 @@ $(document).ready(() => {
         },
         {
           text: "System admistrator ",
-          value: "sytem_administrator ",
+          value: "system_administrator",
         },
       ];
 
@@ -94,6 +94,34 @@ $(document).ready(() => {
     allocateUserToRole($("#userId").val());
   });
 
+  $("#suspendAccount").click(() => {
+    let conformation = confirm("Are you sure ?");
+
+    if (conformation == true) {
+      suspendAccount($("#userId").val());
+    }
+  });
+
+  function suspendAccount(userID) {
+    $.post(
+      "get_data.php",
+      {
+        suspendUser: userID,
+      },
+      (data) => {
+      
+          if (data == "suspended") {
+            alert("Your account has been suspended");
+            // window.location.reload();
+            history.back()
+          } else {
+            alert(data);
+            window.location.reload();
+          }
+      }
+    );
+  }
+
   function allocateUserToRole(userID) {
     let conformation = confirm("Are you sure ?");
     if (conformation == true) {
@@ -130,21 +158,21 @@ $(document).ready(() => {
 
   function allocateUser(allocationData) {
     allocationData.push($("#userId").val());
-   
+
     $.post(
       "get_data.php",
       {
         allocateUser: allocationData,
       },
       (data) => {
-        alert(data);
-        //   if (data == "registered") {
-        //     alert("Your account has been registered");
-        //     window.location="../index.php";
-        //   } else {
-        //     alert(data);
-        //     window.location.reload();
-        //   }
+
+          if (data == "registered") {
+            alert("Your account has been allocated to new role");
+           history.back();
+          } else {
+            alert(data);
+            window.location.reload();
+          }
       }
     );
   }

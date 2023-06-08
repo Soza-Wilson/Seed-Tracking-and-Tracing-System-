@@ -305,7 +305,11 @@ else{
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -336,7 +340,11 @@ else{
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>

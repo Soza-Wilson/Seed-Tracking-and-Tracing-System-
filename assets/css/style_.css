@@ -12314,6 +12314,26 @@ th {
       letter-spacing: 5px;
       text-shadow: 3px -2px 4px rgba(128, 128, 128, 0.57); }
 
+
+      .profile-block {
+        margin: 30px auto; }
+        .profile-block .auth-box {
+          margin: 20px auto 0 auto;
+          max-width: 450px; }
+          .profile-block .auth-box .confirm h3 {
+            color: #5aab4d;
+            font-size: 34px; }
+          .profile-block .auth-box i.icofont-check-circled {
+            font-size: 42px; }
+        .profile-block.offline-404 .auth-box {
+          max-width: 650px; }
+          .profile-block.offline-404 .auth-box h1 {
+            color: #2c3e50;
+            font-size: 160px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-shadow: 3px -2px 4px rgba(128, 128, 128, 0.57); }
+
 .footer {
   background-color: #37474f;
   color: #fff;

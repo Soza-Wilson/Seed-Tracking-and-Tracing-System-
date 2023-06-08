@@ -168,7 +168,11 @@ if (in_array($position, $restricted)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -200,7 +204,11 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
@@ -279,7 +287,7 @@ if (in_array($position, $restricted)) {
                                         <li class="<?php if($_GET[$department]=="-"){
                                             echo "active";
                                         }?>">
-                                            <a href="view_registered_users.php" class="waves-effect waves-dark">
+                                            <a href="user_other_accounts.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Other occounts</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -472,7 +480,7 @@ if (in_array($position, $restricted)) {
                                                                     }?>
 
                                                             <div class="align-middle m-b-10 col-sm-5">
-                                                                <img src="assets/images/<?php echo $_GET['profile_picture'];?>" alt="user image" class="img-radius img-100 align-middle m-r-15">
+                                                                <img src="../files/user_profile/<?php echo $_GET['profile_picture'];?>" alt="user image" class="img-radius img-100 align-middle m-r-15">
                                                                 <div class="d-inline-block">
                                                                     <h6><?php echo $_GET['name'];?></h6>
                                                                     <p class="text-muted m-b-0"><?php echo $position_data?></p>
@@ -586,7 +594,6 @@ if (in_array($position, $restricted)) {
                                                         <select name="departments" id="departments" class="form-control" required="">
                                                             <option value="0">Select department</option>
                                                             <option value="1">System administrator  </option>
-                
                                                             <option value="2">Production</option>
                                                             <option value="3">Marketing</option>
                                                             <option value="5">Finance</option>
@@ -619,7 +626,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                     <div class="col-sm-12">
-                                                        <button class="btn btn-danger btn-mat"><i class="icofont icofont-trash"></i> suspend account</button>
+                                                        <button class="btn btn-danger btn-mat" id="suspendAccount"><i class="icofont icofont-trash"></i> suspend account</button>
 
                                                         
                                                     </div>

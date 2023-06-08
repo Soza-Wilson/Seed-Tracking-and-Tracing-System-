@@ -205,7 +205,11 @@ if ($result->num_rows > 0) {
                                     </li>
                                     <li class="waves-effect waves-light">
                                         <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image">
+                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" alt="Generic placeholder image">
                                             <div class="media-body">
                                                 <h5 class="notification-user">John Doe</h5>
                                                 <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -237,7 +241,11 @@ if ($result->num_rows > 0) {
                             </li>
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -268,7 +276,11 @@ if ($result->num_rows > 0) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -324,25 +336,35 @@ if ($result->num_rows > 0) {
                                     
 
                                 </ul>
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Registration</div>
-                                    <ul class="pcoded-item pcoded-left-item">
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Roles</div>
+                                    <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">User accounts</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
                                         <li class="">
-                                            <a href="add_user.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register user</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="view_registered_users.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Users</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Users</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
 
+                                        <li class="">
+                                            <a href="user_other_accounts.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Other occounts</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
-                            </ul>
+                                </li>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">

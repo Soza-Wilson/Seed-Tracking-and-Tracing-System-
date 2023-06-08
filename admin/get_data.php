@@ -25,7 +25,9 @@ if (isset($_POST["updateSeason"])) {
 if (isset($_POST["allocateUser"])) {
 
    $userInput = $_POST["allocateUser"];
-   $returnData = main::allocate_role_to_user($userInput[2], $userInput[0], $userInput[1]);
+   echo main::allocate_role_to_user($userInput[2], $userInput[0], $userInput[1]);
+}
 
-   echo $returnData;
+if (isset($_POST["suspendUser"])) {
+   echo main::suspend_user_account($_POST["suspendUser"]);
 }

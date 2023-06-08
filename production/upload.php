@@ -105,6 +105,35 @@ if (isset($_FILES['logo_image'])) {
 }
 
 
+if (isset($_FILES['profile'])) {
+
+    $errors = array();
+    $file_name = $_FILES['profile']['name'];
+    $file_size = $_FILES['profile']['size'];
+    $file_tmp = $_FILES['profile']['tmp_name'];
+    $file_type = $_FILES['profile']['type'];
+
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["profile"]["name"]));
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["profile"]["tmp_name"], "../files/user_profile/" . $newfilename);
+        
+    } else {
+       
+    }
+
+    $data = array("filename" =>"$newfilename");
+    $eco_data = json_encode($data);
+    echo $eco_data;
+}
+
+
+
+
+
 
 // $file_name = $_FILES['file']['name'];
 // $file_size = $_FILES['file']['size'];

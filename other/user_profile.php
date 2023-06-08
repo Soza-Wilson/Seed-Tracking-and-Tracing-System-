@@ -4,7 +4,7 @@
 
 Ob_start();
 include('../class/main.php');
-include('../class/production.php');
+// include('../class/production.php');
 session_start();
 
 $test = $_SESSION['fullname'];
@@ -19,10 +19,11 @@ $phone = "";
 $email = "";
 $passoword = "";
 
-$sql = "SELECT `user_ID`, `user_type_ID`,
- `fullname`, `DOB`, `sex`, `registered_date`,
-  `postion`, `phone`, `email`, `password` FROM 
-  `user` WHERE `user_ID`='$user_ID'";
+$sql = "SELECT `user_ID`, usertype.user_type `type`, `fullname`, 
+`DOB`, `sex`, `registered_date`, `postion`, `phone`,
+ `email`, `password`, `account_status`, 
+ `profile_picture` FROM `user` INNER JOIN 
+ usertype ON user.user_type_ID = usertype.user_type_ID WHERE `user_ID`='$user_ID'";
 global $con;
 
 $result = $con->query($sql);
@@ -31,11 +32,13 @@ if ($result->num_rows > 0) {
         $user_ID = $row["user_ID"];
         $fullname  = $row["fullname"];
         $dob  = $row["DOB"];
+        $department = $row["type"];
         $registered_date = $row["registered_date"];
-        $position  = $row["postion"];
+        $position = $row["postion"];
         $phone  = $row["phone"];
         $email  = $row["email"];
         $password  = $row["password"];
+        $profile = $row["profile_picture"];
     }
 }
 
@@ -47,7 +50,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -62,89 +65,33 @@ if ($result->num_rows > 0) {
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="icon" href="../assets/images/main_icon.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <!-- waves.css -->
-    <link rel="stylesheet" href="../assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap/css/bootstrap.min.css">
     <!-- waves.css -->
     <link rel="stylesheet" href="../assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- themify-icons line icon -->
     <link rel="stylesheet" type="text/css" href="../assets/icon/themify-icons/themify-icons.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="../assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="../assets/icon/icofont/css/icofont.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="../assets/icon/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/pages/notification/notification.css">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style_.css">
+
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <script type="text/javascript" src="../assets/js/jsHandle/user_profile.js">
 
-            document.getElementById('user_id').readOnly = true;
-            document.getElementById('dob').readOnly = true;
-            document.getElementById('reg_date').readOnly = true;
-            document.getElementById('position').readOnly = true;
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ////js code for sending  crop data and retrive certificate 
-
-            //retriving main certificate data 
-
-            $("#search_main_certificate").on("input", function() {
-
-
-
-
-                var lab_certificate_value = $('#search_main_certificate').val();
-                var quantity_value = $('#farm_quantity').val();
-                var variety_value = $('#farm_variety').val();
-                var class_value = $('#farm_class').val();
-
-
-                $.post('farm_get_certificate.php', {
-                    lab_certificate_value: lab_certificate_value,
-                    quantity_value: quantity_value,
-                    variety_value: variety_value,
-                    class_value: class_value
-                }, function(data) {
-                    $('#main_certificate').html(data);
-
-                })
-
-            });
-
-
-
-
-
-        });
     </script>
 
 </head>
 
-<body>
-    <!-- Pre-loader start -->
+<body themebg-pattern="theme3">
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -199,363 +146,261 @@ if ($result->num_rows > 0) {
         </div>
     </div>
     <!-- Pre-loader end -->
-    <div id="pcoded" class="pcoded">
-        <div class="pcoded-overlay-box"></div>
-        <div class="pcoded-container navbar-wrapper">
-            <nav class="navbar header-navbar pcoded-header">
-                <div class="navbar-wrapper">
-                    <div class="navbar-logo">
-                        <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
-                            <i class="ti-menu"></i>
-                        </a>
-                        <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+
+    <div class="container-fluid">
+        <div class="row">
+            </br></br></br>
+        </div>
+
+    </div>
+
+
+    <section>
+        <div class="col-md-12">
+
+
+
+            <div class="card">
+
+                <div class="card-header">
+
+
+                    <h5>Profile</h5>
+                </div>
+
+
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="modal-title">Update Profile Picture</h5>
+                            </div>
+                            <div class="modal-body">
+                            <form action="user_profile.php" method="POST" enctype="multipart/form-data">
+
+                                <div class="form-group row">
+
+                                    <div class="col-sm-12">
+                                        <labe>Picture Directory :</label>
+                                            <input type="file" class="form-control" name="file_directory" accept=".jpg" id="file_directory">
+                                            <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                            <input type="hidden" class="form-control" id="user" value="<?php echo $user_ID; ?>">
+
+                                            
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="save_image" value="Save" class="btn waves-effect waves-light btn-success  btn-mat"><i class="icofont icofont-save"></i> Save</button>
+                                    </div>
+
                                 </div>
+                                  
+
+                            </form>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
 
-                        <a class="mobile-options waves-effect waves-light">
-                            <i class="ti-more"></i>
-                        </a>
                     </div>
+                </div>
 
-                    <div class="navbar-container container-fluid">
-                        <ul class="nav-left">
-                            <li>
-                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
-                            </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
-                                    <i class="ti-fullscreen"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../assets/images/user.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
 
+                <div class="card-block ">
+
+                    <div class="form-group row">
+
+                        <!-- Nav tabs -->
+                        <!-- <div class="nav nav-tabs md-tabs img-tabs b-none col-sm-2">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab" href="#home8" role="tab">
+                                                                    <img src="assets/images/avatar-1.jpg" class="img-fluid img-circle" alt="">
+
+                                                                </a>
+                                                            </li>
+
+                                                        </div> -->
+
+                        <?php
+                        $position_data = "";
+                        if ($position == "") {
+                            $position_data = "-";
+                        } else {
+                            $position_data = $position;
+                        } ?>
+
+
+
+                        <div class="align-middle m-b-10 col-sm-12">
+                            <img src="../files/user_profile/<?php if ($profile == "") {
+                                                                echo "user.jpg";
+                                                            } else {
+                                                                echo $profile;
+                                                            } ?>" alt="user image" class="img-radius img-100 align-middle m-r-15">
+
+
+                            <div class="d-inline-block">
+                                <h6><?php echo $fullname; ?></h6>
+                                <p class="text-muted m-b-0"><?php echo $position_data ?></p>
+                            </div>
+                        </div>
+
+                        <div class=" col-sm-12">
+
+                            <button class="btn btn-inverse btn-round btn-mini img-radius img-100 align-middle m-r-15" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-camera"></i>update</button>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </section>
+
+
+
+    <section>
+
+        <div class="col-xl-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Account details</h5>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                            <li><i class="fa fa-minus minimize-card"></i></li>
+                            <li><i class="fa fa-refresh reload-card"></i></li>
+                            <li><i class="fa fa-trash close-card"></i></li>
                         </ul>
                     </div>
                 </div>
-            </nav>
+                <div class="card-block">
 
-            <div class="pcoded-main-container">
-                <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
-                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                        <div class="pcoded-inner-navbar main-menu">
-                            <div class="">
+
+                    <form>
+                        <div class="form-group row">
 
 
 
-                            </div>
-                            <div class="p-15 p-b-0">
-
-
-
-                            </div>
-
-
-
-
-
-
-
-
-                            </ul>
-
-
-
+                            <dt class="col-sm-2">Full name : </dt>
+                            <dd class="col-sm-10"> <input type="text"  id="fullname" class="form-control" value="<?php echo $fullname ?>"></dd>
 
                         </div>
-                    </nav>
-                    <div class="pcoded-content">
-                        <!-- Page-header start -->
-                        <div class="page-header">
-                            <div class="page-block">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8">
-                                        <div class="page-header-title">
-                                            <h5 class="m-b-10">User Profile</h5>
-                                            <p class="m-b-0"></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group row">
+                            <dt class="col-sm-2">Depertment : </dt>
+                            <dd class="col-sm-10"> <select class="form-control">
+                                    <option value="<?php echo $type ?>"><?php echo $department;?></option>
+                                </select></dd>
                         </div>
-                        <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-                            <!-- Main-body start -->
-                            <div class="main-body">
-                                <div class="page-wrapper">
-                                    <!-- Page-body start -->
-                                    <div class="page-body">
-                                        <!-- Basic table card start -->
-                                        <!-- Basic table card end -->
-                                        <!-- Inverse table card start -->
-
-                                        <!-- Inverse table card end -->
-                                        <!-- Hover table card start -->
-
-                                        <!-- Hover table card end -->
-                                        <!-- Contextual classes table starts -->
-
-
-                                        <!-- Contextual classes table ends -->
-                                        <!-- Background Utilities table start -->
-                                        <form action="user_profile.php" method="POST">
-
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Details </h5>
-
-
-                                                </div>
-
-
-
-
-                                                <div class="card-block">
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary">User ID:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="user_id" id="user_id" required="" value="<?php echo $user_ID; ?>">
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Fullname:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="fullname" required="" value="<?php echo $fullname; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Date of Birth:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="dob" id="dob" required="" value="<?php echo $dob; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Registered date:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="reg_date" id="reg_date" required="" value="<?php echo $registered_date; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Position:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="position" id="position" required="" value="<?php echo $position; ?>">
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary">Email:</label>
-
-                                                            <br />
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="email" required="" value="<?php echo $email; ?>">
-                                                        </div>
-                                                    </div>
-
-
-
-
-
-
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-primary ">Password:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" name="password" required="" value="<?php echo $password; ?>">
-                                                        </div>
-
-
-                                                    </div>
-
-
-
-
-
-
-
-
-
-                                                    <div class="form-group row">
-
-                                                        <div class="col-sm-12">
-
-                                                        </div class="form-group row" require="">
-
-
-
-
-
-
-                                                        </br>
-
-
-                                                        <div>
-
-                                                        </div>
-
-                                                        <br>
-                                                        .
-                                                        <div class="form-group">
-
-
-                                                            <input type="submit" name="update_profile" value="update" class="btn waves-effect waves-light btn-primary btn-block" />
-                                                            <button type="button" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20" onclick="history.back()">Back</button>
-                                                        </div>
-
-
-
-
-
-                                        </form>
-
-
-
-                                    </div>
-                                    <!-- Page-body end -->
-                                </div>
-                            </div>
-                            <!-- Main-body end -->
-
-                            <div id="styleSelector">
-
-                            </div>
+                        <div class="form-group row">
+                            <dt class="col-sm-2">Position : </dt>
+                            <dd class="col-sm-10"> <select class="form-control">
+                                    <option value="<?php echo $position ?>"><?php echo $position ?></option>
+                                </select></dd>
                         </div>
-                    </div>
+                        <div class="form-group row">
+                            <dt class="col-sm-2">Phone : </dt>
+                            <dd class="col-sm-10"> <input type="text" id="phone" class="form-control" value="<?php echo $phone ?>"></dd>
+                        </div>
+                        <div class="form-group row">
+                            <dt class="col-sm-2">Email : </dt>
+                            <dd class="col-sm-10"> <input type="text" id="email" class="form-control" value="<?php echo $email ?>"></dd>
+                        </div>
+
+
+
+
+                    </form>
+
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+
+    <section>
+
+        <div class="col-xl-12 col-md-12">
+            <div class="card">
+
+                <div class="card-block">
+
+                    <button class="btn btn-success btn-mat" id="update_user"><i class="icofont icofont-save"></i> Update</button>
+                    <button class="btn btn-danger btn-mat" id="back"><i class="icofont icofont-warning"></i> Back</button>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]>
-    <div class="ie-warning">
-        <h1>Warning!!</h1>
-        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-        <div class="iew-container">
-            <ul class="iew-download">
-                <li>
-                    <a href="http://www.google.com/chrome/">
-                        <img src="assets/images/browser/chrome.png" alt="Chrome">
-                        <div>Chrome</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.mozilla.org/en-US/firefox/new/">
-                        <img src="assets/images/browser/firefox.png" alt="Firefox">
-                        <div>Firefox</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.opera.com">
-                        <img src="assets/images/browser/opera.png" alt="Opera">
-                        <div>Opera</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.apple.com/safari/">
-                        <img src="assets/images/browser/safari.png" alt="Safari">
-                        <div>Safari</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                        <img src="assets/images/browser/ie.png" alt="">
-                        <div>IE (9 & above)</div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <p>Sorry for the inconvenience!</p>
+<div class="ie-warning">
+    <h1>Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="../assets/images/browser/chrome.png" alt="Chrome">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="../assets/images/browser/firefox.png" alt="Firefox">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="../assets/images/browser/opera.png" alt="Opera">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="../assets/images/browser/safari.png" alt="Safari">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="../assets/images/browser/ie.png" alt="">
+                    <div>IE (9 & above)</div>
+                </a>
+            </li>
+        </ul>
     </div>
-    <![endif]-->
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
     <!-- Warning Section Ends -->
     <!-- Required Jquery -->
     <script type="text/javascript" src="../assets/js/jquery/jquery.min.js"></script>
@@ -566,32 +411,15 @@ if ($result->num_rows > 0) {
     <script src="../assets/pages/waves/js/waves.min.js"></script>
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="../assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="../assets/pages/waves/js/waves.min.js"></script>
     <!-- modernizr js -->
-    <script type="text/javascript" src="../assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="../assets/js/pcoded.min.js"></script>
-    <script src="../assets/js/vertical-layout.min.js "></script>
-    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="../assets/js/script.js"></script>
-
-    <?php
-
-    if (isset($_POST['update_profile'])) {
-
-        $object = new main;
-        $object->update_user_profile(
-            $_SESSION['user'],
-            $_POST['fullname'],
-            $_POST['phone'],
-            $_POST['email'],
-            $_POST['password']
-        );
-    }
-
-
-    ?>
+    <script type="text/javascript" src="../assets/js/SmoothScroll.js"></script>
+    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="bower_components/i18next/js/i18next.min.js"></script>
+    <script type="text/javascript" src="bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+    <script type="text/javascript" src="../assets/js/common-pages.js"></script>
 </body>
 
 </html>

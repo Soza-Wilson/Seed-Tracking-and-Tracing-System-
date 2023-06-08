@@ -163,7 +163,11 @@ if (in_array($position, $restricted)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="assets/images/user.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -195,7 +199,11 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="assets/images/user.jpg" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
+                                                                                $profile = "user.jpg";
+                                                                            } else {
+                                                                                $profile = $_SESSION["profile"];
+                                                                            }echo $profile;?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
@@ -400,7 +408,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Registered Users</h5>
+                                            <h5 class="m-b-10">Inactive Users </h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -409,7 +417,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
 
-                                            <li class="breadcrumb-item"><a href="view_registered_users.php">View Registered Users</a>
+                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Inactive users </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -510,13 +518,13 @@ if (in_array($position, $restricted)) {
                                                                             // $registered_date = $row['entry_date'];
                                                                             // $registered_time = $row['entry_time'];
 
-                                                                            if ($_row["account_status"] == "unassigned") {
+                                                                            if ($row["account_status"] == "unsigned") {
 
                                                                                 $status = ["inverse", "unassigned"];
                                                                             }
 
 
-                                                                            if ($_row["account_status"] == "suspended") {
+                                                                            if ($row["account_status"] == "suspended") {
 
                                                                                 $status = ["danger", "suspended"];
                                                                             }
@@ -536,7 +544,7 @@ if (in_array($position, $restricted)) {
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class='d-inline-block align-middle'>
-                                                                                    <img src='assets/images/$profile' alt='user image' class='img-radius img-40 align-top m-r-15'>
+                                                                                    <img src='../files/user_profile/$profile' alt='user image' class='img-radius img-40 align-top m-r-15'>
                                                                                     <div class='d-inline-block'>
                                                                                         <h6>$name</h6>
                                                                                         <p 
