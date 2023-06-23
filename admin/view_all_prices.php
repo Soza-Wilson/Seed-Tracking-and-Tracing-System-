@@ -455,15 +455,15 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-
-                                                                <th>Sell Pre-Basic</th>
-                                                                <th>Sell Basic</th>
-                                                                <th>Sell Certified</th>
-                                                                <th>Buyback Pre-basic</th>
-                                                                <th>Buyback Basic</th>
-                                                                <th>Buyback Certified</th>
+                                                                <th style="font-weight: 600;" >Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Sell Breeder</th>
+                                                                <th style="font-weight: 600;">Sell Pre-Basic</th>
+                                                                <th style="font-weight: 600;">Sell Basic</th>
+                                                                <th style="font-weight: 600;">Sell Certified</th>
+                                                                <th style="font-weight: 600;">Buyback Pre-basic</th>
+                                                                <th style="font-weight: 600;">Buyback Basic</th>
+                                                                <th style="font-weight: 600;">Buyback Certified</th>
 
 
                                                             </tr>
@@ -471,7 +471,7 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                             <?php
-                                                            $sql = "SELECT `crop`,`variety`,`sell_pre_basic`,`sell_basic`,`sell_certified`,`buy_pre_basic`,`buy_basic`,`buy_certified` 
+                                                            $sql = "SELECT `crop`,`variety`,`sell_breeder`,`sell_pre_basic`,`sell_basic`,`sell_certified`,`buy_pre_basic`,`buy_basic`,`buy_certified` 
                                 FROM `crop` INNER JOIN variety ON crop.crop_ID = variety.crop_ID 
                                 INNER JOIN price ON variety.variety_ID = price.variety_ID ORDER BY price.prices_ID DESC";
                                                             $result = $con->query($sql);
@@ -479,6 +479,7 @@ if (in_array($position, $restricted)) {
                                                                 while ($row = $result->fetch_assoc()) {
                                                                     $crop      = $row["crop"];
                                                                     $variety     = $row["variety"];
+                                                                    $sell_breeder     = $row["sell_breeder"];
                                                                     $sell_pre_basic     = $row["sell_pre_basic"];
                                                                     $sell_basic  = $row["sell_basic"];
                                                                     $sell_certified = $row['sell_certified'];
@@ -498,6 +499,7 @@ if (in_array($position, $restricted)) {
 											<tr class='odd gradeX'>
 											    <td>$crop</td>
 												<td>$variety</td>
+                                                <td>$sell_breeder</td>
 												<td>$sell_pre_basic</td>
 												<td>$sell_basic</td>
 												<td>$sell_certified</td>

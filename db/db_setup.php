@@ -50,14 +50,14 @@ if ($database === true) {
             user_type_ID INT(10),
     		fullname varchar(100),
 			DOB date,
-     sex varchar(100),
+            sex varchar(100),
 			registered_date date,
     		postion varchar(100),
 			phone varchar(100),
-    			 email varchar(100),
+    			email varchar(100),
     			 		password varchar(100),
                         account_status varchar(100),
-                        profile_piture vatchar(500),
+                        profile_picture varchar(500),
 
     			 		FOREIGN KEY(user_type_ID)REFERENCES usertype(user_type_ID)) ";
 
@@ -397,13 +397,13 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
     $sql = "CREATE TABLE price (prices_ID varchar(100) PRIMARY KEY, 
 crop_ID varchar(100),
 variety_ID varchar(100),
-sell_breeder varchar(100),
-sell_basic varchar(100),
-sell_pre_basic varchar(100),
-sell_certified varchar(100),
-buy_basic varchar(100),
-buy_pre_basic varchar(100),
-buy_certified varchar(100),
+sell_breeder int,
+sell_basic int,
+sell_pre_basic int,
+sell_certified int,
+buy_basic int,
+buy_pre_basic int,
+buy_certified int,
 FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
 
     mysqli_query($con, $sql);
@@ -545,8 +545,8 @@ values ('001','ADMIN'),
 
     mysqli_query($con, $sql);
 
-    $sql = "insert into user
-values ('001','01','ADMIN','0000','-','0000','system_administrator','0000','admin@example.com','0000');";
+    $sql = "INSERT INTO `user`(`user_ID`, `user_type_ID`, `fullname`, `DOB`, `sex`, `registered_date`, `postion`, `phone`, `email`, `password`) VALUES 
+     ('001','01','ADMIN','0000-00-00','-','0000-00-00','system_administrator','0000','example@admin.com','0000')";
 
     mysqli_query($con, $sql);
 

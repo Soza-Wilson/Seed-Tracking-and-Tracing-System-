@@ -580,7 +580,7 @@ $(document).ready(() => {
     options.each(function () {
       var value = $(this).val(); // Get the value of the option
       var text = $(this).text(); // Get the text of the option
-      console.log("Value: " + value + ", Text: " + text);
+      // console.log("Value: " + value + ", Text: " + text);
     });
 
     var selectElement = $(select_element);

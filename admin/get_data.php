@@ -31,3 +31,10 @@ if (isset($_POST["allocateUser"])) {
 if (isset($_POST["suspendUser"])) {
    echo main::suspend_user_account($_POST["suspendUser"]);
 }
+
+if (isset($_POST["setNewPrices"])) {
+
+   $data = $_POST["setNewPrices"];
+   echo main::set_sell_prices($data[0], $data[1], $data[2], $data[3],$data[4], $data[5]);
+}
+

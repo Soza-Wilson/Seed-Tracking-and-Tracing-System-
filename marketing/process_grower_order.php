@@ -81,7 +81,7 @@ if ($class == "certified") {
 
 
 if ($crop_ID == "CP001") {
-    header("Location: hybred_order.php? main_certificate=$main_lot_number& male_certificate=$male_lot_number& female_certificate=$female_lot_number");
+    header("Location: hybred_order.php? main_certificate=$main_lot_number&main_quantity=$main_quantity&male_certificate=$male_lot_number&male_quantity=$male_quantity&female_certificate=$female_lot_number&female_quantity=$female_quantity");
 }
 
 ?>

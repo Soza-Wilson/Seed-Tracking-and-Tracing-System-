@@ -41,6 +41,8 @@ $(document).ready(function () {
       $("#original_price").val($("#price_per_kg").val());
       $("#discount").val($("#discount_price").val());
 
+     
+
       if ($("#discount_price").val() > 0) {
         $(".place_order_items").hide();
       } else {

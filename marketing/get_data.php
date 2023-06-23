@@ -6,6 +6,198 @@ $type_value = "";
 
 include('../class/main.php');
 
+if (isset($_POST['createCertificateTable'])) {
+  $data = $_POST['createCertificateTable'];
+
+  $file = "assets/JSON/" . $data[3] . "_order_details.json";
+
+  echo $file;
+
+  $order_details = marketing::get_grower_order_details($data[0]);
+  $total = (int)$data[1] * $order_details[0];
+
+
+  $details = array("price" => "$order_details[0]", "crop_id" => "$order_details[1]", "crop_name" => "$order_details[2]", "variety_id" => "$order_details[3]", "variety_name" => "$order_details[4]");
+  if (file_exists($file)) {
+
+    $path = file_get_contents($file);
+    $json_data[] = array(json_decode($path));
+
+
+    if (!empty($json_data[0])) {
+
+      unset($json_data[0]);
+
+      $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+      if (file_put_contents($file, $unsave)) {
+        $final_data = add_data($details);
+        file_put_contents($file, $final_data);
+      }
+    } else {
+
+      echo "
+       <option value =''>empty</option>";
+    }
+  } else {
+
+    echo "
+    <option value =''>error</option>";
+  }
+}
+
+if (isset($_POST['addOrderItem'])) {
+  $itemData = $_POST['addOrderItem'];
+  $orderData = marketing::add_hybrid_order($itemData[0]);
+
+  if ($orderData == "registered" || $orderData == "already_registered") {
+    $object = new main();
+    echo $object->add_order_item($itemData[0], $itemData[1], $itemData[2], $itemData[3], $itemData[4], $itemData[5], $itemData[6], $itemData[7]);
+  }
+  else{
+
+    echo "Error: order can not be registered";
+  }
+}
+
+//function adding temp data to json file
+
+function add_data($data)
+{
+  $eco_data = json_encode($data);
+  return $eco_data;
+}
+
+//delete temp data from json
+
+function delete_data($file)
+{
+
+  $json_data = json_decode(file_get_contents($file));
+  unset($json_data[0]);
+
+  $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+  file_put_contents($file, $unsave);
+}
+
+//   echo "<div class='card'>
+//   <div class='card-header'>
+//       <h5>$type seed details</h5>
+//       <div class='card-header-right'>
+//           <ul class='list-unstyled card-option'>
+//               <li><i class='fa fa fa-wrench open-card-option'></i></li>
+//               <li><i class='fa fa-window-maximize full-card'></i></li>
+//               <li><i class='fa fa-minus minimize-card'></i></li>
+//               <li><i class='fa fa-refresh reload-card'></i></li>
+//               <li><i class='fa fa-trash close-card'></i></li>
+//           </ul>
+//       </div>
+//   </div>
+//   <div class='card-block'>
+
+
+//       <form>
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Crop :</label>
+//               </div>
+//               <div class='col-sm-12'>
+
+//                   <select class='form-control' name='$type._crop' id='$type._crop'>
+
+//                       <option value='$order_details[1]'>$order_details[2]</option>
+//                   </select>
+
+
+//               </div>
+//           </div>
+
+
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Variety :</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <select class='form-control' name='$type._crop' id='$type._crop'>
+
+//                       <option value='$order_details[3]'>$order_details[4]</option>
+//                   </select>
+//               </div>
+//           </div>
+
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Class :</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <select id='$type._class' class='form-control' name='$type._class' >
+
+//                   <option value'breeder'>breeder</option>
+
+//                   </select>
+
+//               </div>
+//           </div>
+
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Quantity :</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <select id='$type._quantity' class='form-control'>
+//                   <option value='$data[1]'>$data[1]</option>
+//                   </select>
+//               </div>
+//           </div>
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Price per KG :</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <select type='text' id='$type._price' class='form-control'>
+//                   <option value='$order_details[0]'>$order_details[0]</option>
+//                   </select>
+//               </div>
+//           </div>
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Discount Price:</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <input type='text' id='$type._discount' class='form-control' name='$type._discount' placeholder='Discount price'>
+//               </div>
+//               </br>
+//               </br>
+
+//               <div class='col-sm-1'>
+
+
+//                   <button type='submit' name='place_order' class='btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat'> <i class='icofont icofont-warning'></i> Request for discount</button>
+//               </div>
+//           </div>
+
+//           <div class='form-group row'>
+//               <div class='col-sm-2'>
+//                   <label class='label bg-success'>Total Price:</label>
+//               </div>
+//               <div class='col-sm-12'>
+//                   <input type='number' id='$type._total' class='form-control' name='$type._total' placeholder='Price per kg' value='$total'>
+//               </div>
+//           </div>
+
+
+
+
+//       </form>
+
+//   </div>
+// </div>";
+
+
 
 if (isset($_POST['search_value'])) {
 
@@ -108,8 +300,8 @@ if (isset($_POST['search_value'])) {
 if (isset($_POST['discountRequest'])) {
 
   $object = new main();
-  $object->admin_approval($_POST['approvalId'], $_POST['depertment'],$_POST['discountRequest'], $_POST['action_id'], $_POST['description'], $_POST['request_id'], $_POST['requestedName']);
- 
+  $object->admin_approval($_POST['approvalId'], $_POST['depertment'], $_POST['discountRequest'], $_POST['action_id'], $_POST['description'], $_POST['request_id'], $_POST['requestedName']);
+
 
   echo '
 <div class="" >
@@ -429,9 +621,9 @@ if (isset($_POST["lpo_data_filter"])) {
 
   $fromValue = $_POST["from"];
   $toValue = $_POST["to"];
-  $customer_name= $_POST["lpo_data_filter"];
+  $customer_name = $_POST["lpo_data_filter"];
 
-  
+
 
 
   $sql = "SELECT `order_ID`,`order_files`,`order_type`,order_table.status, user.fullname, `customer_name`, `order_book_number`, `status`, order_table.date, order_table.time, `count`, `total_amount` FROM `order_table` 
@@ -522,14 +714,14 @@ if (isset($_POST["sales_data_filter"])) {
   </tr>";
 
 
-  $customerType=$_POST["sales_data_filter"];
+  $customerType = $_POST["sales_data_filter"];
   $fromValue = $_POST["from"];
   $toValue = $_POST["to"];
   $cropValue = $_POST["cropValue"];
   $varietyValue = $_POST["varietyValue"];
   $classValue = $_POST["classValue"];
 
-  
+
 
 
 
@@ -537,24 +729,24 @@ if (isset($_POST["sales_data_filter"])) {
   FROM item INNER JOIN crop ON crop.crop_ID = item.crop_ID INNER JOIN variety ON variety.variety_ID = item.variety_ID INNER JOIN order_table ON order_table.order_ID = item.order_ID 
   INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.order_type='$customerType' AND order_table.status='processed' AND item.crop_ID='$cropValue' AND item.variety_ID='$varietyValue' AND item.class='$classValue' AND order_table.date BETWEEN '$fromValue' AND '$toValue' ORDER BY order_table.order_ID DESC;";
 
- $result = $con->query($sql);
- if ($result->num_rows > 0) {
-     while ($row = $result->fetch_assoc()) {
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
 
-         $order_ID =$row["order_ID"];
+      $order_ID = $row["order_ID"];
 
-         $item_ID      = $row["item_ID"];
-         $crop     = $row["crop"];
-         $order_by=$row["fullname"];
-         $customer=$row["customer_name"];
-         $order_date=$row["date"];
-         $variety = $row["variety"];
-         $class    = $row['class'];
-         $quantity = $row['quantity'];
-         $price_per_kg = $row['price_per_kg'];
-         $order_type = $row['order_type'];
-         $discount_price = $row['discount_price'];
-         $total_price = $row['total_price'];
+      $item_ID      = $row["item_ID"];
+      $crop     = $row["crop"];
+      $order_by = $row["fullname"];
+      $customer = $row["customer_name"];
+      $order_date = $row["date"];
+      $variety = $row["variety"];
+      $class    = $row['class'];
+      $quantity = $row['quantity'];
+      $price_per_kg = $row['price_per_kg'];
+      $order_type = $row['order_type'];
+      $discount_price = $row['discount_price'];
+      $total_price = $row['total_price'];
 
 
       echo "
@@ -601,4 +793,3 @@ if (isset($_POST["sales_data_filter"])) {
  ";
   }
 }
-

@@ -1,6 +1,7 @@
 $(document).ready(() => {
 
- 
+
+
   $("#file_directory").change(function () {
     $("#warning_file").hide();
     uploadFile();
@@ -44,16 +45,15 @@ $(document).ready(() => {
    var months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
    months -= startDate.getMonth();
    months += endDate.getMonth();
-   
+
 if (months < 3){
-  
+
   alert("Error : Season minimum is 3 months, please adjust date settings");
-    
+
    }
 else if(months > 6){
 
   alert("Error : Season maximum is 6 months, please adjust date settings");
-    
 
 }   else{
 
@@ -64,20 +64,13 @@ else if(months > 6){
     },
     function (data) {
 
-    
       alert(" Details updated");
       window.location.reload();
     }
   );
 }
 
-
-
-
-
-
 }
-   
 
   function uploadFile() {
     let formData = new FormData();
@@ -95,3 +88,4 @@ else if(months > 6){
       });
   }
 });
+

@@ -22,38 +22,14 @@ if (in_array($position, $restricted)) {
     header('Location:../restricted_access/restricted_access.php');
 }
 
+$main_certificate = $_GET["main_certificate"];
+$main_quantity = $_GET["main_quantity"];
+$male_certificate = $_GET["male_certificate"];
+$male_quantity = $_GET["male_quantity"];
+$female_certificate = $_GET["female_certificate"];
+$female_quantity = $_GET["female_quantity"];
 
-$main_data = $_GET["main_certificate"];
-$male_data = $_GET["male_certificate"];
-$female_data = $_GET["female_certificate"];
-$order_type = "";
 
-if ($main_data == "-") {
-    $order_type = "inbred";
-
-    $sql = "SELECT `lot_number`, `crop_ID`, `variety_ID`, `class`
-       FROM `certificate` WHERE `lot_number`";
-
-    $result = $con->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $farm_id = $row['farm_ID'];
-            $crop_ID = $row['crop_ID'];
-
-            $variety_ID = $row['variety_ID'];
-            $main_lot_number = $row['main_lot_number'];
-            $main_quantity = $row['main_quantity'];
-            $male_lot_number = $row['male_lot_number'];
-            $male_quantity = $row['male_quantity'];
-            $female_lot_number = $row['female_lot_number'];
-            $female_quantity = $row['female_quantity'];
-            $class = $row['class'];
-        }
-    }
-} else {
-
-    $order_type = "single_closs";
-}
 
 
 
@@ -398,7 +374,7 @@ if ($main_data == "-") {
 
                                             <!--  project and team member start -->
 
-                                            <div class="col-xl-12 col-md-12" id="main_certificate">
+                                            <div class="col-xl-12 col-md-12" id="main_values">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Male seed details</h5>
@@ -421,10 +397,14 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Crop :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_crop" class="form-control" name="male_crop" placeholder="Price per kg" require="" value="<?php echo $_GET['crop']; ?>">
+                                                                    <select class="form-control" name="main_crop" id="main_crop">
+
+                                                                        <option value=""></option>
+                                                                    </select>
                                                                     <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id']; ?>">
                                                                     <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id']; ?>">
-                                                                    <input type="text" name="order_type" id="order_type" value="<?php echo $order_type; ?>">
+                                                                    <input type="hidden" name="order_type" id="order_type" value="<?php echo $order_type; ?>">
+
                                                                 </div>
                                                             </div>
 
@@ -435,7 +415,10 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Variety :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_variety" class="form-control" name="male_variety" placeholder="Price per kg" require="" value="<?php echo $_GET['variety']; ?>">
+                                                                    <select class="form-control" name="main_variety" id="main_variety">
+
+                                                                        <option value=""></option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
@@ -445,7 +428,10 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Class :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_class" class="form-control" name="male_class" placeholder="male_class" require="" value="<?php echo $male_class; ?>">
+                                                                    <select class="form-control" name="main_class" id="main_class">
+
+                                                                        <option value="breeder">Breeder</option>
+                                                                    </select>
                                                                     <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
                                                                     <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
                                                                 </div>
@@ -457,7 +443,10 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Quantity :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="quantity" require="" value="<?php echo $main_quantity_; ?>">
+                                                                    <select class="form-control" name="main_quantity" id="main_quantity">
+
+                                                                        <option value=""></option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
@@ -466,7 +455,10 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Price per KG :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_price" class="form-control" name="male_price" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <select class="form-control" name="main_price" id="main_price">
+
+                                                                        <option value=""></option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
 
@@ -475,16 +467,12 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Discount Price:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_discount" class="form-control" name="male_discount" placeholder="Discount price" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <input type="text" id="main_discount" class="form-control" name="main_discount" placeholder="Discount price" require="" >
                                                                 </div>
                                                                 </br>
                                                                 </br>
 
-                                                                <div class="col-sm-1">
-
-
-                                                                    <button type="submit" name="place_order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat"> <i class="icofont icofont-warning"></i> Request for discount</button>
-                                                                </div>
+                                                               
                                                             </div>
 
                                                             <div class="form-group row">
@@ -492,7 +480,7 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Total Price:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <input type="text" id="main_total" class="form-control" name="main_total" placeholder="Price per kg" require="">
                                                                 </div>
                                                             </div>
 
@@ -504,7 +492,7 @@ if ($main_data == "-") {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-md-12 inbred">
+                                            <div class="col-xl-6 col-md-12 inbred" id="male_values">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>Male seed details</h5>
@@ -545,7 +533,7 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Variety :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <select class="form-control" name="male_crop" id="male_crop">
+                                                                    <select class="form-control" name="male_variety" id="male_variety">
 
                                                                         <option value=""></option>
                                                                     </select>
@@ -558,7 +546,12 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Class :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_class" class="form-control" name="male_class" placeholder="male_class" require="" value="<?php echo $male_class; ?>">
+
+                                                                    <select id="male_class" class="form-control" name="male_class">
+
+                                                                        <option value="breeder">Breeder</option>
+                                                                    </select>
+
                                                                     <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
                                                                     <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
                                                                 </div>
@@ -570,7 +563,14 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Quantity :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="quantity" require="" value="<?php echo $main_quantity_; ?>">
+
+                                                                    <select id="male_quantity" class="form-control" name="male_quantity">
+
+                                                                        <option value=""></option>
+                                                                    </select>
+
+
+
                                                                 </div>
                                                             </div>
 
@@ -579,7 +579,10 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Price per KG :</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_price" class="form-control" name="male_price" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <select id="male_price" class="form-control" name="male_price">
+
+                                                                    </select>
+
                                                                 </div>
                                                             </div>
 
@@ -588,16 +591,12 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Discount Price:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_discount" class="form-control" name="male_discount" placeholder="Discount price" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <input type="text" id="male_discount" class="form-control" name="male_discount" placeholder="Discount price" require="">
                                                                 </div>
                                                                 </br>
                                                                 </br>
 
-                                                                <div class="col-sm-1">
 
-
-                                                                    <button type="submit" name="place_order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat"> <i class="icofont icofont-warning"></i> Request for discount</button>
-                                                                </div>
                                                             </div>
 
                                                             <div class="form-group row">
@@ -605,7 +604,7 @@ if ($main_data == "-") {
                                                                     <label class="label bg-success">Total Price:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+                                                                    <input type="text" id="male_total" class="form-control" name="male_total" placeholder="Total Amount" require="">
                                                                 </div>
                                                             </div>
 
@@ -617,10 +616,10 @@ if ($main_data == "-") {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-md-12 inbred">
-                                                <div class="card ">
+                                            <div class="col-xl-6 col-md-12 inbred" id="female_values">
+                                                <div class="card">
                                                     <div class="card-header">
-                                                        <h5>Female seed details</h5>
+                                                        <h5>Male seed details</h5>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
@@ -633,149 +632,258 @@ if ($main_data == "-") {
                                                     </div>
                                                     <div class="card-block">
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Crop :</label>
+
+                                                        <form>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Crop :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+
+                                                                    <select class="form-control" name="female_crop" id="female_crop">
+
+                                                                        <option value=""></option>
+                                                                    </select>
+
+                                                                    <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id']; ?>">
+                                                                    <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id']; ?>">
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_crop" class="form-control" name="male_crop" placeholder="Price per kg" require="" value="<?php echo $_GET['crop']; ?>">
-                                                                <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id']; ?>">
-                                                                <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id']; ?>">
-                                                            </div>
-                                                        </div>
 
 
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Variety :</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Variety :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <select class="form-control" name="female_variety" id="female_variety">
+
+                                                                        <option value=""></option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_variety" class="form-control" name="male_variety" placeholder="Price per kg" require="" value="<?php echo $_GET['variety']; ?>">
-                                                            </div>
-                                                        </div>
 
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Class :</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Class :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+
+                                                                    <select id="female_class" class="form-control" name="female_class">
+
+                                                                        <option value="breeder">Breeder</option>
+                                                                    </select>
+
+                                                                    <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
+                                                                    <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_class" class="form-control" name="male_class" placeholder="male_class" require="" value="<?php echo $male_class; ?>">
-                                                                <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
-                                                                <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
-                                                            </div>
-                                                        </div>
 
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Quantity :</label>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="quantity" require="" value="<?php echo $main_quantity_; ?>">
-                                                            </div>
-                                                        </div>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Quantity :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Price per KG :</label>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_price" class="form-control" name="male_price" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
-                                                            </div>
-                                                        </div>
+                                                                    <select id="female_quantity" class="form-control" name="female_quantity">
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Discount Price:</label>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_discount" class="form-control" name="male_discount" placeholder="Discount price" require="" value="<?php echo $male_quantity_; ?>">
-                                                            </div>
-                                                            </br>
-                                                            </br>
-
-                                                            <div class="col-sm-1">
+                                                                        <option value=""></option>
+                                                                    </select>
 
 
-                                                                <button type="submit" name="place_order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat"> <i class="icofont icofont-warning"></i> Request for discount</button>
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label bg-success">Total Price:</label>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Price per KG :</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <select id="female_price" class="form-control" name="female_price">
+
+                                                                    </select>
+
+                                                                </div>
                                                             </div>
-                                                        </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Discount Price:</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" id="female_discount" class="form-control" name="female_discount" placeholder="Discount price" require="">
+                                                                </div>
+                                                                </br>
+                                                                </br>
 
 
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label bg-success">Total Price:</label>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" id="female_total" class="form-control" name="female_total" placeholder="Total Amount" require="">
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                        </form>
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--  project and team member end -->
-
-                                            <div class="col-xl-12 col-md-12">
-                                                <div class="card">
-
-                                                    <div class="card-block">
-                                                        <div class="col-sm-12">
-                                                            <button class="btn btn-success btn-mat" id="place_order"><i class="icofont icofont-cart"></i> Place Order </button>
-
-                                                        </div>
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             </div>
 
                                         </div>
+                                        <!--  project and team member end -->
+
+                                        <div class="col-xl-12 col-md-12">
+
+                                            <div class="card" id="approval_for_discount">
+
+                                                <div class="card-header">
+
+                                                    <h5>Request for approval</h5>
+                                                </div>
+
+                                                <div class="card-block">
+
+
+                                                    <div class="form-group row">
+
+                                                        <div class="col-sm-5 requestDetails">
+                                                            <label for="discount_price" class="label bg-primary">Original price</label>
+                                                            <input type="text" id="original_price" class="form-control" name="original_price" placeholder="-" require="">
+                                                            <input type="hidden" id="user_id" class="form-control" name="original_price" value="<?php echo $_SESSION['user']; ?>">
+                                                            <input type="hidden" id="user_name" class="form-control" name="original_price" value="<?php echo $_SESSION['fullname']; ?>">
+                                                            <input type="hidden" id="approvalId" class="form-control">
+                                                            <input type="hidden" id="discount_type">
+
+                                                        </div>
+                                                        <div class="col-sm-1 requestDetails">
+                                                            </br>
+                                                            <label for="" class="text align-center">TO</label>
+                                                        </div>
+                                                        <div class="col-sm-5 requestDetails">
+                                                            <label for="discount_price" class="label bg-primary">Discount price</label>
+                                                            <input type="text" id="discount" class="form-control" name="discount" placeholder="-" require="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row requestDetails">
+
+                                                        <div class="col-sm-2">
+
+                                                            <a href="#discount" class="btn btn-success  btn-mat" id="discount_request"> <i class="icofont icofont-email"></i>Send request</a>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12 approvedDetails">
+                                                            <label for="discount_price" class="label bg-primary">Enter code</label>
+                                                            <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="-" require="">
+
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    <div class="form-group row approvedDetails">
+
+                                                        <div class="col-sm-2">
+
+                                                            <a href="#original_price" class="btn btn-success  btn-mat" id="checkDiscountCode"> <i class="icofont icofont-unlock"></i>check code</a>
+
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <div class="card">
+
+                                                <div class="card-block">
+                                                    <div class="col-sm-12">
+                                                        <button class="btn btn-success btn-mat" id="place_order"><i class="icofont icofont-cart"></i> Place Order </button>
+                                                        <input type="hidden" id="data_main_certificate" value="<?php echo $main_certificate; ?>">
+                                                        <input type="hidden" id="data_main_quantity" value="<?php echo $main_quantity; ?>">
+                                                        <input type="hidden" id="data_male_certificate" value="<?php echo $male_certificate; ?>">
+                                                        <input type="hidden" id="data_male_quantity" value="<?php echo $male_quantity; ?>">
+                                                        <input type="hidden" id="data_female_certificate" value="<?php echo $female_certificate; ?>">
+                                                        <input type="hidden" id="data_female_quantity" value="<?php echo $female_quantity; ?>">
+                                                        <input type="hidden" id="order_id">
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+
                                     </div>
-
-
                                 </div>
-
 
 
                             </div>
 
 
-                        </div>
-                        <!-- Basic Form Inputs card end -->
-                        <!-- Input Grid card start -->
 
+                        </div>
 
 
                     </div>
+                    <!-- Basic Form Inputs card end -->
+                    <!-- Input Grid card start -->
+
+
 
                 </div>
-                <!-- Page body end -->
-            </div>
-        </div>
-        <!-- Main-body end -->
-        <div>
 
+            </div>
+            <!-- Page body end -->
         </div>
+    </div>
+    <!-- Main-body end -->
+    <div>
+
+    </div>
     </div>
     </div>
     </div>

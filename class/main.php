@@ -256,7 +256,7 @@ class main
 
     return "registered";
   }
-  static function update_user($user_id,$fullname,$phone,$email)
+  static function update_user($user_id, $fullname, $phone, $email)
   {
 
     $sql = "UPDATE `user` SET `fullname`='$fullname',`phone`='$phone',`email`='$email' WHERE `user_ID`='$user_id'";
@@ -301,7 +301,7 @@ class main
 
 
 
-  function set_sell_prices($crop, $variety, $pre_basic, $basic, $certified)
+  static function set_sell_prices($crop, $variety, $breeder, $pre_basic, $basic, $certified)
   {
 
 
@@ -312,15 +312,13 @@ class main
     if ($count === 1) {
       $name = $result->fetch_assoc();
       $price_id = $name['prices_ID'];
-      $sql = "UPDATE `price` SET `sell_basic`='$basic',`sell_pre_basic`='$pre_basic',`sell_certified`='$certified' WHERE prices_ID='$price_id'";
+      $sql = "UPDATE `price` SET `sell_breeder`='$breeder',`sell_basic`='$basic',`sell_pre_basic`='$pre_basic',`sell_certified`='$certified' WHERE prices_ID='$price_id'";
       $statement = $con->prepare($sql);
-      $statement->execute();
-
-      echo ("<script> alert('Prices updated ');
-      </script>");
+      if ($statement->execute()) {
+        return "updated";
+      }
     } else {
-      echo ("<script> alert('Error : no crop and variety was selected');
-        </script>");
+      return "error";
     }
 
 
@@ -2922,5 +2920,57 @@ class main
   FROM transactions
   WHERE YEAR(date) = [year_number]
   GROUP BY MONTH(date), YEAR(date)";
+  }
+}
+
+
+
+
+
+class marketing extends main
+{
+
+
+  static function get_grower_order_details($lot_number)
+  {
+    global $con;
+
+    $sql = "SELECT price.sell_breeder,crop.crop,crop.crop_ID,variety.variety,variety.variety_ID,certificate.class FROM `certificate` 
+    INNER JOIN crop ON crop.crop_ID =certificate.crop_ID INNER JOIN 
+    variety ON variety.variety_ID = certificate.variety_ID LEFT JOIN 
+    price ON variety.variety_ID = price.variety_ID WHERE lot_number  = '$lot_number'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $price = $row['sell_breeder'];
+        $crop_ID = $row['crop_ID'];
+        $crop_name = $row['crop'];
+        $variety_ID = $row['variety_ID'];
+        $variety_name = $row['variety'];
+      }
+
+      return [$price, $crop_ID, $crop_name, $variety_ID, $variety_name];
+    }
+  }
+
+  static function add_hybrid_order($order_id)
+  {
+
+
+    global $con;
+
+    $sql = "SELECT * FROM `order_table` WHERE `order_ID`='order_Id'";
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+
+      return "already_registered";
+    } else {
+      $sql = "INSERT INTO `order_table`(`order_ID`) VALUES ('$order_id')";
+      $statement = $con->prepare($sql);
+      if ($statement->execute()) {
+        return "registered";
+      }
+    }
   }
 }

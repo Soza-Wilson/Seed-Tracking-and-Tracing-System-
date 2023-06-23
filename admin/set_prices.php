@@ -58,85 +58,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-
-
-
-            $("#quantity").on("input", function() {
-                var quantity = $("#quantity").val();
-                var price_per_kg = $("#quantity").val();
-                var total = result * price_per_kg;
-
-
-                alert(total);
-                // Print entered value in a div box
-                //$("#result").text($(this).val());
-            });
-
-            const loaded = "1";
-
-            $.post('../production/get_products.php', {
-                loaded: loaded
-
-            }, data => {
-                $('#select_crop').html(data);
-
-
-
-
-            });
-
-            $('#select_crop').change(() => {
-
-                let data = $('#select_crop').find(':selected');
-
-                if (data.val() == "0") {
-                    alert("please select Crop ");
-                } else {
-
-
-                    let crop_value = $('#select_crop').val();
-
-                    $.post('../production/get_products.php', {
-                        crop_value: crop_value
-
-                    }, data => {
-                        $('#select_variety').html(data);
-
-                    });
-                }
-
-            });
-
-
-            $('#select_variety').change(() => {
-
-
-
-
-                let crop_value = $('#select_crop').val();
-                let variety_value = $('#select_variety').val();
-
-                $.post('get_price.php', {
-                    crop_value: crop_value,
-                    variety_value: variety_value
-
-                }, data => {
-                    $('#pre_basic').html(data);
-
-                });
-
-
-            });
-
-
-
-
-
-        });
-    </script>
+    <script type="text/javascript" src="assets/js/jsHandler/set_sell_price.js"></script>
+   
 
 
 </head>
@@ -517,7 +440,7 @@ if (in_array($position, $restricted)) {
                                         </div>
                                         <div class="card-block">
 
-                                            <form action="set_prices.php" method="POST">
+                                           
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
@@ -549,15 +472,15 @@ if (in_array($position, $restricted)) {
 
                                                 </div>
 
-                                                <div class="form-group row">
+                                                <div class="form-group row" id="breederContainer">
                                                     <div class="col-sm-2">
                                                         <label>Breeder Seed Price </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="number" class="form-control" name="pre_basic" id="pre_basic" placeholder="Price per kg" require="">
+                                                        <input type="number" class="form-control" name="breeder" id="breeder" placeholder="Price per kg" require="">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row" id="preBasicContainer">
                                                     <div class="col-sm-2">
                                                         <label>Pre-Basic Seed Price </label>
                                                     </div>
@@ -566,7 +489,7 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
+                                                <div class="form-group row" id="basicContainer">
                                                     <div class="col-sm-2">
                                                         <label>Basic Seed Price </label>
                                                     </div>
@@ -576,7 +499,7 @@ if (in_array($position, $restricted)) {
 
                                                 </div>
 
-                                                <div class="form-group row">
+                                                <div class="form-group row" id="certifiedContainer">
                                                     <div class="col-sm-2">
                                                         <label>Certified:</label>
                                                     </div>
@@ -597,9 +520,10 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="col-sm-12">
 
-                                                        <Input type="submit" class="btn btn-success" name="set_prices" value="Set new price">
+                                                       
+                                                        <button class="btn btn-success btn-mat" id="set_prices"><i class="icofont icofont-update"></i>Update prices</button>
 
-                                                        <a href='view_all_prices.php' class='btn btn-primary'>View all</a>
+                                                        <a href='view_all_prices.php' class='btn btn-info btn-mat'>View all</a>
 
 
                                                     </div>
@@ -608,7 +532,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                            </form>
+                                        
                                             <div id="test_one">
 
 
@@ -710,13 +634,6 @@ if (in_array($position, $restricted)) {
 <?php
 
 
-if (isset($_POST['set_prices'])) {
-
-
-
-    $object = new main();
-    $object->set_sell_prices($_POST['crop'], $_POST['variety'], $_POST['pre_basic'], $_POST['basic'], $_POST['certified']);
-}
 
 ?>
 
