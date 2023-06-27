@@ -70,7 +70,7 @@ $female_quantity = $_GET["female_quantity"];
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/hybred_order.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/hybred_order_.js"></script>
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">
@@ -432,8 +432,7 @@ $female_quantity = $_GET["female_quantity"];
 
                                                                         <option value="breeder">Breeder</option>
                                                                     </select>
-                                                                    <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
-                                                                    <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+
                                                                 </div>
                                                             </div>
 
@@ -467,12 +466,12 @@ $female_quantity = $_GET["female_quantity"];
                                                                     <label class="label bg-success">Discount Price:</label>
                                                                 </div>
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" id="main_discount" class="form-control" name="main_discount" placeholder="Discount price" require="" >
+                                                                    <input type="text" id="main_discount" class="form-control" name="main_discount" placeholder="Discount price" require="">
                                                                 </div>
                                                                 </br>
                                                                 </br>
 
-                                                               
+
                                                             </div>
 
                                                             <div class="form-group row">
@@ -552,8 +551,7 @@ $female_quantity = $_GET["female_quantity"];
                                                                         <option value="breeder">Breeder</option>
                                                                     </select>
 
-                                                                    <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
-                                                                    <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+
                                                                 </div>
                                                             </div>
 
@@ -676,8 +674,7 @@ $female_quantity = $_GET["female_quantity"];
                                                                         <option value="breeder">Breeder</option>
                                                                     </select>
 
-                                                                    <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
-                                                                    <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+
                                                                 </div>
                                                             </div>
 
@@ -826,6 +823,9 @@ $female_quantity = $_GET["female_quantity"];
                                                 <div class="card-block">
                                                     <div class="col-sm-12">
                                                         <button class="btn btn-success btn-mat" id="place_order"><i class="icofont icofont-cart"></i> Place Order </button>
+
+                                                        <a href="grower_order.php" class="btn btn-danger  btn-mat ">Back</a>
+
                                                         <input type="hidden" id="data_main_certificate" value="<?php echo $main_certificate; ?>">
                                                         <input type="hidden" id="data_main_quantity" value="<?php echo $main_quantity; ?>">
                                                         <input type="hidden" id="data_male_certificate" value="<?php echo $male_certificate; ?>">
@@ -833,6 +833,9 @@ $female_quantity = $_GET["female_quantity"];
                                                         <input type="hidden" id="data_female_certificate" value="<?php echo $female_certificate; ?>">
                                                         <input type="hidden" id="data_female_quantity" value="<?php echo $female_quantity; ?>">
                                                         <input type="hidden" id="order_id">
+                                                        <input type="hidden" name="creditor_id" id="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
+                                                        <input type="hidden" name="creditor_name" id="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+                                                        <input type="hidden" name="farm_id" id="farm_id" value="<?php echo $_GET['farm_id']; ?>">
 
                                                     </div>
                                                 </div>

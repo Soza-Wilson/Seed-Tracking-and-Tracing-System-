@@ -243,7 +243,7 @@ class main
 
     $user_id = $this->generate_user("user");
     global $con;
-    $registered_date =  date("Y-m-d");;
+    $registered_date =  date("Y-m-d");
     $userFullName = strtolower($fullname);
 
     $sql = "INSERT INTO `user`(`user_ID`, `fullname`, `registered_date`,
@@ -370,30 +370,7 @@ class main
   //Marketing sales functions 
 
   // grower order is a little different from the normal order 
-  function grower_order($creditor_id, $creditor_name, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price, $farm_id)
-  {
 
-    global $con;
-    $order_ID = $this->generate_user("order");
-    $user = $_SESSION["user"];
-    $date = date("Y-m-d");
-    $time = date("H:i:s");
-
-    $sql = "INSERT INTO `order_table`(`order_ID`, `order_type`,
-       `customer_id`, `customer_name`, `order_book_number`, 
-       `user_ID`, `status`, `date`, `time`, `count`, `total_amount`) 
-      VALUES ('$order_ID','grower_order','$creditor_id','$creditor_name',
-      '-','$user','pending','$date','$time','1','$total_price')";
-
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    $sql = "UPDATE `farm` SET `order_status`='confirmed' WHERE `farm_ID`='$farm_id'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
-
-    $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
-  }
 
   function temp_data($data_result, $order_note_number, $order_type, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
   {
@@ -540,11 +517,46 @@ class main
 
 
 
+  static function admin_approve_order($order_id, $action)
+  {
+    global $con;
+
+    if ($action == "approve") {
+
+      $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$order_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+      self::check_farm_order($order_id,"order_approved");
+      echo "approved";
+    } else if ("deny") {
+
+      $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$order_id'";
+      $statement = $con->prepare($sql);
+      $statement->execute();
+      self::check_farm_order($order_id,"order_denied");
+      echo"denied";
+    }
+  }
 
 
 
+  static function  check_farm_order($order_id,$status)
+  { 
+    global $con;
+    
+    $sql = "SELECT `farm_id` FROM `order_table` WHERE  `order_ID`='$order_id'";
+    $result = $con->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $farm_id = $row["farm_id"];
+          $sql="UPDATE `farm` SET `order_status`='$status' WHERE farm_ID ='$farm_id'";
+          $statement = $con->prepare($sql);
+          $statement->execute();
+         }
+}
 
 
+  }
 
 
 
@@ -558,7 +570,7 @@ class main
 
       $order_ID = $this->generate_user("order");
 
-      $order_date = date("d-m-Y");
+      $order_date = date("Y-m-d");
       $order_time = date("H:i:s");
       global $con;
 
@@ -1168,13 +1180,13 @@ class main
 
   ///production process order 
 
-  function production_process_order($order_ID, $C_D_ID, $type, $printSave)
+  function production_process_order($order_ID, $C_D_ID, $type, $printSave,$user)
   {
 
 
     global $con;
     $pdfType = "dispatch_note";
-    $user_ID = $_SESSION['user'];
+    $user_ID = $user;
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $transaction_ID = $this->generate_user("transaction");
@@ -1230,7 +1242,9 @@ class main
 
       if ($printSave == "print") {
 
-        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
+        ///header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
+        $url = "../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType";
+        echo '<script>window.open("' . $url . '", "_blank");</script>';
       } else if ($printSave == "save") {
 
         header('location:stock_out.php');
@@ -1246,7 +1260,47 @@ class main
 
       if ($printSave == "print") {
 
-        header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
+        //header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
+        // $url = "../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType";
+          //echo '<script>window.open("https://www.w3schools.com");</script>';
+          
+          $jsonArray = array("order_id"=>"$order_ID", "transaction_id"=>$transaction_ID, "total_quantity"=>"$total_quantity","pdfType"=>"$pdfType");
+          //return [$order_ID,$transaction_ID,$total_quantity,$pdfType];
+
+          $file = "assets/JSON/dispatch_order_details.json";
+
+         // echo $file;
+
+          if (file_exists($file)) {
+
+            $path = file_get_contents($file);
+            $json_data[] = array(json_decode($path));
+        
+        
+            if (!empty($json_data[0])) {
+        
+              unset($json_data[0]);
+        
+              $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+              if (file_put_contents($file, $unsave)) {
+                $final_data = self::add_data($jsonArray);
+                file_put_contents($file, $final_data);
+              }
+            } else {
+        
+              echo "
+               empty1";
+            }
+          }
+
+          else{
+
+            echo "
+               empty2";
+
+
+          }
+
       } else if ($printSave == "save") {
 
         header('location:stock_out.php');
@@ -1255,7 +1309,11 @@ class main
   }
 
 
-
+  static function add_data($data)
+  {
+    $eco_data = json_encode($data);
+    return $eco_data;
+  }
 
   function admin_approval($approvalId, $department, $action_name, $action_id, $description, $requested_ID, $requested_name)
   {
@@ -1418,7 +1476,7 @@ class main
   {
 
     $creditor_ID = $this->generate_user("creditor");
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     global $con;
 
     //  $sql="INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `creditor_status`, `user_ID`, `creditor_files`, `registered_date`, `account_funds`) VALUES
@@ -1646,7 +1704,7 @@ class main
   function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory, $user)
   {
 
-    $added_date = date("d-m-Y");
+    $added_date = date("Y-m-d");
     global $con;
 
 
@@ -1698,7 +1756,7 @@ class main
 
 
     $farm_ID = $this->generate_user("farm");
-    $registered_date = date("d-m-Y");
+    $registered_date = date("Y-m-d");
 
     global $con;
 
@@ -2247,7 +2305,7 @@ class main
   static function change_date_format($date)
   {
     $date = date_create($date);
-    $date = date_format($date, "d-m-Y");
+    $date = date_format($date, "Y-m-d");
     return $date;
   }
 
@@ -2314,7 +2372,7 @@ class main
       }
 
       $test_ID = $this->generate_user("test");
-      $test_date = date("d-m-Y");
+      $test_date = date("Y-m-d");
       $test_time = date("H:m:i");
       $user_ID = $_SESSION['user'];
       global $con;
@@ -2377,7 +2435,7 @@ class main
 
         $agro_dealer_ID = $this->generate_user("debtor");
         $user_ID = $_SESSION['user'];
-        $register_date = date("d-m-Y");
+        $register_date = date("Y-m-d");
 
         global $con;
 
@@ -2432,7 +2490,7 @@ class main
 
         $agro_dealer_ID = $this->generate_user("debtor");
         $user_ID = $_SESSION['user'];
-        $register_date = date("d-m-Y");
+        $register_date = date("Y-m-d");
         global $con;
 
 
@@ -2461,7 +2519,7 @@ class main
 
     $customer_ID = $this->generate_user("debtor");
     $user_ID = $_SESSION['user'];
-    $register_date = date("d-m-Y");
+    $register_date = date("Y-m-d");
     global $con;
 
     $sql = "INSERT INTO `debtor`(`debtor_ID`, `name`, `phone`, `debtor_type`, `user_ID`,`registered_date`,`account_funds`) VALUES 
@@ -2501,7 +2559,7 @@ class main
     $newTransAmount = (int) $trans_amount;
 
     $order_id = "";
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:m:i");
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
@@ -2688,7 +2746,7 @@ class main
       $bank_ID = $this->generate_user("bank");
       $account_funds = 0;
       $user_ID = $_SESSION['user'];
-      $register_date = date("d-m-Y");
+      $register_date = date("Y-m-d");
 
 
 
@@ -2714,7 +2772,7 @@ class main
     global $con;
     $payed_amount = "";
     $transaction_amount = "";
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $time = date("H:m:i");
     $update_status = "";
     $payment_ID = $this->generate_user("payment");
@@ -2931,6 +2989,33 @@ class marketing extends main
 {
 
 
+  function grower_order($creditor_id, $creditor_name, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price, $farm_id)
+  {
+
+    global $con;
+    $order_ID = $this->generate_user("order");
+    $user = $_SESSION["user"];
+    $date = date("Y-m-d");
+    $time = date("H:i:s");
+
+    $sql = "INSERT INTO `order_table`(`order_ID`, `order_type`,
+       `customer_id`, `customer_name`, `order_book_number`, 
+       `user_ID`, `status`, `date`, `time`, `count`, `total_amount`,`farm_id`) 
+      VALUES ('$order_ID','grower_order','$creditor_id','$creditor_name',
+      '-','$user','pending','$date','$time','1','$total_price','$farm_id')";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    $sql = "UPDATE `farm` SET `order_status`='order_pending' WHERE `farm_ID`='$farm_id'";
+    $statement = $con->prepare($sql);
+    $statement->execute();
+
+    $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
+  }
+
+
+
   static function get_grower_order_details($lot_number)
   {
     global $con;
@@ -2957,13 +3042,10 @@ class marketing extends main
   static function add_hybrid_order($order_id)
   {
 
-
     global $con;
-
-    $sql = "SELECT * FROM `order_table` WHERE `order_ID`='order_Id'";
+    $sql = "SELECT * FROM `order_table` WHERE `order_ID`='$order_id'";
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
-
       return "already_registered";
     } else {
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES ('$order_id')";
@@ -2971,6 +3053,70 @@ class marketing extends main
       if ($statement->execute()) {
         return "registered";
       }
+    }
+  }
+
+  static function hybrid_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price)
+  {
+    global $con;
+    $item_ID = self::generate_user("item");
+
+    $sql = "INSERT INTO `item`(`item_ID`, `order_ID`, `crop_ID`,
+     `variety_ID`, `class`, `quantity`, `price_per_kg`, `discount_price`, 
+     `total_price`) VALUES ('$item_ID','$order_ID','$crop','$variety','$class',
+     '$order_quantity','$price_per_kg','$discount_price','$total_price')";
+
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+
+      echo "registered";
+    }
+  }
+
+  static function prepare_hybred_order($order_id, $grower_name, $grower_id, $user_id, $count, $farm_id)
+  {
+
+    global $con;
+    $date = date("Y-m-d");
+    $time = date("H:m:i");
+    $total_amount = self::get_hybrid_total_amount($order_id);
+
+    $sql = "UPDATE `order_table` SET `order_type`='grower_order',`customer_id`='$grower_id',`customer_name`='$grower_name',
+    `order_book_number`='-',`user_ID`='$user_id',`status`='pending',
+    `date`='$date',`time`='$time',`count`='$count',`total_amount`='$total_amount',`farm_id`='$farm_id' WHERE order_ID = '$order_id'";
+
+    $statement = $con->prepare($sql);
+    if ($statement->execute() && self::update_order_status($farm_id, "order_pending")) {
+      echo "registered";
+    }
+  }
+
+
+
+
+  static function get_hybrid_total_amount($order_id)
+  {
+
+    global $con;
+    $sql = "SELECT SUM(`total_price`) AS total FROM item WHERE order_ID ='$order_id'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        return $row['total'];
+      }
+    }
+  }
+
+  static function update_order_status($farm_id, $status)
+  {
+
+    global $con;
+
+    $sql = "UPDATE `farm` SET `order_status`='$status' WHERE farm_ID = '$farm_id'";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+      echo "updated";
     }
   }
 }

@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  hybrid_order();
+  generate_order_id();
 
   $("#approval_for_discount").hide();
   $(".approvedDetails").hide();
@@ -57,10 +57,40 @@ $(document).ready(() => {
 
   $("#place_order").click(() => {
     if ($("#data_main_certificate").val() == "-") {
+      // adding items to order
       add_order_item("male");
       add_order_item("female");
+      //  process order after added items
+      const conformation = confirm("Are you sure ?");
+
+      if (conformation == true) {
+      prepareOrder(
+        $("#order_id").val(),
+        $("#creditor_name").val(),
+        $("#creditor_id").val(),
+        $("#user_id").val(),
+        2,
+        $("#farm_id").val()
+      );
+
+      }
     } else {
       add_order_item("main");
+
+      //  process order after added items
+
+      const conformation = confirm("Are you sure ?");
+
+      if (conformation == true) {
+        prepareOrder(
+          $("#order_id").val(),
+          $("#creditor_name").val(),
+          $("#creditor_id").val(),
+          $("#user_id").val(),
+          1,
+          $("#farm_id").val()
+        );
+      }
     }
   });
 
@@ -106,6 +136,8 @@ $(document).ready(() => {
   };
 });
 
+//  validating if all required details are added before requisting seed discount
+
 const validateDiscountData = (cropType) => {
   $("#approval_for_discount").show();
   $("#original_price").val($("#" + cropType + "_price").val());
@@ -118,6 +150,8 @@ const validateDiscountData = (cropType) => {
     $(".place_order_items").show();
   }
 };
+
+// getting order details for both male and female breeder seed
 
 const createCertificateTable = (certificate, quantity, tableName, cropType) => {
   const tableData = [certificate, quantity, tableName, cropType];
@@ -159,6 +193,11 @@ const createCertificateTable = (certificate, quantity, tableName, cropType) => {
     }
   );
 };
+
+/**
+ *
+ *sending request for discount price to system admin
+ */
 
 const request_approval = (
   actionName,
@@ -204,6 +243,8 @@ const request_approval = (
   }
 };
 
+//  check approval code
+
 const check_if_approved = (accessCode, approvalId, cropType) => {
   if (accessCode == "") {
     alert("Please Enter given approval code before submitting!!");
@@ -236,6 +277,8 @@ const check_if_approved = (accessCode, approvalId, cropType) => {
   }
 };
 
+//  for inbreed seed type reset approval text fields
+
 const reset_approval_request = () => {
   $("#accessCode").val("");
   $("#approval_for_discount").show();
@@ -247,15 +290,24 @@ const hybrid_order = () => {
   $("#order_id").val(generate_order_id());
 };
 
+// generate order id and insertying new order item
 const generate_order_id = () => {
   const characters = "0123456789";
   let code = "ORDER";
   for (let i = 0; i < 8; i++) {
     code += characters.charAt(Math.floor(Math.random() * characters.length));
   }
-  return code;
+  $.post(
+    "get_data.php",
+    {
+      addOrderId: code,
+    },
+    function (data) {
+      $("#order_id").val(code);
+    }
+  );
 };
-
+//  add order to Items
 const add_order_item = (cropType) => {
   const orderData = [
     $("#order_id").val(),
@@ -273,8 +325,34 @@ const add_order_item = (cropType) => {
     {
       addOrderItem: orderData,
     },
+    function (data) {}
+  );
+};
+
+const prepareOrder = (
+  order_id,
+  grower_name,
+  grower_id,
+  user_id,
+  count,
+  farm_id
+) => {
+  const orderData = [order_id, grower_name, grower_id, user_id, count, farm_id];
+
+  $.post(
+    "get_data.php",
+    {
+      prepareHybridOrder: orderData,
+    },
     function (data) {
-      alert(data);
+      
+      if (data == "updated") {
+        alert(" Order placed ");
+        window.location = "grower_order.php";
+      } else {
+        alert(" Error: something went wrong ");
+        window.location.reload();
+      }
     }
   );
 };

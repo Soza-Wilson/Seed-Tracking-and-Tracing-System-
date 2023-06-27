@@ -44,19 +44,21 @@ if (isset($_POST['createCertificateTable'])) {
     <option value =''>error</option>";
   }
 }
-
+if (isset($_POST['addOrderId'])) {
+  $itemData = $_POST['addOrderId'];
+  $orderData = marketing::add_hybrid_order($itemData);
+}
 if (isset($_POST['addOrderItem'])) {
   $itemData = $_POST['addOrderItem'];
-  $orderData = marketing::add_hybrid_order($itemData[0]);
 
-  if ($orderData == "registered" || $orderData == "already_registered") {
-    $object = new main();
-    echo $object->add_order_item($itemData[0], $itemData[1], $itemData[2], $itemData[3], $itemData[4], $itemData[5], $itemData[6], $itemData[7]);
-  }
-  else{
 
-    echo "Error: order can not be registered";
+  if (marketing::hybrid_item($itemData[0], $itemData[1], $itemData[2], $itemData[3], $itemData[4], $itemData[5], $itemData[6], $itemData[7]) == "registered") {
   }
+}
+
+if (isset($_POST['prepareHybridOrder'])) {
+  $prepareData = $_POST['prepareHybridOrder'];
+  marketing::prepare_hybred_order($prepareData[0],$prepareData[1],$prepareData[2],$prepareData[3],$prepareData[4],$prepareData[5]);
 }
 
 //function adding temp data to json file
@@ -79,123 +81,7 @@ function delete_data($file)
   file_put_contents($file, $unsave);
 }
 
-//   echo "<div class='card'>
-//   <div class='card-header'>
-//       <h5>$type seed details</h5>
-//       <div class='card-header-right'>
-//           <ul class='list-unstyled card-option'>
-//               <li><i class='fa fa fa-wrench open-card-option'></i></li>
-//               <li><i class='fa fa-window-maximize full-card'></i></li>
-//               <li><i class='fa fa-minus minimize-card'></i></li>
-//               <li><i class='fa fa-refresh reload-card'></i></li>
-//               <li><i class='fa fa-trash close-card'></i></li>
-//           </ul>
-//       </div>
-//   </div>
-//   <div class='card-block'>
 
-
-//       <form>
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Crop :</label>
-//               </div>
-//               <div class='col-sm-12'>
-
-//                   <select class='form-control' name='$type._crop' id='$type._crop'>
-
-//                       <option value='$order_details[1]'>$order_details[2]</option>
-//                   </select>
-
-
-//               </div>
-//           </div>
-
-
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Variety :</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <select class='form-control' name='$type._crop' id='$type._crop'>
-
-//                       <option value='$order_details[3]'>$order_details[4]</option>
-//                   </select>
-//               </div>
-//           </div>
-
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Class :</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <select id='$type._class' class='form-control' name='$type._class' >
-
-//                   <option value'breeder'>breeder</option>
-
-//                   </select>
-
-//               </div>
-//           </div>
-
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Quantity :</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <select id='$type._quantity' class='form-control'>
-//                   <option value='$data[1]'>$data[1]</option>
-//                   </select>
-//               </div>
-//           </div>
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Price per KG :</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <select type='text' id='$type._price' class='form-control'>
-//                   <option value='$order_details[0]'>$order_details[0]</option>
-//                   </select>
-//               </div>
-//           </div>
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Discount Price:</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <input type='text' id='$type._discount' class='form-control' name='$type._discount' placeholder='Discount price'>
-//               </div>
-//               </br>
-//               </br>
-
-//               <div class='col-sm-1'>
-
-
-//                   <button type='submit' name='place_order' class='btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat'> <i class='icofont icofont-warning'></i> Request for discount</button>
-//               </div>
-//           </div>
-
-//           <div class='form-group row'>
-//               <div class='col-sm-2'>
-//                   <label class='label bg-success'>Total Price:</label>
-//               </div>
-//               <div class='col-sm-12'>
-//                   <input type='number' id='$type._total' class='form-control' name='$type._total' placeholder='Price per kg' value='$total'>
-//               </div>
-//           </div>
-
-
-
-
-//       </form>
-
-//   </div>
-// </div>";
 
 
 

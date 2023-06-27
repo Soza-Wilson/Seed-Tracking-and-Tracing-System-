@@ -77,6 +77,11 @@ if ($result->num_rows > 0) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/process_order.js">
+
+    </script>
 </head>
 
 <body>
@@ -514,7 +519,7 @@ if ($result->num_rows > 0) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="process_order.php" method="POST">
+                                            <!-- <form action="process_order.php" method="POST"> -->
                                                 <div class="card-header">
                                                     <h5>Order details</h5>
 
@@ -631,21 +636,14 @@ if ($result->num_rows > 0) {
                                                             <div class="form-group row">
 
                                                                 <div class="col-sm-3">
-                                                                    <button class="btn btn-success" name="print_process_order_btn"> Save & Print Dispatch note</button>
+                                                                    <button class="btn btn-success btn-mat" id ="print_dispatch" name="print_process_order_btn"><i class="ti ti-printer"></i> Save & Print Dispatch note</button>
                                                                 </div>
 
 
                                                             </div>
 
 
-                                                            <div class="form-group row">
-
-                                                                <div class="col-sm-3">
-                                                                    <button class="btn btn-success" name="process_order_btn"> Save Only</button>
-                                                                </div>
-
-
-                                                            </div>
+                                                            
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -753,12 +751,20 @@ if ($result->num_rows > 0) {
 
                                                     <a href='stock_out.php' class='btn btn-danger btn-mat'>Back </a>
 
+                                                   
+
+                                                    <input type="hidden" id="order_id" value="<?php echo $order_ID?>">
+                                                    <input type="hidden" id="c_d_id" value="<?php echo $customer_ID?>">
+                                                    <input type="hidden" id="type" value="<?php echo $order_type?>">
+                                                    <input type="hidden" id="user_id" value="<?php echo $_SESSION['user']?>">
+                                                    
+
 
 
 
 
                                                 </div>
-                                                </form>
+                                                <!-- </form> -->
                                             </div>
 
                                             <!-- Background Utilities table end -->
@@ -857,7 +863,7 @@ if (isset($_POST['print_process_order_btn'])) {
 
 
     $object = new main();
-    $object->production_process_order($order_ID, $C_D_ID, $type, $printSave);
+    // $object->production_process_order($order_ID, $C_D_ID, $type, $printSave);
 }
 
 if (isset($_POST['process_order_btn'])) {
@@ -872,7 +878,7 @@ if (isset($_POST['process_order_btn'])) {
 
 
     $object = new main();
-    $object->production_process_order($order_ID, $C_D_ID, $type, $printSave);
+    // $object->production_process_order($order_ID, $C_D_ID, $type, $printSave);
 }
 
 

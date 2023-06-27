@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <head>
-    <title>MUSECO</title>
+    <title>STTS</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -88,6 +88,13 @@ if ($result->num_rows > 0) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/admin_order_items_.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
 </head>
 
 <body>
@@ -166,6 +173,10 @@ if ($result->num_rows > 0) {
                                 </div>
                             </div>
                         </div>
+                        <a href="">
+
+<span>admin</span>
+</a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -177,15 +188,7 @@ if ($result->num_rows > 0) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -193,59 +196,15 @@ if ($result->num_rows > 0) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                           
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -276,11 +235,12 @@ if ($result->num_rows > 0) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -325,19 +285,19 @@ if ($result->num_rows > 0) {
                                     </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Setup</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="setup.php" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="setup.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                </ul>
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Roles</div>
-                                    <li class="pcoded-hasmenu">
+
+                                    </ul>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Roles</div>
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">User accounts</span>
@@ -365,40 +325,40 @@ if ($result->num_rows > 0) {
 
                                     </ul>
                                 </li>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="view_all_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="view_all_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Products & Prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                                <li class="">
-                                    <a href="add_product.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a href="add_product.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-plus"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Register product</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set sell prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                                <li class="">
-                                    <a href="set_prices.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a href="set_prices.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-write"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Set buy back prices</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                            </ul>
+                                </ul>
                             </ul>
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
@@ -494,8 +454,7 @@ if ($result->num_rows > 0) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+                                            
                                             <li class="breadcrumb-item"><a href="admin_pending_orders.php">pending orders </a>
                                             </li>
                                             </li>
@@ -530,7 +489,7 @@ if ($result->num_rows > 0) {
 
 
                                         <div class="card">
-                                            <form action="admin_view_order_items.php" method="POST">
+                                            
                                                 <div class="card-header">
                                                     <h5>Order details</h5>
 
@@ -585,7 +544,7 @@ if ($result->num_rows > 0) {
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-primary ">Order date</label>
-                                                            <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo $date; ?>" require="">
+                                                            <input id="search_main_certificate" type="text" class="form-control" name="search_main_certificate" value="<?php echo main::change_date_format($date); ?>" require="">
 
 
 
@@ -603,11 +562,14 @@ if ($result->num_rows > 0) {
                                                         <div class="card-block">
 
 
-                                                            <input type="submit" name="approve_order" value="approve order" class='btn btn-success' />
 
-                                                            <input type="submit" name="deny_order" value="Deny order" class='btn btn-danger' />
+                                                            <button id="approve_order" class="btn btn-success btn-mat"><i class="ti ti-thumb-up"></i>Approve Order</button>
 
-                                            </form>
+                                                            <button id="deny_order" class="btn btn-danger btn-mat"><i class=" ti ti-thumb-down"></i>Deny Order</button>
+
+
+
+                                          
 
 
                                         </div>
@@ -698,7 +660,7 @@ if ($result->num_rows > 0) {
                                     </div>
 
                                     <div class="card-block">
-                                        <a href='admin_pending_orders.php' class='btn btn-primary'>Back </a>
+                                        <a href='admin_pending_orders.php' class='btn btn-success btn-mat'>Back </a>
 
 
                                     </div>
@@ -786,31 +748,31 @@ if ($result->num_rows > 0) {
 </body>
 <?php
 
-if (isset($_POST['approve_order'])) {
+// if (isset($_POST['approve_order'])) {
 
 
-    $ID = $_POST['order_id'];
+//     $ID = $_POST['order_id'];
 
-    $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
+//     $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$ID'";
+//     $statement = $con->prepare($sql);
+//     $statement->execute();
 
-    echo ("<script> alert('Order approved!');
-    </script>");
-}
+//     echo ("<script> alert('Order approved!');
+//     </script>");
+// }
 
-if (isset($_POST['deny_order'])) {
+// if (isset($_POST['deny_order'])) {
 
 
-    $ID = $_POST['order_id'];
+//     $ID = $_POST['order_id'];
 
-    $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$ID'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
+//     $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$ID'";
+//     $statement = $con->prepare($sql);
+//     $statement->execute();
 
-    echo ("<script> alert('Order denied!');
-    </script>");
-}
+//     echo ("<script> alert('Order denied!');
+//     </script>");
+// }
 
 
 

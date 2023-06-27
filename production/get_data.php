@@ -5,6 +5,14 @@ include('../class/main.php');
 
 $object = new main();
 
+if (isset($_POST['processOrder'])) {
+  $orderData = $_POST['processOrder'];
+
+ echo $object->production_process_order($orderData[0], $orderData[1], $orderData[2], $orderData[3],$orderData[4]);
+
+  // echo "saved";
+}
+
 if (isset($_POST['updateStockInRequest'])) {
 
   $object->admin_approval($_POST['approvalId'], $_POST['depertment'], $_POST['updateStockInRequest'], $_POST['action_id'], $_POST['description'], $_POST['request_id'], $_POST['requestedName']);

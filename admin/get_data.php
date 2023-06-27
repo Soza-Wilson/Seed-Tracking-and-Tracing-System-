@@ -21,6 +21,12 @@ if (isset($_POST["updateSeason"])) {
 
    $object->update_season($data[0], $data[1]);
 }
+if(isset($_POST["approveOrder"])){
+   
+   $data = $_POST["approveOrder"];
+   echo main::admin_approve_order($data[0],$data[1]);
+
+}
 
 if (isset($_POST["allocateUser"])) {
 

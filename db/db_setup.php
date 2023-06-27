@@ -416,12 +416,13 @@ FOREIGN KEY(crop_ID) REFERENCES crop(crop_ID))";
                                     customer_name varchar(100),
 	                          order_book_number varchar(100),
 		                             user_ID varchar(100),            
-							                    status varchar(100),
-							                      date date,
-							                      time varchar(100),
+							        status varchar(100),
+							        date date,
+							        time varchar(100),
                                     count varchar(100),
-						                      	total_amount varchar(100),
+						            total_amount varchar(100),
                                     order_files varchar(100),
+                                    farm_id varchar(100),
 								
 							
                  FOREIGN KEY(user_ID) REFERENCES user(user_ID))";

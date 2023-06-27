@@ -669,7 +669,7 @@ if (in_array($position, $notRestricted)) {
                                                             <?php
 
 
-                                                                $sql = "SELECT crop.crop,variety.variety, SUM(stock_in.quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID GROUP BY crop.crop_ID;";
+                                                                $sql = "SELECT crop.crop,variety.variety, SUM(stock_in.available_quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID INNER JOIN variety ON variety.variety_ID =stock_in.variety_ID GROUP BY crop.crop_ID;";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {

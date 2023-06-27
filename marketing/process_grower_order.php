@@ -25,7 +25,7 @@ if (in_array($position, $restricted)) {
 
 $sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID,
  `class`, `region`, `district`, `area_name`, `address`, `physical_address`,
- `EPA`,creditor.name, farm.registered_date, `previous_year_crop`,
+ `EPA`,creditor.name,creditor.creditor_ID, farm.registered_date, `previous_year_crop`,
   `other_year_crop`, `main_lot_number`, `main_quantity`, 
   `male_lot_number`, `male_quantity`, `female_lot_number`, 
   `female_quantity` FROM `farm` INNER JOIN crop
@@ -38,6 +38,8 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $farm_id = $row['farm_ID'];
         $crop_ID = $row['crop_ID'];
+        $creditor_name = $row['name'];
+        $creditor_id = $row['creditor_ID'];
 
         $variety_ID = $row['variety_ID'];
         $main_lot_number = $row['main_lot_number'];
@@ -81,7 +83,7 @@ if ($class == "certified") {
 
 
 if ($crop_ID == "CP001") {
-    header("Location: hybred_order.php? main_certificate=$main_lot_number&main_quantity=$main_quantity&male_certificate=$male_lot_number&male_quantity=$male_quantity&female_certificate=$female_lot_number&female_quantity=$female_quantity");
+    header("Location: hybred_order.php?creditor_name=$creditor_name&creditor_id=$creditor_id&farm_id=$farm_id&main_certificate=$main_lot_number&main_quantity=$main_quantity&male_certificate=$male_lot_number&male_quantity=$male_quantity&female_certificate=$female_lot_number&female_quantity=$female_quantity");
 }
 
 ?>
@@ -127,7 +129,7 @@ if ($crop_ID == "CP001") {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/place_order_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/process_grower_order_.js"></script>
 
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
@@ -229,7 +231,7 @@ if ($crop_ID == "CP001") {
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a href="#">
                             <span>Marketing</span>
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -242,15 +244,7 @@ if ($crop_ID == "CP001") {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -427,7 +421,7 @@ if ($crop_ID == "CP001") {
                                 </div>
                             </div>
                         </div>
-                        <form action="process_grower_order.php" method="POST">
+                        
                             <!-- Page-header end -->
                             <div class="pcoded-inner-content">
                                 <!-- Main-body start -->
@@ -475,8 +469,8 @@ if ($crop_ID == "CP001") {
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="text" id="crop" class="form-control" name="crop" placeholder="Price per kg" require="" value="<?php echo $_GET['crop']; ?>">
-                                                        <input type="hidden" name="crop_id" value="<?php echo $_GET['crop_id']; ?>">
-                                                        <input type="hidden" name="variety_id" value="<?php echo $_GET['variety_id']; ?>">
+                                                        <input type="hidden" name="crop_id" id="crop_id" value="<?php echo $_GET['crop_id']; ?>">
+                                                        <input type="hidden" name="variety_id" id="variety_id" value="<?php echo $_GET['variety_id']; ?>">
                                                     </div>
                                                 </div>
 
@@ -498,38 +492,23 @@ if ($crop_ID == "CP001") {
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="text" id="certificate_class" class="form-control" name="certificate_class" placeholder="certificate_class" require="" value="<?php echo $certificate_class; ?>">
-                                                        <input type="hidden" name="creditor_id" value="<?php echo $_GET['creditor_id']; ?>">
-                                                        <input type="hidden" name="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
+                                                        <input type="hidden" name="creditor_id" id="creditor_id"value="<?php echo $_GET['creditor_id']; ?>">
+                                                        <input type="hidden" name="creditor_name" id="creditor_name" value="<?php echo $_GET['creditor_name']; ?>">
                                                     </div>
                                                 </div>
 
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
-                                                        <label>Certificate Quantity :</label>
+                                                        <label>Quantity :</label>
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="text" id="certificate_quantity" class="form-control" name="certificate_quantity" placeholder="Price per kg" require="" value="<?php echo $main_quantity_; ?>">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Male Certificate Quantity :</label>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <input type="text" id="male_quantity" class="form-control" name="male_quantity" placeholder="Price per kg" require="" value="<?php echo $male_quantity_; ?>">
-                                                    </div>
-                                                </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                        <label>Female Certificate Quantity:</label>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <input type="text" id="female_quantity" class="form-control" name="female_quantity" placeholder="Price per kg" require="" value="<?php echo $female_quantity_; ?>">
-                                                    </div>
-                                                </div>
+
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
                                                         <label>Price Per Kg :</label>
@@ -545,19 +524,12 @@ if ($crop_ID == "CP001") {
                                                         <label>Enter Discount price:</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" id="discount_price" class="form-control" name="discount_price" placeholder="-" require="">
-                                                        </div>
 
-                                                        </br>
-
-                                                        <div class="col-sm-1">
-
-
-                                                            <button type="submit" name="place_order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-mat"> <i class="icofont icofont-warning"></i> Request for discount</button>
-                                                        </div>
-
+                                                        <input type="text" id="crop_discount_price" class="form-control" name="crop_discount_price" placeholder="-" require="">
                                                     </div>
+
+
+
                                                 </div>
 
 
@@ -582,23 +554,108 @@ if ($crop_ID == "CP001") {
                                                     .
                                                     <div class="form-group">
 
+                                                        <div class="col-sm-12">
+
+                                                            <button name="palce_order" id="place_order" class="btn btn-success  btn-mat"> <i class="icofont icofont-cart"></i>place order</button>
 
 
-                                                        <input type="submit" name="place_order" value="place order" class="btn waves-effect waves-light btn-success btn-mat btn-mat  btn-block btn-mat" />
+                                                            <a href="grower_order.php" class="btn btn-danger  btn-mat "><i class="icofont icofont-warning"></i>Back</a>
 
+                                                        </div>
+
+                                                        <input type="hidden" id="order_id">
+                                                        <input type="hidden" id="farm_id" value="<?php echo $farm_id; ?>">
                                                     </div>
 
 
 
 
 
-                        </form>
+                        
 
 
 
                     </div>
 
+
+
                 </div>
+
+
+
+            </div>
+            <div class="card" id="approval_for_discount">
+
+                <div class="card-header">
+
+                    <h5>Request for approval</h5>
+                </div>
+
+                <div class="card-block">
+
+
+                    <div class="form-group row">
+
+                        <div class="col-sm-5 requestDetails">
+                            <label for="discount_price" class="label bg-primary">Original price</label>
+                            <input type="text" id="original_price" class="form-control" name="original_price" placeholder="-" require="">
+                            <input type="hidden" id="user_id" class="form-control" name="original_price" value="<?php echo $_SESSION['user']; ?>">
+                            <input type="hidden" id="user_name" class="form-control" name="original_price" value="<?php echo $_SESSION['fullname']; ?>">
+                            <input type="hidden" id="approvalId" class="form-control">
+                            <input type="hidden" id="discount_type">
+
+                        </div>
+                        <div class="col-sm-1 requestDetails">
+                            </br>
+                            <label for="" class="text align-center">TO</label>
+                        </div>
+                        <div class="col-sm-5 requestDetails">
+                            <label for="discount_price" class="label bg-primary">Discount price</label>
+                            <input type="number" id="discount" class="form-control" name="discount" placeholder="-" require="">
+                        </div>
+                    </div>
+                    <div class="form-group row requestDetails">
+
+                        <div class="col-sm-2">
+
+                            <a href="#discount" class="btn btn-success  btn-mat" id="discount_request"> <i class="icofont icofont-email"></i>Send request</a>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 approvedDetails">
+                            <label for="discount_price" class="label bg-primary">Enter code</label>
+                            <input type="text" id="accessCode" class="form-control" name="accessCode" placeholder="-" require="">
+
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row approvedDetails">
+
+                        <div class="col-sm-2">
+
+                            <a href="#original_price" class="btn btn-success  btn-mat" id="checkCode"> <i class="icofont icofont-unlock"></i>check code</a>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
 
             </div>
 
@@ -610,6 +667,8 @@ if ($crop_ID == "CP001") {
 
             <!-- Input Alignment card end -->
         </div>
+
+
     </div>
     </div>
     <!-- Page body end -->
@@ -694,26 +753,6 @@ if ($crop_ID == "CP001") {
 <?php
 
 
-if (isset($_POST['place_order'])) {
-
-
-
-
-
-    $object = new main();
-    $object->grower_order(
-        $_POST['creditor_id'],
-        $_POST['creditor_name'],
-        $_POST['crop_id'],
-        $_POST['variety_id'],
-        $_POST['certificate_class'],
-        $_POST['certificate_quantity'],
-        $_POST['price_per_kg'],
-        $_POST['discount_price'],
-        $_POST['total_price'],
-        $farm_id
-    );
-}
 
 
 
