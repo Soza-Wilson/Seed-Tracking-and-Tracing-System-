@@ -332,7 +332,7 @@ class main
   }
 
   /// set  buy back price
-  function set_buy_prices($crop, $variety, $pre_basic, $basic, $certified)
+  static function set_buy_prices($crop, $variety,$breeder, $pre_basic, $basic, $certified)
   {
 
 
@@ -346,16 +346,16 @@ class main
 
       $name = $result->fetch_assoc();
       $price_id = $name['prices_ID'];
-      $sql = "UPDATE `price` SET `buy_basic`='$basic',`buy_pre_basic`='$pre_basic',`buy_certified`='$certified' WHERE prices_ID='$price_id'";
+      $sql = "UPDATE `price` SET `buy_breeder`='$breeder',`buy_basic`='$basic',`buy_pre_basic`='$pre_basic',`buy_certified`='$certified' WHERE prices_ID='$price_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
 
-      echo ("<script> alert('Prices updated ');
-        </script>");
+      return "updated";
     } else {
-      echo ("<script> alert('Error : no crop and variety was selected');
-        </script>");
+      return "error";
     }
+
+
 
 
 
@@ -701,6 +701,9 @@ if ($result->num_rows > 0) {
     } else if ($class == "certified") {
       $temp_class = "buy_certified";
     }
+    else if ($class == "breeder") {
+    $temp_class = "buy_breeder";
+  }
 
 
     //calculate amount add stock in transaction 
@@ -1269,43 +1272,55 @@ if ($result->num_rows > 0) {
 
           $file = "assets/JSON/dispatch_order_details.json";
 
-         // echo $file;
+         self::handle_json($file,$jsonArray);
 
-          if (file_exists($file)) {
-
-            $path = file_get_contents($file);
-            $json_data[] = array(json_decode($path));
-        
-        
-            if (!empty($json_data[0])) {
-        
-              unset($json_data[0]);
-        
-              $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-              if (file_put_contents($file, $unsave)) {
-                $final_data = self::add_data($jsonArray);
-                file_put_contents($file, $final_data);
-              }
-            } else {
-        
-              echo "
-               empty1";
-            }
-          }
-
-          else{
-
-            echo "
-               empty2";
-
-
-          }
+         
 
       } else if ($printSave == "save") {
 
         header('location:stock_out.php');
       }
     }
+  }
+
+
+
+
+
+  static function handle_json($file,$jsonArray){
+
+
+    if (file_exists($file)) {
+
+      $path = file_get_contents($file);
+      $json_data[] = array(json_decode($path));
+  
+  
+      if (!empty($json_data[0])) {
+  
+        unset($json_data[0]);
+  
+        $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if (file_put_contents($file, $unsave)) {
+          $final_data = self::add_data($jsonArray);
+          file_put_contents($file, $final_data);
+        }
+      } else {
+  
+        echo "
+         error";
+      }
+    }
+
+    else{
+
+      echo "
+         error";
+
+
+    }
+
+
   }
 
 

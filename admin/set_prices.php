@@ -521,9 +521,9 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
 
                                                        
-                                                        <button class="btn btn-success btn-mat" id="set_prices"><i class="icofont icofont-update"></i>Update prices</button>
+                                                        <button class="btn btn-success btn-mat" id="set_prices"> <i class="ti ti-write"></i> Update prices</button>
 
-                                                        <a href='view_all_prices.php' class='btn btn-info btn-mat'>View all</a>
+                                                        <a href='view_all_prices.php' class='btn btn-info btn-mat'><i class="ti ti-list"></i>View all</a>
 
 
                                                     </div>

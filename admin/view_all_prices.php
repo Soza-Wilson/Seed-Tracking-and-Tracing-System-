@@ -461,6 +461,7 @@ if (in_array($position, $restricted)) {
                                                                 <th style="font-weight: 600;">Sell Pre-Basic</th>
                                                                 <th style="font-weight: 600;">Sell Basic</th>
                                                                 <th style="font-weight: 600;">Sell Certified</th>
+                                                                <th style="font-weight: 600;">Buyback Breeder</th>
                                                                 <th style="font-weight: 600;">Buyback Pre-basic</th>
                                                                 <th style="font-weight: 600;">Buyback Basic</th>
                                                                 <th style="font-weight: 600;">Buyback Certified</th>
@@ -471,7 +472,7 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                             <?php
-                                                            $sql = "SELECT `crop`,`variety`,`sell_breeder`,`sell_pre_basic`,`sell_basic`,`sell_certified`,`buy_pre_basic`,`buy_basic`,`buy_certified` 
+                                                            $sql = "SELECT `crop`,`variety`,`sell_breeder`,`sell_pre_basic`,`sell_basic`,`sell_certified`,`buy_breeder`,`buy_pre_basic`,`buy_basic`,`buy_certified` 
                                 FROM `crop` INNER JOIN variety ON crop.crop_ID = variety.crop_ID 
                                 INNER JOIN price ON variety.variety_ID = price.variety_ID ORDER BY price.prices_ID DESC";
                                                             $result = $con->query($sql);
@@ -483,6 +484,7 @@ if (in_array($position, $restricted)) {
                                                                     $sell_pre_basic     = $row["sell_pre_basic"];
                                                                     $sell_basic  = $row["sell_basic"];
                                                                     $sell_certified = $row['sell_certified'];
+                                                                    $buy_breeder = $row['buy_breeder'];
                                                                     $buy_pre_basic = $row['buy_pre_basic'];
                                                                     $buy_basic = $row['buy_basic'];
                                                                     $buy_certified = $row['buy_certified'];
@@ -503,6 +505,7 @@ if (in_array($position, $restricted)) {
 												<td>$sell_pre_basic</td>
 												<td>$sell_basic</td>
 												<td>$sell_certified</td>
+                                                <td>$buy_breeder</td>
                                                 <td>$buy_pre_basic</td>
 												<td>$buy_basic</td>
 												<td>$buy_certified</td>

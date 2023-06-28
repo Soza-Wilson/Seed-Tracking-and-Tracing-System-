@@ -160,8 +160,8 @@ $(document).ready(function () {
               alert(" Error :Buyback prices are not set !!");
               window.location.reload();
             } else {
-              alert("Data added succefully");
-              window.location.reload();
+              alert(data);
+              // window.location.reload();
             }
           }
         );
@@ -257,6 +257,8 @@ $(document).ready(function () {
         crop_value: crop_value,
       },
       (data) => {
+        changeMaizeClassValues($("#select_crop"));
+       
         $("#select_variety").html(data);
         $("#warning_crop").hide();
       }
@@ -339,11 +341,7 @@ $(document).ready(function () {
             insertExtCreditor: data,
           },
           function (data) {
-
-
-
-            
-            if (data=="added") {
+            if (data == "added") {
               alert("Data added succefully");
               window.location.reload();
             } else {
@@ -455,3 +453,28 @@ $(document).ready(function () {
       });
   }
 });
+
+const changeMaizeClassValues = (selected) => {
+  maizeCLassValues = ["Select class", "breeder", "certified"];
+  otherCLassValues = ["Select class", "pre_basic", "basic","certified"];
+
+  if (selected.val() == "CP001") {
+    $("#select_class").empty();
+    maizeCLassValues.forEach((element) => {
+      if (element == "Select class") {
+        $("#select_class").append(new Option(element, "0"));
+      } else {
+        $("#select_class").append(new Option(element, element));
+      }
+    });
+  } else {
+    $("#select_class").empty();
+    otherCLassValues.forEach((element) => {
+      if (element == "Select class") {
+        $("#select_class").append(new Option(element, "0"));
+      } else {
+        $("#select_class").append(new Option(element, element));
+      }
+    });
+  }
+};
