@@ -562,7 +562,7 @@ if (in_array($position, $restricted)) {
                                                                     $order_book_number     = $row["order_book_number"];
                                                                     $customer_name  = $row["customer_name"];
                                                                     $user = $row["fullname"];
-                                                                    $date    = $row['date'];
+                                                                    $date    = main::change_date_format($row['date']);
                                                                     $time = $row['time'];
                                                                     $order_type = $row['order_type'];
                                                                     $count = $row['count'];

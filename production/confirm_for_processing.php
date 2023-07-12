@@ -60,6 +60,12 @@ if (empty($test)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/confirm_for_processing_.js">
+
+    </script>
+
 </head>
 
 <body>
@@ -138,6 +144,7 @@ if (empty($test)) {
                                 </div>
                             </div>
                         </div>
+                        <a href="">Production</a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -149,15 +156,7 @@ if (empty($test)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -165,59 +164,15 @@ if (empty($test)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -248,11 +203,12 @@ if (empty($test)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -280,7 +236,7 @@ if (empty($test)) {
 
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="">
-                                            <a href="admin_dashboard" class="waves-effect waves-dark">
+                                            <a href="production_dashboard.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -374,142 +330,142 @@ if (empty($test)) {
                                             </a>
                                         </li>
                                     </ul>
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-book"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                                <li>
+                                                    <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
 
-                                       
-                            
+                                                <li class="">
+                                                    <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
 
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
+                                    <ul class="pcoded-item pcoded-left-item">
 
 
-                              
-                            <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        
+
+                                        <li class="pcoded-hasmenu ">
+                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li class="">
+                                                    <a href="active_growers.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="register_farm.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="registered_farms.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
+
+                                    <ul class="pcoded-item pcoded-left-item">
+
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="new_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                       
-                            
+                                        <li>
+                                            <a href="active_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="test_history.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="register_farm.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="registered_farms.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
-
-                            <ul class="pcoded-item pcoded-left-item">
-
-
-                                <li class="">
-                                    <a href="new_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="active_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="test_history.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -526,10 +482,9 @@ if (empty($test)) {
                                     <div class="col-md-4">
                                         <ul class="breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
+                                                <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+
                                             <li class="breadcrumb-item"><a href="admin_pending_orders.php">Grade seed </a>
 
                                             </li>
@@ -562,7 +517,7 @@ if (empty($test)) {
                                         <!-- Background Utilities table start -->
 
                                         <div class="card">
-                                            <form action="confirm_for_processing.php" method="POST" enctype="multipart/form-data">
+                                          
                                                 <!-- // " -->
                                                 <div class="card-header">
                                                     <h5>Seed details </h5>
@@ -716,25 +671,59 @@ if (empty($test)) {
 
 
 
+                                            <form action="file_upload.php" method="POST" enctype="multipart/form-data">
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label> Conformation Document:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="file" class="form-control" name="fileDirectory" accept=".pdf" id="fileDirectory">
+                                                        <input type="hidden" class="form-control" name="tempFile" id="tempFile">
 
 
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-2">
-                                                    <label>Upload Corfimation Document</label>
+
+                                                        <label id="warning_dir" class="warning_text"> <span>Please upload supporting documents <i class="icofont icofont-warning"></i></span></label>
+                                                    </div class="form-group row" require="">
+
+
+
+
+
+
+                                                    </br></br></br>
+
+                                                    <div>
+
+
+                                                    </div>
+
+
+
+
+
+
+
 
 
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input type="file" id="conformation_file" class="form-control" name="conformation_file" placeholder="-" require="">
-                                                    <input type="hidden" name="grade" value="<?php echo $grade_ID; ?>">
-                                                    <input type="hidden" name="receive_id" value="<?php echo $received_ID; ?>">
-                                                    <input type="hidden" name="receive_name" value="<?php echo $received_name; ?>">
-                                                    <input type="hidden" name="passed_quantity" value="<?php echo $quantity; ?>">
-                                                    <input type="hidden" name="stock_in_ID" value="<?php echo $stock_in; ?>">
 
-                                                </div>
-                                            </div>
+                                            </form>
+
+
+
+                                           
+                                                   
+                                                    <input type="hidden" id="grade_id" name="grade" value="<?php echo $grade_ID; ?>">
+                                                    <input type="hidden" id="receive_id" name="receive_id" value="<?php echo $received_ID; ?>">
+                                                    <input type="hidden" id="receive_name" name="receive_name" value="<?php echo $received_name; ?>">
+                                                    <input type="hidden" id="passed_quantity" value="<?php echo $quantity; ?>">
+                                                    <input type="hidden" id="stock_in_id" value="<?php echo $stock_in; ?>">
+
+                                             
+                                        
 
 
 
@@ -762,9 +751,15 @@ if (empty($test)) {
                                                 .
                                                 <div class="form-group">
 
+                                                    <button id="confirm" class="btn btn-success btn-mat"> <i class="ti ti-thumb-up"></i>confirm</button>
+                                                    <button id="deny" class="btn btn-danger btn-mat"> <i class="ti ti-thumb-down"></i>deny</button>
 
-                                                    <input type="submit" name="confirm" value="Confirm" class="btn waves-effect waves-light btn-success btn-block" />
-                                                    <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+                                                </div>
+                                                </br></br></br>
+
+
+                                                <div>
 
                                                 </div>
 
@@ -772,7 +767,9 @@ if (empty($test)) {
 
 
 
-                                                </form>
+
+
+                                              
 
 
 
@@ -788,6 +785,24 @@ if (empty($test)) {
                                         <!-- Input Alignment card end -->
                                     </div>
 
+                                    <div class="card">
+
+                                        <div class="card-block">
+                                            <div class="form-group">
+
+
+
+                                                <button class="btn waves-effect waves-light btn-info btn-mat" id="back"><i class="ti-back-left"></i>Back</button>
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
 
 
 

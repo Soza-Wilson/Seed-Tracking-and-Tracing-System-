@@ -59,9 +59,23 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/grade_seed.js">
+    
 
-    </script>
+    <script type="text/javascript" src="assets/js/jsHandle/seed_grading_.js"> 
+
+    
+       
+
+
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+<script type="text/javascript" src="../assets/pagination/pagination.js"></script>
+
+
+    
+  
 </head>
 
 <body>
@@ -166,11 +180,12 @@ if (empty($test)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -201,11 +216,12 @@ if (empty($test)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -327,143 +343,143 @@ if (empty($test)) {
                                             </a>
                                         </li>
                                     </ul>
-                            </ul>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-book"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                                <li>
+                                                    <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
 
-                                       
-                            
+                                                <li class="">
+                                                    <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+                                        </li>
+
                                     </ul>
-                                </li>
 
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
-                            <ul class="pcoded-item pcoded-left-item">
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Grower </div>
+                                    <ul class="pcoded-item pcoded-left-item">
 
 
-                               
-                            <li class="pcoded-hasmenu ">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        
+
+                                        <li class="pcoded-hasmenu ">
+                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li class="">
+                                                    <a href="active_growers.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="register_farm.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="registered_farms.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
+
+                                    <ul class="pcoded-item pcoded-left-item">
+
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="new_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                       
-                            
+                                        <li>
+                                            <a href="active_test.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="test_history.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="register_farm.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-map-alt"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Farm</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="registered_farms.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-gallery"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered farms</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-car"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Inspection</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-
-                            </ul>
-
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.other">Lab test</div>
-
-                            <ul class="pcoded-item pcoded-left-item">
-
-
-                                <li class="">
-                                    <a href="new_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-paint-bucket"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> New lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="active_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="test_history.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -530,97 +546,98 @@ if (empty($test)) {
                                                         <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
-                                                <form action="grade_seed.php" method="POST">
-                                                    <div class="form-group row">
+
+                                                <div class="form-group row">
 
 
-                                                        <span class="pcoded-mcaret"></span>
+                                                    <span class="pcoded-mcaret"></span>
 
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">stock in ID</label>
-                                                            <select class="form-control" name="stock_in_id">
-                                                                <option value="<?php echo $stock_in_ID; ?>"><?php echo $stock_in_ID; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-
-                                                        <div class="col-sm-2">
-
-                                                            <label class="badge badge-success ">Crop</label>
-                                                            <select class="form-control" name="crop">
-                                                                <option value="<?php echo $crop; ?>"><?php echo $crop; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-
-
-                                                        <div class="col-sm-2">
-
-                                                            <label class="badge badge-success ">Variety</label>
-                                                            <select class="form-control" name="variety">
-                                                                <option value="<?php echo $variety; ?>"><?php echo $variety; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">Class</label>
-                                                            <select class="form-control" name="class">
-                                                                <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">Quantity</label>
-                                                            <select class="form-control" name="quantity">
-                                                                <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-
-
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">Stock In Date</label>
-                                                            <select class="form-control" name="quantity">
-                                                                <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
-                                                            </select>
-
-
-
-                                                        </div>
-
-
-
-
-
-
-
-                                                        <div class="card-block">
-
-
-
-
-
-
-                                                        </div>
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">stock in ID</label>
+                                                        <select class="form-control" name="stock_in_id" id="stock_in_id">
+                                                            <option value="<?php echo $stock_in_ID; ?>"><?php echo $stock_in_ID; ?></option>
+                                                        </select>
+                                                        <input type="hidden" id="user" value="<?php echo $_SESSION["user"]?>">
 
 
 
                                                     </div>
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-success ">Crop</label>
+                                                        <select class="form-control" name="crop">
+                                                            <option value="<?php echo $crop; ?>"><?php echo $crop; ?></option>
+                                                        </select>
+
+
+
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-2">
+
+                                                        <label class="badge badge-success ">Variety</label>
+                                                        <select class="form-control" name="variety">
+                                                            <option value="<?php echo $variety; ?>"><?php echo $variety; ?></option>
+                                                        </select>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">Class</label>
+                                                        <select class="form-control" name="class">
+                                                            <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
+                                                        </select>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">Quantity</label>
+                                                        <select class="form-control" name="quantity">
+                                                            <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
+                                                        </select>
+
+
+
+                                                    </div>
+
+
+
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">Stock In Date</label>
+                                                        <select class="form-control" name="quantity">
+                                                            <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
+                                                        </select>
+
+
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <div class="card-block">
+
+
+
+
+
+
+                                                    </div>
+
+
+
+                                                </div>
 
 
 
@@ -710,10 +727,13 @@ if (empty($test)) {
                                                 .
                                                 <div class="form-group">
 
+                                                    <button name="assign_seed" id="assign_seed" class="btn waves-effect waves-light btn-success btn-mat">Assign Seed <i class="ti ti-plus"></i></button>
+                                                    <button class="btn btn-danger btn-mat">Back </button>
 
-                                                    <input type="submit" name="assign_seed" value="Assign seed" class="btn waves-effect waves-light btn-success btn-block" />
 
-                                                    <input type="submit" name="cancle_stock_in" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+
+
+
 
                                                 </div>
 
@@ -726,9 +746,11 @@ if (empty($test)) {
 
                                             </div>
 
-                                            </form>
+
 
                                         </div>
+
+
                                         <!-- Input Grid card end -->
                                         <!-- Input Validation card start -->
 
@@ -739,7 +761,123 @@ if (empty($test)) {
                                     </div>
 
 
+                                    <div class="card">
+                                        <div class="card-header">
 
+                                            <h5>Previous assigned seed</h5>
+
+                                            <?php 
+
+$sql = "SELECT SUM(assigned_quantity) AS `quantity` FROM `grading` WHERE `stock_in_ID`='$stock_in_ID'";
+$result = $con->query($sql);
+if (!empty($result)) {
+    while ($row = $result->fetch_assoc()) {
+        $total_quantity = $row['quantity'];
+    }
+
+}
+
+                                            
+                                            ?>
+
+                                            <span>Total assigned seed quantity: <?php echo $total_quantity;?> </span>  
+                                            <span>Available seed quantity:  <?php echo (int)(int)$quantity-(int)$total_quantity?> </span>
+
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Grade ID</th>
+                                                            <th>Assigned Quantity</th>
+                                                            <th>Added by</th>
+                                                            <th>Assigned Date</th>
+                                                            <th>Assigned Time</th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php
+
+
+                                                        $sql = "SELECT `grade_ID`, `assigned_date`, `assigned_time`, 
+                                                        `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`, 
+                                                        `fullname`, `received_ID`, `received_name`, `status`, 
+                                                        `file_directory` FROM `grading` INNER JOIN user ON user.user_ID = grading.assigned_by WHERE `stock_in_ID`='$stock_in_ID'";
+                                                        $result = $con->query($sql);
+                                                        if (!empty($result)) {
+                                                            while ($row = $result->fetch_assoc()) {
+
+                                                                
+                                                                $grade_id = $row['grade_ID'];
+                                                                $user = $row['fullname'];
+                                                                $date = main::change_date_format($row['assigned_date']);
+                                                                $time = $row['assigned_time'];
+                                                                $assigned_quantity = $row['assigned_quantity'];
+                                                                $time = $row['assigned_time'];
+
+
+
+
+
+
+
+
+                                                                echo "
+											<tr class='odd gradeX'>
+                                                 <td>$grade_id</td>
+												<td>$assigned_quantity</td>
+												<td>$user</td>
+                                                <td>$date</td>
+                                                <td>$time</td>
+                                       
+                                                
+                                               
+												
+												
+												
+											</tr>	
+										";
+                                                            }
+                                                        } else {
+
+                                                            echo "
+											<tr class='odd gradeX'>
+                                                 <td>-</td>
+											    <td>-</td>
+												<td>-</td>
+												<td>-</td>
+												<td>-</td>
+                                                
+                                                
+                                                
+                                               
+												
+												
+												
+											</tr>	
+										";
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+
+                                                <div id="pagination"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
@@ -825,11 +963,7 @@ if (empty($test)) {
 </body>
 <?php
 
-if (isset($_POST['assign_seed'])) {
 
-    $object = new main();
-    $object->assign_prcessing_quantity($_POST['stock_in_id'], $_POST['assign_quantity']);
-}
 
 
 

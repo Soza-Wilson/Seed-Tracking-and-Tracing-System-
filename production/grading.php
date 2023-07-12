@@ -58,6 +58,13 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+
+<!-- pagenation -->
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+<script type="text/javascript" src="../assets/pagination/pagination.js"></script>
+
 </head>
 
 <body>
@@ -162,11 +169,12 @@ if (in_array($position, $restricted)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -197,18 +205,19 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
                                 </div>
 
                                 <div class="main-menu-content">
-                                    
+
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -319,47 +328,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -369,33 +378,33 @@ if (in_array($position, $restricted)) {
 
 
 
-                              
-                            <li class="pcoded-hasmenu ">
+
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -506,7 +515,7 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Grade</button>
+                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Grade Seed <i class="ti ti-brush-alt"></i></button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -516,12 +525,12 @@ if (in_array($position, $restricted)) {
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Grade</h5>
+                                                                <h5 class="modal-title">Grade seed </h5>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="card-block table-border-style">
                                                                     <div class="table-responsive">
-                                                                        <table class="table table-hover">
+                                                                        <table class="table table-hover" id="dataTable">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Stock in ID</th>
@@ -540,15 +549,11 @@ if (in_array($position, $restricted)) {
                                                                             <tbody>
 
                                                                                 <?php
+                                                                                            // SUM(assigned_quantity) AS total_graded,
 
-
-                                                                                $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
-                              `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                               `quantity`,`used_quantity`,`available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
-                              INNER JOIN user ON stock_in.user_ID = user.user_ID 
-                              INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                              INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' ORDER BY `stock_in_ID` DESC";
+                                                                                $sql = "SELECT stock_in.stock_in_ID, stock_in.stock_in_ID, `fullname`,stock_in.source, `name`, `crop`, `variety`, `class`, `SLN`, `bincard`, `number_of_bags`, `quantity`, `date` ,`supporting_dir`,stock_in.class, stock_in.SLN, stock_in.bincard, stock_in.quantity, stock_in.grade_outs_quantity, stock_in.description, stock_in.supporting_dir, stock_in.date, stock_in.time FROM stock_in 
+                                                                               INNER JOIN user ON stock_in.user_ID = user.user_ID INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
+                                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' OR stock_in.status = 'partly_assigned' GROUP BY stock_in.stock_in_ID";
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
@@ -560,15 +565,14 @@ if (in_array($position, $restricted)) {
                                                                                         $variety     = $row['variety'];
                                                                                         $class     = $row['class'];
                                                                                         $quantity     = $row['quantity'];
-                                                                                        $used_quantity = $row['used_quantity'];
-                                                                                        $available_quantity = $row['available_quantity'];
-                                                                                        $date_added = $row['date'];
+
+                                                                                        $date_added = main::change_date_format($row['date']);
                                                                                         $user = $row['fullname'];
                                                                                         $srn = $row['SLN'];
                                                                                         $dir = $row['supporting_dir'];
 
                                                                                         $object = new main();
-                                                                                        $newDate = $object->change_date_format($date_added);
+
 
 
 
@@ -583,12 +587,12 @@ if (in_array($position, $restricted)) {
 												<td>$quantity</td>
                                                 <td>$srn</td>
                                                 <td>$user</td>
-                                                <td>$newDate</td>
+                                                <td>$date_added</td>
                                                 
                                                
 												
 												
-												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$user' class='btn btn-success'> grade</a>
+												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$user' class='btn btn-success btn-mat'>Grade  </a>
                                                 
                                                 </td>
 											</tr>	
@@ -598,7 +602,10 @@ if (in_array($position, $restricted)) {
                                                                                 ?>
                                                                             </tbody>
                                                                         </table>
+                                                                       
                                                                     </div>
+                                                                    <div id="pagination"></div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

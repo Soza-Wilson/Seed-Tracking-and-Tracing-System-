@@ -72,7 +72,7 @@ if (isset($_POST['farm_value'])) {
 
     $sql = "SELECT `farm_ID`, farm.crop_variety,crop.crop, variety.variety, `class` 
  FROM `farm` INNER JOIN crop ON crop.crop_ID = farm.crop_species
-  INNER JOIN variety ON variety.variety_ID = farm.crop_variety WHERE `farm_ID` LIKE '%$farm_search_value%' AND `creditor_ID` = '$grower_selected_value'";
+  INNER JOIN variety ON variety.variety_ID = farm.crop_variety WHERE `farm_ID` LIKE '%$farm_search_value%' AND `creditor_ID` = '$grower_selected_value' AND `order_status`='order_processed'";
 
     $result =  $con->query($sql);
     if ($result->num_rows > 0) {

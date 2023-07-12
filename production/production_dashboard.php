@@ -22,6 +22,9 @@ if (in_array($position, $restricted)) {
     header('Location:../restricted_access/restricted_access.php');
 }
 
+
+$sql = "";
+
 ?>
 
 
@@ -65,6 +68,7 @@ if (in_array($position, $restricted)) {
 <body>
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/production_dashboard.js"></script>
     <script type="text/javascript">
         $(document).ready(() => {
 
@@ -130,67 +134,51 @@ if (in_array($position, $restricted)) {
         function Stock_bar_chart() {
 
             <?php
-            $sql = "SELECT DATE_FORMAT(stock_in.date, '%M') AS month_name, SUM(stock_in.available_quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY stock_in.month_name";
+            $sql = "SELECT calendar.month_name, COALESCE(SUM(stock_in.quantity), 0) AS quantity
+            FROM (
+                SELECT 1 AS month_num, 'January' AS month_name
+                UNION SELECT 2, 'February'
+                UNION SELECT 3, 'March'
+                UNION SELECT 4, 'April'
+                UNION SELECT 5, 'May'
+                UNION SELECT 6, 'June'
+                UNION SELECT 7, 'July'
+                UNION SELECT 8, 'August'
+                UNION SELECT 9, 'September'
+                UNION SELECT 10, 'October'
+                UNION SELECT 11, 'November'
+                UNION SELECT 12, 'December'
+            ) AS calendar
+            LEFT JOIN stock_in ON DATE_FORMAT(stock_in.date, '%M') = calendar.month_name
+            LEFT JOIN crop ON crop.crop_ID = stock_in.crop_ID
+            GROUP BY calendar.month_name
+            ORDER BY calendar.month_num";
+            $result = $con->query($sql);
+            foreach ($result as $row) {
+                $stock_bar_labels[] = $row['month_name'];
+                $stock_bar_quantity[] = $row['quantity'];
+            }
 
             ?>
 
 
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ];
+            const labels = <?php echo json_encode($stock_bar_labels) ?>;
 
             const data = {
                 labels: labels,
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
                     backgroundColor: [
-                        'rgba(41, 173, 72, 0.2)',
-                        // 'rgba(255, 159, 64, 0.2)',
-                        // 'rgba(255, 205, 86, 0.2)',
-                        // 'rgba(75, 192, 192, 0.2)',
-                        // 'rgba(54, 162, 235, 0.2)',
-                        // 'rgba(153, 102, 255, 0.2)',
-                        // 'rgba(201, 203, 207, 0.2)',
-                        // 'rgba(45, 189, 79, 0.2)',
-                        // 'rgba(255, 159, 64, 0.2)',
-                        // 'rgba(255, 205, 86, 0.2)',
-                        // 'rgba(75, 192, 192, 0.2)',
-                        // 'rgba(54, 162, 235, 0.2)',
-                        // 'rgba(153, 102, 255, 0.2)',
-                        // 'rgba(201, 203, 207, 0.2)',
+                        getRandomRGBColor("background"),
 
                     ],
                     borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
-                        'rgb(45, 189, 79,)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
+                        getRandomRGBColor("border")
 
                     ],
                     borderWidth: 1,
 
-                    data: [70, 10, 5, 2, 20, 30, 30, 5, 10, 5, 2, 20, 3, 45],
+                    data: <?php echo json_encode($stock_bar_quantity) ?>,
                 }]
             };
 
@@ -202,6 +190,26 @@ if (in_array($position, $restricted)) {
                 document.getElementById('stock_out_chart'),
                 config
             );
+
+        }
+
+
+        function getRandomRGBColor(type) {
+
+
+
+            const r = Math.floor(Math.random() * 256); // Random value between 0 and 255 for red
+            const g = Math.floor(Math.random() * 256); // Random value between 0 and 255 for green
+            const b = Math.floor(Math.random() * 256); // Random value between 0 and 255 for blue
+
+            if (type == "background") {
+
+                return `rgb(${r}, ${g}, ${b},0.2)`;
+
+
+            } else {
+                return `rgb(${r}, ${g}, ${b})`;
+            }
 
         }
 
@@ -223,18 +231,20 @@ if (in_array($position, $restricted)) {
 
             ?>
 
+            let chatColors = [];
 
+            for (let index = 0; index < 6; index++) {
+                chatColors.push(getRandomRGBColor("color"));
 
+            }
             const data = {
+
                 labels: <?php echo json_encode($labels) ?>,
                 datasets: [{
                     label: 'My First Dataset',
                     data: <?php echo json_encode($amount) ?>,
-                    backgroundColor: [
-                        'rgb(90,171, 77)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                    ],
+                    backgroundColor: chatColors,
+                  
                     hoverOffset: 4
                 }]
             };
@@ -259,7 +269,8 @@ if (in_array($position, $restricted)) {
 
 
             <?php
-
+             
+            $amount = [];
             $sql = "SELECT crop.crop_ID,crop.crop, SUM(stock_in.quantity) AS quantity FROM stock_in
              INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY crop.crop_ID";
             $result = mysqli_query($con, $sql);
@@ -269,57 +280,44 @@ if (in_array($position, $restricted)) {
                 $day[] = $row['crop'];
                 $amount[] = $row['quantity'];
             }
-
-
+            array_push($day,"");    
+            array_push($amount,0)
+          
             ?>
 
 
 
-            let test = <?php echo json_encode($amount) ?>;
+
+            const getColors = colorType => {
+
+
+                let labels = <?php echo json_encode($day) ?>;
+                let color = [];
+                labels.forEach(element => {
+                    color.push(getRandomRGBColor(colorType));
+                });
+
+                return color;
+
+            }
+
 
 
             const data = {
                 labels: <?php echo json_encode($day) ?>,
+
                 datasets: [{
                     label: 'Stock out Quantity For 2022',
-                    backgroundColor: [
-                        'rgba(41, 173, 72, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-                        'rgba(45, 189, 79, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-
-                    ],
-                    borderColor: [
-                        'rgb(30, 128, 53)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
-                        'rgb(45, 189, 79,)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
-
-                    ],
+                    backgroundColor: getColors("background"),
+                    borderColor: getColors("border"),
                     borderWidth: 1,
 
                     data: <?php echo json_encode($amount) ?>,
+
+
                 }]
+
+
             };
 
             const config = {
@@ -328,7 +326,7 @@ if (in_array($position, $restricted)) {
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: false
                         }
                     }
                 },
@@ -440,11 +438,12 @@ if (in_array($position, $restricted)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -475,11 +474,12 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
@@ -588,47 +588,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -639,33 +639,33 @@ if (in_array($position, $restricted)) {
 
 
 
-                                
-                            <li class="pcoded-hasmenu ">
+
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -771,42 +771,17 @@ if (in_array($position, $restricted)) {
                                     <div class="page-body">
                                         <div class="row">
                                             <!-- task, page, download counter  start -->
-                                            <div class="col-xl-3 col-md-6">
+
+                                            <div class="col-xl-4 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">$0</h4>
-                                                                <h6 class="text-muted m-b-0">All Earnings</h6>
+                                                                <h4 class="text-c-green" id="block_inventory">0 kg</h4>
+                                                                <h6 class="text-muted m-b-0">Inventory</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-bar-chart f-28"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-footer bg-c-purple">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-
-                                                            </div>
-                                                            <div class="col-3 text-right">
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <h4 class="text-c-green">0 kg</h4>
-                                                                <h6 class="text-muted m-b-0">Seed in Stock</h6>
-                                                            </div>
-                                                            <div class="col-4 text-right">
-                                                                <i class="ti-writes"></i>
+                                                                <i class="ti-home"></i>
 
                                                             </div>
                                                         </div>
@@ -823,12 +798,12 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-4 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">0 kg</h4>
+                                                                <h4 class="text-c-blue" id="block_stock_in">0 kg</h4>
                                                                 <h6 class="text-muted m-b-0">Stock In</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -836,7 +811,7 @@ if (in_array($position, $restricted)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-red">
+                                                    <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
 
@@ -848,12 +823,12 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-4 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">0 kg</h4>
+                                                                <h4 class="text-c-red" id="block_stock_out">0 kg</h4>
                                                                 <h6 class="text-muted m-b-0">Stock Out </h6>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -861,7 +836,7 @@ if (in_array($position, $restricted)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer bg-c-blue">
+                                                    <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
                                                             <div class="col-9">
 
@@ -898,7 +873,7 @@ if (in_array($position, $restricted)) {
                                             <!--  sale analytics end -->
 
                                             <!--  project and team member start -->
-                                            <div class="col-xl-8 col-md-12">
+                                            <div class="col-xl-12 col-md-12">
 
                                                 <div class="card">
 
@@ -909,62 +884,7 @@ if (in_array($position, $restricted)) {
                                                 </div>
 
                                             </div>
-                                            <div class="col-xl-4 col-md-12">
-                                                <div class="card ">
-                                                    <div class="card-header">
-                                                        <h5>Bank Accounts </h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-1.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-3.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="align-middle m-b-10">
-                                                            <img src="assets/images/avatar-5.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>David Jones</h6>
-                                                                <p class="text-muted m-b-0">Developer</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <a href="#!" class="b-b-success text-success">View all Projects</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <!--  project and team member end -->
                                         </div>
                                     </div>

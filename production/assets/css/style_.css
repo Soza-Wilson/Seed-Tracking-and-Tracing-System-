@@ -58,6 +58,12 @@ a {
 h4 {
   font-size: 1.375rem; }
 
+th {
+
+  font-weight: 600;
+
+}  
+
 h6 {
   font-size: 14px; }
 

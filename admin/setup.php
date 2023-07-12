@@ -74,10 +74,10 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/setup.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/setup__.js"></script>
 
     <script type="text/javascript">
-  
+
     </script>
 
 
@@ -738,6 +738,48 @@ if (empty($test)) {
                                                     </div>
                                                 </div>
 
+                                            </div>
+
+                                            <div class="col-md-12">
+
+
+                                                <div class="card">
+
+
+
+
+
+                                                    <div class="card-header">
+                                                        <h5>Assigned accounts</h5>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+
+
+
+                                                        <div>
+                                                            <div>
+                                                                <button id="sync_data" class="btn btn-info btn-mat"><i class="ti-cloud-up"></i>Send API data</button>
+
+                                                                </br></br></br>
+
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
                                             </div>
 
                                         </div>

@@ -7,6 +7,20 @@ $(document).ready(() => {
     uploadFile();
   });
 
+  $("#sync_data").click(()=>{
+
+    $.post(
+      "send_api_data.php",
+      {
+        sync_data: "sync",
+      },
+      function (data) {
+  
+        alert(data)
+      }
+    );
+  })
+
   $("#save").click(() => {
     let conf = confirm("Are you sure ?");
 

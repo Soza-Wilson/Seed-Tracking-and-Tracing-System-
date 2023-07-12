@@ -1,4 +1,5 @@
 $(document).ready(() => {
+ 
   let user_value = "";
 
   $("#user_name").html(
@@ -230,15 +231,19 @@ $(document).ready(() => {
     getUserInputData().forEach((element) => {
       userInput.push(element.inputValue);
     });
+
+
     $.post(
       "get_data.php",
       {
         registerUser: userInput,
       },
       (data) => {
+
+  
         if (data == "registered") {
           alert("Your account has been registered");
-          window.location="../index.php";
+          window.location = "../index.php";
         } else {
           alert(data);
           window.location.reload();

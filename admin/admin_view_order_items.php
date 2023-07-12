@@ -90,7 +90,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/admin_order_items_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/admin_order_items.js"></script>
 
     <script type="text/javascript">
 
@@ -566,6 +566,8 @@ if ($result->num_rows > 0) {
                                                             <button id="approve_order" class="btn btn-success btn-mat"><i class="ti ti-thumb-up"></i>Approve Order</button>
 
                                                             <button id="deny_order" class="btn btn-danger btn-mat"><i class=" ti ti-thumb-down"></i>Deny Order</button>
+
+                                                            <button id="fetch_data" class="btn btn-danger btn-mat"><i class=" ti ti-thumb-down"></i>fetch data</button>
 
 
 

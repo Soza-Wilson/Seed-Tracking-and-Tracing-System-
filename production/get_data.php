@@ -5,10 +5,118 @@ include('../class/main.php');
 
 $object = new main();
 
+//  getting graded quantity for selected stock in 
+
+if (isset($_POST["assignForProcessing"])) {
+  $data = $_POST["assignForProcessing"];
+  echo main::assign_processing_quantity($data[0], $data[1], $data[2]);
+}
+
+
+if (isset($_POST["filterHandoOverData"])) {
+
+  echo "working";
+}
+
+if (isset($_POST["getStockInId"])) {
+  $data = $_POST["getStockInId"];
+  $sql = "SELECT stock_in.stock_in_ID FROM `grading` RIGHT JOIN stock_in ON stock_in.stock_in_ID = grading.grade_ID LEFT JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID WHERE creditor.name LIKE '%$data%' ORDER BY stock_in.stock_in_ID DESC ";
+
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $stock_in_ID = $row['stock_in_ID'];
+      echo "<option>$stock_in_ID</option>";
+    }
+  }
+
+  else {
+    echo "<option>Not available !!</option>";
+  }
+}
+
+
+// seedHAndOver for pprocessing , passinfg data to function in the main class
+
+
+if (isset($_POST["seedHandOver"])) {
+  $data = $_POST["seedHandOver"];
+  echo main::handover_conformation($data[0], $data[1], $data[2], $data[3], $data[4], $data[5]);
+}
+
+
+//   dashboard 
+
+// block data
+if (isset($_POST["get_inventory"])) {
+
+  $sql = "SELECT stock_in.status, SUM(stock_in.available_quantity) AS quantity FROM stock_in";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $data = $row['quantity'];;
+      echo "   <h4 class='text-c-green' id='block_inventory' >$data KG</h4>";
+    }
+  }
+}
+
+if (isset($_POST["get_stock_in"])) {
+
+  $sql = "SELECT stock_in.status, SUM(stock_in.quantity) AS quantity FROM stock_in";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $data = $row['quantity'];;
+      echo "   <h4 class='text-c-green' id='block_stock_in' >$data KG</h4>";
+    }
+  }
+}
+
+
+if (isset($_POST["get_stock_out"])) {
+
+  $sql = "SELECT SUM(stock_out.amount) AS quantity FROM stock_out";
+
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $data = $row['quantity'];;
+      echo "   <h4 class='text-c-green' id='block_stock_out' >$data KG</h4>";
+    }
+  }
+}
+
+
+// Donart stock in 
+
+
+if (isset($_POST["dashboardInventoryChart"])) {
+
+  $data = array();
+
+  $sql = "SELECT stock_in.status, SUM(stock_in.available_quantity) AS quantity FROM stock_in INNER JOIN crop ON crop.crop_ID = stock_in.crop_ID GROUP BY stock_in.status;";
+  $result = mysqli_query($con, $sql);
+
+  $result = $con->query($sql);
+  foreach ($result as $row) {
+    $label[] = $row['status'];
+    $amount[] = $row['quantity'];
+    $data = array("label" => $label, "quantity" => $amount);
+    $eco_data = json_encode($data);
+    echo $eco_data;
+  }
+}
+
+
+
+
 if (isset($_POST['processOrder'])) {
   $orderData = $_POST['processOrder'];
 
- echo $object->production_process_order($orderData[0], $orderData[1], $orderData[2], $orderData[3],$orderData[4]);
+  echo $object->production_process_order($orderData[0], $orderData[1], $orderData[2], $orderData[3], $orderData[4]);
 
   // echo "saved";
 }

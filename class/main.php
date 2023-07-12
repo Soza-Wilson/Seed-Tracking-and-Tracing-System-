@@ -9,7 +9,7 @@
 
 
 //$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
-$con = mysqli_connect('localhost', 'root', '', 'seed_tracking_DB');
+$con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
 
 
 
@@ -237,7 +237,7 @@ class main
 
 
 
-  function register_user($fullname, $phone, $email, $password)
+  function register_user($fullname, $dob, $sex, $phone, $email, $password)
   {
 
 
@@ -246,15 +246,14 @@ class main
     $registered_date =  date("Y-m-d");
     $userFullName = strtolower($fullname);
 
-    $sql = "INSERT INTO `user`(`user_ID`, `fullname`, `registered_date`,
-                `phone`, `email`, `password`,`account_status`) 
-                       VALUES ('$user_id','$userFullName','$registered_date',
+    $sql = "INSERT INTO `user`(`user_ID`, `fullname`,`DOB`,`sex`,`registered_date`,`phone`, `email`, `password`,`account_status`) 
+                       VALUES ('$user_id','$userFullName','$dob','$sex','$registered_date',
                             '$phone','$email','$password','unsigned')";
 
     $statement = $con->prepare($sql);
-    $statement->execute();
-
-    return "registered";
+    if ($statement->execute()) {
+      return "registered";
+    }
   }
   static function update_user($user_id, $fullname, $phone, $email)
   {
@@ -286,9 +285,10 @@ class main
     $sql = "UPDATE `user` SET `user_type_ID`='$department',`postion`='$role',`account_status`='active' WHERE `user_ID`='$userId'";
 
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if ($statement->execute()) {
 
-    return "registered";
+      return "registered";
+    };
   }
 
 
@@ -332,7 +332,7 @@ class main
   }
 
   /// set  buy back price
-  static function set_buy_prices($crop, $variety,$breeder, $pre_basic, $basic, $certified)
+  static function set_buy_prices($crop, $variety, $breeder, $pre_basic, $basic, $certified)
   {
 
 
@@ -526,36 +526,34 @@ class main
       $sql = "UPDATE `order_table` SET `status`='approved' WHERE `order_ID`='$order_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-      self::check_farm_order($order_id,"order_approved");
+      self::check_farm_order($order_id, "order_approved");
       echo "approved";
     } else if ("deny") {
 
       $sql = "UPDATE `order_table` SET `status`='denied' WHERE `order_ID`='$order_id'";
       $statement = $con->prepare($sql);
       $statement->execute();
-      self::check_farm_order($order_id,"order_denied");
-      echo"denied";
+      self::check_farm_order($order_id, "order_denied");
+      echo "denied";
     }
   }
 
 
 
-  static function  check_farm_order($order_id,$status)
-  { 
+  static function  check_farm_order($order_id, $status)
+  {
     global $con;
-    
+
     $sql = "SELECT `farm_id` FROM `order_table` WHERE  `order_ID`='$order_id'";
     $result = $con->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
         $farm_id = $row["farm_id"];
-          $sql="UPDATE `farm` SET `order_status`='$status' WHERE farm_ID ='$farm_id'";
-          $statement = $con->prepare($sql);
-          $statement->execute();
-         }
-}
-
-
+        $sql = "UPDATE `farm` SET `order_status`='$status' WHERE farm_ID ='$farm_id'";
+        $statement = $con->prepare($sql);
+        $statement->execute();
+      }
+    }
   }
 
 
@@ -700,10 +698,9 @@ if ($result->num_rows > 0) {
       $temp_class = "buy_basic";
     } else if ($class == "certified") {
       $temp_class = "buy_certified";
+    } else if ($class == "breeder") {
+      $temp_class = "buy_breeder";
     }
-    else if ($class == "breeder") {
-    $temp_class = "buy_breeder";
-  }
 
 
     //calculate amount add stock in transaction 
@@ -738,6 +735,7 @@ if ($result->num_rows > 0) {
         } else if ($source == "internal") {
 
           $available_quantity =  $quantity;
+          self::farm_update_order_status($farm, "stock_in");
         }
 
 
@@ -1183,7 +1181,7 @@ if ($result->num_rows > 0) {
 
   ///production process order 
 
-  function production_process_order($order_ID, $C_D_ID, $type, $printSave,$user)
+  function production_process_order($order_ID, $C_D_ID, $type, $printSave, $user)
   {
 
 
@@ -1261,21 +1259,12 @@ if ($result->num_rows > 0) {
       $statement = $con->prepare($sql);
       $statement->execute();
 
+      self::farm_update_order_status(self::order_get_farm_id($order_ID), "order_processed");
+
       if ($printSave == "print") {
-
-        //header("Location:../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType");
-        // $url = "../class/pdf_handler.php? order_ID=$order_ID & transaction_ID=$transaction_ID & total_quantity=$total_quantity & type=$pdfType";
-          //echo '<script>window.open("https://www.w3schools.com");</script>';
-          
-          $jsonArray = array("order_id"=>"$order_ID", "transaction_id"=>$transaction_ID, "total_quantity"=>"$total_quantity","pdfType"=>"$pdfType");
-          //return [$order_ID,$transaction_ID,$total_quantity,$pdfType];
-
-          $file = "assets/JSON/dispatch_order_details.json";
-
-         self::handle_json($file,$jsonArray);
-
-         
-
+        $jsonArray = array("order_id" => "$order_ID", "transaction_id" => $transaction_ID, "total_quantity" => "$total_quantity", "pdfType" => "$pdfType");
+        $file = "assets/JSON/dispatch_order_details.json";
+        self::handle_json($file, $jsonArray);
       } else if ($printSave == "save") {
 
         header('location:stock_out.php');
@@ -1285,42 +1274,63 @@ if ($result->num_rows > 0) {
 
 
 
+  static function farm_update_order_status($farm_id, $status)
+  {
+    global $con;
 
 
-  static function handle_json($file,$jsonArray){
+    $sql = "UPDATE `farm` SET `order_status`='$status' WHERE `farm_ID`='$farm_id'";
+
+    $statement = $con->prepare($sql);
+    $statement->execute();
+  }
+
+  static function order_get_farm_id($order_id)
+  {
+    global $con;
+
+    $sql = "SELECT `order_ID`, `order_type`, `customer_id`, `customer_name`, `order_book_number`, `user_ID`, `status`, `date`, `time`, `count`, `total_amount`, `order_files`, `farm_id` FROM `order_table` WHERE `order_ID`='$order_id'";
+    $result = $con->query($sql);
+
+    while ($row = $result->fetch_assoc()) {
+      $farm_id = $row["farm_id"];
+    }
+    return $farm_id;
+  }
+
+
+
+
+
+  static function handle_json($file, $jsonArray)
+  {
 
 
     if (file_exists($file)) {
 
       $path = file_get_contents($file);
       $json_data[] = array(json_decode($path));
-  
-  
+
+
       if (!empty($json_data[0])) {
-  
+
         unset($json_data[0]);
-  
+
         $unsave = json_encode($json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         if (file_put_contents($file, $unsave)) {
           $final_data = self::add_data($jsonArray);
           file_put_contents($file, $final_data);
         }
       } else {
-  
+
         echo "
          error";
       }
-    }
-
-    else{
+    } else {
 
       echo "
          error";
-
-
     }
-
-
   }
 
 
@@ -2076,13 +2086,14 @@ if ($result->num_rows > 0) {
 
   // assign ungraded seed for processing
 
-  function assign_prcessing_quantity($stock_in_id, $assigned_quantity)
+  static function assign_processing_quantity($stock_in_id, $assigned_quantity, $user)
   {
 
 
+
     global $con;
-    $grade_ID = $this->generate_user("grade_seed");
-    $user_ID = $_SESSION['user'];
+    $grade_ID = self::generate_user("grade_seed");
+    $user_ID = $user;
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $pdfType = "handover";
@@ -2108,16 +2119,11 @@ if ($result->num_rows > 0) {
       $stock = (int)$stock_in_quantity;
       $total = (int)$total_quantity + (int)$assigned_quantity;
 
-
-
-
       if ($total > $stock) {
 
         //echo ("<scriTY\t> alert('$stock.$total'); </script>");
 
-        echo ("<script> alert('Seed can not be assigned for processing, quantity exceeding available stock');
-          window.location='grading.php';
-           </script>");
+        return "quantity_exceeded";
       } else {
         $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
           `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
@@ -2128,53 +2134,38 @@ if ($result->num_rows > 0) {
 
         // update stock in available quantity by subtracting assigned quantity with available 
 
+        if ($total == $stock) {
+
+          main::update_stockIn_grading_status($stock_in_id, "handover_pending");
+        }
+
+        if ($total < $stock) {
+
+          main::update_stockIn_grading_status($stock_in_id, "partly_assigned");
+        }
 
 
         // create PDF file for assigned seed
 
-        header("Location:../class/pdf_handler.php? grade_id=$grade_ID & type=$pdfType");
-
-
-
-        // $sql = "INSERT INTO `grading`(`grade_ID`, `date`, `time`, `grade_out_quantity`, `trash_quantity`, `stock_in_ID`, `user_ID`) VALUES 
-        // ('$grade_ID','$date','$time','$grade_out_quantity','$trash_quantity','$stock_in_id','$user_ID')";
-
-
-
-        // update stock in status and available quantity  
-
-        // $t_g_quantity = $grade_out_quantity + $trash_quantity;
-
-
-
+        echo $grade_ID;
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $sql = "UPDATE `stock_in` SET `status`='uncertified',`available_quantity`= available_quantity-$t_g_quantity WHERE `stock_in_ID`='$stock_in_id'";
-
-    // $statement = $con->prepare($sql);
-    // $statement->execute();
-
-    // echo ("<script> alert('saved!');
-    // </script>");
   }
 
-  function handover_conformation($receive_id, $received_name, $file_directory, $grade_id, $passed_quantity, $stock_in_ID)
+  static function update_stockIn_grading_status($stock_in_id, $status)
+  {
+
+    global $con;
+
+    $sql = "UPDATE `stock_in` SET `status`='$status' WHERE `stock_in_ID`='$stock_in_id'";
+    $statement = $con->prepare($sql);
+    if ($statement->execute()) {
+
+      echo "updated" . $stock_in_id;
+    }
+  }
+
+  static function handover_conformation($receive_id, $received_name, $file_directory, $grade_id, $passed_quantity, $stock_in_ID)
   {
     global $con;
 
@@ -2182,17 +2173,40 @@ if ($result->num_rows > 0) {
     `received_name`='$received_name',`status`='unprocessed',
     `file_directory`='$file_directory' WHERE `grade_ID`='$grade_id'";
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if ($statement->execute()) {
+
+      echo "successful";
+    };
 
 
 
 
-    // updating stock in proceessed quantity field when hand over is complete 
+    // Check if all stock_in quantity has been assigned for processing, if so update the status to unprocesssed 
+    $checkStatus = self::checkProcessStatus($stock_in_ID, "unprocessed");
+    if ((int)$checkStatus[0] + (int)$passed_quantity == (int)$checkStatus[1]) {
+      self::update_stockIn_grading_status($stock_in_ID, "uprocessed");
+    }
+    // $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
+    // $statement = $con->prepare($sql);
+    // $statement->execute();
+  }
 
 
-    $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
-    $statement = $con->prepare($sql);
-    $statement->execute();
+  static function checkProcessStatus($stock_in_id, $stage)
+  {
+    global $con;
+    $sql = "SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
+    INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$stock_in_id' AND grading.status='$stage'";
+
+    $result = $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        $total_quantity = $row['total_graded'];
+        $stock_in_quantity = $row['quantity'];
+      }
+
+      return [$total_quantity, $stock_in_quantity];
+    }
   }
 
 
@@ -2257,6 +2271,8 @@ if ($result->num_rows > 0) {
 
       // update cleaning status (i was lazy at the end)
 
+      // FIY this was not even close to the end 
+
 
       $sql = "UPDATE `process_type` SET
         `process_type`='Cleaning_' WHERE `process_type_ID`='$passed_process_type_id'";
@@ -2320,7 +2336,7 @@ if ($result->num_rows > 0) {
   static function change_date_format($date)
   {
     $date = date_create($date);
-    $date = date_format($date, "Y-m-d");
+    $date = date_format($date, "d-m-Y");
     return $date;
   }
 
@@ -3003,6 +3019,8 @@ if ($result->num_rows > 0) {
 class marketing extends main
 {
 
+  //  Inserting grower order, grower order is different from the normal order as the order ITEMS are added based on the registered farm details 
+
 
   function grower_order($creditor_id, $creditor_name, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price, $farm_id)
   {
@@ -3029,7 +3047,7 @@ class marketing extends main
     $this->add_order_item($order_ID, $crop, $variety, $class, $order_quantity, $price_per_kg, $discount_price, $total_price);
   }
 
-
+  //GEtting order details based on the added farm details and registed certificate details 
 
   static function get_grower_order_details($lot_number)
   {
@@ -3053,7 +3071,15 @@ class marketing extends main
       return [$price, $crop_ID, $crop_name, $variety_ID, $variety_name];
     }
   }
+  /*
 
+Here we sprit the order one more time into three sections, the normal grower order , hybrid inbred order 
+(uses two certificates male and female ) and hybred single closs order 
+(uses one certificate, I call it main certificate but its just a normal certificate )
+
+
+
+*/
   static function add_hybrid_order($order_id)
   {
 

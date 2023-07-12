@@ -31,13 +31,14 @@ $result = $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
 
-
+         
         $order_type = $row["order_type"];
         $customer = $row["customer_name"];
         $customer_ID = $row["customer_id"];
         $user_requested = $row["fullname"];
         $date = $row['date'];
         $time = $row['time'];
+       
     }
 }
 

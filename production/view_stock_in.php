@@ -698,12 +698,12 @@ if (in_array($position, $notRestricted)) {
                                                                     $quantity     = $row['quantity'];
                                                                     $used_quantity = $row['used_quantity'];
                                                                     $available_quantity = $row['available_quantity'];
-                                                                    $date_added = $row['date'];
+                                                                    $date_added = main::change_date_format($row['date']);
                                                                     $user = $row['fullname'];
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];
                                                                    
-                                                                    $newDate = main::change_date_format($date_added);
+                                                                   
 
 
 
@@ -722,7 +722,7 @@ if (in_array($position, $notRestricted)) {
                                                 <td>$source_name</td>
                                                 <td>$srn</td>
                                                 <td>$user</td>
-                                                <td>$newDate</td>
+                                                <td>$date_added</td>
                                                 
                                                
 												

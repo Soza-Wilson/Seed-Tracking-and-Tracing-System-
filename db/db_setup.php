@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost", "root", "", "");
+$con = mysqli_connect("localhost", "root", "soza123@Sa.", "");
 
 $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB");
 
@@ -11,7 +11,7 @@ $database = mysqli_query($con, "CREATE DATABASE IF NOT EXISTS seed_tracking_DB")
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "soza123@Sa.";
 
 //Create connection
 $con = mysqli_connect($servername, $username, $password);
@@ -289,7 +289,7 @@ FOREIGN KEY(bank_ID) REFERENCES bank_account(bank_ID))";
                                      trash_quantity INT,
                                      description varchar(100),
                                      supporting_dir varchar(100),
-                                     date varchar(100),
+                                     date date,
                                      time varchar(100),
                                      FOREIGN KEY(creditor_ID) REFERENCES creditor(creditor_ID),
                                      FOREIGN KEY(user_ID) REFERENCES user(user_ID),
@@ -518,7 +518,7 @@ FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) R
     $date = date("Y");
     $int_value = (int)$date + 1;
     $season = $date . "-" . $int_value;
-    $sql = "insert into growing_season values ('$season',00-00-0000,00-00-0000)";
+    $sql = "insert into growing_season values ('$season','2222-02-22','2222-02-02')";
 
     mysqli_query($con, $sql);
 
@@ -549,7 +549,7 @@ values ('001','ADMIN'),
     mysqli_query($con, $sql);
 
     $sql = "INSERT INTO `user`(`user_ID`, `user_type_ID`, `fullname`, `DOB`, `sex`, `registered_date`, `postion`, `phone`, `email`, `password`) VALUES 
-     ('001','01','ADMIN','0000-00-00','-','0000-00-00','system_administrator','0000','example@admin.com','0000')";
+     ('001','01','ADMIN','2222-11-11','-','2222-11-11','system_administrator','0000','example@admin.com','0000')";
 
     mysqli_query($con, $sql);
 

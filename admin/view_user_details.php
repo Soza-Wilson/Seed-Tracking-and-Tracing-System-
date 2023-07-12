@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/users.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/users_.js"></script>
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     <script type="text/javascript">

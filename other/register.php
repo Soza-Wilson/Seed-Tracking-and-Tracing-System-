@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/style_.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="../assets/js/jsHandle/register__.js">
+    <script type="text/javascript" src="../assets/js/jsHandle/register.js">
 
     </script>
 

@@ -65,7 +65,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_.js">
 
     </script>
 
@@ -173,7 +173,7 @@ if (in_array($position, $restricted)) {
                                                                                 $profile = "user.jpg";
                                                                             } else {
                                                                                 $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image" >
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -208,7 +208,7 @@ if (in_array($position, $restricted)) {
                                                                                 $profile = "user.jpg";
                                                                             } else {
                                                                                 $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                                                            }echo $profile;?>" alt="User-Profile-Image" >
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
@@ -485,7 +485,8 @@ if (in_array($position, $restricted)) {
                                         <div class="card">
                                             <div class="card-header">
 
-                                                <button type="button" class="btn btn-success btn-mat" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-user"></i>new creditor </button>
+                                                <button type="button" class="btn btn-success btn-mat" data-toggle="modal" data-target="#myModal"><i class="ti ti-user
+                                                "></i>new creditor </button>
 
                                                 <!-- Modal -->
                                                 <div id="myModal" class="modal fade" role="dialog">
@@ -1030,7 +1031,7 @@ if (in_array($position, $restricted)) {
                                                 <div class="col-sm-1">
 
 
-                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-mat"><i class="icofont icofont-save"></i>save</button>
+                                                    <button type="submit" name="add_to_stock" id="save_test" class="btn waves-effect waves-light btn-success btn-mat"><i class="ti ti-save"></i>save</button>
 
 
 

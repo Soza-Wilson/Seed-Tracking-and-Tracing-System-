@@ -241,7 +241,7 @@ if ($result->num_rows > 0) {
                                                                 echo "user.jpg";
                                                             } else {
                                                                 echo $profile;
-                                                            } ?>" alt="user image" class="img-radius img-100 align-middle m-r-15">
+                                                            } ?>" alt="user image" class="img-radius img-100 align-middle m-r-15" >
 
 
                             <div class="d-inline-block">
