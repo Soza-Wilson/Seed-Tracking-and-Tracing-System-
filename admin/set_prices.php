@@ -208,15 +208,7 @@ if (in_array($position, $restricted)) {
                                     </div>
                                 </div>
 
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                             <div class="p-15 p-b-0">
                                 <form class="form-material">
@@ -440,9 +432,8 @@ if (in_array($position, $restricted)) {
                                         </div>
                                         <div class="card-block">
 
-                                           
-
-                                                <div class="form-group row">
+                                        <form action="get_data.php" method="POST">
+                                        <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <select id="select_crop" name="crop" class="form-control" required="">
 
@@ -464,6 +455,11 @@ if (in_array($position, $restricted)) {
                                                     </div>
 
                                                 </div>
+
+
+                                        </form>
+
+                                                
 
                                                 <div class="form-group row">
 

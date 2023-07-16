@@ -83,8 +83,10 @@ $(document).ready(function () {
             insertCertificate: data,
           },
           function (data) {
-            alert("Data added succefully");
-            window.location.reload();
+
+            alert(data);
+            // alert("Data added succefully");
+            // window.location.reload();
           }
         );
       } else {

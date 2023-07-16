@@ -10,6 +10,7 @@ session_start();
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 $farm_id = $_GET['farm_id'];
+$certificate_class = "";
 
 if (empty($test)) {
 
@@ -40,7 +41,6 @@ if ($result->num_rows > 0) {
         $crop_ID = $row['crop_ID'];
         $creditor_name = $row['name'];
         $creditor_id = $row['creditor_ID'];
-
         $variety_ID = $row['variety_ID'];
         $main_lot_number = $row['main_lot_number'];
         $main_quantity = $row['main_quantity'];
@@ -50,41 +50,44 @@ if ($result->num_rows > 0) {
         $female_quantity = $row['female_quantity'];
         $class = $row['class'];
     }
+
 }
+    if ($variety_ID == "VT003" || $variety_ID == "VT004" || $variety_ID == "VT004") {
 
-if ($variety_ID == "VT003" || $variety_ID == "VT004" || $variety_ID == "VT004") {
+        $main_quantity_ = "-";
+        $male_quantity_ = $male_quantity;
+        $female_quantity_ = $female_quantity;
+    } else {
+        $main_quantity_ = $main_quantity;
+        $male_quantity_ = "-";
+        $female_quantity_ = "-";
+    }
+    
+    
+    ///Getting price
+    
+    $certificate_class = $class;
+    
+    if ($class == "certified") {
+    
+        $object = new main();
+        $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
+        $certificate_class = "basic";
+    } else if ($class == "basic") {
+    
+        $object = new main();
+        $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
+        $certificate_class = "prebasic";
+    } else if ($class == "pre_basic") {
+    }
+    
+    
+    if ($crop_ID == "CP001") {
+        header("Location: hybred_order.php?creditor_name=$creditor_name&creditor_id=$creditor_id&farm_id=$farm_id&main_certificate=$main_lot_number&main_quantity=$main_quantity&male_certificate=$male_lot_number&male_quantity=$male_quantity&female_certificate=$female_lot_number&female_quantity=$female_quantity");
+    }
+    
 
-    $main_quantity_ = "-";
-    $male_quantity_ = $male_quantity;
-    $female_quantity_ = $female_quantity;
-} else {
-    $main_quantity_ = $main_quantity;
-    $male_quantity_ = "-";
-    $female_quantity_ = "-";
-}
 
-
-///Getting price
-
-
-
-if ($class == "certified") {
-
-    $object = new main();
-    $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
-    $certificate_class = "basic";
-} else if ($class == "basic") {
-
-    $object = new main();
-    $price = $object->grower_order_price($crop_ID, $variety_ID, $class);
-    $certificate_class = "prebasic";
-} else if ($class == "pre_basic") {
-}
-
-
-if ($crop_ID == "CP001") {
-    header("Location: hybred_order.php?creditor_name=$creditor_name&creditor_id=$creditor_id&farm_id=$farm_id&main_certificate=$main_lot_number&main_quantity=$main_quantity&male_certificate=$male_lot_number&male_quantity=$male_quantity&female_certificate=$female_lot_number&female_quantity=$female_quantity");
-}
 
 ?>
 

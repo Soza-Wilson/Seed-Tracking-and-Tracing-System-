@@ -606,7 +606,7 @@ if (!empty($farm_id)) {
 
                                                         <div class="card-block">
 
-                                                            <button class="btn btn-primary btn-mat" id="delete_request" name="delete_request"> Request for approval</button>
+                                                            <button class="btn btn-success btn-mat" id="delete_request" name="delete_request"> Request for approval</button>
 
 
                                                         </div>
@@ -626,7 +626,7 @@ if (!empty($farm_id)) {
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-primary btn-mat" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-success btn-mat" id="checkCodeDelete"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -972,7 +972,7 @@ add hybrid female crop certificate
 
                                                                 <div class="col-sm-12">
 
-                                                                    <a href="add_certificate.php" class="btn btn-primary btn-mat"><i class="icofont icofont-plus"></i>
+                                                                    <a href="add_certificate.php" class="btn btn-success btn-mat"><i class="icofont icofont-plus"></i>
                                                                         New certificate
 
                                                                     </a>
@@ -1227,8 +1227,8 @@ form adding farm location details
 
 
 
-                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-primary btn-mat ">save</button> -->
-                                                <button class="btn btn-primary btn-mat" id="update_farm_details" ><i class="icofont icofont-save"></i>Save</button>
+                                                <!-- <button type="submit" id="save_farm" value="save farm" class="btn btn-success btn-mat ">save</button> -->
+                                                <button class="btn btn-success btn-mat" id="update_farm_details" ><i class="icofont icofont-save"></i>Save</button>
 
                                                 </br>
                                                 </br>
@@ -1272,7 +1272,7 @@ form adding farm location details
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <button class="btn btn-primary btn-mat" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
+                                                            <button class="btn btn-success btn-mat" id="checkCode"><i class='icofont icofont-upload-alt'></i>Submit</button>
                                                         </div>
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
@@ -1644,7 +1644,7 @@ form adding farm location details
                                 <div class="form-group row">
 
                                     <div class="col-sm-3">
-                                        <button class=" btn btn-primary btn-mat" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
+                                        <button class=" btn btn-success btn-mat" id='back' data-toggle="modal" data-target="#myModal" name='back'><i class='icofont icofont-edit-alt'></i>Update</button>
 
                                         <button class=" btn btn-danger btn-mat" id='back' data-toggle="modal" data-target="#deleteModal" name='back'><i class='icofont icofont-trash'></i>Delete</button>
                                     </div>

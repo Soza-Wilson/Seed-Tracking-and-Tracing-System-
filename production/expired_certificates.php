@@ -579,7 +579,7 @@ if (in_array($position, $restricted)) {
 
 
                                                         <br/>
-                                                        <button name="get_data" id="get_data" class=" btn btn-primary btn-mat"><i class="icofont icofont-search"></i></button>
+                                                        <button name="get_data" id="get_data" class=" btn btn-success btn-mat"><i class="icofont icofont-search"></i></button>
 
 
                                                       
@@ -593,7 +593,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="btn btn-primary btn-mat" id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                            <button class="btn btn-success btn-mat" id='certificate_csv' name='certificate_csv'><i class="icofont icofont-download"></i> CSV</button>
 
 
                                                             <input type="hidden" name="creditor_hidden" id="creditor_hidden">

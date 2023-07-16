@@ -250,15 +250,7 @@ if (empty($test)) {
                                     </div>
                                 </div>
 
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                             <div class="p-15 p-b-0">
 
@@ -553,7 +545,7 @@ if (empty($test)) {
 
                                                     <div class="col-sm-3">
 
-                                                        <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-primary" />
+                                                        <input type="button" name="get_data" id="get_data" value="Get data" class="btn btn-success" />
 
                                                         <button name="reset_data" id="reset_data" class="btn btn-danger"> Reset</button>
                                                     </div>

@@ -74,7 +74,7 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/setup__.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/setup_.js"></script>
 
     <script type="text/javascript">
 
@@ -229,15 +229,7 @@ if (empty($test)) {
                                     </div>
                                 </div>
 
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                             </div>
                             <div class="p-15 p-b-0">
 
@@ -471,13 +463,54 @@ if (empty($test)) {
                                     <!-- Page body start -->
                                     <div class="page-body">
 
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h5 class="modal-title">Update Logo</h5>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="setup.php" method="POST" enctype="multipart/form-data">
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    <labe>Picture Directory :</label>
+                                                                        <input type="file" class="form-control" name="file_directory" accept=".jpg,png" id="file_directory">
+                                                                        <input type="hidden" class="form-control" name="tempFile" id="tempFile">
+                                                                     
+
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" id="save_image" value="Save" class="btn waves-effect waves-light btn-success  btn-mat"><i class="icofont icofont-save"></i> Save</button>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </form>
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                         <div class="row">
 
-                                            <div class="col-xl-3 col-md-12">
+                                            <div class="col-xl-12 col-md-12">
                                                 <div class="card ">
 
                                                     <div class="card-header">
-                                                        <h5>logo </h5>
+                                                        <h5>logo</h5>
 
 
                                                     </div>
@@ -486,30 +519,33 @@ if (empty($test)) {
                                                     <div class="card-block ">
 
 
-                                                        <div class="col-md-12">
-
-                                                            <!--logo card -->
-
-                                                            <div class="card" style="width: 18rem;">
-                                                                <img src="../files/business_logo/<?php echo $logo; ?>" class="card-img-top" alt="...">
-                                                                <div class="card-body">
-                                                                    <h5 class="label bg-primary">Upload logo </h5>
 
 
-                                                                    <div class="input-group">
-                                                                        <input type="file" class="form-control" accept=".jpg,.png" id="file_directory" aria-label="Upload">
-                                                                        <input type="hidden" class="form-control" accept=".jpg" id="tempFile" aria-label="Upload" value="<?php echo $logo; ?>">
+                                                        <!--logo card -->
 
-                                                                    </div>
-
-
-                                                                </div>
-                                                            </div>
-
+                                                        <div class="align-middle m-b-10 col-sm-12">
+                                                            <img src="../files/business_logo/<?php if ($logo == "-" || $logo == "") {
+                                                                                                    echo "default.png";
+                                                                                                } else {
+                                                                                                    echo $logo;
+                                                                                                } ?>" alt="logo image" class=" img-100 align-middle m-r-15">
 
 
 
                                                         </div>
+
+                                                        <div class=" col-sm-12">
+
+
+                                                            <button class="btn btn-inverse btn-round btn-mini img-radius img-100 align-middle m-r-15" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-camera"></i>update</button>
+
+                                                        </div>
+
+
+
+
+
+
 
 
                                                     </div>
@@ -518,7 +554,7 @@ if (empty($test)) {
                                             </div>
 
 
-                                            <div class="col-xl-9 col-md-12">
+                                            <div class="col-xl-12 col-md-12">
                                                 <div class="card ">
 
                                                     <div class="card-header">
@@ -553,7 +589,7 @@ if (empty($test)) {
                                                             </div>
 
                                                             <div class="form-group row">
-                                                                <div class="col-sm-12"><label class="label bg-primary"> Country name </label></div>
+                                                                <div class="col-sm-12"><label class="label bg-primary"> Country  </label></div>
                                                                 <div class="col-sm-12">
                                                                     <input type="text" class="form-control" id="country" required="" placeholder="Enter Country name" value="<?php if ($address != "-") {
                                                                                                                                                                                     echo $country;
@@ -698,8 +734,8 @@ if (empty($test)) {
                                                                 if ($result->num_rows > 0) {
                                                                     while ($row = $result->fetch_assoc()) {
                                                                         $season = $row["season"];
-                                                                        $opening_date  = $row["opening_date"];
-                                                                        $closing_date  = $row["closing_date"];
+                                                                        $opening_date  = main::change_date_format($row["opening_date"]);
+                                                                        $closing_date  = main::change_date_format($row["closing_date"]);
 
 
 

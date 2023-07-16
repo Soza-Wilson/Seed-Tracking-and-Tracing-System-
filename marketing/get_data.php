@@ -548,7 +548,7 @@ if (isset($_POST["lpo_data_filter"])) {
  <td>$count</t>
  <td>$total</td>
  
- <td><a href='../files/marketing/b_to_b_LPO/$files' class='btn btn-primary'>File</a><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
+ <td><a href='../files/marketing/b_to_b_LPO/$files' class='btn btn-success'>File</a><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>view</a></td>
  
  </tr>	
  ";

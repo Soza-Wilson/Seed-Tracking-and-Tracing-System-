@@ -167,7 +167,6 @@ $(document).ready(() => {
       (data) => {
 
           if (data == "registered") {
-          
            alert("account has been allocated to new role");
            history.back();
           } else {

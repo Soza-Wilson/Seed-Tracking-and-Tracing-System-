@@ -567,7 +567,7 @@ if ($result->num_rows > 0) {
 
                                                             <button id="deny_order" class="btn btn-danger btn-mat"><i class=" ti ti-thumb-down"></i>Deny Order</button>
 
-                                                            <button id="fetch_data" class="btn btn-danger btn-mat"><i class=" ti ti-thumb-down"></i>fetch data</button>
+                                                          
 
 
 

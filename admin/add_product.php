@@ -62,73 +62,8 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-
-
-
-            $("#quantity").on("input", function() {
-                var quantity = $("#quantity").val();
-                var price_per_kg = $("#quantity").val();
-                var total = result * price_per_kg;
-
-
-                alert(total);
-                // Print entered value in a div box
-                //$("#result").text($(this).val());
-            });
-
-            const loaded = "1";
-
-            $.post('../production/get_products.php', {
-                loaded: loaded
-
-            }, data => {
-                $('#select_crop').html(data);
-
-
-
-
-            });
-
-            $('#select_crop').change(() => {
-
-                let data = $('#select_crop').find(':selected');
-
-                if (data.val() == "0") {
-
-                } else {
-
-
-
-                }
-
-            });
-
-
-            $('#select_variety').change(() => {
-
-                let crop = $('#select_crop').val();
-                let variety = $('#select_variety').val();
-                $.post('get_pre_price.php', {
-                    crop_value: crop_value,
-                    variety_value: variety_value
-
-                }, data => {
-
-                    $('#select_crop').val(data);
-
-                });
-
-
-
-
-            });
-
-
-
-        });
+    <script type="text/javascript" src="assets/js/jsHandler/add_product.js">
+       
     </script>
 
 
@@ -278,15 +213,7 @@ if (in_array($position, $restricted)) {
                                     </div>
                                 </div>
 
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="../logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                             <div class="p-15 p-b-0">
                                 <form class="form-material">
@@ -353,6 +280,8 @@ if (in_array($position, $restricted)) {
 
                                     </ul>
                                 </li>
+
+                                </ul>
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                                     <ul class="pcoded-item pcoded-left-item">
@@ -504,27 +433,16 @@ if (in_array($position, $restricted)) {
                                         </div>
                                         <div class="card-block">
 
-                                            <form action="add_product.php" method="POST">
+                                          
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <select id="select_crop" name="crop" class="form-control" required="">
-
-
-
-
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-
+                                                
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-2">
                                                         <label>Register new crop species </label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" name="new_crop" id="pre_basic" placeholder="Register crop" require="">
+                                                        <input type="text" class="form-control"  id="new_crop" placeholder="Register crop" require="">
                                                     </div>
                                                     
                                                 </div>
@@ -546,7 +464,7 @@ if (in_array($position, $restricted)) {
                                                     <div class="col-sm-12">
 
                                                      
-                                                        <button type="submit" class="btn btn-primary btn-mat" name="save_crop"><i class="icofont icofont-save"></i>Save</button>
+                                                        <button type="submit" class="btn btn-success btn-mat" name="save_crop" id="save_crop"><i class="ti ti-save"></i>Register Crop</button>
 
 
 
@@ -593,9 +511,21 @@ if (in_array($position, $restricted)) {
                                                 <div class="col-sm-2">
                                                     <label>Register new variety </label>
                                                 </div>
+                                                
+                                                    <div class="col-sm-12">
+                                                        <select id="select_crop" name="crop" class="form-control" required="">
+
+
+
+
+                                                        </select>
+                                                    </div>
+
+                                                
+
                                                 <div class="col-sm-12">
                                                     <label for="" class="label">Variety Name</label>
-                                                    <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Register crop" require="">
+                                                    <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Enter variety name" require="">
                                                 </div>
                                                 <div class="col-sm-12">
                                                 <label for="" class="label">Variety type</label>
@@ -632,7 +562,7 @@ if (in_array($position, $restricted)) {
 
                                                    
 
-                                                    <button type="submit" class="btn btn-success btn-mat" name="save_variety"><i class="icofont icofont-save"></i>save variety</button>
+                                                    <button type="submit" class="btn btn-info btn-mat" name="save_variety" id="save_variety"><i class="ti ti-save"></i>Register variety</button>
 
 
 
@@ -738,20 +668,6 @@ if (in_array($position, $restricted)) {
 <?php
 
 
-if (isset($_POST['save_crop'])) {
-
-
-    $object = new main();
-    $object->register_crop($_POST['new_crop']);
-}
-
-
-if (isset($_POST['save_variety'])) {
-
-
-    $object = new main();
-    $object->register_variety($_POST['new_variety'], $_POST['crop'],  $_POST['variety_type']);
-}
 ?>
 
 </html>

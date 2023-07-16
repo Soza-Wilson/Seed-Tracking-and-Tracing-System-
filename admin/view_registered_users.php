@@ -286,6 +286,8 @@ if (in_array($position, $restricted)) {
                                     </ul>
                                 </li>
 
+                            </ul>
+
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -558,7 +560,7 @@ if (in_array($position, $restricted)) {
                                                                             <td class='text-left'><label class='label label-$dataAccess[0]'>$dataAccess[1]</label></td>
                                                                          
 
-                                                                            <td><a href='view_user_details.php? user_id=$user_id & name=$name & depertment=$department & position=$position & phone=$phone & email=$email & date=$date & profile_picture=$profile' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i></a>
+                                                                            <td><a href='view_user_details.php?user_id=$user_id&name=$name&depertment=$department&position=$position&phone=$phone&email=$email&date=$date&profile_picture=$profile' class='btn btn-success btn-mat'><i class='icofont icofont-eye-alt'></i></a>
                                                                         </tr>";
                                                                         }
                                                                     }

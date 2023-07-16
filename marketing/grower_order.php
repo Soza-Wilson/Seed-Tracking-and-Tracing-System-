@@ -444,7 +444,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='process_grower_order.php? farm_id=$farm_id & crop=$crop & variety=$variety & class=$class & creditor_id=$creditor_id & creditor_name=$grower_name & crop_id=$crop_ID & variety_id=$variety_ID & main_certificate=$main_certificate & main_quantity=$main_quantity & male_certificate=$male_certificate & female_certificate=$female_certificate ' class='btn btn-success btn-mat btn-mat'>Place order</a>
+												<td><a href='process_grower_order.php?farm_id=$farm_id&crop=$crop&variety=$variety&class=$class&creditor_id=$creditor_id&creditor_name=$grower_name&crop_id=$crop_ID&variety_id=$variety_ID&main_certificate=$main_certificate&main_quantity=$main_quantity&male_certificate=$male_certificate&female_certificate=$female_certificate'class='btn btn-success btn-mat btn-mat'>Place order</a>
                                               </a>
                                                
                                                 </td>

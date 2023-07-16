@@ -54,9 +54,17 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+
+    
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+     <!-- pagenation -->
+     <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
+
+    
 </head>
 
 <body>
@@ -256,6 +264,7 @@ if (in_array($position, $restricted)) {
 
                                 </ul>
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Users &amp; Roles</div>
+                                
                                     <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
@@ -284,6 +293,8 @@ if (in_array($position, $restricted)) {
 
                                     </ul>
                                 </li>
+
+                                
 
                                     <div class="pcoded-navigation-label" data-i18n="nav.category.forms"> Products &amp; Pricing</div>
                                     <ul class="pcoded-item pcoded-left-item">
@@ -452,7 +463,7 @@ if (in_array($position, $restricted)) {
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
                                                                 <th style="font-weight: 600;" >Crop</th>
@@ -520,6 +531,11 @@ if (in_array($position, $restricted)) {
                                                         </tbody>
                                                     </table>
                                                 </div>
+
+                                                <div id="pagination">
+
+
+                                                        </div>
                                             </div>
                                         </div>
 

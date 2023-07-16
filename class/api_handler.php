@@ -5,10 +5,15 @@ include('../class/main.php');
 
 class api_handler extends main
 {
+    // function api_handler($host,$port)
+    // {
+    //     $apiHost = $host;
+    //     $apiPort=$port;
+    // }
     static function send_data()
     {
         $request_issues = [];
-        array_push($request_issues, self::send_user_data(), self::send_crops_data(), self::send_varieties_data());
+        array_push($request_issues, self::send_user_data(), self::send_crops_data(), self::send_varieties_data(), self::send_growers_data(), self::send_farm_data());
 
         return $request_issues;
     }
@@ -79,6 +84,62 @@ class api_handler extends main
             echo "error on crop";
         }
     }
+
+    static function send_growers_data()
+    {
+
+        global $con;
+
+        $sql = "SELECT * FROM `creditor` WHERE `source` = 'internal' AND `creditor_status`='active'";
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $jsonData = ["grower_id" => $row['creditor_ID'], "fullname" => $row["name"], "phone" => $row["phone"]];
+                $apiData = json_encode($jsonData);
+
+                $issue = self::send_request("localhost:8080/requests/grower", $apiData);
+            }
+
+            return $issue;
+        } else {
+
+            echo "error on grower_data";
+        }
+    }
+
+    static function send_farm_data()
+    {
+        global $con;
+
+        $sql = "SELECT `farm_ID`, `Hectors`,crop.crop_ID,variety.variety_ID,
+        `class`, `region`, `district`, `area_name`, `address`, `physical_address`,
+        `EPA`,creditor.name,creditor.creditor_ID, farm.registered_date, `previous_year_crop`,
+         `other_year_crop`, `main_lot_number`, `main_quantity`, 
+         `male_lot_number`, `male_quantity`, `female_lot_number`, 
+         `female_quantity` FROM `farm` INNER JOIN crop
+        ON farm.crop_species = crop.crop_ID INNER JOIN variety 
+        ON farm.crop_variety = variety.variety_ID INNER JOIN 
+        creditor ON farm.creditor_ID = creditor.creditor_ID WHERE `order_status`='order_processed'";
+
+        $result = $con->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $jsonData = ["farm_id" => $row['farm_ID'], "hectors" => $row["Hectors"], "region" => $row["region"], "district" => $row["district"], "area_name" => $row["area_name"], "address" => $row["address"], "physical_address" => $row["physical_address"], "epa" => $row["EPA"],"crop_id" => $row["crop_ID"], "variety_id" => $row["variety_ID"], "grower_id" => $row["creditor_ID"]];
+                $apiData = json_encode($jsonData);
+
+                $issue = self::send_request("localhost:8080/requests/farm", $apiData);
+                
+            }
+
+            return $issue;
+        } else {
+
+
+            echo "error on farm_data";
+        }
+    }
+
 
     static function send_request($url, $data)
     {

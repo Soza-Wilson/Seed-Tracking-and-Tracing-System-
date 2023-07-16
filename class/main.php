@@ -20,7 +20,7 @@ class main
 
   // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the department)
 
-  function generate_user($department)
+  static function generate_user($department)
   {
 
     $user_id = "";
@@ -190,27 +190,62 @@ class main
 
 
 
-  function register_crop($crop_name)
+  static function register_crop($crop_name)
   {
     global $con;
     $name = strtolower($crop_name);
-    $user_id = $this->generate_user("crop");
+    $user_id = self::generate_user("crop");
     $sql = "INSERT INTO `crop`(`crop_ID`, `crop`) VALUES ('$user_id','$name')";
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if ($statement->execute()) {
+      return "registered";
+    }
   }
 
-  function register_variety($variety_name, $crop_id, $variety_type)
+  // checking if variety name already exists in the database
+  static function check_new_crop_name($crop_name)
+  {
+    $name = strtolower($crop_name);
+    global $con;
+
+    $sql = "SELECT * FROM crop WHERE  `crop` LIKE '%$name%'";
+    $result =  $con->query($sql);
+    if ($result->num_rows > 0) {
+
+      return "already_exists";
+    }
+  }
+  // checking if variety name already exists in the database
+
+  static function check_new_variety_name($crop, $new_variety_name)
+  {
+    $variety = strtoupper($new_variety_name);
+    global $con;
+
+    $sql = "SELECT * FROM variety WHERE `crop_ID`='$crop' AND `variety` LIKE '%$variety%'";
+    $result =  $con->query($sql);
+    if ($result->num_rows > 0) {
+
+      return "already_exists";
+    }
+  }
+
+  //  adding new variety 
+  static function register_variety($crop_id, $variety_name, $variety_type)
   {
 
-    $v_name = strtolower($variety_name);
+    $v_name = strtoupper($variety_name);
     global $con;
-    $user_id = $this->generate_user("variety");
-    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`) VALUES ('$user_id','$v_name','$crop_id','$variety_type')";
+    $variety_id = self::generate_user("variety");
+    $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`) VALUES ('$variety_id','$v_name','$crop_id','$variety_type')";
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if ($statement->execute()) {
 
-    $this->add_price($crop_id, $user_id);
+
+     
+      return self::add_price($crop_id, $variety_id);
+    }
+
   }
 
   function add_price($crop_id, $variety_id)
@@ -218,16 +253,23 @@ class main
 
     global $con;
     $price_id = time();
-    $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`, `variety_ID`, `sell_basic`, 
-    `sell_pre_basic`, `sell_certified`, `buy_basic`, `buy_pre_basic`, `buy_certified`) VALUES 
+    $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`, `variety_ID`,`sell_breeder`,`sell_basic`, 
+    `sell_pre_basic`,`sell_certified`,`buy_breeder`,`buy_basic`, `buy_pre_basic`, `buy_certified`) VALUES 
     ('$price_id','$crop_id','$variety_id','0.00','0.00',
-    '0.00','0.00','0.00','0.00')";
+    '0.00','0.00','0.00','0.00','0.00','0.00')";
 
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if($statement->execute()){
+  
+      return "registered";
 
-    echo ("<script> alert('registered');
-    </script>");
+    }
+    else{
+
+      return "error";
+    }
+
+    
   }
 
 
@@ -277,12 +319,12 @@ class main
   //admin set prices for all products function
 
 
-  static function allocate_role_to_user($userId, $department, $role)
+  static function allocate_role_to_user($userId,$department, $role)
   {
 
     global $con;
 
-    $sql = "UPDATE `user` SET `user_type_ID`='$department',`postion`='$role',`account_status`='active' WHERE `user_ID`='$userId'";
+    $sql = "UPDATE `user` SET `user_type_ID`='$department', `postion`='$role', `account_status`='active' WHERE `user_ID`='$userId'";
 
     $statement = $con->prepare($sql);
     if ($statement->execute()) {
@@ -298,8 +340,20 @@ class main
 
 
 
+  //  get crop prices
 
+  static function get_prices($crop, $variety)
+  {
+    global $con;
 
+    $sql = "SELECT * FROM price WHERE `crop_ID`='$crop' AND `variety_ID`='$variety'";
+    $result =  $con->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        return $row["sell_breeder"] . "," . $row["sell_basic"] . "," . $row["sell_pre_basic"] . "," . $row["sell_certified"] . "," . $row["buy_breeder"] . "," . $row["buy_basic"] . "," . $row["buy_pre_basic"] . "," . $row["buy_certified"];
+      }
+    }
+  }
 
   static function set_sell_prices($crop, $variety, $breeder, $pre_basic, $basic, $certified)
   {
@@ -309,13 +363,19 @@ class main
     $sql = "SELECT `prices_ID` FROM `price` WHERE `crop_ID`='$crop' AND `variety_ID`='$variety'";
     $result =  $con->query($sql);
     $count = $result->num_rows;
-    if ($count === 1) {
+    if ($count == 1) {
       $name = $result->fetch_assoc();
       $price_id = $name['prices_ID'];
+
+
+
       $sql = "UPDATE `price` SET `sell_breeder`='$breeder',`sell_basic`='$basic',`sell_pre_basic`='$pre_basic',`sell_certified`='$certified' WHERE prices_ID='$price_id'";
       $statement = $con->prepare($sql);
       if ($statement->execute()) {
         return "updated";
+      } else {
+
+        return "error";
       }
     } else {
       return "error";
@@ -1684,9 +1744,28 @@ class main
   {
 
     global $con;
-    $sql = "UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address',`logo`='$logo_drectory'";
+    $sql = "UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address'";
     $statement = $con->prepare($sql);
-    $statement->execute();
+    if($statement->execute()){
+
+      return "updated";
+    }
+  }
+
+  // save business logo image
+
+  static function save_logo($image){
+
+    global $con;
+    $sql = "UPDATE `client` SET `logo`='$image'";
+    $statement = $con->prepare($sql);
+    if($statement->execute()){
+
+      return "saved";
+
+    }
+
+
   }
 
   function update_season($opening_date, $closing_date)
@@ -1726,26 +1805,54 @@ class main
   // production certicate functions 
 
 
-  function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory, $user)
+  static function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory, $user)
   {
 
     $added_date = date("Y-m-d");
     global $con;
 
+    if (self::check_ids("certificate", "lot_number", $lot_number) == "false") {
 
-    $sql = "INSERT INTO `certificate`(`lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, 
+      $sql = "INSERT INTO `certificate`(`lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, 
                       `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, 
                       `available_quantity`, `assigned_quantity`, `status`, `directory`, `user_ID`) VALUES 
                       ('$lot_number','$crop','$variety','$class','$type','$source','$source_name',
                       '$date_tested','$expire_date','$added_date','$certificate_quantity',
                       '$certificate_quantity','$certificate_quantity','available','$directory','$user')";
 
-    $statement = $con->prepare($sql);
-    $statement->execute();
+      $statement = $con->prepare($sql);
+
+      if ($statement->execute()) {
+
+        return "registered";
+      } else {
+
+        return "error ";
+      }
+    } else {
+
+      return "error lot number already registered";
+    }
   }
 
 
 
+
+
+  static function check_ids($table_name, $id_title, $id_value)
+  {
+    global $con;
+
+    $sql = "SELECT * FROM `" . $table_name . "` WHERE `" . $id_title . "` ='$id_value'";
+
+    $result =  $con->query($sql);
+    if ($result->num_rows > 0) {
+
+      return "n";
+    } else {
+      "false";
+    }
+  }
 
 
 

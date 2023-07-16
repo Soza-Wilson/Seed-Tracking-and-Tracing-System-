@@ -500,7 +500,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-success"></button>
 
                                                         <button name="reset_data" id="reset_data" class="ti-loop btn btn-danger"></button>
                                                     </div>
@@ -513,7 +513,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                            <button class="ti-download btn btn-primary " id='create_csv_file' name='create_csv_file'> CSV</button>
+                                                            <button class="ti-download btn btn-success " id='create_csv_file' name='create_csv_file'> CSV</button>
 
 
 

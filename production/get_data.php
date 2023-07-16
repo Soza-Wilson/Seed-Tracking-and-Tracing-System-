@@ -29,9 +29,7 @@ if (isset($_POST["getStockInId"])) {
       $stock_in_ID = $row['stock_in_ID'];
       echo "<option>$stock_in_ID</option>";
     }
-  }
-
-  else {
+  } else {
     echo "<option>Not available !!</option>";
   }
 }
@@ -51,7 +49,7 @@ if (isset($_POST["seedHandOver"])) {
 // block data
 if (isset($_POST["get_inventory"])) {
 
-  $sql = "SELECT stock_in.status, SUM(stock_in.available_quantity) AS quantity FROM stock_in";
+  $sql = "SELECT  SUM(stock_in.available_quantity) AS quantity FROM stock_in";
 
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
@@ -59,12 +57,15 @@ if (isset($_POST["get_inventory"])) {
       $data = $row['quantity'];;
       echo "   <h4 class='text-c-green' id='block_inventory' >$data KG</h4>";
     }
+  } else {
+
+    echo "   <h4 class='text-c-green' id='block_stock_out' >0 KG</h4>";
   }
 }
 
 if (isset($_POST["get_stock_in"])) {
 
-  $sql = "SELECT stock_in.status, SUM(stock_in.quantity) AS quantity FROM stock_in";
+  $sql = "SELECT  SUM(stock_in.quantity) AS quantity FROM stock_in";
 
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
@@ -72,6 +73,9 @@ if (isset($_POST["get_stock_in"])) {
       $data = $row['quantity'];;
       echo "   <h4 class='text-c-green' id='block_stock_in' >$data KG</h4>";
     }
+  } else {
+
+    echo "   <h4 class='text-c-green' id='block_stock_out' >0 KG</h4>";
   }
 }
 
@@ -79,13 +83,15 @@ if (isset($_POST["get_stock_in"])) {
 if (isset($_POST["get_stock_out"])) {
 
   $sql = "SELECT SUM(stock_out.amount) AS quantity FROM stock_out";
-
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
       $data = $row['quantity'];;
       echo "   <h4 class='text-c-green' id='block_stock_out' >$data KG</h4>";
     }
+  } else {
+
+    echo "   <h4 class='text-c-green' id='block_stock_out' >0 KG</h4>";
   }
 }
 
@@ -1056,21 +1062,21 @@ if (isset($_POST["viewStockOutFilter"])) {
 
 if (isset($_POST["insertCertificate"])) {
 
-  $test = $_POST["insertCertificate"];
+ $certificate_data = $_POST["insertCertificate"];
 
-  $object->add_certificate(
-    $test[4],
-    $test[0],
-    $test[1],
-    $test[2],
-    $test[3],
-    $test[6],
-    $test[7],
-    $test[8],
-    $test[9],
-    $test[5],
-    $test[10],
-    $test[11]
+  echo $object->add_certificate(
+   $certificate_data[4],
+   $certificate_data[0],
+   $certificate_data[1],
+   $certificate_data[2],
+   $certificate_data[3],
+   $certificate_data[6],
+   $certificate_data[7],
+   $certificate_data[8],
+   $certificate_data[9],
+   $certificate_data[5],
+   $certificate_data[10],
+   $certificate_data[11]
   );
 }
 

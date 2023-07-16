@@ -62,7 +62,7 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/set_buy_price.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/set_buy_price_.js"></script>
 
 
 

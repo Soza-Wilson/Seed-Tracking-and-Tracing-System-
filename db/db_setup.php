@@ -567,11 +567,11 @@ values ('001','ADMIN'),
 
 
     $sql = "INSERT INTO `variety`(`variety_ID`, `variety`, `crop_ID`,`variety_type`)
-    VALUES ('VT001','MLERA_ZM_623','CP001','opv'),
-    ('VT002','THANZI_MH_44A','CP001','hybrid'),
-    ('VT003','MANTHU_MH_36','CP001','hybrid'),
-    ('VT004','NTONDO_MH_35','CP001','hybrid'),
-    ('VT005','LIMBA_ZM_523','CP001','opv'),
+    VALUES ('VT001','MLERA ZM 623','CP001','opv'),
+    ('VT002','THANZI MH 44A','CP001','hybrid'),
+    ('VT003','MANTHU MH 36','CP001','hybrid'),
+    ('VT004','NTONDO MH 35','CP001','hybrid'),
+    ('VT005','LIMBA ZM 523','CP001','opv'),
     ('VT006','CHITALA','CP002','-'),
     ('VT007','CG7','CP002','-'),
     ('VT008','CG9','CP002','-'),
@@ -583,7 +583,7 @@ values ('001','ADMIN'),
     ('VT0014','CG11','CP003','-'),
     ('VT0015','CG13','CP003','-'),
     ('VT0016','PILIRA1','CP004','-'),
-    ('VT0017','FAYA_1469','CP005','-'),
+    ('VT0017','FAYA 1469','CP005','-'),
     ('VT0018','KILOMBERO','CP005','-'),
     ('VT0019','SUDAN1','CP006','-'),
     ('VT0020','CHITEDZE','CP007','-'),
@@ -597,7 +597,7 @@ values ('001','ADMIN'),
 
     mysqli_query($con, $sql);
 
-    $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`, `variety_ID`, `sell_basic`, `sell_pre_basic`, `sell_certified`,`buy_basic`,`buy_pre_basic`,`buy_certified`) 
+    $sql = "INSERT INTO `price`(`prices_ID`, `crop_ID`,`variety_ID`,`sell_breeder`,`sell_basic`, `sell_pre_basic`, `sell_certified`,`buy_breeder`,`buy_basic`,`buy_pre_basic`,`buy_certified`) 
 VALUES ('PRC001','CP001','VT001','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC002','CP001','VT002','0.00','0.00','0.00','0.00','0.00','0.00'),
 ('PRC003','CP001','VT003','0.00','0.00','0.00','0.00','0.00','0.00'),

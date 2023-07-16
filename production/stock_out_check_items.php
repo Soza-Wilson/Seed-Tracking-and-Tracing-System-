@@ -857,7 +857,7 @@ if ($result->num_rows > 0) {
                                                 <td>$date_added</td>
                                           
 
-                                            <td><a href='process_stock_out.php? item_ID=$item_ID & item_quntity=$item_quantity & stock_in_ID=$stock_in_id & stock_in_quantity=$quantity & order_ID=$order_ID & price_per_kg=$price_per_kg & discount_price=$discount_price'  class='btn btn-success'>Add to order item</a> </td>
+                                            <td><a href='process_stock_out.php? item_ID=$item_ID&item_quntity=$item_quantity&stock_in_ID=$stock_in_id&stock_in_quantity=$quantity&order_ID=$order_ID&price_per_kg=$price_per_kg&discount_price=$discount_price'class='btn btn-success'>Add to order item</a> </td>
 
 												
 											</tr>	

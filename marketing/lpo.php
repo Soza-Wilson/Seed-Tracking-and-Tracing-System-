@@ -456,7 +456,7 @@ $.post('get_data.php', {
 
 
 
-                                                        <button name="get_data" id="get_data" class="ti-search btn btn-primary"></button>
+                                                        <button name="get_data" id="get_data" class="ti-search btn btn-success"></button>
 
 
                                                         <a href="lpo.php" class="ti-loop btn btn-danger"></a>
@@ -572,7 +572,7 @@ $.post('get_data.php', {
                                                 <td>$count</td>
                                                 <td>$total</td>
                                     
-												<td><a href='../files/marketing/b_to_b_LPO/$files' class='btn btn-primary'>File</a> <a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>order</a></td>
+												<td><a href='../files/marketing/b_to_b_LPO/$files' class='btn btn-success'>File</a> <a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success'>order</a></td>
                                                 
 											</tr>	
 										";
