@@ -23,7 +23,7 @@ SeedTracker is a comprehensive and user-friendly seed tracking system designed t
 
 <h3>Technology Stack: </h3>
 
-Backend: PHP (Laravel Framework)
+Backend: PHP 
 Frontend: HTML, CSS, JavaScript (Vue.js)
 Database: MySQL
 Version Control: Git
