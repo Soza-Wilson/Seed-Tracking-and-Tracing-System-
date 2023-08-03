@@ -23,11 +23,12 @@ SeedTracker is a comprehensive and user-friendly seed tracking system designed t
 
 <h3>Technology Stack: </h3>
 
-Backend: PHP 
-Frontend: HTML, CSS, JavaScript (Vue.js)
-Database: MySQL
-Version Control: Git
-Installation Guide:
+<p>Backend: PHP</p>
+<p>Frontend: HTML, CSS, JavaScript (Vue.js)</p>
+<p>Database: MySQL</p>
+<p>Version Control: Git</p>
+
+<h3>Installation Guide:</h3>
 
 To deploy SeedTracker on your local machine or server, follow these steps:
 
