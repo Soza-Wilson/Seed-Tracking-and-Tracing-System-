@@ -35,7 +35,7 @@ Clone the repository from GitHub:
 
 bash
 
-git clone https://github.com/SeedTracker/SeedTracker.git
+git clone https://github.com/Soza-Wilson/Seed-Tracking-and-Tracing-System.git
 
 
 
