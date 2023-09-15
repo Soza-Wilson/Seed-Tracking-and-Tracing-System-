@@ -49,7 +49,7 @@ $(document).ready(() => {
         updateBusiness: data,
       },
       function (data) {
-        alert(data);
+        //alert(data);
         // alert("Business details updated");
         // window.location.reload();
       }

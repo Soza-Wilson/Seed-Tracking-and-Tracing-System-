@@ -50,10 +50,13 @@ $(document).ready(function () {
   });
 
   $("#save_variety").click(() => {
-    if (confirm("Are you sure ?") == true) {
+    if (confirm("Are you sure ?")) {
       if ($("#new_variety").val() == "") {
         alert("Fillout variety name !!");
         $("#new_variety").attr("class", "form-control form-control-danger");
+      } else if (
+        checkInputText($("#new_variety").val(), "new_variety") === "bad_input"
+      ) {
       } else {
         $.post(
           "get_data.php",
@@ -76,39 +79,38 @@ $(document).ready(function () {
   });
 
   $("#save_crop").click(() => {
-    $.post(
-      "get_data.php",
-      {
-        checkNewCropName: $("#new_crop").val(),
-      },
-      (data) => {
-        if (data == "already_exists") {
-          alert("Crop name already exist");
-          $("#new_crop").attr("class", "form-control form-control-danger");
-        } else {
-
-
-          $.post(
-            "get_data.php",
-            {
-              registerCrop: $("#new_crop").val(),
-            },
-            (data) => {
-              if (data == "registered") {
-                alert("New crop registered");
-                window.location.reload();
-
-              } else {
-      
-                
-              }
+    const confirmomation = confirm("Are you sure");
+    if (confirmomation) {
+      if (checkInputText($("#new_crop").val(), "new_crop") === "bad_input") {
+      } else {
+        $.post(
+          "get_data.php",
+          {
+            checkNewCropName: $("#new_crop").val(),
+          },
+          (data) => {
+            if (data == "already_exists") {
+              alert("Crop name already exist");
+              $("#new_crop").attr("class", "form-control form-control-danger");
+            } else {
+              $.post(
+                "get_data.php",
+                {
+                  registerCrop: $("#new_crop").val(),
+                },
+                (data) => {
+                  if (data == "registered") {
+                    alert("New crop registered");
+                    window.location.reload();
+                  } else {
+                  }
+                }
+              );
             }
-          );
-
-
-        }
+          }
+        );
       }
-    );
+    }
   });
 });
 
@@ -127,6 +129,16 @@ $("#select_variety").change(() => {
   );
 });
 
+const checkInputText = (input, field) => {
+  if (input.match(/[!@#$%^&*()\_=+{}[\]|\\;:'",.<>/?]/g)) {
+    alert("Input contains invalid character");
+    $("#" + field + "").attr("class", "form-control form-control-danger");
+    return "bad_input";
+  } else {
+    return "okay";
+  }
+};
+
 const registerVariety = (crop_id, variety) => {
   $.post(
     "get_data.php",
@@ -134,12 +146,9 @@ const registerVariety = (crop_id, variety) => {
       registerNewVariety: [crop_id, variety, $("#variety_type").val()],
     },
     (data) => {
-      
-   
       if (data == "registered") {
         alert("New variety registered ");
         window.location.reload();
-
       } else {
         alert("Error: Unable to register new variety");
       }

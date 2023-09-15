@@ -2,12 +2,10 @@
 <html lang="en">
 <?php
 
+
 Ob_start();
 include('../class/main.php');
 session_start();
-
-
-
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
@@ -17,51 +15,12 @@ if (empty($test)) {
     header('Location:../index.php');
 }
 
-$restricted = array("system_administrator","marketing_officer","marketing_system_administrator");
+$restricted = array("marketing_admin", "system_administrator", "marketing_officer");
 
 if (in_array($position, $restricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
-
-
-$test = $_SESSION['fullname'];
-$position = $_SESSION['position'];
-
-
-
-
-
-
-
-
-
-
-if(!empty($order_ID)){
-
-$sql="SELECT * FROM order_table WHERE `order_ID`='$order_ID'";
-
-
-$result = $con->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        
-        $amount = $row["total_amount"];
-        $customer = $row["customer_id"];
-        $user_requested = $row["user_ID"];
-        $date = $row["date"];
-        $time = $row["time"];
-        $file = $row["order_files"];
-      
-
-    }
-
-}
-
-
-}
-
-
 
 
 
@@ -84,8 +43,7 @@ if ($result->num_rows > 0) {
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/main_icon.png" type="image/x-icon">
-    <!-- Google font-->
-   
+  
     <!-- waves.css -->
     <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
     <!-- Required Fremwork -->
@@ -101,180 +59,9 @@ if ($result->num_rows > 0) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
-
-    <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript">
-
-       $(document).ready(()=>{
-
-
-        const loaded = "1";
-
-$.post('../production/get_products.php', {
-    loaded: loaded
-
-}, data => {
-    $('#select_crop').html(data);
-
-
-
-
-});
-
-
-
-$('#select_crop').change(function() {
-
-
-
-    var data = $('#select_crop').find(':selected');
-
-    if (data.val() == "0") {
-        alert("please select Crop ");
-    } else {
-
-
-
-
-        let crop_value = $('#select_crop').val();
-
-        $.post('../production/get_products.php', {
-            crop_value: crop_value
-
-        }, data => {
-            $('#select_variety').html(data);
-
-
-
-        });
-
-
-
-
-
-
-
-
-    }
-});
-
-$('#select_class').change(function() {
-
-    var crop_data = $('#select_crop').val();
-    var variety_data = $('#select_variety').val();
-    var class_data = $('#select_class').val();
-
-    if (crop_data == 0) {
-
-        alert('Select crop and variety');
-
-
-    } else if (variety_data == 0) {
-
-        alert('Select crop and variety');
-
-    } else {
-
-        $.post('get_prices.php', {
-            crop_data: crop_data,
-            variety_data: variety_data,
-            class_data: class_data
-        }, function(data) {
-
-            $('#price_per_kg').val(data);
-
-        });
-    }
-
-
-
-
-});
-
-
-        $('#openLpoFile').click(()=>{
-            let directory = $('#directorHidden').val();
-            if(directory=="" || directory=="-"){
-            alert('LPO file not found');
-            }
-            else{
-                window.location='../files/marketing/b_to_b_LPO/'+directory;
-            } 
-        });
-
-        $('#lpo_file').hide();
-        if($('#page_type_hidden').val()=="b_to_b"){
-
-            $('#lpo_file').show();
-        }
-        
-
-
-
-
-        $("#back").click(()=>{
-
-            history.back();
-        });
-
-         
-
-        $("#get_data").click(()=>{
-
-
-
-
-
-let sales_data_filter = $('#typeValue').val();
-let cropValue = $('#select_crop').val();
-let varietyValue = $('#select_variety').val();
-let classValue = $('#select_class').val();
-let from = $('#fromDateValue').val();
-let to = $('#toDateValue').val();
-let page_type ="sales_list";
-
-
-
-$('#customer_type_hidden').val(sales_data_filter);
-$('#cropValueHidden').val(cropValue);
-$('#varietyValueHidden').val(varietyValue);
-$('#classValueHidden').val(classValue);
-$('#from_hidden').val(from);
-$('#to_hidden').val(to);
-$('#filter').val("haghgd");
-
-
-
-
-$.post('get_data.php', {
-  sales_data_filter:sales_data_filter,   
-    cropValue:cropValue,
-    varietyValue:varietyValue,
-    classValue:classValue,
-    from:from,
-    to:to,
-    page_type:page_type,                 
-    }, function(data) {
-        $('#dataTable').html(data);
-
-
-    })
-
-
-
-})
-
-
-        
-
-       });
-
-        </script>
 </head>
 
 <body>
-
-
     <!-- Pre-loader start -->
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -350,9 +137,9 @@ $.post('get_data.php', {
                                 </div>
                             </div>
                         </div>
-                        <a href="">
 
-                        <span>finance</span>
+                        <a href="">
+                            <span>marketing</span>
                         </a>
 
                         <a class="mobile-options waves-effect waves-light">
@@ -365,7 +152,7 @@ $.post('get_data.php', {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                           
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -373,7 +160,6 @@ $.post('get_data.php', {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                           
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
@@ -386,13 +172,13 @@ $.post('get_data.php', {
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../other/user_profile.php">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
-                                    
+
                                     <li class="waves-effect waves-light">
                                         <a href="../logout.php">
                                             <i class="ti-layout-sidebar-left"></i> Logout
@@ -423,7 +209,13 @@ $.post('get_data.php', {
                                 </div>
 
                                 <div class="main-menu-content">
-                                   
+                                    <ul>
+                                        <li class="more-details">
+                                            <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
+                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
+                                            <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="p-15 p-b-0">
@@ -431,29 +223,27 @@ $.post('get_data.php', {
 
 
                             </div>
-                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Admin control </div>
-                           
-
-                                <li class="pcoded-hasmenu">
-
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="">
-                                            <a href="marketing_dashboard.php" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
 
 
 
 
 
 
-                                        </li>
 
 
-                                    </ul>
-                                    <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Order &amp; Sales</div>
+                            </ul>
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Home</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="marketing_dashboard.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+
+                            </ul>
+
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Orders &amp; Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="place_order.php" class="waves-effect waves-dark">
@@ -462,43 +252,42 @@ $.post('get_data.php', {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
 
-                                <li class="<?php echo $pending;?>">
+                                <li class="">
                                     <a href="view_pending_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Pending Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="<?php echo $processed;?>">
+                                <li class="">
                                     <a href="view_processed_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-check"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Processed Orders </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="<?php echo $denied;?>">
+                                <li class="">
                                     <a href="view_denied_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-face-sad"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Denied Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="<?php echo $all;?>">
+                                <li class="">
                                     <a href="view_all_orders.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-clipboard"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">All Orders</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                               
-                    
+
+
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                            <li class="pcoded-hasmenu">
+                            <li class="pcoded-hasmenu active pcoded-trigger">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Agro Dealer </span>
@@ -506,7 +295,7 @@ $.post('get_data.php', {
                                     </a>
                                     <ul class="pcoded-submenu">
                                         
-                                        <li class="">
+                                        <li class="active">
                                         <a href="active_agro_dealer.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Agro Dealers</span>
@@ -533,17 +322,19 @@ $.post('get_data.php', {
 
                             </ul>
 
+
+                           
+
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
-                                <li class="<?php echo$b_to_b;?>">
+
+                                <li class="">
                                     <a href="b_to_b.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-truck"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Business </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
                                 <li class="">
                                     <a href="lpo.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-file"></i><b>FC</b></span>
@@ -551,22 +342,26 @@ $.post('get_data.php', {
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                    
+
+
                             </ul>
+
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Sales</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                
-                                <li class="active">
+
+                                <li class="">
                                     <a href="sales_list.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-stats-up"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">View Sales </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
-                    
+
+
                             </ul>
+
+
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -576,7 +371,7 @@ $.post('get_data.php', {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Sales List </h5>
+                                            <h5 class="m-b-10">Active Agro Dealers</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -585,11 +380,10 @@ $.post('get_data.php', {
                                             <li class="breadcrumb-item">
                                                 <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            
-                                            
+
+                                            <li class="breadcrumb-item"><a href="active_agro_dealer.php">Active Agro Dealers</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="sales_list.php">Sales List </a>
-                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -615,136 +409,153 @@ $.post('get_data.php', {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-
-                                        
-
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Filter </h5>
+
+                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
+
+                                                <!-- Modal -->
+                                                <div id="myModal" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog modal-lg">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h5 class="modal-title">Register new agro dealer</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
+
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_name" type="text" class="form-control" name="debtor_name" placeholder="Name" require="">
+                                                                        </div>
 
 
-                                            </div>
-                                            <div class="card-block">
-
-                                               
-
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-2">
-                                                             <label class="label bg-success">Order Type</label>
-                                                        <select id="typeValue" name="typeValue" class="form-control" required="">
-                                                            <option value="type_not_selected">Order Type</option>
-                                                            <option value="customer">Customer</option>
-                                                            <option value="agro_dealer">Agro Dealer</option>
-                                                            <option value="b_to_b">Business</option>
-                                                            <option value="grower">Grower</option>
-
-
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-
-                                                    <label class="label bg-success">Select Crop</label>
-                                                    <select name="select_crop" id="select_crop" class="form-control"> 
-                                                        <option value="not_selected">Not Selected</option>
-
-
-                                                    </select>
-
-
-                                                        
-                                                    </div>
-                                                    
-                                                    <div class="col-sm-2">
-
-                                                    <label class="label bg-success">Select Variety</label>
-                                                    <select name="select_variety" id="select_variety" class="form-control"> 
-                                                        <option value="not_selected">Not Selected</option>
-
-
-                                                    </select>
-
-
-                                                        
-                                                    </div>
-                                                    <div class="col-sm-1">
-
-                                                    <label class="label bg-success">Select Class</label>
-                                                    <select name="select_class" id="select_class" class="form-control"> 
-                                                        <option value="not_selected">Class</option>
-                                                        <option value="pre_basic">Pre-Basic</option>
-                                                        <option value="basic">Basic</option>
-                                                        <option value="certified">Certified</option>
-
-
-                                                    </select>
-
-
-                                                        
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                    <label class="label bg-success">From :</label>
-                                                        <input type="date" class="form-control" id="fromDateValue" name="fromDateValue" placeholder="From" require="">
-                                                    </div>
-
-                                                    <div class="col-sm-2">
-                                                    <label class="label bg-success">To :</label>
-                                                        <input type="date" class="form-control" id="toDateValue" name="toDateValue" placeholder="TO " require="">
-                                                    </div>
-
-
-                                                    
+                                                                    </div>
 
 
 
-                                                    <div class="col-sm-1">
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_phone" type="text" class="form-control" name="debtor_phone" placeholder="Phone number" require="">
+                                                                        </div>
 
 
-    </br>
-                                                        <button name="get_data" id="get_data" class="btn btn-success btn-mat btn-mat"><i class="icofont icofont-search"></i></button>
+                                                                    </div>
 
 
-                                                      
-                                                    </div>
-                                                </div>
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="debtor_email" type="text" class="form-control" name="debtor_email" placeholder="Email" require="">
+                                                                        </div>
 
 
-                                                <form action="marketing_csv_handler.php" method="POST">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-3">
+                                                                    </div>
 
 
 
-                                                            <button class="btn btn-success btn-mat btn-mat " id='sales_save_csv' name='sales_save_csv'><i class="icofont icofont-download"></i> CSV</button>
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <labe>Supporting documents :</label>
+                                                                                <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-success btn-mat btn-block" />
+                                                                        </div>
+
+                                                                    </div>
 
 
-                                                            <input type="hidden" name="customer_type_hidden" id="customer_type_hidden">
-                                                            <input type="hidden" name="cropValueHidden" id="cropValueHidden">
-                                                            <input type="hidden" name="varietyValueHidden" id="varietyValueHidden">
-                                                            <input type="hidden" name="classValueHidden" id="classValueHidden">
-                                                            <input type="hidden" name="from_hidden" id="from_hidden">
-                                                            <input type="hidden" name="to_hidden" id="to_hidden">
-                                                            <input type="hidden" name="filter" id="filter">
+                                                                    <div class="form-group row">
+
+                                                                        <div class="col-sm-12">
+                                                                            <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
+                                                                        </div>
+
+
+                                                                    </div>
 
 
 
 
 
-                                                            </select>
 
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>Seed Receive Note #:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>Bin card #:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label>number of bags :</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-2">
+                                                                            <label> Supporting Document:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="file" class="form-control" name="image" id="image">
+                                                                        </div class="form-group row" require="">
+
+
+
+
+
+
+                                                                        </br></br></br>
+
+
+                                                                        <div>
+
+                                                                        </div>
+
+
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
 
                                                     </div>
-                                                </form>
+                                                </div>
 
                                             </div>
                                         </div>
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Items</h5>
+                                                <h5>Active agro dealers </h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
@@ -755,79 +566,64 @@ $.post('get_data.php', {
                                                         <li><i class="fa fa-trash close-card"></i></li>
                                                     </ul>
                                                 </div>
-
-
                                             </div>
                                             <div class="card-block table-border-style">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="dataTable">
+                                                    <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                            <th>Order ID</th>
-                                                                <th>Item Number</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>price per kg</th>
-                                                                <th>Discount</th>
-                                                                <th>Total price</th>
-                                                                <th>Order By</th>
-                                                                <th>Customer Name</th>
-                                                                <th>Order Type</th>
-                                                                <th>Date</th>
-                                                                <th>Action</th>
+                                                                <th>Fullname</th>
+                                                                <th>Email </th>
+                                                                <th>phone</th>
+                                                                <th>Registered date</th>
+                                                                <th>registered by</th>
 
+                                                                <th>Action</th>
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
                                                             <?php
-                                                            $sql = "SELECT item.order_ID,item.item_ID,crop.crop,user.fullname,variety.variety,item.class,item.price_per_kg,item.discount_price,order_table.order_type,item.quantity,item.total_price,order_table.date,order_table.customer_name
-                                                             FROM item INNER JOIN crop ON crop.crop_ID = item.crop_ID INNER JOIN variety ON variety.variety_ID = item.variety_ID INNER JOIN order_table ON order_table.order_ID = item.order_ID 
-                                                             INNER JOIN user ON user.user_ID = order_table.user_ID WHERE order_table.status='processed' ORDER BY order_table.order_ID DESC;";
+
+
+                                                            $sql = "SELECT `debtor_ID`, `name`, debtor.phone, debtor.email, `description`, `fullname`, `debtor_files`, debtor.registered_date FROM `debtor`
+                              INNER JOIN user ON debtor.user_ID = user.user_ID WHERE `debtor_type` = 'agro_dealer'";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
 
-                                                                    $order_ID =$row["order_ID"];
-                            
-                                                                    $item_ID      = $row["item_ID"];
-                                                                    $crop     = $row["crop"];
-                                                                    $order_by=$row["fullname"];
-                                                                    $customer=$row["customer_name"];
-                                                                    $order_date=$row["date"];
-                                                                    $variety = $row["variety"];
-                                                                    $class    = $row['class'];
-                                                                    $quantity = $row['quantity'];
-                                                                    $price_per_kg = $row['price_per_kg'];
-                                                                    $order_type = $row['order_type'];
-                                                                    $discount_price = $row['discount_price'];
-                                                                    $total_price = $row['total_price'];
-                                                                    $page="sales_order";
+                                                                    $debtor_id = $row['debtor_ID'];
+                                                                    $name = $row['name'];
+                                                                    $phone = $row['phone'];
+                                                                    $email = $row['email'];
+                                                                    $registered_date = $row['registered_date'];
+                                                                    $registered_by = $row['fullname'];
+                                                                    $dir = $row['debtor_files'];
+                                                                    $page_type = "agro_dealer";
+
+
+
+
+
+
                                                                     echo "
 											<tr class='odd gradeX'>
-                                            <td>$order_ID</td>
-                                            <td>$item_ID</td>
-                                            <td>$crop</td>
-                                            <td>$variety</td>
-                                            <td>$class</td>
-                                            <td>$quantity</td>
-                                            <td>$price_per_kg </td>
-                                            <td>$discount_price</td>
-                                            <td>$total_price</td>
-                                            <td>$order_by</td>
-                                            <td>$order_type</td>
-                                            <td>$customer</td>
-                                            <td>$order_date</td>
-                                           <td><a href='order_details.php? order_ID=$order_ID & page_type=$page' class='btn btn-success btn-mat'>View Order</a></td>
-                                            
+                                                 <td>$name</td>
+											    <td>$email</td>
+												<td>$phone</td>
+												<td>$registered_date</td>
+												<td>$registered_by</td>
+                                               
+                                                
+                                               
+	
 												
+												<td><a href='account_details.php? debtor_id=$debtor_id&page_type=$page_type' class='btn btn-success'>View</a>
+                                               
+                                                </td>
 											</tr>	
-                                    
-												
 										";
                                                                 }
                                                             }
@@ -835,17 +631,6 @@ $.post('get_data.php', {
                                                         </tbody>
                                                     </table>
                                                 </div>
-
-                                                <div class="card-block">
-
-                                              
-                                            
-                                                
-                                                
-
-                                                
-                                               
-
                                             </div>
                                         </div>
 
@@ -929,14 +714,46 @@ $.post('get_data.php', {
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
-<?php
 
 
 
-
- 
- 
-
-
-?>
 </html>
+
+<?php
+if (isset($_FILES['image'])) {
+    $errors = array();
+    $file_name = $_FILES['image']['name'];
+    $file_size = $_FILES['image']['size'];
+    $file_tmp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
+
+    $newfilename = date('dmYHis') . str_replace(" ", "", basename($_FILES["image"]["name"]));
+
+
+    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+    $extensions = array("pdf");
+
+    if (in_array($file_ext, $extensions) === false) {
+        $errors[] = "extension not allowed, please choose a pdf file .";
+    }
+
+    if ($file_size > 2097152) {
+        $errors[] = 'File size must be excately 2 MB';
+    }
+
+    if (empty($errors) == true) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "../files/marketing/agro_dealer_contracts/" . $newfilename);
+        echo "Success";
+    } else {
+        print_r($errors);
+    }
+}
+
+if (isset($_POST['register_agro_dealer'])) {
+
+    $object = new main();
+
+    $object->add_agro_dealer($_POST['debtor_name'], $_POST['debtor_phone'], $_POST['debtor_email'], "agro_dealer", $newfilename);
+}
+?>

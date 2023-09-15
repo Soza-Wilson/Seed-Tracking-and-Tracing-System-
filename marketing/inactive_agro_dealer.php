@@ -287,16 +287,43 @@ if (in_array($position, $restricted)) {
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="active">
-                                    <a href="agro_dealer.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered </span>
+                            <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Agro Dealer </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                        <li class="">
+                                        <a href="active_agro_dealer.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Agro Dealers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
 
+                                <li class="active">
+                                        <a href="inactive_agro_dealer.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Agro Dealers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                       
+                            
+                                    </ul>
+                                </li>
+
+
+                                
+
 
                             </ul>
+
+
+                           
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">B to B</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -344,7 +371,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Agro Dealer</h5>
+                                            <h5 class="m-b-10">Inactive Agro Dealers</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -354,7 +381,7 @@ if (in_array($position, $restricted)) {
                                                 <a href="marketing_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
-                                            <li class="breadcrumb-item"><a href="grower.php">Agro Dealer</a>
+                                            <li class="breadcrumb-item"><a href="grower.php">Inactive Agro Dealers</a>
                                             </li>
 
                                         </ul>
@@ -382,153 +409,11 @@ if (in_array($position, $restricted)) {
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <div class="card">
-                                            <div class="card-header">
-
-                                                <button type="button" class="btn btn-success btn-mat " data-toggle="modal" data-target="#myModal">Add new Agro dealer</button>
-
-                                                <!-- Modal -->
-                                                <div id="myModal" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                <h5 class="modal-title">Register new agro dealer</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="debtor_name" type="text" class="form-control" name="debtor_name" placeholder="Name" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="debtor_phone" type="text" class="form-control" name="debtor_phone" placeholder="Phone number" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="debtor_email" type="text" class="form-control" name="debtor_email" placeholder="Email" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <labe>Supporting documents :</label>
-                                                                                <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-success btn-mat btn-block" />
-                                                                        </div>
-
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-
-
-
-
-
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>Seed Receive Note #:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>Bin card #:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>number of bags :</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label> Supporting Document:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="file" class="form-control" name="image" id="image">
-                                                                        </div class="form-group row" require="">
-
-
-
-
-
-
-                                                                        </br></br></br>
-
-
-                                                                        <div>
-
-                                                                        </div>
-
-
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Registred growers </h5>
+                                                <h5>Inactive agro dealers </h5>
 
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">

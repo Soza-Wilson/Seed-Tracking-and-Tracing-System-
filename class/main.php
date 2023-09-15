@@ -7,9 +7,11 @@
 // $database  = 'seed_tracking_DB';
 // $con = new mysqli($localhost, $username, $password, $database);
 
+$con = mysqli_connect("localhost", "root", "", "seed_tracking_db");
+
 
 //$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
-$con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
+// $con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
 
 
 
@@ -242,10 +244,9 @@ class main
     if ($statement->execute()) {
 
 
-     
+
       return self::add_price($crop_id, $variety_id);
     }
-
   }
 
   function add_price($crop_id, $variety_id)
@@ -259,17 +260,13 @@ class main
     '0.00','0.00','0.00','0.00','0.00','0.00')";
 
     $statement = $con->prepare($sql);
-    if($statement->execute()){
-  
-      return "registered";
+    if ($statement->execute()) {
 
-    }
-    else{
+      return "registered";
+    } else {
 
       return "error";
     }
-
-    
   }
 
 
@@ -319,7 +316,7 @@ class main
   //admin set prices for all products function
 
 
-  static function allocate_role_to_user($userId,$department, $role)
+  static function allocate_role_to_user($userId, $department, $role)
   {
 
     global $con;
@@ -1746,7 +1743,7 @@ class main
     global $con;
     $sql = "UPDATE `client` SET `business_name`='$name',`country`='$country',`physical_address`='$physical_address'";
     $statement = $con->prepare($sql);
-    if($statement->execute()){
+    if ($statement->execute()) {
 
       return "updated";
     }
@@ -1754,18 +1751,16 @@ class main
 
   // save business logo image
 
-  static function save_logo($image){
+  static function save_logo($image)
+  {
 
     global $con;
     $sql = "UPDATE `client` SET `logo`='$image'";
     $statement = $con->prepare($sql);
-    if($statement->execute()){
+    if ($statement->execute()) {
 
       return "saved";
-
     }
-
-
   }
 
   function update_season($opening_date, $closing_date)
@@ -1811,14 +1806,16 @@ class main
     $added_date = date("Y-m-d");
     global $con;
 
-    if (self::check_ids("certificate", "lot_number", $lot_number) == "false") {
+    if (self::check_ids("certificate", "lot_number", $lot_number)) {
+      return 'lot_number already exists';
+    } else {
 
       $sql = "INSERT INTO `certificate`(`lot_number`, `crop_ID`, `variety_ID`, `class`, `type`, `source`, 
-                      `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, 
-                      `available_quantity`, `assigned_quantity`, `status`, `directory`, `user_ID`) VALUES 
-                      ('$lot_number','$crop','$variety','$class','$type','$source','$source_name',
-                      '$date_tested','$expire_date','$added_date','$certificate_quantity',
-                      '$certificate_quantity','$certificate_quantity','available','$directory','$user')";
+      `source_name`, `date_tested`, `expiry_date`, `date_added`, `certificate_quantity`, 
+      `available_quantity`, `assigned_quantity`, `status`, `directory`, `user_ID`) VALUES 
+      ('$lot_number','$crop','$variety','$class','$type','$source','$source_name',
+      '$date_tested','$expire_date','$added_date','$certificate_quantity',
+      '$certificate_quantity','$certificate_quantity','available','$directory','$user')";
 
       $statement = $con->prepare($sql);
 
@@ -1829,14 +1826,11 @@ class main
 
         return "error ";
       }
-    } else {
-
-      return "error lot number already registered";
     }
   }
 
 
-
+  //  checking if ids already exists 
 
 
   static function check_ids($table_name, $id_title, $id_value)
@@ -1844,13 +1838,12 @@ class main
     global $con;
 
     $sql = "SELECT * FROM `" . $table_name . "` WHERE `" . $id_title . "` ='$id_value'";
-
     $result =  $con->query($sql);
     if ($result->num_rows > 0) {
 
-      return "n";
+      return true;
     } else {
-      "false";
+      return false;
     }
   }
 

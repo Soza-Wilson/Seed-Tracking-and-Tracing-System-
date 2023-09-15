@@ -19,6 +19,8 @@ $(document).ready(function () {
   });
 });
 
+
+// cheching if assigned seed is procceding available seed in inventory
 const assignForProcessing = (stockInId, quantity, user) => {
   $.post(
     "get_data.php",
@@ -31,8 +33,6 @@ const assignForProcessing = (stockInId, quantity, user) => {
       } else {
         alert(data);
          //openPdf(data);
-    
-        
       }
     }
   );

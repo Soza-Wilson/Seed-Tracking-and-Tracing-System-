@@ -297,13 +297,37 @@ $female_quantity = $_GET["female_quantity"];
                             <div class="pcoded-navigation-label" data-i18n="nav.category.other">Agro Dealer</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="">
-                                    <a href="agro_dealer.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Registered </span>
+                            <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Agro Dealer </span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                        <li class="">
+                                        <a href="active_agro_dealer.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Agro Dealers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+
+                                <li class="">
+                                        <a href="inactive_agro_dealer.php" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Agro Dealers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                       
+                            
+                                    </ul>
+                                </li>
+
+
+                                
 
 
                             </ul>

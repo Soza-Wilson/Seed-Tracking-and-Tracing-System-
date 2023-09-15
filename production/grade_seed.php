@@ -671,26 +671,6 @@ if (empty($test)) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             <div class="form-group row">
                                                 <div class="col-sm-2">
                                                     <label>Assign quantity:</label>

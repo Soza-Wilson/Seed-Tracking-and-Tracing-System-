@@ -650,7 +650,7 @@ if (in_array($position, $restricted)) {
                                                                     $action_name     = $row["action_name"];
                                                                     $action_id  = $row["action_id"];
                                                                     $requested_name = $row['requested_name'];
-                                                                    $date = $row['date'];
+                                                                    $date = main::change_date_format($row['date']);
                                                                     $time = $row['time'];
                                                                     $description = $row['description'];
                                                                 

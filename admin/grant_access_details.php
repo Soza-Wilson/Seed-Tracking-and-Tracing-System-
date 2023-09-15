@@ -582,7 +582,7 @@ if (in_array($position, $restricted)) {
                                                         <label>date :</label>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo $date; ?>">
+                                                        <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="" value="<?php echo main::change_date_format($date); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

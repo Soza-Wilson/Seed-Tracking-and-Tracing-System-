@@ -61,7 +61,7 @@ if (in_array($position, $restricted)) {
     <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
         </script>
 
-    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation.css">
+<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
     <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 </head>
 
@@ -649,11 +649,11 @@ if (in_array($position, $restricted)) {
                                                         <tbody>
 
                                                             <?php
-                                                              $date = date("Y-m-d");
+                                                              $date = date("y-m-d");
                                                             $sql = "SELECT `lot_number`, `crop`, `variety`, `class`, `type`, `source`, `date_tested`, `expiry_date`, `date_added`,
                                  `certificate_quantity`, `available_quantity`, `assigned_quantity`,`directory`, `fullname` FROM `certificate`
                                  INNER JOIN crop ON certificate.crop_ID = crop.crop_ID INNER JOIN variety ON certificate.variety_ID = variety.variety_ID 
-                                 INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` > '$date'";
+                                 INNER JOIN user ON user.user_ID = certificate.user_ID WHERE `available_quantity` > 0 AND `expiry_date` <= '$date'";
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
@@ -663,9 +663,9 @@ if (in_array($position, $restricted)) {
                                                                     $class     = $row["class"];
                                                                     $type  = $row["type"];
                                                                     $source = $row['source'];
-                                                                    $date_tested = $row['date_tested'];
-                                                                    $expire_date = $row['expiry_date'];
-                                                                    $date_added = $row['date_added'];
+                                                                    $date_tested = main::change_date_format($row['date_tested']);
+                                                                    $expire_date = main::change_date_format($row['expiry_date']);
+                                                                    $date_added = main::change_date_format($row['date_added']);
                                                                     $dir = $row['directory'];
                                                                     $certificate_quantity = $row['certificate_quantity'];
                                                                     $available_quantity = $row['available_quantity'];

@@ -737,7 +737,7 @@ if (in_array($position, $notRestricted)) {
                                                                     $name = $row['name'];
                                                                     $phone = $row['phone'];
                                                                     $email = $row['email'];
-                                                                    $registered_date = $row['registered_date'];
+                                                                    $registered_date =  main::change_date_format($row['registered_date']);
                                                                     $registered_by = $row['fullname'];
                                                                     $status =$row['creditor_status'];
                                                               

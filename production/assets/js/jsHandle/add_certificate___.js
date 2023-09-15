@@ -83,10 +83,16 @@ $(document).ready(function () {
             insertCertificate: data,
           },
           function (data) {
+           
+           if(data==='registered'){
+             alert("Certificate registered");
+            window.location.reload();
+           }else
+           {
 
-            alert(data);
-            // alert("Data added succefully");
-            // window.location.reload();
+            alert("Error!! : Lot number already exists")
+           }
+       
           }
         );
       } else {
@@ -95,9 +101,9 @@ $(document).ready(function () {
     }
 
     if (emptyFields <= 0) {
-      alert(working);
+      
     } else if (emptyFields <= 0) {
-      alert(working);
+    
     }
   });
   const loaded = "1";

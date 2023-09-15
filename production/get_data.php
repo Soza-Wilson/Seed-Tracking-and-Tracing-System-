@@ -82,7 +82,7 @@ if (isset($_POST["get_stock_in"])) {
 
 if (isset($_POST["get_stock_out"])) {
 
-  $sql = "SELECT SUM(stock_out.amount) AS quantity FROM stock_out";
+  $sql = "SELECT SUM(quantity) AS quantity FROM stock_out";
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
