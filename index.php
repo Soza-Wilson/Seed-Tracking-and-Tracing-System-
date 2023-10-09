@@ -2,7 +2,7 @@
 <?php
 
 Ob_start();
-include('class/main.php');
+include('class/Auth.php');
 
 ?>
 
@@ -198,11 +198,7 @@ include('class/main.php');
     </body>
     <?php
     if (isset($_POST['login_btn'])) {
-
-
-
-        $object = new main();
-
+        $object = new Auth();
         $object->user_log_in($_POST['email'], $_POST['password']);
     }
 

@@ -87,7 +87,6 @@ class User
 
         $statement = $con->prepare($sql);
         if ($statement->execute()) {
-
             return "registered";
         };
     }
@@ -99,7 +98,6 @@ class User
         $sql = "UPDATE `user` SET `account_status`='suspended' WHERE `user_ID`='$user_id'";
         $statement = $con->prepare($sql);
         if ($statement->execute()) {
-
             return "suspended";
         }
     }
