@@ -59,6 +59,10 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/active_agro_dealer__.js"></script>
+
 </head>
 
 <body>
@@ -425,7 +429,7 @@ if (in_array($position, $restricted)) {
                                                                 <h5 class="modal-title">Register new agro dealer</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="agro_dealer.php" method="POST" enctype="multipart/form-data">
+                                                          
 
                                                                     <div class="form-group row">
 
@@ -441,7 +445,7 @@ if (in_array($position, $restricted)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                            <input id="debtor_phone" type="text" class="form-control" name="debtor_phone" placeholder="Phone number" require="">
+                                                                            <input id="debtor_phone" type="number" class="form-control" name="debtor_phone" placeholder="Phone number" require="">
                                                                         </div>
 
 
@@ -451,35 +455,32 @@ if (in_array($position, $restricted)) {
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
-                                                                            <input id="debtor_email" type="text" class="form-control" name="debtor_email" placeholder="Email" require="">
+                                                                            <input id="debtor_email" type="email" class="form-control" name="debtor_email" placeholder="Email" require="">
                                                                         </div>
 
 
                                                                     </div>
 
-
+                                                                   
 
                                                                     <div class="form-group row">
 
                                                                         <div class="col-sm-12">
                                                                             <labe>Supporting documents :</label>
-                                                                                <input id="image" type="file" class="form-control" name="image" placeholder="Phone number" require="">
+                                                                                <input id="file_directory" type="file" class="form-control" name="image" placeholder="Phone number" require="">
                                                                         </div>
+
+                                                                
                                                                         <div class="modal-footer">
-                                                                            <input type="submit" name="register_agro_dealer" value="Save" class="btn waves-effect waves-light btn-success btn-mat btn-block" />
+                                                                          
+
+                                                                            <button id='save_agro_dealer' name="save_agro_dealer" class="btn waves-effect waves-light btn-success btn-mat btn-block">save</button>
                                                                         </div>
 
                                                                     </div>
+             
 
-
-                                                                    <div class="form-group row">
-
-                                                                        <div class="col-sm-12">
-                                                                            <input id="description" type="text" class="form-control" name="description" placeholder="description" require="">
-                                                                        </div>
-
-
-                                                                    </div>
+                                                                   
 
 
 
@@ -487,61 +488,14 @@ if (in_array($position, $restricted)) {
 
 
 
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>Seed Receive Note #:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="srn" class="form-control" name="srn" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>Bin card #:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="bin_card " class="form-control" name="bin_card" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label>number of bags :</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="text" id="number_of_bags" class="form-control" name="number_of_bags" placeholder="-" require="">
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-2">
-                                                                            <label> Supporting Document:</label>
-                                                                        </div>
-                                                                        <div class="col-sm-12">
-                                                                            <input type="file" class="form-control" name="image" id="image">
-                                                                        </div class="form-group row" require="">
+                                                                    
 
 
 
 
 
-
-                                                                        </br></br></br>
-
-
-                                                                        <div>
-
-                                                                        </div>
-
-
-
-                                                                </form>
-                                                            </div>
+                                                              
+                                                            
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                             </div>

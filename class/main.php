@@ -7,11 +7,11 @@
 // $database  = 'seed_tracking_DB';
 // $con = new mysqli($localhost, $username, $password, $database);
 
-$con = mysqli_connect("localhost", "root", "", "seed_tracking_db");
+// $con = mysqli_connect("localhost", "root", "", "seed_tracking_db");
 
 
 //$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
-// $con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
+$con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
 
 
 
@@ -2548,7 +2548,7 @@ class main
   /// marketing functions 
 
   // register agro dealer 
-  function add_agro_dealer($name, $phone, $email, $debtor_type, $debtor_files)
+  static function add_agro_dealer($name, $phone, $email, $debtor_type, $debtor_files)
   {
 
 
@@ -2564,7 +2564,7 @@ class main
       </script>");
       } else {
 
-        $agro_dealer_ID = $this->generate_user("debtor");
+        $agro_dealer_ID = self::generate_user("debtor");
         $user_ID = $_SESSION['user'];
         $register_date = date("Y-m-d");
 

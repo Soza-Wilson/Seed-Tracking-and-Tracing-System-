@@ -6,6 +6,13 @@ $type_value = "";
 
 include('../class/main.php');
 
+
+if(isset($_POST['register_agro_dealer'])){
+  $agro_dealer_data = $_POST['register_agro_dealer'];
+  echo main::add_agro_dealer($agro_dealer_data[0],$agro_dealer_data[1],$agro_dealer_data[2],$agro_dealer_data[3],$agro_dealer_data[4]);
+   
+}
+
 if (isset($_POST['createCertificateTable'])) {
   $data = $_POST['createCertificateTable'];
 

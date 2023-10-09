@@ -85,7 +85,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" type="text/css" href="../assets/css/style_.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="../assets/js/jsHandle/user_profile.js">
+    <script type="text/javascript" src="../assets/js/jsHandle/user_profile_.js">
 
     </script>
 

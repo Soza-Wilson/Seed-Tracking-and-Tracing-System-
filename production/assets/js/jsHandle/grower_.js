@@ -18,7 +18,7 @@ $(document).ready(() => {
 
      let conf = confirm("Are you sure ?");
 
-     if(conf =true){
+     if(conf){
       
       if($("#fileDirectory").val()==""){
        

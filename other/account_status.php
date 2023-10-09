@@ -120,7 +120,7 @@
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
                                         <h5 class="text-center txt-primary" >Account unassigned.</h5>
-                                        <p class="text-inverse text-left m-b-0">Waiting for system admin to assign account to department </p>
+                                        <p class="text-inverse text-left m-b-0">Waiting for system admin to assign account to department and role </p>
                                     </div>
                                 </div>
 

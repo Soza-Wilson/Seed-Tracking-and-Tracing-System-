@@ -13,9 +13,16 @@ $(document).ready(() => {
           userId: $("#user").val(),
         },
         (data) => {
+
+          alert
+          
           if (data == "updated") {
             alert("updated");
             window.location.reload();
+          }
+          else{
+            alert(data)
+
           }
         }
       );
@@ -44,7 +51,6 @@ $(document).ready(() => {
         updateUser: userData,
       },
       (data) => {
-       
         if (data == "updated") {
           alert("updated");
           window.location.reload();
