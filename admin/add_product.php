@@ -62,7 +62,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/add_product_.js">
+    <script type="text/javascript" src="assets/js/jsHandler/add_product.js">
        
     </script>
 
@@ -509,7 +509,7 @@ if (in_array($position, $restricted)) {
 
                                             <div class="form-group row">
                                                 <div class="col-sm-2">
-                                                    <label>Register new variety </label>
+                                                    <label>Register new variety dwd </label>
                                                 </div>
                                                 
                                                     <div class="col-sm-12">
@@ -527,9 +527,14 @@ if (in_array($position, $restricted)) {
                                                     <label for="" class="label">Variety Name</label>
                                                     <input type="text" class="form-control" name="new_variety" id="new_variety" placeholder="Enter variety name" require="">
                                                 </div>
+                                                                     
+                                              
+
+                                              
                                                 <div class="col-sm-12">
-                                                <label for="" class="label">Variety type</label>
+                                               
                                                     <select id="variety_type" name="variety_type" class="form-control" required="">
+                                                        <option value="-">Select variety type</option>
                                                         <option value="-">None</option>
                                                         <option value="opv">OPV (Open Polinated Variety)</option>
                                                         <option value="hybrid">Hybrid</option>

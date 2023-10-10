@@ -103,6 +103,7 @@ $(document).ready(function () {
                     alert("New crop registered");
                     window.location.reload();
                   } else {
+                    alert(data);
                   }
                 }
               );
@@ -151,6 +152,8 @@ const registerVariety = (crop_id, variety) => {
         window.location.reload();
       } else {
         alert("Error: Unable to register new variety");
+        alert(data)
+        window.location.reload();
       }
     }
   );

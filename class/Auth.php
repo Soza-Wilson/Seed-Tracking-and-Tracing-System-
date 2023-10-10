@@ -17,7 +17,7 @@ class Auth
         if ($count === 1) {
 
             /*
-            Create session for diffrent users, user will have access to pages acording to their department and position
+            Create session for diffrent users, user will have access to pages according to their department and position
             */
             $data = $result->fetch_assoc();
             session_start();

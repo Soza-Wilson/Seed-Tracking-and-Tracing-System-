@@ -1,6 +1,7 @@
 <?php
 include('../class/main.php');
 include('../class/User.php');
+include('../class/Product.php');
 $object = new main();
 if (isset($_POST["grantUserAccess"])) {
 
@@ -52,14 +53,14 @@ if (isset($_POST["getCropPrices"])) {
 //  check if new crop name already exists
 
 if (isset($_POST["checkNewCropName"])) {
-   echo main::check_new_crop_name($_POST["checkNewCropName"]);
+   echo Product::check_new_crop_name($_POST["checkNewCropName"]);
 }
 
 
 // register  new crop 
 
 if(isset($_POST["registerCrop"])){
-   echo main::register_crop($_POST["registerCrop"]);
+   echo Product::register_crop($_POST["registerCrop"]);
 }
 
 
@@ -68,14 +69,14 @@ if(isset($_POST["registerCrop"])){
 if (isset($_POST["checkNewVarietyName"])) {
    $data = $_POST["checkNewVarietyName"];
 
-   echo main::check_new_variety_name($data[0], $data[1]);
+   echo Product::check_new_variety_name($data[0], $data[1]);
 }
 
 // register new variety
 
 if (isset($_POST["registerNewVariety"])) {
    $data = $_POST["registerNewVariety"];
-   echo main::register_variety($data[0],$data[1],$data[2]);
+   echo Product::register_variety($data[0],$data[1],$data[2]);
 }
 
 
@@ -86,10 +87,10 @@ if (isset($_POST["setNewPrices"])) {
 
 
    $data = $_POST["setNewPrices"];
-   echo main::set_sell_prices($data[0], $data[1], $data[2], $data[3], $data[4], $data[5]);
+   echo Product::set_sell_prices($data[0], $data[1], $data[2], $data[3], $data[4], $data[5]);
 }
 
 if (isset($_POST["setBuyPrices"])) {
    $data = $_POST["setBuyPrices"];
-   echo main::set_buy_prices($data[0], $data[1], $data[2], $data[3], $data[4], $data[5]);
+   echo Product::set_buy_prices($data[0], $data[1], $data[2], $data[3], $data[4], $data[5]);
 }
