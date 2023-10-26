@@ -72,7 +72,7 @@ $(document).ready(() => {
   function activate_grower(grower_id,file,user){
              let contractData = [grower_id,file,user]
     $.post(
-      "get_data.php",
+      "get_data/creditor.php",
       {
        activateGrower: contractData,
       },
@@ -111,7 +111,7 @@ $(document).ready(() => {
 
   function checkName() {
     $.post(
-      "get_data.php",
+      "get_data/creditor_data.php",
       {
         checkGrowerName: $("#creditor_name").val(),
       },
@@ -156,15 +156,16 @@ $(document).ready(() => {
     ];
 
     $.post(
-      "get_data.php",
+      "get_data/creditor_data.php",
       {
         registerGrower: growerData,
       },
       (data) => {
         if (data !== "") {
+          alert(data)
           addContract(data);
         } else {
-          alert("Error: Grower not registered ");
+          alert( data);
           window.location.reload();
         }
       }
@@ -175,7 +176,7 @@ $(document).ready(() => {
     let contractData = [creditorID, $("#user").val(), $("#tempFile").val()];
 
     $.post(
-      "get_data.php",
+      "get_data/creditor_data.php",
       {
         registerContract: contractData,
       },

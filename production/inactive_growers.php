@@ -3,7 +3,7 @@
 <?php
 
 Ob_start();
-include('../class/main.php');
+include('../class/Season.php');
 session_start();
 
 $test = $_SESSION['fullname'];
@@ -21,7 +21,7 @@ if (in_array($position, $notRestricted)) {
 } else {
     header('Location:../restricted_access/restricted_access.php');
 }
- $object = new main();
+ $object = new Season();
  $object -> check_season_closing();
 
 ?>

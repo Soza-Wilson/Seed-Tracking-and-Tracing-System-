@@ -1,9 +1,16 @@
 <?php
 
-include('../class/main.php');
+
+require('../class/Farm.php');
+
+
 
 
 $object = new main();
+$certificate = new Certificate();
+$farm = new Farm();
+
+
 
 //  getting graded quantity for selected stock in 
 
@@ -219,16 +226,16 @@ if (isset($_POST["deleteStockIn"])) {
 }
 
 if (isset($_POST["deleteCertificate"])) {
-  $object->delete_certificate($_POST["deleteCertificate"]);
+ echo $certificate->delete_certificate($_POST["deleteCertificate"]);
 }
 
-if (isset($_POST["registerGrower"])) {
+// if (isset($_POST["registerGrower"])) {
 
-  $growerData = $_POST["registerGrower"];
-  $growerName = strtolower($growerData[1]);
-  $returnData = $object->add_creditor($growerData[0], $growerName, $growerData[2], $growerData[3], "-", $growerData[4], "active");
-  echo $returnData[1];
-}
+//   $growerData = $_POST["registerGrower"];
+//   $growerName = strtolower($growerData[1]);
+//   $returnData = $creditorObject->add_creditor($growerData[0], $growerName, $growerData[2], $growerData[3], "-", $growerData[4], "active");
+//   echo $returnData[1];
+// }
 
 if (isset($_POST["registerUser"])) {
   // $userInput = $_POST["registerUSer"];
@@ -266,7 +273,7 @@ if (isset($_POST["registerFarm"])) {
 
 
   $farmRegisterData = $_POST["registerFarm"];
-  $returnData = $object->register_farm(
+  $returnData = $farm->register_farm(
     $farmRegisterData[4],
     $farmRegisterData[1],
     $farmRegisterData[2],
@@ -299,7 +306,7 @@ if (isset($_POST["updateFarm"])) {
 
 
   $farmRegisterData = $_POST["updateFarm"];
-  $returnData = $object->update_farm(
+  $returnData = $farm->update_farm(
     $farmRegisterData[4],
     $farmRegisterData[1],
     $farmRegisterData[2],
@@ -1064,20 +1071,22 @@ if (isset($_POST["insertCertificate"])) {
 
  $certificate_data = $_POST["insertCertificate"];
 
-  echo $object->add_certificate(
-   $certificate_data[4],
-   $certificate_data[0],
-   $certificate_data[1],
-   $certificate_data[2],
-   $certificate_data[3],
-   $certificate_data[6],
-   $certificate_data[7],
-   $certificate_data[8],
-   $certificate_data[9],
-   $certificate_data[5],
-   $certificate_data[10],
-   $certificate_data[11]
-  );
+
+ echo $certificate->add_certificate( 
+$certificate_data[4],
+ $certificate_data[0],
+ $certificate_data[1],
+ $certificate_data[2],
+ $certificate_data[3],
+ $certificate_data[6],
+ $certificate_data[7],
+ $certificate_data[8],
+ $certificate_data[9],
+ $certificate_data[5],
+ $certificate_data[10],
+ $certificate_data[11]);
+
+ 
 }
 
 

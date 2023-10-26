@@ -90,7 +90,7 @@ $(document).ready(function () {
            }else
            {
 
-            alert("Error!! : Lot number already exists")
+            alert(data)
            }
        
           }

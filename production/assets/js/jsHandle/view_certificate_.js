@@ -96,9 +96,9 @@ $(document).ready(function () {
                 {
                   deleteCertificate: lotNumber,
                 },
-                function () {
-                  alert("Certificate deleted");
-                  window.history.back();
+                function (data) {
+                  alert(data);
+                  // window.history.back();
                 }
               );
             } else {

@@ -10,12 +10,14 @@ if (isset($_POST["registerUser"])) {
 }
 
 if (isset($_POST["updateProfilePicture"])) {
-    echo User::update_profile_picture($_POST["userId"], $_POST["updateProfilePicture"]);
+    $user = new User("","","","","","");
+    echo $user->update_profile_picture($_POST["userId"], $_POST["updateProfilePicture"]);
 }
 
 if(isset($_POST["updateUser"])){
 
+    $user = new User("","","","","","");
     $userData = $_POST["updateUser"];
-    echo User::update_user($userData[0],$userData[1],$userData[2],$userData[3]);
+    echo $user->update_user($userData[0],$userData[1],$userData[2],$userData[3]);
 
 }

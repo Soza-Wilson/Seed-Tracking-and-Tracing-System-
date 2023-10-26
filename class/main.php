@@ -1,26 +1,20 @@
 <?php
 
-// database connection
-// $localhost = 'db';
-// $username  = 'seed_tracking_DB';
-// $password  = '123456sa.';
-// $database  = 'seed_tracking_DB';
-// $con = new mysqli($localhost, $username, $password, $database);
-
-// $con = mysqli_connect("localhost", "root", "", "seed_tracking_db");
 
 
-//$con = mysqli_connect('db', 'seed_tracking_DB', '123456sa.', 'seed_tracking_DB');
-$con = mysqli_connect('localhost', 'root', 'soza123@Sa.', 'seed_tracking_DB');
+require('DbConnection.php');
+require('Util.php');
 
-
-
+$db = new DbConnection();
+$con = $db->connect();
 
 class main
 {
 
 
-  // system generate id functions (the unique id will include shuffled corrent time and random number concantinated with the department)
+
+
+
 
   static function generate_user($department)
   {
@@ -62,64 +56,8 @@ class main
   //user log-in function
 
 
-  function user_log_in($email, $password)
-  {
-
-    $Email = $email;
-    $Password = $password;
 
 
-    global $con;
-    $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
-
-    $result =  $con->query($sql);
-    $count = $result->num_rows;
-
-    if ($count === 1) {
-
-
-      $name = $result->fetch_assoc();
-
-
-      session_start();
-      $_SESSION['user'] = $name['user_ID'];
-      $_SESSION['fullname'] = $name['fullname'];
-      $_SESSION['depertment'] = $name['user_type_ID'];
-      $_SESSION['position'] = $name['postion'];
-      $_SESSION['account_status'] = $name['account_status'];
-      $_SESSION['profile'] = $name['profile_picture'];
-      if ($_SESSION['depertment'] == 1) {
-
-        header('Location:admin/admin_dashboard.php');
-      } else if ($_SESSION['depertment'] == 2 &&  $_SESSION['position'] == "warehouse_officer") {
-
-        header('Location:production/stock_in.php');
-      } else if ($_SESSION['depertment'] == 2 &&  $_SESSION['position'] == "lab_technician") {
-
-        header('Location:production/new_test.php');
-      } else if ($_SESSION['depertment'] == 2 &&  $_SESSION['position'] == "field_officer") {
-
-        header('Location:production/grower.php');
-      } else if ($_SESSION['depertment'] == 2) {
-
-        header('Location:production/production_dashboard.php');
-      } else if ($_SESSION['depertment'] == 3) {
-
-        header('Location:marketing/marketing_dashboard.php');
-      } else if ($_SESSION['depertment'] == 4) {
-
-        header('Location:production/m&e_dashboard.php');
-      } else if ($_SESSION['depertment'] == 5) {
-
-        header('Location:finance/finance_dashboard.php');
-      } else if ($_SESSION['account_status'] == "unsigned") {
-        header('Location:other/account_status.php');
-      }
-    } else {
-      echo ("<script> alert('wrong username or password');
-        </script>");
-    }
-  }
 
 
 
@@ -868,7 +806,6 @@ class main
 
 
     $sql = "UPDATE `certificate` SET `available_quantity`= available_quantity-$quantity WHERE `lot_number`='$certificateID'";
-
 
     $statement = $con->prepare($sql);
     $statement->execute();
@@ -1661,36 +1598,36 @@ class main
   }
 
 
-  function check_season_closing()
-  {
+  // function check_season_closing()
+  // {
 
 
 
-    $season = $this->get_season();
-    global $con;
-    // get colosing date 
-    $sql = "SELECT opening_date,closing_date FROM growing_season WHERE season='$season'";
-    $result = $con->query($sql);
+  //   //$season = $this->get_season();
+  //   global $con;
+  //   // get colosing date 
+  //   $sql = "SELECT opening_date,closing_date FROM growing_season WHERE season='$season'";
+  //   $result = $con->query($sql);
 
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $closing_date = $row['closing_date'];
-        $opening_date = $row['opening_date'];
-      }
+  //   if ($result->num_rows > 0) {
+  //     while ($row = $result->fetch_assoc()) {
+  //       $closing_date = $row['closing_date'];
+  //       $opening_date = $row['opening_date'];
+  //     }
 
-      $target_date = '2023-06-01';
-      $current_date = date('Y-m-d');
+  //     $target_date = '2023-06-01';
+  //     $current_date = date('Y-m-d');
 
 
-      $target_timestamp = strtotime($closing_date);
-      $current_timestamp = strtotime($current_date);
+  //     $target_timestamp = strtotime($closing_date);
+  //     $current_timestamp = strtotime($current_date);
 
-      if ($target_timestamp < $current_timestamp) {
-        $this->deactivate_growers($season);
-        $this->create_new_season($opening_date, $closing_date);
-      }
-    }
-  }
+  //     if ($target_timestamp < $current_timestamp) {
+  //       $this->deactivate_growers($season);
+  //       $this->create_new_season($opening_date, $closing_date);
+  //     }
+  //   }
+  // }
 
 
 

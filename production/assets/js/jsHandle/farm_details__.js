@@ -803,8 +803,9 @@ $(document).ready(() => {
                     alert("Farm updated successfully");
                     window.location.reload();
                   } else {
-                    alert("Error: something went wrong ");
-                    window.location.reload();
+                    alert("Error: something went wrong ,"+data);
+                    alert(data)
+                    // window.location.reload();
                   }
                 }
               );

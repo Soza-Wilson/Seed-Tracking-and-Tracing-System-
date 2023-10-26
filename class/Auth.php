@@ -1,37 +1,46 @@
 <?php
-
-include('class/Database.php');
+require ('DbConnection.php');
 class Auth
-{
+{ 
+
+   
     function user_log_in($email, $password)
     {
+        try {
+            //code...
+            $connect = new DbConnection();
+            $con = $connect->connect();
+            $Email = $email;
+            $Password = $password;
+            $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
+    
+            $result =  $con->query($sql);
+            $count = $result->num_rows;
+    
+            if ($count === 1) {
+    
+                /*
+                Create session for diffrent users, user will have access to pages according to their department and position
+                */
+                $data = $result->fetch_assoc();
+                session_start();
+                $_SESSION['user'] = $data['user_ID'];
+                $_SESSION['fullname'] = $data['fullname'];
+                $_SESSION['depertment'] = $data['user_type_ID'];
+                $_SESSION['position'] = $data['postion'];
+                $_SESSION['account_status'] = $data['account_status'];
+                $_SESSION['profile'] = $data['profile_picture'];
+                $this->navigate_user($_SESSION['depertment'], $_SESSION['position']);
+            } else {
+                echo ("<script> alert('wrong username or password');
+              </script>");
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
 
-        $con = Database::connect();
-        $Email = $email;
-        $Password = $password;
-        $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
-
-        $result =  $con->query($sql);
-        $count = $result->num_rows;
-
-        if ($count === 1) {
-
-            /*
-            Create session for diffrent users, user will have access to pages according to their department and position
-            */
-            $data = $result->fetch_assoc();
-            session_start();
-            $_SESSION['user'] = $data['user_ID'];
-            $_SESSION['fullname'] = $data['fullname'];
-            $_SESSION['depertment'] = $data['user_type_ID'];
-            $_SESSION['position'] = $data['postion'];
-            $_SESSION['account_status'] = $data['account_status'];
-            $_SESSION['profile'] = $data['profile_picture'];
-            $this->navigate_user($_SESSION['depertment'], $_SESSION['position']);
-        } else {
-            echo ("<script> alert('wrong username or password');
-          </script>");
+            return "Error Logging in ".$th;
         }
+       
     }
 
 

@@ -602,8 +602,8 @@ $(document).ready(function () {
 
           else{
 
-            alert("Error: something went wrong ");
-            window.location.reload();
+            alert(data);
+            // window.location.reload();
 
 
           }

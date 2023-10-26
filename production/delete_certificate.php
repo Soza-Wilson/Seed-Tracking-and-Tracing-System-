@@ -54,7 +54,7 @@ if (empty($test)) {
       <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
 
       <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate_.js">
         </script>
   </head>
 
