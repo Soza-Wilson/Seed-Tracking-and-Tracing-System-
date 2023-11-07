@@ -92,6 +92,7 @@ class production
 $result =  $con->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        
   
         $data[0] = $row["test_ID"];
         $data[1] = $row["source"];

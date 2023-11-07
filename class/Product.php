@@ -1,4 +1,5 @@
 <?php
+require('Farm.php');
 
 class Product
 {
@@ -52,7 +53,7 @@ class Product
 
 
 
-  public function check_new_variety_name($crop, $new_variety_name)
+  public function check_new_variety_name($crop, $new_variety_name):string
   {
     $variety = strtoupper($new_variety_name);
 
@@ -72,7 +73,7 @@ class Product
 
 
 
-  public function register_variety($crop_id, $variety_name, $variety_type)
+  public function register_variety($crop_id, $variety_name, $variety_type) 
   {
 
     $v_name = strtoupper($variety_name);
@@ -97,7 +98,7 @@ class Product
 
 
 
-  function add_price($crop_id, $variety_id)
+  public function add_price($crop_id, $variety_id)
   {
 
 
@@ -131,7 +132,7 @@ class Product
       $result =  $this->con->query($sql);
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-          return $row["sell_breeder"] . "," . $row["sell_basic"] . "," . $row["sell_pre_basic"] . "," . $row["sell_certified"] . "," . $row["buy_breeder"] . "," . $row["buy_basic"] . "," . $row["buy_pre_basic"] . "," . $row["buy_certified"];
+          return $row["sell_breeder"] . "," . $row["sell_basic"] . "," . $row["sell_pre_basic"] . "," . $row["sell_certified"] . "," . $row["buy_breeder"] . "," . $row["buy_pre_basic"] . "," . $row["buy_basic"] . "," . $row["buy_certified"];
         }
       }
       mysqli_close($this->con);

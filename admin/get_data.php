@@ -1,7 +1,7 @@
 <?php
-include('../class/main.php');
-include('../class/User.php');
-include('../class/Product.php');
+// include('../class/main.php');
+// include('../class/User.php');
+// include('../class/Product.php');
 $object = new main();
 
 

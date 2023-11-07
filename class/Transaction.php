@@ -58,7 +58,7 @@ class Transaction
 
 
 
-    public function update_account_funds($creditor_id, $funds, $type)
+    public function update_account_funds($id, $funds, $type)
     {
         $operation = '';
         if ($type == "plus") {
@@ -68,7 +68,7 @@ class Transaction
         }
         try {
             //code...
-            $sql = "UPDATE `creditor` SET `account_funds`= account_funds $operation '$funds' WHERE `creditor_ID`='$creditor_id'";
+            $sql = "UPDATE `creditor` SET `account_funds`= account_funds $operation '$funds' WHERE `creditor_ID`='$id'";
             $statement = $this->con->prepare($sql);
             $statement->execute();
         } catch (\Throwable $th) {

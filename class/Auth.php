@@ -1,24 +1,31 @@
 <?php
-require ('DbConnection.php');
+require('DbConnection.php');
 class Auth
-{ 
+{
 
-   
+    private $con;
+
+    function __construct()
+    {
+        $connection = new DbConnection();
+        $this->con = $connection->connect();
+    }
+
     function user_log_in($email, $password)
     {
         try {
             //code...
             $connect = new DbConnection();
-            $con = $connect->connect();
+
             $Email = $email;
             $Password = $password;
             $sql = "SELECT * FROM user WHERE email = '$Email' AND password = '$Password'";
-    
-            $result =  $con->query($sql);
+
+            $result =  $this->con->query($sql);
             $count = $result->num_rows;
-    
+
             if ($count === 1) {
-    
+
                 /*
                 Create session for diffrent users, user will have access to pages according to their department and position
                 */
@@ -35,17 +42,51 @@ class Auth
                 echo ("<script> alert('wrong username or password');
               </script>");
             }
+            mysqli_close($this->con);
         } catch (\Throwable $th) {
             //throw $th;
 
-            return "Error Logging in ".$th;
+            return "Error Logging in " . $th;
         }
-       
+    }
+
+
+    /// Administrative Approval functions
+
+    function admin_confirm_approval($approvalId, $approvalCode, $userId): string
+    {
+        try {
+            $sql = "UPDATE `approval` SET `approved_ID`='$userId',`approval_code`='$approvalCode' WHERE `approval_ID`='$approvalId'";
+            $statement = $this->con->prepare($sql);
+            if ($statement->execute()) {
+                return 'approved';
+            }
+            mysqli_close($this->con);
+        } catch (\Throwable $th) {
+            return $th;
+        };
+    }
+
+
+    ////deny user access
+
+    function admin_deny_requested_access($approvalId): string
+    {
+        try {
+            $sql = "DELETE FROM `approval` WHERE `approval`.`approval_ID` = '$approvalId'";
+            $statement = $this->con->prepare($sql);
+            if ($statement->execute()) {
+
+                return 'denied';
+            }
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
 
 
-    private function navigate_user($depertment, $position)
+    private function navigate_user($depertment, $position): void
     {
         if ($depertment == 1) {
             header('Location:admin/admin_dashboard.php');

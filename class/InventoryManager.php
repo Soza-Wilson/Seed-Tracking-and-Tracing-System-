@@ -1,6 +1,6 @@
 <?php
 
-require('farm.php');
+require('Product.php');
 
 class InventoryManager
 {
@@ -107,7 +107,7 @@ class InventoryManager
 
 
 
-    public function update_stock_details($stockInId, $old_certificate, $new_certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $newQuantity, $oldQuantity, $description, $fileDirectory, $creditorId, $status)
+    public function update_stock_details($stockInId, $old_certificate, $new_certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $newQuantity, $oldQuantity, $description, $fileDirectory, $creditorId, $status) :string
     {
 
         /**
@@ -131,8 +131,7 @@ class InventoryManager
             `description`='$description',`supporting_dir`='$fileDirectory',`certificate_ID`='$new_certificate' WHERE `stock_in_ID`='$stockInId'";
             $statement = $this->con->prepare($sql);
             if ($statement->execute()) {
-
-                return "success";
+            return "success".$status;
             }
             mysqli_close($this->con);
         } catch (\Throwable $th) {
@@ -163,7 +162,7 @@ class InventoryManager
         }
     }
 
-    private function stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity)
+    private function stock_in_update_certificate($old_certificate, $new_certificate, $newQuantity, $oldQuantity):string
     {
 
         //  restore old certificate 
@@ -184,7 +183,7 @@ class InventoryManager
 
 
 
-    function delete_stock_in($creditor_id, $stock_in_id, $certificate, $quantity)
+    function delete_stock_in($creditor_id, $stock_in_id, $certificate, $quantity):string
     {
 
         // get transaction amount
@@ -204,6 +203,7 @@ class InventoryManager
                         if ($statement->execute()) {
                             return "deleted";
                         }
+                        mysqli_close($this->con);
                     } catch (\Throwable $th) {
                         return $th;
                     }

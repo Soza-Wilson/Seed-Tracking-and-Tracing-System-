@@ -101,7 +101,7 @@ if (!empty($stock_in_ID)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/stock_in_details__.js">
 
     </script>
 </head>

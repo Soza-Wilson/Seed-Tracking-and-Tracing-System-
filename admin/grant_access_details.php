@@ -75,7 +75,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/new.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/grant_access__.js"></script>
 
 
     </script>

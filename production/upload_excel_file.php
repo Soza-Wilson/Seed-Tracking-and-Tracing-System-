@@ -1,9 +1,11 @@
-<?php 
+<?php
+
+
 
 require('../class/main.php');
+require('../PhpSpreadsheet/IOFactory.php');
 
 
-require 'PhpOffice/PhpSpreadsheet/src/PhpSpreadsheet/IOFactory.php';
 
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -21,6 +23,19 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 // Check if the form is submitted and the file is uploaded
 
 if(isset($_POST["upload_excel"])){
+
+    $excelFile = $_FILES['excelFile']['tmp_name'];
+
+    $file_name = $_FILES['excelFile']['name'];
+    $file_size = $_FILES['excelFile']['size'];
+    $file_tmp = $_FILES['excelFile']['tmp_name'];
+    $file_type = $_FILES['excelFile']['type'];
+
+    if(!empty($excelFile)){
+        $spreadsheet = IOFactory::load($file_tmp);
+
+    }
+    
 
    
 }
