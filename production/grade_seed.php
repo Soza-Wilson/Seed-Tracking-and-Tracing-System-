@@ -61,7 +61,7 @@ if (empty($test)) {
     <script type="text/javascript" src="../jquery/jquery.js"></script>
     
 
-    <script type="text/javascript" src="assets/js/jsHandle/seed_grading_.js"> 
+    <script type="text/javascript" src="assets/js/jsHandle/seed_grading.js"> 
 
     
        

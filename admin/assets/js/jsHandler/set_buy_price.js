@@ -54,6 +54,7 @@ $(document).ready(() => {
       (data) => {
 
         const prices = data.toString().split(",");
+        alert(prices);
       
 
         $("#breeder").val(prices[4]);

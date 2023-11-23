@@ -1,6 +1,6 @@
 {
     "name": "ghost/sts",
-    "description": "Seed tracking system is an interprice software for seed companies to manage their operations",
+    "description": "Seed tracking system is an interprice software for seed companies ",
     "require-dev": {
         "phpunit/phpunit": "^9.6"
     },

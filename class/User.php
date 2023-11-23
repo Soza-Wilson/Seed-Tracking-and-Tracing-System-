@@ -1,5 +1,8 @@
 <?php
-require('main.php');
+spl_autoload_register(function($class){
+    require"$class.php";
+    });
+    
 class User
 {
     private $con;

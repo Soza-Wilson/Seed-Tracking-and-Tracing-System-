@@ -47,7 +47,7 @@ $(document).ready(() => {
     let variety_value = $("#select_variety").val();
 
     $.post(
-      "get_data.php",
+       "get_data/product_data.php",
       {
         getCropPrices: [crop_value, variety_value],
       },
@@ -114,7 +114,7 @@ $(document).ready(() => {
     ];
 
     $.post(
-      "get_data.php",
+       "get_data/product_data.php",
       {
         setNewPrices: data,
       },

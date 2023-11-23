@@ -1,13 +1,11 @@
 <?php
-
-require('Season.php');
+spl_autoload_register(function ($class) {
+    require "$class.php";
+});
 
 trait HasContract
 
 {
-
-   
-
     private function register_contract($creditor_id, $user_id, $type, $contract_directory)
     {
         try {

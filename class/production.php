@@ -3,7 +3,10 @@
 
 
 // database connection
-require('main.php');
+spl_autoload_register(function($class){
+    require"$class.php";
+    });
+    
 
 class production
 {
@@ -99,8 +102,8 @@ if ($result->num_rows > 0) {
         $data[2] = $row["stock_in_ID"];
         $data[3] = $row["area_name"];
         $data[4] = $row["physical_address"];
-        $data[5]  = $row["crop"];
-        $data[6]  = $row["variety"];
+        $data[5] = $row["crop"];
+        $data[6] = $row["variety"];
         $data[7] = $row["class"];
         $data[8] = $row["date"];
         $data[9] = $row["fullname"];
@@ -143,9 +146,9 @@ if ($result->num_rows > 0) {
         $data[2] = $row["variety"];
         $data[3] = $row["class"];
         $data[4] = $row["quantity"];
-        $data[5]  = $row["germination_percentage"];
-        $data[6]  = $row["shelling_percentage"];
-        $data[7]  = $row["purity_percentage"];
+        $data[5] = $row["germination_percentage"];
+        $data[6] = $row["shelling_percentage"];
+        $data[7] = $row["purity_percentage"];
         $data[8] = $row["defects_percentage"];
         $data[9] = $row["grade"];
         $data[10] = $row["variety_ID"];

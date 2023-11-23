@@ -1,7 +1,7 @@
 <?php
 
 
-require('../class/Farm.php');
+require('../class/main.php');
 
 
 

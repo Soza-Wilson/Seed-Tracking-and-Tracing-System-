@@ -25,6 +25,7 @@ const aprrove_order = (order_id, action) => {
         approveOrder: data,
       },
       (data) => {
+        alert(data)
         if (data == "approved") {
           alert("approved");
           window.history.back();

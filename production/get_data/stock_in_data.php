@@ -23,7 +23,7 @@ if (isset($_POST["insertStockIn"])) {
     $status = $_POST['status'];
     $dir = $_POST['fileDirectory'];
     $user = $_POST['user'];
-    $inventory->register_stock($creditor, $certificate, $farm_ID, $status, $crop, $variety, $class, $source, $srn, $bincard, $bags, $quantity, $description, $dir, $user);
+    echo $inventory->register_stock($creditor, $certificate, $farm_ID, $status, $crop, $variety, $class, $source, $srn, $bincard, $bags, $quantity, $description, $dir, $user);
   }
   
   
@@ -45,7 +45,7 @@ if (isset($_POST["insertStockIn"])) {
     $fileDirectory = $_POST["dir"];
     $creditorId = $_POST["creditorId"];
     $status = $_POST["status"];
-    $inventory->update_stock_details($stockInId, $old_certificate, $new_certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $newQuantity, $oldQuantity, $description, $fileDirectory, $creditorId, $status);
+    echo $inventory->update_stock_details($stockInId, $old_certificate, $new_certificate, $crop, $variety, $class, $srn, $binCardNumber, $numberOfBags, $newQuantity, $oldQuantity, $description, $fileDirectory, $creditorId, $status);
     
   // delete stock 
   
@@ -53,5 +53,5 @@ if (isset($_POST["insertStockIn"])) {
   
   if (isset($_POST["deleteStockIn"])) {
     $stockData = $_POST["deleteStockIn"];
-    $object->delete_stock_in($stockData[0], $stockData[1], $stockData[2], $stockData[3]);
+    echo $inventory->delete_stock_in($stockData[0], $stockData[1], $stockData[2], $stockData[3]);
   }

@@ -2,11 +2,6 @@
 
 
 
-require('../class/main.php');
-require('../PhpSpreadsheet/IOFactory.php');
-
-
-
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 

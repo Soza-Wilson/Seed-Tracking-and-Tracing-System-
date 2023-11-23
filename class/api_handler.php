@@ -5,11 +5,14 @@ include('../class/main.php');
 
 class api_handler extends main
 {
-    // function api_handler($host,$port)
-    // {
-    //     $apiHost = $host;
-    //     $apiPort=$port;
-    // }
+   
+     protected $api_host;
+     protected $port;
+    function __construct()
+    {
+        $this->api_host = 'localhost';
+        $this->port = '8080';
+    }
     static function send_data()
     {
         $request_issues = [];
@@ -29,10 +32,7 @@ class api_handler extends main
             while ($row = $result->fetch_assoc()) {
                 $jsonData = ["id" => $row['user_ID'], "fullname" => $row["fullname"], "email" => $row["email"], "password" => $row["password"], "profilePicture" => $row["profile_picture"]];
                 $apiData = json_encode($jsonData);
-
-
-
-                $issue = self::send_request("localhost:8080/requests/user", $apiData);
+                $issue = self::send_request(self::$api_host.":".self::$api_host."/requests/user", $apiData);
             }
 
             return $issue;
@@ -53,7 +53,7 @@ class api_handler extends main
                 $jsonData = ["crop_id" => $row['crop_ID'], "crop_name" => $row["crop"]];
                 $apiData = json_encode($jsonData);
 
-                $issue = self::send_request("localhost:8080/requests/crop", $apiData);
+                $issue = self::send_request(self::$api_host.":".self::$api_host."/requests/crop", $apiData);
             }
 
             return $issue;
@@ -75,7 +75,7 @@ class api_handler extends main
                 $jsonData = ["variety_id" => $row['variety_ID'], "variety_name" => $row["variety"], "crop_id" => $row["crop_ID"]];
                 $apiData = json_encode($jsonData);
 
-                $issue = self::send_request("localhost:8080/requests/variety", $apiData);
+                $issue = self::send_request(self::$api_host.":".self::$api_host."/requests/variety", $apiData);
             }
 
             return $issue;
@@ -97,7 +97,7 @@ class api_handler extends main
                 $jsonData = ["grower_id" => $row['creditor_ID'], "fullname" => $row["name"], "phone" => $row["phone"]];
                 $apiData = json_encode($jsonData);
 
-                $issue = self::send_request("localhost:8080/requests/grower", $apiData);
+                $issue = self::send_request(self::$api_host.":".self::$api_host."/requests/grower", $apiData);
             }
 
             return $issue;
@@ -128,7 +128,7 @@ class api_handler extends main
                 $jsonData = ["farm_id" => $row['farm_ID'], "hectors" => $row["Hectors"], "region" => $row["region"], "district" => $row["district"], "area_name" => $row["area_name"], "address" => $row["address"], "physical_address" => $row["physical_address"], "epa" => $row["EPA"],"crop_id" => $row["crop_ID"], "variety_id" => $row["variety_ID"], "grower_id" => $row["creditor_ID"]];
                 $apiData = json_encode($jsonData);
 
-                $issue = self::send_request("localhost:8080/requests/farm", $apiData);
+                $issue = self::send_request(self::$api_host.":".self::$api_host."/requests/farm", $apiData);
                 
             }
 

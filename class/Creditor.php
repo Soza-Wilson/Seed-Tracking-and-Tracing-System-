@@ -1,6 +1,9 @@
 <?php
 
-require('HasContract.php');
+spl_autoload_register(function($class){
+    require"$class.php";
+    });
+    
 
 class Creditor
 {
@@ -42,7 +45,7 @@ class Creditor
         try {
             //code...
             $sql = "INSERT INTO `creditor`(`creditor_ID`, `source`, `name`, `phone`, `email`, `description`, `user_ID`,`registered_date`, `account_funds`,`creditor_status`) VALUES
-  ('$creditor_ID','$source','$name','$phone','$email','$description','$user','$date',0,'$status')";
+        ('$creditor_ID','$source','$name','$phone','$email','$description','$user','$date',0,'$status')";
 
             $statement = $this->con->prepare($sql);
             $statement->execute();

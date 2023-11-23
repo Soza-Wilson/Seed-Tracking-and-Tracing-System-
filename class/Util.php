@@ -37,6 +37,7 @@ class Util{
  
 
 //   This function checks if an exists in any table in the database 
+// takes table name
 
 
 

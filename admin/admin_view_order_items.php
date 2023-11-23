@@ -90,7 +90,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/admin_order_items.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/admin_order_items__.js"></script>
 
     <script type="text/javascript">
 

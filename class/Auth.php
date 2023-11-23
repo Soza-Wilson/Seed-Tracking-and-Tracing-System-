@@ -1,5 +1,8 @@
 <?php
-require('DbConnection.php');
+spl_autoload_register(function($class){
+    require"$class.php";
+    });
+    
 class Auth
 {
 
@@ -11,7 +14,7 @@ class Auth
         $this->con = $connection->connect();
     }
 
-    function user_log_in($email, $password)
+    public function user_log_in($email, $password)
     {
         try {
             //code...
@@ -39,7 +42,7 @@ class Auth
                 $_SESSION['profile'] = $data['profile_picture'];
                 $this->navigate_user($_SESSION['depertment'], $_SESSION['position']);
             } else {
-                echo ("<script> alert('wrong username or password');
+                echo ("<script> alert('Wrong Email or Password');
               </script>");
             }
             mysqli_close($this->con);
@@ -53,7 +56,7 @@ class Auth
 
     /// Administrative Approval functions
 
-    function admin_confirm_approval($approvalId, $approvalCode, $userId): string
+    public function admin_confirm_approval($approvalId, $approvalCode, $userId): string
     {
         try {
             $sql = "UPDATE `approval` SET `approved_ID`='$userId',`approval_code`='$approvalCode' WHERE `approval_ID`='$approvalId'";
@@ -70,7 +73,7 @@ class Auth
 
     ////deny user access
 
-    function admin_deny_requested_access($approvalId): string
+    public function admin_deny_requested_access($approvalId): string
     {
         try {
             $sql = "DELETE FROM `approval` WHERE `approval`.`approval_ID` = '$approvalId'";

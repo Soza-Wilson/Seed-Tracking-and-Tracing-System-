@@ -160,7 +160,7 @@ $(document).ready(function () {
               alert(" Error :Buyback prices are not set !!");
               window.location.reload();
             } else {
-              alert("Seed added to inventory");
+              alert(data);
               window.location.reload();
             }
           }

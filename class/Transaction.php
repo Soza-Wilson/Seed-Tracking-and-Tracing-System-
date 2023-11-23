@@ -1,4 +1,7 @@
 <?php
+spl_autoload_register(function ($class) {
+    require "$class.php";
+});
 
 
 class Transaction
@@ -14,28 +17,38 @@ class Transaction
     }
 
 
-
-    public function register_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user_ID)
+    //  register tracation functiom
+    //  function takes transaction arguments a simply register's the data to the trasaction table in the seed_tracking_DB
+    
+    public function register_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user_ID):string
     {
 
 
         $date = date("Y-m-d");
         $time = date("H:i:s");
-        global $con;
 
-        $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
+        try {
+            //code...
+
+            $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
         `action_ID`, `C_D_ID`,`transaction_price`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
         ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor','$transaction_price','$calculated_amount',
         '$date','$time','payment_pending','$user_ID')";
 
-        $statement = $con->prepare($sql);
-        $statement->execute();
+            $statement = $this->con->prepare($sql);
+            $statement->execute();
+            return 'registered';
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
 
         /**
          * 
-         * The account refgereed here is the creditor or debtor account NOT !! the bank account 
+         * The account here is the creditor or debtor account NOT !! the bank account 
          * 
          */
+        mysqli_close($this->con);
     }
 
     public function get_old_amount($action_id)
@@ -59,6 +72,7 @@ class Transaction
 
 
     public function update_account_funds($id, $funds, $type)
+    //  this function is updating creditor account funds , it takes the creaditor id the funds and the type (plus or minus)
     {
         $operation = '';
         if ($type == "plus") {

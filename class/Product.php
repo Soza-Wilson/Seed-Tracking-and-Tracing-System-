@@ -1,5 +1,8 @@
 <?php
-require('Farm.php');
+spl_autoload_register(function($class){
+  require"$class.php";
+  });
+  
 
 class Product
 {
@@ -12,7 +15,8 @@ class Product
   }
 
   // checking if variety name already exists in the database
-  public function check_new_crop_name($crop_name)
+  // function takes a crop name and returns a string
+  public function check_new_crop_name($crop_name): string
   {
 
     $name = strtolower($crop_name);
@@ -131,9 +135,7 @@ class Product
       $sql = "SELECT * FROM price WHERE `crop_ID`='$crop' AND `variety_ID`='$variety'";
       $result =  $this->con->query($sql);
       if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          return $row["sell_breeder"] . "," . $row["sell_basic"] . "," . $row["sell_pre_basic"] . "," . $row["sell_certified"] . "," . $row["buy_breeder"] . "," . $row["buy_pre_basic"] . "," . $row["buy_basic"] . "," . $row["buy_certified"];
-        }
+        return $result->fetch_assoc();
       }
       mysqli_close($this->con);
     } catch (\Throwable $th) {

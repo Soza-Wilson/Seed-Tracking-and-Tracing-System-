@@ -1,6 +1,8 @@
 <?php
-
-require ('season.php');
+spl_autoload_register(function($class){
+  require"$class.php";
+  });
+  
 class Certificate
 {
   
@@ -20,7 +22,7 @@ class Certificate
 
   /*
 This function wil register new certificates to the database 
-first we are passing data to the check ids function in Util 
+first we are passing data to the check ids function in Util class
 if 
 
 */

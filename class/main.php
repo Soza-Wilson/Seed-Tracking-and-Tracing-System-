@@ -1,9 +1,9 @@
 <?php
+spl_autoload_register(function($class){
+require"$class.php";
+});
 
 
-
-require('DbConnection.php');
-require('Util.php');
 
 $db = new DbConnection();
 $con = $db->connect();
@@ -380,9 +380,6 @@ class main
       $_SESSION['customer_ID'] = $data_result[0];
       $_SESSION['customer_name'] = $data_result[2];
       $_SESSION['type'] = $order_type;
-
-
-
 
 
       $sql = "INSERT INTO `order_table`(`order_ID`) VALUES
