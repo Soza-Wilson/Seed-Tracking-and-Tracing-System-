@@ -20,7 +20,7 @@ const aprrove_order = (order_id, action) => {
     let data = [order_id, action];
 
     $.post(
-      "get_data.php",
+      "get_data/order_data.php",
       {
         approveOrder: data,
       },

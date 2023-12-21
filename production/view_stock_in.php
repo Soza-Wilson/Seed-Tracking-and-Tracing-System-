@@ -657,19 +657,19 @@ if (in_array($position, $notRestricted)) {
                                                     <table id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Stock In ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>Used Quantity</th>
-                                                                <th>Available Quantity</th>
-                                                                <th>Source</th>
-                                                                <th>Source Name</th>
-                                                                <th>SRN</th>
-                                                                <th>Added By</th>
-                                                                <th>Added Date</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Stock In ID</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                <th style="font-weight: 600;">Used Quantity</th>
+                                                                <th style="font-weight: 600;">Available Quantity</th>
+                                                                <th style="font-weight: 600;">Source</th>
+                                                                <th style="font-weight: 600;">Source Name</th>
+                                                                <th style="font-weight: 600;">SRN</th>
+                                                                <th style="font-weight: 600;">Added By</th>
+                                                                <th style="font-weight: 600;">Added Date</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>

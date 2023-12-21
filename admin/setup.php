@@ -74,7 +74,7 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/setup_.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandler/setup__.js"></script>
 
     <script type="text/javascript">
 
@@ -481,7 +481,7 @@ if (empty($test)) {
                                                                     <labe>Picture Directory :</label>
                                                                         <input type="file" class="form-control" name="file_directory" accept=".jpg,png" id="file_directory">
                                                                         <input type="hidden" class="form-control" name="tempFile" id="tempFile">
-                                                                     
+
 
 
                                                                 </div>
@@ -506,243 +506,278 @@ if (empty($test)) {
 
                                         <div class="row">
 
-                                            <div class="col-xl-12 col-md-12">
-                                                <div class="card ">
-
-                                                    <div class="card-header">
-                                                        <h5>logo</h5>
 
 
-                                                    </div>
+                                            <div class="col-lg-12 card">
+                                                <!-- <h6 class="sub-title">Tab With Icon</h6> -->
+
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs md-tabs " role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab" href="#business_profile" role="tab"><i class="ti ti-settings  "></i> Business Profile</a>
+                                                        <div class="slide"></div>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#growing_season" role="tab"><i class="ti ti-shine "></i> Growing Season</a>
+                                                        <div class="slide"></div>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#api_connection" role="tab"><i class="ti ti-jsfiddle "></i> API Connection</a>
+                                                        <div class="slide"></div>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#data_back_up" role="tab"><i class="ti ti-harddrives "></i> Data Backup</a>
+                                                        <div class="slide"></div>
+                                                    </li>
 
 
-                                                    <div class="card-block ">
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content card-block">
+                                                    <div class="tab-pane active" id="business_profile" role="tabpanel">
+                                                        <div class="col-xl-12 col-md-12">
 
 
 
 
-                                                        <!--logo card -->
 
-                                                        <div class="align-middle m-b-10 col-sm-12">
-                                                            <img src="../files/business_logo/<?php if ($logo == "-" || $logo == "") {
-                                                                                                    echo "default.png";
-                                                                                                } else {
-                                                                                                    echo $logo;
-                                                                                                } ?>" alt="logo image" class=" img-100 align-middle m-r-15">
+                                                            <div class="col-xl-12 col-md-12">
+                                                                <div class="card ">
 
+                                                                    <div class="card-header">
+                                                                        <h5>logo</h5>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="card-block ">
+
+
+
+
+                                                                        <!--logo card -->
+
+                                                                        <div class="align-middle m-b-10 col-sm-12">
+                                                                            <img src="../files/business_logo/<?php if ($logo == "-" || $logo == "") {
+                                                                                                                    echo "default.png";
+                                                                                                                } else {
+                                                                                                                    echo $logo;
+                                                                                                                } ?>" alt="logo image" class=" img-100 align-middle m-r-15">
+
+
+
+                                                                        </div>
+
+                                                                        <div class=" col-sm-12">
+
+
+                                                                            <button class="btn btn-inverse btn-round btn-mini img-radius img-100 align-middle m-r-15" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-camera"></i>update</button>
+
+                                                                        </div>
+
+
+
+
+
+
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="card-block ">
+
+
+                                                                <div class="col-md-12">
+
+
+
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12"><label class="label bg-primary"> Business name</label></div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" class="form-control" id="business_name" required="" placeholder="Business Name" value="<?php if ($address != "-") {
+                                                                                                                                                                                            echo $business_name;
+                                                                                                                                                                                        } ?>">
+                                                                        </div>
+
+
+
+
+
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12"><label class="label bg-primary"> Country </label></div>
+                                                                        <div class="col-sm-12">
+                                                                            <input type="text" class="form-control" id="country" required="" placeholder="Enter Country name" value="<?php if ($address != "-") {
+                                                                                                                                                                                            echo $country;
+                                                                                                                                                                                        } ?>">
+                                                                        </div>
+
+
+
+
+
+                                                                    </div>
+
+
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-12"><label class="label bg-primary"> Physical Address</label></div>
+                                                                        <div class="col-sm-12">
+
+
+                                                                            <textarea rows=7 type="address" class="form-control internal" required="" id="physical_address" placeholder="Format: TITLE/ P.O BOX 0000/  CITY NAME/ AREA ( This will be disprayed on all documents generated by the system.)"><?php if ($address != "-") {
+                                                                                                                                                                                                                                                                                                                echo $address;
+                                                                                                                                                                                                                                                                                                            } ?></textarea>
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                                                    <div class="col-sm-12">
+
+
+
+                                                                        <button id="save" class="btn btn-success btn-mat" data-toggle="tooltip" data-placement="left" data-original-title="Update business details"><i class="icofont icofont-save"></i> save</button>
+
+
+
+
+                                                                    </div>
+
+
+
+
+
+
+
+
+                                                                    <!--logo card -->
+
+
+
+
+
+
+                                                                </div>
+
+
+                                                            </div>
 
 
                                                         </div>
 
-                                                        <div class=" col-sm-12">
-
-
-                                                            <button class="btn btn-inverse btn-round btn-mini img-radius img-100 align-middle m-r-15" data-toggle="modal" data-target="#myModal"><i class="icofont icofont-camera"></i>update</button>
-
-                                                        </div>
-
-
-
-
-
-
-
 
                                                     </div>
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-xl-12 col-md-12">
-                                                <div class="card ">
-
-                                                    <div class="card-header">
-                                                        <h5>Business Information</h5>
+                                                    <div class="tab-pane" id="growing_season" role="tabpanel">
+                                                        <div class="card-block ">
 
 
-                                                    </div>
-
-
-
-                                                    <div class="card-block ">
-
-
-                                                        <div class="col-md-12">
+                                                            <div class="col-md-12">
 
 
 
 
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12"><label class="label bg-primary"> Business name</label></div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" class="form-control" id="business_name" required="" placeholder="Business Name" value="<?php if ($address != "-") {
-                                                                                                                                                                                    echo $business_name;
-                                                                                                                                                                                } ?>">
+
+
+
+                                                                <div class="form-group row">
+
+                                                                    <div class="col-sm-12">
+                                                                        <h6><label for="row" class="label bg-primary">Growing season <?php echo $season; ?></label>
+                                                                            <h6>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+                                                                        <label for="row" class="label bg-success">Opening date</label>
+                                                                        <input type="date" class="form-control" name="opening_date" id="opening_date" required="" placeholder="Repeat password">
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <label for="row" class="label bg-danger"><span>Closing date</span></label>
+                                                                        <input type="date" class="form-control" name="closing_date" id="closing_date" required="" placeholder="Repeat password">
+                                                                    </div>
+                                                                    </br></br></br>
+
+
                                                                 </div>
 
 
 
 
 
-                                                            </div>
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12"><label class="label bg-primary"> Country  </label></div>
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" class="form-control" id="country" required="" placeholder="Enter Country name" value="<?php if ($address != "-") {
-                                                                                                                                                                                    echo $country;
-                                                                                                                                                                                } ?>">
-                                                                </div>
-
-
-
-
-
-                                                            </div>
-
-
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12"><label class="label bg-primary"> Physical Address</label></div>
                                                                 <div class="col-sm-12">
 
 
-                                                                    <textarea rows=7 type="address" class="form-control internal" required="" id="physical_address" placeholder="Format: TITLE/ P.O BOX 0000/  CITY NAME/ AREA ( This will be disprayed on all documents generated by the system.)"><?php if ($address != "-") {
-                                                                                                                                                                                                                                                                                                        echo $address;
-                                                                                                                                                                                                                                                                                                    } ?></textarea>
+
+                                                                    <button id="save" class="btn btn-success btn-mat" data-toggle="tooltip" data-placement="left" data-original-title="Update business details"><i class="icofont icofont-save"></i> save</button>
+
+
+
+
                                                                 </div>
-                                                            </div>
 
 
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h5>Previous active seasons</h5>
 
-                                                            <div class="form-group row">
+                                                                    </div>
+                                                                    <div class="card-block table-border-style">
+                                                                        <div class="table-responsive" id="table_test">
+                                                                            <table class="table" id="ledger_table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Period</th>
+                                                                                        <th>Opening date</th>
+                                                                                        <th>Closing date</th>
 
-                                                                <div class="col-sm-12">
-                                                                    <h6><label for="row" class="label bg-primary">Growing season <?php echo $season; ?></label>
-                                                                        <h6>
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                    <label for="row" class="label bg-success">Opening date</label>
-                                                                    <input type="date" class="form-control" name="opening_date" id="opening_date" required="" placeholder="Repeat password">
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label for="row" class="label bg-danger"><span>Closing date</span></label>
-                                                                    <input type="date" class="form-control" name="closing_date" id="closing_date" required="" placeholder="Repeat password">
-                                                                </div>
-                                                                </br></br></br>
 
 
-                                                            </div>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
 
+                                                                                    <?php
 
 
 
 
-                                                            <div class="col-sm-12">
 
 
+                                                                                    $sql = "SELECT * FROM growing_season";
 
-                                                                <button id="save" class="btn btn-success btn-mat" data-toggle="tooltip" data-placement="left" data-original-title="Update business details"><i class="icofont icofont-save"></i> save</button>
+                                                                                    $result = $con->query($sql);
+                                                                                    if ($result->num_rows > 0) {
+                                                                                        while ($row = $result->fetch_assoc()) {
+                                                                                            $season = $row["season"];
+                                                                                            $opening_date  = main::change_date_format($row["opening_date"]);
+                                                                                            $closing_date  = main::change_date_format($row["closing_date"]);
 
 
 
 
-                                                            </div>
 
 
-
-
-
-
-
-
-                                                            <!--logo card -->
-
-
-
-
-
-
-                                                        </div>
-
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-
-
-
-
-
-
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-
-
-                                            <div class="card">
-
-
-
-
-
-                                            </div>
-
-
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Previous active seasons</h5>
-
-                                                </div>
-                                                <div class="card-block table-border-style">
-                                                    <div class="table-responsive" id="table_test">
-                                                        <table class="table" id="ledger_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Period</th>
-                                                                    <th>Opening date</th>
-                                                                    <th>Closing date</th>
-
-
-
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <?php
-
-
-
-
-
-
-                                                                $sql = "SELECT * FROM growing_season";
-
-                                                                $result = $con->query($sql);
-                                                                if ($result->num_rows > 0) {
-                                                                    while ($row = $result->fetch_assoc()) {
-                                                                        $season = $row["season"];
-                                                                        $opening_date  = main::change_date_format($row["opening_date"]);
-                                                                        $closing_date  = main::change_date_format($row["closing_date"]);
-
-
-
-
-
-
-                                                                        echo "
+                                                                                            echo "
                                                    <tr class='odd gradeX'>
                                                        <td>$season</td>
                                                        <td>$opening_date</td>
@@ -752,60 +787,42 @@ if (empty($test)) {
 
                                                   
                                                ";
-                                                                    }
-                                                                }
+                                                                                        }
+                                                                                    }
 
 
 
-                                                                ?>
-                                                                <tr>
-                                                                    <th scope="row">-</th>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
+                                                                                    ?>
+                                                                                    <tr>
+                                                                                        <th scope="row">-</th>
+                                                                                        <td>-</td>
+                                                                                        <td>-</td>
 
 
 
-                                                                </tr>
+                                                                                    </tr>
 
-                                                            </tbody>
-                                                        </table>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-md-12">
+                                                                                </tbody>
+                                                                            </table>
 
 
-                                                <div class="card">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
 
 
 
 
 
-                                                    <div class="card-header">
-                                                        <h5>Assigned accounts</h5>
-                                                        <div class="card-header-right">
-                                                            <ul class="list-unstyled card-option">
-                                                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                                                <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block">
 
 
 
-                                                        <div>
-                                                            <div>
-                                                                <button id="sync_data" class="btn btn-info btn-mat"><i class="ti-cloud-up"></i>Send API data</button>
+                                                                <!--logo card -->
 
-                                                                </br></br></br>
+
+
+
 
 
                                                             </div>
@@ -814,35 +831,121 @@ if (empty($test)) {
                                                         </div>
                                                     </div>
 
+                                                    <div class="tab-pane" id="api_connection" role="tabpanel">
+
+                                                        <div class="col-md-12">
+
+
+                                                            <div class="card">
+
+
+
+
+
+                                                                <div class="card-header">
+                                                                    <h5>Assigned accounts</h5>
+                                                                    <div class="card-header-right">
+                                                                        <ul class="list-unstyled card-option">
+                                                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                            <li><i class="fa fa-trash close-card"></i></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-block">
+
+
+
+                                                                    <div>
+                                                                        <div>
+                                                                            <button id="sync_data" class="btn btn-info btn-mat"><i class="ti-cloud-up"></i>Send API data</button>
+
+                                                                            </br></br></br>
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
-
                                         </div>
 
 
 
+                                        </form>
 
 
 
                                     </div>
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+                                <div class="card">
+
+
+
+
+
+                                </div>
+
+
+
+
+
+
                             </div>
 
 
-                            <!-- Basic Form Inputs card end -->
-                            <!-- Input Grid card start -->
+
+
+
 
                         </div>
-                        <!-- Page body end -->
                     </div>
                 </div>
-                <!-- Main-body end -->
-                <div>
 
-                </div>
+
+                <!-- Basic Form Inputs card end -->
+                <!-- Input Grid card start -->
+
             </div>
+            <!-- Page body end -->
         </div>
+    </div>
+    <!-- Main-body end -->
+    <div>
+
+    </div>
+    </div>
+    </div>
     </div>
     </div>
     </div>

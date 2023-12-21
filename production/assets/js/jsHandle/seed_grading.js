@@ -20,7 +20,7 @@ $(document).ready(function () {
 });
 
 
-// cheching if assigned seed is procceding available seed in inventory
+// Checking if assigned seed is procceding available seed in inventory
 const assignForProcessing = (stockInId, quantity, user) => {
   $.post(
     "get_data/seed_processing_data.php",
@@ -31,8 +31,8 @@ const assignForProcessing = (stockInId, quantity, user) => {
       if (data == "quantity_exceeded") {
         alert("Quantity assigned is exceeding available quantity ");
       } else {
-        alert(data);
-         
+        // alert(data)
+        openPdf(data);
       }
     }
   );

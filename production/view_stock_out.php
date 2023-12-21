@@ -473,7 +473,7 @@ if (in_array($position, $restricted)) {
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">View stock out</h5>
+                                            <h5 class="m-b-10">View Stock Out</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -482,7 +482,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
 
-                                            <li class="breadcrumb-item"><a href="view_stock_out.php">View stock out </a>
+                                            <li class="breadcrumb-item"><a href="view_stock_out.php">View Stock Out </a>
                                             </li>
                                             </li>
 
@@ -655,17 +655,17 @@ if (in_array($position, $restricted)) {
                                                     <table id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Customer name</th>
-                                                                <th>Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
+                                                                <th style="font-weight: 600;">ID</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Customer name</th>
+                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                <th style="font-weight: 600;">Date</th>
+                                                                <th style="font-weight: 600;">Time</th>
 
 
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>
@@ -673,13 +673,13 @@ if (in_array($position, $restricted)) {
 
                                                             <?php
                                                             $sql = "SELECT `stock_out_ID`, crop.crop, variety.variety, item.class,
-                 user.fullname, order_table.customer_name, `Quntity`, stock_out.date,
+                 user.fullname, order_table.customer_name, stock_out.quantity, stock_out.date,
                   stock_out.time FROM `stock_out` INNER JOIN item ON item.item_ID = stock_out.item_ID INNER JOIN crop
                  ON crop.crop_ID = item.crop_ID INNER JOIN variety on variety.variety_ID = item.variety_ID INNER JOIN 
-                 user on user.user_ID = stock_out.user_ID INNER JOIN order_table on order_table.order_ID = stock_out.order_ID;";
+                 user on user.user_ID = stock_out.user_ID INNER JOIN order_table on order_table.order_ID = stock_out.order_ID";
 
                                                             $result = $con->query($sql);
-                                                            if ($result->num_rows > 0) {
+                                                            if (!empty($result) && $result->num_rows > 0) {
                                                                 while ($row = $result->fetch_assoc()) {
 
 
@@ -692,7 +692,7 @@ if (in_array($position, $restricted)) {
                                                                     $date    = $row['date'];
                                                                     $time = $row['time'];
 
-                                                                    $quantity = $row['Quntity'];
+                                                                    $quantity = $row['quantity'];
 
                                                                     $object = new main();
                                                                     $newDate = $object->change_date_format($date);

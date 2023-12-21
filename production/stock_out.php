@@ -531,16 +531,16 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Order ID</th>
-                                                                <th>order number</th>
-                                                                <th>order type</th>
-                                                                <th>Customer name</th>
-                                                                <th>reqiested by</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>count</th>
-                                                                <th>Total</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Order ID</th>
+                                                              
+                                                                <th style="font-weight: 600;">order type</th>
+                                                                <th style="font-weight: 600;">Customer name</th>
+                                                                <th style="font-weight: 600;">reqiested by</th>
+                                                                <th style="font-weight: 600;">Date</th>
+                                                                <th style="font-weight: 600;">Time</th>
+                                                                <th style="font-weight: 600;">count</th>
+                                                                <th style="font-weight: 600;">Total</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>
@@ -574,7 +574,6 @@ if (in_array($position, $restricted)) {
                                                                     echo "
 <tr class='odd gradeX'>
     <td>$order_ID</td>
-    <td>$order_book_number</td>
     <td>$order_type</td>
     <td>$customer_name</td>
     <td>$user</td>

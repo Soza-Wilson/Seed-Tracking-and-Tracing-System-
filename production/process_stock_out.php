@@ -1,16 +1,28 @@
 <?php
 
-Ob_start();
-include('../class/main.php');
+
+
+
+Ob_start();  
+
+
+
+spl_autoload_register(function($class){
+    if (file_exists('../class/Inventory/' . $class . '.php')) {
+       require_once '../class/Inventory/' . $class . '.php';
+    }
+    elseif (file_exists('../class/' . $class . '.php')) {
+       require_once '../class/' . $class . '.php';
+    }
+});
+
 session_start();
-
 $test = $_SESSION['fullname'];
-
 if (empty($test)) {
 
     header('Location:../login.php');
 }
-
+$user = $_SESSION['user'];
 $item_ID = $_GET['item_ID'];
 $order_ID = $_GET['order_ID'];
 $item_quantity = $_GET['item_quntity'];
@@ -18,22 +30,22 @@ $stock_in_ID = $_GET['stock_in_ID'];
 $stock_in_quantity = $_GET['stock_in_quantity'];
 $price_per_kg = $_GET['price_per_kg'];
 $discount_price = $_GET['discount_price'];
-$object = new main();
+
 $amount ="";
+$connection = new DbConnection();
 
 
 
 if(!empty($discount_price)){
-$amount=(int)$discount_price*(int)$item_quantity;    
-$object -> stock_out($item_ID,$stock_in_ID,$item_quantity,$stock_in_quantity,$order_ID,$amount);
-
-
-
+$amount=(float)$discount_price*(float)$item_quantity;    
+$object = new StockOut($item_ID,$stock_in_ID,$price_per_kg,$item_quantity,$stock_in_quantity,$order_ID,$connection);
+$object -> process_stock_out();
 
 }
 else{
-    $amount = (int)$price_per_kg*(int)$item_quantity; 
-    $object -> stock_out($item_ID,$stock_in_ID,$item_quantity,$stock_in_quantity,$order_ID,$amount);
+    $amount = (float)$price_per_kg*(float)$item_quantity; 
+    $object = new StockOut($item_ID,$stock_in_ID,$price_per_kg,$item_quantity,$stock_in_quantity,$order_ID,$connection);
+    $object ->  process_stock_out($item_ID,$stock_in_ID,$item_quantity,$stock_in_quantity,$order_ID,$amount);
 
    
 }

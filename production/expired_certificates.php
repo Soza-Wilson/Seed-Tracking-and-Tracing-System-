@@ -58,7 +58,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/view_certificate__.js">
+    <script type="text/javascript" src="assets/js/jsHandle/view_certificate_.js">
         
 
     </script>
@@ -639,19 +639,19 @@ if (in_array($position, $restricted)) {
                                                     <table  id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Lot number</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Certificate type</th>
-                                                                <th>Source</th>
-                                                                <th>Date tested</th>
-                                                                <th>Expire date</th>
-                                                                <th>Added date</th>
-                                                                <th>Certificate quantity</th>
-                                                                <th>Available quantity</th>
-                                                                <th>Added by</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Lot number</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Certificate type</th>
+                                                                <th style="font-weight: 600;">Source</th>
+                                                                <th style="font-weight: 600;">Date tested</th>
+                                                                <th style="font-weight: 600;">Expire date</th>
+                                                                <th style="font-weight: 600;">Added date</th>
+                                                                <th style="font-weight: 600;">Certificate quantity</th>
+                                                                <th style="font-weight: 600;">Available quantity</th>
+                                                                <th style="font-weight: 600;">Added by</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>

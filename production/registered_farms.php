@@ -792,21 +792,21 @@ if (empty($test)) {
                                                     <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
-                                                                <th>Farm ID</th>
-                                                                <th>Grower</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Hectors</th>
-                                                                <th>Region</th>
-                                                                <th>District</th>
-                                                                <th>EPA</th>
-                                                                <th>Area name</th>
-                                                                <th>Address</th>
-                                                                <th>Location</th>
-                                                                <th>Land history(previous year)</th>
-                                                                <th>Land history(other year)</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Farm ID</th>
+                                                                <th style="font-weight: 600;">Grower</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Hectors</th>
+                                                                <th style="font-weight: 600;">Region</th>
+                                                                <th style="font-weight: 600;">District</th>
+                                                                <th style="font-weight: 600;">EPA</th>
+                                                                <th style="font-weight: 600;">Area name</th>
+                                                                <th style="font-weight: 600;">Address</th>
+                                                                <th style="font-weight: 600;">Location</th>
+                                                                <th style="font-weight: 600;">Land history(previous year)</th>
+                                                                <th style="font-weight: 600;">Land history(other year)</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>

@@ -3,19 +3,26 @@
 <?php
 
 Ob_start();
-
-include('../class/production.php');
 session_start();
 
-$get_data = new production();
 
-$data = $get_data->get_lab_stock_details($_GET["ID"]);
+spl_autoload_register(function ($class) {
+    if (file_exists('../class/LabTest/' . $class . '.php')) {
+        require '../class/LabTest/' . $class . '.php';
+    } elseif (file_exists('../class/' . $class . '.php')) {
+        require   '../class/' . $class . '.php';
+    }
+});
+
+
+
+$get_data = new GetLabTestData();
+$data = $get_data->get_stock_in_details($_GET["ID"]);
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
 
 if (empty($test)) {
-
     header('Location:../login.php');
 }
 
@@ -63,157 +70,12 @@ if (in_array($position, $restricted)) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+  
     <script type="text/javascript" src="../jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/add_lab_test.js"></script>
+   
     <script type="text/javascript">
-        $(document).ready(function() {
-
-
-            $('#pass').click(function() {
-
-                $('#fail').prop('checked', false)
-
-            });
-
-            $('#fail').click(function() {
-
-                $('#pass').prop('checked', false);
-
-            });
-            // germination text
-
-
-            $("#germination").on("input", function() {
-
-                var germ = $("#germination").val();
-
-
-
-                if ($.isNumeric(germ)) {
-
-                    if (germ > 100) {
-                        alert("value only 1 - 100")
-                        $("#germination").val("");
-
-                    }
-
-                } else {
-                    alert("Only numeric values")
-                    $("#germination").val("");
-
-                }
-
-            });
-
-            //germination text
-
-            $("#germination").on("input", function() {
-
-                var germ = $("#germination").val();
-
-
-
-                if ($.isNumeric(germ)) {
-
-                    if (germ > 100) {
-                        alert("value only 1 - 100")
-                        $("#germination").val("");
-
-                    }
-
-                } else {
-                    alert("Only numeric values")
-                    $("#germination").val("");
-
-                }
-
-            });
-
-
-
-            //shelling text
-            $("#shelling").on("input", function() {
-
-                var germ = $("#shelling").val();
-
-
-
-                if ($.isNumeric(germ)) {
-
-                    if (germ > 100) {
-                        alert("value only 1 - 100")
-                        $("#shelling").val("");
-
-                    }
-
-                } else {
-                    alert("Only numeric values")
-                    $("#shelling").val("");
-
-                }
-
-            });
-
-            // purity text
-            $("#purity").on("input", function() {
-
-                var germ = $("#purity").val();
-
-
-
-                if ($.isNumeric(germ)) {
-
-                    if (germ > 100) {
-                        alert("value only 1 - 100")
-                        $("#purity").val("");
-
-                    }
-
-                } else {
-                    alert("Only numeric values")
-                    $("#purity").val("");
-
-                }
-
-            });
-
-            // defects text
-            $("#defects").on("input", function() {
-
-                var germ = $("#defects").val();
-
-
-
-                if ($.isNumeric(germ)) {
-
-                    if (germ > 100) {
-                        alert("value only 1 - 100")
-                        $("#defects").val("");
-
-                    }
-
-                } else {
-                    alert("Only numeric values")
-                    $("#defects").val("");
-
-                }
-
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        });
+      
     </script>
 </head>
 
@@ -282,20 +144,14 @@ if (in_array($position, $restricted)) {
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                             <i class="ti-menu"></i>
                         </a>
-                        <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
+                        </a>
+
+                        <a href="">
+                            production
                         </a>
                     </div>
 
@@ -304,15 +160,7 @@ if (in_array($position, $restricted)) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -320,59 +168,15 @@ if (in_array($position, $restricted)) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
-                                <ul class="show-notification">
-                                    <li>
-                                        <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -403,11 +207,12 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -457,7 +262,7 @@ if (in_array($position, $restricted)) {
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="view_stock.php" class="waves-effect waves-dark">
+                                    <a href="view_stock_in.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-import"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">view Stock In </span>
                                         <span class="pcoded-mcaret"></span>
@@ -523,47 +328,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
                             </ul>
@@ -571,32 +376,32 @@ if (in_array($position, $restricted)) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="active">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="active">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -641,8 +446,11 @@ if (in_array($position, $restricted)) {
 
                                 <li class="">
                                     <a href="active_test.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-reload"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active lab test </span>
+                                       
+
+                                        <span class="pcoded-micon"><i class="ti-view-grid"></i><b>W</b></span>
+                                        <span class="pcoded-mtext">Active lab test</span>
+                                        <span class="pcoded-badge label label-info">6</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -676,8 +484,7 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+
                                             <li class="breadcrumb-item"><a href="add_lab_test.php">new lab test</a>
                                             </li>
 
@@ -717,7 +524,7 @@ if (in_array($position, $restricted)) {
                                             </div>
 
 
-                                            <form action="add_lab_test.php" method="POST" enctype="multipart/form-data">
+                                           
 
                                                 <div class="card-block">
 
@@ -756,8 +563,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Physical address :</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <textarea class="form-control" id="farm_physical_address">
-                                                        <?php echo $data[4]; ?>
+                                                            <textarea class="form-control" id="farm_physical_address"><?php echo $data[4]; ?>
                                                                                 </textarea>
                                                         </div>
                                                     </div>
@@ -772,6 +578,7 @@ if (in_array($position, $restricted)) {
                                                                 <option value="<?php echo $data[7]; ?>"><?php echo $data[2]; ?></option>
 
                                                             </select>
+                                                            <input type="hidden" id="hidden_crop" value="<?php echo $data[2];?>" />
                                                         </div>
                                                     </div>
 
@@ -823,6 +630,8 @@ if (in_array($position, $restricted)) {
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
 
+                                                            <label class="badge badge-success">Stock In Id :</label>
+
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <select id="stock_id" name="stock_id" class="form-control">
@@ -864,7 +673,7 @@ if (in_array($position, $restricted)) {
                                                         </div>
 
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="germination" class="form-control" name="germination" placeholder="-" require="">
+                                                            <input type="number" id="germination" class="form-control" name="germination" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -880,7 +689,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Shelling (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
+                                                            <input type="number" id="shelling" class="form-control" name="shelling" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -889,7 +698,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Oil Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="oil_content" class="form-control" name="oil_content" placeholder="-" require="">
+                                                            <input type="number" id="oil_content" class="form-control" name="oil_content" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -898,7 +707,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Moisture Content (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="moisture_content" class="form-control" name="moisture_content" placeholder="-" require="">
+                                                            <input type="number" id="moisture_content" class="form-control" name="moisture_content" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -907,7 +716,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Purity (%):</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="purity" class="form-control" name="purity" placeholder="-" require="">
+                                                            <input type="number" id="purity" class="form-control" name="purity" placeholder="-" require="">
                                                         </div>
                                                     </div>
 
@@ -917,13 +726,13 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Defects (%) :</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="defects" class="form-control" name="defects" placeholder="-" require="">
+                                                            <input type="number" id="defects" class="form-control" name="defects" placeholder="-" require="">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
 
-                                                            <label class="badge badge-success">Grade :</label>
+                                                            <label>Grade :</label>
 
                                                         </div>
 
@@ -931,17 +740,21 @@ if (in_array($position, $restricted)) {
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-2">
-                                                            <label for="pass">Passed</label>
+                                                            <label for="pass" class="badge badge-success">Passed</label>
                                                             <input type="checkbox" name="pass" id="pass" value="pass">
 
                                                             <span>
 
-                                                                <label for="pass">_________Failed</label>
+                                                                <label class="badge badge-danger" for="pass">
+                                                                    Failed</label>
                                                                 <input type="checkbox" name="fail" id="fail" value="fail">
 
 
                                                         </div>
                                                     </div>
+
+
+
 
 
                                                     <div class="form-group row">
@@ -966,8 +779,8 @@ if (in_array($position, $restricted)) {
                                                         .
                                                         <div class="form-group">
 
-
-                                                            <input type="submit" name="add_lab_test" value="save test" class="btn waves-effect waves-light btn-success btn-block" />
+                                                             <button name="" id="save"  class="btn waves-effect waves-light btn-success btn-block" > Save</button>
+                                                          
                                                             <input type="submit" name="cancle" value="back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                         </div>
@@ -976,7 +789,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                            </form>
+                                        
 
 
 

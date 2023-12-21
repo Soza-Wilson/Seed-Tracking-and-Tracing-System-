@@ -613,14 +613,14 @@ if (in_array($position, $notRestricted)) {
                                                     <table class="table table-hover" id="dataTable">
                                                         <thead>
                                                             <tr>
-                                                                <th>Fullname</th>
-                                                                <th>Email </th>
-                                                                <th>Phone</th>
-                                                                <th>Registered date</th>
-                                                                <th>Registered by</th>
-                                                                <th>Status</th>
+                                                                <th style="font-weight: 600;">Fullname</th>
+                                                                <th style="font-weight: 600;">Email </th>
+                                                                <th style="font-weight: 600;">Phone</th>
+                                                                <th style="font-weight: 600;">Registered date</th>
+                                                                <th style="font-weight: 600;">Registered by</th>
+                                                                <th style="font-weight: 600;">Status</th>
 
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>

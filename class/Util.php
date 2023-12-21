@@ -34,6 +34,11 @@ class Util{
 
  }
 
+private function hash_function(){
+
+  
+}
+
  
 
 //   This function checks if an exists in any table in the database 

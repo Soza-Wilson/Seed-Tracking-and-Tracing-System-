@@ -151,7 +151,7 @@ class api_handler extends main
 
         $response = curl_exec($ch);
 
-        if ($response === false) {
+        if ($response == false) {
             echo 'Error: ' . curl_error($ch);
         } else {
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

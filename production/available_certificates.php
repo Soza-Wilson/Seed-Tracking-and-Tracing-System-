@@ -630,19 +630,19 @@ if (in_array($position, $restricted)) {
                                                     <table id="dataTable" class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Lot number</th>
-                                                                <th>crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Certificate type</th>
-                                                                <th>Source</th>
-                                                                <th>Date tested</th>
-                                                                <th>Expire date</th>
-                                                                <th>Added date</th>
-                                                                <th>certificate quantity</th>
-                                                                <th>available quantity</th>
-                                                                <th>added by</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Lot number</th>
+                                                                <th style="font-weight: 600;">crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Certificate type</th>
+                                                                <th style="font-weight: 600;">Source</th>
+                                                                <th style="font-weight: 600;">Date tested</th>
+                                                                <th style="font-weight: 600;">Expire date</th>
+                                                                <th style="font-weight: 600;">Added date</th>
+                                                                <th style="font-weight: 600;">certificate quantity</th>
+                                                                <th style="font-weight: 600;">available quantity</th>
+                                                                <th style="font-weight: 600;">added by</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>

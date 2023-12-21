@@ -140,6 +140,10 @@ if (in_array($position, $restricted)) {
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
                         </a>
+
+                        <a href="">
+                            <span>Production</span>
+                        </a>
                     </div>
 
                     <div class="navbar-container container-fluid">
@@ -166,11 +170,12 @@ if (in_array($position, $restricted)) {
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -201,11 +206,12 @@ if (in_array($position, $restricted)) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -242,6 +248,8 @@ if (in_array($position, $restricted)) {
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
+
+
                                     </a>
 
                             </ul>
@@ -329,47 +337,47 @@ if (in_array($position, $restricted)) {
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -379,32 +387,32 @@ if (in_array($position, $restricted)) {
 
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -482,8 +490,8 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
-                                            </li>
+
+
                                             <li class="breadcrumb-item"><a href="view_registered_users.php">Grade new stock</a>
                                             </li>
 
@@ -515,7 +523,7 @@ if (in_array($position, $restricted)) {
 
 
                                         <div class="card">
-                                            <form action="assign_seed_for_processing.php" method="POST">
+                                           
                                                 <div class="card-header">
                                                     <h5>Seed details </h5>
 
@@ -536,7 +544,7 @@ if (in_array($position, $restricted)) {
 
                                                             <div class="col-sm-3">
                                                                 <label class="badge badge-success ">ID</label>
-                                                                <select class="form-control" name="grade_id">
+                                                                <select class="form-control" name="grade_id" id= "grade_id">
                                                                     <option value="<?php echo $_GET['grade_id']; ?>"><?php echo $_GET['grade_id']; ?></option>
                                                                 </select>
 
@@ -548,7 +556,7 @@ if (in_array($position, $restricted)) {
                                                             <div class="col-sm-3">
 
                                                                 <label class="badge badge-success ">Crop</label>
-                                                                <select class="form-control" name="crop">
+                                                                <select class="form-control" name="crop" id ="crop">
                                                                     <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
                                                                 </select>
 
@@ -561,7 +569,7 @@ if (in_array($position, $restricted)) {
                                                             <div class="col-sm-3">
 
                                                                 <label class="badge badge-success ">Variety</label>
-                                                                <select class="form-control" name="variety">
+                                                                <select class="form-control" name="variety" id= "variety">
                                                                     <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety']; ?></option>
                                                                 </select>
 
@@ -575,7 +583,7 @@ if (in_array($position, $restricted)) {
 
                                                             <div class="col-sm-3">
                                                                 <label class="badge badge-success ">Available Quantity</label>
-                                                                <select class="form-control" name="available_quantity">
+                                                                <select class="form-control" name="available_quantity" id="available_quantity">
                                                                     <option value="<?php echo $_GET['available_quantity']; ?>"><?php echo $_GET['available_quantity']; ?></option>
                                                                 </select>
 
@@ -659,8 +667,8 @@ if (in_array($position, $restricted)) {
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <input type="text" id="grade_outs_quantity" class="form-control" name="grade_outs_quantity" placeholder="-" require="">
-                                                        <input type="hidden" name="process_id" value="<?php echo $_GET['process_id']; ?>">
-                                                        <input type="hidden" name="passed_process_type_id" value="<?php echo $_GET['passed_process_type_id']; ?>">
+                                                        <input type="hidden" name="process_id" id="process_id" value="<?php echo $_GET['process_id']; ?>">
+                                                        <input type="hidden" name="passed_process_type_id"  id="passed_process_type_id" value="<?php echo $_GET['passed_process_type_id']; ?>">
                                                     </div>
                                                 </div>
 
@@ -695,9 +703,9 @@ if (in_array($position, $restricted)) {
                                                     .
                                                     <div class="form-group">
 
-
-                                                        <input type="submit" name="process_seed" value="Save" class="btn waves-effect waves-light btn-success btn-block" />
-                                                        <input type="submit" name="cancle" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
+                                                        <button name="process_seed" id="process_seed" value="Save" class="btn waves-effect waves-light btn-success btn-block" >Save</button>
+                                                     
+                                                        <input type="submit" name="cancle" id ="back" value="Back" class="btn waves-effect waves-light btn-danger  btn-block" />
 
                                                     </div>
 
@@ -705,7 +713,7 @@ if (in_array($position, $restricted)) {
 
 
 
-                                                    </form>
+                                                
 
 
 
@@ -795,19 +803,35 @@ if (in_array($position, $restricted)) {
     <script src="assets/js/vertical-layout.min.js "></script>
     <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
+
+
+    <script type="text/javascript" src="assets/js/jsHandle/assign_seed_for_processing___.js">
+
+    </script>
+
+
+
+    
 </body>
 
 </html>
 
 <?php
-if (isset($_POST['process_seed'])) {
-    $object = new main();
 
-    if (empty($_POST['process_id'])) {
-        $object->process_seed($_POST['grade_id'], $_POST['type'], $_POST['assign_quantity'], $_POST['grade_outs_quantity'], $_POST['trash_quantity'], $_POST['available_quantity'], "-", "-");
-    } else {
-        $object->process_seed($_POST['grade_id'], $_POST['type'], $_POST['assign_quantity'], $_POST['grade_outs_quantity'], $_POST['trash_quantity'], $_POST['available_quantity'], $_POST['process_id'], $_POST['passed_process_type_id']);
-    }
-}
+
+
+// if (isset($_POST['process_seed'])) {
+
+
+//     if (empty($_POST['process_id'])) {
+//         // first step for processing is seed cleaning 
+//         $cleaning = new Seedcleaning($_POST['grade_id'], $_POST['type'], $_POST['assign_quantity'], $_POST['grade_outs_quantity'], $_POST['trash_quantity'], $_POST['available_quantity'], "-", "-");
+//         $cleaning->assign_for_cleaning();
+//     } else {
+//         // last step is is seed grading 
+//         $grading = new SeedGrading($_POST['grade_id'], $_POST['type'], $_POST['assign_quantity'], $_POST['grade_outs_quantity'], $_POST['trash_quantity'], $_POST['available_quantity'], $_POST['process_id'], $_POST['passed_process_type_id']);
+//         $grading->grade_seed();
+//     }
+// }
 
 ?>

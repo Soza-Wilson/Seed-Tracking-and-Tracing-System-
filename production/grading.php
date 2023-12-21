@@ -61,9 +61,9 @@ if (in_array($position, $restricted)) {
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
 
-<!-- pagenation -->
-<link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
-<script type="text/javascript" src="../assets/pagination/pagination.js"></script>
+    <!-- pagenation -->
+    <link rel="stylesheet" type="text/css" href="../assets/pagination/pagenation_.css">
+    <script type="text/javascript" src="../assets/pagination/pagination.js"></script>
 
 </head>
 
@@ -533,25 +533,25 @@ if (in_array($position, $restricted)) {
                                                                         <table class="table table-hover" id="dataTable">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th>Stock in ID</th>
-                                                                                    <th>Crop</th>
-                                                                                    <th>Variety</th>
-                                                                                    <th>Class</th>
-                                                                                    <th>Quantity</th>
+                                                                                    <th style="font-weight: 600;">Stock in ID</th>
+                                                                                    <th style="font-weight: 600;">Crop</th>
+                                                                                    <th style="font-weight: 600;">Variety</th>
+                                                                                    <th style="font-weight: 600;">Class</th>
+                                                                                    <th style="font-weight: 600;">Quantity</th>
 
-                                                                                    <th>SRN</th>
-                                                                                    <th>Added by</th>
-                                                                                    <th>added date</th>
-                                                                                    <th>Action</th>
+                                                                                    <th style="font-weight: 600;">SRN</th>
+                                                                                    <th style="font-weight: 600;">Added by</th>
+                                                                                    <th style="font-weight: 600;">added date</th>
+                                                                                    <th style="font-weight: 600;">Action</th>
 
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
 
                                                                                 <?php
-                                                                                            // SUM(assigned_quantity) AS total_graded,
+                                                                                // SUM(assigned_quantity) AS total_graded,
 
-                                                                                $sql = "SELECT stock_in.stock_in_ID, stock_in.stock_in_ID, `fullname`,stock_in.source, `name`, `crop`, `variety`, `class`, `SLN`, `bincard`, `number_of_bags`, `quantity`, `date` ,`supporting_dir`,stock_in.class, stock_in.SLN, stock_in.bincard, stock_in.quantity, stock_in.grade_outs_quantity, stock_in.description, stock_in.supporting_dir, stock_in.date, stock_in.time FROM stock_in 
+                                                                                $sql = "SELECT stock_in.stock_in_ID, stock_in.stock_in_ID, `fullname`,stock_in.source, `name`, `crop`, `variety`, `class`, `SLN`, `bincard`, `number_of_bags`, `quantity`, stock_in.date,`supporting_dir`,stock_in.class, stock_in.SLN, stock_in.bincard, stock_in.quantity, stock_in.grade_outs_quantity, stock_in.description, stock_in.supporting_dir, stock_in.date, stock_in.time FROM stock_in 
                                                                                INNER JOIN user ON stock_in.user_ID = user.user_ID INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
                                                                                 INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' OR stock_in.status = 'partly_assigned' GROUP BY stock_in.stock_in_ID";
 
@@ -566,7 +566,7 @@ if (in_array($position, $restricted)) {
                                                                                         $class     = $row['class'];
                                                                                         $quantity     = $row['quantity'];
 
-                                                                                        $date_added = main::change_date_format($row['date']);
+                                                                                        $date_added = Util::convert_date($row['date']);
                                                                                         $user = $row['fullname'];
                                                                                         $srn = $row['SLN'];
                                                                                         $dir = $row['supporting_dir'];
@@ -592,7 +592,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & user_name=$user' class='btn btn-success btn-mat'>Grade  </a>
+												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & date=$date_added & user_name=$user' class='btn btn-success btn-mat'>Grade  </a>
                                                 
                                                 </td>
 											</tr>	
@@ -602,10 +602,10 @@ if (in_array($position, $restricted)) {
                                                                                 ?>
                                                                             </tbody>
                                                                         </table>
-                                                                       
+
                                                                     </div>
                                                                     <div id="pagination"></div>
-                                                                    
+
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -639,14 +639,14 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Grade ID</th>
-                                                                <th>Stock in ID</th>
-                                                                <th>Grade out Quantity</th>
-                                                                <th>Trash quantity</th>
-                                                                <th>Added by</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Grade ID</th>
+                                                                <th style="font-weight: 600;">Stock in ID</th>
+                                                                <th style="font-weight: 600;">Grade out Quantity</th>
+                                                                <th style="font-weight: 600;">Trash quantity</th>
+                                                                <th style="font-weight: 600;">Added by</th>
+                                                                <th style="font-weight: 600;">Date</th>
+                                                                <th style="font-weight: 600;">Time</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
 
                                                             </tr>

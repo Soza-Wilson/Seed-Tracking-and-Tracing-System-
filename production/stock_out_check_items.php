@@ -2,7 +2,8 @@
 <html lang="en">
 <?php
 
-Ob_start();
+
+
 include('../class/main.php');
 session_start();
 
@@ -26,7 +27,7 @@ if (empty($_GET['item_ID'])) {
     header('Location:stock_out.php');
 }
 
-$sql =    "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
+$sql =  "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
 `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `item_ID` = '$item_ID'";
 
 
@@ -80,6 +81,8 @@ if ($result->num_rows > 0) {
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+
+    
 </head>
 
 <body>
@@ -147,7 +150,7 @@ if ($result->num_rows > 0) {
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                             <i class="ti-menu"></i>
                         </a>
-                         <a>PRODUCTION</a>
+                        <a>PRODUCTION</a>
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -159,7 +162,7 @@ if ($result->num_rows > 0) {
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                          
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -167,14 +170,15 @@ if ($result->num_rows > 0) {
                             </li>
                         </ul>
                         <ul class="nav-right">
-                        
+
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -205,11 +209,12 @@ if ($result->num_rows > 0) {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -328,47 +333,47 @@ if ($result->num_rows > 0) {
                             </ul>
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
                             </ul>
@@ -377,32 +382,32 @@ if ($result->num_rows > 0) {
                             <ul class="pcoded-item pcoded-left-item">
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -479,8 +484,14 @@ if ($result->num_rows > 0) {
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
 
+                                            <li class="breadcrumb-item"><a href="stock_out.php">Stock Out </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="stock_out_check_items.php">check inventory </a>
+
+                                            <li class="breadcrumb-item"><a href="process_order.php">Process Order </a>
+                                            </li>
+
+                                            </li>
+                                            <li class="breadcrumb-item"><a href="stock_out_check_items.php">Check Inventory </a>
                                             </li>
                                             </li>
 
@@ -574,7 +585,7 @@ if ($result->num_rows > 0) {
 
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <label class="badge badge-success ">price per kd</label>
+                                                            <label class="badge badge-success ">price per kg</label>
                                                             <select class="form-control" name="price_per_kg">
                                                                 <option value="<?php echo $price_per_kg; ?>"><?php echo $price_per_kg; ?></option>
                                                             </select>
@@ -636,11 +647,11 @@ if ($result->num_rows > 0) {
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Stock in ID</th>
-                                                    <th>Quantity</th>
+                                                    <th style="font-weight: 600;">Stock in ID</th>
+                                                    <th style="font-weight: 600;">Quantity</th>
 
 
-                                                    <th>Action</th>
+                                                    <th style="font-weight: 600;">Action</th>
 
 
 
@@ -659,16 +670,16 @@ if ($result->num_rows > 0) {
                                                 $price_per_kg = $_GET['item_price'];
                                                 $discount_price = $_GET['discount_price'];
 
-                                                $sql = "SELECT `stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `Quntity`, `amount`, `date`, `time`, `user_ID` FROM `stock_out` WHERE `item_ID` = '$item_ID'";
+                                                $sql = "SELECT `stock_out_ID`, `item_ID`, `stock_in_ID`, `order_ID`, `quantity`, `amount`, `date`, `time`, `user_ID` FROM `stock_out` WHERE `item_ID` = '$item_ID'";
 
                                                 $result = $con->query($sql);
-                                                if ($result->num_rows > 0) {
+                                                if (!empty($result) && $result->num_rows > 0) {
                                                     while ($row = $result->fetch_assoc()) {
 
 
                                                         $stock_in_id = $row['stock_in_ID'];
                                                         $stock_out_id = $row['stock_out_ID'];
-                                                        $quantity     = $row['Quntity'];
+                                                        $quantity     = $row['quantity'];
 
 
 
@@ -725,17 +736,17 @@ if ($result->num_rows > 0) {
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Stock in ID</th>
-                                                    <th>Crop</th>
-                                                    <th>Variety</th>
-                                                    <th>Class</th>
-                                                    <th>Quantity</th>
-                                                    <th>Source</th>
-                                                    <th>Source_name</th>
-                                                    <th>SRN</th>
-                                                    <th>Added by</th>
-                                                    <th>added date</th>
-                                                    <th>Action</th>
+                                                    <th style="font-weight: 600;">Stock in ID</th>
+                                                    <th style="font-weight: 600;">Crop</th>
+                                                    <th style="font-weight: 600;">Variety</th>
+                                                    <th style="font-weight: 600;">Class</th>
+                                                    <th style="font-weight: 600;">Quantity</th>
+                                                    <th style="font-weight: 600;">Source</th>
+                                                    <th style="font-weight: 600;">Source_name</th>
+                                                    <th style="font-weight: 600;">SRN</th>
+                                                    <th style="font-weight: 600;">Added by</th>
+                                                    <th style="font-weight: 600;">added date</th>
+                                                    <th style="font-weight: 600;">Action</th>
 
 
 
@@ -755,7 +766,7 @@ if ($result->num_rows > 0) {
 
                                                 $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
                                                `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                                                `quantity`, `date` ,`supporting_dir` FROM `stock_in` 
+                                                `available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
                                                INNER JOIN user ON stock_in.user_ID = user.user_ID 
                                                INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
                                                INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
@@ -772,8 +783,8 @@ if ($result->num_rows > 0) {
                                                         $source_name = $row['name'];
                                                         $variety     = $row['variety'];
                                                         $class     = $row['class'];
-                                                        $quantity     = $row['quantity'];
-                                                        $date_added = $row['date'];
+                                                        $quantity     = $row['available_quantity'];
+                                                        $date_added = Util::convert_date($row['date']);
                                                         $user = $row['fullname'];
                                                         $srn = $row['SLN'];
                                                         $dir = $row['supporting_dir'];

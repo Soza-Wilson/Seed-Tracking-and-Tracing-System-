@@ -521,17 +521,17 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Stock in ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Quantity</th>
-                                                                <th>Source</th>
-                                                                <th>Source_name</th>
-                                                                <th>SRN</th>
-                                                                <th>Added by</th>
-                                                                <th>Added date</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Stock in ID</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                <th style="font-weight: 600;">Source</th>
+                                                                <th style="font-weight: 600;">Source_name</th>
+                                                                <th style="font-weight: 600;">SRN</th>
+                                                                <th style="font-weight: 600;">Added by</th>
+                                                                <th style="font-weight: 600;">Added date</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
                                                             </tr>
                                                         </thead>
@@ -546,7 +546,7 @@ if (in_array($position, $restricted)) {
                               INNER JOIN user ON stock_in.user_ID = user.user_ID 
                               INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
                               INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE status = 'uncertified'";
+                              INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE status = 'uncertified' OR status = 'partly_processed'";
 
                                                             $result = $con->query($sql);
                                                             if ($result->num_rows > 0) {
@@ -558,7 +558,7 @@ if (in_array($position, $restricted)) {
                                                                     $variety     = $row['variety'];
                                                                     $class     = $row['class'];
                                                                     $quantity     = $row['quantity'];
-                                                                    $date_added = $row['date'];
+                                                                    $date_added =Util::convert_date($row['date']);
                                                                     $user = $row['fullname'];
                                                                     $srn = $row['SLN'];
                                                                     $dir = $row['supporting_dir'];

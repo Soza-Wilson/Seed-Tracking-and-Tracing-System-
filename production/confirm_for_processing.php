@@ -62,7 +62,7 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/confirm_for_processing_.js">
+    <script type="text/javascript" src="assets/js/jsHandle/confirm_for_processing___.js">
 
     </script>
 

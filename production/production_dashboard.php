@@ -769,7 +769,7 @@ $sql = "";
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green" id="block_inventory">0 kg</h4>
+                                                                <h4 class="text-c-green" style="font-weight: 800;" id="block_inventory">0 kg</h4>
                                                                 <h6 class="text-muted m-b-0">Inventory</h6>
                                                             </div>
                                                             <div class="col-4 text-right">

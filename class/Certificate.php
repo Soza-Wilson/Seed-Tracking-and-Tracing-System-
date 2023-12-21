@@ -1,11 +1,11 @@
 <?php
-spl_autoload_register(function($class){
-  require"$class.php";
-  });
-  
+spl_autoload_register(function ($class) {
+  require "$class.php";
+});
+
 class Certificate
 {
-  
+
 
 
   public $con;
@@ -31,7 +31,7 @@ if
 
 
     $added_date = $this->register_date;
-    $check_ids = Util::check_id("certificate", "lot_number", $lot_number,$this->con);
+    $check_ids = Util::check_id("certificate", "lot_number", $lot_number, $this->con);
     if ($check_ids) {
       return "Error: Lot Number already exists";
     } else {
@@ -78,32 +78,26 @@ if
     }
     mysqli_close($this->con);
   }
-  /**
-   * 
+  /*
    * 
    * The function below is handling most of the operations done to a certificate 
-   * the function takes operation type this can be  (-) or  (+) operator
-   * also quantity type can be certificate quantity or assigned quantity
-   * the last two arguments are the certificate ID and the quantity 
-   * 
-   * 
+   *
    */
   public function update_certificate_quantity($operation_type, $quantity_type, $lot_number, $quantity)
   {
+    // * the function takes operation type this can be  (-) or  (+) operator
+    // * also quantity type can be certificate quantity or assigned quantity
+    // * the last two arguments are the certificate ID and the quantity 
     try {
       //code...
       $sql =   "UPDATE `certificate` SET `$quantity_type` = `$quantity_type` $operation_type'$quantity' WHERE `lot_number`='$lot_number'";
       $statement = $this->con->prepare($sql);
       $statement->execute();
-      return "updated"; 
-      
+      return "updated";
     } catch (\Throwable $th) {
       //throw $th;
       return "error updating certificate quantity" . $th;
     }
     mysqli_close($this->con);
   }
-
-
-
 }

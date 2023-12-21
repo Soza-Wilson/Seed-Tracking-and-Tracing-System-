@@ -17,8 +17,10 @@ class Auth
     public function user_log_in($email, $password)
     {
         try {
+
+         
             //code...
-            $connect = new DbConnection();
+         
 
             $Email = $email;
             $Password = $password;
@@ -47,9 +49,9 @@ class Auth
             }
             mysqli_close($this->con);
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
 
-            return "Error Logging in " . $th;
+           
         }
     }
 

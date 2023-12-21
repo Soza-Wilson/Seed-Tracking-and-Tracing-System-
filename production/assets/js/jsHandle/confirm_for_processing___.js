@@ -31,12 +31,13 @@ const confirmHandOver = () => {
   ];
 
   $.post(
-    "get_data.php",
+    "get_data/seed_processing_data.php",
     {
       seedHandOver: conformationData,
     },
     (data) => {
       alert(data);
+      history.back()
     }
   );
 };

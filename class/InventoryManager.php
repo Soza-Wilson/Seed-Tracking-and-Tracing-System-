@@ -2,6 +2,7 @@
 
 use Inventory\Expense;
 
+
 spl_autoload_register(function ($class) {
     require "$class.php";
 });
@@ -9,10 +10,11 @@ spl_autoload_register(function ($class) {
 
 class InventoryManager
 {
-
+   
+    use HasTransaction;
+    
     private $con;
     private $product;
-    private $transaction;
     private $certificate;
     private $expense;
 
@@ -30,8 +32,10 @@ class InventoryManager
         $this->con = $connection->connect();
         $this->product = new Product();
         $this->expense = new Expense;
-        $this->transaction = new Transaction();
         $this->certificate = new Certificate();
+        $this->transaction_date = Util::get_current_date();
+        $this->transaction_time = Util::get_current_time();
+        $this->transaction_id= Util::generate_id('transaction');
     }
 
 
@@ -64,11 +68,11 @@ class InventoryManager
 
                         if (
                             // If register stock is complete, we will register transaction and update the certificate quantity
-                            $this->transaction->register_transaction(Util::generate_id('trans'), $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user) == "registered"
+                            $this->register_transaction('creditor_buy_back',$trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user) == "registered"
                             && $this->certificate->update_certificate_quantity("-", "available_quantity", $certificate, $quantity) == "updated"
                         ) {
                             // updating creditor account 
-                            $this->transaction->update_account_funds($creditor, $calculated_amount, 'plus');
+                            $this->update_account_funds($creditor, $calculated_amount, 'plus');
                             return "stock_registered";
                         } else {
                             return "error_registering_stock";
@@ -132,8 +136,8 @@ class InventoryManager
     {
 
         //Restore old account funds amount
-        $oldAmount = $this->transaction->get_old_amount($stockInId);
-        if ($this->transaction->update_account_funds($creditorId, $oldAmount, 'minus')) {
+        $oldAmount = $this->get_old_amount($stockInId);
+        if ($this->update_account_funds($creditorId, $oldAmount, 'minus')) {
 
             /*After creditor account restored calculate new amount and update creditor and transaction with new details.
             we are also getting transaction price and calculating the amount */
@@ -141,9 +145,9 @@ class InventoryManager
             $price = $this->expense->get_seed_buy_prices($class, $crop, $variety);
             $new_amount = (int)$price * (int)$quantity;
             /// Adding new amount tom creditor account
-            if ($this->transaction->update_account_funds($creditorId, $oldAmount, 'minus')) {
+            if ($this->update_account_funds($creditorId, $oldAmount, 'minus')) {
                 // updating transaction with new transaction price and amount
-                $this->transaction->update_transaction($price, $new_amount, $stockInId);
+                $this->update_transaction($price, $new_amount, $stockInId);
             }
         }
     }
@@ -173,15 +177,15 @@ class InventoryManager
     {
 
         // get transaction amount
-        (float)$amount = $this->transaction->get_old_amount($stock_in_id);
+        (float)$amount = $this->get_old_amount($stock_in_id);
         // Restore creditor funds account 
-        $this->transaction->update_account_funds($creditor_id, $amount, 'minus');
+        $this->update_account_funds($creditor_id, $amount, 'minus');
         // Restore certificate if seed is certified
         if ($certificate == "not_certified") {
         } else {
             if ($this->certificate->update_certificate_quantity('+', 'available_quantity', $certificate, $quantity) == 'updated') {
                 // Delete transaction 
-                if ($this->transaction->delete_transaction($stock_in_id) == 'deleted') {
+                if ($this->delete_transaction($stock_in_id) == 'deleted') {
                     // Delete entery 
                     try {
                         $sql = "DELETE FROM stock_in WHERE stock_in.stock_in_ID ='$stock_in_id'";
@@ -197,4 +201,8 @@ class InventoryManager
             }
         }
     }
+
+
+
+    
 }

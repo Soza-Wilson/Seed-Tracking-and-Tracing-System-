@@ -466,8 +466,10 @@ if (in_array($position, $restricted)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
+                                            <li class="breadcrumb-item"><a href="view_rprocessed_seed.php">View Processed Seed</a>
+                                            </li>
 
-                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Grade new stock</a>
+                                            <li class="breadcrumb-item"><a href="#">Processed Seed Details </a>
                                             </li>
 
                                         </ul>
@@ -516,10 +518,10 @@ if (in_array($position, $restricted)) {
                                                         <thead>
                                                             <tr>
 
-                                                                <th>Process Type</th>
-                                                                <th>Processed Quantity</th>
-                                                                <th>Grade Outs Quantity</th>
-                                                                <th>Trash Quantity</th>
+                                                                <th style="font-weight: 600;">Process Type</th>
+                                                                <th style="font-weight: 600;">Processed Quantity</th>
+                                                                <th style="font-weight: 600;">Grade Outs Quantity</th>
+                                                                <th style="font-weight: 600;">Trash Quantity</th>
 
 
 

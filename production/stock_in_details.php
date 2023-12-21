@@ -523,6 +523,8 @@ if (!empty($stock_in_ID)) {
 
                                             <li class="breadcrumb-item"><a href="view_stock_in.php">View Stock In</a>
                                             </li>
+                                            <li class="breadcrumb-item"><a href="stock_in_details.php">Stock Details</a>
+                                            </li>
 
                                         </ul>
                                     </div>

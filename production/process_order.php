@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
         $customer = $row["customer_name"];
         $customer_ID = $row["customer_id"];
         $user_requested = $row["fullname"];
-        $date = $row['date'];
+        $date = Util::convert_date($row['date']);
         $time = $row['time'];
        
     }
@@ -488,8 +488,10 @@ if ($result->num_rows > 0) {
                                             <li class="breadcrumb-item">
                                                 <a href="production_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
+                                            <li class="breadcrumb-item"><a href="stock_out.php">Stock Out </a>
+                                            </li>
 
-                                            <li class="breadcrumb-item"><a href="process_order.php">process order </a>
+                                            <li class="breadcrumb-item"><a href="process_order.php">Process Order </a>
                                             </li>
                                             </li>
 
@@ -554,7 +556,7 @@ if ($result->num_rows > 0) {
 
                                                         <div class="col-sm-2">
                                                             <label class="badge badge-success ">Order Type</label>
-                                                            <select class="form-control" name="order_type">
+                                                            <select class="form-control" name="order_type" id ="order_type">
                                                                 <option value="<?php echo $order_type; ?>"><?php echo $order_type; ?></option>
                                                             </select>
 
@@ -674,16 +676,16 @@ if ($result->num_rows > 0) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>Item ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>class</th>
-                                                                <th>Quantity</th>
-                                                                <th>price per kg</th>
-                                                                <th>Discount</th>
-                                                                <th>Total price</th>
-                                                                <th>status</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">Item ID</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">class</th>
+                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                <th style="font-weight: 600;">price per kg</th>
+                                                                <th style="font-weight: 600;">Discount</th>
+                                                                <th style="font-weight: 600;">Total price</th>
+                                                                <th style="font-weight: 600;">status</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
 
 

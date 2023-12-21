@@ -657,10 +657,10 @@ if (in_array($position, $notRestricted)) {
                                                         <thead>
                                                             <tr>
                                                                
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
                                                                
-                                                                <th>Quantity</th>
+                                                                <th style="font-weight: 600;">Quantity</th>
                                                                 
                                                             </tr>
                                                         </thead>

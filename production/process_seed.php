@@ -590,16 +590,16 @@ if (in_array($position, $restricted)) {
                                                                         <table class="table table-hover" id="dataTable">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th>GradeID</th>
-                                                                                    <th>Crop</th>
-                                                                                    <th>Variety</th>
-                                                                                    <th>Class</th>
-                                                                                    <th>Assigned Quantity</th>
+                                                                                    <th style="font-weight: 600;">GradeID</th>
+                                                                                    <th style="font-weight: 600;">Crop</th>
+                                                                                    <th style="font-weight: 600;">Variety</th>
+                                                                                    <th style="font-weight: 600;">Class</th>
+                                                                                    <th style="font-weight: 600;">Assigned Quantity</th>
 
-                                                                                    <th>Assigned Date</th>
-                                                                                    <th>Assigned TIme</th>
-                                                                                    <th>Assigned by</th>
-                                                                                    <th>Action</th>
+                                                                                    <th style="font-weight: 600;">Assigned Date</th>
+                                                                                    <th style="font-weight: 600;">Assigned TIme</th>
+                                                                                    <th style="font-weight: 600;">Assigned by</th>
+                                                                                    <th style="font-weight: 600;">Action</th>
 
                                                                                 </tr>
                                                                             </thead>
@@ -695,14 +695,14 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th>ID</th>
-                                                                <th>Assigned Quantity</th>
-                                                                <th>Availables Quantity</th>
-                                                                <th>Grower name</th>
-                                                                <th>Assigned by</th>
-                                                                <th>Received date</th>
-                                                                <th>Received time</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;">ID</th>
+                                                                <th style="font-weight: 600;">Assigned Quantity</th>
+                                                                <th style="font-weight: 600;">Availables Quantity</th>
+                                                                <th style="font-weight: 600;">Grower name</th>
+                                                                <th style="font-weight: 600;">Assigned by</th>
+                                                                <th style="font-weight: 600;">Received date</th>
+                                                                <th style="font-weight: 600;">Received time</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
 
                                                             </tr>
@@ -753,7 +753,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & assigned_quantity=$assigned_quantity'  class='btn btn-success btn-mat'>Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id&available_quantity=$available_quantity&crop=$crop&variety=$variety&grading_type=$grading_type&assigned_quantity=$assigned_quantity'  class='btn btn-success btn-mat'>Process</a>
                                                 
                                                 </td>
 											</tr>	
@@ -787,14 +787,14 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th> ID</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Cleaned Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;"> ID</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Cleaned Quantity</th>
+                                                                <th style="font-weight: 600;">Date</th>
+                                                                <th style="font-weight: 600;">Time</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
 
                                                             </tr>
@@ -848,7 +848,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id & available_quantity=$available_quantity & crop=$crop & variety=$variety & grading_type=$grading_type & processed_quantity=$assigned_quantity & process_id=$process_ID & passed_process_type_id=$passed_process_type_id'  class='btn btn-success btn-mat'> Process</a>
+												<td><a href='assign_seed_for_processing.php? grade_id=$grade_id&available_quantity=$available_quantity&crop=$crop&variety=$variety&grading_type=$grading_type&processed_quantity=$assigned_quantity&process_id=$process_ID&passed_process_type_id=$passed_process_type_id'  class='btn btn-success btn-mat'> Process</a>
                                                 
                                                 </td>
 											</tr>	

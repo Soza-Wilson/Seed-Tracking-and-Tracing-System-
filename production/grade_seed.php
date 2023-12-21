@@ -13,6 +13,7 @@ $crop = $_GET['crop'];
 $variety = $_GET['variety'];
 $class = $_GET['class'];
 $quantity = $_GET['quantity'];
+$date = $_GET['date'];
 
 
 if (empty($test)) {
@@ -613,7 +614,7 @@ if (empty($test)) {
                                                     <div class="col-sm-2">
                                                         <label class="badge badge-success ">Stock In Date</label>
                                                         <select class="form-control" name="quantity">
-                                                            <option value="<?php echo $quantity; ?>"><?php echo $quantity; ?></option>
+                                                            <option value="<?php echo $date; ?>"><?php echo $date; ?></option>
                                                         </select>
 
 

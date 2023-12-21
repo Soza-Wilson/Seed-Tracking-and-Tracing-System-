@@ -44,12 +44,12 @@ $(document).ready(() => {
     ];
 
     $.post(
-      "get_data.php",
+      "get_data/business_profile_data.php",
       {
         updateBusiness: data,
       },
       function (data) {
-        //alert(data);
+        alert(data);
         // alert("Business details updated");
         // window.location.reload();
       }
@@ -70,7 +70,7 @@ $(document).ready(() => {
       alert("Error : Season maximum is 6 months, please adjust date settings");
     } else {
       $.post(
-        "get_data.php",
+        "get_data/business_profile_data.php",
         {
           updateSeason: seasonData,
         },
@@ -105,18 +105,18 @@ const saveImage = () => {
   }else {
 
     $.post(
-      "get_data.php",
+      "get_data/business_profile_data.php",
       {
         saveLogoImage: $("#tempFile").val(),
       },
       function (data) {
+        alert(data)
        if(data=="saved"){
 
         alert("Image updated");
         window.location.reload();
 
        }else{
-
         alert("Error: failed to update image");
 
 

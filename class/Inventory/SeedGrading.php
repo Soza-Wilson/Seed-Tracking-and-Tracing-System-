@@ -1,351 +1,107 @@
 <?php
 
 
-/**
- * 
- * 
- * This class handles all seed grading functionalities, these include assigning seed for grading and generating required documents for the seed  handover process
- */
-
-
-namespace Grading;
-
-use DbConnection;
-use Util;
-
-spl_autoload_register(function ($class) {
-    require "../$class.php";
-});
-
 class SeedGrading
 {
 
+    /***
+     * This class handles seed processing stage, functionality includes 
+     * 
+     *  - Register seed processing stage 
+     *  - update already registered seed processing type to used
+     *  - checking stock in status and update based on the status
+     * 
+     * 
+     */
 
-    private $con;
-    private $id;
-    private $user;
-    private $date;
-    private $time;
-    private $pdfType;
-    private $total_quantity;
-    private $stock_in_quantity;
-    private $stock_in_id;
-    private $assigned_quantity;
-
-
-
-    function __construct($stock_in_id, $assigned_quantity, $user)
+    use HasSeedProcessing;
+    public function __construct($grade_id, $processing_type, $assigned_quantity, $grade_outs_quantity, $trash_quantity, $available_quantity, $process_ID, $passed_process_type_id)
     {
+        $this->grade_id = $grade_id;
+        $this->processing_type = $processing_type;
+        $this->assigned_quantity = $assigned_quantity;
+        $this->grade_outs_quantity = $grade_outs_quantity;
+        $this->trash_quantity = $trash_quantity;
+        $this->available_quantity = $available_quantity;
+        $this->process_ID = $process_ID;
+        $this->passed_process_type_id = $passed_process_type_id;
+        $this->processed_quantity = $this->get_processed_quantity();
         $connection = new DbConnection();
         $this->con = $connection->connect();
-        $this->id = Util::generate_id('grade');
-        $this->user = $user;
-        $this->date = date("Y-m-d");
-        $this->time = date("H:i:s");
-        $this->pdfType = "handover";
-        $this->total_quantity = "";
-        $this->stock_in_quantity = "";
-        $this->stock_in_id = $stock_in_id;
-        $this->assigned_quantity = $assigned_quantity;
     }
-
-    //  
-
     public function grade_seed()
     {
+        $this->update_processing_type();
+        $this->register_process_type(Util::generate_id('ptype'),$this->process_ID);
+        $this->update_stock_in_status();
+        $this->feedback();
+    }
 
+
+    private function get_stock_in_id(): string
+    {
         try {
-            //code...
-            $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
-            `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
-           ('$this->id','$this->date','$this->time','$this->assigned_quantity','0','$this->assigned_quantity','$this->stock_in_id','$this->user','-','-','unconfirmed','-')";
+            $sql = "SELECT stock_in_ID from grading WHERE grade_ID = '$this->grade_id'";
+            $result = $this->con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $assigned_quantity = $row['stock_in_ID'];
+                    return $assigned_quantity;
+                }
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+
+    private function get_stock_in_processed_quantity(): array
+    {
+        $stock_in_id = $this->get_stock_in_id();
+        try {
+
+            $sql = "SELECT sum(grading.assigned_quantity) AS total_assigned_quantity , stock_in.quantity AS stock_in_quantity FROM
+             grading JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID  WHERE grading.status = 'processed' AND grading.stock_in_ID = '$stock_in_id'";
+            $result = $this->con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $total_assigned_quantity = $row['total_assigned_quantity'];
+                    $stock_in_quantity = $row['stock_in_quantity'];
+                    return [$total_assigned_quantity, $stock_in_quantity];
+                }
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+    private function update_stock_in_status()
+    {
+
+        /**
+         * Update stock in when total seed assigned for gradding is equal to stock_in quantity 
+         * if total processed quantity is less than stock in quantity upadte to partly assigned 
+         */
+        $stock_in_status = '';
+        $quantities = $this->get_stock_in_processed_quantity();
+        if ((int)$quantities[0] = (int)$quantities[1]) {
+            // update stock_in status to assigned for gradding 
+            $stock_in_status = 'proccessed';
+        } else if ((int)$quantities[0] < (int)$quantities[1]) {
+            // update to partly assigned for processing
+            $stock_in_status  = 'partly_processed';
+        }
+        try {
+
+            $sql = "UPDATE `stock_in` INNER JOIN grading ON grading.stock_in_ID = stock_in.stock_in_ID INNER JOIN process_seed ON
+         process_seed.grade_ID = grading.grade_ID SET stock_in.status = '$stock_in_status' WHERE process_seed.process_ID='$this->process_ID'";
 
             $statement = $this->con->prepare($sql);
             $statement->execute();
         } catch (\Throwable $th) {
-            //throw $th;
-        }
-    }
-
-
-
-    //  this function takes seed quantity and stock in id and checks in the inventory if the assigned quantity is exceeding the available quantity 
-
-    private function check_quantity_limit(): string
-    {
-
-        try {
-            //code...
-            $sql = "SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
-            INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$this->stock_in_id'";
-
-            $result = $this->con->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $total_quantity = $row['total_graded'];
-                    $stock_in_quantity = $row['quantity'];
-                }
-                $stock = (float)$stock_in_quantity;
-                $total = (float)$total_quantity + (float)$this->assigned_quantity;
-
-                if ($total > $stock) {
-                    return True;
-                }
-                mysqli_close($this->con);
-            }
-        } catch (\Throwable $th) {
-            //throw $th;
-            return $th;
-        }
-    }
-
-
-    public function update_stockIn_grading_status($status)
-    {
-
-        global $con;
-
-        $sql = "UPDATE `stock_in` SET `status`='$status' WHERE `stock_in_ID`='$this->stock_in_id'";
-        $statement = $con->prepare($sql);
-        if ($statement->execute()) {
-
-            echo "updated" . $this->stock_in_id;
+            throw $th;
         }
     }
 }
-
-
-//   // assign ungraded seed for processing
-
-//   static function assign_processing_quantity($stock_in_id, $assigned_quantity, $user)
-//   {
-
-
-
-//     global $con;
-//     $grade_ID = self::generate_user("grade_seed");
-//     $user_ID = $user;
-//     $date = date("Y-m-d");
-//     $time = date("H:i:s");
-//     $pdfType = "handover";
-//     $total_quantity = "";
-//     $stock_in_quantity = "";
-
-
-//     //Checking if all graded seed quantity are less than or equal to stock_in quantity
-
-//     $sql = "SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
-//     INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$stock_in_id'";
-
-//     $result = $con->query($sql);
-//     if ($result->num_rows > 0) {
-//       while ($row = $result->fetch_assoc()) {
-//         $total_quantity = $row['total_graded'];
-//         $stock_in_quantity = $row['quantity'];
-//       }
-//       // echo ("<script> alert('$total_quantity.$stock_in_quantity');
-//       // window.location='process_seed.php';
-//       // </script>");
-
-//       $stock = (int)$stock_in_quantity;
-//       $total = (int)$total_quantity + (int)$assigned_quantity;
-
-//       if ($total > $stock) {
-
-//         //echo ("<scriTY\t> alert('$stock.$total'); </script>");
-
-//         return "quantity_exceeded";
-//       } else {
-//         $sql = "INSERT INTO `grading`(`grade_ID`, `assigned_date`, `assigned_time`, `assigned_quantity`, `used_quantity`, `available_quantity`, `stock_in_ID`,
-//           `assigned_by`, `received_ID`, `received_name`, `status`, `file_directory`) VALUES 
-//           ('$grade_ID','$date','$time','$assigned_quantity','0','$assigned_quantity','$stock_in_id','$user_ID','-','-','unconfirmed','-')";
-
-//         $statement = $con->prepare($sql);
-//         $statement->execute();
-
-//         // update stock in available quantity by subtracting assigned quantity with available 
-
-//         if ($total == $stock) {
-
-//           main::update_stockIn_grading_status($stock_in_id, "handover_pending");
-//         }
-
-//         if ($total < $stock) {
-
-//           main::update_stockIn_grading_status($stock_in_id, "partly_assigned");
-//         }
-
-
-//         // create PDF file for assigned seed
-
-//         echo $grade_ID;
-//       }
-//     }
-//   }
-
-//   static function update_stockIn_grading_status($stock_in_id, $status)
-//   {
-
-//     global $con;
-
-//     $sql = "UPDATE `stock_in` SET `status`='$status' WHERE `stock_in_ID`='$stock_in_id'";
-//     $statement = $con->prepare($sql);
-//     if ($statement->execute()) {
-
-//       echo "updated" . $stock_in_id;
-//     }
-//   }
-
-//   static function handover_conformation($receive_id, $received_name, $file_directory, $grade_id, $passed_quantity, $stock_in_ID)
-//   {
-//     global $con;
-
-//     $sql = "UPDATE `grading` SET `received_ID`='$receive_id',
-//     `received_name`='$received_name',`status`='unprocessed',
-//     `file_directory`='$file_directory' WHERE `grade_ID`='$grade_id'";
-//     $statement = $con->prepare($sql);
-//     if ($statement->execute()) {
-
-//       echo "successful";
-//     };
-
-
-
-
-//     // Check if all stock_in quantity has been assigned for processing, if so update the status to unprocesssed 
-//     $checkStatus = self::checkProcessStatus($stock_in_ID, "unprocessed");
-//     if ((int)$checkStatus[0] + (int)$passed_quantity == (int)$checkStatus[1]) {
-//       self::update_stockIn_grading_status($stock_in_ID, "uprocessed");
-//     }
-//     // $sql = "UPDATE `stock_in` SET `processed_quantity`='$passed_quantity' WHERE `stock_in_ID` = '$stock_in_ID'";
-//     // $statement = $con->prepare($sql);
-//     // $statement->execute();
-//   }
-
-
-//   static function checkProcessStatus($stock_in_id, $stage)
-//   {
-//     global $con;
-//     $sql = "SELECT SUM(assigned_quantity) AS total_graded, stock_in.quantity FROM `grading`
-//     INNER JOIN stock_in ON stock_in.stock_in_ID = grading.stock_in_ID WHERE grading.stock_in_ID = '$stock_in_id' AND grading.status='$stage'";
-
-//     $result = $con->query($sql);
-//     if ($result->num_rows > 0) {
-//       while ($row = $result->fetch_assoc()) {
-//         $total_quantity = $row['total_graded'];
-//         $stock_in_quantity = $row['quantity'];
-//       }
-
-//       return [$total_quantity, $stock_in_quantity];
-//     }
-//   }
-
-
-
-
-
-//   // clean and process seed
-
-//   function process_seed($grade_ID, $type, $assigned_quantity, $grade_outs_quantity, $trash_quantity, $available_quantity, $process_ID, $passed_process_type_id)
-//   {
-
-
-//     $process_type_ID = $this->generate_user("pr_type");
-//     global $con;
-
-//     //Check if all processed transaction are greater are not more than the stock in quantity 
-
-//     // $sql="SELECT SUM(assigned_quantity) AS total_processed FROM `process_seed`WHERE `process_ID` =''";
-
-
-//     // echo("<script>$available_quantity</script>");
-
-
-
-
-//     if ($type == "Cleaning ") {
-
-
-
-//       $process_ID = $this->generate_user("process");
-
-//       $user = $_SESSION['user'];
-//       $process_date = date("Y-m-d");
-//       $process_time = date("H:i:s");
-
-//       // update available quantity in gr
-//       $this->update_available_quantity_grading($grade_ID, $available_quantity, $assigned_quantity);
-
-//       $sql = "INSERT INTO `process_seed`(`process_ID`, `assigned_quantity`, `processed_date`, `processed_time`, `grade_ID`, `user_ID`) VALUES 
-//           ('$process_ID','$assigned_quantity','$process_date','$process_time','$grade_ID','$user')";
-
-//       $statement = $con->prepare($sql);
-//       $statement->execute();
-
-
-//       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
-
-//       $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
-//         VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
-
-//       $statement = $con->prepare($sql);
-//       $statement->execute();
-//       $this->update_available_quantity_grading($grade_ID, $available_quantity, $assigned_quantity);
-
-//       echo ("<script> alert('saved!');
-//        window.location='process_seed.php';
-//        </script>");
-//     } else {
-
-//       $processed_quantity = $this->get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity);
-
-
-//       // update cleaning status (i was lazy at the end)
-
-//       // FIY this was not even close to the end 
-
-
-//       $sql = "UPDATE `process_type` SET
-//         `process_type`='Cleaning_' WHERE `process_type_ID`='$passed_process_type_id'";
-//       $statement = $con->prepare($sql);
-//       $statement->execute();
-
-//       $sql = "INSERT INTO `process_type`(`process_type_ID`, `process_ID`, `grade_outs_quantity`, `processed_quantity`, `trash_quantity`, `process_type`) 
-//         VALUES ('$process_type_ID','$process_ID','$grade_outs_quantity','$processed_quantity','$trash_quantity','$type')";
-
-//       $statement = $con->prepare($sql);
-//       $statement->execute();
-
-//       $sql = "UPDATE `stock_in` INNER JOIN grading ON grading.stock_in_ID = stock_in.stock_in_ID INNER JOIN process_seed ON
-//        process_seed.grade_ID = grading.grade_ID SET stock_in.status = 'uncertified' WHERE process_seed.process_ID='$process_ID'";
-
-//       $statement = $con->prepare($sql);
-//       $statement->execute();
-
-//       echo ("<script> alert('saved!');
-//       window.location='process_seed.php';
-//       </script>");
-//     }
-//   }
-
-
-//   function get_processed_quantity($trash_quantity, $grade_outs_quantity, $assigned_quantity)
-//   {
-//     $t = (int)$trash_quantity + (int)$grade_outs_quantity;
-//     $processed_quantity = (int)$assigned_quantity - $t;
-//     return $processed_quantity;
-//   }
-
-
-
-
-//   function update_available_quantity_grading($grade_id, $available_quantity, $assigned_quantity)
-//   {
-
-//     global $con;
-//     $new_available_quantity = (int)$available_quantity - (int)$assigned_quantity;
-//     $sql = "UPDATE `grading` SET `available_quantity`=' $new_available_quantity' WHERE `grade_ID`='$grade_id'";
-
-//     $statement = $con->prepare($sql);
-//     $statement->execute();
-//   }

@@ -1,0 +1,135 @@
+ <?php
+
+
+                                                                        global $con;
+                                                                        $data[] = "";
+                                                                        $lab_id = "";
+                                                                        $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
+                                                       farm.class,user.fullname,farm.area_name,
+                                                       farm.physical_address,lab_test.germination_percentage,
+                                                       lab_test.shelling_percentage,lab_test.purity_percentage,
+                                                       lab_test.defects_percentage,lab_test.grade, stock_in.date, 
+                                                       stock_in.quantity FROM lab_test INNER JOIN crop ON crop.crop_ID
+                                                        = lab_test.crop_ID INNER JOIN variety ON variety.variety_ID = 
+                                                        lab_test.variety_ID INNER JOIN farm on farm.farm_ID = lab_test.farm_ID 
+                                                        INNER JOIN user ON user.user_ID = lab_test.user_ID INNER JOIN stock_in 
+                                                        ON stock_in.stock_in_ID = lab_test.stock_in_ID WHERE lab_test.grade = 'passed' AND lab_test.test_status = 'active'
+                                                       ";
+
+                                                                        $result =  $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+
+                                                                                $lab_id = $row["test_ID"];
+                                                                                $data[1] = $row["source"];
+                                                                                $data[2] = $row["stock_in_ID"];
+                                                                                $data[3] = $row["area_name"];
+                                                                                $data[4] = $row["physical_address"];
+                                                                                $data[5]  = $row["crop"];
+                                                                                $data[6]  = $row["variety"];
+                                                                                $data[7] = $row["class"];
+                                                                                $data[8] = $row["date"];
+                                                                                $data[9] = $row["fullname"];
+                                                                                $data[10] = $row["quantity"];
+                                                                                $data[11] = $row["grade"];
+
+
+                                                                                echo "
+                                                       
+                                                      
+                                                            <tr>
+                                                         
+                                                                <td> $lab_id[0]</td>
+                                                                <td> $data[1]</td>
+                                                                <td> $data[2]</td>
+                                                                <td> $data[3]</td>
+                                                                <td> $data[4]</td>
+                                                                <td> $data[5]</td>
+                                                                <td> $data[6]</td>
+                                                                <td> $data[7]</td>
+                                                                <td> $data[8]</td>
+                                                                <td> $data[9]</td>
+                                                                <td> $data[10]</td>
+                                                                <td> $data[11]</td>
+
+                                                                
+                                                                <td><a href='lab_add_certificate.php?ID=$lab_id' class='btn btn-success'>Add Certificate</a>
+                                               
+                                                
+                                                </td>
+                                                               
+
+                                                            </tr>
+                                                           ";
+                                                                            }
+                                                                        }
+                                                                        ?>
+
+
+
+                                                                         <?php
+
+
+                                                                        global $con;
+                                                                        $data[] = "";
+
+                                                                        $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
+                                                       farm.class,user.fullname,farm.area_name,
+                                                       farm.physical_address,lab_test.germination_percentage,
+                                                       lab_test.shelling_percentage,lab_test.purity_percentage,
+                                                       lab_test.defects_percentage,lab_test.grade, stock_in.date, 
+                                                       stock_in.quantity FROM lab_test INNER JOIN crop ON crop.crop_ID
+                                                        = lab_test.crop_ID INNER JOIN variety ON variety.variety_ID = 
+                                                        lab_test.variety_ID INNER JOIN farm on farm.farm_ID = lab_test.farm_ID 
+                                                        INNER JOIN user ON user.user_ID = lab_test.user_ID INNER JOIN stock_in 
+                                                        ON stock_in.stock_in_ID = lab_test.stock_in_ID WHERE lab_test.grade = 'failed'
+                                                       ";
+
+                                                                        $result =  $con->query($sql);
+                                                                        if ($result->num_rows > 0) {
+                                                                            while ($row = $result->fetch_assoc()) {
+
+                                                                                $data[0] = $row["test_ID"];
+                                                                                $data[1] = $row["source"];
+                                                                                $data[2] = $row["stock_in_ID"];
+                                                                                $data[3] = $row["area_name"];
+                                                                                $data[4] = $row["physical_address"];
+                                                                                $data[5]  = $row["crop"];
+                                                                                $data[6]  = $row["variety"];
+                                                                                $data[7] = $row["class"];
+                                                                                $data[8] = $row["date"];
+                                                                                $data[9] = $row["fullname"];
+                                                                                $data[10] = $row["quantity"];
+                                                                                $data[11] = $row["grade"];
+
+
+                                                                                echo "
+                                                       
+                                                      
+                                                            <tr>
+                                                         
+                                                                <td> $data[0]</td>
+                                                                <td> $data[1]</td>
+                                                                <td> $data[2]</td>
+                                                                <td> $data[3]</td>
+                                                                <td> $data[4]</td>
+                                                                <td> $data[5]</td>
+                                                                <td> $data[6]</td>
+                                                                <td> $data[7]</td>
+                                                                <td> $data[8]</td>
+                                                                <td> $data[9]</td>
+                                                                <td> $data[10]</td>
+                                                                <td> $data[11]</td>
+
+                                                                <td><a href='view_registered_users.php' class='btn btn-success'>view </a>
+                                                                <a href='view_registered_users.php' class='btn btn-success'>Retest</a>
+                                               
+                                                
+                                                </td>
+                                                               
+
+                                                            </tr>
+                                                           ";
+                                                                            }
+                                                                        }
+                                                                        ?>

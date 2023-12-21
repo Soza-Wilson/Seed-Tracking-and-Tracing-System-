@@ -1,11 +1,16 @@
 <?php
-spl_autoload_register(function($class){
-    require"$class.php";
-    });
+
+spl_autoload_register(function ($class) {
+    if (file_exists('Order/' . $class . '.php')) {
+        require_once 'Order/' . $class . '.php';
+    } elseif (file_exists($class . '.php')) {
+        require_once $class . '.php';
+    }
+});
 class Farm
 {
-    
- 
+
+
 
     private $id;
     private $register_date;
@@ -14,12 +19,10 @@ class Farm
 
     function __construct()
     {
-        
+
         $this->id = Util::generate_id("farm");
         $this->register_date = Util::get_current_date();
         $this->certificate = new Certificate();
-        
-       
     }
 
 
@@ -194,7 +197,7 @@ class Farm
 
         try {
             $sql = "DELETE FROM `farm` WHERE `farm_ID`='$farm_ID'";
-            $statement =$this->certificate->con->prepare($sql);
+            $statement = $this->certificate->con->prepare($sql);
             $statement->execute();
             $old_certificate = [$old_main_certificate, $old_main_quantity, $old_male_certificate, $old_male_quantity, $old_female_certificate, $old_female_quantity];
             if (self::restore_assigned_seed_certificates($old_hybrid_type, $old_certificate) == "updated") {

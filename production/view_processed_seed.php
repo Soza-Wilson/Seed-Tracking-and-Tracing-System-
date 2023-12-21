@@ -520,15 +520,15 @@ if (in_array($position, $restricted)) {
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th> ID</th>
-                                                                <th>Grower Name</th>
-                                                                <th>Crop</th>
-                                                                <th>Variety</th>
-                                                                <th>Class</th>
-                                                                <th>Processed Quantity</th>
-                                                                <th>Date</th>
-                                                                <th>Time</th>
-                                                                <th>Action</th>
+                                                                <th style="font-weight: 600;"> ID</th>
+                                                                <th style="font-weight: 600;">Grower Name</th>
+                                                                <th style="font-weight: 600;">Crop</th>
+                                                                <th style="font-weight: 600;">Variety</th>
+                                                                <th style="font-weight: 600;">Class</th>
+                                                                <th style="font-weight: 600;">Processed Quantity</th>
+                                                                <th style="font-weight: 600;">Date</th>
+                                                                <th style="font-weight: 600;">Time</th>
+                                                                <th style="font-weight: 600;">Action</th>
 
 
                                                             </tr>

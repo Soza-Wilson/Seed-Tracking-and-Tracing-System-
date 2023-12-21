@@ -4,36 +4,39 @@ spl_autoload_register(function ($class) {
 });
 
 
-class Transaction
+trait HasTransaction
 {
 
 
     private $con;
+    private $transaction_id;
+    private $transaction_date;
+    private $transaction_time;
+
 
     function __construct()
     {
         $connection = new DbConnection();
         $this->con = $connection->connect();
+       
     }
 
 
     //  register tracation functiom
-    //  function takes transaction arguments a simply register's the data to the trasaction table in the seed_tracking_DB
-    
-    public function register_transaction($transaction_ID, $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user_ID):string
+
+
+    private function register_transaction($transaction_type, $action_name, $action_id, $account_id, $transaction_price, $calculated_amount, $user_ID): string
+
+    //  function takes transaction arguments, register's the data to the trasaction table in the seed_tracking_DB
     {
-
-
-        $date = date("Y-m-d");
-        $time = date("H:i:s");
 
         try {
             //code...
 
             $sql = "INSERT INTO `transaction`(`transaction_ID`, `type`, `action_name`,
         `action_ID`, `C_D_ID`,`transaction_price`, `amount`, `trans_date`, `trans_time`, `trans_status`, `user_ID`) VALUES
-        ('$transaction_ID','creditor_buy_back','$trans_type','$stock_ID','$creditor','$transaction_price','$calculated_amount',
-        '$date','$time','payment_pending','$user_ID')";
+        ('$this->transaction_id','$transaction_type','$action_name','$action_id','$account_id','$transaction_price','$calculated_amount',
+        '$this->transaction_date','$this->transaction_time','payment_pending','$user_ID')";
 
             $statement = $this->con->prepare($sql);
             $statement->execute();
@@ -51,7 +54,7 @@ class Transaction
         mysqli_close($this->con);
     }
 
-    public function get_old_amount($action_id)
+    private function get_old_amount($action_id)
     {
 
         try {
@@ -69,10 +72,12 @@ class Transaction
         }
     }
 
+    private function get_transaction_id(){
+        return $this->transaction_id;
+    }
 
+    private function update_account_funds($id, $funds, $type)
 
-    public function update_account_funds($id, $funds, $type)
-    //  this function is updating creditor account funds , it takes the creaditor id the funds and the type (plus or minus)
     {
         $operation = '';
         if ($type == "plus") {
@@ -83,6 +88,48 @@ class Transaction
         try {
             //code...
             $sql = "UPDATE `creditor` SET `account_funds`= account_funds $operation '$funds' WHERE `creditor_ID`='$id'";
+            $statement = $this->con->prepare($sql);
+            $statement->execute();
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
+
+    private function update_creditor_funds($id, $funds, $type)
+    {
+
+        //  this function is updating  debtor account funds , function takes creaditor id ,account funds and type (plus or minus)
+        $operation = '';
+        if ($type == "plus") {
+            $operation = '+';
+        } else {
+            $operation = '-';
+        }
+        try {
+            //code...
+            $sql = "UPDATE `creditor` SET `account_funds`= account_funds $operation '$funds' WHERE `creditor_ID`='$id'";
+            $statement = $this->con->prepare($sql);
+            $statement->execute();
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
+    public function update_debtor_funds($id, $funds, $type)
+    {
+
+        //  this function is updating  debtor account funds , function takes creaditor id ,account funds and type (plus or minus)
+
+        $operation = '';
+        if ($type == "plus") {
+            $operation = '+';
+        } else {
+            $operation = '-';
+        }
+        try {
+            //code...
+            $sql = "UPDATE `debtor` SET `account_funds`= account_funds $operation '$funds' WHERE `debtor_ID`='$id'";
             $statement = $this->con->prepare($sql);
             $statement->execute();
         } catch (\Throwable $th) {

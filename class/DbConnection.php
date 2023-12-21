@@ -30,7 +30,6 @@ class DbConnection
         try {
 
             // database connection
-           
             $con = mysqli_connect($this->host, $this->username, $this->password, $this->database, $this->port);
             return $con;
         } catch (\Throwable $th) {
