@@ -16,8 +16,8 @@ trait HasTransaction
 
     function __construct()
     {
-        $connection = new DbConnection();
-        $this->con = $connection->connect();
+        $DB = new DbConnection();
+        $this->con = $DB->connect();
        
     }
 

@@ -206,7 +206,7 @@ Hectors varchar(100),
                region varchar(100),
                district varchar(100),
                area_name varchar(100),
-               address varchar(100),
+               address varchar(250),
                physical_address varchar(300),
                EPA varchar(100),
                user_ID  varchar(100),
@@ -525,7 +525,10 @@ FOREIGN KEY(season) REFERENCES growing_season(season),FOREIGN KEY(agro_dealer) R
 
 
 
-    $sql = "CREATE TABLE client(business_name varchar(100) PRIMARY KEY, country varchar(100),physical_address varchar(100),logo varchar(100))";
+    $sql = "CREATE TABLE client(id varchar(100) PRIMARY KEY,business_name varchar(100), country varchar(100),physical_address varchar(300),logo varchar(100))";
+    mysqli_query($con, $sql);
+
+    $sql = "CREATE TABLE api(user_name varchar(100),access_key varchar(100), token varchar(300))";
     mysqli_query($con, $sql);
 
 

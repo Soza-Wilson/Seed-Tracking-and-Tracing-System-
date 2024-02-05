@@ -729,7 +729,7 @@ if ($result->num_rows > 0) {
                                             <td>$total_price</td>
 
                                      
-                                            <td><a href='stock_out_check_items.php? crop_ID=$crop_ID&variety_ID=$variety_ID&seed_class=$class&item_ID=$item_ID&quantity=$quantity&order_ID=$order_ID&discount_price=$discount_price&item_price=$price_per_kg'class='btn btn-success btn-mat'>check inventory</a> </td>
+                                            <td><a href='stock_out_check_items.php? crop_ID=$crop_ID&variety_ID=$variety_ID&seed_class=$class&item_ID=$item_ID&quantity=$quantity&order_ID=$order_ID&discount_price=$discount_price&item_price=$price_per_kg&order_type=$order_type'class='btn btn-success btn-mat'>check inventory</a> </td>
                                             
 
 												

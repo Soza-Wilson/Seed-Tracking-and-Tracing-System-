@@ -10,14 +10,16 @@ session_start();
 
 spl_autoload_register(function ($class) {
     if (file_exists('../class/LabTest/' . $class . '.php')) {
-      require '../class/LabTest/' . $class . '.php';
+        require '../class/LabTest/' . $class . '.php';
     } elseif (file_exists('../class/' . $class . '.php')) {
-      require   '../class/' . $class . '.php';
+        require   '../class/' . $class . '.php';
     }
-  });
+});
 
 $test = $_SESSION['fullname'];
 $position = $_SESSION['position'];
+$connection = new DbConnection();
+$con = $connection->connect();
 
 if (empty($test)) {
 
@@ -185,11 +187,12 @@ $passed_data[] = $data_list->get_active_test("passed");
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -221,17 +224,18 @@ $passed_data[] = $data_list->get_active_test("passed");
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                             <div class="p-15 p-b-0">
 
@@ -305,47 +309,47 @@ $passed_data[] = $data_list->get_active_test("passed");
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
                             </ul>
@@ -355,32 +359,32 @@ $passed_data[] = $data_list->get_active_test("passed");
 
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -480,98 +484,227 @@ $passed_data[] = $data_list->get_active_test("passed");
                                     <div class="page-body">
 
 
-                                    
+
                                         <div class="row">
                                             <div class="col-md-12">
 
-                                              <div class='card'>
-                                            <div class='card-header'>
-                                            <h5> Active Tests </h5>
+                                                <div class='card'>
+                                                    <div class='card-header'>
+                                                        <h5> Active Tests </h5>
 
-                                            </div>
+                                                    </div>
 
-                                              <div class="col-lg-12 ">
-                                                            <!-- <h6 class="sub-title">Tab With Icon</h6> -->
-                                                           
-                                                            <!-- Nav tabs -->
-                                                            <ul class="nav nav-tabs md-tabs " role="tablist">
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><i class="ti ti-check "></i>  Passed Tests</a>
-                                                                    <div class="slide"></div>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><i class="ti ti-close "></i> Failed Tests</a>
-                                                                    <div class="slide"></div>
-                                                                </li>
-                                                               
-                                                            </ul>
-                                                            <!-- Tab panes -->
-                                                            <div class="tab-content card-block">
-                                                                <div class="tab-pane active" id="home7" role="tabpanel">
+                                                    <div class="col-lg-12 ">
+                                                        <!-- <h6 class="sub-title">Tab With Icon</h6> -->
+
+                                                        <!-- Nav tabs -->
+                                                        <ul class="nav nav-tabs md-tabs " role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab" href="#home7" role="tab"><i class="ti ti-check "></i> Passed Tests</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#profile7" role="tab"><i class="ti ti-close "></i> Failed Tests</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+
+                                                        </ul>
+                                                        <!-- Tab panes -->
+                                                        <div class="tab-content card-block">
+                                                            <div class="tab-pane active" id="home7" role="tabpanel">
                                                                 <div class="table-responsive" id="table_test">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="font-weight: 600;">Test id</th>
-                                                                            <th style="font-weight: 600;">Source</th>
-                                                                            <th style="font-weight: 600;">Stock In Id</th>
-                                                                            <th style="font-weight: 600;">Area</th>
-                                                                            <th style="font-weight: 600;">Physical Address</th>
-                                                                            <th style="font-weight: 600;">Crop</th>
-                                                                            <th style="font-weight: 600;">Variety</th>
-                                                                            <th style="font-weight: 600;">Class</th>
-                                                                            <th style="font-weight: 600;">Stock In Date</th>
-                                                                            <th style="font-weight: 600;">Tested By</th>
-                                                                            <th style="font-weight: 600;">Quantity</th>
-                                                                            <th style="font-weight: 600;">Result</th>
-                                                                            <th style="font-weight: 600;">Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="font-weight: 600;">Test id</th>
+                                                                                <th style="font-weight: 600;">Source</th>
+                                                                                <th style="font-weight: 600;">Stock In Id</th>
+                                                                                <th style="font-weight: 600;">Area</th>
+                                                                                <th style="font-weight: 600;">Physical Address</th>
+                                                                                <th style="font-weight: 600;">Crop</th>
+                                                                                <th style="font-weight: 600;">Variety</th>
+                                                                                <th style="font-weight: 600;">Class</th>
+                                                                                <th style="font-weight: 600;">Stock In Date</th>
+                                                                                <th style="font-weight: 600;">Tested By</th>
+                                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                                <th style="font-weight: 600;">Result</th>
+                                                                                <th style="font-weight: 600;">Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php
+                                                                            $data[] = "";
 
-                                                                       
-                                                                    </tbody>
-                                                                </table>
+                                                                            $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
+                                                                                                    farm.class,user.fullname,farm.area_name,
+                                                                                                    farm.physical_address,lab_test.germination_percentage,
+                                                                                                    lab_test.shelling_percentage,lab_test.purity_percentage,
+                                                                                                    lab_test.defects_percentage,lab_test.grade, stock_in.date, 
+                                                                                                    stock_in.quantity FROM lab_test INNER JOIN crop ON crop.crop_ID
+                                                                                                    = lab_test.crop_ID INNER JOIN variety ON variety.variety_ID = 
+                                                                                                    lab_test.variety_ID INNER JOIN farm on farm.farm_ID = lab_test.farm_ID 
+                                                                                                    INNER JOIN user ON user.user_ID = lab_test.user_ID INNER JOIN stock_in 
+                                                                                                    ON stock_in.stock_in_ID = lab_test.stock_in_ID WHERE lab_test.grade = 'passed' AND lab_test.test_status ='active'
+                                                                                                    ";
+
+                                                                            $result =  $con->query($sql);
+                                                                            if ($result->num_rows > 0) {
+                                                                                while ($row = $result->fetch_assoc()) {
+
+                                                                                    $data[0] = $row["test_ID"];
+                                                                                    $data[1] = $row["source"];
+                                                                                    $data[2] = $row["stock_in_ID"];
+                                                                                    $data[3] = $row["area_name"];
+                                                                                    $data[4] = $row["physical_address"];
+                                                                                    $data[5]  = $row["crop"];
+                                                                                    $data[6]  = $row["variety"];
+                                                                                    $data[7] = $row["class"];
+                                                                                    $data[8] = Util::convert_date($row["date"]);
+                                                                                    $data[9] = $row["fullname"];
+                                                                                    $data[10] = $row["quantity"];
+                                                                                    $data[11] = $row["grade"];
 
 
-                                                            </div>
+                                                                                    echo "
+
+
+                                                                                                <tr>
+
+                                                                                                <td> $data[0]</td>
+                                                                                                <td> $data[1]</td>
+                                                                                                <td> $data[2]</td>
+                                                                                                <td> $data[3]</td>
+                                                                                                <td> $data[4]</td>
+                                                                                                <td> $data[5]</td>
+                                                                                                <td> $data[6]</td>
+                                                                                                <td> $data[7]</td>
+                                                                                                <td> $data[8]</td>
+                                                                                                <td> $data[9]</td>
+                                                                                                <td> $data[10]</td>
+                                                                                                <td> $data[11]</td>
+
+                                                                                                
+
+                                                                                                <td><a href='view_active_test.php? test_id=$data[0]' data-toggle='tooltip' data-placement='left' data-original-title='View test details'><i class='ti ti-new-window'></i></a> /
+                                                                                                <a href='view_registered_users.php' data-toggle='tooltip' data-placement='left' data-original-title='Retest'><i class='ti ti-reload'></i></a>
+
+
+                                                                                                </td>
+
+
+                                                                                                </tr>
+                                                                                                ";
+                                                                                }
+                                                                            }
+                                                                            ?>
+
+
+                                                                        </tbody>
+                                                                    </table>
 
 
                                                                 </div>
-                                                                <div class="tab-pane" id="profile7" role="tabpanel">
+
+
+                                                            </div>
+                                                            <div class="tab-pane" id="profile7" role="tabpanel">
                                                                 <div class="table-responsive" id="table_test">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="font-weight: 600;">Test id</th>
-                                                                            <th style="font-weight: 600;">Source</th>
-                                                                            <th style="font-weight: 600;">Stock In Id</th>
-                                                                            <th style="font-weight: 600;">Area</th>
-                                                                            <th style="font-weight: 600;">Physical Address</th>
-                                                                            <th style="font-weight: 600;">Crop</th>
-                                                                            <th style="font-weight: 600;">Variety</th>
-                                                                            <th style="font-weight: 600;">Class</th>
-                                                                            <th style="font-weight: 600;">Stock In Date</th>
-                                                                            <th style="font-weight: 600;">Tested By</th>
-                                                                            <th style="font-weight: 600;">Quantity</th>
-                                                                            <th style="font-weight: 600;">Result</th>
-                                                                            <th style="font-weight: 600;">Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="font-weight: 600;">Test id</th>
+                                                                                <th style="font-weight: 600;">Source</th>
+                                                                                <th style="font-weight: 600;">Stock In Id</th>
+                                                                                <th style="font-weight: 600;">Area</th>
+                                                                                <th style="font-weight: 600;">Physical Address</th>
+                                                                                <th style="font-weight: 600;">Crop</th>
+                                                                                <th style="font-weight: 600;">Variety</th>
+                                                                                <th style="font-weight: 600;">Class</th>
+                                                                                <th style="font-weight: 600;">Stock In Date</th>
+                                                                                <th style="font-weight: 600;">Tested By</th>
+                                                                                <th style="font-weight: 600;">Quantity</th>
+                                                                                <th style="font-weight: 600;">Result</th>
+                                                                                <th style="font-weight: 600;">Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
 
-                                                                       
-                                                                    </tbody>
-                                                                </table>
+                                                                            <?php
+                                                                            $data[] = "";
+
+                                                                            $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
+                                                                                    farm.class,user.fullname,farm.area_name,
+                                                                                    farm.physical_address,lab_test.germination_percentage,
+                                                                                    lab_test.shelling_percentage,lab_test.purity_percentage,
+                                                                                    lab_test.defects_percentage,lab_test.grade, stock_in.date, 
+                                                                                    stock_in.quantity FROM lab_test INNER JOIN crop ON crop.crop_ID
+                                                                                    = lab_test.crop_ID INNER JOIN variety ON variety.variety_ID = 
+                                                                                    lab_test.variety_ID INNER JOIN farm on farm.farm_ID = lab_test.farm_ID 
+                                                                                    INNER JOIN user ON user.user_ID = lab_test.user_ID INNER JOIN stock_in 
+                                                                                    ON stock_in.stock_in_ID = lab_test.stock_in_ID WHERE lab_test.grade = 'failed'
+                                                                                                                                    ";
+
+                                                                            $result =  $con->query($sql);
+                                                                            if ($result->num_rows > 0) {
+                                                                                while ($row = $result->fetch_assoc()) {
+
+                                                                                    $data[0] = $row["test_ID"];
+                                                                                    $data[1] = $row["source"];
+                                                                                    $data[2] = $row["stock_in_ID"];
+                                                                                    $data[3] = $row["area_name"];
+                                                                                    $data[4] = $row["physical_address"];
+                                                                                    $data[5]  = $row["crop"];
+                                                                                    $data[6]  = $row["variety"];
+                                                                                    $data[7] = $row["class"];
+                                                                                    $data[8] = $row["date"];
+                                                                                    $data[9] = $row["fullname"];
+                                                                                    $data[10] = $row["quantity"];
+                                                                                    $data[11] = $row["grade"];
 
 
-                                                            </div>
+                                                                                    echo "
+
+
+                                                                                                                    <tr>
+
+                                                                                                                    <td> $data[0]</td>
+                                                                                                                    <td> $data[1]</td>
+                                                                                                                    <td> $data[2]</td>
+                                                                                                                    <td> $data[3]</td>
+                                                                                                                    <td> $data[4]</td>
+                                                                                                                    <td> $data[5]</td>
+                                                                                                                    <td> $data[6]</td>
+                                                                                                                    <td> $data[7]</td>
+                                                                                                                    <td> $data[8]</td>
+                                                                                                                    <td> $data[9]</td>
+                                                                                                                    <td> $data[10]</td>
+                                                                                                                    <td> $data[11]</td>
+
+                                                                                                                    <td><a href='view_registered_users.php' class='btn btn-success'>view </a>
+                                                                                                                    <a href='view_registered_users.php' class='btn btn-success'>Retest</a>
+
+
+                                                                                                                    </td>
+
+
+                                                                                                                    </tr>
+                                                                                                                    ";
+                                                                                }
+                                                                            }
+                                                                            ?>
+
+
+                                                                        </tbody>
+                                                                    </table>
+
+
                                                                 </div>
-                                                                
                                                             </div>
+
                                                         </div>
-                                              </div>
-                                               
+                                                    </div>
+                                                </div>
+
 
 
                                                 </form>
@@ -584,7 +717,7 @@ $passed_data[] = $data_list->get_active_test("passed");
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                
+
 
 
                                                 </form>

@@ -612,7 +612,7 @@ if (in_array($position, $restricted)) {
                 
                                                                 INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
                                                                 INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status='certified' AND stock_in.source ='internal' ORDER BY `stock_in_ID` DESC";
+                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status='certified' OR stock_in.status='partly_certified'  ORDER BY `stock_in_ID` DESC";
 
 
                                                             $result = $con->query($sql);
@@ -659,7 +659,7 @@ if (in_array($position, $restricted)) {
 												
 												
 												
-                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & lotnumber=$lotnumber'  class='btn btn-success'>View</a>
+                                                <td><a href='generate_labels.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & stock_quantity=$quantity & grower=$grower_name & product_date=$new_date & lotnumber=$lotnumber'   data-toggle='tooltip' data-placement='left' data-original-title='View details'><i class='ti ti-new-window'></i></a>
                                                 </td>
 											</tr>	
 										";

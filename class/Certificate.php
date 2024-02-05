@@ -3,6 +3,9 @@ spl_autoload_register(function ($class) {
   require "$class.php";
 });
 
+
+
+
 class Certificate
 {
 
@@ -13,8 +16,8 @@ class Certificate
 
   function __construct()
   {
-    $data = new DbConnection();
-    $this->con = $data->connect();
+    $DB = new DbConnection();
+    $this->con = $DB->connect();
     $this->register_date = Util::get_current_date();
   }
 
@@ -28,6 +31,7 @@ if
 */
   public function add_certificate($lot_number, $crop, $variety, $class, $type, $source, $source_name, $date_tested, $expire_date, $certificate_quantity, $directory, $user)
   {
+    
 
 
     $added_date = $this->register_date;
@@ -83,7 +87,8 @@ if
    * The function below is handling most of the operations done to a certificate 
    *
    */
-  public function update_certificate_quantity($operation_type, $quantity_type, $lot_number, $quantity)
+
+  public function update_certificate_quantity($operation_type, $quantity_type, $lot_number,$quantity)
   {
     // * the function takes operation type this can be  (-) or  (+) operator
     // * also quantity type can be certificate quantity or assigned quantity

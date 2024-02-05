@@ -1,7 +1,7 @@
 <?php
 
 use Inventory\Expense;
-
+use PhpParser\Node\Stmt\Return_;
 
 spl_autoload_register(function ($class) {
     require "$class.php";
@@ -10,9 +10,9 @@ spl_autoload_register(function ($class) {
 
 class InventoryManager
 {
-   
+
     use HasTransaction;
-    
+
     private $con;
     private $product;
     private $certificate;
@@ -28,14 +28,14 @@ class InventoryManager
     public function __construct()
     {
 
-        $connection = new DbConnection();
-        $this->con = $connection->connect();
+        $DB = new DbConnection();
+        $this->con = $DB->connect();
         $this->product = new Product();
         $this->expense = new Expense;
         $this->certificate = new Certificate();
         $this->transaction_date = Util::get_current_date();
         $this->transaction_time = Util::get_current_time();
-        $this->transaction_id= Util::generate_id('transaction');
+        $this->transaction_id = Util::generate_id('transaction');
     }
 
 
@@ -68,7 +68,7 @@ class InventoryManager
 
                         if (
                             // If register stock is complete, we will register transaction and update the certificate quantity
-                            $this->register_transaction('creditor_buy_back',$trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user) == "registered"
+                            $this->register_transaction('creditor_buy_back', $trans_type, $stock_ID, $creditor, $transaction_price, $calculated_amount, $user) == "registered"
                             && $this->certificate->update_certificate_quantity("-", "available_quantity", $certificate, $quantity) == "updated"
                         ) {
                             // updating creditor account 
@@ -173,7 +173,7 @@ class InventoryManager
 
 
 
-    function delete_stock_in($creditor_id, $stock_in_id, $certificate, $quantity): string
+    public function delete_stock_in($creditor_id, $stock_in_id, $certificate, $quantity): string
     {
 
         // get transaction amount
@@ -204,5 +204,19 @@ class InventoryManager
 
 
 
-    
+    public function get_stock_in_status($stock_in_id)
+    {
+        try {
+            //code...
+            $sql = "SELECT stock_in.status FROM stock_in WHERE stock_in_ID = '$stock_in_id'";
+            $result =  $this->con->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                   return $row["status"];
+                }
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

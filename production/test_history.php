@@ -4,7 +4,13 @@
 
 Ob_start();
 
-include('../class/production.php');
+
+
+spl_autoload_register(function ($class) {
+    if (file_exists('../class/' . $class . '.php')) {
+        require   '../class/' . $class . '.php';
+    }
+});
 
 session_start();
 
@@ -30,10 +36,9 @@ if (in_array($position, $restricted)) {
 }
 
 
-$data_list = new production();
 
-$failed_data[] = $data_list->get_active_test("failed");
-$passed_data[] = $data_list->get_active_test("passed");
+$DB = new DbConnection();
+$con = $DB->connect();
 
 
 
@@ -183,11 +188,12 @@ $passed_data[] = $data_list->get_active_test("passed");
 
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -218,17 +224,18 @@ $passed_data[] = $data_list->get_active_test("passed");
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                             <div class="p-15 p-b-0">
 
@@ -329,47 +336,47 @@ $passed_data[] = $data_list->get_active_test("passed");
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -380,32 +387,32 @@ $passed_data[] = $data_list->get_active_test("passed");
 
 
 
-                            <li class="pcoded-hasmenu ">
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -526,19 +533,19 @@ $passed_data[] = $data_list->get_active_test("passed");
                                                                 <table class="table">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>test id</th>
-                                                                            <th>Source</th>
-                                                                            <th>Stock in id</th>
-                                                                            <th>Area</th>
-                                                                            <th>Physical address</th>
-                                                                            <th>Crop</th>
-                                                                            <th>Variety</th>
-                                                                            <th>Class</th>
-                                                                            <th>Stock in date</th>
-                                                                            <th>Tested by</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>Result</th>
-                                                                            <th>Action</th>
+                                                                            <th style="font-weight: 600;">test id</th>
+                                                                            <th style="font-weight: 600;">Source</th>
+                                                                            <th style="font-weight: 600;">Stock in id</th>
+                                                                            <th style="font-weight: 600;">Area</th>
+                                                                            <th style="font-weight: 600;">Physical address</th>
+                                                                            <th style="font-weight: 600;">Crop</th>
+                                                                            <th style="font-weight: 600;">Variety</th>
+                                                                            <th style="font-weight: 600;">Class</th>
+                                                                            <th style="font-weight: 600;">Stock in date</th>
+                                                                            <th style="font-weight: 600;">Tested by</th>
+                                                                            <th style="font-weight: 600;">Quantity</th>
+                                                                            <th style="font-weight: 600;">Result</th>
+                                                                            <th style="font-weight: 600;">Action</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -574,7 +581,7 @@ $passed_data[] = $data_list->get_active_test("passed");
                                                                                 $data[5]  = $row["crop"];
                                                                                 $data[6]  = $row["variety"];
                                                                                 $data[7] = $row["class"];
-                                                                                $data[8] = $row["date"];
+                                                                                $data[8] = Util::convert_date($row["date"]);
                                                                                 $data[9] = $row["fullname"];
                                                                                 $data[10] = $row["quantity"];
                                                                                 $data[11] = $row["grade"];
@@ -598,8 +605,9 @@ $passed_data[] = $data_list->get_active_test("passed");
                                                                 <td> $data[10]</td>
                                                                 <td> $data[11]</td>
 
-                                                                <td><a href='view_registered_users.php' class='btn btn-success'>view </a>
-                                                                <a href='view_registered_users.php' class='btn btn-success'>report</a>
+                                                                <td><a href='view_test_details.php?test_id=$data[0]'  data-toggle='tooltip' data-placement='left' data-original-title='View Test details' ><i class='ti ti-new-window'></i></a> /
+        
+                                                                <a href='../class/createPdf.php?document=test_report&test_id=$data[0]' data-toggle='tooltip' data-placement='left' data-original-title='Download report' ><i class='ti ti-download'></i></a>
                                                
                                                 
                                                 </td>

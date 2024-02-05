@@ -16,10 +16,11 @@ if (empty($test)) {
     $business_name     = "-";
     $country  = "-";
     $address = "-";
+    $logo = "-";
 
     $sql = "SELECT * FROM client";
     $result = $con->query($sql);
-    if ($result->num_rows > 0) {
+    if (!empty($result) && $result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $business_name     = $row["business_name"];
             $country  = $row["country"];
@@ -74,10 +75,10 @@ if (empty($test)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandler/setup__.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/jsHandler/setup.js"></script> -->
 
-    <script type="text/javascript">
-
+    <script type="text/javascript" src="assets/js/jsHandler/setup_.js">
+      
     </script>
 
 
@@ -265,7 +266,7 @@ if (empty($test)) {
                                         <li class="active">
                                             <a href="setup.php" class="waves-effect waves-dark">
                                                 <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Setup </span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -446,7 +447,7 @@ if (empty($test)) {
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
 
-                                            <li class="breadcrumb-item"><a href="setup.php">Quick Setup</a>
+                                            <li class="breadcrumb-item"><a href="setup.php">Setup</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -474,6 +475,7 @@ if (empty($test)) {
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="setup.php" method="POST" enctype="multipart/form-data">
+
 
                                                             <div class="form-group row">
 
@@ -860,9 +862,159 @@ if (empty($test)) {
 
                                                                     <div>
                                                                         <div>
-                                                                            <button id="sync_data" class="btn btn-info btn-mat"><i class="ti-cloud-up"></i>Send API data</button>
+                                                                            <button id="sync_data" class="btn btn-info btn-mat" data-toggle="modal" data-target="#myConfigModal"><i class="ti-cloud-up"></i>Sync API data</button>
 
-                                                                            </br></br></br>
+
+
+                                                                            </br>
+                                                                            <div id="myConfigModal" class="modal fade" role="dialog">
+                                                                                <div class="modal-dialog modal-lg">
+
+                                                                                    <!-- Modal content-->
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                            <h5 class="modal-title">API configuration </h5>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="card-block table-border-style">
+                                                                                                <div class="table-responsive">
+
+
+                                                                                                    <div class="form-group column">
+
+
+                                                                                                        
+                                                                                                        </br>
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <label for="row" class="label badge-inverse-success"><span>Business name</span></label>
+                                                                                                            <input type="text" class="form-control" name="user_name" id="user_name" required="" placeholder="Business Name">
+                                                                                                            <label id="warning_user_name" class="warning_text"> <span>Enter Business name  <i class="icofont icofont-warning"></i></span></label>
+                                                                                                        </div>
+                                                                                                        </br>
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <label for="row" class="label badge-inverse-success"><span>Access key</span></label>
+                                                                                                            <input type="text" class="form-control" name="access_key" id="access_key" required="" placeholder="Access key">
+                                                                                                            <label id="warning_access_key" class="warning_text"> <span>Enter access key <i class="icofont icofont-warning"></i></span></label>
+                                                                                                           
+                                                                                                        </div>
+                                                                                                        </br>
+                                                                                                        
+                                                                                                        </br>
+                                                                                                        <div class="col-sm-12">
+
+                                                                                                            <button id="connect" class="btn btn-success btn-mat"><i class="ti ti-reload"></i>Sync Data</button>
+
+                                                                                                            <button id="register" class="btn btn-info btn-mat"><i class="ti ti-cloud"></i>Register</button>
+                                                                                                        </div>
+                                                                                                        </br>
+
+
+                                                                                                    </div>
+
+
+
+                                                                                                </div>
+                                                                                                <div id="pagination"></div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+
+
+
+                                                                    <div>
+                                                                        <div>
+                                                                            <div class="card">
+                                                                                <div class="card-header">
+                                                                                    <h5>Previous Seasons</h5>
+
+                                                                                </div>
+                                                                                <div class="card-block table-border-style">
+                                                                                    <div class="table-responsive" id="table_test">
+                                                                                        <table class="table" id="ledger_table">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Period</th>
+                                                                                                    <th>Opening date</th>
+                                                                                                    <th>Closing date</th>
+
+
+
+
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+
+                                                                                                <?php
+
+
+
+
+
+
+                                                                                                $sql = "SELECT * FROM growing_season";
+
+                                                                                                $result = $con->query($sql);
+                                                                                                if ($result->num_rows > 0) {
+                                                                                                    while ($row = $result->fetch_assoc()) {
+                                                                                                        $season = $row["season"];
+                                                                                                        $opening_date  = main::change_date_format($row["opening_date"]);
+                                                                                                        $closing_date  = main::change_date_format($row["closing_date"]);
+
+
+
+
+
+
+                                                                                                        echo "
+                                                   <tr class='odd gradeX'>
+                                                       <td>$season</td>
+                                                       <td>$opening_date</td>
+                                                       <td>$closing_date</td>
+                                                    
+                                                   </tr>	
+
+                                                  
+                                               ";
+                                                                                                    }
+                                                                                                }
+
+
+
+                                                                                                ?>
+                                                                                                <tr>
+                                                                                                    <th scope="row">-</th>
+                                                                                                    <td>-</td>
+                                                                                                    <td>-</td>
+
+
+
+                                                                                                </tr>
+
+                                                                                            </tbody>
+                                                                                        </table>
+
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
 
 
                                                                         </div>

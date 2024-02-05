@@ -19,6 +19,7 @@ class ProcessOrder
      * 
      */
     use HasTransaction;
+ 
     private $order_ID, $C_D_ID, $order_type, $action_type, $user_id, $order_amount,$con, $order_quantity,$transaction_id;
     function __construct($order_ID, $C_D_ID, $type, $printSave, $user)
     {
@@ -27,8 +28,7 @@ class ProcessOrder
         $this->order_type = $type;
         $this->action_type = $printSave;
         $this->user_id = $user;
-        $transaction = new DbConnection();
-        $this->con = $transaction->connect();
+       
         $this->transaction_date = Util::get_current_date();
         $this->transaction_time = Util :: get_current_time();
         $this->transaction_id = Util::generate_id('transaction');

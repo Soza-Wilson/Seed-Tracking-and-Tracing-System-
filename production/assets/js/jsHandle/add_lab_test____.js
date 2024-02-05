@@ -1,78 +1,81 @@
 $(document).ready(function () {
-  $(document).ready(function () {
-    $("#pass").click(function () {
-      $("#fail").prop("checked", false);
-    });
-
-    $("#fail").click(function () {
-      $("#pass").prop("checked", false);
-    });
-    $("#save").click(function () {
-      if (!checkIfEmpty()) {
-        saveTest();
-      }
-    });
-    // germination text
-
-    //germination text
-
-    $("#germination").on("input", function () {
-      checkPercentage("germination");
-    });
-    $("#moisture_content").on("input", function () {
-      checkIfNuts("moisture_content");
-      checkPercentage("moisture_content");
-    });
-    $("#oil_content").on("input", function () {
-      checkIfNuts("oil_content");
-      checkPercentage("oil_content");
-    });
-    //shelling text
-    $("#shelling").on("input", function () {
-      checkIfNuts("shelling");
-      checkPercentage("shelling");
-    });
-    // purity text
-    $("#purity").on("input", function () {
-      checkPercentage("purity");
-    });
-    // defects text
-    $("#defects").on("input", function () {
-      checkPercentage("defects");
-    });
+  let grade = "";
+  $("#pass").click(function () {
+    $("#fail").prop("checked", false);
+    grade = "passed";
   });
 
-  const getGrade = () => {
-    if ($("#pass").prop("checked", true)) {
-      return "passed";
-    } else { 
-      return "failed";
+  $("#fail").click(function () {
+    $("#pass").prop("checked", false);
+    grade = "failed";
+  });
+  $("#save").click(function () {
+    if (!checkIfEmpty()) {
+      saveTest();
     }
+  });
+  // germination text
 
-    
-  };
+  //germination text
+
+  $("#germination").on("input", function () {
+    checkPercentage("germination");
+  });
+  $("#moisture_content").on("input", function () {
+    checkIfNuts("moisture_content");
+    checkPercentage("moisture_content");
+  });
+  $("#oil_content").on("input", function () {
+    checkIfNuts("oil_content");
+    checkPercentage("oil_content");
+  });
+  //shelling text
+  $("#shelling").on("input", function () {
+    checkIfNuts("shelling");
+    checkPercentage("shelling");
+  });
+  // purity text
+  $("#purity").on("input", function () {
+    checkPercentage("purity");
+  });
+  // defects text
+  $("#defects").on("input", function () {
+    checkPercentage("defects");
+  });
+
+  $("#download_pdf_report").click(() => {
+    const test_id = $("#test_id").val();
+
+       const url = "../class/createPdf.php?document=test_report&test_id="+test_id+"";
+        window.open(url, "_blank");
+  
+  });
 
   const saveTest = () => {
-    alert(getGrade());
-    // data = [
-    //   $("#stock_id").find(":selected").val(),
-    //   $("#germination").val(),
-    //   $("#shelling").val(),
-    //   $("#purity").val(),
-    //   $("#defects").val(),
-    //   $("#oil_content").val(),
-    //   $("#moisture_content").val(),
-    // ];
-    // $.post(
-    //   "get_data/lab_test_data.php",
-    //   {
-    //     test_seed: data,
-    //   },
-    //   (data) => {
-    //     alert(data);
-    //     //  window.location='process_seed.php';
-    //   }
-    // );
+    data = [
+      $("#stock_id").find(":selected").val(),
+      $("#germination").val(),
+      $("#shelling").val(),
+      $("#purity").val(),
+      $("#defects").val(),
+      $("#moisture_content").val(),
+      $("#oil_content").val(),
+      grade,
+      $("#farm_crop").find(":selected").val(),
+      $("#farm_variety").find(":selected").val(),
+      $("#farm_id").find(":selected").val(),
+      $("#user_id").val(),
+    ];
+    $.post(
+      "get_data/lab_test_data.php",
+      {
+        test_seed: data,
+      },
+      (data) => {
+        alert(data);
+        window.location = "new_test.php";
+      }
+    );
   };
 
   const checkIfEmpty = () => {
@@ -108,6 +111,11 @@ $(document).ready(function () {
         ];
       }
     });
+
+    if (grade == "") {
+      alert("Test grade is required");
+      issues++;
+    }
     return issues;
   };
 

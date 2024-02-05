@@ -711,7 +711,7 @@ if (in_array($position, $restricted)) {
     <td>$time</t>
    
 
-    <td><a href='stock_out_details.php? stock_out_ID=$ID' class='btn btn-success'>view</a></td>
+    <td><a href='stock_out_details.php? stock_out_ID=$ID'  data-toggle='tooltip' data-placement='left' data-original-title='View stock out details'><i class='ti ti-new-window'></i></a> </td>
 </tr>	
 ";
                                                                 }

@@ -8,7 +8,7 @@ class ReverseStockOut
     
 
     private $item_id, $item_quantity, $stock_in_id, $stock_out_id, $con;
-    function __construct($item_id, $item_quantity, $stock_in_id, $stock_out_id)
+    public function __construct($item_id, $item_quantity, $stock_in_id, $stock_out_id)
     {
         $this->item_id = $item_id;
         $this->item_quantity = $item_quantity;

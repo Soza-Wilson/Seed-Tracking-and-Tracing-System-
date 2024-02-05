@@ -19,8 +19,8 @@ class User
 
     function __construct($fullname, $date_of_birth, $sex, $phone, $email, $password)
     {   
-        $data = new DbConnection();
-        $this->con = $data->connect();
+        $DB = new DbConnection();
+        $this->con = $DB->connect();
         $this->fullname = $fullname;
         $this->date_of_birth = $date_of_birth;
         $this->sex = $sex;
@@ -103,7 +103,7 @@ class User
     }
 
     //  suspend user account
-    function suspend_user_account($user_id)
+    public function suspend_user_account($user_id)
     {
         
         $sql = "UPDATE `user` SET `account_status`='suspended' WHERE `user_ID`='$user_id'";

@@ -5,33 +5,62 @@
 
 class DbConnection
 {
-   protected $host;
-   protected $username;
-   protected $password;
-   protected $database;
-   protected $port;
+    /**
+     * Host.
+     *
+     * @var string
+     */
+    protected $host;
+
+    /**
+     * UserName.
+     *
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * Password.
+     *
+     * @var string
+     */
+    protected $password;
+    /**
+     * Database.
+     *
+     * @var string
+     */
+    protected $database;
 
 
-   function __construct()
-   {
+    /**
+     * Port.
+     *
+     * @var int
+     */
+    protected $port;
 
-    $this->host = 'localhost';
-    $this->username = 'root';
-    $this->password = '';
-    $this->database = 'seed_tracking_DB';
-    $this->port = 3306;
-    
-    
-   }
+    private $con;
 
-   public function connect()
+
+    function __construct()
+    {
+
+        $this->host = 'localhost';
+        $this->username = 'root';
+        $this->password = '';
+        $this->database = 'seed_tracking_DB';
+        $this->port = 3307;
+    }
+
+    public function connect()
     {
 
         try {
 
             // database connection
-            $con = mysqli_connect($this->host, $this->username, $this->password, $this->database, $this->port);
-            return $con;
+            $this->con = mysqli_connect($this->host, $this->username, $this->password, $this->database, $this->port);
+            return $this->con;
         } catch (\Throwable $th) {
             die("Connection failed :" . $th);
         }

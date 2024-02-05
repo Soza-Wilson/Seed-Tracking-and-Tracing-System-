@@ -39,7 +39,7 @@ const processOrder = (buttonType) => {
 
       const url = `../class/pdf_handler.php?order_ID=${array[1]}&transaction_ID=${array[2]}&total_quantity=${array[3]}&type=${array[4]}`;
       window.open(url, "_blank", { data: data });
-      go_back();
+      back();
     }
   );
 };

@@ -20,8 +20,6 @@ $item_ID = $_GET['item_ID'];
 // $class = $_GET['seed_class'];
 // $quantity = "";
 
-
-
 if (empty($_GET['item_ID'])) {
 
     header('Location:stock_out.php');
@@ -29,6 +27,9 @@ if (empty($_GET['item_ID'])) {
 
 $sql =  "SELECT `item_ID`, `order_ID`, `crop`, `variety`, `class`, `quantity`, `price_per_kg`, `discount_price`, `total_price` FROM
 `item`INNER JOIN crop ON item.crop_ID = crop.crop_ID INNER JOIN variety ON item.variety_ID = variety.variety_ID WHERE `item_ID` = '$item_ID'";
+
+
+
 
 
 $result = $con->query($sql);
@@ -82,7 +83,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" type="text/css" href="assets/css/style_.css">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
 
-    
+
 </head>
 
 <body>
@@ -330,7 +331,7 @@ if ($result->num_rows > 0) {
                                             </a>
                                         </li>
                                     </ul>
-                            </ul>
+                          
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
@@ -762,15 +763,30 @@ if ($result->num_rows > 0) {
                                                 $class = $_GET['seed_class'];
                                                 $item_quantity = $_GET['quantity'];
                                                 $order_ID = $_GET['order_ID'];
+                                                $certificate = $_GET[''];
+
+                                                if ($_GET['order_type'] === 'grower_order') {
 
 
-                                                $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
-                                               `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
-                                                `available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
-                                               INNER JOIN user ON stock_in.user_ID = user.user_ID 
-                                               INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
-                                               INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                                               INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.crop_ID = '$crop_ID' AND stock_in.variety_ID = '$variety_ID' AND stock_in.class = '$class' AND stock_in.available_quantity > 0 ";
+                                                    $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
+                                                    `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
+                                                     `available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
+                                                    INNER JOIN user ON stock_in.user_ID = user.user_ID 
+                                                    INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
+                                                    INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
+                                                    INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE certificate_ID =  stock_in.crop_ID = '$crop_ID' AND stock_in.variety_ID = '$variety_ID' AND stock_in.class = '$class' AND stock_in.available_quantity > 0 ";
+                                                } else {
+                                                    $sql = "SELECT `stock_in_ID`, `fullname`,stock_in.source, `name`, `crop`, 
+                                                    `variety`, `class`, `SLN`, `bincard`, `number_of_bags`,
+                                                     `available_quantity`, `date` ,`supporting_dir` FROM `stock_in` 
+                                                    INNER JOIN user ON stock_in.user_ID = user.user_ID 
+                                                    INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID 
+                                                    INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
+                                                    INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.crop_ID = '$crop_ID' AND stock_in.variety_ID = '$variety_ID' AND stock_in.class = '$class' AND stock_in.available_quantity > 0 ";
+                                                }
+
+
+
 
                                                 $result = $con->query($sql);
                                                 if ($result->num_rows > 0) {

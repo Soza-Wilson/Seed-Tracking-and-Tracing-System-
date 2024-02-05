@@ -35,7 +35,7 @@ class Order
    */
 
 
-  private $con;
+ 
   private $status;
   private $date;
   private $time;
@@ -48,17 +48,18 @@ class Order
   private $sum;
   private $count;
   private $item_id;
-
+  private $con;
 
 
   function __construct()
   {
-    $connection = new DbConnection();
-    $this->con = $connection->connect();
+
     $this->status = 'pending';
     $this->date = Util::get_current_date();
     $this->time = Util::get_current_time();
     $this->item_id = Util::generate_id('item');
+    $DB = new DbConnection;
+    $this->con = $DB->connect();
 
     $this->get_items_data();
   }
@@ -104,8 +105,6 @@ class Order
     $_SESSION['customer_ID'] = $data_result[0];
     $_SESSION['customer_name'] = $data_result[2];
     $_SESSION['type'] = $order_type;
-
-
   }
 
 
@@ -131,7 +130,7 @@ class Order
       $this->sum = $data[0];
       $this->count = $data[1];
 
-   
+
 
       if (!empty($this->sum)) {
         /// finalizing order by updating the total of all added atems in the order 

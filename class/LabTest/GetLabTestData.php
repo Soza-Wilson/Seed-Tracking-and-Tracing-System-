@@ -10,11 +10,41 @@ class GetLabTestData
         $connection = new DbConnection();
         $this->con = $connection->connect();
     }
+    public function get_test_details($test_id)
+    {
+
+
+        $data = array();
+        $sql = "SELECT lab_test.test_ID,stock_in.source,
+        stock_in.stock_in_ID ,crop.crop,crop.crop_ID,variety.variety,variety.variety_ID, 
+        farm.class,user.fullname,farm.area_name, 
+        farm.physical_address,lab_test.germination_percentage, 
+        lab_test.shelling_percentage,lab_test.oil_content,lab_test.moisture_content,lab_test.purity_percentage, 
+        lab_test.defects_percentage,lab_test.grade, lab_test.date,lab_test.time,
+        creditor.name AS creditor,
+         stock_in.quantity FROM lab_test INNER JOIN 
+         crop ON crop.crop_ID = lab_test.crop_ID INNER JOIN 
+         variety ON variety.variety_ID = lab_test.variety_ID 
+         INNER JOIN farm on farm.farm_ID = lab_test.farm_ID 
+         lEFT JOIN creditor ON creditor.creditor_ID = farm.creditor_ID
+         INNER JOIN user ON user.user_ID = lab_test.user_ID 
+         INNER JOIN stock_in ON stock_in.stock_in_ID = lab_test.stock_in_ID WHERE lab_test.test_ID = '$test_id'
+        ";
+
+        $result =  $this->con->query($sql);
+        if ($result->num_rows > 0) {
+
+            while ($row = $result->fetch_assoc()) {
+                $data = $row;
+            }
+            return $data;
+        };
+    }
 
 
     public function get_stock_in_details($stock_in_id)
-    {   
-        $data [] ='';
+    {
+        $data[] = '';
         $sql = "
         SELECT farm.farm_ID,farm.physical_address, crop.crop_ID,
         crop.crop,variety.variety,variety.variety_ID,stock_in.class,
@@ -43,7 +73,7 @@ class GetLabTestData
 
     function get_active_test($grade)
     {
-        $data [] ='';
+        $data[] = '';
         $sql = "SELECT lab_test.test_ID,stock_in.source,stock_in.stock_in_ID ,crop.crop,variety.variety,
         farm.class,user.fullname,farm.area_name,
         farm.physical_address,lab_test.germination_percentage,

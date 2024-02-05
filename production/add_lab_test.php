@@ -72,7 +72,7 @@ if (in_array($position, $restricted)) {
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
   
     <script type="text/javascript" src="../jquery/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/jsHandle/add_lab_test.js"></script>
+    <script type="text/javascript" src="assets/js/jsHandle/add_lab_test__.js"></script>
    
     <script type="text/javascript">
       
@@ -533,7 +533,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">Farm ID :</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <select id="farm_ID" name="farm_ID" class="form-control">
+                                                            <select id="farm_id" name="farm_ID" class="form-control">
 
                                                                 <option value="<?php echo $data[1]; ?>"><?php echo $data[1]; ?></option>
 
@@ -548,7 +548,7 @@ if (in_array($position, $restricted)) {
                                                             <label class="badge badge-success">grower name / source name :</label>
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <select id="farm_variety" name="farm_variety" class="form-control">
+                                                            <select id="grower_name" name="grower_name" class="form-control">
 
                                                                 <option value="0"><?php echo "--"; ?></option>
 
@@ -579,6 +579,8 @@ if (in_array($position, $restricted)) {
 
                                                             </select>
                                                             <input type="hidden" id="hidden_crop" value="<?php echo $data[2];?>" />
+                                                            <input type="hidden" id="user_id" value="<?php echo $_SESSION['user'];?>" />
+
                                                         </div>
                                                     </div>
 

@@ -4,10 +4,10 @@
 
 Ob_start();
 
-include('../class/production.php');
+
 session_start();
 
-$get_data = new production();
+
 //$ID = $_GET["ID"] ;
 //$data = $get_data -> get_test_details($ID);
 
@@ -172,20 +172,14 @@ $get_data = new production();
                         <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                             <i class="ti-menu"></i>
                         </a>
-                        <div class="mobile-search waves-effect waves-light">
-                            <div class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
+                        </a>
+
+                        <a href="#">
+                            production
                         </a>
                     </div>
 
@@ -194,15 +188,7 @@ $get_data = new production();
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            <li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="ti-fullscreen"></i>
@@ -211,10 +197,7 @@ $get_data = new production();
                         </ul>
                         <ul class="nav-right">
                             <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
-                                    <i class="ti-bell"></i>
-                                    <span class="badge bg-c-red"></span>
-                                </a>
+
                                 <ul class="show-notification">
                                     <li>
                                         <h6>Notifications</h6>
@@ -222,47 +205,26 @@ $get_data = new production();
                                     </li>
                                     <li class="waves-effect waves-light">
                                         <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
+                                            <img class="d-flex align-self-center img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                                            $profile = "user.jpg";
+                                                                                                                        } else {
+                                                                                                                            $profile = $_SESSION["profile"];
+                                                                                                                        }
+                                                                                                                        echo $profile; ?>" alt="Generic placeholder image">
+
                                     </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
+
+
                                 </ul>
                             </li>
                             <li class="user-profile header-notification">
                                 <a href="#!" class="waves-effect waves-light">
-                                    <img src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" class="img-radius" alt="User-Profile-Image">
+                                    <img src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                        $profile = "user.jpg";
+                                                                    } else {
+                                                                        $profile = $_SESSION["profile"];
+                                                                    }
+                                                                    echo $profile; ?>" class="img-radius" alt="User-Profile-Image">
                                     <span><?php echo $_SESSION['fullname'] ?></span>
                                     <i class="ti-angle-down"></i>
                                 </a>
@@ -293,11 +255,12 @@ $get_data = new production();
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="../files/user_profile/<?php  if ($_SESSION["profile"] =="") {
-                                                                                $profile = "user.jpg";
-                                                                            } else {
-                                                                                $profile = $_SESSION["profile"];
-                                                                            }echo $profile;?>" alt="User-Profile-Image">
+                                    <img class="img-80 img-radius" src="../files/user_profile/<?php if ($_SESSION["profile"] == "") {
+                                                                                                    $profile = "user.jpg";
+                                                                                                } else {
+                                                                                                    $profile = $_SESSION["profile"];
+                                                                                                }
+                                                                                                echo $profile; ?>" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $_SESSION['fullname'] ?></i></span>
                                     </div>
@@ -413,47 +376,47 @@ $get_data = new production();
 
                             <div class="pcoded-navigation-label" data-i18n="nav.category.forms">certificate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Seed Certificates </span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Seed Certificates </span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
-                                    <li >
-                                    <a href="add_certificate.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="available_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
 
-                                <li class="">
-                                    <a href="used_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="add_certificate.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Register Certificate </span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="available_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-files"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Available Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                    <a href="expired_certificates.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="used_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-na"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Used Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+                                        <li class="">
+                                            <a href="expired_certificates.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-trash"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Expired Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+
+
                                     </ul>
                                 </li>
 
@@ -463,33 +426,33 @@ $get_data = new production();
 
 
 
-                              
-                            <li class="pcoded-hasmenu ">
+
+                                <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Growers</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Growers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
+
                                         <li class="">
-                                        <a href="active_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                            <a href="active_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Active Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                <li class="">
-                                        <a href="inactive_growers.php" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                        <li class="">
+                                            <a href="inactive_growers.php" class="waves-effect waves-dark">
+                                                <span class="pcoded-micon"><i class="ti-id-badge"></i><b>FC</b></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main"> Inactive Growers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
-                                       
-                            
+
+
                                     </ul>
                                 </li>
                                 <li>
@@ -539,7 +502,7 @@ $get_data = new production();
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="register_farm.php" class="waves-effect waves-dark">
+                                    <a href="test_history.php" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-book"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Test History</span>
                                         <span class="pcoded-mcaret"></span>
@@ -557,7 +520,7 @@ $get_data = new production();
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Download Labels</h5>
+                                            <h5 class="m-b-10">Generate Labels</h5>
                                             <p class="m-b-0"></p>
                                         </div>
                                     </div>
@@ -566,9 +529,10 @@ $get_data = new production();
                                             <li class="breadcrumb-item">
                                                 <a href="admin_dashboard.php"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#">dashboard</a>
+
+                                            <li class="breadcrumb-item"><a href="labels.php">Labels</a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="view_registered_users.php">Download Labels</a>
+                                            <li class="breadcrumb-item"><a href="generate_labels.php">Generate Labels </a>
                                             </li>
 
                                         </ul>
@@ -596,21 +560,34 @@ $get_data = new production();
 
                                         <!-- Contextual classes table ends -->
                                         <!-- Background Utilities table start -->
-                                        <form action="generate_labels.php" method="POST">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Download Labels </h5>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Download Labels </h5>
+
+
+
+
+                                            </div>
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+
+
+                                                    <span class="pcoded-mcaret"></span>
+
+
+
+
+
+
+
+
 
 
 
 
                                                 </div>
-                                                <div class="card-block">
-
-                                                    <div class="form-group row">
-
-
-                                                        <span class="pcoded-mcaret"></span>
 
 
 
@@ -618,20 +595,7 @@ $get_data = new production();
 
 
 
-
-
-
-
-
-                                                    </div>
-
-
-
-
-
-
-
-                                                    <!--                                                                                                            /*
+                                                <!--                                                                                                            /*
 add hybrid female crop certificate 
 */   -->
 
@@ -639,232 +603,233 @@ add hybrid female crop certificate
 
 
 
+                                                <div class="col-sm-12">
+
+
+
+
+
+                                                    <!-- <input type="submit" name="save_pdf" value="Download PDF File" class="btn btn-success"> -->
+                                                    <button name="save_pdf" id='generate_pdf' class="btn btn-success btn-mat"><i class="ti ti-receipt"></i>Download PDF</button>
+
+                                                    <a href="labels.php" class="btn btn-info">
+                                                        Back
+
+                                                    </a>
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <!-- Background Utilities table end -->
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Seed details </h5>
+
+
+                                            </div>
+
+
+
+
+                                            <div class="card-block">
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success">stock in ID :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="stock_in" name="stock_in" class="form-control">
+
+                                                            <option value="<?php echo $_GET['stock_in_id']; ?>"><?php echo $_GET['stock_in_id']; ?></option>
+
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success">Crop :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="farm_crop" name="farm_crop" class="form-control">
+
+                                                            <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">Variety:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="farm_variety" name="farm_variety" class="form-control">
+
+                                                            <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety'];; ?></option>
+
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success">Class :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="farm_class" name="farm_class" class="form-control">
+
+                                                            <option value="<?php echo $_GET['class']; ?>"><?php echo $_GET['class']; ?></option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success"> Stock in Quantity :</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="farm_quantity" name="farm_quantity" class="form-control">
+
+                                                            <option value="<?php echo $_GET['stock_quantity']; ?>"><?php echo $_GET['stock_quantity']; ?></option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success">Grower :</label>
+
+                                                        <br />
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <select id="germ" name="germ" class="form-control">
+
+                                                            <option value="<?php echo $_GET['grower']; ?>"><?php echo $_GET['grower']; ?></option>
+
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success ">Production Year</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="farm_ID" name="farm_ID" class="form-control">
+
+                                                            <option value="<?php echo $_GET['product_date']; ?>"><?php echo $_GET['product_date']; ?></option>
+
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-2">
+                                                        <label class="badge badge-success">Lot Number:</label>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <select id="lot_number" name="lot_number" class="form-control">
+
+                                                            <option value="<?php echo $_GET['lotnumber']; ?>"><?php echo $_GET['lotnumber'] ?></option>
+
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+                                                <div class="form-group row">
+
                                                     <div class="col-sm-12">
 
+                                                    </div class="form-group row" require="">
 
 
 
 
-                                                        <input type="submit" name="save_pdf" value="Download PDF File" class="btn btn-success">
 
-                                                        <a href="add_certificate.php" class="btn btn-danger">
-                                                            Back
+
+                                                    </br></br></br>
+
+
+                                                    <div>
+
+                                                    </div>
+
+                                                    <br>
+                                                    .
+                                                    <div class="form-group">
+
+
 
                                                         </a>
 
+
                                                     </div>
 
 
 
-                                                </div>
 
-                                                <!-- Background Utilities table end -->
+
+
+
+
+
+                                                </div>
+                                                <!-- Page-body end -->
                                             </div>
+                                        </div>
+                                        <!-- Main-body end -->
 
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Seed details </h5>
+                                        <div id="styleSelector">
 
-
-                                                </div>
-
-
-
-
-                                                <div class="card-block">
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success">stock in ID :</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="stock_in" name="stock_in" class="form-control">
-
-                                                                <option value="<?php echo $_GET['stock_in_id']; ?>"><?php echo $_GET['stock_in_id']; ?></option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success">Crop :</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="farm_crop" name="farm_crop" class="form-control">
-
-                                                                <option value="<?php echo $_GET['crop']; ?>"><?php echo $_GET['crop']; ?></option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">Variety:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="farm_variety" name="farm_variety" class="form-control">
-
-                                                                <option value="<?php echo $_GET['variety']; ?>"><?php echo $_GET['variety'];; ?></option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success">Class :</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="farm_class" name="farm_class" class="form-control">
-
-                                                                <option value="<?php echo $_GET['class']; ?>"><?php echo $_GET['class']; ?></option>
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success"> Stock in Quantity :</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="farm_quantity" name="farm_quantity" class="form-control">
-
-                                                                <option value="<?php echo $_GET['stock_quantity']; ?>"><?php echo $_GET['stock_quantity']; ?></option>
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success">Grower :</label>
-
-                                                            <br />
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <select id="germ" name="germ" class="form-control">
-
-                                                                <option value="<?php echo $_GET['grower']; ?>"><?php echo $_GET['grower']; ?></option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-
-
-
-
-
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success ">Production Year</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="farm_ID" name="farm_ID" class="form-control">
-
-                                                                <option value="<?php echo $_GET['product_date']; ?>"><?php echo $_GET['product_date']; ?></option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-2">
-                                                            <label class="badge badge-success">Lot Number:</label>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <select id="lot_number" name="lot_number" class="form-control">
-
-                                                                <option value="<?php echo $_GET['lotnumber']; ?>"><?php echo $_GET['lotnumber'] ?></option>
-
-
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-
-
-
-
-
-
-                                                    <div class="form-group row">
-
-                                                        <div class="col-sm-12">
-
-                                                        </div class="form-group row" require="">
-
-
-
-
-
-
-                                                        </br></br></br>
-
-
-                                                        <div>
-
-                                                        </div>
-
-                                                        <br>
-                                                        .
-                                                        <div class="form-group">
-
-
-
-                                                            </a>
-
-
-                                                        </div>
-
-
-
-
-
-                                        </form>
-
-
-
+                                        </div>
                                     </div>
-                                    <!-- Page-body end -->
                                 </div>
-                            </div>
-                            <!-- Main-body end -->
-
-                            <div id="styleSelector">
-
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
+                <!-- Warning Section Starts -->
+                <!-- Older IE warning message -->
+                <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
         <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -905,37 +870,38 @@ add hybrid female crop certificate
         <p>Sorry for the inconvenience!</p>
     </div>
     <![endif]-->
-    <!-- Warning Section Ends -->
-    <!-- Required Jquery -->
-    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
-    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- jquery slimscroll js -->
-    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
-    <!-- waves js -->
-    <script src="assets/pages/waves/js/waves.min.js"></script>
-    <!-- modernizr js -->
-    <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
-    <!-- Custom js -->
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="assets/js/vertical-layout.min.js "></script>
-    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+                <!-- Warning Section Ends -->
+                <!-- Required Jquery -->
+                <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+                <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js "></script>
+                <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+                <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js "></script>
+                <!-- waves js -->
+                <script src="assets/pages/waves/js/waves.min.js"></script>
+                <!-- jquery slimscroll js -->
+                <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+                <!-- waves js -->
+                <script src="assets/pages/waves/js/waves.min.js"></script>
+                <!-- modernizr js -->
+                <script type="text/javascript" src="assets/js/modernizr/modernizr.js "></script>
+                <!-- Custom js -->
+                <script src="assets/js/pcoded.min.js"></script>
+                <script src="assets/js/vertical-layout.min.js "></script>
+                <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+                <script type="text/javascript" src="assets/js/script.js"></script>
+                <script type="text/javascript" src="assets/js/jsHandle/generate_labels.js"></script>
 
-    <?php
+                <?php
 
-    if (isset($_POST['save_pdf'])) {
+                // if (isset($_POST['save_pdf'])) {
 
-        $lot_number = $_POST["lot_number"];
+                //     $lot_number = $_POST["lot_number"];
 
-        header("Location:../class/pdf_handler.php? lot_number=$lot_number");
-    }
+                //     header("Location:../class/pdf_handler.php? lot_number=$lot_number");
+                // }
 
 
-    ?>
+                ?>
 </body>
 
 </html>

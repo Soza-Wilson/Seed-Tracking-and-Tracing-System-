@@ -527,7 +527,7 @@ if (in_array($position, $restricted)) {
                                                                 <th style="font-weight: 600;">Class</th>
                                                                 <th style="font-weight: 600;">Quantity</th>
                                                                 <th style="font-weight: 600;">Source</th>
-                                                                <th style="font-weight: 600;">Source_name</th>
+                                                                <th style="font-weight: 600;">Source Name</th>
                                                                 <th style="font-weight: 600;">SRN</th>
                                                                 <th style="font-weight: 600;">Added by</th>
                                                                 <th style="font-weight: 600;">Added date</th>

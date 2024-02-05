@@ -13,8 +13,8 @@ class Season
 
   function __construct()
   {
-    $connect = new DbConnection();
-    $this->con = $connect->connect();
+    $DB = new DbConnection();
+    $this->con = $DB->connect();
    
   }
 

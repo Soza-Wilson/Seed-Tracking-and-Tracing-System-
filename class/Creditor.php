@@ -21,8 +21,8 @@ class Creditor
     function __construct()
     {
         
-        $data = new DbConnection();
-        $this->con = $data->connect();
+        $DB= new DbConnection();
+        $this->con = $DB->connect();
         $this->season = new Season();
 
 

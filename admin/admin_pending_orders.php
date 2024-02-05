@@ -248,7 +248,7 @@ if (in_array($position, $restricted)) {
                                     <li class="">
                                         <a href="setup.php" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-settings"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Quick Setup </span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Setup </span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

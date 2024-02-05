@@ -553,7 +553,7 @@ if (in_array($position, $restricted)) {
 
                                                                                 $sql = "SELECT stock_in.stock_in_ID, stock_in.stock_in_ID, `fullname`,stock_in.source, `name`, `crop`, `variety`, `class`, `SLN`, `bincard`, `number_of_bags`, `quantity`, stock_in.date,`supporting_dir`,stock_in.class, stock_in.SLN, stock_in.bincard, stock_in.quantity, stock_in.grade_outs_quantity, stock_in.description, stock_in.supporting_dir, stock_in.date, stock_in.time FROM stock_in 
                                                                                INNER JOIN user ON stock_in.user_ID = user.user_ID INNER JOIN creditor ON stock_in.creditor_ID = creditor.creditor_ID INNER JOIN crop ON stock_in.crop_ID = crop.crop_ID 
-                                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' OR stock_in.status = 'partly_assigned' GROUP BY stock_in.stock_in_ID";
+                                                                                INNER JOIN variety on stock_in.variety_ID = variety.variety_ID WHERE stock_in.status = 'ungraded' OR stock_in.status = 'partly_assigned' OR stock_in.status = 'partly_processed' OR stock_in.status = 'partly_certified' GROUP BY stock_in.stock_in_ID";
 
                                                                                 $result = $con->query($sql);
                                                                                 if ($result->num_rows > 0) {
@@ -592,7 +592,7 @@ if (in_array($position, $restricted)) {
                                                
 												
 												
-												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & date=$date_added & user_name=$user' class='btn btn-success btn-mat'>Grade  </a>
+												<td><a href='grade_seed.php? stock_in_id=$stock_in_id & crop=$crop & variety=$variety & class=$class & quantity=$quantity & date=$date_added & user_name=$user' class='btn btn-success' data-toggle='tooltip' data-placement='left' data-original-title='View details '> <i class='ti ti-package' ></i> grade</a>
                                                 
                                                 </td>
 											</tr>	
